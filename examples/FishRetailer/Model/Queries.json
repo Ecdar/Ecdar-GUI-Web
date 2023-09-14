@@ -1,0 +1,8 @@
+[
+  {
+    "query": "consistency: Retailer",
+    "comment": "",
+    "isPeriodic": false,
+    "engine": "Reveaal"
+  }
+]
