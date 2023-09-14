@@ -1,4 +1,4 @@
 {
-  "name": "Global Declarations",
-  "declarations": "broadcast chan a, b, c;"
+	"name": "Global Declarations",
+	"declarations": "broadcast chan a, b, c;"
 }

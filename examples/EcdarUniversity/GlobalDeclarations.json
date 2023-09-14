@@ -1,4 +1,4 @@
 {
-  "name": "Global Declarations",
-  "declarations": "broadcast chan pub, grant, patent, coin, tea, cof;"
+	"name": "Global Declarations",
+	"declarations": "broadcast chan pub, grant, patent, coin, tea, cof;"
 }

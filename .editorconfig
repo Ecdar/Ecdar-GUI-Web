@@ -1,0 +1,14 @@
+[*]
+end_of_line = lf
+charset = utf-8
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+
+[*.{json,js,ts,css,html,svelte}]
+indent_style = tab
+tab_width = 4
+
+[*.{java}]
+indent_style = tab
+tab_width = 4

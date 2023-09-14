@@ -1,20 +1,20 @@
 [
-  {
-    "query": "reachability: Receiver.L4",
-    "comment": "",
-    "isPeriodic": false,
-    "engine": "Reveaal"
-  },
-  {
-    "query": "specification: Sender",
-    "comment": "",
-    "isPeriodic": false,
-    "engine": "Reveaal"
-  },
-  {
-    "query": "implementation: Sender",
-    "comment": "",
-    "isPeriodic": false,
-    "engine": "Reveaal"
-  }
+	{
+		"query": "reachability: Receiver.L4",
+		"comment": "",
+		"isPeriodic": false,
+		"engine": "Reveaal"
+	},
+	{
+		"query": "specification: Sender",
+		"comment": "",
+		"isPeriodic": false,
+		"engine": "Reveaal"
+	},
+	{
+		"query": "implementation: Sender",
+		"comment": "",
+		"isPeriodic": false,
+		"engine": "Reveaal"
+	}
 ]

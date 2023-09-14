@@ -11,20 +11,23 @@ Note: Please search to see if an issue already exists for the bug you encountere
 -->
 
 ### Description
+
 <!--
 Should include:
 1. What happened
 2. What was expected to happen
 3. Suggestion on possible cause [Not required]
 -->
-#### Where was the error encountered
-- [ ] Using a distribution from the main ECDAR repository
 
+#### Where was the error encountered
+
+- [ ] Using a distribution from the main ECDAR repository
 
 - [ ] Using a local runtime
   - **Used runtime** (ex. Node 18.2.0):
 
 ### Steps To Reproduce
+
 <!--
 Example: steps to reproduce the behavior:
 1. In this environment...
@@ -34,6 +37,7 @@ Example: steps to reproduce the behavior:
 -->
 
 ### Images
+
 <!--
 Links? References? Anything that will give us more context about the issue that you are encountering!
 -->

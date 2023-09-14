@@ -1,99 +1,99 @@
 {
-  "name": "Sender",
-  "declarations": "",
-  "locations": [
-    {
-      "id": "L0",
-      "nickname": "",
-      "invariant": "",
-      "type": "NORMAL",
-      "urgency": "NORMAL",
-      "x": 210.69444444444446,
-      "y": 129.44444444444446,
-      "color": "9",
-      "nicknameX": 30.0,
-      "nicknameY": -10.0,
-      "invariantX": 30.0,
-      "invariantY": 10.0
-    },
-    {
-      "id": "L1",
-      "nickname": "",
-      "invariant": "",
-      "type": "INITIAL",
-      "urgency": "NORMAL",
-      "x": 110.69444444444444,
-      "y": 219.44444444444446,
-      "color": "9",
-      "nicknameX": 30.0,
-      "nicknameY": -10.0,
-      "invariantX": 30.0,
-      "invariantY": 10.0
-    }
-  ],
-  "edges": [
-    {
-      "id": "E0",
-      "group": "",
-      "sourceLocation": "L0",
-      "targetLocation": "L0",
-      "status": "OUTPUT",
-      "select": "",
-      "guard": "",
-      "update": "",
-      "sync": "c",
-      "isLocked": false,
-      "nails": [
-        {
-          "x": 320.69444444444446,
-          "y": 89.44444444444444,
-          "propertyType": "NONE",
-          "propertyX": 0.0,
-          "propertyY": 0.0
-        },
-        {
-          "x": 260.69444444444446,
-          "y": 69.44444444444444,
-          "propertyType": "SYNCHRONIZATION",
-          "propertyX": 10.0,
-          "propertyY": -10.0
-        },
-        {
-          "x": 220.69444444444446,
-          "y": 49.44444444444444,
-          "propertyType": "NONE",
-          "propertyX": 0.0,
-          "propertyY": 0.0
-        }
-      ]
-    },
-    {
-      "id": "E0",
-      "group": "",
-      "sourceLocation": "L1",
-      "targetLocation": "L0",
-      "status": "OUTPUT",
-      "select": "",
-      "guard": "",
-      "update": "",
-      "sync": "c",
-      "isLocked": false,
-      "nails": [
-        {
-          "x": 180.69444444444446,
-          "y": 179.44444444444446,
-          "propertyType": "SYNCHRONIZATION",
-          "propertyX": 10.0,
-          "propertyY": -10.0
-        }
-      ]
-    }
-  ],
-  "description": "",
-  "x": 548.0,
-  "y": 355.0,
-  "width": 380.0,
-  "height": 273.61111111111114,
-  "color": "9",
-  "includeInPeriodicCheck": true
+	"name": "Sender",
+	"declarations": "",
+	"locations": [
+		{
+			"id": "L0",
+			"nickname": "",
+			"invariant": "",
+			"type": "NORMAL",
+			"urgency": "NORMAL",
+			"x": 210.69444444444446,
+			"y": 129.44444444444446,
+			"color": "9",
+			"nicknameX": 30.0,
+			"nicknameY": -10.0,
+			"invariantX": 30.0,
+			"invariantY": 10.0
+		},
+		{
+			"id": "L1",
+			"nickname": "",
+			"invariant": "",
+			"type": "INITIAL",
+			"urgency": "NORMAL",
+			"x": 110.69444444444444,
+			"y": 219.44444444444446,
+			"color": "9",
+			"nicknameX": 30.0,
+			"nicknameY": -10.0,
+			"invariantX": 30.0,
+			"invariantY": 10.0
+		}
+	],
+	"edges": [
+		{
+			"id": "E0",
+			"group": "",
+			"sourceLocation": "L0",
+			"targetLocation": "L0",
+			"status": "OUTPUT",
+			"select": "",
+			"guard": "",
+			"update": "",
+			"sync": "c",
+			"isLocked": false,
+			"nails": [
+				{
+					"x": 320.69444444444446,
+					"y": 89.44444444444444,
+					"propertyType": "NONE",
+					"propertyX": 0.0,
+					"propertyY": 0.0
+				},
+				{
+					"x": 260.69444444444446,
+					"y": 69.44444444444444,
+					"propertyType": "SYNCHRONIZATION",
+					"propertyX": 10.0,
+					"propertyY": -10.0
+				},
+				{
+					"x": 220.69444444444446,
+					"y": 49.44444444444444,
+					"propertyType": "NONE",
+					"propertyX": 0.0,
+					"propertyY": 0.0
+				}
+			]
+		},
+		{
+			"id": "E0",
+			"group": "",
+			"sourceLocation": "L1",
+			"targetLocation": "L0",
+			"status": "OUTPUT",
+			"select": "",
+			"guard": "",
+			"update": "",
+			"sync": "c",
+			"isLocked": false,
+			"nails": [
+				{
+					"x": 180.69444444444446,
+					"y": 179.44444444444446,
+					"propertyType": "SYNCHRONIZATION",
+					"propertyX": 10.0,
+					"propertyY": -10.0
+				}
+			]
+		}
+	],
+	"description": "",
+	"x": 548.0,
+	"y": 355.0,
+	"width": 380.0,
+	"height": 273.61111111111114,
+	"color": "9",
+	"includeInPeriodicCheck": true
 }

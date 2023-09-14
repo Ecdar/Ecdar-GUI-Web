@@ -1,38 +1,38 @@
 [
-  {
-    "query": "consistency: Alarm",
-    "comment": "",
-    "isPeriodic": false,
-    "engine": "Reveaal"
-  },
-  {
-    "query": "specification: Alarm",
-    "comment": "",
-    "isPeriodic": false,
-    "engine": "Reveaal"
-  },
-  {
-    "query": "reachability: Alarm.L11",
-    "comment": "",
-    "isPeriodic": false,
-    "engine": "Reveaal"
-  },
-  {
-    "query": "reachability: Alarm.L12",
-    "comment": "",
-    "isPeriodic": false,
-    "engine": "Reveaal"
-  },
-  {
-    "query": "reachability: Alarm.L9",
-    "comment": "",
-    "isPeriodic": false,
-    "engine": "Reveaal"
-  },
-  {
-    "query": "specification: (Alarm",
-    "comment": "",
-    "isPeriodic": false,
-    "engine": "Reveaal"
-  }
+	{
+		"query": "consistency: Alarm",
+		"comment": "",
+		"isPeriodic": false,
+		"engine": "Reveaal"
+	},
+	{
+		"query": "specification: Alarm",
+		"comment": "",
+		"isPeriodic": false,
+		"engine": "Reveaal"
+	},
+	{
+		"query": "reachability: Alarm.L11",
+		"comment": "",
+		"isPeriodic": false,
+		"engine": "Reveaal"
+	},
+	{
+		"query": "reachability: Alarm.L12",
+		"comment": "",
+		"isPeriodic": false,
+		"engine": "Reveaal"
+	},
+	{
+		"query": "reachability: Alarm.L9",
+		"comment": "",
+		"isPeriodic": false,
+		"engine": "Reveaal"
+	},
+	{
+		"query": "specification: (Alarm",
+		"comment": "",
+		"isPeriodic": false,
+		"engine": "Reveaal"
+	}
 ]
