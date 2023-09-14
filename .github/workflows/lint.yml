@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  lint:
     strategy:
       fail-fast: false
       matrix:
