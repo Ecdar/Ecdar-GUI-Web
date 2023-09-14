@@ -10,6 +10,16 @@ lib/
 .gradle
 /build/
 
+### NPM ###
+node_modules
+
+### SvelteKit ###
+/build
+/.svelte-kit
+/package
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
 
 ### macOS ###
 *.DS_Store

@@ -2,27 +2,24 @@ name: Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
-
   test:
-
     strategy:
       fail-fast: false
       matrix:
-        node-version: [ lts/* ]
-        os: [ ubuntu-latest ]
+        node-version: [lts/*]
+        os: [ubuntu-latest]
 
     runs-on: ${{ matrix.os }}
 
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -34,6 +31,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install-clean
+
+      - name: Install Playwright dependencies
+        run: npx playwright install
 
       - name: Run test
         run: npm run test
