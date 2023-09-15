@@ -27,10 +27,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: yarn install
+          cache: yarn
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
       - name: Run lint
         run: yarn lint
