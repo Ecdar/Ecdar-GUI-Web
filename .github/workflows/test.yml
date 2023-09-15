@@ -30,7 +30,7 @@ jobs:
           cache: yarn
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
       - name: Install Playwright dependencies
         run: yarn playwright install
