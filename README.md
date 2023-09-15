@@ -23,6 +23,7 @@ As with all JavaScript applications, a runtime is required to build the project.
 This project is primarily a [NodeJS](https://nodejs.org) project, but alternative engines such as [Deno](https://deno.com/) or [Bun](https://bun.sh/) should also work with minor adjustments.
 
 All packages are managed with [yarn](https://yarnpkg.com/). Yarn can be installed with npm:
+
 ```bash
 npm install --global yarn
 ```
