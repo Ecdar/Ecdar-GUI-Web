@@ -27,13 +27,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
+          cache: yarn
 
       - name: Install dependencies
-        run: npm install-clean
+        run: yarn
 
       - name: Install Playwright dependencies
-        run: npx playwright install
+        run: dlx playwright install
 
       - name: Run test
-        run: npm run test
+        run: yarn test
