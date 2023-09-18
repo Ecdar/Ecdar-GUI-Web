@@ -22,7 +22,11 @@ As with all JavaScript applications, a runtime is required to build the project.
 
 This project is primarily a [NodeJS](https://nodejs.org) project, but alternative engines such as [Deno](https://deno.com/) or [Bun](https://bun.sh/) should also work with minor adjustments.
 
-All packages are managed with [npm](https://www.npmjs.com/), which is bundled with node.
+All packages are managed with [yarn](https://yarnpkg.com/). Yarn can be installed with npm:
+
+```bash
+npm install --global yarn
+```
 
 ### Engines (needed for model-checking)
 
@@ -40,7 +44,7 @@ The engines can then be configured in the GUI as described in [Engine Configurat
 After having retrieved the code and acquired all the dependencies mentioned in [Dependencies](#dependencies), the GUI can be started using the following command:
 
 ```shell
-npm run dev -- --open
+yarn dev --open
 ```
 
 `--open` automatically opens the site in your default browser.
@@ -48,7 +52,7 @@ npm run dev -- --open
 A production-ready version of the GUI can be build with the following command:
 
 ```shell
-npm run build
+yarn build
 ```
 
 <a id="engine_configuration"></a>
