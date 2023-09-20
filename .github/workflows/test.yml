@@ -33,7 +33,7 @@ jobs:
         run: yarn install
 
       - name: Install Playwright dependencies
-        run: yarn playwright install
+        run: yarn playwright install --with-deps
 
       - name: Run test
         run: yarn test

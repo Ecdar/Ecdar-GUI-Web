@@ -28,6 +28,18 @@ All packages are managed with [yarn](https://yarnpkg.com/). Yarn can be installe
 npm install --global yarn
 ```
 
+Packages can then be installed with yarn:
+
+```bash
+yarn install
+```
+
+The E2E tests need to install custom browsers on your system. To make them work, run:
+
+```bash
+yarn test:install
+```
+
 ### Engines (needed for model-checking)
 
 In order to use the model-checking capabilities of the system, it is necessary to bundle or connect to at least one engine for the used operating system.
