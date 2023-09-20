@@ -12,6 +12,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
+		"test:install": "playwright install --with-deps",
 		"test:integration": "playwright test",
 		"test:unit": "vitest"
 	},
