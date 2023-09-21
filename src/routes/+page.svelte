@@ -70,8 +70,6 @@
 <!-- Footer component -->
 <footer>Footer/Console</footer>
 
-<!-- <svelte:document on:pointermove={resize} on:pointerup|passive={stopExpand} /> -->
-
 <style>
 	nav {
 		height: 50px;
