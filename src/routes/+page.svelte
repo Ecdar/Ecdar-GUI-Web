@@ -23,8 +23,15 @@
 	}
 </script>
 
+<!-- Top navigation bar -->
+<nav id="main-nav"></nav>
 <main>
-	<div class="sidebar" style="flex-basis: {leftLength}px">Left</div>
+	<!-- Left side bar -->
+	<div class="sidebar" style="flex-basis: {leftLength}px">
+		<nav class="inner-nav1">Nav 1</nav>
+		<p>Left</p>
+	</div>
+	<!-- Left resize bar -->
 	<div
 		role="button"
 		id="leftresizer"
@@ -34,7 +41,12 @@
 			startExpand('left');
 		}}
 	/>
-	<div class="canvas">Canvas</div>
+	<!-- Canvas -->
+	<div class="canvas">
+		<nav class="inner-nav2">Nav 2</nav>
+		<p>Canvas</p>
+	</div>
+	<!-- Right resize bar -->
 	<div
 		role="button"
 		id="leftresizer"
@@ -44,19 +56,39 @@
 			startExpand('right');
 		}}
 	/>
-	<div class="sidebar" style="flex-basis: {rightLength}px">Right</div>
+	<!-- Right side bar -->
+	<div class="sidebar" style="flex-basis: {rightLength}px">
+		<nav class="inner-nav3">Nav 3</nav>
+		<p>Right</p>
+	</div>
 </main>
+<!-- Footer component -->
+<footer>Footer/Console</footer>
 
 <svelte:document on:pointermove={resize} on:pointerup|passive={stopExpand} />
 
 <style>
-	main {
-		display: flex;
-		height: 100vh;
+	nav {
+		height: 50px;
+		background-color: slategrey;
 	}
 
-	main div {
+	#main-nav {
+		height: 25px;
+	}
+
+	main {
+		display: flex;
 		height: 100%;
+	}
+
+	.inner-nav1,
+	.inner-nav3 {
+		background-color: slategrey;
+	}
+
+	.inner-nav2 {
+		background-color: lightslategrey;
 	}
 
 	.sidebar {
@@ -73,5 +105,10 @@
 	.canvas {
 		background-color: whitesmoke;
 		flex-grow: 1;
+	}
+
+	footer {
+		height: 25px;
+		background-color: slategrey;
 	}
 </style>
