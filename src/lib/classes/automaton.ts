@@ -43,7 +43,6 @@ export class Dimentions {
 
 
 
-
 export enum LocationType {
   INITIAL = "INITIAL",
   NORMAL = "NORMAL",
@@ -78,7 +77,10 @@ export enum PropertyType {
 
 export enum OperatorType {
   COMPOSITION = "COMPOSITION",
-  CONJUNCTION = "CONJUNCTION"
+  CONJUNCTION = "CONJUNCTION",
+  REFINEMENT = "REFINEMENT",
+  QUOTIENT = "QUOTIENT",
+  SIMPLE = "SIMPLE"
 }
 
 
@@ -107,7 +109,7 @@ export class Operator implements Draw {
   type : OperatorType = OperatorType.COMPOSITION;
   position : Point = new Point(0,0);
 
-  constructor(id : number = 0, type : OperatorType.COMPOSITION, position : Point = new Point(0,0)) {
+  constructor(id : number = 0, type : OperatorType = OperatorType.COMPOSITION, position : Point = new Point(0,0)) {
 	this.id = id;
 	this.type = type;
 	this.position = position;
@@ -136,6 +138,15 @@ export class ComponentInstace {
   }
 }
 
+export class SystemEdge {
+  parent :number;
+  child : number;
+  constructor(parent : number, child : number) {
+	this.parent = parent;
+	this.child = child;
+  }
+}
+
 export class System implements Draw, Serialize{
   name : string;
   description : string;
@@ -144,6 +155,8 @@ export class System implements Draw, Serialize{
   color : string;
   systemRootX: number;
   componentInstances : ComponentInstace[];
+  operators : Operator[];
+  edges : SystemEdge[];
 
   constructor(
 	name : string = "",
@@ -152,7 +165,9 @@ export class System implements Draw, Serialize{
 	dimentions : Dimentions = new Dimentions(0,0),
 	color : string = "",
 	systemRootX : number = 0,
-	componentInstances : ComponentInstace[] = []
+	componentInstances : ComponentInstace[] = [],
+	operators : Operator[] = [],
+	edges : SystemEdge[] = []
   ) {
 	this.name = name;
 	this.description = description;
@@ -161,6 +176,8 @@ export class System implements Draw, Serialize{
 	this.color = color;
 	this.systemRootX = systemRootX;
 	this.componentInstances = componentInstances;
+	this.operators = operators;
+	this.edges = edges;
   }
 
   
@@ -181,7 +198,22 @@ export class System implements Draw, Serialize{
 		  x : instance.position.x,
 		  y : instance.position.y
 		}
-	  })
+	  }),
+	  operators : this.operators.map( o => {
+		return {
+		  x : o.position.x,
+		  y : o.position.y,
+		  // BECAUSE OF COMPATIBILITY
+		  type : o.type.toLowerCase(),
+		  id : o.id
+		}
+	  } ),
+	  edges : this.edges.map( e => {
+		return {
+		  child : e.child,
+		  parent : e.parent
+		}
+	  } )
 	}
   }
 
@@ -202,6 +234,20 @@ export class System implements Draw, Serialize{
 		  instance.id, 
 		  instance.componentName, 
 		  new Point(instance.x, instance.y)
+		)
+	  }),
+	  raw.operators.map((o) => { 
+		return new Operator(
+		  o.id, 
+		  /// BECAUSE OF COMPATIBILITY
+		  o.type.toUpperCase() as OperatorType, 
+		  new Point(o.x, o.y) 
+		)
+	  }),
+	  raw.edges.map((e) => {
+		return new SystemEdge(
+		  e.parent, 
+		  e.child
 		)
 	  })
 	)

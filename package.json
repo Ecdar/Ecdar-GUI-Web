@@ -34,5 +34,9 @@
 		"typescript": "^5.2.2",
 		"vite": "^4.4.9",
 		"vitest": "^0.34.4"
+	},
+	"dependencies": {
+		"@types/lodash": "^4.14.198",
+		"lodash": "^4.17.21"
 	}
 }

@@ -15,7 +15,6 @@ export type RawLocation = {
 }
 
 export type RawEdge = {
-  // MULTI EDGE
   id : string,
   group : string,
   sourceLocation : string,
@@ -65,6 +64,16 @@ export type RawSystem = {
 	componentName : string,
 	x : number,
 	y : number
-  }[]
+  }[],
+  operators : {
+	id : number,
+	type : string,
+	x : number,
+	y : number
+  }[],
+  edges : {
+	child : number,
+	parent : number
+  }[],
 }
 
