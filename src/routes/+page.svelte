@@ -2,6 +2,7 @@
 	let currentSide: string = '';
 	let leftLength: number = 300;
 	let rightLength: number = 300;
+	let mainContainer: HTMLElement;
 
 	function resize(e: MouseEvent) {
 		if (currentSide != '') {
@@ -16,16 +17,20 @@
 
 	function startExpand(side: string) {
 		currentSide = side;
+		mainContainer.addEventListener('pointermove', resize);
+		mainContainer.addEventListener('pointerup', stopExpand);
 	}
 
 	function stopExpand() {
 		currentSide = '';
+		mainContainer.removeEventListener('pointermove', resize);
+		mainContainer.removeEventListener('pointerup', stopExpand);
 	}
 </script>
 
 <!-- Top navigation bar -->
 <nav id="main-nav"></nav>
-<main>
+<main bind:this={mainContainer}>
 	<!-- Left side bar -->
 	<div class="sidebar" style="flex-basis: {leftLength}px">
 		<nav class="inner-nav1">Nav 1</nav>
@@ -65,7 +70,7 @@
 <!-- Footer component -->
 <footer>Footer/Console</footer>
 
-<svelte:document on:pointermove={resize} on:pointerup|passive={stopExpand} />
+<!-- <svelte:document on:pointermove={resize} on:pointerup|passive={stopExpand} /> -->
 
 <style>
 	nav {
