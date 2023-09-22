@@ -1,169 +1,172 @@
-
 import { describe, it, expect } from 'vitest';
 import { Location, Edge, Component, System, Queries, Declaration } from './automaton';
-import type { RawLocation, RawEdge, RawComponent, RawSystem, RawQuery, RawDeclaration } from './raw_input.ts';
-import {isEqual} from "lodash";
+import type {
+	RawLocation,
+	RawEdge,
+	RawComponent,
+	RawSystem,
+	RawQuery,
+	RawDeclaration
+} from './raw_input.ts';
+import { isEqual } from 'lodash';
 
 describe('Location test', () => {
-  it('serializes into location', () => {
-	let location = Location.deserialize(locationData);
-	let raw : RawLocation  = JSON.parse(locationData);
-	expect(location.id).toBe(raw.id);
-	expect(location.urgency).toBe(raw.urgency);
-	expect(location.color).toBe(raw.color);
-	expect(location.position.x).toBe(raw.x);
-	expect(location.position.y).toBe(raw.y);
-	expect(location.type).toBe(raw.type);
-	expect(location.nickname.name).toBe(raw.nickname);
-	expect(location.nickname.position.x).toBe(raw.nicknameX);
-	expect(location.nickname.position.y).toBe(raw.nicknameY);
-	expect(location.invariant.fn).toBe(raw.invariant);
-	expect(location.invariant.position.x).toBe(raw.invariantX);
-	expect(location.invariant.position.y).toBe(raw.invariantY);
-  });
+	it('serializes into location', () => {
+		let location = Location.deserialize(locationData);
+		let raw: RawLocation = JSON.parse(locationData);
+		expect(location.id).toBe(raw.id);
+		expect(location.urgency).toBe(raw.urgency);
+		expect(location.color).toBe(raw.color);
+		expect(location.position.x).toBe(raw.x);
+		expect(location.position.y).toBe(raw.y);
+		expect(location.type).toBe(raw.type);
+		expect(location.nickname.name).toBe(raw.nickname);
+		expect(location.nickname.position.x).toBe(raw.nicknameX);
+		expect(location.nickname.position.y).toBe(raw.nicknameY);
+		expect(location.invariant.fn).toBe(raw.invariant);
+		expect(location.invariant.position.x).toBe(raw.invariantX);
+		expect(location.invariant.position.y).toBe(raw.invariantY);
+	});
 
-  it('serializes and deserializes to the same object', () => {
-	let o = Location.deserialize(locationData);
-	let rawObj = o.toRaw();
-	let rawParse = JSON.parse(locationData);
-	expect(isEqual(rawObj, rawParse)).toBe(true);
-  })
+	it('serializes and deserializes to the same object', () => {
+		let o = Location.deserialize(locationData);
+		let rawObj = o.toRaw();
+		let rawParse = JSON.parse(locationData);
+		expect(isEqual(rawObj, rawParse)).toBe(true);
+	});
 });
 
 describe('Edge test', () => {
-  it('serializes into an Edge', () => {
-	let edge = Edge.deserialize(edgeData);
-	let data : RawEdge = JSON.parse(edgeData);
-	expect(edge.id).toBe(data.id);
-	expect(edge.sync).toBe(data.sync);
-	expect(edge.group).toBe(data.group);
-	expect(edge.guard).toBe(data.guard);
-	expect(edge.select).toBe(data.select);
-	expect(edge.status).toBe(data.status);
-	expect(edge.update).toBe(data.update);
-	expect(edge.isLocked).toBe(data.isLocked);
-	expect(edge.sourceLocation).toBe(data.sourceLocation);
-	expect(edge.targetLocation).toBe(data.targetLocation);
-	expect(edge.nails.length).toBe(data.nails.length);
-	expect(edge.nails[0].position.x).toBe(data.nails[0].x);
-	expect(edge.nails[0].position.y).toBe(data.nails[0].y);
-	expect(edge.nails[0].property.type).toBe(data.nails[0].propertyType);
-	expect(edge.nails[0].property.position.x).toBe(data.nails[0].propertyX);
-	expect(edge.nails[0].property.position.y).toBe(data.nails[0].propertyY);
-  })
+	it('serializes into an Edge', () => {
+		let edge = Edge.deserialize(edgeData);
+		let data: RawEdge = JSON.parse(edgeData);
+		expect(edge.id).toBe(data.id);
+		expect(edge.sync).toBe(data.sync);
+		expect(edge.group).toBe(data.group);
+		expect(edge.guard).toBe(data.guard);
+		expect(edge.select).toBe(data.select);
+		expect(edge.status).toBe(data.status);
+		expect(edge.update).toBe(data.update);
+		expect(edge.isLocked).toBe(data.isLocked);
+		expect(edge.sourceLocation).toBe(data.sourceLocation);
+		expect(edge.targetLocation).toBe(data.targetLocation);
+		expect(edge.nails.length).toBe(data.nails.length);
+		expect(edge.nails[0].position.x).toBe(data.nails[0].x);
+		expect(edge.nails[0].position.y).toBe(data.nails[0].y);
+		expect(edge.nails[0].property.type).toBe(data.nails[0].propertyType);
+		expect(edge.nails[0].property.position.x).toBe(data.nails[0].propertyX);
+		expect(edge.nails[0].property.position.y).toBe(data.nails[0].propertyY);
+	});
 
-  it('serializes and deserializes to the same object', () => {
-	let o = Edge.deserialize(edgeData);
-	let rawObj = o.toRaw();
-	let rawParse = JSON.parse(edgeData);
-	expect(isEqual(rawObj, rawParse)).toBe(true);
-  })
-})
-
+	it('serializes and deserializes to the same object', () => {
+		let o = Edge.deserialize(edgeData);
+		let rawObj = o.toRaw();
+		let rawParse = JSON.parse(edgeData);
+		expect(isEqual(rawObj, rawParse)).toBe(true);
+	});
+});
 
 describe('Component test', () => {
-  it('serializes into a Component', () => {
-	let component = Component.deserialize(componentData);
-	let data : RawComponent = JSON.parse(componentData);
-	expect(component.name).toBe(data.name);
-	expect(component.declarations).toBe(data.declarations);
-	expect(component.locations.length).toBe(data.locations.length);
-	expect(component.edges.length).toBe(data.edges.length);
-	expect(component.description).toBe(data.description);
-	expect(component.position.x).toBe(data.x);
-	expect(component.position.y).toBe(data.y);
-	expect(component.dimentions.width).toBe(data.width);
-	expect(component.dimentions.height).toBe(data.height);
-	expect(component.color).toBe(data.color);
-	expect(component.includeInPeriodicCheck).toBe(data.includeInPeriodicCheck);
-  })
+	it('serializes into a Component', () => {
+		let component = Component.deserialize(componentData);
+		let data: RawComponent = JSON.parse(componentData);
+		expect(component.name).toBe(data.name);
+		expect(component.declarations).toBe(data.declarations);
+		expect(component.locations.length).toBe(data.locations.length);
+		expect(component.edges.length).toBe(data.edges.length);
+		expect(component.description).toBe(data.description);
+		expect(component.position.x).toBe(data.x);
+		expect(component.position.y).toBe(data.y);
+		expect(component.dimentions.width).toBe(data.width);
+		expect(component.dimentions.height).toBe(data.height);
+		expect(component.color).toBe(data.color);
+		expect(component.includeInPeriodicCheck).toBe(data.includeInPeriodicCheck);
+	});
 
-  it('serializes and deserializes to the same object', () => {
-	let o = Component.deserialize(componentData);
-	let rawObj = o.toRaw();
-	let rawParse = JSON.parse(componentData);
-	expect(isEqual(rawObj, rawParse)).toBe(true);
-  })
-})
+	it('serializes and deserializes to the same object', () => {
+		let o = Component.deserialize(componentData);
+		let rawObj = o.toRaw();
+		let rawParse = JSON.parse(componentData);
+		expect(isEqual(rawObj, rawParse)).toBe(true);
+	});
+});
 
 describe('System test', () => {
-  it('serializes into a system', () => {
-	let system = System.deserialize(systemData);
-	let data : RawSystem = JSON.parse(systemData);
-	expect(system.name).toBe(data.name);
-	expect(system.description).toBe(data.description);
-	expect(system.position.x).toBe(data.x);
-	expect(system.position.y).toBe(data.y);
-	expect(system.color).toBe(data.color);
-	expect(system.systemRootX).toBe(data.systemRootX);
-	expect(system.componentInstances.length).toBe(data.componentInstances.length);
-	expect(system.componentInstances[0].name).toBe(data.componentInstances[0].componentName);
-	expect(system.componentInstances[0].id).toBe(data.componentInstances[0].id);
-	expect(system.componentInstances[0].position.x).toBe(data.componentInstances[0].x);
-	expect(system.componentInstances[0].position.y).toBe(data.componentInstances[0].y);
-	expect(system.operators.length).toBe(data.operators.length);
-	expect(system.operators[0].id).toBe(data.operators[0].id);
-	expect(system.operators[0].position.x).toBe(data.operators[0].x);
-	expect(system.operators[0].position.y).toBe(data.operators[0].y);
-	expect(system.operators[0].type.toLowerCase()).toBe(data.operators[0].type);
-	expect(system.edges.length).toBe(data.edges.length);
-	expect(system.edges[0].parent).toBe(data.edges[0].parent);
-	expect(system.edges[0].child).toBe(data.edges[0].child);
-  })
+	it('serializes into a system', () => {
+		let system = System.deserialize(systemData);
+		let data: RawSystem = JSON.parse(systemData);
+		expect(system.name).toBe(data.name);
+		expect(system.description).toBe(data.description);
+		expect(system.position.x).toBe(data.x);
+		expect(system.position.y).toBe(data.y);
+		expect(system.color).toBe(data.color);
+		expect(system.systemRootX).toBe(data.systemRootX);
+		expect(system.componentInstances.length).toBe(data.componentInstances.length);
+		expect(system.componentInstances[0].name).toBe(data.componentInstances[0].componentName);
+		expect(system.componentInstances[0].id).toBe(data.componentInstances[0].id);
+		expect(system.componentInstances[0].position.x).toBe(data.componentInstances[0].x);
+		expect(system.componentInstances[0].position.y).toBe(data.componentInstances[0].y);
+		expect(system.operators.length).toBe(data.operators.length);
+		expect(system.operators[0].id).toBe(data.operators[0].id);
+		expect(system.operators[0].position.x).toBe(data.operators[0].x);
+		expect(system.operators[0].position.y).toBe(data.operators[0].y);
+		expect(system.operators[0].type.toLowerCase()).toBe(data.operators[0].type);
+		expect(system.edges.length).toBe(data.edges.length);
+		expect(system.edges[0].parent).toBe(data.edges[0].parent);
+		expect(system.edges[0].child).toBe(data.edges[0].child);
+	});
 
-  it('serializes and deserializes to the same object', () => {
-	let o = System.deserialize(systemData);
-	let rawObj = o.toRaw();
-	let rawParse = JSON.parse(systemData);
-	expect(isEqual(rawObj, rawParse)).toBe(true);
-  })
-})
+	it('serializes and deserializes to the same object', () => {
+		let o = System.deserialize(systemData);
+		let rawObj = o.toRaw();
+		let rawParse = JSON.parse(systemData);
+		expect(isEqual(rawObj, rawParse)).toBe(true);
+	});
+});
 
 describe('Queries test', () => {
-  it('serializes into a query array', () => {
-	let queries = Queries.deserialize(queriesData);
-	let data : RawQuery[] = JSON.parse(queriesData);
+	it('serializes into a query array', () => {
+		let queries = Queries.deserialize(queriesData);
+		let data: RawQuery[] = JSON.parse(queriesData);
 
-	expect(queries.arr.length).toBe(data.length);
-	for(let i = 0; i < queries.arr.length; i++){
-	  expect(queries.arr[i].query).toBe(data[i].query);
-	  expect(queries.arr[i].backend).toBe(data[i].backend);
-	  expect(queries.arr[i].comment).toBe(data[i].comment);
-	  expect(queries.arr[i].isPeriodic).toBe(data[i].isPeriodic);
-	}
-  })
+		expect(queries.arr.length).toBe(data.length);
+		for (let i = 0; i < queries.arr.length; i++) {
+			expect(queries.arr[i].query).toBe(data[i].query);
+			expect(queries.arr[i].backend).toBe(data[i].backend);
+			expect(queries.arr[i].comment).toBe(data[i].comment);
+			expect(queries.arr[i].isPeriodic).toBe(data[i].isPeriodic);
+		}
+	});
 
-  it('serializes and deserializes to the same object', () => {
-	let o = Queries.deserialize(queriesData);
-	let rawObj = o.toRaw();
-	let rawParse = JSON.parse(queriesData);
-	expect(isEqual(rawObj, rawParse)).toBe(true);
-  })
-})
+	it('serializes and deserializes to the same object', () => {
+		let o = Queries.deserialize(queriesData);
+		let rawObj = o.toRaw();
+		let rawParse = JSON.parse(queriesData);
+		expect(isEqual(rawObj, rawParse)).toBe(true);
+	});
+});
 
 describe('Declarations test', () => {
-  it('serializes into a declaration', () => {
-	let queries = Declaration.deserialize(declarationData);
-	let data : RawDeclaration = JSON.parse(declarationData);
-	
-	expect(queries.declarations).toBe(data.declarations);
-	expect(queries.name).toBe(data.name);
-  })
+	it('serializes into a declaration', () => {
+		let queries = Declaration.deserialize(declarationData);
+		let data: RawDeclaration = JSON.parse(declarationData);
 
-  it('serializes and deserializes to the same object', () => {
-	let o = Declaration.deserialize(declarationData);
-	let rawObj = o.toRaw();
-	let rawParse = JSON.parse(declarationData);
+		expect(queries.declarations).toBe(data.declarations);
+		expect(queries.name).toBe(data.name);
+	});
 
-	expect(isEqual(rawObj, rawParse)).toBe(true);
-  })
-})
+	it('serializes and deserializes to the same object', () => {
+		let o = Declaration.deserialize(declarationData);
+		let rawObj = o.toRaw();
+		let rawParse = JSON.parse(declarationData);
 
+		expect(isEqual(rawObj, rawParse)).toBe(true);
+	});
+});
 
 /*******************************\
  *           DATA              * 
 \*******************************/
-
 
 let locationData = `
 {
@@ -180,7 +183,7 @@ let locationData = `
   "invariantX": 20.0,
   "invariantY": 10.0
 }
-`
+`;
 
 let edgeData = `
 {
@@ -211,7 +214,7 @@ let edgeData = `
 	}
   ]
 }
-`
+`;
 
 let componentData = `
 {
@@ -390,7 +393,7 @@ let componentData = `
   "color": "7",
   "includeInPeriodicCheck": false
 }
-`
+`;
 
 let systemData = `
 {
@@ -487,7 +490,7 @@ let systemData = `
     }
   ]
 }
-`
+`;
 
 let queriesData = `
 [
@@ -556,12 +559,11 @@ let queriesData = `
     "backend": 1
   }
 ]
-`
+`;
 
 let declarationData = `
 {
   "name": "Global Declarations",
   "declarations": "broadcast chan pub, grant, patent, coin, tea, cof;"
 }
-`
-
+`;
