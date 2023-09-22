@@ -13,7 +13,8 @@
 		}
 	}
 
-	function startExpand(side: string) {
+	function startExpand(e: PointerEvent, side: string) {
+		e.preventDefault();
 		currentSide = side;
 		mainContainer.addEventListener('pointermove', resize);
 		mainContainer.addEventListener('pointerup', stopExpand);
@@ -40,8 +41,8 @@
 		id="leftresizer"
 		class="resizer"
 		tabindex="-1"
-		on:pointerdown={() => {
-			startExpand('left');
+		on:pointerdown={event => {
+			startExpand(event, 'left');
 		}}
 	/>
 	<!-- Canvas -->
@@ -55,8 +56,8 @@
 		id="leftresizer"
 		class="resizer"
 		tabindex="-1"
-		on:pointerdown={() => {
-			startExpand('right');
+		on:pointerdown={event => {
+			startExpand(event, 'right');
 		}}
 	/>
 	<!-- Right side bar -->
