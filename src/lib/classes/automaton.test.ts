@@ -1,8 +1,8 @@
 
 import { describe, it, expect } from 'vitest';
-import { Location, Edge, Component, System } from './automaton';
-import type { RawLocation, RawEdge, RawComponent, RawSystem } from './raw_input.ts';
-import * as _ from "lodash";
+import { Location, Edge, Component, System, Queries, Declaration } from './automaton';
+import type { RawLocation, RawEdge, RawComponent, RawSystem, RawQuery, RawDeclaration } from './raw_input.ts';
+import {isEqual} from "lodash";
 
 describe('Location test', () => {
   it('serializes into location', () => {
@@ -26,7 +26,7 @@ describe('Location test', () => {
 	let o = Location.deserialize(locationData);
 	let rawObj = o.toRaw();
 	let rawParse = JSON.parse(locationData);
-	expect(_.isEqual(rawObj, rawParse)).toBe(true);
+	expect(isEqual(rawObj, rawParse)).toBe(true);
   })
 });
 
@@ -56,7 +56,7 @@ describe('Edge test', () => {
 	let o = Edge.deserialize(edgeData);
 	let rawObj = o.toRaw();
 	let rawParse = JSON.parse(edgeData);
-	expect(_.isEqual(rawObj, rawParse)).toBe(true);
+	expect(isEqual(rawObj, rawParse)).toBe(true);
   })
 })
 
@@ -82,7 +82,7 @@ describe('Component test', () => {
 	let o = Component.deserialize(componentData);
 	let rawObj = o.toRaw();
 	let rawParse = JSON.parse(componentData);
-	expect(_.isEqual(rawObj, rawParse)).toBe(true);
+	expect(isEqual(rawObj, rawParse)).toBe(true);
   })
 })
 
@@ -115,10 +115,49 @@ describe('System test', () => {
 	let o = System.deserialize(systemData);
 	let rawObj = o.toRaw();
 	let rawParse = JSON.parse(systemData);
-	expect(_.isEqual(rawObj, rawParse)).toBe(true);
+	expect(isEqual(rawObj, rawParse)).toBe(true);
   })
 })
 
+describe('Queries test', () => {
+  it('serializes into a query array', () => {
+	let queries = Queries.deserialize(queriesData);
+	let data : RawQuery[] = JSON.parse(queriesData);
+
+	expect(queries.arr.length).toBe(data.length);
+	for(let i = 0; i < queries.arr.length; i++){
+	  expect(queries.arr[i].query).toBe(data[i].query);
+	  expect(queries.arr[i].backend).toBe(data[i].backend);
+	  expect(queries.arr[i].comment).toBe(data[i].comment);
+	  expect(queries.arr[i].isPeriodic).toBe(data[i].isPeriodic);
+	}
+  })
+
+  it('serializes and deserializes to the same object', () => {
+	let o = Queries.deserialize(queriesData);
+	let rawObj = o.toRaw();
+	let rawParse = JSON.parse(queriesData);
+	expect(isEqual(rawObj, rawParse)).toBe(true);
+  })
+})
+
+describe('Declarations test', () => {
+  it('serializes into a declaration', () => {
+	let queries = Declaration.deserialize(declarationData);
+	let data : RawDeclaration = JSON.parse(declarationData);
+	
+	expect(queries.declarations).toBe(data.declarations);
+	expect(queries.name).toBe(data.name);
+  })
+
+  it('serializes and deserializes to the same object', () => {
+	let o = Declaration.deserialize(declarationData);
+	let rawObj = o.toRaw();
+	let rawParse = JSON.parse(declarationData);
+
+	expect(isEqual(rawObj, rawParse)).toBe(true);
+  })
+})
 
 
 /*******************************\
@@ -447,6 +486,82 @@ let systemData = `
       "parent": 4
     }
   ]
+}
+`
+
+let queriesData = `
+[
+  {
+    "query": "specification: (Administration || Machine || Researcher)",
+    "comment": "",
+    "isPeriodic": false,
+    "ignoredInputs": {},
+    "ignoredOutputs": {},
+    "backend": 1
+  },
+  {
+    "query": "specification: Spec",
+    "comment": "",
+    "isPeriodic": false,
+    "ignoredInputs": {},
+    "ignoredOutputs": {},
+    "backend": 1
+  },
+  {
+    "query": "consistency: (Administration || Machine || Researcher)",
+    "comment": "",
+    "isPeriodic": false,
+    "ignoredInputs": {},
+    "ignoredOutputs": {},
+    "backend": 1
+  },
+  {
+    "query": "consistency: (Administration || Machine || Researcher)",
+    "comment": "",
+    "isPeriodic": false,
+    "ignoredInputs": {},
+    "ignoredOutputs": {},
+    "backend": 1
+  },
+  {
+    "query": "refinement: (Administration || Machine || Researcher) \u003c\u003d Spec",
+    "comment": "",
+    "isPeriodic": false,
+    "ignoredInputs": {},
+    "ignoredOutputs": {},
+    "backend": 1
+  },
+  {
+    "query": "refinement: Machine3 \u003c\u003d Machine3",
+    "comment": "",
+    "isPeriodic": false,
+    "ignoredInputs": {},
+    "ignoredOutputs": {},
+    "backend": 1
+  },
+  {
+    "query": "refinement: (HalfAdm1 \u0026\u0026 HalfAdm2) \u003c\u003d Adm2",
+    "comment": "",
+    "isPeriodic": false,
+    "ignoredInputs": {},
+    "ignoredOutputs": {},
+    "backend": 1
+  },
+  {
+    "query": "refinement: Adm2 \u003c\u003d (HalfAdm1 \u0026\u0026 HalfAdm2)",
+    "comment": "",
+    "isPeriodic": false,
+    "ignoredInputs": {},
+    "ignoredOutputs": {},
+    "backend": 1
+  }
+]
+`
+
+let declarationData = `
+{
+  "name": "Global Declarations",
+  "declarations": "broadcast chan pub, grant, patent, coin, tea, cof;"
 }
 `
 

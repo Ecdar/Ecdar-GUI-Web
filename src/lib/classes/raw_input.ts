@@ -77,3 +77,17 @@ export type RawSystem = {
   }[],
 }
 
+export type RawQuery = {
+  query : string,
+  comment : string,
+  isPeriodic : boolean,
+  ignoredInputs : {}, // Ignored for now
+  ignoredOutputs : {}, // Ignored for now
+  backend : number
+}
+
+export type RawDeclaration = {
+  name : string,
+  declarations : string
+}
+

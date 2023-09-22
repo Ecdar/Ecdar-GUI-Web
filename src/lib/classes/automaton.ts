@@ -3,7 +3,9 @@ import type {
   RawLocation,
   RawEdge,
   RawComponent,
-  RawSystem
+  RawSystem,
+  RawQuery,
+  RawDeclaration
 } from "./raw_input";
 
 
@@ -81,6 +83,11 @@ export enum OperatorType {
   REFINEMENT = "REFINEMENT",
   QUOTIENT = "QUOTIENT",
   SIMPLE = "SIMPLE"
+}
+
+export enum Backend {
+  J_ECDAR = 0,
+  REVEAAL = 1
 }
 
 
@@ -500,6 +507,121 @@ export class Edge implements Draw, Serialize {
   static deserialize : Deserialize<Edge> = (input) => {
 	let raw : RawEdge = JSON.parse(input);
 	return Edge.fromRaw(raw);
+  }
+}
+
+export class Query implements Serialize {
+  query : string;
+  comment : string;
+  isPeriodic : boolean;
+  //ignoredInputs
+  //ignoredOutputs
+  backend : Backend;
+
+
+  toRaw : ToRaw<RawQuery> = () => {
+	return {
+	  query : this.query,
+	  comment : this.comment,
+	  isPeriodic : this.isPeriodic,
+	  ignoredInputs : {},
+	  ignoredOutputs : {},
+	  backend : this.backend
+	}
+  }
+
+
+  constructor(
+	query : string = "",
+	comment : string = "",
+	isPeriodic : boolean = false,
+	backend : Backend = Backend.REVEAAL
+  ) {
+	this.query = query;
+	this.comment = comment;
+	this.isPeriodic = isPeriodic;
+	this.backend = backend;
+  }
+
+
+  serialize () : string {
+	let raw = this.toRaw();
+	return JSON.stringify(raw);
+  }
+
+  static fromRaw : FromRaw<RawQuery, Query> = (raw) => {
+	return new Query(
+	  raw.query,
+	  raw.comment,
+	  raw.isPeriodic,
+	  raw.backend as Backend
+	);
+  }
+
+  static deserialize : Deserialize<Query> = (input) => {
+	let raw: RawQuery = JSON.parse(input);
+	return Query.fromRaw(raw);
+  }
+}
+
+export class Queries  implements Serialize {
+  arr : Query[];
+  constructor(arr : Query[] = []) {
+	this.arr = arr;
+  }
+
+  static fromRaw : FromRaw<Array<RawQuery>, Queries> = (raw) => {
+	return new Queries(raw.map((rawSingle) => {
+	  return Query.fromRaw(rawSingle);
+	}));
+  }
+
+
+  toRaw : ToRaw<Array<RawQuery>> = () => {
+	return this.arr.map((query) => {
+	  return query.toRaw();
+	});
+  }
+
+  static deserialize : Deserialize<Queries> = (input) => {
+	let raw: Array<RawQuery> = JSON.parse(input);
+	return Queries.fromRaw(raw);
+  }
+
+  serialize(): string {
+	let raw = this.toRaw();
+	return JSON.stringify(raw);
+  }
+}
+
+export class Declaration implements Serialize {
+  name : string;
+  declarations : string;
+
+  constructor(name = "", declarations = ""){
+	this.name = name;
+	this.declarations = declarations;
+  }
+
+  static fromRaw : FromRaw<RawDeclaration, Declaration> = (raw) => {
+	return new Declaration(raw.name, raw.declarations);
+  }
+
+  static deserialize : Deserialize<Declaration> = (input) => {
+	let raw = JSON.parse(input);
+	return Declaration.fromRaw(raw);
+  }
+
+  toRaw : ToRaw<RawDeclaration> = () => {
+	return {
+	  name : this.name,
+	  declarations : this.declarations
+	}
+  }
+
+  serialize() : string{
+	let raw = this.toRaw();
+	return JSON.stringify(raw);
   }
 }
 
