@@ -7,14 +7,14 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"test": "npm run test:integration && npm run test:unit",
+		"test": "yarn test:integration && yarn test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
+		"test:install": "playwright install --with-deps",
 		"test:integration": "playwright test",
-		"test:unit": "vitest",
-		"update": "npx npm-check-updates -u"
+		"test:unit": "vitest"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.38.0",
@@ -25,7 +25,6 @@
 		"eslint": "^8.49.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte": "^2.33.1",
-		"npm-check-updates": "^16.14.2",
 		"prettier": "^3.0.3",
 		"prettier-plugin-svelte": "^3.0.3",
 		"svelte": "^4.2.0",
@@ -38,5 +37,7 @@
 	"dependencies": {
 		"@types/lodash": "^4.14.198",
 		"lodash": "^4.17.21"
+		"svelte-google-materialdesign-icons": "^0.8.1"
+
 	}
 }

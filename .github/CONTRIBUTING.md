@@ -48,7 +48,7 @@ TODO: We need to add documentation on how we use and run tests.
 Tests can be run with:
 
 ```shell
-npm run test
+yarn test
 ```
 
 ## TODO
