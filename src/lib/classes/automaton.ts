@@ -245,7 +245,7 @@ export class System implements Draw, Serialize {
 	};
 
 	static deserialize: Deserialize<System> = (input) => {
-		let raw = JSON.parse(input);
+		const raw = JSON.parse(input);
 		return System.fromRaw(raw);
 	};
 }
@@ -326,7 +326,7 @@ export class Component implements Draw, Serialize {
 	};
 
 	static deserialize: Deserialize<Component> = (input) => {
-		let raw: RawComponent = JSON.parse(input);
+		const raw: RawComponent = JSON.parse(input);
 		return Component.fromRaw(raw);
 	};
 }
@@ -391,7 +391,7 @@ export class Location implements Draw, Serialize {
 		);
 	};
 	static deserialize: Deserialize<Location> = (input) => {
-		let raw: RawLocation = JSON.parse(input);
+		const raw: RawLocation = JSON.parse(input);
 		return Location.fromRaw(raw);
 	};
 }
@@ -496,7 +496,7 @@ export class Edge implements Draw, Serialize {
 		);
 	};
 	static deserialize: Deserialize<Edge> = (input) => {
-		let raw: RawEdge = JSON.parse(input);
+		const raw: RawEdge = JSON.parse(input);
 		return Edge.fromRaw(raw);
 	};
 }
@@ -533,7 +533,7 @@ export class Query implements Serialize {
 	}
 
 	serialize(): string {
-		let raw = this.toRaw();
+		const raw = this.toRaw();
 		return JSON.stringify(raw);
 	}
 
@@ -542,7 +542,7 @@ export class Query implements Serialize {
 	};
 
 	static deserialize: Deserialize<Query> = (input) => {
-		let raw: RawQuery = JSON.parse(input);
+		const raw: RawQuery = JSON.parse(input);
 		return Query.fromRaw(raw);
 	};
 }
@@ -568,12 +568,12 @@ export class Queries implements Serialize {
 	};
 
 	static deserialize: Deserialize<Queries> = (input) => {
-		let raw: Array<RawQuery> = JSON.parse(input);
+		const raw: Array<RawQuery> = JSON.parse(input);
 		return Queries.fromRaw(raw);
 	};
 
 	serialize(): string {
-		let raw = this.toRaw();
+		const raw = this.toRaw();
 		return JSON.stringify(raw);
 	}
 }
@@ -592,7 +592,7 @@ export class Declaration implements Serialize {
 	};
 
 	static deserialize: Deserialize<Declaration> = (input) => {
-		let raw = JSON.parse(input);
+		const raw = JSON.parse(input);
 		return Declaration.fromRaw(raw);
 	};
 
@@ -604,7 +604,7 @@ export class Declaration implements Serialize {
 	};
 
 	serialize(): string {
-		let raw = this.toRaw();
+		const raw = this.toRaw();
 		return JSON.stringify(raw);
 	}
 }

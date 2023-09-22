@@ -78,8 +78,8 @@ export type RawQuery = {
 	query: string;
 	comment: string;
 	isPeriodic: boolean;
-	ignoredInputs: {}; // Ignored for now
-	ignoredOutputs: {}; // Ignored for now
+	ignoredInputs: object; // Ignored for now
+	ignoredOutputs: object; // Ignored for now
 	backend: number;
 };
 
