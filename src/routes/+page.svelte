@@ -19,6 +19,7 @@
 		mainContainer.setPointerCapture(e.pointerId);
 		mainContainer.addEventListener('pointermove', resize);
 		mainContainer.addEventListener('pointerup', stopExpand);
+		mainContainer.addEventListener('pointercancel', stopExpand);
 	}
 
 	function stopExpand(e: PointerEvent) {
@@ -26,6 +27,7 @@
 		mainContainer.releasePointerCapture(e.pointerId);
 		mainContainer.removeEventListener('pointermove', resize);
 		mainContainer.removeEventListener('pointerup', stopExpand);
+		mainContainer.removeEventListener('pointercancel', stopExpand);
 	}
 </script>
 
