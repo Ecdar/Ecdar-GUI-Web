@@ -16,12 +16,14 @@
 	function startExpand(e: PointerEvent, side: string) {
 		e.preventDefault();
 		currentSide = side;
+		mainContainer.setPointerCapture(e.pointerId);
 		mainContainer.addEventListener('pointermove', resize);
 		mainContainer.addEventListener('pointerup', stopExpand);
 	}
 
-	function stopExpand() {
+	function stopExpand(e: PointerEvent) {
 		currentSide = '';
+		mainContainer.releasePointerCapture(e.pointerId);
 		mainContainer.removeEventListener('pointermove', resize);
 		mainContainer.removeEventListener('pointerup', stopExpand);
 	}
