@@ -5,13 +5,11 @@
 	let mainContainer: HTMLElement;
 
 	function resize(e: MouseEvent) {
-		if (currentSide != '') {
-			e.preventDefault();
-			if (currentSide === 'left') {
-				leftLength = e.x;
-			} else {
-				rightLength = window.innerWidth - e.x;
-			}
+		e.preventDefault();
+		if (currentSide === 'left') {
+			leftLength = e.x;
+		} else {
+			rightLength = window.innerWidth - e.x;
 		}
 	}
 
