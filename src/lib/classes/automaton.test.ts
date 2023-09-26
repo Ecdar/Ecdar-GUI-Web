@@ -159,7 +159,7 @@ describe('Declarations test', () => {
 		const data: RawDeclaration = JSON.parse(declarationData);
 
 		expect(queries.declarations).toBe(data.declarations);
-		expect(queries.name).toBe(data.name);
+		expect(queries.type).toBe(data.name);
 	});
 
 	it('serializes and deserializes to the same object', () => {

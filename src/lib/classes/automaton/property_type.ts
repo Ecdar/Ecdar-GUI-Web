@@ -1,0 +1,9 @@
+
+
+export enum PropertyType {
+	NONE = 'NONE',
+	SELECTION = 'SELECTION',
+	GUARD = 'GUARD',
+	SYNCHRONIZATION = 'SYNCHRONIZATION',
+	UPDATE = 'UPDATE'
+}

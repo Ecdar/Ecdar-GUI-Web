@@ -13,7 +13,8 @@ import type {
 } from '../automaton'
 
 /**
-* An Ecdar Component
+* # An Ecdar component
+* It stores the edges and locations of a single automaton
 * */
 export class Component implements SerializeRaw, ToRaw<RawComponent> {
 	/**
@@ -84,9 +85,6 @@ export class Component implements SerializeRaw, ToRaw<RawComponent> {
 		this.includeInPeriodicCheck = includeInPeriodicCheck;
 	}
 
-	/**
-	* Converts the Component into a RawComponent
-	* */
 	toRaw() {
 		return {
 			name: this.name,

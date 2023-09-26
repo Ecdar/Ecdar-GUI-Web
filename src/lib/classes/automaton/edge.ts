@@ -3,7 +3,9 @@ import {
 } from '$lib/classes/draw';
 
 import {
-  Status
+  Status,
+  Property,
+  PropertyType
 } from '../automaton';
 import type { 
   SerializeRaw,
@@ -13,35 +15,72 @@ import type {
   RawEdge,
 } from '../automaton'
 
-export enum PropertyType {
-	NONE = 'NONE',
-	SELECTION = 'SELECTION',
-	GUARD = 'GUARD',
-	SYNCHRONIZATION = 'SYNCHRONIZATION',
-	UPDATE = 'UPDATE'
-}
-
-
-export class Property {
-	type: PropertyType = PropertyType.NONE;
-	position: Point = new Point(0, 0);
-	constructor(type: PropertyType = PropertyType.NONE, position = new Point(0, 0)) {
-		this.type = type;
-		this.position = position;
-	}
-}
-
+/**
+* # An Ecdar Edge
+* Used to define edges in an Ecdar Component
+* */
 export class Edge implements SerializeRaw, ToRaw<RawEdge> {
+	/**
+	* The id of the edge
+	*  - Must be "E" followed by a number and
+	*  - Must be unique
+	* */
 	id: string;
+
+	/**
+	* # Unused
+	* */
 	group: string;
+
+	/**
+	* The id of the source location 
+	* */
 	sourceLocation: string;
+
+	/**
+	* The id of the target location 
+	* */
 	targetLocation: string;
+
+	/**
+	* The status of the edge 
+	*  - Input or
+	*  - Output
+	* */
 	status: Status;
+
+	/**
+	* Unused
+	* */
 	select: string;
+
+	/**
+	* The guard of the edge
+	* ex "c <= 7"
+	* */
 	guard: string;
+
+	/**
+	* The update of the edge
+	* ex "c := 7"
+	* */
 	update: string;
+
+	/**
+	* The input OR output variable of the edge
+	* */
 	sync: string;
+
+	/**
+	* Unused  
+	* */
 	isLocked: boolean;
+
+	/**
+	* The nails of the edge 
+	* Modifies the path that the edge takes
+	* Defines properties on the edge
+	* */
 	nails: {
 		position: Point;
 		property: Property;
@@ -107,6 +146,10 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 		return JSON.stringify(this.toRaw());
 	}
 
+
+	/**
+	* Creates an Edge from a RawEdge
+	* */
 	static fromRaw: FromRaw<RawEdge, Edge> = (raw) => {
 		return new Edge(
 			raw.id,
@@ -130,6 +173,10 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 			})
 		);
 	};
+
+	/**
+	* Creates an Edge from a JSON matching a RawEdge
+	* */
 	static deserializeRaw: DeserializeRaw<Edge> = (input) => {
 		const raw: RawEdge = JSON.parse(input);
 		return Edge.fromRaw(raw);
