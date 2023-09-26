@@ -1,0 +1,8 @@
+
+
+export enum Urgency {
+	NORMAL = 'NORMAL',
+	PROHIBITED = 'PROHIBITED',
+	URGENT = 'URGENT',
+	COMMITTED = 'COMMITTED'
+}

@@ -1,0 +1,9 @@
+
+export enum LocationType {
+	INITIAL = 'INITIAL',
+	NORMAL = 'NORMAL',
+	UNIVERSAL = 'UNIVERSAL',
+	INCONSISTENT = 'INCONSISTENT',
+	ANY = 'ANY'
+}
+
