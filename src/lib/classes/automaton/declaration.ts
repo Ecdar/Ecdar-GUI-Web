@@ -1,20 +1,20 @@
-import { 
-  type SerializeRaw,
-  type ToRaw,
-  type FromRaw,
-  type DeserializeRaw,
-  type RawDeclaration,
-  DeclarationType
-} from '../automaton'
+import {
+	type SerializeRaw,
+	type ToRaw,
+	type FromRaw,
+	type DeserializeRaw,
+	type RawDeclaration,
+	DeclarationType
+} from '../automaton';
 
 /**
-* The top level declarations
-* */
+ * The top level declarations
+ * */
 export class Declaration implements SerializeRaw, ToRaw<RawDeclaration> {
 	type: DeclarationType;
 	declarations: string;
 
-	constructor(type = DeclarationType.GLOBAL, declarations = "") {
+	constructor(type = DeclarationType.GLOBAL, declarations = '') {
 		this.type = type;
 		this.declarations = declarations;
 	}
@@ -33,7 +33,7 @@ export class Declaration implements SerializeRaw, ToRaw<RawDeclaration> {
 			name: this.type,
 			declarations: this.declarations
 		};
-	};
+	}
 
 	serializeRaw(): string {
 		const raw = this.toRaw();

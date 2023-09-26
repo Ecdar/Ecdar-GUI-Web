@@ -1,65 +1,61 @@
-import { Point, Dimensions } from '$lib/classes/draw'
-import {
-  Operator,
-  ComponentInstance,
-  SystemEdge
+import { Point, Dimensions } from '$lib/classes/draw';
+import { Operator, ComponentInstance, SystemEdge } from '../automaton';
+import type {
+	OperatorType,
+	SerializeRaw,
+	ToRaw,
+	FromRaw,
+	DeserializeRaw,
+	RawSystem
 } from '../automaton';
-import type { 
-  OperatorType,
-  SerializeRaw,
-  ToRaw,
-  FromRaw,
-  DeserializeRaw,
-  RawSystem,
-} from '../automaton'
 
 /**
-* An Ecdar System
-* */
+ * An Ecdar System
+ * */
 export class System implements SerializeRaw, ToRaw<RawSystem> {
 	/**
-	* The name of the system
-	* */
+	 * The name of the system
+	 * */
 	name: string;
 
 	/**
-	* The description of the system
-	* */
+	 * The description of the system
+	 * */
 	description: string;
 
 	/**
-	* The position of the system
-	* */
+	 * The position of the system
+	 * */
 	position: Point;
 
 	/**
-	* The dimensions of the system
-	* */
+	 * The dimensions of the system
+	 * */
 	dimensions: Dimensions;
 
 	/**
-	* The color of the system
-	* */
+	 * The color of the system
+	 * */
 	color: string;
 
 	/**
-	* The coordinate of root of the system
-	* */
+	 * The coordinate of root of the system
+	 * */
 	systemRootX: number;
 
 	/**
-	* A list of components in the system
-	* */
+	 * A list of components in the system
+	 * */
 	componentInstances: ComponentInstance[];
 
 	/**
-	* A list of operators in the system
-	* */
+	 * A list of operators in the system
+	 * */
 	operators: Operator[];
 
 	/**
-	* A list of edges in the system
-	* */
+	 * A list of edges in the system
+	 * */
 	edges: SystemEdge[];
 
 	constructor(
@@ -85,9 +81,9 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 	}
 
 	/**
-	* Converts the System into a RawSystem
-	* */
-	toRaw () {
+	 * Converts the System into a RawSystem
+	 * */
+	toRaw() {
 		return {
 			name: this.name,
 			description: this.description,
@@ -121,15 +117,15 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 				};
 			})
 		};
-	};
+	}
 
 	serializeRaw() {
 		return JSON.stringify(this.toRaw());
 	}
 
 	/**
-	* Creates a System from an object of type RawSystem 
-	* */
+	 * Creates a System from an object of type RawSystem
+	 * */
 	static fromRaw: FromRaw<RawSystem, System> = (raw) => {
 		return new System(
 			raw.name,
@@ -160,8 +156,8 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 	};
 
 	/**
-	* Creates a System from a JSON string of a RawSystem
-	* */
+	 * Creates a System from a JSON string of a RawSystem
+	 * */
 	static deserializeRaw: DeserializeRaw<System> = (input) => {
 		const raw = JSON.parse(input);
 		return System.fromRaw(raw);

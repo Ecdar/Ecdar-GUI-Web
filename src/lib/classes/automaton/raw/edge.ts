@@ -1,6 +1,6 @@
 /**
-* The raw Object for an Edge that is used to save and communicate in JSON.
-* */
+ * The raw Object for an Edge that is used to save and communicate in JSON.
+ * */
 export type RawEdge = {
 	id: string;
 	group: string;
@@ -20,4 +20,3 @@ export type RawEdge = {
 		propertyY: number;
 	}[];
 };
-

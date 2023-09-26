@@ -1,13 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { isEqual } from 'lodash';
-import { 
-  Location, 
-  Edge, 
-  Component, 
-  System, 
-  Queries, 
-  Declaration 
-} from './automaton';
+import { Location, Edge, Component, System, Queries, Declaration } from './automaton';
 import type {
 	RawLocation,
 	RawEdge,

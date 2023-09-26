@@ -1,6 +1,6 @@
 /**
-* The raw Object for a Query that is used to save and communicate in JSON.
-* */
+ * The raw Object for a Query that is used to save and communicate in JSON.
+ * */
 export type RawQuery = {
 	query: string;
 	comment: string;
@@ -9,4 +9,3 @@ export type RawQuery = {
 	ignoredOutputs: object; // Ignored for now
 	backend: number;
 };
-

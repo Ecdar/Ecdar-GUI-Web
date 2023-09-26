@@ -1,6 +1,6 @@
 /**
-* The raw Object for a Location that is used to save and communicate in JSON.
-* */
+ * The raw Object for a Location that is used to save and communicate in JSON.
+ * */
 export type RawLocation = {
 	id: string;
 	nickname: string;
@@ -15,4 +15,3 @@ export type RawLocation = {
 	invariantX: number;
 	invariantY: number;
 };
-

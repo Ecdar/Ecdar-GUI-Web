@@ -1,7 +1,6 @@
-
 /**
-* The raw Object for a System that is used to save and communicate in JSON.
-* */
+ * The raw Object for a System that is used to save and communicate in JSON.
+ * */
 export type RawSystem = {
 	name: string;
 	description: string;
@@ -28,4 +27,3 @@ export type RawSystem = {
 		parent: number;
 	}[];
 };
-

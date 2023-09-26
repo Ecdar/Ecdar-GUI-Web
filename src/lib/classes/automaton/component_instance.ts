@@ -1,26 +1,24 @@
-import type { 
-  Point 
-} from '$lib/classes/draw';
+import type { Point } from '$lib/classes/draw';
 
 /**
-* # A Component Instance 
-* Is used by a System to store what components are used
-* */
+ * # A Component Instance
+ * Is used by a System to store what components are used
+ * */
 export class ComponentInstance {
 	/**
-	* The id of the component instance 
-	* This must be unique and is shared by Operators
-	* */
+	 * The id of the component instance
+	 * This must be unique and is shared by Operators
+	 * */
 	id: number;
 
 	/**
-	* The name of the component this references
-	* */
+	 * The name of the component this references
+	 * */
 	name: string;
 
 	/**
-	* The position of the component instance
-	* */
+	 * The position of the component instance
+	 * */
 	position: Point;
 
 	constructor(id: number, name: string, position: Point) {
@@ -29,4 +27,3 @@ export class ComponentInstance {
 		this.position = position;
 	}
 }
-

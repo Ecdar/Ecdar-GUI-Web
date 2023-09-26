@@ -1,66 +1,57 @@
-import { Point, Dimensions } from '$lib/classes/draw'
+import { Point, Dimensions } from '$lib/classes/draw';
 
-import {
-  Edge,
-  Location,
-} from '../automaton';
-import type { 
-  SerializeRaw,
-  ToRaw,
-  FromRaw,
-  DeserializeRaw,
-  RawComponent
-} from '../automaton'
+import { Edge, Location } from '../automaton';
+import type { SerializeRaw, ToRaw, FromRaw, DeserializeRaw, RawComponent } from '../automaton';
 
 /**
-* # An Ecdar component
-* It stores the edges and locations of a single automaton
-* */
+ * # An Ecdar component
+ * It stores the edges and locations of a single automaton
+ * */
 export class Component implements SerializeRaw, ToRaw<RawComponent> {
 	/**
-	* The name of the component 
-	* */
+	 * The name of the component
+	 * */
 	name: string = '';
 
 	/**
-	* The declarations of the component ex "clock t;"
-	* */
+	 * The declarations of the component ex "clock t;"
+	 * */
 	declarations: string = '';
 
 	/**
-	* A list of Locations in the Component
-	* */
+	 * A list of Locations in the Component
+	 * */
 	locations: Location[] = [];
 
 	/**
-	* A list of Edges in the Component
-	* */
+	 * A list of Edges in the Component
+	 * */
 	edges: Edge[] = [];
 
 	/**
-	* A description of the Component
-	* */
+	 * A description of the Component
+	 * */
 	description: string = '';
 
 	/**
-	* The position of the Component
-	* */
+	 * The position of the Component
+	 * */
 	position = new Point(0, 0);
 
 	/**
-	* The dimensions of the Component
-	* */
+	 * The dimensions of the Component
+	 * */
 	dimensions: Dimensions;
 
 	/**
-	* The color of the Component
-	* */
+	 * The color of the Component
+	 * */
 	color: string = '0';
 
 	/**
-	* Include in periodic checks
-	* ! Some more information might be needed !
-	* */
+	 * Include in periodic checks
+	 * ! Some more information might be needed !
+	 * */
 	includeInPeriodicCheck: boolean = false;
 
 	constructor(
@@ -103,15 +94,15 @@ export class Component implements SerializeRaw, ToRaw<RawComponent> {
 			color: this.color,
 			includeInPeriodicCheck: this.includeInPeriodicCheck
 		};
-	};
+	}
 
-	serializeRaw(){
+	serializeRaw() {
 		return JSON.stringify(this.toRaw());
 	}
 
 	/**
-	* Converts the Component into a RawComponent
-	* */
+	 * Converts the Component into a RawComponent
+	 * */
 	static fromRaw: FromRaw<RawComponent, Component> = (raw) => {
 		return new Component(
 			raw.name,
@@ -131,8 +122,8 @@ export class Component implements SerializeRaw, ToRaw<RawComponent> {
 	};
 
 	/**
-	* Creates a Component from a JSON string of a RawComponent
-	* */
+	 * Creates a Component from a JSON string of a RawComponent
+	 * */
 	static deserializeRaw: DeserializeRaw<Component> = (input) => {
 		const raw: RawComponent = JSON.parse(input);
 		return Component.fromRaw(raw);

@@ -1,86 +1,74 @@
-import { 
-  Point 
-} from '$lib/classes/draw';
+import { Point } from '$lib/classes/draw';
 
-import {
-  Status,
-  Property,
-  PropertyType
-} from '../automaton';
-import type { 
-  SerializeRaw,
-  ToRaw,
-  FromRaw,
-  DeserializeRaw,
-  RawEdge,
-} from '../automaton'
+import { Status, Property, PropertyType } from '../automaton';
+import type { SerializeRaw, ToRaw, FromRaw, DeserializeRaw, RawEdge } from '../automaton';
 
 /**
-* # An Ecdar Edge
-* Used to define edges in an Ecdar Component
-* */
+ * # An Ecdar Edge
+ * Used to define edges in an Ecdar Component
+ * */
 export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 	/**
-	* The id of the edge
-	*  - Must be "E" followed by a number and
-	*  - Must be unique
-	* */
+	 * The id of the edge
+	 *  - Must be "E" followed by a number and
+	 *  - Must be unique
+	 * */
 	id: string;
 
 	/**
-	* # Unused
-	* */
+	 * # Unused
+	 * */
 	group: string;
 
 	/**
-	* The id of the source location 
-	* */
+	 * The id of the source location
+	 * */
 	sourceLocation: string;
 
 	/**
-	* The id of the target location 
-	* */
+	 * The id of the target location
+	 * */
 	targetLocation: string;
 
 	/**
-	* The status of the edge 
-	*  - Input or
-	*  - Output
-	* */
+	 * The status of the edge
+	 *  - Input or
+	 *  - Output
+	 * */
 	status: Status;
 
 	/**
-	* Unused
-	* */
+	 * Unused
+	 * */
 	select: string;
 
 	/**
-	* The guard of the edge
-	* ex "c <= 7"
-	* */
+	 * The guard of the edge
+	 * ex "c <= 7"
+	 * */
 	guard: string;
 
 	/**
-	* The update of the edge
-	* ex "c := 7"
-	* */
+	 * The update of the edge
+	 * ex "c := 7"
+	 * */
 	update: string;
 
 	/**
-	* The input OR output variable of the edge
-	* */
+	 * The input OR output variable of the edge
+	 * */
 	sync: string;
 
 	/**
-	* Unused  
-	* */
+	 * Unused
+	 * */
 	isLocked: boolean;
 
 	/**
-	* The nails of the edge 
-	* Modifies the path that the edge takes
-	* Defines properties on the edge
-	* */
+	 * The nails of the edge
+	 * Modifies the path that the edge takes
+	 * Defines properties on the edge
+	 * */
 	nails: {
 		position: Point;
 		property: Property;
@@ -141,15 +129,14 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 				<RawEdge['nails']>[]
 			)
 		};
-	};
+	}
 	serializeRaw() {
 		return JSON.stringify(this.toRaw());
 	}
 
-
 	/**
-	* Creates an Edge from a RawEdge
-	* */
+	 * Creates an Edge from a RawEdge
+	 * */
 	static fromRaw: FromRaw<RawEdge, Edge> = (raw) => {
 		return new Edge(
 			raw.id,
@@ -175,8 +162,8 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 	};
 
 	/**
-	* Creates an Edge from a JSON matching a RawEdge
-	* */
+	 * Creates an Edge from a JSON matching a RawEdge
+	 * */
 	static deserializeRaw: DeserializeRaw<Edge> = (input) => {
 		const raw: RawEdge = JSON.parse(input);
 		return Edge.fromRaw(raw);

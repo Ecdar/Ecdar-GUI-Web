@@ -1,4 +1,3 @@
-
 // Raw Types
 export type {
 	RawLocation,
@@ -12,7 +11,6 @@ export type {
 	SerializeRaw,
 	DeserializeRaw
 } from './automaton/raw';
-
 
 // Enums
 export { Backend } from './automaton/backend';
@@ -38,14 +36,3 @@ export { Edge } from './automaton/edge';
 export { Location } from './automaton/location';
 export { Query, Queries } from './automaton/query';
 export { System } from './automaton/system';
-
-
-
-
-
-
-
-
-
-
-

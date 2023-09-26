@@ -1,4 +1,6 @@
-
+/**
+ * Describes a point in a coordinate system
+ * */
 export class Point {
 	x: number;
 	y: number;
@@ -8,4 +10,3 @@ export class Point {
 		this.y = y;
 	}
 }
-

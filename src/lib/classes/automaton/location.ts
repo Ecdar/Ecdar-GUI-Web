@@ -1,54 +1,41 @@
-import { 
-  Point 
-} from '$lib/classes/draw';
-import {
-  Nickname,
-  Invariant,
-  LocationType,
-  Urgency,
-} from '../automaton';
-import type { 
-  SerializeRaw,
-  ToRaw,
-  FromRaw,
-  DeserializeRaw,
-  RawLocation,
-} from '../automaton'
+import { Point } from '$lib/classes/draw';
+import { Nickname, Invariant, LocationType, Urgency } from '../automaton';
+import type { SerializeRaw, ToRaw, FromRaw, DeserializeRaw, RawLocation } from '../automaton';
 
 export class Location implements SerializeRaw, ToRaw<RawLocation> {
 	/**
-	* The id of the Location  
-	* */
+	 * The id of the Location
+	 * */
 	id: string;
 
 	/**
-	* The position of the Location  
-	* */
+	 * The position of the Location
+	 * */
 	position: Point;
 
 	/**
-	* The Nickname of the Location  
-	* */
+	 * The Nickname of the Location
+	 * */
 	nickname: Nickname;
 
 	/**
-	* The Invariant of the Location  
-	* */
+	 * The Invariant of the Location
+	 * */
 	invariant: Invariant;
 
 	/**
-	* The Type of the Location  
-	* */
+	 * The Type of the Location
+	 * */
 	type: LocationType;
 
 	/**
-	* The Urgency of the Location  
-	* */
+	 * The Urgency of the Location
+	 * */
 	urgency: Urgency;
 
 	/**
-	* The Color of the Location  
-	* */
+	 * The Color of the Location
+	 * */
 	color: string;
 
 	constructor(
@@ -70,8 +57,8 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 	}
 
 	/**
-	* Converts the Location into a RawLocation 
-	* */
+	 * Converts the Location into a RawLocation
+	 * */
 	toRaw() {
 		return {
 			id: this.id,
@@ -87,15 +74,15 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 			invariantX: this.invariant.position.x,
 			invariantY: this.invariant.position.y
 		};
-	};
+	}
 
 	serializeRaw() {
 		return JSON.stringify(this.toRaw());
 	}
 
 	/**
-	* Converts the Location into a RawLocation
-	* */
+	 * Crates a Location from a RawLocation
+	 * */
 	static fromRaw: FromRaw<RawLocation, Location> = (raw) => {
 		return new Location(
 			raw.id,
@@ -107,6 +94,10 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 			raw.color
 		);
 	};
+
+	/**
+	 * Crates a Location from a JSON string matching a RawLocation
+	 * */
 	static deserializeRaw: DeserializeRaw<Location> = (input) => {
 		const raw: RawLocation = JSON.parse(input);
 		return Location.fromRaw(raw);
