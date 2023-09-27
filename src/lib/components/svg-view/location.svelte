@@ -1,4 +1,4 @@
-<svelte/>
+<svelte:options accessors/>
 
 <script lang="ts">
 	import DraggableSVG from "./DraggableSVG.svelte";
