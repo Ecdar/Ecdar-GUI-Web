@@ -1,71 +1,71 @@
 <script lang="ts">
-	enum PanelSide {
+	enum SidePanel {
 		Left,
 		Right,
 		Neither
 	}
 
-	let currentSide: PanelSide = PanelSide.Neither;
-	let leftSidebarWidth: number = 300;
-	let rightSidebarWidth: number = 300;
+	let currentResizablePanel: SidePanel = SidePanel.Neither;
+	let leftSidePanelWidth: number = 300;
+	let rightSidePanelWidth: number = 300;
 	let mainContainer: HTMLElement;
 
 	/**
-	 * Function for resizing a sidebar
+	 * Function for resizing a sidepanel
 	 * @param event
 	 */
-	function resizeSidebar(event: MouseEvent) {
+	function resizeSidePanel(event: MouseEvent) {
 		event.preventDefault();
-		if (currentSide === PanelSide.Left) {
-			leftSidebarWidth = event.x;
+		if (currentResizablePanel === SidePanel.Left) {
+			leftSidePanelWidth = event.x;
 		} else {
-			rightSidebarWidth = window.innerWidth - event.x;
+			rightSidePanelWidth = window.innerWidth - event.x;
 		}
 	}
 
 	/**
-	 * Function for starting resizing a sidebar
+	 * Function for starting resizing a side panel
 	 * @param event
 	 * @param side
 	 */
-	function startResizingSidebar(event: PointerEvent, side: PanelSide) {
+	function startResizingSidePanel(event: PointerEvent, side: SidePanel) {
 		event.preventDefault();
-		currentSide = side;
+		currentResizablePanel = side;
 		mainContainer.setPointerCapture(event.pointerId);
-		mainContainer.addEventListener('pointermove', resizeSidebar);
-		mainContainer.addEventListener('pointerup', stopResizingSidebar);
-		mainContainer.addEventListener('pointercancel', stopResizingSidebar);
+		mainContainer.addEventListener('pointermove', resizeSidePanel);
+		mainContainer.addEventListener('pointerup', stopResizingSidePanel);
+		mainContainer.addEventListener('pointercancel', stopResizingSidePanel);
 	}
 
 	/**
-	 * Function for stopping resizing a sidebar
+	 * Function for stopping resizing a sid panel
 	 * @param event
 	 */
-	function stopResizingSidebar(event: PointerEvent) {
-		currentSide = PanelSide.Neither;
+	function stopResizingSidePanel(event: PointerEvent) {
+		currentResizablePanel = SidePanel.Neither;
 		mainContainer.releasePointerCapture(event.pointerId);
-		mainContainer.removeEventListener('pointermove', resizeSidebar);
-		mainContainer.removeEventListener('pointerup', stopResizingSidebar);
-		mainContainer.removeEventListener('pointercancel', stopResizingSidebar);
+		mainContainer.removeEventListener('pointermove', resizeSidePanel);
+		mainContainer.removeEventListener('pointerup', stopResizingSidePanel);
+		mainContainer.removeEventListener('pointercancel', stopResizingSidePanel);
 	}
 </script>
 
-<!-- Top navigation bar -->
+<!-- Top navigation Panel -->
 <nav id="main-nav"></nav>
 <main bind:this={mainContainer}>
-	<!-- Left side bar -->
-	<div class="sidebar" style="flex-basis: {leftSidebarWidth}px">
+	<!-- Left side Panel -->
+	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
 		<nav class="inner-nav1">Nav 1</nav>
 		<p>Left</p>
 	</div>
-	<!-- Left resize bar -->
+	<!-- Left resize Panel -->
 	<div
 		role="button"
 		id="leftresizer"
 		class="resizer"
 		tabindex="-1"
 		on:pointerdown={(event) => {
-			startResizingSidebar(event, PanelSide.Left);
+			startResizingSidePanel(event, SidePanel.Left);
 		}}
 	/>
 	<!-- Canvas -->
@@ -73,18 +73,18 @@
 		<nav class="inner-nav2">Nav 2</nav>
 		<p>Canvas</p>
 	</div>
-	<!-- Right resize bar -->
+	<!-- Right resize Panel -->
 	<div
 		role="button"
 		id="leftresizer"
 		class="resizer"
 		tabindex="-1"
 		on:pointerdown={(event) => {
-			startResizingSidebar(event, PanelSide.Right);
+			startResizingSidePanel(event, SidePanel.Right);
 		}}
 	/>
-	<!-- Right side bar -->
-	<div class="sidebar" style="flex-basis: {rightSidebarWidth}px">
+	<!-- Right side Panel -->
+	<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
 		<nav class="inner-nav3">Nav 3</nav>
 		<p>Right</p>
 	</div>
@@ -116,7 +116,7 @@
 		background-color: lightslategrey;
 	}
 
-	.sidebar {
+	.sidePanel {
 		background-color: whitesmoke;
 		flex-basis: 200px;
 	}
