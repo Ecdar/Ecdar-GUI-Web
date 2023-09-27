@@ -1,33 +1,52 @@
 <script lang="ts">
-	let currentSide: string = '';
-	let leftLength: number = 300;
-	let rightLength: number = 300;
+	enum PanelSide {
+		Left,
+		Right,
+		Neither
+	}
+
+	let currentSide: PanelSide = PanelSide.Neither;
+	let leftSidebarWidth: number = 300;
+	let rightSidebarWidth: number = 300;
 	let mainContainer: HTMLElement;
 
-	function resize(e: MouseEvent) {
-		e.preventDefault();
-		if (currentSide === 'left') {
-			leftLength = e.x;
+	/**
+	 * Function for resizing a sidebar
+	 * @param event
+	 */
+	function resizeSidebar(event: MouseEvent) {
+		event.preventDefault();
+		if (currentSide === PanelSide.Left) {
+			leftSidebarWidth = event.x;
 		} else {
-			rightLength = window.innerWidth - e.x;
+			rightSidebarWidth = window.innerWidth - event.x;
 		}
 	}
 
-	function startExpand(e: PointerEvent, side: string) {
-		e.preventDefault();
+	/**
+	 * Function for starting resizing a sidebar
+	 * @param event
+	 * @param side
+	 */
+	function startResizingSidebar(event: PointerEvent, side: PanelSide) {
+		event.preventDefault();
 		currentSide = side;
-		mainContainer.setPointerCapture(e.pointerId);
-		mainContainer.addEventListener('pointermove', resize);
-		mainContainer.addEventListener('pointerup', stopExpand);
-		mainContainer.addEventListener('pointercancel', stopExpand);
+		mainContainer.setPointerCapture(event.pointerId);
+		mainContainer.addEventListener('pointermove', resizeSidebar);
+		mainContainer.addEventListener('pointerup', stopResizingSidebar);
+		mainContainer.addEventListener('pointercancel', stopResizingSidebar);
 	}
 
-	function stopExpand(e: PointerEvent) {
-		currentSide = '';
-		mainContainer.releasePointerCapture(e.pointerId);
-		mainContainer.removeEventListener('pointermove', resize);
-		mainContainer.removeEventListener('pointerup', stopExpand);
-		mainContainer.removeEventListener('pointercancel', stopExpand);
+	/**
+	 * Function for stopping resizing a sidebar
+	 * @param event
+	 */
+	function stopResizingSidebar(event: PointerEvent) {
+		currentSide = PanelSide.Neither;
+		mainContainer.releasePointerCapture(event.pointerId);
+		mainContainer.removeEventListener('pointermove', resizeSidebar);
+		mainContainer.removeEventListener('pointerup', stopResizingSidebar);
+		mainContainer.removeEventListener('pointercancel', stopResizingSidebar);
 	}
 </script>
 
@@ -35,7 +54,7 @@
 <nav id="main-nav"></nav>
 <main bind:this={mainContainer}>
 	<!-- Left side bar -->
-	<div class="sidebar" style="flex-basis: {leftLength}px">
+	<div class="sidebar" style="flex-basis: {leftSidebarWidth}px">
 		<nav class="inner-nav1">Nav 1</nav>
 		<p>Left</p>
 	</div>
@@ -45,8 +64,8 @@
 		id="leftresizer"
 		class="resizer"
 		tabindex="-1"
-		on:pointerdown={event => {
-			startExpand(event, 'left');
+		on:pointerdown={(event) => {
+			startResizingSidebar(event, PanelSide.Left);
 		}}
 	/>
 	<!-- Canvas -->
@@ -60,12 +79,12 @@
 		id="leftresizer"
 		class="resizer"
 		tabindex="-1"
-		on:pointerdown={event => {
-			startExpand(event, 'right');
+		on:pointerdown={(event) => {
+			startResizingSidebar(event, PanelSide.Right);
 		}}
 	/>
 	<!-- Right side bar -->
-	<div class="sidebar" style="flex-basis: {rightLength}px">
+	<div class="sidebar" style="flex-basis: {rightSidebarWidth}px">
 		<nav class="inner-nav3">Nav 3</nav>
 		<p>Right</p>
 	</div>
