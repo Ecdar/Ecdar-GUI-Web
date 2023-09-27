@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	enum SidePanel {
 		Left,
 		Right,
@@ -6,8 +8,9 @@
 	}
 
 	let currentResizablePanel: SidePanel = SidePanel.Neither;
-	let leftSidePanelWidth: number = 300;
-	let rightSidePanelWidth: number = 300;
+	let windowWidth: number;
+	let leftSidePanelWidth: number = 0;
+	let rightSidePanelWidth: number = 0;
 	let mainContainer: HTMLElement;
 
 	/**
@@ -48,7 +51,14 @@
 		mainContainer.removeEventListener('pointerup', stopResizingSidePanel);
 		mainContainer.removeEventListener('pointercancel', stopResizingSidePanel);
 	}
+
+	onMount(() => {
+		leftSidePanelWidth = windowWidth * 0.2;
+		rightSidePanelWidth = leftSidePanelWidth;
+	});
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <!-- Top navigation Panel -->
 <nav id="main-nav"></nav>
@@ -94,12 +104,12 @@
 
 <style>
 	nav {
-		height: 50px;
+		height: 5em;
 		background-color: slategrey;
 	}
 
 	#main-nav {
-		height: 25px;
+		height: 2.5em;
 	}
 
 	main {
@@ -118,12 +128,12 @@
 
 	.sidePanel {
 		background-color: whitesmoke;
-		flex-basis: 200px;
+		flex-basis: 10em;
 	}
 
 	.resizer {
 		background-color: black;
-		flex-basis: 5px;
+		flex-basis: 0.3em;
 		cursor: col-resize;
 	}
 
@@ -133,7 +143,7 @@
 	}
 
 	footer {
-		height: 25px;
+		height: 2.5em;
 		background-color: slategrey;
 	}
 </style>
