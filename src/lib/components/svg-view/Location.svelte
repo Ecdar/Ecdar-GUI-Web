@@ -2,9 +2,10 @@
 
 <script lang="ts">
 
-export let x: number;
+	export let x: number;
 	export let y: number;
 	export let locationID: string;
+	let rad: number = 20; 
 
 	$: x;
 	$: y;
@@ -13,4 +14,4 @@ export let x: number;
 	import Node from "./Node.svelte";
 </script>
 
-<Node locationID={locationID} radius={10} x={x} y={y}/>
+<Node locationID={locationID} radius={rad} x={x} y={y}/>
