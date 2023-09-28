@@ -3,6 +3,7 @@
 </svelte:head>
 
 <slot />
+
 <style>
 	:global(*) {
 		box-sizing: border-box;
