@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Star, Zoom_in, Delete, Warning } from 'svelte-google-materialdesign-icons';
 	import { ContextMenuItem } from '../svelte-modifiers/rightClickableComponents/contextMenuItem';
-	import RightClickable from '../svelte-modifiers/+RightClickable.svelte';
+	import RightClickable from '../svelte-modifiers/RightClickable.svelte';
 
 	const menuItems: ContextMenuItem[] = [
 		new ContextMenuItem(false, 'View', () => void 0, Zoom_in),
