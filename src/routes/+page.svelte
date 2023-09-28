@@ -1,5 +1,5 @@
 <script>
-	import SvgView from "$lib/components/svg-view/svg-view.svelte";
+	import SvgView from "$lib/components/svg-view/SvgView.svelte";
 </script>
 
 <h1>Welcome to SvelteKit</h1>

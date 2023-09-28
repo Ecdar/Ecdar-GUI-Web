@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Location from '$lib/components/svg-view/location.svelte';
+	import Location from '$lib/components/svg-view/Location.svelte';
 
 	const Locations: Record<string, Location> = {};
 
