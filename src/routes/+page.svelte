@@ -1,6 +1,4 @@
 <script lang="ts">
-	import RightClickableSample from '$lib/components/samplesImplementations/+RightClickableSample.svelte';
-
 	enum SidePanel {
 		Left,
 		Right,
