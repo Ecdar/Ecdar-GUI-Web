@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import { isEqual } from 'lodash';
 import { Location, Edge, Component, System, Queries, Declaration } from './automaton';
 import type {
 	RawLocation,
@@ -32,7 +31,7 @@ describe('Location test', () => {
 		const o = Location.deserializeRaw(locationData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(locationData);
-		expect(isEqual(rawObj, rawParse)).toBe(true);
+		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
 
@@ -62,7 +61,7 @@ describe('Edge test', () => {
 		const o = Edge.deserializeRaw(edgeData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(edgeData);
-		expect(isEqual(rawObj, rawParse)).toBe(true);
+		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
 
@@ -87,7 +86,7 @@ describe('Component test', () => {
 		const o = Component.deserializeRaw(componentData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(componentData);
-		expect(isEqual(rawObj, rawParse)).toBe(true);
+		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
 
@@ -120,7 +119,7 @@ describe('System test', () => {
 		const o = System.deserializeRaw(systemData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(systemData);
-		expect(isEqual(rawObj, rawParse)).toBe(true);
+		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
 
@@ -142,7 +141,7 @@ describe('Queries test', () => {
 		const o = Queries.deserializeRaw(queriesData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(queriesData);
-		expect(isEqual(rawObj, rawParse)).toBe(true);
+		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
 
@@ -152,7 +151,7 @@ describe('Declarations test', () => {
 		const data: RawDeclaration = JSON.parse(declarationData);
 
 		expect(queries.declarations).toBe(data.declarations);
-		expect(queries.type).toBe(data.name);
+		expect(queries.type).toStrictEqual(data.name);
 	});
 
 	it('serializes and deserializes to the same object', () => {
@@ -160,7 +159,7 @@ describe('Declarations test', () => {
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(declarationData);
 
-		expect(isEqual(rawObj, rawParse)).toBe(true);
+		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
 
