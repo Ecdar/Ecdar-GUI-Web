@@ -10,6 +10,8 @@
 	let rightSidePanelWidth: number = 300;
 	let mainContainer: HTMLElement;
 
+	let consoleCollapsableText: string = "↑";
+
 	/**
 	 * Function for resizing a sidepanel
 	 * @param event
@@ -48,6 +50,15 @@
 		mainContainer.removeEventListener('pointerup', stopResizingSidePanel);
 		mainContainer.removeEventListener('pointercancel', stopResizingSidePanel);
 	}
+
+	function changeConsoleCollapsableText() {
+		if (consoleCollapsableText == '↑') {
+			consoleCollapsableText = '↓';
+		} else {
+			consoleCollapsableText = '↑';
+		}
+	}
+
 </script>
 
 <!-- Top navigation Panel -->
@@ -90,7 +101,11 @@
 	</div>
 </main>
 <!-- Footer component -->
-<footer>Footer/Console</footer>
+<footer class="console">
+	<button type="button" class="collapsible" on:click={changeConsoleCollapsableText}>
+		{consoleCollapsableText}
+	</button>
+</footer>
 
 <style>
 	nav {
@@ -134,6 +149,17 @@
 
 	footer {
 		height: 2.5em;
+		background-color: slategrey;
+	}
+
+	.collapsible {
+		background-color: lightslategrey;
+		position: relative;
+		left: 98%;
+		top: -30%;
+	}
+
+	.collapsible:hover {
 		background-color: slategrey;
 	}
 </style>
