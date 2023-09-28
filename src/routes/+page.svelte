@@ -1,4 +1,6 @@
 <script lang="ts">
+	import RightClickableSample from '$lib/components/samplesImplementations/+RightClickableSample.svelte';
+
 	enum SidePanel {
 		Left,
 		Right,
@@ -74,6 +76,7 @@
 	<div class="canvas">
 		<nav class="inner-nav2">Nav 2</nav>
 		<p>Canvas</p>
+		<RightClickableSample />
 	</div>
 	<!-- Right resize Panel -->
 	<div

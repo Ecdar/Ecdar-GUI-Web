@@ -8,7 +8,7 @@
 
 	export let menuItems: ContextMenuItem[];
 	let showContextMenu = false;
-	let contextMenuPosition: Point;
+	let contextMenuPosition: Point = { x: 0, y: 0 };
 	let originalRightClickable: HTMLElement;
 
 	/**
