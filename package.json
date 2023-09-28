@@ -35,7 +35,6 @@
 		"vitest": "^0.34.4"
 	},
 	"dependencies": {
-		"@types/lodash": "^4.14.198",
 		"svelte-google-materialdesign-icons": "^0.8.1"
 	}
 }
