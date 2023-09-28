@@ -8,9 +8,8 @@
 	}
 
 	let currentResizablePanel: SidePanel = SidePanel.Neither;
-	let windowWidth: number;
-	let leftSidePanelWidth: number = 0;
-	let rightSidePanelWidth: number = 0;
+	let leftSidePanelWidth: number = 300;
+	let rightSidePanelWidth: number = 300;
 	let mainContainer: HTMLElement;
 
 	/**
@@ -51,14 +50,7 @@
 		mainContainer.removeEventListener('pointerup', stopResizingSidePanel);
 		mainContainer.removeEventListener('pointercancel', stopResizingSidePanel);
 	}
-
-	onMount(() => {
-		leftSidePanelWidth = windowWidth * 0.2;
-		rightSidePanelWidth = leftSidePanelWidth;
-	});
 </script>
-
-<svelte:window bind:innerWidth={windowWidth} />
 
 <!-- Top navigation Panel -->
 <nav id="main-nav"></nav>
