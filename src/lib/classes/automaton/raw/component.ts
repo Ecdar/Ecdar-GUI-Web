@@ -1,5 +1,5 @@
-import type { RawLocation } from './location';
-import type { RawEdge } from './edge';
+import type { RawLocation } from "./location";
+import type { RawEdge } from "./edge";
 
 /**
  * The raw Object for a Component that is used to save and communicate in JSON.

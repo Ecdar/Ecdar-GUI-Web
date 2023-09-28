@@ -1,4 +1,4 @@
-import type { Point } from '$lib/classes/draw';
+import type { Point } from "$lib/classes/draw";
 
 /**
  * # A Component Instance

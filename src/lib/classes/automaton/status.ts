@@ -4,6 +4,6 @@
  *  - Output
  * */
 export enum Status {
-	INPUT = 'INPUT',
-	OUTPUT = 'OUTPUT'
+	INPUT = "INPUT",
+	OUTPUT = "OUTPUT",
 }

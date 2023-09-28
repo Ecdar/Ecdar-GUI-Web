@@ -1,13 +1,13 @@
-import { Point, Dimensions } from '$lib/classes/draw';
-import { Operator, ComponentInstance, SystemEdge } from '../automaton';
+import { Point, Dimensions } from "$lib/classes/draw";
+import { Operator, ComponentInstance, SystemEdge } from "../automaton";
 import type {
 	OperatorType,
 	SerializeRaw,
 	ToRaw,
 	FromRaw,
 	DeserializeRaw,
-	RawSystem
-} from '../automaton';
+	RawSystem,
+} from "../automaton";
 
 /**
  * An Ecdar System
@@ -59,15 +59,15 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 	edges: SystemEdge[];
 
 	constructor(
-		name: string = '',
-		description: string = '',
+		name: string = "",
+		description: string = "",
 		position: Point = new Point(0, 0),
 		dimensions: Dimensions = new Dimensions(0, 0),
-		color: string = '',
+		color: string = "",
 		systemRootX: number = 0,
 		componentInstances: ComponentInstance[] = [],
 		operators: Operator[] = [],
-		edges: SystemEdge[] = []
+		edges: SystemEdge[] = [],
 	) {
 		this.name = name;
 		this.description = description;
@@ -98,7 +98,7 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 					id: instance.id,
 					componentName: instance.name,
 					x: instance.position.x,
-					y: instance.position.y
+					y: instance.position.y,
 				};
 			}),
 			operators: this.operators.map((o) => {
@@ -107,15 +107,15 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 					y: o.position.y,
 					// BECAUSE OF COMPATIBILITY
 					type: o.type.toLowerCase(),
-					id: o.id
+					id: o.id,
 				};
 			}),
 			edges: this.edges.map((e) => {
 				return {
 					child: e.child,
-					parent: e.parent
+					parent: e.parent,
 				};
-			})
+			}),
 		};
 	}
 
@@ -138,7 +138,7 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 				return new ComponentInstance(
 					instance.id,
 					instance.componentName,
-					new Point(instance.x, instance.y)
+					new Point(instance.x, instance.y),
 				);
 			}),
 			raw.operators.map((o) => {
@@ -146,12 +146,12 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 					o.id,
 					/// BECAUSE OF COMPATIBILITY
 					o.type.toUpperCase() as OperatorType,
-					new Point(o.x, o.y)
+					new Point(o.x, o.y),
 				);
 			}),
 			raw.edges.map((e) => {
 				return new SystemEdge(e.parent, e.child);
-			})
+			}),
 		);
 	};
 
