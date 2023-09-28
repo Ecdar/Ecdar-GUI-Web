@@ -76,7 +76,6 @@
 	<div class="canvas">
 		<nav class="inner-nav2">Nav 2</nav>
 		<p>Canvas</p>
-		<RightClickableSample />
 	</div>
 	<!-- Right resize Panel -->
 	<div
