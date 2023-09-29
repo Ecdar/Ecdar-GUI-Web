@@ -1,5 +1,11 @@
-import { Backend } from '../automaton';
-import type { SerializeRaw, ToRaw, FromRaw, DeserializeRaw, RawQuery } from '../automaton';
+import { Backend } from "../automaton";
+import type {
+	SerializeRaw,
+	ToRaw,
+	FromRaw,
+	DeserializeRaw,
+	RawQuery,
+} from "../automaton";
 
 /**
  * # An Ecdar Query
@@ -35,15 +41,15 @@ export class Query implements SerializeRaw, ToRaw<RawQuery> {
 			isPeriodic: this.isPeriodic,
 			ignoredInputs: {},
 			ignoredOutputs: {},
-			backend: this.backend
+			backend: this.backend,
 		};
 	}
 
 	constructor(
-		query: string = '',
-		comment: string = '',
+		query: string = "",
+		comment: string = "",
 		isPeriodic: boolean = false,
-		backend: Backend = Backend.REVEAAL
+		backend: Backend = Backend.REVEAAL,
 	) {
 		this.query = query;
 		this.comment = comment;
@@ -60,7 +66,12 @@ export class Query implements SerializeRaw, ToRaw<RawQuery> {
 	 * Creates a query from a RawQuery
 	 * */
 	static fromRaw: FromRaw<RawQuery, Query> = (raw) => {
-		return new Query(raw.query, raw.comment, raw.isPeriodic, raw.backend as Backend);
+		return new Query(
+			raw.query,
+			raw.comment,
+			raw.isPeriodic,
+			raw.backend as Backend,
+		);
 	};
 
 	/**
@@ -108,7 +119,7 @@ export class Queries implements SerializeRaw, ToRaw<RawQuery[]> {
 		return new Queries(
 			raw.map((rawSingle) => {
 				return Query.fromRaw(rawSingle);
-			})
+			}),
 		);
 	};
 }

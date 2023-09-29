@@ -1,16 +1,23 @@
-import { describe, it, expect } from 'vitest';
-import { Location, Edge, Component, System, Queries, Declaration } from './automaton';
+import { describe, it, expect } from "vitest";
+import {
+	Location,
+	Edge,
+	Component,
+	System,
+	Queries,
+	Declaration,
+} from "./automaton";
 import type {
 	RawLocation,
 	RawEdge,
 	RawComponent,
 	RawSystem,
 	RawQuery,
-	RawDeclaration
-} from './automaton';
+	RawDeclaration,
+} from "./automaton";
 
-describe('Location test', () => {
-	it('serializes into location', () => {
+describe("Location test", () => {
+	it("serializes into location", () => {
 		const location = Location.deserializeRaw(locationData);
 		const raw: RawLocation = JSON.parse(locationData);
 		expect(location.id).toBe(raw.id);
@@ -27,7 +34,7 @@ describe('Location test', () => {
 		expect(location.invariant.position.y).toBe(raw.invariantY);
 	});
 
-	it('serializes and deserializes to the same object', () => {
+	it("serializes and deserializes to the same object", () => {
 		const o = Location.deserializeRaw(locationData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(locationData);
@@ -35,8 +42,8 @@ describe('Location test', () => {
 	});
 });
 
-describe('Edge test', () => {
-	it('serializes into an Edge', () => {
+describe("Edge test", () => {
+	it("serializes into an Edge", () => {
 		const edge = Edge.deserializeRaw(edgeData);
 		const data: RawEdge = JSON.parse(edgeData);
 		expect(edge.id).toBe(data.id);
@@ -57,7 +64,7 @@ describe('Edge test', () => {
 		expect(edge.nails[0].property.position.y).toBe(data.nails[0].propertyY);
 	});
 
-	it('serializes and deserializes to the same object', () => {
+	it("serializes and deserializes to the same object", () => {
 		const o = Edge.deserializeRaw(edgeData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(edgeData);
@@ -65,8 +72,8 @@ describe('Edge test', () => {
 	});
 });
 
-describe('Component test', () => {
-	it('serializes into a Component', () => {
+describe("Component test", () => {
+	it("serializes into a Component", () => {
 		const component = Component.deserializeRaw(componentData);
 		const data: RawComponent = JSON.parse(componentData);
 		expect(component.name).toBe(data.name);
@@ -79,10 +86,12 @@ describe('Component test', () => {
 		expect(component.dimensions.width).toBe(data.width);
 		expect(component.dimensions.height).toBe(data.height);
 		expect(component.color).toBe(data.color);
-		expect(component.includeInPeriodicCheck).toBe(data.includeInPeriodicCheck);
+		expect(component.includeInPeriodicCheck).toBe(
+			data.includeInPeriodicCheck,
+		);
 	});
 
-	it('serializes and deserializes to the same object', () => {
+	it("serializes and deserializes to the same object", () => {
 		const o = Component.deserializeRaw(componentData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(componentData);
@@ -90,8 +99,8 @@ describe('Component test', () => {
 	});
 });
 
-describe('System test', () => {
-	it('serializes into a system', () => {
+describe("System test", () => {
+	it("serializes into a system", () => {
 		const system = System.deserializeRaw(systemData);
 		const data: RawSystem = JSON.parse(systemData);
 		expect(system.name).toBe(data.name);
@@ -100,22 +109,34 @@ describe('System test', () => {
 		expect(system.position.y).toBe(data.y);
 		expect(system.color).toBe(data.color);
 		expect(system.systemRootX).toBe(data.systemRootX);
-		expect(system.componentInstances.length).toBe(data.componentInstances.length);
-		expect(system.componentInstances[0].name).toBe(data.componentInstances[0].componentName);
-		expect(system.componentInstances[0].id).toBe(data.componentInstances[0].id);
-		expect(system.componentInstances[0].position.x).toBe(data.componentInstances[0].x);
-		expect(system.componentInstances[0].position.y).toBe(data.componentInstances[0].y);
+		expect(system.componentInstances.length).toBe(
+			data.componentInstances.length,
+		);
+		expect(system.componentInstances[0].name).toBe(
+			data.componentInstances[0].componentName,
+		);
+		expect(system.componentInstances[0].id).toBe(
+			data.componentInstances[0].id,
+		);
+		expect(system.componentInstances[0].position.x).toBe(
+			data.componentInstances[0].x,
+		);
+		expect(system.componentInstances[0].position.y).toBe(
+			data.componentInstances[0].y,
+		);
 		expect(system.operators.length).toBe(data.operators.length);
 		expect(system.operators[0].id).toBe(data.operators[0].id);
 		expect(system.operators[0].position.x).toBe(data.operators[0].x);
 		expect(system.operators[0].position.y).toBe(data.operators[0].y);
-		expect(system.operators[0].type.toLowerCase()).toBe(data.operators[0].type);
+		expect(system.operators[0].type.toLowerCase()).toBe(
+			data.operators[0].type,
+		);
 		expect(system.edges.length).toBe(data.edges.length);
 		expect(system.edges[0].parent).toBe(data.edges[0].parent);
 		expect(system.edges[0].child).toBe(data.edges[0].child);
 	});
 
-	it('serializes and deserializes to the same object', () => {
+	it("serializes and deserializes to the same object", () => {
 		const o = System.deserializeRaw(systemData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(systemData);
@@ -123,8 +144,8 @@ describe('System test', () => {
 	});
 });
 
-describe('Queries test', () => {
-	it('serializes into a query array', () => {
+describe("Queries test", () => {
+	it("serializes into a query array", () => {
 		const queries = Queries.deserializeRaw(queriesData);
 		const data: RawQuery[] = JSON.parse(queriesData);
 
@@ -137,7 +158,7 @@ describe('Queries test', () => {
 		}
 	});
 
-	it('serializes and deserializes to the same object', () => {
+	it("serializes and deserializes to the same object", () => {
 		const o = Queries.deserializeRaw(queriesData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(queriesData);
@@ -145,8 +166,8 @@ describe('Queries test', () => {
 	});
 });
 
-describe('Declarations test', () => {
-	it('serializes into a declaration', () => {
+describe("Declarations test", () => {
+	it("serializes into a declaration", () => {
 		const queries = Declaration.deserializeRaw(declarationData);
 		const data: RawDeclaration = JSON.parse(declarationData);
 
@@ -154,7 +175,7 @@ describe('Declarations test', () => {
 		expect(queries.type).toStrictEqual(data.name);
 	});
 
-	it('serializes and deserializes to the same object', () => {
+	it("serializes and deserializes to the same object", () => {
 		const o = Declaration.deserializeRaw(declarationData);
 		const rawObj = o.toRaw();
 		const rawParse = JSON.parse(declarationData);

@@ -1,6 +1,6 @@
-import { Point } from '$lib/classes/draw';
+import { Point } from "$lib/classes/draw";
 
-import { OperatorType } from './operator_type';
+import { OperatorType } from "./operator_type";
 
 /**
  * Defines an operator for a System
@@ -25,7 +25,7 @@ export class Operator {
 	constructor(
 		id: number = 0,
 		type: OperatorType = OperatorType.COMPOSITION,
-		position: Point = new Point(0, 0)
+		position: Point = new Point(0, 0),
 	) {
 		this.id = id;
 		this.type = type;
