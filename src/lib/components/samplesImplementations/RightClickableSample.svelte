@@ -1,42 +1,53 @@
 <script lang="ts">
-	import { Star, Zoom_in, Delete, Warning } from 'svelte-google-materialdesign-icons';
-	import { ContextMenuItem } from '../svelte-modifiers/rightClickableComponents/contextMenuItem';
-	import RightClickable from '../svelte-modifiers/RightClickable.svelte';
+	import {
+		Star,
+		Zoom_in,
+		Delete,
+		Warning,
+	} from "svelte-google-materialdesign-icons";
+	import { ContextMenuItem } from "../svelte-modifiers/rightClickableComponents/context_menu_item";
+	import RightClickable from "../svelte-modifiers/RightClickable.svelte";
 
 	const menuItems: ContextMenuItem[] = [
-		new ContextMenuItem(false, 'View', () => void 0, Zoom_in),
+		new ContextMenuItem(false, "View", () => void 0, Zoom_in),
 		new ContextMenuItem(true),
 		new ContextMenuItem(
 			false,
-			'Delete',
+			"Delete",
 			(target) => {
 				target.remove();
 			},
 			Delete,
-			'danger'
+			"danger",
 		),
-		new ContextMenuItem(false, 'Deattach', () => void 0, Warning, 'warning'),
-		new ContextMenuItem(false, 'Star', () => void 0, Star, 'success')
+		new ContextMenuItem(
+			false,
+			"Deattach",
+			() => void 0,
+			Warning,
+			"warning",
+		),
+		new ContextMenuItem(false, "Star", () => void 0, Star, "success"),
 	];
 	const menuItems2: ContextMenuItem[] = [
 		new ContextMenuItem(
 			false,
-			'Warning',
+			"Warning",
 			() => {
-				console.log('Warned the user');
+				console.log("Warned the user");
 			},
 			Warning,
-			'warning'
+			"warning",
 		),
 		new ContextMenuItem(
 			false,
-			'Remove',
+			"Remove",
 			(element) => {
 				element.remove();
 			},
 			Delete,
-			'danger'
-		)
+			"danger",
+		),
 	];
 </script>
 

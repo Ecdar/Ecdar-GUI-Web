@@ -2,9 +2,9 @@
 	Modifier for making svelte components right clickable
 -->
 <script lang="ts">
-	import ContextMenu from './rightClickableComponents/ContextMenu.svelte';
-	import type { ContextMenuItem } from './rightClickableComponents/contextMenuItem';
-	import type { Point } from '$lib/classes/draw/point';
+	import ContextMenu from "./rightClickableComponents/ContextMenu.svelte";
+	import type { ContextMenuItem } from "./rightClickableComponents/context_menu_item";
+	import type { Point } from "$lib/classes/draw/point";
 
 	export let menuItems: ContextMenuItem[];
 	let showContextMenu = false;

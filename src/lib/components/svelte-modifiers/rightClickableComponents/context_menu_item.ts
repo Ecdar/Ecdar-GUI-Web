@@ -1,4 +1,4 @@
-import type { ComponentType } from 'svelte';
+import type { ComponentType } from "svelte";
 
 /**
  * Class used for storing information about context menu items (The menu appearing when rightclicking)
@@ -19,10 +19,10 @@ export class ContextMenuItem {
 
 	constructor(
 		isHorizontalRule: boolean,
-		displayText: string = '',
+		displayText: string = "",
 		onClick: (originalRightClickable: HTMLElement) => void = () => void 0,
 		icon?: ComponentType,
-		cssClass?: string
+		cssClass?: string,
 	) {
 		this.isHorizontalRule = isHorizontalRule;
 		this.displayText = displayText;
