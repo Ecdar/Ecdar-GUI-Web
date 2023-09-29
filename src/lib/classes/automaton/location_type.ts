@@ -11,26 +11,26 @@ export enum LocationType {
 	 * It is an initial Location
 	 * only one allowed per Component
 	 * */
-	INITIAL = 'INITIAL',
+	INITIAL = "INITIAL",
 
 	/**
 	 * No modifires
 	 * */
-	NORMAL = 'NORMAL',
+	NORMAL = "NORMAL",
 
 	/**
 	 * ?????
 	 * */
-	UNIVERSAL = 'UNIVERSAL',
+	UNIVERSAL = "UNIVERSAL",
 
 	/**
 	 * ?????
 	 * */
-	INCONSISTENT = 'INCONSISTENT',
+	INCONSISTENT = "INCONSISTENT",
 
 	/**
 	 * DO NOT USE
 	 * Reveaal will panic
 	 * */
-	ANY = 'ANY'
+	ANY = "ANY",
 }

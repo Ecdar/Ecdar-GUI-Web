@@ -1,9 +1,9 @@
-export type { RawComponent } from './raw/component';
-export type { RawDeclaration } from './raw/declaration';
-export type { RawEdge } from './raw/edge';
-export type { RawLocation } from './raw/location';
-export type { RawQuery } from './raw/query';
-export type { RawSystem } from './raw/system';
+export type { RawComponent } from "./raw/component";
+export type { RawDeclaration } from "./raw/declaration";
+export type { RawEdge } from "./raw/edge";
+export type { RawLocation } from "./raw/location";
+export type { RawQuery } from "./raw/query";
+export type { RawSystem } from "./raw/system";
 
 export interface SerializeRaw {
 	/**
