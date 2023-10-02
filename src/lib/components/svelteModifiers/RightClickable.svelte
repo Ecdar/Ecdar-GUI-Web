@@ -72,10 +72,7 @@
 -->
 <style>
 	* {
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
+		-webkit-user-select: none; /* needed for Safari support: https://developer.mozilla.org/en-US/docs/Web/CSS/user-select#browser_compatibility */
 		user-select: none;
 	}
 </style>
