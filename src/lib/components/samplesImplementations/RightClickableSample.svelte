@@ -5,8 +5,8 @@
 		Delete,
 		Warning,
 	} from "svelte-google-materialdesign-icons";
-	import { ContextMenuItem } from "../svelte-modifiers/rightClickableComponents/context_menu_item";
-	import RightClickable from "../svelte-modifiers/RightClickable.svelte";
+	import { ContextMenuItem } from "../svelteModifiers/rightClickableComponents/ContextMenuItem";
+	import RightClickable from "../svelteModifiers/RightClickable.svelte";
 
 	const menuItems: ContextMenuItem[] = [
 		new ContextMenuItem(false, "View", () => void 0, Zoom_in),

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ContextMenuItem } from "./context_menu_item";
+	import type { ContextMenuItem } from "./ContextMenuItem";
 
 	// Variables for the menu items to be shown and style to be set
 	export let menuItems: ContextMenuItem[];

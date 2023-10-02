@@ -3,7 +3,7 @@
 -->
 <script lang="ts">
 	import ContextMenu from "./rightClickableComponents/ContextMenu.svelte";
-	import type { ContextMenuItem } from "./rightClickableComponents/context_menu_item";
+	import type { ContextMenuItem } from "./rightClickableComponents/ContextMenuItem";
 	import type { Point } from "$lib/classes/draw/point";
 
 	export let menuItems: ContextMenuItem[];
