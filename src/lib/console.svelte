@@ -76,9 +76,15 @@
 
 	.collapsible {
 		background-color: lightslategrey;
-		left: 93%;
+		float: right;
 		position: relative;
 		box-shadow: 0 3px 11px rgba(28, 28, 28, 0.55);
+		padding-left: 1em;
+		padding-right: 1em;
+		padding-bottom: 0.75em;
+		padding-top: 0.75em;
+		margin-top: 0.3em;
+		margin-right: 0.5em;
 	}
 
 	.collapsible:hover {
@@ -98,7 +104,6 @@
 		border-top: 0em;
 		border-bottom: 0em;
 		border-style: solid;
-		display: inline-block;
 		float: left;
 	}
 

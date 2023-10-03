@@ -11,7 +11,7 @@
 	let leftSidePanelWidth: number = 300;
 	let rightSidePanelWidth: number = 300;
 	let mainContainer: HTMLElement;
-	let footerHeight: number = 2;
+	let footerHeight: number = 3.25;
 
 	/**
 	 * Function for resizing a sidepanel
