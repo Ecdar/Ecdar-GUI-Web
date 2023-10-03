@@ -101,7 +101,10 @@
 	</div>
 </main>
 <!-- Footer component -->
-<footer class="console">
+<footer>
+	<div class="console">
+		<p>Console</p>
+	</div>
 	<button type="button" class="collapsible" on:click={changeConsoleCollapsableText}>
 		{consoleCollapsableText}
 	</button>
@@ -149,7 +152,12 @@
 
 	footer {
 		height: 2.5em;
-		background-color: slategrey;
+		background-color: slategrey;;
+	}
+
+	.console {
+		background-color: rgb(159, 174, 189);
+		height: 10em;
 	}
 
 	.collapsible {
