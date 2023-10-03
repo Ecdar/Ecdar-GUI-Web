@@ -5,12 +5,13 @@
 		Neither
 	}
 
+	import Console from '../lib/console.svelte';
+
 	let currentResizablePanel: SidePanel = SidePanel.Neither;
 	let leftSidePanelWidth: number = 300;
 	let rightSidePanelWidth: number = 300;
 	let mainContainer: HTMLElement;
-
-	let consoleCollapsableText: string = "↑";
+	let footerHeight: number = 2;
 
 	/**
 	 * Function for resizing a sidepanel
@@ -50,15 +51,6 @@
 		mainContainer.removeEventListener('pointerup', stopResizingSidePanel);
 		mainContainer.removeEventListener('pointercancel', stopResizingSidePanel);
 	}
-
-	function changeConsoleCollapsableText() {
-		if (consoleCollapsableText == '↑') {
-			consoleCollapsableText = '↓';
-		} else {
-			consoleCollapsableText = '↑';
-		}
-	}
-
 </script>
 
 <!-- Top navigation Panel -->
@@ -101,13 +93,8 @@
 	</div>
 </main>
 <!-- Footer component -->
-<footer>
-	<div class="console">
-		<p>Console</p>
-	</div>
-	<button type="button" class="collapsible" on:click={changeConsoleCollapsableText}>
-		{consoleCollapsableText}
-	</button>
+<footer style="height:{footerHeight}em;">
+	<Console bind:value={footerHeight} />
 </footer>
 
 <style>
@@ -128,10 +115,12 @@
 	.inner-nav1,
 	.inner-nav3 {
 		background-color: slategrey;
+		box-shadow: lightslategray 0px 0px 1em;
 	}
 
 	.inner-nav2 {
 		background-color: lightslategrey;
+		box-shadow: slategrey 0px 0px 1em;
 	}
 
 	.sidePanel {
@@ -151,23 +140,8 @@
 	}
 
 	footer {
-		height: 2.5em;
-		background-color: slategrey;;
-	}
-
-	.console {
-		background-color: rgb(159, 174, 189);
-		height: 10em;
-	}
-
-	.collapsible {
-		background-color: lightslategrey;
-		position: relative;
-		left: 98%;
-		top: -30%;
-	}
-
-	.collapsible:hover {
+		height: var(--footerHeight);
 		background-color: slategrey;
+		overflow: hidden;
 	}
 </style>
