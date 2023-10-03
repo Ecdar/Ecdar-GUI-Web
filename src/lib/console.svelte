@@ -32,8 +32,11 @@
 	<button type="button" class="collapsible" on:click={changeConsoleCollapsableTextAndHeight}>
 		{consoleCollapsableText}
 	</button>
-	<button type="button" class="consoleTab" on:click={changeTabToFrontend}> Frontend </button>
-	<button type="button" class="consoleTab" on:click={changeTabToBackend}> Backend </button>
+
+	<button type="button" class="consoleTab frontEndButton" on:click={changeTabToFrontend}
+		>Frontend</button
+	>
+	<button type="button" class="consoleTab" on:click={changeTabToBackend}>Backend</button>
 	<div class="console">
 		{#if currentTab == Tabs.Frontend}
 			<ConsoleLine componentText="Frontend Errors!" />
@@ -52,8 +55,6 @@
 		height: 12em;
 		overflow-y: scroll;
 		overflow-wrap: break-word;
-		box-shadow: inset 0 0 1em grey;
-		margin-top: 1em;
 	}
 
 	.console::-webkit-scrollbar {
@@ -75,7 +76,7 @@
 
 	.collapsible {
 		background-color: lightslategrey;
-		left: 98%;
+		left: 93%;
 		position: relative;
 		box-shadow: 0 3px 11px rgba(28, 28, 28, 0.55);
 	}
@@ -85,6 +86,28 @@
 	}
 
 	.outerOverflow {
-		margin-top: 1em;
+		margin: 0%;
+		padding: 0%;
+	}
+
+	.consoleTab {
+		background-color: slategrey;
+		position: relative;
+		height: 3.8em;
+		margin: auto;
+		border-top: 0em;
+		border-bottom: 0em;
+		border-style: solid;
+		display: inline-block;
+		float: left;
+	}
+
+	.consoleTab:hover {
+		background-color: lightslategrey;
+	}
+
+	.frontEndButton {
+		border-left: 0;
+		border-right: 0;
 	}
 </style>
