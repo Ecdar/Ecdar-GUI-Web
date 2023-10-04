@@ -78,7 +78,7 @@ export class Project implements Named {
 				// IN TAURI
 				const { dialog, fs } = await import("@tauri-apps/api");
 
-				let d = (await dialog.open({
+				const d = (await dialog.open({
 					title: "Choose an Ecdar project directory",
 					directory: true,
 					recursive: true,
@@ -89,13 +89,13 @@ export class Project implements Named {
 					throw new Error(ProjectError.DialogClosed);
 				}
 
-				let project = new Project();
+				const project = new Project();
 
-				let path = d.split(/[\/\\]/g);
+				const path = d.split(/[/\\]/g);
 				project.name = path.at(-1) as string;
 				project.srcDir = path.slice(0, -1).join("/");
 
-				let dir = await fs.readDir(d, { recursive: true });
+				const dir = await fs.readDir(d, { recursive: true });
 
 				async function mapChildren<T>(
 					children: Awaited<ReturnType<typeof fs.readDir>>,
@@ -154,15 +154,15 @@ export class Project implements Named {
 		  () => {
 				console.log(inTauri);
 				return new Promise((resolve, reject) => {
-					let input = document.createElement("input");
+					const input = document.createElement("input");
 					input.type = "file";
 					input.webkitdirectory = true;
 					input.onchange = () => {
 						if (input.files != null) {
-							let project = new Project();
-							for (let file of input.files) {
+							const project = new Project();
+							for (const file of input.files) {
 								const [projectName, type] =
-									file.webkitRelativePath.split(/[\\\/]/g);
+									file.webkitRelativePath.split(/[\\/]/g);
 								const reader = new FileReader();
 								reader.readAsText(file);
 								reader.addEventListener("load", () => {
@@ -234,19 +234,19 @@ export class Project implements Named {
 					throw new Error(ProjectError.SaveCanceled);
 				}
 
-				let split = dir.split(/[\/\\]/g);
-				let lastFolder = split.at(-1) as string;
+				const split = dir.split(/[/\\]/g);
+				const lastFolder = split.at(-1) as string;
 				if (lastFolder === this.name) {
 					dir = split.slice(0, -1).join("/");
 				}
 
 				this.srcDir = dir;
 
-				let saveDir = `${dir}/${this.name}`;
+				const saveDir = `${dir}/${this.name}`;
 
-				let dirExist = await fs.exists(saveDir);
+				const dirExist = await fs.exists(saveDir);
 				if (dirExist) {
-					let dialogAnswer = await dialog.confirm(
+					const dialogAnswer = await dialog.confirm(
 						`There already exists a directory named ${this.name} in that directory, would you like to over write`,
 					);
 					if (!dialogAnswer) {
@@ -256,8 +256,7 @@ export class Project implements Named {
 					fs.createDir(saveDir);
 				}
 
-				// Its fine because of the inTauri check done on both functions
-				(this.writeToDir as any)(saveDir);
+				(this.writeToDir as (dir: string) => Promise<void>)(saveDir);
 		  }
 		: async () => {
 				/* DOWNLOAD FILES AS ZIP */
@@ -276,7 +275,7 @@ export class Project implements Named {
 				}
 
 				// Its fine because of the inTauri check done on both functions
-				(this.writeToDir as any)(dir);
+				(this.writeToDir as (dir: string) => Promise<void>)(dir);
 		  }
 		: undefined;
 
@@ -307,7 +306,7 @@ export class Project implements Named {
 					obj: T[],
 					dir: string,
 				) {
-					let filenames = obj.map((o) => `${o.name}.json`);
+					const filenames = obj.map((o) => `${o.name}.json`);
 					return Promise.all(
 						(await fs.readDir(dir)).map((file) =>
 							filenames.includes(file.name as string)
@@ -319,11 +318,12 @@ export class Project implements Named {
 					);
 				}
 
+				const systemDir = `${dir}/${PROJECT_FOLDER_NAME_SYSTEMS}`;
+				const componentDir = `${dir}/${PROJECT_FOLDER_NAME_COMPONENTS}`;
 				await Promise.all(
 					Object.entries(this).map(async ([k, v]) => {
 						switch (k) {
 							case "systems":
-								const systemDir = `${dir}/${PROJECT_FOLDER_NAME_SYSTEMS}`;
 								if (!(await fs.exists(systemDir))) {
 									fs.createDir(systemDir);
 								}
@@ -339,7 +339,6 @@ export class Project implements Named {
 								]);
 								break;
 							case "components":
-								const componentDir = `${dir}/${PROJECT_FOLDER_NAME_COMPONENTS}`;
 								if (!(await fs.exists(componentDir))) {
 									fs.createDir(componentDir);
 								}
