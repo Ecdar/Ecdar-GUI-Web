@@ -89,7 +89,7 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 	/**
 	 * Crates a Location from a RawLocation
 	 * */
-	static fromRaw: FromRaw<RawLocation, Location> = (raw) => {
+	static readonly fromRaw: FromRaw<RawLocation, Location> = (raw) => {
 		return new Location(
 			raw.id,
 			new Point(raw.x, raw.y),
@@ -107,7 +107,7 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 	/**
 	 * Crates a Location from a JSON string matching a RawLocation
 	 * */
-	static deserializeRaw: DeserializeRaw<Location> = (input) => {
+	static readonly deserializeRaw: DeserializeRaw<Location> = (input) => {
 		const raw: RawLocation = JSON.parse(input);
 		return Location.fromRaw(raw);
 	};

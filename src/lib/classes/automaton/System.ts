@@ -7,8 +7,8 @@ import type {
 	FromRaw,
 	DeserializeRaw,
 	RawSystem,
-	Named
-} from '../automaton';
+	Named,
+} from "../automaton";
 
 /**
  * An Ecdar System
@@ -127,7 +127,7 @@ export class System implements SerializeRaw, ToRaw<RawSystem>, Named {
 	/**
 	 * Creates a System from an object of type RawSystem
 	 * */
-	static fromRaw: FromRaw<RawSystem, System> = (raw) => {
+	static readonly fromRaw: FromRaw<RawSystem, System> = (raw) => {
 		return new System(
 			raw.name,
 			raw.description,
@@ -159,7 +159,7 @@ export class System implements SerializeRaw, ToRaw<RawSystem>, Named {
 	/**
 	 * Creates a System from a JSON string of a RawSystem
 	 * */
-	static deserializeRaw: DeserializeRaw<System> = (input) => {
+	static readonly deserializeRaw: DeserializeRaw<System> = (input) => {
 		const raw = JSON.parse(input);
 		return System.fromRaw(raw);
 	};

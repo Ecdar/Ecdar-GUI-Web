@@ -143,7 +143,7 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 	/**
 	 * Creates an Edge from a RawEdge
 	 * */
-	static fromRaw: FromRaw<RawEdge, Edge> = (raw) => {
+	static readonly fromRaw: FromRaw<RawEdge, Edge> = (raw) => {
 		return new Edge(
 			raw.id,
 			raw.group,
@@ -170,7 +170,7 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 	/**
 	 * Creates an Edge from a JSON matching a RawEdge
 	 * */
-	static deserializeRaw: DeserializeRaw<Edge> = (input) => {
+	static readonly deserializeRaw: DeserializeRaw<Edge> = (input) => {
 		const raw: RawEdge = JSON.parse(input);
 		return Edge.fromRaw(raw);
 	};

@@ -65,7 +65,7 @@ export class Query implements SerializeRaw, ToRaw<RawQuery> {
 	/**
 	 * Creates a query from a RawQuery
 	 * */
-	static fromRaw: FromRaw<RawQuery, Query> = (raw) => {
+	static readonly fromRaw: FromRaw<RawQuery, Query> = (raw) => {
 		return new Query(
 			raw.query,
 			raw.comment,
@@ -77,7 +77,7 @@ export class Query implements SerializeRaw, ToRaw<RawQuery> {
 	/**
 	 * Creates a query from a JSON string matching a RawQuery
 	 * */
-	static deserializeRaw: DeserializeRaw<Query> = (input) => {
+	static readonly deserializeRaw: DeserializeRaw<Query> = (input) => {
 		const raw: RawQuery = JSON.parse(input);
 		return Query.fromRaw(raw);
 	};
@@ -107,7 +107,7 @@ export class Queries implements SerializeRaw, ToRaw<RawQuery[]> {
 	/**
 	 * Creates all Queries from an JSON array matching an array of RawQuery
 	 * */
-	static deserializeRaw: DeserializeRaw<Queries> = (input) => {
+	static readonly deserializeRaw: DeserializeRaw<Queries> = (input) => {
 		const raw: RawQuery[] = JSON.parse(input);
 		return Queries.fromRaw(raw);
 	};
@@ -115,7 +115,7 @@ export class Queries implements SerializeRaw, ToRaw<RawQuery[]> {
 	/**
 	 * Creates all Queries from an array of RawQuery
 	 * */
-	static fromRaw: FromRaw<RawQuery[], Queries> = (raw) => {
+	static readonly fromRaw: FromRaw<RawQuery[], Queries> = (raw) => {
 		return new Queries(
 			raw.map((rawSingle) => {
 				return Query.fromRaw(rawSingle);
