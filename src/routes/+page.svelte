@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Test from "./Test.svelte";
 	enum SidePanel {
 		Left,
 		Right,
@@ -57,6 +58,8 @@
 	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
 		<nav class="inner-nav1">Nav 1</nav>
 		<p>Left</p>
+		<Test/>
+		<input type="file" />
 	</div>
 	<!-- Left resize Panel -->
 	<div

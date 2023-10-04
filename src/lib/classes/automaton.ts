@@ -12,6 +12,9 @@ export type {
 	DeserializeRaw
 } from './automaton/raw';
 
+// THE PROJECT
+export { Project } from './automaton/Project';
+
 // Enums
 export { Backend } from './automaton/backend';
 export { DeclarationType } from './automaton/declaration_type';
@@ -36,3 +39,6 @@ export { Edge } from './automaton/edge';
 export { Location } from './automaton/location';
 export { Query, Queries } from './automaton/query';
 export { System } from './automaton/system';
+
+// Interfaces
+export type { Named } from './automaton/Named';
