@@ -1,9 +1,9 @@
 ---
 name: Feature
 about: Suggest a new feature
-title: '[Feature] <title>'
+title: "[Feature] <title>"
 labels: enhancement
-assignees: ''
+assignees: ""
 ---
 
 <!--

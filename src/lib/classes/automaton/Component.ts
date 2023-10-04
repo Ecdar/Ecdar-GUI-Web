@@ -1,4 +1,4 @@
-import { Point, Dimensions } from '$lib/classes/draw';
+import { Point, Dimensions } from "$lib/classes/draw";
 
 import { Edge, Location } from '../automaton';
 import type {
@@ -18,12 +18,12 @@ export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
 	/**
 	 * The name of the component
 	 * */
-	name: string = '';
+	name: string = "";
 
 	/**
 	 * The declarations of the component ex "clock t;"
 	 * */
-	declarations: string = '';
+	declarations: string = "";
 
 	/**
 	 * A list of Locations in the Component
@@ -38,7 +38,7 @@ export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
 	/**
 	 * A description of the Component
 	 * */
-	description: string = '';
+	description: string = "";
 
 	/**
 	 * The position of the Component
@@ -53,7 +53,7 @@ export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
 	/**
 	 * The color of the Component
 	 * */
-	color: string = '0';
+	color: string = "0";
 
 	/**
 	 * Include in periodic checks
@@ -62,15 +62,15 @@ export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
 	includeInPeriodicCheck: boolean = false;
 
 	constructor(
-		name: string = '',
-		declarations: string = '',
+		name: string = "",
+		declarations: string = "",
 		locations: Location[] = [],
 		edges: Edge[] = [],
-		description: string = '',
+		description: string = "",
 		position = new Point(0, 0),
 		dimensions = new Dimensions(100, 100),
-		color: string = '0',
-		includeInPeriodicCheck: boolean = false
+		color: string = "0",
+		includeInPeriodicCheck: boolean = false,
 	) {
 		this.name = name;
 		this.declarations = declarations;
@@ -99,7 +99,7 @@ export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
 			width: this.dimensions.width,
 			height: this.dimensions.height,
 			color: this.color,
-			includeInPeriodicCheck: this.includeInPeriodicCheck
+			includeInPeriodicCheck: this.includeInPeriodicCheck,
 		};
 	}
 
@@ -124,7 +124,7 @@ export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
 			new Point(raw.x, raw.y),
 			new Dimensions(raw.width, raw.height),
 			raw.color,
-			raw.includeInPeriodicCheck
+			raw.includeInPeriodicCheck,
 		);
 	};
 

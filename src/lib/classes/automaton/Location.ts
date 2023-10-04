@@ -1,6 +1,12 @@
-import { Point } from '$lib/classes/draw';
-import { Nickname, Invariant, LocationType, Urgency } from '../automaton';
-import type { SerializeRaw, ToRaw, FromRaw, DeserializeRaw, RawLocation } from '../automaton';
+import { Point } from "$lib/classes/draw";
+import { Nickname, Invariant, LocationType, Urgency } from "../automaton";
+import type {
+	SerializeRaw,
+	ToRaw,
+	FromRaw,
+	DeserializeRaw,
+	RawLocation,
+} from "../automaton";
 
 export class Location implements SerializeRaw, ToRaw<RawLocation> {
 	/**
@@ -39,13 +45,13 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 	color: string;
 
 	constructor(
-		id: string = '',
+		id: string = "",
 		position: Point = new Point(0, 0),
-		nickname: Nickname = new Nickname('', new Point(0, 0)),
-		invariant: Invariant = new Invariant('', new Point(0, 0)),
+		nickname: Nickname = new Nickname("", new Point(0, 0)),
+		invariant: Invariant = new Invariant("", new Point(0, 0)),
 		type: LocationType = LocationType.NORMAL,
 		urgency: Urgency = Urgency.NORMAL,
-		color: string = ''
+		color: string = "",
 	) {
 		this.id = id;
 		this.position = position;
@@ -72,7 +78,7 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 			nicknameX: this.nickname.position.x,
 			nicknameY: this.nickname.position.y,
 			invariantX: this.invariant.position.x,
-			invariantY: this.invariant.position.y
+			invariantY: this.invariant.position.y,
 		};
 	}
 
@@ -88,10 +94,13 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 			raw.id,
 			new Point(raw.x, raw.y),
 			new Nickname(raw.nickname, new Point(raw.nicknameX, raw.nicknameY)),
-			new Invariant(raw.invariant, new Point(raw.invariantX, raw.invariantY)),
+			new Invariant(
+				raw.invariant,
+				new Point(raw.invariantX, raw.invariantY),
+			),
 			raw.type as LocationType,
 			raw.urgency as Urgency,
-			raw.color
+			raw.color,
 		);
 	};
 

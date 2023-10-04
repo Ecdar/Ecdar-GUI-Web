@@ -1,9 +1,9 @@
 ---
 name: Bug
 about: File a bug report
-title: '[BUG] <title>'
+title: "[BUG] <title>"
 labels: bug
-assignees: ''
+assignees: ""
 ---
 
 <!--
