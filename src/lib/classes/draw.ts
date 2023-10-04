@@ -1,2 +1,2 @@
-export { Point } from "./draw/point";
-export { Dimensions } from "./draw/dimensions";
+export { Point } from "./draw/Point";
+export { Dimensions } from "./draw/Dimensions";

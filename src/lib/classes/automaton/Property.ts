@@ -1,6 +1,6 @@
 import { Point } from "$lib/classes/draw";
 
-import { PropertyType } from "./property_type";
+import { PropertyType } from "./PropertyType";
 
 /**
  * The properties of a nail
