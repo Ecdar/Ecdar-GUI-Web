@@ -13,26 +13,26 @@ export type {
 } from "./automaton/raw";
 
 // Enums
-export { Backend } from "./automaton/backend";
-export { DeclarationType } from "./automaton/declaration_type";
-export { Status } from "./automaton/status";
-export { LocationType } from "./automaton/location_type";
-export { OperatorType } from "./automaton/operator_type";
-export { PropertyType } from "./automaton/property_type";
-export { Urgency } from "./automaton/urgency";
+export { Backend } from "./automaton/Backend";
+export { DeclarationType } from "./automaton/DeclarationType";
+export { Status } from "./automaton/Status";
+export { LocationType } from "./automaton/LocationType";
+export { OperatorType } from "./automaton/OperatorType";
+export { PropertyType } from "./automaton/PropertyType";
+export { Urgency } from "./automaton/Urgency";
 
 // Minor Classes
-export { Invariant } from "./automaton/invariant";
-export { Nickname } from "./automaton/nickname";
-export { Operator } from "./automaton/operator";
-export { Property } from "./automaton/property";
-export { SystemEdge } from "./automaton/system_edge";
-export { ComponentInstance } from "./automaton/component_instance";
+export { Invariant } from "./automaton/Invariant";
+export { Nickname } from "./automaton/Nickname";
+export { Operator } from "./automaton/Operator";
+export { Property } from "./automaton/Property";
+export { SystemEdge } from "./automaton/SystemEdge";
+export { ComponentInstance } from "./automaton/ComponentInstance";
 
 // Major Classes
-export { Declaration } from "./automaton/declaration";
-export { Component } from "./automaton/component";
-export { Edge } from "./automaton/edge";
-export { Location } from "./automaton/location";
+export { Declaration } from "./automaton/Declaration";
+export { Component } from "./automaton/Component";
+export { Edge } from "./automaton/Edge";
+export { Location } from "./automaton/Location";
 export { Query, Queries } from "./automaton/query";
-export { System } from "./automaton/system";
+export { System } from "./automaton/System";

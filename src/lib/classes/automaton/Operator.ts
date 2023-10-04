@@ -1,6 +1,6 @@
 import { Point } from "$lib/classes/draw";
 
-import { OperatorType } from "./operator_type";
+import { OperatorType } from "./OperatorType";
 
 /**
  * Defines an operator for a System
