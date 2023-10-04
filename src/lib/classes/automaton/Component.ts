@@ -1,19 +1,20 @@
 import { Point, Dimensions } from "$lib/classes/draw";
 
-import { Edge, Location } from "../automaton";
+import { Edge, Location } from '../automaton';
 import type {
 	SerializeRaw,
 	ToRaw,
 	FromRaw,
 	DeserializeRaw,
 	RawComponent,
-} from "../automaton";
+	Named
+} from '../automaton';
 
 /**
  * # An Ecdar component
  * It stores the edges and locations of a single automaton
  * */
-export class Component implements SerializeRaw, ToRaw<RawComponent> {
+export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
 	/**
 	 * The name of the component
 	 * */

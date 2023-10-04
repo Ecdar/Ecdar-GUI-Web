@@ -7,12 +7,13 @@ import type {
 	FromRaw,
 	DeserializeRaw,
 	RawSystem,
-} from "../automaton";
+	Named
+} from '../automaton';
 
 /**
  * An Ecdar System
  * */
-export class System implements SerializeRaw, ToRaw<RawSystem> {
+export class System implements SerializeRaw, ToRaw<RawSystem>, Named {
 	/**
 	 * The name of the system
 	 * */
