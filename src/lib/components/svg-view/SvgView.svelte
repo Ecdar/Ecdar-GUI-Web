@@ -4,42 +4,38 @@
 
 	const Locations: Record<string, Location> = {};
 
-	
-
 	onMount(() => {
-		Locations["1"] = new Location({
-			target: document.getElementById("svg-container")?? document.body,
+		Locations['1'] = new Location({
+			target: document.getElementById('svg-container') ?? document.body,
 			props: {
-				position: {x: 100, y: 100},
-				locationID: "1"
+				x: 100,
+				y: 100,
+				locationID: '1'
 			}
 		});
 
-		Locations["2"] = new Location({
-			target: document.getElementById("svg-container")?? document.body,
+		Locations['2'] = new Location({
+			target: document.getElementById('svg-container') ?? document.body,
 			props: {
-				position: {x: 100, y: 150},
-				locationID: "2"
+				x: 100,
+				y: 150,
+				locationID: '2'
 			}
 		});
 	});
 
-	
 	/**
 	 * Function for moving a Location when the button "draw" is clicked
 	 * @param {string} id
 	 */
 	export function move(id: string): void {
-		console.log(Locations[id].position.x);
-		Locations[id].position.x += 10;
-		Locations[id].position.y += 10;
-		Locations[id].position = Locations[id].position;
+		console.log(Locations[id].x);
+		Locations[id].x += 10;
+		Locations[id].y += 10;
 	}
 </script>
 
 <!-- create a flexbox for zooming -->
 
-
-<button on:click={()=>move("1")}>Draw</button>
-<svg id="svg-container" width="100vw" height="100vh" >
-</svg>
+<button on:click={() => move('1')}>Draw</button>
+<svg id="svg-container" width="100vw" height="100vh"> </svg>

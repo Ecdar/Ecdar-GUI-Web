@@ -1,17 +1,15 @@
-<svelte:options accessors/>
+<svelte:options accessors />
 
 <script lang="ts">
-	import Node from "./Node.svelte";
-	import type { Point } from "$lib/classes/draw";
+	import Node from './Node.svelte';
 
-	export let position: Point;
+	export let x: number;
+	export let y: number;
 	export let locationID: string;
-	let rad: number = 20;
 
-	$: position;
+	$: x;
+	$: y;
 	$: locationID;
-
-	
 </script>
 
-<Node locationID={locationID} radius={rad} position={position}/>
+<Node {locationID} radius={20} {x} {y} />
