@@ -1,13 +1,13 @@
 <script lang="ts">
 	import DraggableSVG from './DraggableSVG.svelte';
+	import type Location from './Location.svelte';
+	import type Nail from './Nail.svelte';
 
 	export let x: number;
 	export let y: number;
 	export let locationID: string;
 	export let radius: number;
 
-	$: x;
-	$: y;
 	$: locationID;
 	$: radius;
 

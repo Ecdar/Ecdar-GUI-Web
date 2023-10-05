@@ -12,4 +12,4 @@
 	$: locationID;
 </script>
 
-<Node {locationID} radius={20} {x} {y} />
+<Node {locationID} radius={20} bind:x bind:y />
