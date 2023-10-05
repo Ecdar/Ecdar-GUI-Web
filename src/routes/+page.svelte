@@ -55,8 +55,6 @@
 	}
 </script>
 
-<svelte:window on:contextmenu|preventDefault />
-
 <!-- Top navigation Panel -->
 <nav id="main-nav"></nav>
 <main bind:this={mainContainer}>

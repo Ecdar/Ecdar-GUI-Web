@@ -15,7 +15,7 @@ export class ContextMenuItem {
 	/**
 	 * The function that should be run whenever the button is clicked. Has reference to the right clicked element.
 	 */
-	public onClick: (originalRightClickable: HTMLElement) => void;
+	public onClick: () => void;
 	/**
 	 * The icon to be displayed before the displayText.
 	 */
@@ -28,7 +28,7 @@ export class ContextMenuItem {
 	constructor(
 		isHorizontalRule: boolean,
 		displayText: string = "",
-		onClick: (originalRightClickable: HTMLElement) => void = () => void 0,
+		onClick: () => void = () => void 0,
 		icon?: ComponentType,
 		cssClass?: string,
 	) {
