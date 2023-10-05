@@ -1,4 +1,3 @@
-import type { Action } from "svelte/action";
 import type { ContextMenuTarget } from "./contextMenu/ContextMenuTarget";
 import type { ContextMenuItem } from "./contextMenu/ContextMenuItem";
 import type { PointLike } from "$lib/classes/draw";
@@ -10,7 +9,7 @@ import {
 
 /**
  * Adds a context menu (right click menu) to an element. The element must define what the context menu should include.
- * @type {Action<ContextMenuTarget, { menuItems: ContextMenuItem[] }>}
+ * @type {import('svelte/action').Action<ContextMenuTarget, { menuItems: ContextMenuItem[] }>}
  */
 export function contextMenu(
 	target: ContextMenuTarget,
