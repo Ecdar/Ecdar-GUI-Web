@@ -1,30 +1,34 @@
 <script lang="ts">
+	import ConsoleLine from './ConsoleLine.svelte';
+	export let consoleSize: number;
+	
 	enum Tabs {
 		Frontend,
 		Backend
 	}
+	
 	let consoleCollapsableText: string = '↑';
 	let currentTab: Tabs = Tabs.Frontend;
 
-	import ConsoleLine from './consoleLine.svelte';
-
-	export let value: number;
-
+	/**
+	*Function for changing between the status of the console
+	*/
 	function changeConsoleCollapsableTextAndHeight() {
 		if (consoleCollapsableText == '↑') {
 			consoleCollapsableText = '↓';
-			value = 17;
+			consoleSize = 17;
 		} else {
 			consoleCollapsableText = '↑';
-			value = 3.25;
+			consoleSize = 3.25;
 		}
 	}
-	function changeTabToFrontend() {
-		currentTab = Tabs.Frontend;
-	}
 
-	function changeTabToBackend() {
-		currentTab = Tabs.Backend;
+	/**
+	*Function for changing the current tab of the console
+	*@param tab
+	*/
+	function changeTab(tab:Tabs){
+		currentTab = tab;
 	}
 </script>
 
@@ -33,10 +37,10 @@
 		{consoleCollapsableText}
 	</button>
 
-	<button type="button" class="consoleTab frontEndButton" on:click={changeTabToFrontend}
+	<button type="button" class="consoleTab frontEndButton" on:click={() => { changeTab(Tabs.Frontend) }}
 		>Frontend</button
 	>
-	<button type="button" class="consoleTab" on:click={changeTabToBackend}>Backend</button>
+	<button type="button" class="consoleTab" on:click={() => {changeTab(Tabs.Backend)}}>Backend</button>
 	<div class="console">
 		{#if currentTab == Tabs.Frontend}
 			<ConsoleLine componentText="Frontend Errors!" />
@@ -52,7 +56,7 @@
 	.console {
 		background-color: rgb(159, 174, 189);
 		width: 100%;
-		height: 12em;
+		height: 70%;
 		overflow-y: scroll;
 		overflow-wrap: break-word;
 	}
@@ -94,6 +98,7 @@
 	.outerOverflow {
 		margin: 0%;
 		padding: 0%;
+		height: 100%;
 	}
 
 	.consoleTab {

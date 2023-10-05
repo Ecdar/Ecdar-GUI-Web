@@ -1,11 +1,12 @@
 <script lang="ts">
+	import Console from '../lib/components/console/Console.svelte';
+
 	enum SidePanel {
 		Left,
 		Right,
 		Neither,
 	}
 
-	import Console from '../lib/console.svelte';
 
 	let currentResizablePanel: SidePanel = SidePanel.Neither;
 	let leftSidePanelWidth: number = 300;
@@ -97,7 +98,7 @@
 </main>
 <!-- Footer component -->
 <footer style="height:{footerHeight}em;">
-	<Console bind:value={footerHeight} />
+	<Console bind:consoleSize={footerHeight} />
 </footer>
 
 <style>
