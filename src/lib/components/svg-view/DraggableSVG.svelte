@@ -4,26 +4,24 @@
 	export let offsetX = 0;
 	export let offsetY = 0;
 	
-	let moving = false;
 	
 	function onMouseDown() {
-		moving = true;
+		window.addEventListener('mousemove', onMouseMove);
+		window.addEventListener('mouseup', onMouseUp);
 	}
 	
 	function onMouseMove(e: MouseEvent) {
-		if (moving) {
-			offsetX += e.movementX;
-			offsetY += e.movementY;
-		}
+		offsetX += e.movementX;
+		offsetY += e.movementY;
 	}
 	
 	function onMouseUp() {
-		moving = false;
-        
 		updatePost(offsetX, offsetY)
 
         offsetX = 0;
         offsetY = 0;
+		window.removeEventListener('mousemove', onMouseMove);
+		window.removeEventListener('mouseup', onMouseUp);
 	}
 	
 </script>
@@ -32,4 +30,3 @@
 	<slot></slot>
 </svg>
 
-<svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />

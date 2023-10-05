@@ -15,6 +15,7 @@
 	function updatePos(_x: number, _y:number){		
 		position.x += _x;
 		position.y += _y;
+		console.log(position);
 	}
 </script>
 

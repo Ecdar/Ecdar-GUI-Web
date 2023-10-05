@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Location from '$lib/components/svg-view/Location.svelte';
-	import type { Point } from '$lib/classes/draw';
 
 	const Locations: Record<string, Location> = {};
 
+	
 
 	onMount(() => {
 		Locations["1"] = new Location({
@@ -24,16 +24,20 @@
 		});
 	});
 
-	export function move(id: string) {
-		console.log(Locations[id].x);
+	
+	/**
+	 * Function for moving a Location when the button "draw" is clicked
+	 * @param {string} id
+	 */
+	export function move(id: string): void {
+		console.log(Locations[id].position.x);
 		Locations[id].position.x += 10;
 		Locations[id].position.y += 10;
+		Locations[id].position = Locations[id].position;
 	}
 </script>
 
 <!-- create a flexbox for zooming -->
-
-
 
 
 <button on:click={()=>move("1")}>Draw</button>

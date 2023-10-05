@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SvgView from "$lib/components/svg-view/SvgView.svelte";
+	import SvgView from '$lib/components/svg-view/SvgView.svelte';
 
 	enum SidePanel {
 		Left,
@@ -40,7 +40,7 @@
 	}
 
 	/**
-	 * Function for stopping resizing a sid panel
+	 * Function for stopping resizing a side panel
 	 * @param event
 	 */
 	function stopResizingSidePanel(event: PointerEvent) {
@@ -71,7 +71,7 @@
 		}}
 	/>
 	<!-- Canvas -->
-	<SvgView/>
+	<SvgView />
 	<!-- Right resize Panel -->
 	<div
 		role="button"
