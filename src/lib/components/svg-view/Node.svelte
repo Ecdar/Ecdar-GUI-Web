@@ -2,27 +2,26 @@
 
 <script lang="ts">
 	import DraggableSVG from "./DraggableSVG.svelte";
+	import type { Point } from "$lib/classes/draw";
 
-	export let x: number;
-	export let y: number;
+	export let position: Point;
 	export let locationID: string;
 	export let radius: number;
 
-	$: x;
-	$: y;
+	$: position;
 	$: locationID;
 	$: radius;
 
 	function updatePos(_x: number, _y:number){		
-		x += _x;
-		y += _y;
+		position.x += _x;
+		position.y += _y;
 	}
 </script>
 
 <DraggableSVG updatePost={updatePos}>
 		<g id="CircleGroup" >
-			<circle cx={x} cy={y} r={radius} fill="gray" role='none'/>
-			<text x={x} y={y} text-anchor="middle" role='none'>{locationID}</text>
+			<circle cx={position.x} cy={position.y} r={radius} fill="gray" role='none'/>
+			<text x={position.x} y={position.y} text-anchor="middle" role='none'>{locationID}</text>
 		</g>
 </DraggableSVG>
 
