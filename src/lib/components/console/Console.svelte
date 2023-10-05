@@ -32,7 +32,6 @@
 	*@param tab
 	*/
 	function changeTab(tab:Tabs){
-		sendErrorToTab("Error", Tabs.Frontend);
 		currentTab = tab;
 	}
 
