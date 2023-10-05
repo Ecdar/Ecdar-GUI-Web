@@ -4,11 +4,15 @@
 	
 	enum Tabs {
 		Frontend,
-		Backend
+		Backend,
+		All
 	}
 	
 	let consoleCollapsableText: string = '↑';
 	let currentTab: Tabs = Tabs.Frontend;
+
+	let frontEndErrors: string[] = [];
+	let backEndErrors: string[] = [];
 
 	/**
 	*Function for changing between the status of the console
@@ -28,7 +32,34 @@
 	*@param tab
 	*/
 	function changeTab(tab:Tabs){
+		sendErrorToTab("Error", Tabs.Frontend);
 		currentTab = tab;
+	}
+
+	/**
+	*Function for sending an error to a specific tab in the console
+	*@param error
+	*@param tab
+	*/
+	function sendErrorToTab(error:string, tab:Tabs){
+		switch(tab){
+			case Tabs.Frontend:
+				frontEndErrors.push(error);
+				frontEndErrors = frontEndErrors;
+				break;
+			case Tabs.Backend:
+				backEndErrors.push(error);
+				backEndErrors = backEndErrors;
+				break;
+			case Tabs.All:
+				frontEndErrors.push(error);
+				backEndErrors.push(error);
+				frontEndErrors = frontEndErrors;
+				break;
+			default:
+				break;
+		}
+
 	}
 </script>
 
@@ -48,10 +79,12 @@
 	</button>
 	<div class="console">
 		{#if currentTab == Tabs.Frontend}
-			<ConsoleLine componentText="Frontend Errors!" />
+			{#each frontEndErrors as error}
+				<ConsoleLine componentText={error}/>
+			{/each}
 		{:else if currentTab == Tabs.Backend}
-			{#each { length: 50 } as _, i}
-				<ConsoleLine componentText="Backend Error" />
+			{#each backEndErrors as error}
+				<ConsoleLine componentText={error}/>
 			{/each}
 		{/if}
 	</div>
