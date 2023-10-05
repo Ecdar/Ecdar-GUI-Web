@@ -6,10 +6,6 @@
 	export let x: number;
 	export let y: number;
 	export let locationID: string;
-
-	$: x;
-	$: y;
-	$: locationID;
 </script>
 
 <Node {locationID} radius={20} bind:x bind:y />
