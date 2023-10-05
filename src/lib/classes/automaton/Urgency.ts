@@ -6,20 +6,20 @@ export enum Urgency {
 	/**
 	 * Normal TIOA rules apply
 	 * */
-	NORMAL = 'NORMAL',
+	NORMAL = "NORMAL",
 
 	/**
 	 * ????
 	 * */
-	PROHIBITED = 'PROHIBITED',
+	PROHIBITED = "PROHIBITED",
 
 	/**
 	 * Make a move instantly no matter the timer
 	 * */
-	URGENT = 'URGENT',
+	URGENT = "URGENT",
 
 	/**
 	 * ????
 	 * */
-	COMMITTED = 'COMMITTED'
+	COMMITTED = "COMMITTED",
 }

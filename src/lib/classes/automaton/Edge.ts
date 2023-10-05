@@ -1,7 +1,13 @@
-import { Point } from '$lib/classes/draw';
+import { Point } from "$lib/classes/draw";
 
-import { Status, Property, PropertyType } from '../automaton';
-import type { SerializeRaw, ToRaw, FromRaw, DeserializeRaw, RawEdge } from '../automaton';
+import { Status, Property, PropertyType } from "../automaton";
+import type {
+	SerializeRaw,
+	ToRaw,
+	FromRaw,
+	DeserializeRaw,
+	RawEdge,
+} from "../automaton";
 
 /**
  * # An Ecdar Edge
@@ -75,20 +81,20 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 	}[];
 
 	constructor(
-		id: string = '',
-		group: string = '',
-		sourceLocation: string = '',
-		targetLocation: string = '',
+		id: string = "",
+		group: string = "",
+		sourceLocation: string = "",
+		targetLocation: string = "",
 		status: Status = Status.INPUT,
-		select: string = '',
-		guard: string = '',
-		update: string = '',
-		sync: string = '',
+		select: string = "",
+		guard: string = "",
+		update: string = "",
+		sync: string = "",
 		isLocked: boolean = true,
 		nails: {
 			position: Point;
 			property: Property;
-		}[] = []
+		}[] = [],
 	) {
 		this.id = id;
 		this.group = group;
@@ -122,12 +128,12 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 						y: c.position.y,
 						propertyType: c.property.type,
 						propertyX: c.property.position.x,
-						propertyY: c.property.position.y
+						propertyY: c.property.position.y,
 					});
 					return res;
 				},
-				<RawEdge['nails']>[]
-			)
+				<RawEdge["nails"]>[],
+			),
 		};
 	}
 	serializeRaw() {
@@ -154,10 +160,10 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 					position: new Point(nail.x, nail.y),
 					property: new Property(
 						nail.propertyType as PropertyType,
-						new Point(nail.propertyX, nail.propertyY)
-					)
+						new Point(nail.propertyX, nail.propertyY),
+					),
 				};
-			})
+			}),
 		);
 	};
 
