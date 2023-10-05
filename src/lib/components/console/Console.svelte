@@ -33,14 +33,19 @@
 </script>
 
 <div class="outerOverflow">
-	<button type="button" class="collapsible" on:click={changeConsoleCollapsableTextAndHeight}>
+	<button type="button" class="collapsible" 
+		on:click={changeConsoleCollapsableTextAndHeight}>
 		{consoleCollapsableText}
 	</button>
 
-	<button type="button" class="consoleTab frontEndButton" on:click={() => { changeTab(Tabs.Frontend) }}
-		>Frontend</button
-	>
-	<button type="button" class="consoleTab" on:click={() => {changeTab(Tabs.Backend)}}>Backend</button>
+	<button type="button" class="consoleTab frontEndButton" 
+		on:click={() => { changeTab(Tabs.Frontend) }}>
+		Frontend
+	</button>
+	<button type="button" class="consoleTab" 
+		on:click={() => {changeTab(Tabs.Backend)}}>
+		Backend
+	</button>
 	<div class="console">
 		{#if currentTab == Tabs.Frontend}
 			<ConsoleLine componentText="Frontend Errors!" />
