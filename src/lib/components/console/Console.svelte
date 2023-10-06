@@ -1,6 +1,5 @@
 <script lang="ts">
 	import ConsoleLine from './ConsoleLine.svelte';
-	export let consoleSize: number;
 	
 	enum Tabs {
 		Frontend,
@@ -10,9 +9,13 @@
 	
 	let consoleCollapsableText: string = '↑';
 	let currentTab: Tabs = Tabs.Frontend;
-
+	
 	let frontEndErrors: string[] = [];
 	let backEndErrors: string[] = [];
+	
+	let consoleExtendedSize: number = 17;
+	let consoleCollapsedSize: number = 3.25;
+	$: consoleSize = consoleCollapsedSize;
 
 	/**
 	*Function for changing between the status of the console
@@ -20,10 +23,12 @@
 	function changeConsoleCollapsableTextAndHeight() {
 		if (consoleCollapsableText == '↑') {
 			consoleCollapsableText = '↓';
-			consoleSize = 17;
+			consoleSize = consoleExtendedSize;
+			console.log(consoleSize);
 		} else {
 			consoleCollapsableText = '↑';
-			consoleSize = 3.25;
+			consoleSize = consoleCollapsedSize;
+			console.log(consoleSize);
 		}
 	}
 
@@ -40,7 +45,7 @@
 	*@param error
 	*@param tab
 	*/
-	function sendErrorToTab(error:string, tab:Tabs){
+	export function sendErrorToTab(error:string, tab:Tabs){
 		switch(tab){
 			case Tabs.Frontend:
 				frontEndErrors.push(error);
@@ -62,7 +67,7 @@
 	}
 </script>
 
-<div class="outerOverflow">
+<div class="outerOverflow" style="height: {consoleSize}em;">
 	<button type="button" class="collapsible" 
 		on:click={changeConsoleCollapsableTextAndHeight}>
 		{consoleCollapsableText}
@@ -135,7 +140,6 @@
 	.outerOverflow {
 		margin: 0%;
 		padding: 0%;
-		height: 100%;
 	}
 
 	.consoleTab {

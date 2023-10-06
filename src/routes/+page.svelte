@@ -97,8 +97,8 @@
 	</div>
 </main>
 <!-- Footer component -->
-<footer style="height:{footerHeight}em;">
-	<Console bind:consoleSize={footerHeight} />
+<footer>
+	<Console />
 </footer>
 
 <style>
@@ -144,7 +144,6 @@
 	}
 
 	footer {
-		height: var(--footerHeight);
 		background-color: slategrey;
 		overflow: hidden;
 	}
