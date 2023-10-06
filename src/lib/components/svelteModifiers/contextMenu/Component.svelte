@@ -35,7 +35,6 @@
 	/**
 	 * Ensures that the `open` store state changes when the real open state changes
 	 */
-	/* eslint-disable-next-line no-undef -- TODO: remove this when eslint adds support for the `ToggleEvent`: https://github.com/sindresorhus/globals/pull/203 */
 	function updateOpenState(event: ToggleEvent) {
 		$open = Boolean(event.newState === "open");
 	}
