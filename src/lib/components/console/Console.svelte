@@ -24,11 +24,9 @@
 		if (consoleCollapsableText == '↑') {
 			consoleCollapsableText = '↓';
 			consoleSize = consoleExtendedSize;
-			console.log(consoleSize);
 		} else {
 			consoleCollapsableText = '↑';
 			consoleSize = consoleCollapsedSize;
-			console.log(consoleSize);
 		}
 	}
 
