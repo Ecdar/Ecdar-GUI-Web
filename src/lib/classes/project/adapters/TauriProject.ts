@@ -150,7 +150,6 @@ export class TauriProject extends Project {
 				(this.features.save as () => Promise<void>)();
 			}
 
-			// Its fine because of the inTauri check done on both functions
 			await (this.writeToDir as (dir: string) => Promise<void>)(dir);
 		},
 
