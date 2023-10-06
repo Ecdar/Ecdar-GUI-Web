@@ -2,7 +2,7 @@ import * as Automata from "$lib/classes/automaton";
 import type { SerializeRaw, Named } from "$lib/classes/automaton";
 import { ProjectError } from "../ProjectError";
 import { inTauri } from "$lib/tauri";
-import type { Project } from "../Project";
+import { Project } from "../Project";
 import {
 	PROJECT_FILE_NAME_QUERIES,
 	PROJECT_FOLDER_NAME_COMPONENTS,
@@ -15,41 +15,12 @@ import type { Features } from "../features/Feature";
 /**
  * Includes all the information needed to make an Ecdar Project
  * */
-export class TauriProject implements Project, Named {
+export class TauriProject extends Project {
 	/**
-	 * The name of the project, and the name of the save folder
+	 * The directory of the saved files
 	 * */
-	name: string;
+	srcDir: string;
 
-	/**
-	 * Tauri ONLY, the directory of the saved files
-	 * */
-	srcDir?: string;
-
-	/**
-	 * All components in the project
-	 * */
-	components: Automata.Component[];
-
-	/**
-	 * All systems in the project
-	 * */
-	systems: Automata.System[];
-
-	/**
-	 * All queries of the project
-	 * */
-	queries: Automata.Queries;
-
-	/**
-	 * The system declaration of the project
-	 * */
-	systemDeclarations: Automata.Declaration;
-
-	/**
-	 * The global declarations of the project
-	 * */
-	globalDeclarations: Automata.Declaration;
 	constructor(
 		name = "New Project",
 		srcDir: string = "",
@@ -63,13 +34,8 @@ export class TauriProject implements Project, Named {
 			Automata.DeclarationType.GLOBAL,
 		),
 	) {
-		this.name = name;
-		this.srcDir = srcDir;
-		this.components = components;
-		this.systems = systems;
-		this.queries = queries;
-		this.systemDeclarations = systemDeclarations;
-		this.globalDeclarations = globalDeclarations;
+	  super(name, components, systems, queries, systemDeclarations, globalDeclarations)
+	  this.srcDir = srcDir
 	}
 
 	static create(
@@ -94,7 +60,7 @@ export class TauriProject implements Project, Named {
 	 * Opens a file explore and prompts you to choose a folder
 	 * containing an Ecdar project file structure
 	 * */
-	static readonly load = async () => {
+	static override readonly load = async () => {
 		// IN TAURI
 		const { dialog, fs } = await import("@tauri-apps/api");
 
@@ -170,12 +136,12 @@ export class TauriProject implements Project, Named {
 		return project;
 	};
 
-	readonly features: Features = {
+	override readonly features: Features = {
 		quickSave: async () => {
 			const { fs } = await import("@tauri-apps/api");
 			const dir = `${this.srcDir}/${this.name}`;
 			if (!fs.exists(dir)) {
-				throw Error(ProjectError.NoDir);
+				(this.features.save as () => Promise<void>)()
 			}
 
 			// Its fine because of the inTauri check done on both functions

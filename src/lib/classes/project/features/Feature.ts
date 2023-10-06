@@ -13,5 +13,8 @@ export type Features = {
 };
 
 export interface HasFeatures {
+	/**
+	* Optional features of a project all sub values may be undefined
+	* */
 	features: Features;
 }

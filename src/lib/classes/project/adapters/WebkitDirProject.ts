@@ -1,6 +1,6 @@
 import { ProjectError } from "../ProjectError";
 import * as Automata from "$lib/classes/automaton";
-import type { Project } from "../Project";
+import { Project } from "../Project";
 import {
 	PROJECT_FILE_NAME_QUERIES,
 	PROJECT_FOLDER_NAME_COMPONENTS,
@@ -9,36 +9,7 @@ import {
 	PROJECT_FOLDER_NAME_SYSTEMS,
 } from "../Project";
 import type { Features } from "../features/Feature";
-export class DefaultProject implements Project {
-	/**
-	 * The name of the project, and the name of the save folder
-	 * */
-	name: string;
-
-	/**
-	 * All components in the project
-	 * */
-	components: Automata.Component[];
-
-	/**
-	 * All systems in the project
-	 * */
-	systems: Automata.System[];
-
-	/**
-	 * All queries of the project
-	 * */
-	queries: Automata.Queries;
-
-	/**
-	 * The system declaration of the project
-	 * */
-	systemDeclarations: Automata.Declaration;
-
-	/**
-	 * The global declarations of the project
-	 * */
-	globalDeclarations: Automata.Declaration;
+export class WebkitDirProject extends Project {
 	constructor(
 		name = "New Project",
 		components: Automata.Component[] = [],
@@ -51,12 +22,7 @@ export class DefaultProject implements Project {
 			Automata.DeclarationType.GLOBAL,
 		),
 	) {
-		this.name = name;
-		this.components = components;
-		this.systems = systems;
-		this.queries = queries;
-		this.systemDeclarations = systemDeclarations;
-		this.globalDeclarations = globalDeclarations;
+	  super(name, components, systems, queries, systemDeclarations, globalDeclarations)
 	}
 
 	static create(
@@ -67,7 +33,7 @@ export class DefaultProject implements Project {
 		systemDeclarations?: Automata.Declaration,
 		globalDeclarations?: Automata.Declaration,
 	) {
-		return new DefaultProject(
+		return new WebkitDirProject(
 			name,
 			components,
 			systems,
@@ -77,14 +43,14 @@ export class DefaultProject implements Project {
 		);
 	}
 
-	static readonly load: () => Promise<DefaultProject> = () => {
+	static override readonly load: () => Promise<WebkitDirProject> = () => {
 		return new Promise((resolve, reject) => {
 			const input = document.createElement("input");
 			input.type = "file";
 			input.webkitdirectory = true;
 			input.onchange = () => {
 				if (input.files != null) {
-					const project = new DefaultProject();
+					const project = new WebkitDirProject();
 					for (const file of input.files) {
 						const [projectName, type] =
 							file.webkitRelativePath.split(/[\\/]/g);
@@ -135,7 +101,7 @@ export class DefaultProject implements Project {
 			input.click();
 		});
 	};
-	readonly features: Features = {};
+	override readonly features: Features = {};
 }
 
 /*
