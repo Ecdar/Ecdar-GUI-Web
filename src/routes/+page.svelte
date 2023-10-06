@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Console from '../lib/components/console/Console.svelte';
+	import Console from "../lib/components/console/Console.svelte";
 
 	enum SidePanel {
 		Left,
@@ -7,12 +7,10 @@
 		Neither,
 	}
 
-
 	let currentResizablePanel: SidePanel = SidePanel.Neither;
 	let leftSidePanelWidth: number = 300;
 	let rightSidePanelWidth: number = 300;
 	let mainContainer: HTMLElement;
-	let footerHeight: number = 3.25;
 
 	/**
 	 * Function for resizing a sidepanel

@@ -1,50 +1,50 @@
 <script lang="ts">
-	import ConsoleLine from './ConsoleLine.svelte';
-	
+	import ConsoleLine from "./ConsoleLine.svelte";
+
 	enum Tabs {
 		Frontend,
 		Backend,
-		All
+		All,
 	}
-	
-	let consoleCollapsableText: string = '↑';
+
+	let consoleCollapsableText: string = "↑";
 	let currentTab: Tabs = Tabs.Frontend;
-	
+
 	let frontEndErrors: string[] = [];
 	let backEndErrors: string[] = [];
-	
+
 	let consoleExtendedSize: number = 17;
 	let consoleCollapsedSize: number = 3.25;
 	$: consoleSize = consoleCollapsedSize;
 
 	/**
-	*Function for changing between the status of the console
-	*/
+	 *Function for changing between the status of the console
+	 */
 	function changeConsoleCollapsableTextAndHeight() {
-		if (consoleCollapsableText == '↑') {
-			consoleCollapsableText = '↓';
+		if (consoleCollapsableText == "↑") {
+			consoleCollapsableText = "↓";
 			consoleSize = consoleExtendedSize;
 		} else {
-			consoleCollapsableText = '↑';
+			consoleCollapsableText = "↑";
 			consoleSize = consoleCollapsedSize;
 		}
 	}
 
 	/**
-	*Function for changing the current tab of the console
-	*@param tab
-	*/
-	function changeTab(tab:Tabs){
+	 *Function for changing the current tab of the console
+	 *@param tab
+	 */
+	function changeTab(tab: Tabs) {
 		currentTab = tab;
 	}
 
 	/**
-	*Function for sending an error to a specific tab in the console
-	*@param error
-	*@param tab
-	*/
-	export function sendErrorToTab(error:string, tab:Tabs){
-		switch(tab){
+	 *Function for sending an error to a specific tab in the console
+	 *@param error
+	 *@param tab
+	 */
+	export function sendErrorToTab(error: string, tab: Tabs) {
+		switch (tab) {
 			case Tabs.Frontend:
 				frontEndErrors.push(error);
 				frontEndErrors = frontEndErrors;
@@ -61,32 +61,44 @@
 			default:
 				break;
 		}
-
 	}
 </script>
 
 <div class="outerOverflow" style="height: {consoleSize}em;">
-	<button type="button" class="collapsible" 
-		on:click={changeConsoleCollapsableTextAndHeight}>
+	<button
+		type="button"
+		class="collapsible"
+		on:click={changeConsoleCollapsableTextAndHeight}
+	>
 		{consoleCollapsableText}
 	</button>
 
-	<button type="button" class="consoleTab frontEndButton" 
-		on:click={() => { changeTab(Tabs.Frontend) }}>
+	<button
+		type="button"
+		class="consoleTab frontEndButton"
+		on:click={() => {
+			changeTab(Tabs.Frontend);
+		}}
+	>
 		Frontend
 	</button>
-	<button type="button" class="consoleTab" 
-		on:click={() => {changeTab(Tabs.Backend)}}>
+	<button
+		type="button"
+		class="consoleTab"
+		on:click={() => {
+			changeTab(Tabs.Backend);
+		}}
+	>
 		Backend
 	</button>
 	<div class="console">
 		{#if currentTab == Tabs.Frontend}
 			{#each frontEndErrors as error}
-				<ConsoleLine componentText={error}/>
+				<ConsoleLine componentText={error} />
 			{/each}
 		{:else if currentTab == Tabs.Backend}
 			{#each backEndErrors as error}
-				<ConsoleLine componentText={error}/>
+				<ConsoleLine componentText={error} />
 			{/each}
 		{/if}
 	</div>
