@@ -1,7 +1,6 @@
 import * as Automata from "$lib/classes/automaton";
 import type { SerializeRaw, Named } from "$lib/classes/automaton";
 import { ProjectError } from "../ProjectError";
-import { inTauri } from "$lib/tauri";
 import { Project } from "../Project";
 import {
 	PROJECT_FILE_NAME_QUERIES,
@@ -34,8 +33,15 @@ export class TauriProject extends Project {
 			Automata.DeclarationType.GLOBAL,
 		),
 	) {
-	  super(name, components, systems, queries, systemDeclarations, globalDeclarations)
-	  this.srcDir = srcDir
+		super(
+			name,
+			components,
+			systems,
+			queries,
+			systemDeclarations,
+			globalDeclarations,
+		);
+		this.srcDir = srcDir;
 	}
 
 	static create(
@@ -141,7 +147,7 @@ export class TauriProject extends Project {
 			const { fs } = await import("@tauri-apps/api");
 			const dir = `${this.srcDir}/${this.name}`;
 			if (!fs.exists(dir)) {
-				(this.features.save as () => Promise<void>)()
+				(this.features.save as () => Promise<void>)();
 			}
 
 			// Its fine because of the inTauri check done on both functions

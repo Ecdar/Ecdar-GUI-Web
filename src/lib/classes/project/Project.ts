@@ -39,8 +39,8 @@ export class Project implements HasFeatures, Automata.Named {
 	globalDeclarations: Automata.Declaration;
 
 	/**
-	* List of optional features this project
-	* */
+	 * List of optional features this project
+	 * */
 	readonly features: Features = {};
 
 	constructor(
@@ -85,8 +85,8 @@ export class Project implements HasFeatures, Automata.Named {
 	}
 
 	/**
-	* OPTIONAL:
-	* Loads a project from disk
-	* */
-	static readonly load? : () => Promise<Project>  = undefined
+	 * OPTIONAL:
+	 * Loads a project from disk
+	 * */
+	static readonly load?: () => Promise<Project> = undefined;
 }

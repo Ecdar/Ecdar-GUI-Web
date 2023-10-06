@@ -22,7 +22,14 @@ export class WebkitDirProject extends Project {
 			Automata.DeclarationType.GLOBAL,
 		),
 	) {
-	  super(name, components, systems, queries, systemDeclarations, globalDeclarations)
+		super(
+			name,
+			components,
+			systems,
+			queries,
+			systemDeclarations,
+			globalDeclarations,
+		);
 	}
 
 	static create(
