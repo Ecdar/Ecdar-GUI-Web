@@ -2,11 +2,9 @@
 	export let componentText: string;
 </script>
 
-<div>
-	<nobr>
-		<p class="unselectable">></p>
-		<p>{componentText}</p>
-	</nobr>
+<div class="nowrap">
+	<p class="unselectable">></p>
+	<p>{componentText}</p>
 </div>
 
 <style>
@@ -14,6 +12,10 @@
 		display: inline-block;
 		margin: 0.2em 0em 0.2em 0.5em;
 		text-shadow: 0 1.5px 1px rgba(28, 28, 28, 0.3);
+	}
+
+	.nowrap {
+		white-space: nowrap;
 	}
 
 	.unselectable {

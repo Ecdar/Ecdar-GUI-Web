@@ -1,11 +1,6 @@
 <script lang="ts">
 	import ConsoleLine from "./ConsoleLine.svelte";
-
-	enum Tabs {
-		Frontend,
-		Backend,
-		All,
-	}
+	import { Tabs } from "$lib/classes/Tabs";
 
 	let consoleCollapsableText: string = "↑";
 	let currentTab: Tabs = Tabs.Frontend;
@@ -13,8 +8,8 @@
 	let frontEndErrors: string[] = [];
 	let backEndErrors: string[] = [];
 
-	let consoleExtendedSize: number = 17;
-	let consoleCollapsedSize: number = 3.25;
+	let consoleExtendedSize: string = "100%";
+	let consoleCollapsedSize: string = "3.25em";
 	$: consoleSize = consoleCollapsedSize;
 
 	/**
@@ -64,7 +59,7 @@
 	}
 </script>
 
-<div class="outerOverflow" style="height: {consoleSize}em;">
+<div class="outerOverflow" style="height: {consoleSize};">
 	<button
 		type="button"
 		class="collapsible"
@@ -111,6 +106,7 @@
 		height: 70%;
 		overflow-y: scroll;
 		overflow-wrap: break-word;
+		min-height: 10em;
 	}
 
 	.console::-webkit-scrollbar {
