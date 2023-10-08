@@ -1,8 +1,8 @@
-/** 
- * Emum for choosing which tab is used in the console 
-*/
+/**
+ * Emum for choosing which tab is used in the console
+ */
 export const enum Tabs {
-    Frontend,
-    Backend,
-    All,
+	Frontend,
+	Backend,
+	All,
 }
