@@ -1,7 +1,12 @@
+export interface PointLike {
+	x: number;
+	y: number;
+}
+
 /**
  * Describes a point in a coordinate system
  * */
-export class Point {
+export class Point implements PointLike {
 	#x: number;
 	#y: number;
 
@@ -23,8 +28,3 @@ export class Point {
 		this.#y = y;
 	}
 }
-
-export type PointLike = {
-	x: number;
-	y: number;
-};

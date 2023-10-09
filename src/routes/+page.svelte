@@ -1,5 +1,6 @@
 <script lang="ts">
-	import RightClickableSample from "$lib/components/samplesImplementations/RightClickableSample.svelte";
+	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
+	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 
 	enum SidePanel {
 		Left,
@@ -77,7 +78,8 @@
 	<div class="canvas">
 		<nav class="inner-nav2">Nav 2</nav>
 		<p>Canvas</p>
-		<RightClickableSample />
+		<DropDownMenu />
+		<LocationsWithContextMenu />
 	</div>
 	<!-- Right resize Panel -->
 	<div

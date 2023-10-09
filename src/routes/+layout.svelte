@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ContextMenu from "$lib/components/svelteModifiers/contextMenu/Component.svelte";
+	import ContextMenu from "$lib/components/contextMenu/ContextMenu.svelte";
 </script>
 
 <svelte:head>
