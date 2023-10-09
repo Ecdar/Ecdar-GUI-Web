@@ -1,10 +1,10 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import Node from './Node.svelte';
-	import type { iLocation } from '$lib/interfaces/iLocation';
-	import type { Point } from '$lib/classes/draw';
-	import { activeModel } from '$lib/globalState/activeModel';
+	import Node from "./Node.svelte";
+	import type { iLocation } from "$lib/interfaces/iLocation";
+	import type { Point } from "$lib/classes/draw";
+	import { activeModel } from "$lib/globalState/activeModel";
 
 	export let position: Point;
 	export let locationID: string;

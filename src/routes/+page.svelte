@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SvgView from '$lib/components/svg-view/SvgView.svelte';
+	import SvgView from "$lib/components/svg-view/SvgView.svelte";
 
 	enum SidePanel {
 		Left,
@@ -74,7 +74,10 @@
 		}}
 	/>
 	<!-- Canvas -->
-	<SvgView />
+	<div class="canvas">
+		<nav class="inner-nav2">Nav 2</nav>
+		<SvgView />
+	</div>
 	<!-- Right resize Panel -->
 	<div
 		role="button"

@@ -3,8 +3,8 @@
 
 	//Sets up eventlisteners when the mouse is pressed down on the svg
 	function onMouseDown() {
-		window.addEventListener('mousemove', onMouseMove);
-		window.addEventListener('mouseup', onMouseUp);
+		window.addEventListener("mousemove", onMouseMove);
+		window.addEventListener("mouseup", onMouseUp);
 	}
 
 	//Updates the position of the svg
@@ -14,8 +14,8 @@
 
 	//Removes the eventlisteners when the mouse is released
 	function onMouseUp() {
-		window.removeEventListener('mousemove', onMouseMove);
-		window.removeEventListener('mouseup', onMouseUp);
+		window.removeEventListener("mousemove", onMouseMove);
+		window.removeEventListener("mouseup", onMouseUp);
 	}
 </script>
 

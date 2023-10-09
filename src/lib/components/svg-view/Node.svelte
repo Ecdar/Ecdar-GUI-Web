@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Point } from '$lib/classes/draw';
-	import { activeModel } from '$lib/globalState/activeModel';
-	import DraggableSVG from './DraggableSVG.svelte';
+	import type { Point } from "$lib/classes/draw";
+	import { activeModel } from "$lib/globalState/activeModel";
+	import DraggableSVG from "./DraggableSVG.svelte";
 
 	export let position: Point;
 	export let locationID: string;
@@ -18,7 +18,15 @@
 
 <DraggableSVG {updatePos}>
 	<g id="CircleGroup">
-		<circle cx={position.x} cy={position.y} r={radius} fill="gray" role="none" />
-		<text x={position.x} y={position.y} text-anchor="middle" role="none">{locationID}</text>
+		<circle
+			cx={position.x}
+			cy={position.y}
+			r={radius}
+			fill="gray"
+			role="none"
+		/>
+		<text x={position.x} y={position.y} text-anchor="middle" role="none"
+			>{locationID}</text
+		>
 	</g>
 </DraggableSVG>

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Point } from '$lib/classes/draw/point';
-	import type { iNail } from '$lib/interfaces/iNail';
-	import Nail from './Nail.svelte';
+	import type { Point } from "$lib/classes/draw/point";
+	import type { iNail } from "$lib/interfaces/iNail";
+	import Nail from "./Nail.svelte";
 
 	export let sourcePoint: Point;
 	export let targetPoint: Point;
@@ -13,7 +13,7 @@
 	points.push(...nails.map((nail) => nail.position));
 	points.push(targetPoint);
 
-	console.log('Edge: ', sourcePoint, targetPoint);
+	console.log("Edge: ", sourcePoint, targetPoint);
 
 	// logic that calculates the lines from the source to the target
 

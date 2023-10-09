@@ -1,15 +1,17 @@
 <script lang="ts">
-	import { activeModel } from '$lib/globalState/activeModel';
-	import Location from '$lib/components/svg-view/Location.svelte';
-	import Edge from './Edge.svelte';
+	import { activeModel } from "$lib/globalState/activeModel";
+	import Location from "$lib/components/svg-view/Location.svelte";
+	import Edge from "./Edge.svelte";
 </script>
 
-<svg id="svg-container" width="100vw" height="100vh">
+<svg id="svg-container" height="100%" width="100%">
 	<!--All edges gets drawn with their refrence to their source location-->
 	{#each $activeModel.edges as edge}
 		<Edge
-			bind:sourcePoint={$activeModel.locations[edge.sourceLocation].position}
-			bind:targetPoint={$activeModel.locations[edge.targetLocation].position}
+			bind:sourcePoint={$activeModel.locations[edge.sourceLocation]
+				.position}
+			bind:targetPoint={$activeModel.locations[edge.targetLocation]
+				.position}
 			nails={edge.nails}
 		/>
 	{/each}
