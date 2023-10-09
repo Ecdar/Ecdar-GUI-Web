@@ -115,7 +115,8 @@
 		height: 70%;
 		overflow-y: scroll;
 		overflow-wrap: break-word;
-		min-height: 10em;
+		min-height: 5em;
+		max-height: 15em;
 	}
 
 	.console::-webkit-scrollbar {
