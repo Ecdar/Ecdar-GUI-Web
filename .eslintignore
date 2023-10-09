@@ -7,6 +7,9 @@ node_modules
 .env.*
 !.env.example
 .eslintrc.cjs
+svelte.config.js
+prettier.config.js
+playwright.config.ts
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml
