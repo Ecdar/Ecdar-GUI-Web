@@ -6,25 +6,25 @@ export enum PropertyType {
 	/**
 	 * Matches no field
 	 * */
-	NONE = 'NONE',
+	NONE = "NONE",
 
 	/**
 	 * Links to the select property of an Edge
 	 * */
-	SELECTION = 'SELECTION',
+	SELECTION = "SELECTION",
 
 	/**
 	 * Links to the guard property of an Edge
 	 * */
-	GUARD = 'GUARD',
+	GUARD = "GUARD",
 
 	/**
 	 * Links to the sync property of an Edge
 	 * */
-	SYNCHRONIZATION = 'SYNCHRONIZATION',
+	SYNCHRONIZATION = "SYNCHRONIZATION",
 
 	/**
 	 * Links to the update property of an Edge
 	 * */
-	UPDATE = 'UPDATE'
+	UPDATE = "UPDATE",
 }
