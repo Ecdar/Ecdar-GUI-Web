@@ -15,10 +15,7 @@
 		targetPoint,
 	];
 
-	console.log("Edge: ", sourcePoint, targetPoint);
-
 	// logic that calculates the lines from the source to the target
-
 	let lines: { from: Point; to: Point }[] = [];
 	$: updateLines(points);
 	function updateLines(_points: Point[]) {
