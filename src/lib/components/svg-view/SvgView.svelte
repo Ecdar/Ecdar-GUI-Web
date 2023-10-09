@@ -4,7 +4,7 @@
 	import Edge from "./Edge.svelte";
 </script>
 
-<svg height="100%" width="100%">
+<svg id="svg-container" height="100%" width="100%">
 	<!--All edges gets drawn with their refrence to their source location-->
 	{#each $activeModel.edges as edge}
 		<Edge
@@ -21,3 +21,10 @@
 		<Location locationID={location.id} bind:position={location.position} />
 	{/each}
 </svg>
+
+<style>
+	#svg-container {
+		inset: 0;
+		position: absolute;
+	}
+</style>
