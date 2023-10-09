@@ -76,7 +76,9 @@
 	<!-- Canvas -->
 	<div class="canvas">
 		<nav>Nav 2</nav>
-		<SvgView />
+		<div id="svgContainer">
+			<SvgView />
+		</div>
 	</div>
 	<!-- Right resize Panel -->
 	<div
@@ -123,10 +125,20 @@
 		flex-grow: 1;
 	}
 
+	.sidePanel {
+		background-color: white;
+	}
+
 	.canvas,
 	.sidePanel {
 		display: flex;
 		flex-direction: column;
+	}
+
+	#svgContainer {
+		inset: 0;
+		position: absolute;
+		z-index: -9999;
 	}
 
 	footer {

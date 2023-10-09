@@ -4,7 +4,7 @@
 	import Edge from "./Edge.svelte";
 </script>
 
-<svg id="svg-container" height="100%">
+<svg height="100%" width="100%">
 	<!--All edges gets drawn with their refrence to their source location-->
 	{#each $activeModel.edges as edge}
 		<Edge
