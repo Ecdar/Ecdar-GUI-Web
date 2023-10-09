@@ -1,41 +1,21 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { activeModel } from '$lib/globalState/activeModel';
 	import Location from '$lib/components/svg-view/Location.svelte';
-
-	const Locations: Record<string, Location> = {};
-
-	onMount(() => {
-		Locations['1'] = new Location({
-			target: document.getElementById('svg-container') ?? document.body,
-			props: {
-				x: 100,
-				y: 100,
-				locationID: '1'
-			}
-		});
-
-		Locations['2'] = new Location({
-			target: document.getElementById('svg-container') ?? document.body,
-			props: {
-				x: 100,
-				y: 150,
-				locationID: '2'
-			}
-		});
-	});
-
-	/**
-	 * Function for moving a Location when the button "draw" is clicked
-	 * @param {string} id
-	 */
-	export function move(id: string): void {
-		console.log(Locations[id].x);
-		Locations[id].x += 10;
-		Locations[id].y += 10;
-	}
+	import Edge from './Edge.svelte';
 </script>
 
-<!-- create a flexbox for zooming -->
+<svg id="svg-container" width="100vw" height="100vh">
+	<!--All edges gets drawn with their refrence to their source location-->
+	{#each $activeModel.edges as edge}
+		<Edge
+			bind:sourcePoint={$activeModel.locations[edge.sourceLocation].position}
+			bind:targetPoint={$activeModel.locations[edge.targetLocation].position}
+			nails={edge.nails}
+		/>
+	{/each}
 
-<button on:click={() => move('1')}>Draw</button>
-<svg id="svg-container" width="100vw" height="100vh"> </svg>
+	<!--All locations gets drawn-->
+	{#each Object.values({ ...$activeModel.locations }) as location}
+		<Location locationID={location.id} bind:position={location.position} />
+	{/each}
+</svg>
