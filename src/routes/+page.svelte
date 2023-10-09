@@ -56,11 +56,11 @@
 </script>
 
 <!-- Top navigation Panel -->
-<nav id="main-nav"></nav>
+<nav id="main-nav">Main Nav</nav>
 <main bind:this={mainContainer}>
 	<!-- Left side Panel -->
 	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
-		<nav class="inner-nav1">Nav 1</nav>
+		<nav>Nav 1</nav>
 		<p>Left</p>
 	</div>
 	<!-- Left resize Panel -->
@@ -75,7 +75,7 @@
 	/>
 	<!-- Canvas -->
 	<div class="canvas">
-		<nav class="inner-nav2">Nav 2</nav>
+		<nav>Nav 2</nav>
 		<SvgView />
 	</div>
 	<!-- Right resize Panel -->
@@ -90,7 +90,7 @@
 	/>
 	<!-- Right side Panel -->
 	<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
-		<nav class="inner-nav3">Nav 3</nav>
+		<nav>Nav 3</nav>
 		<p>Right</p>
 	</div>
 </main>
@@ -101,6 +101,7 @@
 	nav {
 		height: 5em;
 		background-color: slategrey;
+		flex-shrink: 0;
 	}
 
 	#main-nav {
@@ -112,20 +113,6 @@
 		height: 100%;
 	}
 
-	.inner-nav1,
-	.inner-nav3 {
-		background-color: slategrey;
-	}
-
-	.inner-nav2 {
-		background-color: lightslategrey;
-	}
-
-	.sidePanel {
-		background-color: whitesmoke;
-		flex-basis: 10em;
-	}
-
 	.resizer {
 		background-color: black;
 		flex-basis: 0.3em;
@@ -133,8 +120,13 @@
 	}
 
 	.canvas {
-		background-color: whitesmoke;
 		flex-grow: 1;
+	}
+
+	.canvas,
+	.sidePanel {
+		display: flex;
+		flex-direction: column;
 	}
 
 	footer {
