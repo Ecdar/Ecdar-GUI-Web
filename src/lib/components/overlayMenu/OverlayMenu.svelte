@@ -22,7 +22,7 @@
 
 	/**
 	 * The id of the popover element. You can use this to set a `popovertarget` on a button.
-	 * 
+	 *
 	 * WARNING: This ID is not scoped, make sure it is unique!
 	 */
 	export let id: string | undefined = undefined;
@@ -155,7 +155,6 @@
 		<slot />
 	</div>
 </div>
-
 
 <style>
 	.overlay-menu-popover {
