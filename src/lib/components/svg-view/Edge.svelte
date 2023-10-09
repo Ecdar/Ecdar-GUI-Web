@@ -42,5 +42,5 @@
 {/each}
 
 {#each nails as nail}
-	<Nail position={nail.position} locationID={nail.property.type} />
+	<Nail position={nail.position} locationID={null} />
 {/each}

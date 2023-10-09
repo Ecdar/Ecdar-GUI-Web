@@ -5,7 +5,7 @@
 	import Node from "./Node.svelte";
 
 	export let position: Point;
-	export let locationID: string;
+	export let locationID: string | null;
 </script>
 
 <Node {locationID} radius={10} bind:position />

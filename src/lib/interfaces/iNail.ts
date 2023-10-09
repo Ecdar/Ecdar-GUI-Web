@@ -1,7 +1,9 @@
-import type { Property } from "$lib/classes/automaton/property";
-import type { Point } from "$lib/classes/draw/point";
+import type { Property } from "$lib/classes/automaton/Property";
+import type { Point } from "$lib/classes/draw/Point";
 
 export interface iNail {
+	edgeId: string;
+	nailId: number;
 	position: Point;
 	property: Property;
 }

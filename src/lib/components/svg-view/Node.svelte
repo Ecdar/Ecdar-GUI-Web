@@ -4,15 +4,16 @@
 	import DraggableSVG from "./DraggableSVG.svelte";
 
 	export let position: Point;
-	export let locationID: string;
+	export let locationID: string | null;
 	export let radius: number;
 
 	function updatePos(_x: number, _y: number) {
-		$activeModel.locations[locationID].position.x += _x;
-		$activeModel.locations[locationID].position.y += _y;
+		position.x += _x;
+		position.y += _y;
 
-		// Update the position of the active model
-		activeModel.set($activeModel);
+		// Update the position of the location in the active model
+		if (locationID) $activeModel.locations[locationID].position = position;
+		else activeModel.set($activeModel);
 	}
 </script>
 
@@ -26,7 +27,7 @@
 			role="none"
 		/>
 		<text x={position.x} y={position.y} text-anchor="middle" role="none"
-			>{locationID}</text
+			>{locationID ?? "Nail"}</text
 		>
 	</g>
 </DraggableSVG>
