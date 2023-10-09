@@ -4,7 +4,6 @@
 	import { scale } from "$lib/globalState/scaleStore";
 
 	export let position: Point;
-	export let updatePos: Function;
 
 	//Sets up eventlisteners when the mouse is pressed down on the svg
 	function onMouseDown() {
@@ -14,12 +13,13 @@
 
 	//Updates the position of the svg
 	function onMouseMove(e: MouseEvent) {
-		position.x += e.movementX;
-		position.y += e.movementY;
+		position.x += e.movementX / $scale;
+		position.y += e.movementY / $scale;
+
+		console.log($scale);
 
 		// Update the active model
 		activeModel.set($activeModel);
-		updatePos(e.movementX / $scale, e.movementY / $scale);
 	}
 
 	//Removes the eventlisteners when the mouse is released
