@@ -12,6 +12,9 @@
 	let consoleCollapsedSize: string = "3.25em";
 	$: consoleSize = consoleCollapsedSize;
 
+	let consoleButtonColorOff: string = "slategrey";
+	let consoleButtonColorOn: string = "rgb(159, 174, 189)";
+
 	/**
 	 *Function for changing between the status of the console
 	 */
@@ -71,6 +74,9 @@
 	<button
 		type="button"
 		class="consoleTab frontEndButton"
+		style="background-color: {currentTab == Tabs.Frontend
+			? consoleButtonColorOn
+			: consoleButtonColorOff}"
 		on:click={() => {
 			changeTab(Tabs.Frontend);
 		}}
@@ -80,6 +86,9 @@
 	<button
 		type="button"
 		class="consoleTab"
+		style="background-color: {currentTab == Tabs.Backend
+			? consoleButtonColorOn
+			: consoleButtonColorOff};"
 		on:click={() => {
 			changeTab(Tabs.Backend);
 		}}
@@ -149,7 +158,6 @@
 	}
 
 	.consoleTab {
-		background-color: slategrey;
 		position: relative;
 		height: 3.8em;
 		margin: auto;
@@ -160,7 +168,7 @@
 	}
 
 	.consoleTab:hover {
-		background-color: lightslategrey;
+		filter: brightness(0.9);
 	}
 
 	.frontEndButton {
