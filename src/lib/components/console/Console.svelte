@@ -65,7 +65,7 @@
 <div class="outerOverflow" style="height: {consoleSize};">
 	<button
 		type="button"
-		class="collapsible"
+		class="collapsible unselectable"
 		on:click={changeConsoleCollapsableTextAndHeight}
 	>
 		{consoleCollapsableText}
@@ -73,7 +73,7 @@
 
 	<button
 		type="button"
-		class="consoleTab frontEndButton"
+		class="consoleTab frontEndButton unselectable"
 		style="background-color: {currentTab == Tabs.Frontend
 			? consoleButtonColorOn
 			: consoleButtonColorOff}"
@@ -85,7 +85,7 @@
 	</button>
 	<button
 		type="button"
-		class="consoleTab"
+		class="consoleTab unselectable"
 		style="background-color: {currentTab == Tabs.Backend
 			? consoleButtonColorOn
 			: consoleButtonColorOff};"
@@ -174,5 +174,10 @@
 	.frontEndButton {
 		border-left: 0;
 		border-right: 0;
+	}
+	.unselectable {
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 </style>
