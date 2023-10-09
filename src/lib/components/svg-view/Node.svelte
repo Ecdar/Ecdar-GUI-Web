@@ -8,11 +8,11 @@
 	export let radius: number;
 
 	function updatePos(_x: number, _y: number) {
-		position.x += _x;
-		position.y += _y;
+		$activeModel.locations[locationID].position.x += _x;
+		$activeModel.locations[locationID].position.y += _y;
 
-		// Update the position of the location in the active model
-		$activeModel.locations[locationID].position = position;
+		// Update the position of the active model
+		activeModel.set($activeModel);
 	}
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Point } from "$lib/classes/draw/point";
+	import type { Point } from "$lib/classes/draw/Point";
 	import type { iNail } from "$lib/interfaces/iNail";
 	import Nail from "./Nail.svelte";
 
@@ -9,25 +9,27 @@
 	let points: Point[] = [];
 
 	//Add the source and target points to the array
-	points.push(sourcePoint);
-	points.push(...nails.map((nail) => nail.position));
-	points.push(targetPoint);
+	$: points = [
+		sourcePoint,
+		...nails.map((nail) => nail.position),
+		targetPoint,
+	];
 
 	console.log("Edge: ", sourcePoint, targetPoint);
 
 	// logic that calculates the lines from the source to the target
 
 	let lines: { from: Point; to: Point }[] = [];
-	for (let i = 0; i < points.length - 1; i++) {
-		lines.push({ from: points[i], to: points[i + 1] });
+	$: updateLines(points);
+	function updateLines(_points: Point[]) {
+		lines = [];
+		for (let i = 0; i < _points.length - 1; i++) {
+			lines.push({ from: _points[i], to: _points[i + 1] });
+		}
 	}
 </script>
 
 <!--make lines update-->
-{#each nails as nail}
-	<Nail position={nail.position} locationID={nail.property.type} />
-{/each}
-
 {#each lines as line}
 	<line
 		x1={line.from.x}
@@ -37,4 +39,8 @@
 		stroke="black"
 		stroke-width="2"
 	/>
+{/each}
+
+{#each nails as nail}
+	<Nail position={nail.position} locationID={nail.property.type} />
 {/each}
