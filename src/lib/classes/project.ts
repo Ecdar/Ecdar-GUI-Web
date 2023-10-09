@@ -10,13 +10,14 @@
  *   MUST : add the class to the feature check at the bottom of this file
  *   OPTIONAL: Add the features that is needed
  *	  - check ($lin/project/features/Features.ts) for more information
- *	OPTIONAL: override the load function if it should support loading from disk (or file)
+ *	 OPTIONAL: override the load function if it should support loading from disk (or file)
  * */
 
 import { inTauri } from "$lib/tauri";
 import type { Project } from "./project/Project";
 import { TauriProject } from "./project/adapters/TauriProject";
 import { WebkitDirProject } from "./project/adapters/WebkitDirProject";
+import type * as Automata from "$lib/classes/automaton";
 
 // Enums
 export type { ProjectError } from "./project/ProjectError";
@@ -29,5 +30,12 @@ export const {
 	create,
 }: {
 	load?: () => Promise<Project>;
-	create: () => Project;
+	create: (
+		name?: string,
+		components?: Automata.Component[],
+		systems?: Automata.System[],
+		queries?: Automata.Queries,
+		systemDeclarations?: Automata.Declaration,
+		globalDeclarations?: Automata.Declaration,
+	) => Project;
 } = inTauri ? TauriProject : WebkitDirProject;

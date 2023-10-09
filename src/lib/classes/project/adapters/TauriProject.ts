@@ -27,7 +27,7 @@ export class TauriProject extends Project {
 		systems: Automata.System[] = [],
 		queries = new Automata.Queries(),
 		systemDeclarations = new Automata.Declaration(
-			Automata.DeclarationType.SYSETEM,
+			Automata.DeclarationType.SYSTEM,
 		),
 		globalDeclarations = new Automata.Declaration(
 			Automata.DeclarationType.GLOBAL,
