@@ -36,9 +36,9 @@ activeModel.set(
 			"1": {
 				color: "#ff0000",
 				id: "1",
-				invariant: new Invariant("c >= 8", { x: 100, y: 100 }),
-				nickname: new Nickname("nickname", { x: 100, y: 100 }),
-				position: { x: 100, y: 100 },
+				invariant: new Invariant("c >= 8", { x: 100, y: 300 }),
+				nickname: new Nickname("nickname", { x: 100, y: 300 }),
+				position: { x: 100, y: 300 },
 				type: LocationType.INITIAL,
 				urgency: Urgency.NORMAL,
 			},
@@ -103,10 +103,10 @@ activeModel.set(
 				update: "",
 				nails: [
 					{
-						position: { x: 100, y: 100 },
+						position: { x: 350, y: 300 },
 						property: new Property(PropertyType.GUARD, {
-							x: 100,
-							y: 100,
+							x: 350,
+							y: 300,
 						}),
 					},
 				],

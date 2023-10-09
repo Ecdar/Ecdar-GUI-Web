@@ -1,5 +1,8 @@
 <script lang="ts">
-	export let updatePos: Function;
+	import type { Point } from "$lib/classes/draw";
+	import { activeModel } from "$lib/globalState/activeModel";
+
+	export let position: Point;
 
 	//Sets up eventlisteners when the mouse is pressed down on the svg
 	function onMouseDown() {
@@ -9,7 +12,11 @@
 
 	//Updates the position of the svg
 	function onMouseMove(e: MouseEvent) {
-		updatePos(e.movementX, e.movementY);
+		position.x += e.movementX;
+		position.y += e.movementY;
+
+		// Update the active model
+		activeModel.set($activeModel);
 	}
 
 	//Removes the eventlisteners when the mouse is released

@@ -2,9 +2,16 @@
 	import { activeModel } from "$lib/globalState/activeModel";
 	import Location from "$lib/components/svg-view/Location.svelte";
 	import Edge from "./Edge.svelte";
+	import Label from "./Label.svelte";
 </script>
 
-<svg id="svg-container">
+<svg id="svg-container" height="100%" width="100%">
+	<Label
+		parrentPosition={{ x: 0, y: 0 }}
+		position={{ x: 300, y: 300 }}
+		text="test"
+	/>
+
 	<!--All edges gets drawn with their refrence to their source location-->
 	{#each $activeModel.edges as edge}
 		<Edge
