@@ -4,7 +4,7 @@
 	import Edge from "./Edge.svelte";
 </script>
 
-<svg id="svg-container" height="100%" width="100%">
+<svg id="svg-container">
 	<!--All edges gets drawn with their refrence to their source location-->
 	{#each $activeModel.edges as edge}
 		<Edge
@@ -24,7 +24,9 @@
 
 <style>
 	#svg-container {
-		inset: 0;
+		/* Change height and width dynamically once zooming and panning is implemented */
+		height: 100%;
+		width: 100%;
 		position: absolute;
 	}
 </style>
