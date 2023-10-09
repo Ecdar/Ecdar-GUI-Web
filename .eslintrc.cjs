@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   extends: [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/strict-type-checked",
     "plugin:svelte/recommended",
     "prettier",
   ],
@@ -12,6 +12,7 @@ module.exports = {
     sourceType: "module",
     ecmaVersion: 2020,
     extraFileExtensions: [".svelte"],
+    project: ["./tsconfig.json"],
   },
   env: {
     browser: true,
