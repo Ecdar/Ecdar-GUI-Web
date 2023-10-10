@@ -3,28 +3,78 @@
 	import { Tabs } from "$lib/classes/Tabs";
 
 	let consoleCollapsableText: string = "↑";
+	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
+	let consoleContainer: HTMLElement;
 
 	let frontEndErrors: string[] = [];
 	let backEndErrors: string[] = [];
 
 	let consoleExtendedSize: string = "100%";
 	let consoleCollapsedSize: string = "3.25em";
-	$: consoleSize = consoleCollapsedSize;
+	let consoleSize = consoleCollapsedSize;
 
 	let consoleButtonColorOff: string = "slategrey";
 	let consoleButtonColorOn: string = "rgb(159, 174, 189)";
 
 	/**
+	 * Function for resizing the console
+	 * @param event
+	 */
+	function resizeConsolePanel(event: MouseEvent) {
+		event.preventDefault();
+		consoleSize = (window.innerHeight - event.y).toString() + "px";
+	}
+
+	/**
+	 * Function for starting resizing the console
+	 * @param event
+	 */
+	function startResizingConsolePanel(event: PointerEvent) {
+		event.preventDefault();
+		if (currentlyCollapsed) return;
+		consoleContainer.setPointerCapture(event.pointerId);
+		consoleContainer.addEventListener("pointermove", resizeConsolePanel);
+		consoleContainer.addEventListener(
+			"pointerup",
+			stopResizingConsolePanel,
+		);
+		consoleContainer.addEventListener(
+			"pointercancel",
+			stopResizingConsolePanel,
+		);
+	}
+
+	/**
+	 * Function for stopping resizing the console
+	 * @param event
+	 */
+	function stopResizingConsolePanel(event: PointerEvent) {
+		consoleContainer.releasePointerCapture(event.pointerId);
+		consoleContainer.removeEventListener("pointermove", resizeConsolePanel);
+		consoleContainer.removeEventListener(
+			"pointerup",
+			stopResizingConsolePanel,
+		);
+		consoleContainer.removeEventListener(
+			"pointercancel",
+			stopResizingConsolePanel,
+		);
+		consoleExtendedSize = consoleSize;
+	}
+
+	/**
 	 *Function for changing between the status of the console
 	 */
 	function changeConsoleCollapsableTextAndHeight() {
-		if (consoleCollapsableText == "↑") {
+		if (currentlyCollapsed) {
 			consoleCollapsableText = "↓";
 			consoleSize = consoleExtendedSize;
+			currentlyCollapsed = false;
 		} else {
 			consoleCollapsableText = "↑";
 			consoleSize = consoleCollapsedSize;
+			currentlyCollapsed = true;
 		}
 	}
 
@@ -62,7 +112,21 @@
 	}
 </script>
 
-<div class="outerOverflow" style="height: {consoleSize};">
+<div
+	class="outerOverflow"
+	style="height: {consoleSize};"
+	bind:this={consoleContainer}
+>
+	<div
+		role="button"
+		id="consoleResizer"
+		class="resizer"
+		tabindex="-1"
+		on:pointerdown={(event) => {
+			startResizingConsolePanel(event);
+		}}
+		style="cursor: {currentlyCollapsed ? 'auto' : 'row-resize'};"
+	/>
 	<button
 		type="button"
 		class="collapsible unselectable"
@@ -112,11 +176,15 @@
 	.console {
 		background-color: rgb(159, 174, 189);
 		width: 100%;
-		height: 70%;
+		height: 60%;
 		overflow-y: scroll;
 		overflow-wrap: break-word;
-		min-height: 5em;
-		max-height: 15em;
+		min-height: 2.5em;
+	}
+
+	#consoleResizer {
+		background-color: lightslategray;
+		height: 5px;
 	}
 
 	.console::-webkit-scrollbar {
