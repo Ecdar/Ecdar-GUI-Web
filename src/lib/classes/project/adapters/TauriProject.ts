@@ -1,5 +1,5 @@
 import * as Automata from "$lib/classes/automaton";
-import type { SerializeRaw, Named } from "$lib/classes/automaton";
+import type { Named } from "$lib/classes/automaton";
 import { ProjectError } from "../ProjectError";
 import { Project } from "../Project";
 import {
@@ -91,7 +91,7 @@ export class TauriProject extends Project {
 
 		async function mapChildren<T>(
 			children: Awaited<ReturnType<typeof fs.readDir>>,
-			fn: Automata.DeserializeRaw<T>,
+			fn: Automata.Raw.DeserializeRaw<T>,
 		): Promise<T[]> {
 			return Promise.all(
 				children
@@ -146,8 +146,8 @@ export class TauriProject extends Project {
 		quickSave: async () => {
 			const { fs } = await import("@tauri-apps/api");
 			const dir = `${this.srcDir}/${this.name}`;
-			if (!fs.exists(dir)) {
-				(this.features.save as () => Promise<void>)();
+			if (!(await fs.exists(dir))) {
+				await (this.features.save as () => Promise<void>)();
 			}
 
 			await (this.writeToDir as (dir: string) => Promise<void>)(dir);
@@ -161,7 +161,7 @@ export class TauriProject extends Project {
 				directory: true,
 				recursive: true,
 				multiple: false,
-			})) as string;
+			})) as string | null;
 
 			if (dir === null) {
 				throw new Error(ProjectError.SaveCanceled);
@@ -186,10 +186,10 @@ export class TauriProject extends Project {
 					throw new Error(ProjectError.SaveCanceled);
 				}
 			} else {
-				fs.createDir(saveDir);
+				await fs.createDir(saveDir);
 			}
 
-			(this.writeToDir as (dir: string) => Promise<void>)(saveDir);
+			await (this.writeToDir as (dir: string) => Promise<void>)(saveDir);
 		},
 	};
 
@@ -200,7 +200,7 @@ export class TauriProject extends Project {
 	readonly writeToDir = async (dir: string) => {
 		const { fs } = await import("@tauri-apps/api");
 
-		async function mapNamedArr<T extends SerializeRaw & Named>(
+		async function mapNamedArr<T extends Automata.Raw.SerializeRaw & Named>(
 			obj: T[],
 			dir: string,
 		) {
@@ -237,7 +237,7 @@ export class TauriProject extends Project {
 				switch (k) {
 					case "systems":
 						if (!(await fs.exists(systemDir))) {
-							fs.createDir(systemDir);
+							await fs.createDir(systemDir);
 						}
 						await Promise.all([
 							mapNamedArr(v as typeof this.systems, systemDir),
@@ -249,7 +249,7 @@ export class TauriProject extends Project {
 						break;
 					case "components":
 						if (!(await fs.exists(componentDir))) {
-							fs.createDir(componentDir);
+							await fs.createDir(componentDir);
 						}
 						await Promise.all([
 							mapNamedArr(

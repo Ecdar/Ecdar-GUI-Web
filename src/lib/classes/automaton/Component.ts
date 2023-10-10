@@ -105,7 +105,9 @@ export class Component
 	/**
 	 * Converts the Component into a RawComponent
 	 * */
-	static readonly fromRaw: Raw.FromRaw<Raw.RawComponent, Component> = (raw) => {
+	static readonly fromRaw: Raw.FromRaw<Raw.RawComponent, Component> = (
+		raw,
+	) => {
 		return new Component(
 			raw.name,
 			raw.declarations,

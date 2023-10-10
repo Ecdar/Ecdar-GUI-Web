@@ -5,13 +5,15 @@ import {
 	SystemEdge,
 	Raw,
 	type OperatorType,
-    type Named,
+	type Named,
 } from "../automaton";
 
 /**
  * An Ecdar System
  * */
-export class System implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawSystem>, Named {
+export class System
+	implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawSystem>, Named
+{
 	/**
 	 * The name of the system
 	 * */

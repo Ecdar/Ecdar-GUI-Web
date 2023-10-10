@@ -14,11 +14,15 @@ export class Declaration
 		this.declarations = declarations;
 	}
 
-	static readonly fromRaw: Raw.FromRaw<Raw.RawDeclaration, Declaration> = (raw) => {
+	static readonly fromRaw: Raw.FromRaw<Raw.RawDeclaration, Declaration> = (
+		raw,
+	) => {
 		return new Declaration(raw.name as DeclarationType, raw.declarations);
 	};
 
-	static readonly deserializeRaw: Raw.DeserializeRaw<Declaration> = (input) => {
+	static readonly deserializeRaw: Raw.DeserializeRaw<Declaration> = (
+		input,
+	) => {
 		const raw = Raw.parse(Raw.ZodRawDeclaration, input);
 		return Declaration.fromRaw(raw);
 	};
