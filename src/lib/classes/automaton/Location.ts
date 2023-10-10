@@ -1,14 +1,8 @@
 import { Point } from "$lib/classes/draw";
 import { Nickname, Invariant, LocationType, Urgency } from "../automaton";
-import type {
-	SerializeRaw,
-	ToRaw,
-	FromRaw,
-	DeserializeRaw,
-	RawLocation,
-} from "../automaton";
+import { Raw } from "../automaton";
 
-export class Location implements SerializeRaw, ToRaw<RawLocation> {
+export class Location implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawLocation> {
 	/**
 	 * The id of the Location
 	 * */
@@ -89,7 +83,7 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 	/**
 	 * Crates a Location from a RawLocation
 	 * */
-	static fromRaw: FromRaw<RawLocation, Location> = (raw) => {
+	static fromRaw: Raw.FromRaw<Raw.RawLocation, Location> = (raw) => {
 		return new Location(
 			raw.id,
 			new Point(raw.x, raw.y),
@@ -107,8 +101,8 @@ export class Location implements SerializeRaw, ToRaw<RawLocation> {
 	/**
 	 * Crates a Location from a JSON string matching a RawLocation
 	 * */
-	static deserializeRaw: DeserializeRaw<Location> = (input) => {
-		const raw: RawLocation = JSON.parse(input);
+	static deserializeRaw: Raw.DeserializeRaw<Location> = (input) => {
+		const raw = Raw.parse(Raw.ZodRawLocation, input);
 		return Location.fromRaw(raw);
 	};
 }

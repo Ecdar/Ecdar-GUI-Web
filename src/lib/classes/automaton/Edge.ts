@@ -1,19 +1,13 @@
 import { Point } from "$lib/classes/draw";
 
-import { Status, Property, PropertyType } from "../automaton";
-import type {
-	SerializeRaw,
-	ToRaw,
-	FromRaw,
-	DeserializeRaw,
-	RawEdge,
-} from "../automaton";
+import { Status, Property, PropertyType, Raw, type Nail } from "../automaton";
+import type { RawNail } from "./raw/RawNail";
 
 /**
  * # An Ecdar Edge
  * Used to define edges in an Ecdar Component
  * */
-export class Edge implements SerializeRaw, ToRaw<RawEdge> {
+export class Edge implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawEdge> {
 	/**
 	 * The id of the edge
 	 *  - Must be "E" followed by a number and
@@ -75,10 +69,7 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 	 * Modifies the path that the edge takes
 	 * Defines properties on the edge
 	 * */
-	nails: {
-		position: Point;
-		property: Property;
-	}[];
+	nails: Nail[];
 
 	constructor(
 		id: string = "",
@@ -91,10 +82,7 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 		update: string = "",
 		sync: string = "",
 		isLocked: boolean = true,
-		nails: {
-			position: Point;
-			property: Property;
-		}[] = [],
+		nails: Nail[] = [],
 	) {
 		this.id = id;
 		this.group = group;
@@ -121,19 +109,16 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 			update: this.update,
 			sync: this.sync,
 			isLocked: this.isLocked,
-			nails: this.nails.reduce(
-				(res, c) => {
-					res.push({
-						x: c.position.x,
-						y: c.position.y,
-						propertyType: c.property.type,
-						propertyX: c.property.position.x,
-						propertyY: c.property.position.y,
-					});
-					return res;
-				},
-				<RawEdge["nails"]>[],
-			),
+			nails: this.nails.reduce<RawNail[]>((res, c): RawNail[] => {
+				res.push({
+					x: c.position.x,
+					y: c.position.y,
+					propertyType: c.property.type,
+					propertyX: c.property.position.x,
+					propertyY: c.property.position.y,
+				});
+				return res;
+			}, []),
 		};
 	}
 	serializeRaw() {
@@ -143,7 +128,7 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 	/**
 	 * Creates an Edge from a RawEdge
 	 * */
-	static fromRaw: FromRaw<RawEdge, Edge> = (raw) => {
+	static fromRaw: Raw.FromRaw<Raw.RawEdge, Edge> = (raw) => {
 		return new Edge(
 			raw.id,
 			raw.group,
@@ -155,7 +140,7 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 			raw.update,
 			raw.sync,
 			raw.isLocked,
-			raw.nails.map((nail) => {
+			raw.nails.map<Nail>((nail) => {
 				return {
 					position: new Point(nail.x, nail.y),
 					property: new Property(
@@ -170,8 +155,8 @@ export class Edge implements SerializeRaw, ToRaw<RawEdge> {
 	/**
 	 * Creates an Edge from a JSON matching a RawEdge
 	 * */
-	static deserializeRaw: DeserializeRaw<Edge> = (input) => {
-		const raw: RawEdge = JSON.parse(input);
+	static deserializeRaw: Raw.DeserializeRaw<Edge> = (input) => {
+		const raw = Raw.parse(Raw.ZodRawEdge, input);
 		return Edge.fromRaw(raw);
 	};
 }

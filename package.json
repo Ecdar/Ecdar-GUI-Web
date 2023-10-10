@@ -35,6 +35,7 @@
 		"vitest": "^0.34.4"
 	},
 	"dependencies": {
-		"svelte-google-materialdesign-icons": "^0.8.1"
+		"svelte-google-materialdesign-icons": "^0.8.1",
+		"zod": "^3.22.4"
 	}
 }
