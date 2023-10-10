@@ -1,16 +1,5 @@
 // Raw Types
-export type {
-	RawLocation,
-	RawEdge,
-	RawComponent,
-	RawSystem,
-	RawQuery,
-	RawDeclaration,
-	FromRaw,
-	ToRaw,
-	SerializeRaw,
-	DeserializeRaw,
-} from "./automaton/raw";
+export * as Raw from "./automaton/raw";
 
 // Enums
 export { Backend } from "./automaton/Backend";
@@ -28,6 +17,7 @@ export { Operator } from "./automaton/Operator";
 export { Property } from "./automaton/Property";
 export { SystemEdge } from "./automaton/SystemEdge";
 export { ComponentInstance } from "./automaton/ComponentInstance";
+export { Nail } from "./automaton/Nail";
 
 // Major Classes
 export { Declaration } from "./automaton/Declaration";

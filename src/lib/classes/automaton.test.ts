@@ -6,20 +6,13 @@ import {
 	System,
 	Queries,
 	Declaration,
-} from "./automaton";
-import type {
-	RawLocation,
-	RawEdge,
-	RawComponent,
-	RawSystem,
-	RawQuery,
-	RawDeclaration,
+	Raw,
 } from "./automaton";
 
 describe("Location test", () => {
 	it("serializes into location", () => {
 		const location = Location.deserializeRaw(locationData);
-		const raw: RawLocation = JSON.parse(locationData);
+		const raw = Raw.parse(Raw.ZodRawLocation, locationData);
 		expect(location.id).toBe(raw.id);
 		expect(location.urgency).toBe(raw.urgency);
 		expect(location.color).toBe(raw.color);
@@ -37,7 +30,7 @@ describe("Location test", () => {
 	it("serializes and deserializes to the same object", () => {
 		const o = Location.deserializeRaw(locationData);
 		const rawObj = o.toRaw();
-		const rawParse = JSON.parse(locationData);
+		const rawParse = Raw.parse(Raw.ZodRawLocation, locationData);
 		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
@@ -45,7 +38,7 @@ describe("Location test", () => {
 describe("Edge test", () => {
 	it("serializes into an Edge", () => {
 		const edge = Edge.deserializeRaw(edgeData);
-		const data: RawEdge = JSON.parse(edgeData);
+		const data = Raw.parse(Raw.ZodRawEdge, edgeData);
 		expect(edge.id).toBe(data.id);
 		expect(edge.sync).toBe(data.sync);
 		expect(edge.group).toBe(data.group);
@@ -67,7 +60,7 @@ describe("Edge test", () => {
 	it("serializes and deserializes to the same object", () => {
 		const o = Edge.deserializeRaw(edgeData);
 		const rawObj = o.toRaw();
-		const rawParse = JSON.parse(edgeData);
+		const rawParse = Raw.parse(Raw.ZodRawEdge, edgeData);
 		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
@@ -75,7 +68,7 @@ describe("Edge test", () => {
 describe("Component test", () => {
 	it("serializes into a Component", () => {
 		const component = Component.deserializeRaw(componentData);
-		const data: RawComponent = JSON.parse(componentData);
+		const data = Raw.parse(Raw.ZodRawComponent, componentData);
 		expect(component.name).toBe(data.name);
 		expect(component.declarations).toBe(data.declarations);
 		expect(component.locations.length).toBe(data.locations.length);
@@ -94,7 +87,7 @@ describe("Component test", () => {
 	it("serializes and deserializes to the same object", () => {
 		const o = Component.deserializeRaw(componentData);
 		const rawObj = o.toRaw();
-		const rawParse = JSON.parse(componentData);
+		const rawParse = Raw.parse(Raw.ZodRawComponent, componentData);
 		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
@@ -102,7 +95,7 @@ describe("Component test", () => {
 describe("System test", () => {
 	it("serializes into a system", () => {
 		const system = System.deserializeRaw(systemData);
-		const data: RawSystem = JSON.parse(systemData);
+		const data = Raw.parse(Raw.ZodRawSystem, systemData);
 		expect(system.name).toBe(data.name);
 		expect(system.description).toBe(data.description);
 		expect(system.position.x).toBe(data.x);
@@ -139,7 +132,7 @@ describe("System test", () => {
 	it("serializes and deserializes to the same object", () => {
 		const o = System.deserializeRaw(systemData);
 		const rawObj = o.toRaw();
-		const rawParse = JSON.parse(systemData);
+		const rawParse = Raw.parse(Raw.ZodRawSystem, systemData);
 		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
@@ -147,7 +140,7 @@ describe("System test", () => {
 describe("Queries test", () => {
 	it("serializes into a query array", () => {
 		const queries = Queries.deserializeRaw(queriesData);
-		const data: RawQuery[] = JSON.parse(queriesData);
+		const data = Raw.parse(Raw.ZodRawQuery.array(), queriesData);
 
 		expect(queries.arr.length).toBe(data.length);
 		for (let i = 0; i < queries.arr.length; i++) {
@@ -161,7 +154,7 @@ describe("Queries test", () => {
 	it("serializes and deserializes to the same object", () => {
 		const o = Queries.deserializeRaw(queriesData);
 		const rawObj = o.toRaw();
-		const rawParse = JSON.parse(queriesData);
+		const rawParse = Raw.parse(Raw.ZodRawQuery.array(), queriesData);
 		expect(rawObj).toStrictEqual(rawParse);
 	});
 });
@@ -169,7 +162,7 @@ describe("Queries test", () => {
 describe("Declarations test", () => {
 	it("serializes into a declaration", () => {
 		const queries = Declaration.deserializeRaw(declarationData);
-		const data: RawDeclaration = JSON.parse(declarationData);
+		const data = Raw.parse(Raw.ZodRawDeclaration, declarationData);
 
 		expect(queries.declarations).toBe(data.declarations);
 		expect(queries.type).toStrictEqual(data.name);
@@ -178,7 +171,7 @@ describe("Declarations test", () => {
 	it("serializes and deserializes to the same object", () => {
 		const o = Declaration.deserializeRaw(declarationData);
 		const rawObj = o.toRaw();
-		const rawParse = JSON.parse(declarationData);
+		const rawParse = Raw.parse(Raw.ZodRawDeclaration, declarationData);
 
 		expect(rawObj).toStrictEqual(rawParse);
 	});

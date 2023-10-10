@@ -36,6 +36,7 @@
 	},
 	"dependencies": {
 		"@tauri-apps/api": "^1.5.0",
-		"svelte-google-materialdesign-icons": "^0.8.1"
+		"svelte-google-materialdesign-icons": "^0.8.1",
+		"zod": "^3.22.4"
 	}
 }

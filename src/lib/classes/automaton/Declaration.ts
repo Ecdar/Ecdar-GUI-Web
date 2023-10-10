@@ -1,16 +1,11 @@
-import {
-	type SerializeRaw,
-	type ToRaw,
-	type FromRaw,
-	type DeserializeRaw,
-	type RawDeclaration,
-	DeclarationType,
-} from "../automaton";
+import { Raw, DeclarationType } from "../automaton";
 
 /**
  * The top level declarations
  * */
-export class Declaration implements SerializeRaw, ToRaw<RawDeclaration> {
+export class Declaration
+	implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawDeclaration>
+{
 	type: DeclarationType;
 	declarations: string;
 
@@ -19,12 +14,12 @@ export class Declaration implements SerializeRaw, ToRaw<RawDeclaration> {
 		this.declarations = declarations;
 	}
 
-	static fromRaw: FromRaw<RawDeclaration, Declaration> = (raw) => {
+	static readonly fromRaw: Raw.FromRaw<Raw.RawDeclaration, Declaration> = (raw) => {
 		return new Declaration(raw.name as DeclarationType, raw.declarations);
 	};
 
-	static deserializeRaw: DeserializeRaw<Declaration> = (input) => {
-		const raw = JSON.parse(input);
+	static readonly deserializeRaw: Raw.DeserializeRaw<Declaration> = (input) => {
+		const raw = Raw.parse(Raw.ZodRawDeclaration, input);
 		return Declaration.fromRaw(raw);
 	};
 

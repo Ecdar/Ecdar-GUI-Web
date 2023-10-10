@@ -1,19 +1,17 @@
 import { Point, Dimensions } from "$lib/classes/draw";
-import { Operator, ComponentInstance, SystemEdge } from "../automaton";
-import type {
-	OperatorType,
-	SerializeRaw,
-	ToRaw,
-	FromRaw,
-	DeserializeRaw,
-	RawSystem,
-	Named,
+import {
+	Operator,
+	ComponentInstance,
+	SystemEdge,
+	Raw,
+	type OperatorType,
+    type Named,
 } from "../automaton";
 
 /**
  * An Ecdar System
  * */
-export class System implements SerializeRaw, ToRaw<RawSystem>, Named {
+export class System implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawSystem>, Named {
 	/**
 	 * The name of the system
 	 * */
@@ -127,7 +125,7 @@ export class System implements SerializeRaw, ToRaw<RawSystem>, Named {
 	/**
 	 * Creates a System from an object of type RawSystem
 	 * */
-	static readonly fromRaw: FromRaw<RawSystem, System> = (raw) => {
+	static readonly fromRaw: Raw.FromRaw<Raw.RawSystem, System> = (raw) => {
 		return new System(
 			raw.name,
 			raw.description,
@@ -159,8 +157,8 @@ export class System implements SerializeRaw, ToRaw<RawSystem>, Named {
 	/**
 	 * Creates a System from a JSON string of a RawSystem
 	 * */
-	static readonly deserializeRaw: DeserializeRaw<System> = (input) => {
-		const raw = JSON.parse(input);
+	static readonly deserializeRaw: Raw.DeserializeRaw<System> = (input) => {
+		const raw = Raw.parse(Raw.ZodRawSystem, input);
 		return System.fromRaw(raw);
 	};
 }

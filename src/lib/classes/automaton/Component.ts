@@ -1,20 +1,15 @@
 import { Point, Dimensions } from "$lib/classes/draw";
 
-import { Edge, Location } from "../automaton";
-import type {
-	SerializeRaw,
-	ToRaw,
-	FromRaw,
-	DeserializeRaw,
-	RawComponent,
-	Named,
-} from "../automaton";
+import { Edge, Location, type Named, Raw } from "../automaton";
+import {} from "./raw/RawComponent";
 
 /**
  * # An Ecdar component
  * It stores the edges and locations of a single automaton
  * */
-export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
+export class Component
+	implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawComponent>, Named
+{
 	/**
 	 * The name of the component
 	 * */
@@ -110,7 +105,7 @@ export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
 	/**
 	 * Converts the Component into a RawComponent
 	 * */
-	static readonly fromRaw: FromRaw<RawComponent, Component> = (raw) => {
+	static readonly fromRaw: Raw.FromRaw<Raw.RawComponent, Component> = (raw) => {
 		return new Component(
 			raw.name,
 			raw.declarations,
@@ -131,8 +126,8 @@ export class Component implements SerializeRaw, ToRaw<RawComponent>, Named {
 	/**
 	 * Creates a Component from a JSON string of a RawComponent
 	 * */
-	static readonly deserializeRaw: DeserializeRaw<Component> = (input) => {
-		const raw: RawComponent = JSON.parse(input);
+	static readonly deserializeRaw: Raw.DeserializeRaw<Component> = (input) => {
+		const raw = Raw.parse(Raw.ZodRawComponent, input);
 		return Component.fromRaw(raw);
 	};
 }

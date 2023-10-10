@@ -1,7 +1,15 @@
+import { z } from "zod";
+
+/**
+ * The used for Zod
+ * type inference
+ * */
+export const ZodRawDeclaration = z.object({
+	name: z.string(),
+	declarations: z.string(),
+});
+
 /**
  * The raw Object for a Declaration that is used to save and communicate in JSON.
  * */
-export type RawDeclaration = {
-	name: string;
-	declarations: string;
-};
+export type RawDeclaration = z.infer<typeof ZodRawDeclaration>;
