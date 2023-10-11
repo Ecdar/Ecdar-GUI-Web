@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Point } from "$lib/classes/draw";
 	import { activeModel } from "$lib/globalState/activeModel";
-	import { scale } from "$lib/globalState/scaleStore";
 
 	export let position: Point;
 
@@ -13,10 +12,8 @@
 
 	//Updates the position of the svg
 	function onMouseMove(e: MouseEvent) {
-		position.x += e.movementX / $scale;
-		position.y += e.movementY / $scale;
-
-		console.log($scale);
+		position.x += e.movementX;
+		position.y += e.movementY;
 
 		// Update the active model
 		activeModel.set($activeModel);
