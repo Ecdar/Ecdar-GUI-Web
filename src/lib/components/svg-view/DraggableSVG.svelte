@@ -16,8 +16,6 @@
 		position.x += e.movementX / $scale;
 		position.y += e.movementY / $scale;
 
-		console.log($scale);
-
 		// Update the active model
 		activeModel.set($activeModel);
 	}
