@@ -1,8 +1,8 @@
-import type { Point } from "../classes/draw/point";
-import type { Nickname } from "../classes/automaton/nickname";
-import type { Invariant } from "../classes/automaton/invariant";
-import type { LocationType } from "../classes/automaton/location_type";
-import type { Urgency } from "../classes/automaton/urgency";
+import type { Point } from "../classes/draw/Point";
+import type { iNickname } from "./iNickname";
+import type { Invariant } from "../classes/automaton/Invariant";
+import type { LocationType } from "../classes/automaton/LocationType";
+import type { Urgency } from "../classes/automaton/Urgency";
 
 export interface iLocation {
 	/**
@@ -18,7 +18,7 @@ export interface iLocation {
 	/**
 	 * The Nickname of the Location
 	 * */
-	nickname: Nickname;
+	nickname: iNickname;
 
 	/**
 	 * The Invariant of the Location

@@ -3,7 +3,7 @@
 	import DraggableSVG from "./DraggableSVG.svelte";
 
 	export let position: Point;
-	export let locationID: string | null;
+	export let text: string;
 	export let radius: number;
 </script>
 
@@ -16,6 +16,6 @@
 		role="none"
 	/>
 	<text x={position.x} y={position.y} text-anchor="middle" role="none"
-		>{locationID ?? "Nail"}</text
+		>{text ?? "Nail"}</text
 	>
 </DraggableSVG>
