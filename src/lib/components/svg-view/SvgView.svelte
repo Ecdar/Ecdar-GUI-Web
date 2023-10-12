@@ -25,6 +25,10 @@
 
 	<!--All locations gets drawn-->
 	{#each Object.values({ ...$activeModel.locations }) as location}
-		<Location locationID={location.id} bind:position={location.position} />
+		<Location
+			locationID={location.id}
+			bind:position={location.position}
+			bind:nickname={location.nickname}
+		/>
 	{/each}
 </svg>

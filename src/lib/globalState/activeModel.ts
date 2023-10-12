@@ -64,7 +64,10 @@ activeModel.set(
 				color: "#0000ff", // Example color for location 4
 				id: "4",
 				invariant: new Invariant("c >= 10", { x: 700, y: 300 }), // Example invariant
-				nickname: new Nickname("nickname4", { x: 700, y: 300 }), // Example nickname
+				nickname: {
+					name: "nickname4", 
+					position: { x: 700, y: 320 }
+				}, // Example nickname
 				position: { x: 700, y: 300 }, // Example position
 				type: LocationType.INITIAL, // Example location type
 				urgency: Urgency.NORMAL, // Example urgency
