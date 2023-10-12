@@ -2,16 +2,16 @@
 	import DraggableSvg from "./DraggableSVG.svelte";
 	import type { Point } from "$lib/classes/draw";
 
-	export let parrentPosition: Point;
+	export let parentPosition: Point;
 	export let position: Point;
 	export let text: string;
 </script>
 
 <DraggableSvg bind:position>
-	<!-- line from parrent to text label-->
+	<!-- line from parent to text label-->
 	<line
-		x1={parrentPosition.x}
-		y1={parrentPosition.y}
+		x1={parentPosition.x}
+		y1={parentPosition.y}
 		x2={position.x}
 		y2={position.y}
 		stroke="black"

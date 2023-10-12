@@ -53,59 +53,6 @@
 			stopResizingSidePanel,
 		);
 	}
-
-	import { updateScale } from "$lib/globalState/scaleStore";
-	let svgContainer: HTMLElement;
-	let currentScale = 1;
-	const maxScale = 5;
-	const minScale = 0.25;
-
-	function testingScrolling(event: WheelEvent) {
-		event.preventDefault();
-
-		const delta = Math.sign(event.deltaY);
-
-		currentScale += delta * 0.05;
-
-		if (currentScale > maxScale) {
-			currentScale = maxScale;
-		} else if (currentScale < minScale) {
-			currentScale = minScale;
-		}
-
-		svgContainer.style.transform = `translate(${offset.x}px, ${offset.y}px) scale(${currentScale})`;
-
-		updateScale(currentScale);
-	}
-
-	let toPan: boolean = false;
-	let offset = { x: 0, y: 0 };
-
-	function testingPanning(event: MouseEvent) {
-		event.preventDefault();
-
-		if (toPan && event.shiftKey) {
-			event.stopPropagation();
-			offset = {
-				x: offset.x + event.movementX,
-				y: offset.y + event.movementY,
-			};
-
-			svgContainer.style.transform = `translate(${offset.x}px, ${offset.y}px) scale(${currentScale})`;
-		}
-	}
-
-	function startTestingPanning(event: MouseEvent) {
-		event.preventDefault();
-
-		toPan = true;
-	}
-
-	function stopTestingPanning(event: MouseEvent) {
-		event.preventDefault();
-
-		toPan = false;
-	}
 </script>
 
 <!-- Top navigation Panel -->
@@ -127,20 +74,10 @@
 		}}
 	/>
 	<!-- Canvas -->
-	<div
-		class="canvas"
-		role="button"
-		tabindex="-1"
-		on:wheel={testingScrolling}
-		on:mousedown={startTestingPanning}
-		on:mousemove={testingPanning}
-		on:mouseup={stopTestingPanning}
-	>
+	<div class="canvas">
 		<nav>Nav 2</nav>
 		<div id="svgContainer">
-			<div class="anotherContainer" bind:this={svgContainer}>
-				<SvgView />
-			</div>
+			<SvgView />
 		</div>
 	</div>
 	<!-- Right resize Panel -->
@@ -197,11 +134,6 @@
 		justify-content: center;
 		width: 100%;
 		height: 100%;
-	}
-
-	.anotherContainer {
-		height: 100%;
-		width: 100%;
 	}
 
 	.sidePanel {
