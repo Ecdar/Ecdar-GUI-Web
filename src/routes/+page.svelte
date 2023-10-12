@@ -1,4 +1,7 @@
 <script lang="ts">
+	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
+	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
+
 	import SvgView from "$lib/components/svg-view/SvgView.svelte";
 
 	enum SidePanel {
@@ -79,6 +82,8 @@
 		<div id="svgContainer">
 			<SvgView />
 		</div>
+		<DropDownMenu />
+		<LocationsWithContextMenu />
 	</div>
 	<!-- Right resize Panel -->
 	<div
