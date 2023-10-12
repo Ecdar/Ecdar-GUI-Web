@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { Backend } from "../Backend";
 
 /**
  * The used for Zod
@@ -10,7 +11,7 @@ export const ZodRawQuery = z.object({
 	isPeriodic: z.boolean(),
 	ignoredInputs: z.object({}), // Ignored for now
 	ignoredOutputs: z.object({}), // Ignored for now
-	backend: z.number(),
+	backend: z.nativeEnum(Backend),
 });
 
 /**

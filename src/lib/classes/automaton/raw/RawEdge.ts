@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { ZodRawNail } from "./RawNail";
+import { Status } from "../Status";
 
 /**
  * The used for Zod
@@ -10,7 +11,7 @@ export const ZodRawEdge = z.object({
 	group: z.string(),
 	sourceLocation: z.string(),
 	targetLocation: z.string(),
-	status: z.string(),
+	status: z.nativeEnum(Status),
 	select: z.string(),
 	sync: z.string(),
 	guard: z.string(),

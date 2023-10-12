@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { Urgency } from "../Urgency";
 
 /**
  * The used for Zod
@@ -9,7 +10,7 @@ export const ZodRawLocation = z.object({
 	nickname: z.string(),
 	invariant: z.string(),
 	type: z.string(),
-	urgency: z.string(),
+	urgency: z.nativeEnum(Urgency),
 	x: z.number(),
 	y: z.number(),
 	color: z.string(),

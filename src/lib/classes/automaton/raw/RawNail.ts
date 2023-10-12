@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PropertyType } from "../PropertyType";
 
 /**
  * The used for Zod
@@ -7,7 +8,7 @@ import { z } from "zod";
 export const ZodRawNail = z.object({
 	x: z.number(),
 	y: z.number(),
-	propertyType: z.string(),
+	propertyType: z.nativeEnum(PropertyType),
 	propertyX: z.number(),
 	propertyY: z.number(),
 });

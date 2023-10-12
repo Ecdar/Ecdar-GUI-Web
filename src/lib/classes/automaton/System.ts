@@ -4,7 +4,6 @@ import {
 	ComponentInstance,
 	SystemEdge,
 	Raw,
-	type OperatorType,
 	type Named,
 } from "../automaton";
 
@@ -107,7 +106,7 @@ export class System
 					x: o.position.x,
 					y: o.position.y,
 					// BECAUSE OF COMPATIBILITY
-					type: o.type.toLowerCase(),
+					type: o.type,
 					id: o.id,
 				};
 			}),
@@ -146,7 +145,7 @@ export class System
 				return new Operator(
 					o.id,
 					/// BECAUSE OF COMPATIBILITY
-					o.type.toUpperCase() as OperatorType,
+					o.type,
 					new Point(o.x, o.y),
 				);
 			}),

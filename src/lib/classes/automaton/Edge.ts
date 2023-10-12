@@ -103,7 +103,7 @@ export class Edge implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawEdge> {
 			group: this.group,
 			sourceLocation: this.sourceLocation,
 			targetLocation: this.targetLocation,
-			status: this.status as string,
+			status: this.status,
 			select: this.select,
 			guard: this.guard,
 			update: this.update,

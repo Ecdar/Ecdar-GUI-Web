@@ -44,5 +44,10 @@ export function parse<T>(
 	schema: z.ZodType<T>,
 	json: string,
 ): z.infer<typeof schema> {
-	return schema.parse(JSON.parse(json));
+	const parse = schema.safeParse(JSON.parse(json));
+	if (parse.success) {
+		return parse.data;
+	} else {
+		throw parse.error;
+	}
 }
