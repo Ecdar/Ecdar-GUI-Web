@@ -11,7 +11,12 @@
 	}
 </script>
 
-<button class={`color ${color}`} on:click={() => setColor()} />
+<button
+	class={`color ${color}`}
+	on:click={() => {
+		setColor();
+	}}
+/>
 
 <style>
 	.color {
