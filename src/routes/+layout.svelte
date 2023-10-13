@@ -13,7 +13,8 @@
 		margin: 0;
 		padding: 0;
 		height: 100vh;
-		display: flex;
-		flex-flow: column;
+		box-sizing: border-box;
+		display: grid;
+		grid-template-rows: auto 1fr auto;
 	}
 </style>

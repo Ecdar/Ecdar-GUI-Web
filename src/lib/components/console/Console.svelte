@@ -176,10 +176,11 @@
 	.console {
 		background-color: rgb(159, 174, 189);
 		width: 100%;
-		height: 60%;
+		height: 70%;
 		overflow-y: scroll;
 		overflow-wrap: break-word;
-		min-height: 2.5em;
+		min-height: calc(100% - 3.8em);
+		margin-bottom: auto;
 	}
 
 	#consoleResizer {
@@ -224,6 +225,7 @@
 	.outerOverflow {
 		margin: 0%;
 		padding: 0%;
+		max-height: 50em;
 	}
 
 	.consoleTab {
