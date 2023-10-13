@@ -1,7 +1,7 @@
 // AUTOMATION TYPES
 // Each of the Major Classes are what is the output of loading the ECDAR json files
 // Each of the Minor Classes and Enums  are helper classes to the Major Classes
-// 
+//
 // If a type is Raw, then that is the format of the ECDAR json files
 //
 

@@ -1,15 +1,13 @@
 import { describe, it, expect } from "vitest";
-import {
-	Location,
-} from "$lib/classes/automaton";
+import { Location } from "$lib/classes/automaton";
 
 describe("fail test", () => {
 	it("fails on missing fields", () => {
-	  expect(() => Location.deserializeRaw(missingField)).toThrow()
+		expect(() => Location.deserializeRaw(missingField)).toThrow();
 	});
 
 	it("fails on wrong enum", () => {
-	  expect(() => Location.deserializeRaw(wrongEnum)).toThrow()
+		expect(() => Location.deserializeRaw(wrongEnum)).toThrow();
 	});
 });
 
@@ -17,8 +15,7 @@ describe("fail test", () => {
  *           DATA              * 
 \*******************************/
 
-
-const missingField= `
+const missingField = `
 {
   "id": "L5",
   "nickname": "nickname",
@@ -34,7 +31,7 @@ const missingField= `
 }
 `;
 
-const wrongEnum= `
+const wrongEnum = `
 {
   "id": "L5",
   "nickname": "nickname",
@@ -50,11 +47,3 @@ const wrongEnum= `
   "invariantY": 10.0
 }
 `;
-
-
-
-
-
-
-
-

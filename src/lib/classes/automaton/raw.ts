@@ -1,4 +1,4 @@
-// This lib contains all the RAW data types that represents the data layout 
+// This lib contains all the RAW data types that represents the data layout
 // of Ecdar
 
 import type { z } from "zod";

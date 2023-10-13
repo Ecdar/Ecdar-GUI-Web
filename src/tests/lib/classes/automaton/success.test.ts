@@ -580,4 +580,3 @@ const declarationData = `
   "declarations": "broadcast chan pub, grant, patent, coin, tea, cof;"
 }
 `;
-

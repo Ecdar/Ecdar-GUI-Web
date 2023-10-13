@@ -91,7 +91,7 @@ export class Location implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawLocation> {
 				raw.invariant,
 				new Point(raw.invariantX, raw.invariantY),
 			),
-			raw.type as LocationType,
+			raw.type,
 			raw.urgency as Urgency,
 			raw.color,
 		);
