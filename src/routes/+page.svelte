@@ -61,7 +61,50 @@
 	<!-- Left side Panel -->
 	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
 		<nav class="inner-nav1">Nav 1</nav>
-		<p>Left</p>
+		<div class="sidePanelContent">
+			<p>Left</p>
+			<p>Left but longer than the rest lol ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+			<p>Left</p>
+		</div>
 	</div>
 	<!-- Left resize Panel -->
 	<div
@@ -76,7 +119,19 @@
 	<!-- Canvas -->
 	<div class="canvas">
 		<nav class="inner-nav2">Nav 2</nav>
-		<p>Canvas</p>
+		<div class="canvasContent">
+			<p>Canvas</p>
+			<p>Canvas</p>
+			<p>
+				Canvas Canvas Canvas Canvas Canvas Canvas Canvas Canvas Canvas
+				Canvas
+			</p>
+			<p>Canvas</p>
+			<p>Canvas</p>
+			<p>Canvas</p>
+			<p>Canvas</p>
+			<p>Canvas</p>
+		</div>
 	</div>
 	<!-- Right resize Panel -->
 	<div
@@ -91,18 +146,52 @@
 	<!-- Right side Panel -->
 	<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
 		<nav class="inner-nav3">Nav 3</nav>
-		<p>Right</p>
+		<div class="sidePanelContent">
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right Right Right Right Right Right Right Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+			<p>Right</p>
+		</div>
 	</div>
 </main>
-<!-- Footer component -->
-<footer>
-	<Console />
-</footer>
+<!-- Console component -->
+<Console />
 
 <style>
 	nav {
 		height: 5em;
 		background-color: slategrey;
+		flex-shrink: 0;
 	}
 
 	#main-nav {
@@ -112,7 +201,8 @@
 
 	main {
 		display: flex;
-		height: 100%;
+		flex: 1;
+		overflow: hidden;
 	}
 
 	.inner-nav1,
@@ -129,6 +219,16 @@
 	.sidePanel {
 		background-color: whitesmoke;
 		flex-basis: 10em;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.sidePanelContent {
+		height: 100%;
+		width: 100%;
+		overflow: auto;
+		white-space: nowrap;
 	}
 
 	.resizer {
@@ -139,11 +239,12 @@
 
 	.canvas {
 		background-color: whitesmoke;
-		flex-grow: 1;
+		flex: 1;
+		width: 0;
 	}
 
-	footer {
-		background-color: slategrey;
+	.canvasContent {
 		overflow: hidden;
+		white-space: nowrap;
 	}
 </style>

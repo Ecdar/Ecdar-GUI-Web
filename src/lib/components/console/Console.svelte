@@ -6,11 +6,13 @@
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
 	let consoleContainer: HTMLElement;
+	let consoleBar: HTMLElement;
 
 	let frontEndErrors: string[] = [];
 	let backEndErrors: string[] = [];
 
-	let consoleExtendedSize: string = "100%";
+	const consoleInitialSize: string = "20em";
+	let consoleExtendedSize: string = consoleInitialSize;
 	let consoleCollapsedSize: string = "3.25em";
 	let consoleSize = consoleCollapsedSize;
 
@@ -21,9 +23,14 @@
 	 * Function for resizing the console
 	 * @param event
 	 */
-	function resizeConsolePanel(event: MouseEvent) {
+	function resizeConsolePanel(event: PointerEvent) {
 		event.preventDefault();
 		consoleSize = (window.innerHeight - event.y).toString() + "px";
+		if (window.innerHeight - event.y < consoleBar.clientHeight) {
+			consoleSize = consoleInitialSize;
+			stopResizingConsolePanel(event);
+			changeConsoleCollapsableTextAndHeight();
+		}
 	}
 
 	/**
@@ -68,7 +75,7 @@
 	 */
 	function changeConsoleCollapsableTextAndHeight() {
 		if (currentlyCollapsed) {
-			consoleCollapsableText = "↓";
+			consoleCollapsableText = "X";
 			consoleSize = consoleExtendedSize;
 			currentlyCollapsed = false;
 		} else {
@@ -110,6 +117,79 @@
 				break;
 		}
 	}
+
+	sendErrorToTab("test top", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab(
+		"test test test test test test test test test test test test test test test test test t test test test test test test test test test test test test test t test test test test test test test test test test test test test t test test test test test test test test test test test test test t test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test ",
+		Tabs.Frontend,
+	);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test", Tabs.Frontend);
+	sendErrorToTab("test hello :)", Tabs.Frontend);
+	sendErrorToTab("test hello :)", Tabs.Frontend);
+	sendErrorToTab("test hello :)", Tabs.Frontend);
 </script>
 
 <div
@@ -117,48 +197,50 @@
 	style="height: {consoleSize};"
 	bind:this={consoleContainer}
 >
-	<div
-		role="button"
-		id="consoleResizer"
-		class="resizer"
-		tabindex="-1"
-		on:pointerdown={(event) => {
-			startResizingConsolePanel(event);
-		}}
-		style="cursor: {currentlyCollapsed ? 'auto' : 'row-resize'};"
-	/>
-	<button
-		type="button"
-		class="collapsible unselectable"
-		on:click={changeConsoleCollapsableTextAndHeight}
-	>
-		{consoleCollapsableText}
-	</button>
+	<div bind:this={consoleBar}>
+		<div
+			role="button"
+			id="consoleResizer"
+			class="resizer"
+			tabindex="-1"
+			on:pointerdown={(event) => {
+				startResizingConsolePanel(event);
+			}}
+			style="cursor: {currentlyCollapsed ? 'auto' : 'row-resize'};"
+		/>
+		<button
+			type="button"
+			class="collapsible unselectable"
+			on:click={changeConsoleCollapsableTextAndHeight}
+		>
+			{consoleCollapsableText}
+		</button>
 
-	<button
-		type="button"
-		class="consoleTab frontEndButton unselectable"
-		style="background-color: {currentTab == Tabs.Frontend
-			? consoleButtonColorOn
-			: consoleButtonColorOff}"
-		on:click={() => {
-			changeTab(Tabs.Frontend);
-		}}
-	>
-		Frontend
-	</button>
-	<button
-		type="button"
-		class="consoleTab unselectable"
-		style="background-color: {currentTab == Tabs.Backend
-			? consoleButtonColorOn
-			: consoleButtonColorOff};"
-		on:click={() => {
-			changeTab(Tabs.Backend);
-		}}
-	>
-		Backend
-	</button>
+		<button
+			type="button"
+			class="consoleTab frontEndButton unselectable"
+			style="background-color: {currentTab == Tabs.Frontend
+				? consoleButtonColorOn
+				: consoleButtonColorOff}"
+			on:click={() => {
+				changeTab(Tabs.Frontend);
+			}}
+		>
+			Frontend
+		</button>
+		<button
+			type="button"
+			class="consoleTab unselectable"
+			style="background-color: {currentTab == Tabs.Backend
+				? consoleButtonColorOn
+				: consoleButtonColorOff};"
+			on:click={() => {
+				changeTab(Tabs.Backend);
+			}}
+		>
+			Backend
+		</button>
+	</div>
 	<div class="console">
 		{#if currentTab == Tabs.Frontend}
 			{#each frontEndErrors as error}
@@ -176,16 +258,14 @@
 	.console {
 		background-color: rgb(159, 174, 189);
 		width: 100%;
-		height: 70%;
+		height: 100%;
 		overflow-y: scroll;
-		overflow-wrap: break-word;
-		min-height: calc(100% - 3.8em);
-		margin-bottom: auto;
+		min-height: 2.5em;
 	}
 
 	#consoleResizer {
-		background-color: lightslategray;
-		height: 5px;
+		background-color: black;
+		height: 0.3em;
 	}
 
 	.console::-webkit-scrollbar {
@@ -223,9 +303,12 @@
 	}
 
 	.outerOverflow {
+		display: flex;
 		margin: 0%;
 		padding: 0%;
-		max-height: 50em;
+		flex-direction: column;
+		background-color: slategrey;
+		overflow: hidden;
 	}
 
 	.consoleTab {
