@@ -16,7 +16,7 @@
 		y1={parentPosition.y}
 		x2={position.x}
 		y2={position.y}
-		stroke="black"
+		stroke="gray"
 		stroke-width="2"
 	/>
 

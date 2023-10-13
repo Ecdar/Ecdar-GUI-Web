@@ -24,20 +24,65 @@
 			lines.push({ from: _points[i], to: _points[i + 1] });
 		}
 	}
+
+	// Function to calculate x2
+	function calculateX2(line: { from: Point; to: Point }): number {
+		return (
+			line.to.x -
+			20 *
+				Math.cos(
+					Math.atan2(
+						line.to.y - line.from.y,
+						line.to.x - line.from.x,
+					),
+				)
+		);
+	}
+
+	// Function to calculate y2
+	function calculateY2(line: { from: Point; to: Point }): number {
+		return (
+			line.to.y -
+			20 *
+				Math.sin(
+					Math.atan2(
+						line.to.y - line.from.y,
+						line.to.x - line.from.x,
+					),
+				)
+		);
+	}
 </script>
 
-<!--make lines update-->
-{#each lines as line}
+<!-- Lines -->
+{#each lines as line, index}
 	<line
 		x1={line.from.x}
 		y1={line.from.y}
-		x2={line.to.x}
-		y2={line.to.y}
+		x2={index === lines.length - 1 ? calculateX2(line) : line.to.x}
+		y2={index === lines.length - 1 ? calculateY2(line) : line.to.y}
 		stroke="black"
 		stroke-width="2"
+		marker-end={index === lines.length - 1 ? "url(#arrowhead)" : ""}
 	/>
 {/each}
 
+<!-- Arrowhead Marker -->
+<defs>
+	<marker
+		id="arrowhead"
+		viewBox="0 0 10 10"
+		refX="10"
+		refY="5"
+		markerWidth="6"
+		markerHeight="6"
+		orient="auto-start-reverse"
+	>
+		<path d="M 0 0 L 10 5 L 0 10 z" fill="black" />
+	</marker>
+</defs>
+
+<!-- Nails -->
 {#each nails as nail}
 	<Nail position={nail.position} text="nail" />
 {/each}
