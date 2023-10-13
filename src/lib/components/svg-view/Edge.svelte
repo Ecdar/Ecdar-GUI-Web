@@ -84,5 +84,5 @@
 
 <!-- Nails -->
 {#each nails as nail}
-	<Nail position={nail.position} text="nail" />
+	<Nail position={nail.position} text=":" />
 {/each}

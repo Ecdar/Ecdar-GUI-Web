@@ -15,7 +15,7 @@
 		fill="gray"
 		role="none"
 	/>
-	<text x={position.x} y={position.y} text-anchor="middle" role="none"
+	<text x={position.x} y={position.y + 5} text-anchor="middle" role="none"
 		>{text ?? "Nail"}</text
 	>
 </DraggableSVG>
