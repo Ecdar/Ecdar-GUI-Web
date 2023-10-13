@@ -7,7 +7,7 @@ import {
 	Queries,
 	Declaration,
 	Raw,
-} from "./automaton";
+} from "$lib/classes/automaton";
 
 describe("Location test", () => {
 	it("serializes into location", () => {
@@ -580,3 +580,4 @@ const declarationData = `
   "declarations": "broadcast chan pub, grant, patent, coin, tea, cof;"
 }
 `;
+
