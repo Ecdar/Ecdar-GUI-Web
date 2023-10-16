@@ -4,8 +4,6 @@
 	import ArrowUp from "./symbols/ArrowUp.svelte";
 	import ArrowDown from "./symbols/ArrowDown.svelte";
 
-	let consoleArrowUp = ArrowUp;
-	let consoleArrowDown = ArrowDown;
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
 	let consoleContainer: HTMLElement;
@@ -215,9 +213,9 @@
 			on:click={changeConsoleCollapsableTextAndHeight}
 		>
 			{#if currentlyCollapsed}
-				<ArrowUp/>
+				<ArrowUp />
 			{:else}
-				<ArrowDown/>
+				<ArrowDown />
 			{/if}
 		</button>
 
