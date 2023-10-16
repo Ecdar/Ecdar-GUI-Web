@@ -1,8 +1,10 @@
 <script lang="ts">
 	import ConsoleLine from "./ConsoleLine.svelte";
 	import { Tabs } from "$lib/classes/Tabs";
-	import ArrowUp from "./symbols/ArrowUp.svelte";
-	import ArrowDown from "./symbols/ArrowDown.svelte";
+	import {
+		Arrow_downward,
+		Arrow_upward,
+	} from "svelte-google-materialdesign-icons";
 
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
@@ -213,9 +215,9 @@
 			on:click={changeConsoleCollapsableTextAndHeight}
 		>
 			{#if currentlyCollapsed}
-				<ArrowUp />
+				<Arrow_upward size="18" />
 			{:else}
-				<ArrowDown />
+				<Arrow_downward size="18" />
 			{/if}
 		</button>
 
@@ -293,10 +295,10 @@
 		float: right;
 		position: relative;
 		box-shadow: 0 3px 11px rgba(28, 28, 28, 0.55);
-		padding-left: 1em;
-		padding-right: 1em;
-		padding-bottom: 0.75em;
-		padding-top: 0.75em;
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+		padding-bottom: 0.4em;
+		padding-top: 0.4em;
 		margin-top: 0.3em;
 		margin-right: 0.5em;
 	}
