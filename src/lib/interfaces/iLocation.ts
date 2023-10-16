@@ -1,4 +1,4 @@
-import type { Point } from "../classes/draw/Point";
+import type { iPoint} from "./iPoint";
 import type { iNickname } from "./iNickname";
 import type { Invariant } from "../classes/automaton/Invariant";
 import type { LocationType } from "../classes/automaton/LocationType";
@@ -13,7 +13,7 @@ export interface iLocation {
 	/**
 	 * The position of the Location
 	 * */
-	position: Point;
+	position: iPoint;
 
 	/**
 	 * The Nickname of the Location

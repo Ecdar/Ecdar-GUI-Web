@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { PropertyType, Status } from "$lib/classes/automaton";
-	import type { Point } from "$lib/classes/draw/Point";
+	import type { iPoint } from "$lib/interfaces/iPoint";
 	import type { iNail } from "$lib/interfaces/iNail";
 	import Nail from "./Nail.svelte";
 
-	export let sourcePoint: Point;
-	export let targetPoint: Point;
+	export let sourcePoint: iPoint;
+	export let targetPoint: iPoint;
 	export let edgeType: Status;
 	export let nails: iNail[];
-	let points: Point[] = [];
+	let points: iPoint[] = [];
 
 	function nailSymbol(nail: iNail): string {
 		switch (nail.property.type) {
@@ -34,9 +34,9 @@
 	];
 
 	// logic that calculates the lines from the source to the target
-	let lines: { from: Point; to: Point }[] = [];
+	let lines: { from: iPoint; to: iPoint }[] = [];
 	$: updateLines(points);
-	function updateLines(_points: Point[]) {
+	function updateLines(_points: iPoint[]) {
 		lines = [];
 		for (let i = 0; i < _points.length - 1; i++) {
 			lines.push({ from: _points[i], to: _points[i + 1] });
@@ -44,7 +44,7 @@
 	}
 
 	// Function to calculate x2
-	function calculateX2(line: { from: Point; to: Point }): number {
+	function calculateX2(line: { from: iPoint; to: iPoint }): number {
 		return (
 			line.to.x -
 			20 *
@@ -58,7 +58,7 @@
 	}
 
 	// Function to calculate y2
-	function calculateY2(line: { from: Point; to: Point }): number {
+	function calculateY2(line: { from: iPoint; to: iPoint }): number {
 		return (
 			line.to.y -
 			20 *

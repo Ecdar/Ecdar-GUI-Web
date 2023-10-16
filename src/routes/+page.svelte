@@ -82,8 +82,6 @@
 		<div id="svgContainer">
 			<SvgView />
 		</div>
-		<DropDownMenu />
-		<LocationsWithContextMenu />
 	</div>
 	<!-- Right resize Panel -->
 	<div

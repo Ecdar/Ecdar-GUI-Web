@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Point } from "$lib/classes/draw";
+	import type { iPoint } from "$lib/interfaces/iPoint";
 	import { activeModel } from "$lib/globalState/activeModel";
 
-	export let position: Point;
+	export let position: iPoint;
 
 	//Sets up eventlisteners when the mouse is pressed down on the svg
 	function onMouseDown() {

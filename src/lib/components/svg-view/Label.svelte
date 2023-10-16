@@ -1,9 +1,9 @@
 <script lang="ts">
 	import DraggableSvg from "./DraggableSVG.svelte";
-	import type { Point } from "$lib/classes/draw";
+	import type { iPoint } from "$lib/interfaces/iPoint";
 
-	export let parentPosition: Point;
-	export let position: Point;
+	export let parentPosition: iPoint;
+	export let position: iPoint;
 	export let text: string;
 </script>
 

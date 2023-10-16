@@ -1,4 +1,4 @@
-import type { Point } from "$lib/classes/draw";
+import type { iPoint } from "./iPoint";
 
 export interface iNickname {
 	/**
@@ -9,5 +9,5 @@ export interface iNickname {
 	/**
 	 * The position of the Nickname
 	 * */
-	position: Point;
+	position: iPoint;
 }
