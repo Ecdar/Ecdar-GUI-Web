@@ -27,8 +27,8 @@
 	 */
 	export let id: string | undefined = undefined;
 
-	let overlayMenuPopover: HTMLElement;
-	let overlayMenu: HTMLElement;
+	let overlayMenuPopover: HTMLElement | undefined;
+	let overlayMenu: HTMLElement | undefined;
 
 	/**
 	 * The absolute position of the context menu.
@@ -39,9 +39,12 @@
 	/**
 	 * Used to unregister the event listeners that close the context menu. They should only be active when it is open.
 	 */
-	let closeListenersController: AbortController;
+	let closeListenersController: AbortController | undefined;
 
-	$: updatePosition(anchor); // Update the position when the anchor changes
+	$: updatePosition(anchor).then(
+		() => {},
+		() => {},
+	); // Update the position when the anchor changes
 	afterUpdate(() => updatePosition(anchor)); // Update the position when the contents of the menu changes
 
 	/**
@@ -63,7 +66,7 @@
 	/**
 	 * Opens the context menu (Right-click menu)
 	 */
-	async function openContextMenu() {
+	function openContextMenu() {
 		if (!overlayMenuPopover) return;
 
 		// Show the menu
