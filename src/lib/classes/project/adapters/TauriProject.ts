@@ -180,7 +180,7 @@ export class TauriProject extends Project {
 			const dirExist = await fs.exists(saveDir);
 			if (dirExist) {
 				const dialogAnswer = await dialog.confirm(
-					`There already exists a directory named ${this.name} in that directory, would you like to over write`,
+					`There already exists a directory named ${this.name} in that directory, would you like to overwrite`,
 				);
 				if (!dialogAnswer) {
 					throw new Error(ProjectError.SaveCanceled);
