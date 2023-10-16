@@ -1,8 +1,11 @@
 <script lang="ts">
 	import ConsoleLine from "./ConsoleLine.svelte";
 	import { Tabs } from "$lib/classes/Tabs";
+	import ArrowUp from "./symbols/ArrowUp.svelte";
+	import ArrowDown from "./symbols/ArrowDown.svelte";
 
-	let consoleCollapsableText: string = "↑";
+	let consoleArrowUp = ArrowUp;
+	let consoleArrowDown = ArrowDown;
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
 	let consoleContainer: HTMLElement;
@@ -75,11 +78,9 @@
 	 */
 	function changeConsoleCollapsableTextAndHeight() {
 		if (currentlyCollapsed) {
-			consoleCollapsableText = "X";
 			consoleSize = consoleExtendedSize;
 			currentlyCollapsed = false;
 		} else {
-			consoleCollapsableText = "↑";
 			consoleSize = consoleCollapsedSize;
 			currentlyCollapsed = true;
 		}
@@ -213,7 +214,11 @@
 			class="collapsible unselectable"
 			on:click={changeConsoleCollapsableTextAndHeight}
 		>
-			{consoleCollapsableText}
+			{#if currentlyCollapsed}
+				<ArrowUp/>
+			{:else}
+				<ArrowDown/>
+			{/if}
 		</button>
 
 		<button
