@@ -144,7 +144,6 @@ export class System
 			raw.operators.map((o) => {
 				return new Operator(
 					o.id,
-					/// BECAUSE OF COMPATIBILITY
 					o.type,
 					new Point(o.x, o.y),
 				);
