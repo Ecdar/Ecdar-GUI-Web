@@ -142,11 +142,7 @@ export class System
 				);
 			}),
 			raw.operators.map((o) => {
-				return new Operator(
-					o.id,
-					o.type,
-					new Point(o.x, o.y),
-				);
+				return new Operator(o.id, o.type, new Point(o.x, o.y));
 			}),
 			raw.edges.map((e) => {
 				return new SystemEdge(e.parent, e.child);
