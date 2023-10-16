@@ -82,6 +82,7 @@
 		stroke="black"
 		stroke-width="2"
 		marker-end={index === lines.length - 1 ? "url(#arrowhead)" : ""}
+		stroke-dasharray={edgeType === Status.INPUT ? "10,10" : ""}
 	/>
 {/each}
 
