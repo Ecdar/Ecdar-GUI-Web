@@ -1,6 +1,6 @@
 /**
  * The operator types supported by Ecdar
- * The values are lover case because of compatibility
+ * The values are lower case because of compatibility
  * */
 export enum OperatorType {
 	COMPOSITION = "composition",
