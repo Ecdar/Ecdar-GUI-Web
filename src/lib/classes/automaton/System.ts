@@ -105,7 +105,6 @@ export class System
 				return {
 					x: o.position.x,
 					y: o.position.y,
-					// BECAUSE OF COMPATIBILITY
 					type: o.type,
 					id: o.id,
 				};
