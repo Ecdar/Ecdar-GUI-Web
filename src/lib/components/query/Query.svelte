@@ -55,7 +55,7 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		padding: 1rem;
+		padding: 1em;
 		border-bottom: 1px solid black;
 	}
 
@@ -77,6 +77,6 @@
 
 	input[type="text"] {
 		width: 100%;
-		min-width: 5rem;
+		min-width: 5em;
 	}
 </style>
