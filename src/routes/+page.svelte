@@ -1,6 +1,8 @@
 <script lang="ts">
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
+	import Queries from "$lib/components/query/Queries.svelte";
+	import QueryNav from "$lib/components/query/QueryNav.svelte";
 
 	enum SidePanel {
 		Left,
@@ -93,8 +95,10 @@
 	/>
 	<!-- Right side Panel -->
 	<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
-		<nav class="inner-nav3">Nav 3</nav>
-		<p>Right</p>
+		<nav class="inner-nav3">
+			<QueryNav />
+		</nav>
+		<Queries />
 	</div>
 </main>
 <!-- Footer component -->
