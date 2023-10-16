@@ -39,7 +39,7 @@ export class Project implements HasFeatures, Automata.Named {
 	globalDeclarations: Automata.Declaration;
 
 	/**
-	 * List of optional features this project
+	 * List of optional features in the project
 	 * */
 	readonly features: Features = {};
 
