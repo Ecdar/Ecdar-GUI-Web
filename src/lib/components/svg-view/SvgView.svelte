@@ -14,6 +14,7 @@
 			bind:targetPoint={$activeModel.locations[edge.targetLocation]
 				.position}
 			nails={edge.nails}
+			edgeType={edge.status}
 		/>
 	{/each}
 

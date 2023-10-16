@@ -1,12 +1,30 @@
 <script lang="ts">
+	import { PropertyType, Status } from "$lib/classes/automaton";
 	import type { Point } from "$lib/classes/draw/Point";
 	import type { iNail } from "$lib/interfaces/iNail";
 	import Nail from "./Nail.svelte";
 
 	export let sourcePoint: Point;
 	export let targetPoint: Point;
+	export let edgeType: Status;
 	export let nails: iNail[];
 	let points: Point[] = [];
+
+	function nailSymbol(nail: iNail): string {
+		switch (nail.property.type) {
+			case PropertyType.GUARD:
+				return "<";
+			case PropertyType.SYNCHRONIZATION:
+				return edgeType === Status.INPUT ? "?" : "!";
+			case PropertyType.UPDATE:
+				return "=";
+			case PropertyType.SELECTION:
+				return ":";
+			case PropertyType.NONE:
+			default:
+				return "";
+		}
+	}
 
 	//Add the source and target points to the array
 	$: points = [
@@ -84,5 +102,5 @@
 
 <!-- Nails -->
 {#each nails as nail}
-	<Nail position={nail.position} text=":" />
+	<Nail position={nail.position} text={nailSymbol(nail)} />
 {/each}

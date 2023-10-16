@@ -65,7 +65,7 @@ activeModel.set(
 				id: "4",
 				invariant: new Invariant("c >= 10", { x: 700, y: 300 }), // Example invariant
 				nickname: {
-					name: "nickname4", 
+					name: "nickname4laefpefleapflp", 
 					position: { x: 700, y: 320 }
 				}, // Example nickname
 				position: { x: 700, y: 300 }, // Example position
@@ -107,7 +107,7 @@ activeModel.set(
 				nails: [
 					{
 						position: { x: 350, y: 300 },
-						property: new Property(PropertyType.GUARD, {
+						property: new Property(PropertyType.SYNCHRONIZATION, {
 							x: 350,
 							y: 300,
 						}),

@@ -11,6 +11,7 @@
 	export let nickname: iNickname;
 </script>
 
+<!--Location consists of both a Node with a label-->
 <Label
 	bind:position={nickname.position}
 	bind:parentPosition={position}
