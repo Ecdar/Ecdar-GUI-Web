@@ -2,8 +2,7 @@ import { z } from "zod";
 import { Backend } from "../Backend";
 
 /**
- * The used for Zod
- * type inference
+ * Used to parse a RawQuery through Zod
  * */
 export const ZodRawQuery = z.object({
 	query: z.string(),

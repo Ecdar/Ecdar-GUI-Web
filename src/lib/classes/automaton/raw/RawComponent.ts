@@ -2,6 +2,9 @@ import { ZodRawLocation } from "./RawLocation";
 import { ZodRawEdge } from "./RawEdge";
 import { z } from "zod";
 
+/**
+ * Used to parse a RawComponent through Zod
+ * */
 export const ZodRawComponent = z.object({
 	name: z.string(),
 	declarations: z.string(),

@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+/**
+ * Used to parse a RawComponentInstance through Zod
+ * */
 export const ZodRawComponentInstance = z.object({
 	id: z.number(),
 	componentName: z.string(),

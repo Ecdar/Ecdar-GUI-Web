@@ -2,8 +2,7 @@ import { z } from "zod";
 import { PropertyType } from "../PropertyType";
 
 /**
- * The used for Zod
- * type inference
+ * Used to parse a RawNail through Zod
  * */
 export const ZodRawNail = z.object({
 	x: z.number(),

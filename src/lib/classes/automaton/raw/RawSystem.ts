@@ -4,8 +4,7 @@ import { ZodRawOperator } from "./RawOperator";
 import { ZodRawSystemEdge } from "./RawSystemEdge";
 
 /**
- * The used for Zod
- * type inference
+ * Used to parse a RawSystem through Zod
  * */
 export const ZodRawSystem = z.object({
 	name: z.string(),

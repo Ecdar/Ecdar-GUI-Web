@@ -2,8 +2,7 @@ import { z } from "zod";
 import { DeclarationType } from "../DeclarationType";
 
 /**
- * The used for Zod
- * type inference
+ * Used to parse a RawDecalaration through Zod
  * */
 export const ZodRawDeclaration = z.object({
 	name: z.nativeEnum(DeclarationType),

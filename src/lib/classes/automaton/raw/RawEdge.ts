@@ -3,8 +3,7 @@ import { ZodRawNail } from "./RawNail";
 import { Status } from "../Status";
 
 /**
- * The used for Zod
- * type inference
+ * Used to parse a RawEdge through Zod
  * */
 export const ZodRawEdge = z.object({
 	id: z.string(),

@@ -3,8 +3,7 @@ import { Urgency } from "../Urgency";
 import { LocationType } from "../LocationType";
 
 /**
- * The used for Zod
- * type inference
+ * Used to parse a RawLoaction through Zod
  * */
 export const ZodRawLocation = z.object({
 	id: z.string(),
