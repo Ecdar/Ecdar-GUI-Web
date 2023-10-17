@@ -1,33 +1,86 @@
 <script lang="ts">
 
-//Top-bar menu items
-let fileMenuOpen = false;
-	const fileMenuItems = ["New project", "Open Project", "Recent Projects", "Save Project", "Save Project as", "New Test Plan", "Export as Png", "Export without border as Png"];
-	let editMenuOpen = false;
-	const editMenuItems = ["Move All Nodes Left", "Move All Nodes Up", "Move All Nodes Right", "Move All Nodes Right", "Move All Nodes Down"];
-	let viewMenuOpen = false;
-	const viewMenuItems = ["Project Panel", "Query Panel", "Autoscalling", "Scalling", "Split canvas"];
-	let optionsMenuOpen = false;
-	const optionsMenuItems = ["UI Cache", "Periodic query execution", "Engine Options"];
-	let helpMenuOpen = false;
-	const helpMenuItems = ["Modelling Help", "Testing Help", "About"];
-	export let topbar = [["File",fileMenuOpen,fileMenuItems], ["Edit",editMenuOpen, editMenuItems], ["View", viewMenuOpen,viewMenuItems],["Options",optionsMenuOpen, optionsMenuItems], ["Help",helpMenuOpen,helpMenuItems]];
+import {NewProject, OpenProject, RecentProjects, SaveProject, SaveProjectAs, NewTestPlan, ExportAsPng, ExportWithoutBorderAsPng} from "../topBar/FileTab"
+import {MoveAllNodesRight, MoveAllNodesLeft, MoveAllNodesDown, MoveAllNodesUp} from "../topBar/EditTab"
+import {ProjectPanel,QueryPanel,Autoscalling,Scalling,SplitCanvas} from "../topBar/ViewTab"
+import {UICache,PeriodicQueryExecution,EngineOptions} from "../topBar/OptionsTab"
+import {ModellingHelp, TestingHelp, About} from "../topBar/HelpTab"
+import {clickOutside} from './clickOutside.js';
+
+let currentOpen;
+
+const fileMenu = {
+    items: ["New Project", "Open Project", "Recent Projects", "Save Project", "Save Project As", "New Test Plan", "Export As Png", "Export Without Border As Png"],
+    name: "File",
+    open: false
+};
+
+
+const editMenu = {
+    items: ["Move All Nodes Right", "Move All Nodes Left", "Move All Nodes Up","Move All Nodes Down"],
+    name: "Edit",
+    open: false
+};
+
+const viewMenu = {
+    items: ["Project Panel", "Query Panel", "Autoscalling", "Scalling", "Split Canvas"],
+    name: "View",
+    open: false,
+};
+
+const optionsMenu = {
+    items: ["UI Cache", "Periodic Query Execution", "Engine Options"],
+    name: "Options",
+    open: false
+};
+
+const helpMenu = {
+    items: ["Modelling Help", "Testing Help", "About"],
+    name: "Help",
+    open: false
+};
+
+function handleClickOutside(event) {
+   topbarItem.forEach(item => {
+        item.open = false;
+   });
+   console.log(topbarItem);
+		
+}
+
+
+let topbarItem = [fileMenu, editMenu, viewMenu, optionsMenu, helpMenu];
 
 
 </script>
 
-<div>
-    {#each topbar as bar}
+<div use:clickOutside on:click_outside={handleClickOutside}>
+{#each topbarItem as item}
 		<section class="dropdown">
-			<button class = "dropdown-btn" on:click={() => bar[1] = !bar[1]} >{bar[0]}</button>
-			<div class:show={bar[1]} class="dropdown-content">		
-				{#each bar[2] as item}
-					<div class="dropdown-item">{item}</div>
-				{/each}
+			<button class = "dropdown-btn" on:click={() => {
+                item.open = !item.open;
+            }} >{item.name}</button>
+
+			<div class:show={item.open} class="dropdown-content">		
+				{#each item.items as menuItem}
+                    <button class="dropdown-item" on:click={()=> {
+                        let functionName = menuItem.replace(/\s/g, "");
+                        functionName = functionName+"()";
+                        eval(functionName);
+                    }}>
+                        {menuItem}
+                    </button>
+
+                {/each}
 			</div>	
 		</section>
-	{/each}
+    {/each}
 </div>
+
+
+
+
+
 
 
 <style>
