@@ -1,10 +1,11 @@
 <script lang="ts">
+	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
+	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 
- 
 	enum SidePanel {
 		Left,
 		Right,
-		Neither
+		Neither,
 	}
 
 	let currentResizablePanel: SidePanel = SidePanel.Neither;
@@ -34,9 +35,9 @@
 		event.preventDefault();
 		currentResizablePanel = side;
 		mainContainer.setPointerCapture(event.pointerId);
-		mainContainer.addEventListener('pointermove', resizeSidePanel);
-		mainContainer.addEventListener('pointerup', stopResizingSidePanel);
-		mainContainer.addEventListener('pointercancel', stopResizingSidePanel);
+		mainContainer.addEventListener("pointermove", resizeSidePanel);
+		mainContainer.addEventListener("pointerup", stopResizingSidePanel);
+		mainContainer.addEventListener("pointercancel", stopResizingSidePanel);
 	}
 
 	/**
@@ -46,9 +47,12 @@
 	function stopResizingSidePanel(event: PointerEvent) {
 		currentResizablePanel = SidePanel.Neither;
 		mainContainer.releasePointerCapture(event.pointerId);
-		mainContainer.removeEventListener('pointermove', resizeSidePanel);
-		mainContainer.removeEventListener('pointerup', stopResizingSidePanel);
-		mainContainer.removeEventListener('pointercancel', stopResizingSidePanel);
+		mainContainer.removeEventListener("pointermove", resizeSidePanel);
+		mainContainer.removeEventListener("pointerup", stopResizingSidePanel);
+		mainContainer.removeEventListener(
+			"pointercancel",
+			stopResizingSidePanel,
+		);
 	}
 
 	//Top-bar menu items
@@ -102,6 +106,8 @@
 	<div class="canvas">
 		<nav class="inner-nav2">Nav 2</nav>
 		<p>Canvas</p>
+		<DropDownMenu />
+		<LocationsWithContextMenu />
 	</div>
 	<!-- Right resize Panel -->
 	<div
