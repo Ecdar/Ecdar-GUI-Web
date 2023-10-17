@@ -14,5 +14,5 @@ export function clickOutside(node) {
       destroy() {
         document.removeEventListener('click', handleClick, true);
       }
-      }
-  }
+    }
+}

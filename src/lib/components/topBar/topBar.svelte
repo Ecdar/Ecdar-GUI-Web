@@ -40,7 +40,7 @@ const helpMenu = {
     open: false
 };
 
-function handleClickOutside(event) {
+function handleClickOutside() {
    topbarItem.forEach(item => {
         item.open = false;
    });
