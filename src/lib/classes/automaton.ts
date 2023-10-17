@@ -1,16 +1,12 @@
+// AUTOMATION TYPES
+// Each of the Major Classes are what is the output of loading the ECDAR json files
+// Each of the Minor Classes and Enums  are helper classes to the Major Classes
+//
+// If a type is Raw, then that is the format of the ECDAR json files
+//
+
 // Raw Types
-export type {
-	RawLocation,
-	RawEdge,
-	RawComponent,
-	RawSystem,
-	RawQuery,
-	RawDeclaration,
-	FromRaw,
-	ToRaw,
-	SerializeRaw,
-	DeserializeRaw,
-} from "./automaton/raw";
+export * as Raw from "./automaton/raw";
 
 // Enums
 export { Backend } from "./automaton/Backend";
@@ -28,11 +24,15 @@ export { Operator } from "./automaton/Operator";
 export { Property } from "./automaton/Property";
 export { SystemEdge } from "./automaton/SystemEdge";
 export { ComponentInstance } from "./automaton/ComponentInstance";
+export { Nail } from "./automaton/Nail";
 
 // Major Classes
 export { Declaration } from "./automaton/Declaration";
 export { Component } from "./automaton/Component";
 export { Edge } from "./automaton/Edge";
 export { Location } from "./automaton/Location";
-export { Query, Queries } from "./automaton/query";
+export { Query, Queries } from "./automaton/Query";
 export { System } from "./automaton/System";
+
+// Interfaces
+export type { Named } from "./automaton/Named";

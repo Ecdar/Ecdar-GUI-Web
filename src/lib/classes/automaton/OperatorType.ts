@@ -1,10 +1,11 @@
 /**
  * The operator types supported by Ecdar
+ * The values are lower case because of compatibility
  * */
 export enum OperatorType {
-	COMPOSITION = "COMPOSITION",
-	CONJUNCTION = "CONJUNCTION",
-	REFINEMENT = "REFINEMENT",
-	QUOTIENT = "QUOTIENT",
-	SIMPLE = "SIMPLE",
+	COMPOSITION = "composition",
+	CONJUNCTION = "conjunction",
+	REFINEMENT = "refinement",
+	QUOTIENT = "quotient",
+	SIMPLE = "simple",
 }
