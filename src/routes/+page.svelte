@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Console from "../lib/components/console/Console.svelte";
-
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 
@@ -66,47 +65,6 @@
 		<nav class="inner-nav1">Nav 1</nav>
 		<div class="sidePanelContent">
 			<p>Left</p>
-			<p>Left but longer than the rest lol ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
-			<p>Left</p>
 		</div>
 	</div>
 	<!-- Left resize Panel -->
@@ -140,39 +98,6 @@
 	<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
 		<nav class="inner-nav3">Nav 3</nav>
 		<div class="sidePanelContent">
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right Right Right Right Right Right Right Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
-			<p>Right</p>
 			<p>Right</p>
 		</div>
 	</div>
@@ -234,10 +159,5 @@
 		background-color: whitesmoke;
 		flex: 1;
 		width: 0;
-	}
-
-	.canvasContent {
-		overflow: hidden;
-		white-space: nowrap;
 	}
 </style>
