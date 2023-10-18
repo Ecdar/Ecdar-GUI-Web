@@ -1,7 +1,8 @@
 <script lang="ts">
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
-	import TopBar from "$lib/components/topBar/topBar.svelte";
+	
+	import TopBar from "$lib/components/topBar/TopBar.svelte";
 
 	enum SidePanel {
 		Left,
@@ -61,8 +62,7 @@
 
 <!-- Top navigation Panel -->
 <nav id="main-nav">
-	<TopBar></TopBar>
-
+	<TopBar/>
 </nav>
 
 <main bind:this={mainContainer}>
