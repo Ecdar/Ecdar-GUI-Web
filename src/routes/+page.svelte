@@ -122,6 +122,7 @@
 	#main-nav {
 		height: 2.5em;
 		min-height: 2.5em;
+		border-bottom: 0.3em solid black;
 	}
 
 	

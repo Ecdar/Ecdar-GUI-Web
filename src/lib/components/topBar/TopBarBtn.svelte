@@ -18,7 +18,7 @@ let visible:boolean = false;
     <button >
         {name}
     </button>
-    <div style="position: absolute; height: 0px">
+    <div class = "container">
         {#if visible}
         <TopBarDropDown>
             <slot/>
@@ -31,6 +31,12 @@ let visible:boolean = false;
 
 <style>
 
+    .container{
+        position: absolute; 
+        height: 0px;  
+        z-index: 100;
+    }
+
     div{
         height:100%;
     }
@@ -38,7 +44,8 @@ let visible:boolean = false;
     button{
         height: 100%;
         background-color: slategrey;
-        border-color: black;
+        border-color: transparent;
+        border-right: 2px solid black;
         color:rgb(0, 0, 0);
     }
 
