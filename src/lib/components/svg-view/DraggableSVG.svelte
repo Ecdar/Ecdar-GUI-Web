@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { iPoint } from "$lib/interfaces/iPoint";
 	import { activeModel } from "$lib/globalState/activeModel";
+	import { scale } from "$lib/globalState/scaleStore";
 
 	export let position: iPoint;
 
@@ -11,9 +12,9 @@
 	}
 
 	//Updates the position of the svg
-	function onMouseMove(e: MouseEvent) {
-		position.x += e.movementX;
-		position.y += e.movementY;
+	function onMouseMove(event: MouseEvent) {
+		position.x += event.movementX / $scale;
+		position.y += event.movementY / $scale;
 
 		// Update the active model
 		activeModel.set($activeModel);
@@ -27,6 +28,6 @@
 </script>
 
 <!-- The svg element that is draggable -->
-<svg on:mousedown={onMouseDown} role="none" class="draggable">
+<g on:mousedown={onMouseDown} role="none" class="draggable panzoom-exclude">
 	<slot />
-</svg>
+</g>
