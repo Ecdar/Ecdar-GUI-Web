@@ -149,7 +149,8 @@
 	.sidePanelContent {
 		height: 100%;
 		width: 100%;
-		overflow: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
 		white-space: nowrap;
 	}
 

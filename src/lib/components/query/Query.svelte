@@ -1,6 +1,9 @@
 <script lang="ts">
 	import {
 		Question_mark,
+		Done,
+		Warning,
+		Error,
 		Arrow_right,
 		More_vert,
 	} from "svelte-google-materialdesign-icons";
@@ -9,6 +12,7 @@
 	export let name: string;
 	export let comment: string = "Comment";
 	export let server: string;
+	export let color: string = "lightgrey";
 
 	const typeOptions = ["Spec", "Imp", "Con"];
 	const serverOptions = ["Reveaal"];
@@ -16,16 +20,21 @@
 
 <div class="query">
 	<div class="column">
-		<Question_mark />
-		<select>
-			{#each typeOptions as typeOption}
-				{#if typeOption === type}
-					<option selected>{typeOption}</option>
-				{:else}
-					<option>{typeOption}</option>
-				{/if}
-			{/each}
-		</select>
+		<div class="left-column" style="background-color: {color}">
+			{#if color == "lime"}
+				<Done />
+			{:else if color == "yellow"}
+				<Warning />
+			{:else if color === "red"}
+				<Error />
+			{:else}
+				<Question_mark />
+			{/if}
+			<select>
+					{/if}
+				{/each}
+			</select>
+		</div>
 	</div>
 	<div class="column grow">
 		<input type="text" value={name} />
@@ -55,7 +64,6 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		padding: 1em;
 		border-bottom: 1px solid black;
 	}
 
@@ -63,6 +71,13 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		padding-right: 1em;
+	}
+	.left-column {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 1em;
 	}
 
 	.grow {

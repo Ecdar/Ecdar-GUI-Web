@@ -6,6 +6,7 @@
 			name: "Admin1",
 			type: "Spec",
 			server: "Reveaal",
+			color: "limegreen",
 		},
 		{
 			name: "Admin2",
@@ -18,6 +19,42 @@
 			type: "Con",
 			comment: "",
 			server: "Reveaal",
+		},
+		{
+			name: "Admin1",
+			type: "Spec",
+			server: "Reveaal",
+			color: "red",
+		},
+		{
+			name: "Admin1",
+			type: "Spec",
+			server: "Reveaal",
+			color: "limegreen",
+		},
+		{
+			name: "Admin1",
+			type: "Spec",
+			server: "Reveaal",
+			color: "yellow",
+		},
+		{
+			name: "Admin1",
+			type: "Spec",
+			server: "Reveaal",
+			color: "blue",
+		},
+		{
+			name: "Admin1",
+			type: "Spec",
+			server: "Reveaal",
+			color: "green",
+		},
+		{
+			name: "Admin1",
+			type: "Spec",
+			server: "Reveaal",
+			color: "green",
 		},
 	];
 </script>
