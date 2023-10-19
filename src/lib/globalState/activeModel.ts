@@ -2,10 +2,7 @@ import { writable, type Writable } from "svelte/store";
 import type { iLocation } from "$lib/interfaces/iLocation";
 import type { iEdge } from "$lib/interfaces/iEdge";
 import {
-	Invariant,
 	LocationType,
-	Nickname,
-	Property,
 	PropertyType,
 	Status,
 	Urgency,
@@ -36,8 +33,8 @@ activeModel.set(
 			"1": {
 				color: "#ff0000",
 				id: "1",
-				invariant: new Invariant("c >= 8", { x: 100, y: 300 }),
-				nickname: new Nickname("nickname", { x: 100, y: 300 }),
+				invariant: { fn: "c >= 8", position: { x: 100, y: 300 } },
+				nickname: { name: "nickname", position: { x: 100, y: 300 } },
 				position: { x: 100, y: 300 },
 				type: LocationType.INITIAL,
 				urgency: Urgency.NORMAL,
@@ -45,8 +42,8 @@ activeModel.set(
 			"2": {
 				color: "#ff0000",
 				id: "2",
-				invariant: new Invariant("c >= 8", { x: 300, y: 300 }),
-				nickname: new Nickname("nickname", { x: 300, y: 300 }),
+				invariant: { fn: "c >= 8", position: { x: 300, y: 300 } },
+				nickname: { name: "nickname", position: { x: 300, y: 300 } },
 				position: { x: 300, y: 300 },
 				type: LocationType.INITIAL,
 				urgency: Urgency.NORMAL,
@@ -54,8 +51,8 @@ activeModel.set(
 			"3": {
 				color: "#00ff00", // Example color for location 3
 				id: "3",
-				invariant: new Invariant("c < 8", { x: 500, y: 500 }), // Example invariant
-				nickname: new Nickname("nickname3", { x: 500, y: 500 }), // Example nickname
+				invariant: { fn: "c >= 8", position: { x: 500, y: 500 } },
+				nickname: { name: "Location numba drei", position: { x: 500, y: 500 } }, // Example nickname
 				position: { x: 500, y: 500 }, // Example position
 				type: LocationType.NORMAL, // Example location type
 				urgency: Urgency.NORMAL, // Example urgency
@@ -63,10 +60,10 @@ activeModel.set(
 			"4": {
 				color: "#0000ff", // Example color for location 4
 				id: "4",
-				invariant: new Invariant("c >= 10", { x: 700, y: 300 }), // Example invariant
+				invariant: { fn: "c >= 8", position: { x: 700, y: 320 } },
 				nickname: {
-					name: "nickname4laefpefleapflp", 
-					position: { x: 700, y: 320 }
+					name: "nickname4laefpefleapflp",
+					position: { x: 700, y: 320 },
 				}, // Example nickname
 				position: { x: 700, y: 300 }, // Example position
 				type: LocationType.INITIAL, // Example location type
@@ -107,10 +104,10 @@ activeModel.set(
 				nails: [
 					{
 						position: { x: 350, y: 300 },
-						property: new Property(PropertyType.SYNCHRONIZATION, {
+						property: {type: PropertyType.SYNCHRONIZATION, position: {
 							x: 350,
 							y: 300,
-						}),
+						}},
 					},
 				],
 			},

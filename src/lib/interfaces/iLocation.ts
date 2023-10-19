@@ -1,6 +1,6 @@
 import type { iPoint} from "./iPoint";
 import type { iNickname } from "./iNickname";
-import type { Invariant } from "../classes/automaton/Invariant";
+import type { iInvariant } from "./iInvariant";
 import type { LocationType } from "../classes/automaton/LocationType";
 import type { Urgency } from "../classes/automaton/Urgency";
 
@@ -23,7 +23,7 @@ export interface iLocation {
 	/**
 	 * The Invariant of the Location
 	 * */
-	invariant: Invariant;
+	invariant: iInvariant;
 
 	/**
 	 * The Type of the Location
