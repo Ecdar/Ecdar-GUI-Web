@@ -1,5 +1,5 @@
 
-
+<!--Fill dropdown menu items, into slots-->
 <div class="dropdown-content">
     <slot></slot>
 </div>

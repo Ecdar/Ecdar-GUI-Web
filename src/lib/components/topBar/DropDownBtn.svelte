@@ -4,6 +4,7 @@ export let name:string = "Default"
 
 </script>
 
+<!--Make each dropdown item, into button-->
 <button class = "dropdown-item" on:click>
     {name}
 </button>

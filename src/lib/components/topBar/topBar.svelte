@@ -2,7 +2,7 @@
 
     import TopBarBtn from "$lib/components/topBar/TopBarBtn.svelte";
     import DropDownBtn from "$lib/components/topBar/DropDownBtn.svelte";
-
+    import {load,create} from "$lib/classes/project";
 
 </script>
 
@@ -10,7 +10,7 @@
 <div>   
     <TopBarBtn name = "File">
         <DropDownBtn name="New Project" on:click={() => {console.log("New Project")}}/>
-        <DropDownBtn name="Open Project" on:click={() => {console.log("Open Project")}}/>
+        <DropDownBtn name="Open Project" on:click={() => {if(load != undefined ) load().then()}}/>
         <DropDownBtn name="Recent Projects" on:click={() => {console.log("Recent Projects")}}/>
         <DropDownBtn name="Save Project" on:click={() => {console.log("Save Project")}}/>
         <DropDownBtn name="Save Project as" on:click={() => {console.log("Save Project as")}}/>

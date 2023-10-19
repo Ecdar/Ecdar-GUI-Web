@@ -4,10 +4,12 @@ import TopBarDropDown from "../topBar/TopBarDropDown.svelte"
 
 export let name:string = "Default"
 
+//Set visibility of dropdown to no visible
 let visible:boolean = false;
 
 </script>
 
+<!--Show dropdown menu of given topbar item on hover-->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class = "unselectable"
     on:mouseenter={()=>{visible = true;}} 
