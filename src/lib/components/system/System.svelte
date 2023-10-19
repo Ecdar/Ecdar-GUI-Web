@@ -50,6 +50,7 @@
 		display: flex;
 		height: 50px;
 		width: 50px;
+		min-width: 50px;
 		border-radius: 70px;
 		justify-content: center;
 	}
