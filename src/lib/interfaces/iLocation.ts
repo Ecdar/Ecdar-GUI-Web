@@ -1,4 +1,4 @@
-import type { iPoint} from "./iPoint";
+import type { iPoint } from "./iPoint";
 import type { iNickname } from "./iNickname";
 import type { iInvariant } from "./iInvariant";
 import type { LocationType } from "../classes/automaton/LocationType";

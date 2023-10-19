@@ -52,7 +52,10 @@ activeModel.set(
 				color: "#00ff00", // Example color for location 3
 				id: "3",
 				invariant: { fn: "c >= 8", position: { x: 500, y: 500 } },
-				nickname: { name: "Location numba drei", position: { x: 500, y: 500 } }, // Example nickname
+				nickname: {
+					name: "Location numba drei",
+					position: { x: 500, y: 500 },
+				}, // Example nickname
 				position: { x: 500, y: 500 }, // Example position
 				type: LocationType.NORMAL, // Example location type
 				urgency: Urgency.NORMAL, // Example urgency
@@ -104,10 +107,13 @@ activeModel.set(
 				nails: [
 					{
 						position: { x: 350, y: 300 },
-						property: {type: PropertyType.SYNCHRONIZATION, position: {
-							x: 350,
-							y: 300,
-						}},
+						property: {
+							type: PropertyType.SYNCHRONIZATION,
+							position: {
+								x: 350,
+								y: 300,
+							},
+						},
 					},
 				],
 			},

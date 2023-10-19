@@ -11,4 +11,4 @@ export interface iInvariant {
 	 * The position of the invariant
 	 * */
 	position: iPoint;
-};
+}
