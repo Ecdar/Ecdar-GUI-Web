@@ -1,23 +1,20 @@
 <script lang="ts">
-
-export let name:string = "Default"
-
+	export let name: string = "Default";
 </script>
 
 <!--Make each dropdown item, into button-->
-<button class = "dropdown-item" on:click>
-    {name}
+<button class="dropdown-item" on:click>
+	{name}
 </button>
 
 <style>
+	.dropdown-item {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
 
-.dropdown-item {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.dropdown-item:hover {
-    filter: brightness(0.9);
-}
+	.dropdown-item:hover {
+		filter: brightness(0.9);
+	}
 </style>

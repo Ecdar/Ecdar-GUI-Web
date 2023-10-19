@@ -2,7 +2,7 @@
 	import Console from "../lib/components/console/Console.svelte";
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
-	
+
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
 
 	enum SidePanel {
@@ -57,13 +57,11 @@
 			stopResizingSidePanel,
 		);
 	}
-
-	
 </script>
 
 <!-- Top navigation Panel -->
 <nav id="main-nav">
-	<TopBar/>
+	<TopBar />
 </nav>
 
 <main bind:this={mainContainer}>
@@ -125,8 +123,6 @@
 		border-bottom: 0.3em solid black;
 	}
 
-	
-
 	main {
 		display: flex;
 		flex: 1;
@@ -170,7 +166,4 @@
 		flex: 1;
 		width: 0;
 	}
-
-
-
 </style>
