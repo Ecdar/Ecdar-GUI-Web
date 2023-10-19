@@ -123,17 +123,6 @@
 		flex-grow: 1;
 	}
 
-	#svgContainer {
-		position: relative;
-		overflow: hidden;
-		display: flex;
-		flex-wrap: wrap;
-		align-content: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
 	.sidePanel {
 		background-color: white;
 	}
