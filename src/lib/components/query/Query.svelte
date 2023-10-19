@@ -31,6 +31,11 @@
 				<Question_mark />
 			{/if}
 			<select>
+				{#each typeOptions as typeOption}
+					{#if typeOption === type}
+						<option selected>{typeOption}</option>
+					{:else}
+						<option>{typeOption}</option>
 					{/if}
 				{/each}
 			</select>
