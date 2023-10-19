@@ -1,7 +1,9 @@
 <script lang="ts">
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
-
+	import Components from "$lib/components/component/Components.svelte";
+	import Systems from "$lib/components/system/systems.svelte";
+	import { Description } from "svelte-google-materialdesign-icons";
 	enum SidePanel {
 		Left,
 		Right,
@@ -61,9 +63,15 @@
 <main bind:this={mainContainer}>
 	<!-- Left side Panel -->
 	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
-		<nav class="inner-nav1">Nav 1</nav>
-		<p>Left</p>
+		<nav class="inner-nav1">Projects</nav>
+		<div id="global-dec">
+			<Description />
+			<p>Global declaration</p>
+		</div>
+		<Components />
+		<Systems />
 	</div>
+
 	<!-- Left resize Panel -->
 	<div
 		role="button"
@@ -122,6 +130,14 @@
 
 	.inner-nav2 {
 		background-color: lightslategrey;
+	}
+
+	#global-dec {
+		cursor: pointer;
+		background-color: rgb(196, 196, 196);
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
 	}
 
 	.sidePanel {
