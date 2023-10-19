@@ -1,18 +1,18 @@
 import { Point, Dimensions } from "$lib/classes/draw";
-import { Operator, ComponentInstance, SystemEdge } from "../automaton";
-import type {
-	OperatorType,
-	SerializeRaw,
-	ToRaw,
-	FromRaw,
-	DeserializeRaw,
-	RawSystem,
+import {
+	Operator,
+	ComponentInstance,
+	SystemEdge,
+	Raw,
+	type Named,
 } from "../automaton";
 
 /**
  * An Ecdar System
  * */
-export class System implements SerializeRaw, ToRaw<RawSystem> {
+export class System
+	implements Raw.SerializeRaw, Raw.ToRaw<Raw.RawSystem>, Named
+{
 	/**
 	 * The name of the system
 	 * */
@@ -105,8 +105,7 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 				return {
 					x: o.position.x,
 					y: o.position.y,
-					// BECAUSE OF COMPATIBILITY
-					type: o.type.toLowerCase(),
+					type: o.type,
 					id: o.id,
 				};
 			}),
@@ -126,7 +125,7 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 	/**
 	 * Creates a System from an object of type RawSystem
 	 * */
-	static fromRaw: FromRaw<RawSystem, System> = (raw) => {
+	static readonly fromRaw: Raw.FromRaw<Raw.RawSystem, System> = (raw) => {
 		return new System(
 			raw.name,
 			raw.description,
@@ -142,12 +141,7 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 				);
 			}),
 			raw.operators.map((o) => {
-				return new Operator(
-					o.id,
-					/// BECAUSE OF COMPATIBILITY
-					o.type.toUpperCase() as OperatorType,
-					new Point(o.x, o.y),
-				);
+				return new Operator(o.id, o.type, new Point(o.x, o.y));
 			}),
 			raw.edges.map((e) => {
 				return new SystemEdge(e.parent, e.child);
@@ -158,8 +152,8 @@ export class System implements SerializeRaw, ToRaw<RawSystem> {
 	/**
 	 * Creates a System from a JSON string of a RawSystem
 	 * */
-	static deserializeRaw: DeserializeRaw<System> = (input) => {
-		const raw = JSON.parse(input);
+	static readonly deserializeRaw: Raw.DeserializeRaw<System> = (input) => {
+		const raw = Raw.parse(Raw.ZodRawSystem, input);
 		return System.fromRaw(raw);
 	};
 }

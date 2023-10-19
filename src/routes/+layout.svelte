@@ -21,6 +21,6 @@
 	:global(body) {
 		height: 100vh;
 		display: flex;
-		flex-flow: column;
+		flex-direction: column;
 	}
 </style>

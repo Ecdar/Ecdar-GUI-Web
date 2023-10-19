@@ -1,4 +1,4 @@
 export enum DeclarationType {
 	GLOBAL = "Global Declarations",
-	SYSETEM = "System Declarations",
+	SYSTEM = "System Declarations",
 }
