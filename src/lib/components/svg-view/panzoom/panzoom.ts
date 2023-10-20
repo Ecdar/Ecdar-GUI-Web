@@ -149,57 +149,63 @@ class Panzoom implements PanzoomObject {
 			const diffHorizontal = (scaledWidth - realWidth) / 2;
 			const diffVertical = (scaledHeight - realHeight) / 2;
 
-			if (opts.contain === "inside") {
-				const minX =
-					(-dims.elem.margin.left -
-						dims.parent.padding.left +
-						diffHorizontal) /
-					toScale;
-				const maxX =
-					(dims.parent.width -
-						scaledWidth -
-						dims.parent.padding.left -
-						dims.elem.margin.left -
-						dims.parent.border.left -
-						dims.parent.border.right +
-						diffHorizontal) /
-					toScale;
-				result.x = Math.max(Math.min(result.x, maxX), minX);
-				const minY =
-					(-dims.elem.margin.top -
-						dims.parent.padding.top +
-						diffVertical) /
-					toScale;
-				const maxY =
-					(dims.parent.height -
-						scaledHeight -
-						dims.parent.padding.top -
-						dims.elem.margin.top -
-						dims.parent.border.top -
-						dims.parent.border.bottom +
-						diffVertical) /
-					toScale;
-				result.y = Math.max(Math.min(result.y, maxY), minY);
-			} else if (opts.contain === "outside") {
-				const minX =
-					(-(scaledWidth - dims.parent.width) -
-						dims.parent.padding.left -
-						dims.parent.border.left -
-						dims.parent.border.right +
-						diffHorizontal) /
-					toScale;
-				const maxX =
-					(diffHorizontal - dims.parent.padding.left) / toScale;
-				result.x = Math.max(Math.min(result.x, maxX), minX);
-				const minY =
-					(-(scaledHeight - dims.parent.height) -
-						dims.parent.padding.top -
-						dims.parent.border.top -
-						dims.parent.border.bottom +
-						diffVertical) /
-					toScale;
-				const maxY = (diffVertical - dims.parent.padding.top) / toScale;
-				result.y = Math.max(Math.min(result.y, maxY), minY);
+			switch (opts.contain) {
+				case "inside": {
+					const minX =
+						(-dims.elem.margin.left -
+							dims.parent.padding.left +
+							diffHorizontal) /
+						toScale;
+					const maxX =
+						(dims.parent.width -
+							scaledWidth -
+							dims.parent.padding.left -
+							dims.elem.margin.left -
+							dims.parent.border.left -
+							dims.parent.border.right +
+							diffHorizontal) /
+						toScale;
+					result.x = Math.max(Math.min(result.x, maxX), minX);
+					const minY =
+						(-dims.elem.margin.top -
+							dims.parent.padding.top +
+							diffVertical) /
+						toScale;
+					const maxY =
+						(dims.parent.height -
+							scaledHeight -
+							dims.parent.padding.top -
+							dims.elem.margin.top -
+							dims.parent.border.top -
+							dims.parent.border.bottom +
+							diffVertical) /
+						toScale;
+					result.y = Math.max(Math.min(result.y, maxY), minY);
+					break;
+				}
+				case "outside": {
+					const minX =
+						(-(scaledWidth - dims.parent.width) -
+							dims.parent.padding.left -
+							dims.parent.border.left -
+							dims.parent.border.right +
+							diffHorizontal) /
+						toScale;
+					const maxX =
+						(diffHorizontal - dims.parent.padding.left) / toScale;
+					result.x = Math.max(Math.min(result.x, maxX), minX);
+					const minY =
+						(-(scaledHeight - dims.parent.height) -
+							dims.parent.padding.top -
+							dims.parent.border.top -
+							dims.parent.border.bottom +
+							diffVertical) /
+						toScale;
+					const maxY =
+						(diffVertical - dims.parent.padding.top) / toScale;
+					result.y = Math.max(Math.min(result.y, maxY), minY);
+					break;
+				}
 			}
 		}
 

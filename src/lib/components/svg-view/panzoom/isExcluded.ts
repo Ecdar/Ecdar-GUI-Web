@@ -11,13 +11,20 @@ function hasClass(elem: Element, className: string) {
 }
 
 export default function isExcluded(elem: Element, options: PanzoomOptions) {
-	for (let cur = elem; cur != null; cur = cur.parentNode as Element) {
+	let cur: ParentNode | null = elem;
+	while (cur !== null) {
 		if (
-			hasClass(cur, options.excludeClass) ||
-			options.exclude.includes(cur)
+			isElement(cur) &&
+			(hasClass(cur, options.excludeClass) ||
+				options.exclude.includes(cur))
 		) {
 			return true;
 		}
+		cur = cur.parentNode;
 	}
 	return false;
+}
+
+function isElement(value: unknown): value is Element {
+	return value instanceof Element;
 }
