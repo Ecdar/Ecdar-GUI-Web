@@ -21,7 +21,7 @@
 <div class="query">
 	<div class="column">
 		<div class="left-column" style="background-color: {color}">
-			{#if color == "lime"}
+			{#if color == "limegreen"}
 				<Done />
 			{:else if color == "yellow"}
 				<Warning />
