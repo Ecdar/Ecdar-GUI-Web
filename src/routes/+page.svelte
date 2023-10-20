@@ -57,7 +57,7 @@
 </script>
 
 <!-- Top navigation Panel -->
-<nav id="main-nav">Main Nav</nav>
+<nav id="main-nav"></nav>
 <main bind:this={mainContainer}>
 	<!-- Left side Panel -->
 	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
