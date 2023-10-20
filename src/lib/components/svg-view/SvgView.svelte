@@ -25,7 +25,6 @@
 	onMount(() => {
 		panzoom = new Panzoom(scaler, parent, setTransform, setTransition, {
 			canvas: true,
-			pinchAndPan: true,
 		});
 	});
 
