@@ -159,9 +159,4 @@
 		display: flex;
 		flex-direction: column;
 	}
-
-	footer {
-		height: 2.5em;
-		background-color: slategrey;
-	}
 </style>
