@@ -79,8 +79,6 @@
 		y1={line.from.y}
 		x2={index === lines.length - 1 ? calculateX2(line) : line.to.x}
 		y2={index === lines.length - 1 ? calculateY2(line) : line.to.y}
-		stroke="black"
-		stroke-width="2"
 		marker-end={index === lines.length - 1 ? "url(#arrowhead)" : ""}
 		stroke-dasharray={edgeType === Status.INPUT ? "10,10" : ""}
 	/>
@@ -105,3 +103,10 @@
 {#each nails as nail}
 	<Nail position={nail.position} text={nailSymbol(nail)} />
 {/each}
+
+<style>
+	line {
+		stroke: black;
+		stroke-width: 2;
+	}
+</style>
