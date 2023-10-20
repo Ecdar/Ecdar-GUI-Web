@@ -14,14 +14,17 @@
 
 	let group: SVGElement;
 	let menuProps = {
-		get location(){
+		get location() {
 			return group;
-		}
-	}
+		},
+	};
 </script>
 
 <!--Location consists of both a Node with a label-->
-<g bind:this={group} use:contextMenu={{ content: LocationMenu, props: menuProps }}>
+<g
+	bind:this={group}
+	use:contextMenu={{ content: LocationMenu, props: menuProps }}
+>
 	<Label
 		bind:position={nickname.position}
 		bind:parentPosition={position}
