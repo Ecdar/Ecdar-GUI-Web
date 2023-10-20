@@ -22,7 +22,7 @@
 		position.y += event.movementY / $scale;
 
 		// Update the active model
-		activeModel.set($activeModel);
+		$activeModel = $activeModel;
 	}
 
 	//Removes the eventlisteners when the mouse is released using abortcontroller
