@@ -5,6 +5,8 @@
 	export let position: iPoint;
 	export let text: string;
 	export let radius: number;
+
+	const centerOffset = 5;
 </script>
 
 <DraggableSVG bind:position>
@@ -15,7 +17,10 @@
 		fill="gray"
 		role="none"
 	/>
-	<text x={position.x} y={position.y + 5} text-anchor="middle" role="none"
-		>{text}</text
+	<text
+		x={position.x}
+		y={position.y + centerOffset}
+		text-anchor="middle"
+		role="none">{text}</text
 	>
 </DraggableSVG>

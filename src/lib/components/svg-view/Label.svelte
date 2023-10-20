@@ -5,6 +5,8 @@
 	export let parentPosition: iPoint;
 	export let position: iPoint;
 	export let text: string;
+
+	const centerOffset = 5;
 </script>
 
 <DraggableSvg bind:position>
@@ -32,7 +34,12 @@
 	/>
 
 	<!-- text label -->
-	<text x={position.x} y={position.y + 5} text-anchor="middle" role="none">
+	<text
+		x={position.x}
+		y={position.y + centerOffset}
+		text-anchor="middle"
+		role="none"
+	>
 		{text}
 	</text>
 </DraggableSvg>
