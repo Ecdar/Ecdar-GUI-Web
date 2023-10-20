@@ -38,24 +38,6 @@
 			server: "Reveaal",
 			color: "yellow",
 		},
-		{
-			name: "Admin1",
-			type: "Spec",
-			server: "Reveaal",
-			color: "blue",
-		},
-		{
-			name: "Admin1",
-			type: "Spec",
-			server: "Reveaal",
-			color: "green",
-		},
-		{
-			name: "Admin1",
-			type: "Spec",
-			server: "Reveaal",
-			color: "green",
-		},
 	];
 </script>
 
