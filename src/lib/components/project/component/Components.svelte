@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Component from "$lib/components/component/Component.svelte";
+	import Component from "$lib/components/project/component/Component.svelte";
 
 	const components = [
 		{

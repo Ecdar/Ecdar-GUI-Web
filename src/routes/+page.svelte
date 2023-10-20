@@ -2,9 +2,10 @@
 	import Console from "../lib/components/console/Console.svelte";
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
-	import Components from "$lib/components/component/Components.svelte";
-	import Systems from "$lib/components/system/systems.svelte";
+	import Components from "$lib/components/project/component/Components.svelte";
+	import Systems from "$lib/components/project/system/systems.svelte";
 	import { Description } from "svelte-google-materialdesign-icons";
+	import Projectnav from "$lib/components/project/projectnav.svelte";
 	enum SidePanel {
 		Left,
 		Right,
@@ -64,7 +65,7 @@
 <main bind:this={mainContainer}>
 	<!-- Left side Panel -->
 	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
-		<nav class="inner-nav1">Projects</nav>
+		<nav class="inner-nav1"><Projectnav /></nav>
 		<div class="sidePanelContent">
 			<div class="global-dec">
 				<div class="circle" style="background-color: grey">

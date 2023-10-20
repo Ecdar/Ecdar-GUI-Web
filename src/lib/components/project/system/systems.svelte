@@ -1,5 +1,5 @@
 <script lang="ts">
-	import System from "$lib/components/system/System.svelte";
+	import System from "$lib/components/project/system/System.svelte";
 
 	const systems = [
 		{
