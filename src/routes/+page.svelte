@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SvgView from "$lib/components/svg-view/SvgView.svelte";
+	import Console from "../lib/components/console/Console.svelte";
 
 	enum SidePanel {
 		Left,
@@ -60,8 +61,10 @@
 <main bind:this={mainContainer}>
 	<!-- Left side Panel -->
 	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
-		<nav>Nav 1</nav>
-		<p>Left</p>
+		<nav class="inner-nav1">Nav 1</nav>
+		<div class="sidePanelContent">
+			<p>Left</p>
+		</div>
 	</div>
 	<!-- Left resize Panel -->
 	<div
@@ -90,12 +93,14 @@
 	/>
 	<!-- Right side Panel -->
 	<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
-		<nav>Nav 3</nav>
-		<p>Right</p>
+		<nav class="inner-nav3">Nav 3</nav>
+		<div class="sidePanelContent">
+			<p>Right</p>
+		</div>
 	</div>
 </main>
-<!-- Footer component -->
-<footer>Footer/Console</footer>
+<!-- Console component -->
+<Console />
 
 <style>
 	nav {
@@ -106,11 +111,37 @@
 
 	#main-nav {
 		height: 2.5em;
+		min-height: 2.5em;
 	}
 
 	main {
 		display: flex;
+		flex: 1;
+		overflow: hidden;
+	}
+
+	.inner-nav1,
+	.inner-nav3 {
+		background-color: slategrey;
+		box-shadow: lightslategray 0px 0px 1em;
+	}
+
+	.inner-nav2 {
+		background-color: lightslategrey;
+		box-shadow: slategrey 0px 0px 1em;
+	}
+
+	.sidePanel {
+		background-color: whitesmoke;
+		flex-basis: 10em;
+		overflow: hidden;
+	}
+
+	.sidePanelContent {
 		height: 100%;
+		width: 100%;
+		overflow: auto;
+		white-space: nowrap;
 	}
 
 	.resizer {
@@ -121,10 +152,6 @@
 
 	.canvas {
 		flex-grow: 1;
-	}
-
-	.sidePanel {
-		background-color: white;
 	}
 
 	.canvas,
