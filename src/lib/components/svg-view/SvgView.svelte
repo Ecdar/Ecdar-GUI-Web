@@ -89,7 +89,7 @@
 			/>
 		{/each}
 
-		<!-- Arrowhead Marker -->
+		<!-- Arrowhead used at the end of edges -->
 		<defs>
 			<marker
 				id="arrowhead"
