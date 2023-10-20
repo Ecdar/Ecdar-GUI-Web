@@ -5,11 +5,13 @@
 
 	export let position: iPoint;
 
-	const controller = new AbortController();
-	const signal = controller.signal;
+	let controller: AbortController;
+	let signal: AbortSignal;
 
 	//Sets up eventlisteners when the mouse is pressed down on the svg
 	function onPointerDown() {
+		controller = new AbortController();
+		signal = controller.signal;
 		window.addEventListener("pointermove", onPointerMove, { signal });
 		window.addEventListener("pointerup", onPointerUp, { signal });
 	}
