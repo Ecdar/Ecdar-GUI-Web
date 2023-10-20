@@ -5,14 +5,17 @@
 
 	export let position: iPoint;
 
+	const controller = new AbortController();
+	const signal = controller.signal;
+
 	//Sets up eventlisteners when the mouse is pressed down on the svg
-	function onMouseDown() {
-		window.addEventListener("mousemove", onMouseMove);
-		window.addEventListener("mouseup", onMouseUp);
+	function onPointerDown() {
+		window.addEventListener("pointermove", onPointerMove, { signal });
+		window.addEventListener("pointerup", onPointerUp, { signal });
 	}
 
 	//Updates the position of the svg
-	function onMouseMove(event: MouseEvent) {
+	function onPointerMove(event: PointerEvent) {
 		position.x += event.movementX / $scale;
 		position.y += event.movementY / $scale;
 
@@ -20,14 +23,13 @@
 		activeModel.set($activeModel);
 	}
 
-	//Removes the eventlisteners when the mouse is released
-	function onMouseUp() {
-		window.removeEventListener("mousemove", onMouseMove);
-		window.removeEventListener("mouseup", onMouseUp);
+	//Removes the eventlisteners when the mouse is released using abortcontroller
+	function onPointerUp() {
+		controller.abort();
 	}
 </script>
 
 <!-- The svg element that is draggable -->
-<g on:mousedown={onMouseDown} role="none" class="draggable panzoom-exclude">
+<g on:pointerdown={onPointerDown} role="none" class="draggable panzoom-exclude">
 	<slot />
 </g>

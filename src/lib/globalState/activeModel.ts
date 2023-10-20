@@ -8,7 +8,6 @@ import {
 	Urgency,
 } from "$lib/classes/automaton";
 
-// TODO: Move this class to its own file
 export class ActiveModel {
 	constructor(
 		private _locations: Record<string, iLocation> = {},
