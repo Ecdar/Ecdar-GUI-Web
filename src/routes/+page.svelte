@@ -142,6 +142,7 @@
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
+		background-color: var(--sidebar-background-color);
 	}
 
 	.sidePanelContent {
@@ -161,6 +162,5 @@
 		background-color: whitesmoke;
 		flex: 1;
 		width: 0;
-		flex-grow: 1;
 	}
 </style>
