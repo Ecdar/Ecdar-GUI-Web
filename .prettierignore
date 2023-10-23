@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /build
+/Ecdar-ProtoBuf/
+/src/lib/proto/
 /.svelte-kit
 /package
 .env
