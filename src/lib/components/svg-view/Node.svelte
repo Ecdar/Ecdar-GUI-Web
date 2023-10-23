@@ -16,6 +16,7 @@
 		r={radius}
 		fill="gray"
 		role="none"
+		id="{"node"+text}"
 	/>
 	<text
 		x={position.x}
