@@ -110,9 +110,9 @@
 			}}
 		/>
 		<DropDownBtn
-			name="Scalling"
+			name="Scaling"
 			on:click={() => {
-				console.log("Scalling");
+				console.log("Scaling");
 			}}
 		/>
 		<DropDownBtn
