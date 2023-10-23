@@ -103,7 +103,8 @@
 <style>
 	nav {
 		height: 5em;
-		background-color: slategrey;
+		background-color: var(--main-navigationbar-color);
+		border: var(--main-navigationbar-border);
 	}
 
 	#main-nav {
@@ -117,21 +118,22 @@
 
 	.inner-nav1,
 	.inner-nav3 {
-		background-color: slategrey;
+		background-color: var(--main-navigationbar-color);
+		border: var(--main-innernavigationbar-border);
 	}
 
 	.inner-nav2 {
-		background-color: lightslategrey;
+		background-color: var(--canvas-topbar-color);
+		border: none;
 	}
 
 	.sidePanel {
-		background-color: whitesmoke;
 		flex-basis: 10em;
 	}
 
 	.resizer {
 		background-color: black;
-		flex-basis: 0.3em;
+		flex-basis: 0.1em;
 		cursor: col-resize;
 	}
 
@@ -142,6 +144,7 @@
 
 	footer {
 		height: 2.5em;
-		background-color: slategrey;
+		background-color: var(--main-navigationbar-color);
+		border: var(--main-navigationbar-border);
 	}
 </style>
