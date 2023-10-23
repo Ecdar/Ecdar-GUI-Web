@@ -10,6 +10,9 @@ node_modules
 svelte.config.js
 prettier.config.js
 playwright.config.ts
+compile-protobuffers.js
+/src/lib/proto
+/Ecdar-ProtoBuf
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml

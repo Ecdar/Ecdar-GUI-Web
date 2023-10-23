@@ -17,6 +17,8 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+### Protobuffers ###
+/src/lib/proto/
 
 ### macOS ###
 *.DS_Store
