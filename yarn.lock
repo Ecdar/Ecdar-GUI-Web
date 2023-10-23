@@ -273,6 +273,14 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.23.tgz#498e41218ab3b6a1419c735e5c6ae2c5ed609b6c"
   integrity sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==
 
+"@protobuf-ts/grpcweb-transport@^2.9.1":
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/@protobuf-ts/grpcweb-transport/-/grpcweb-transport-2.9.1.tgz#523647acbf98de54b291a57e770e3127820ba879"
+  integrity sha512-42bvBX312qhPlosMNTZE9XI+lt58ISM5vEJKv/wOx2Fu70J0TdlLa4Bjz8xcuRlv4Pq1CA+94DC1IgNxNRsQdg==
+  dependencies:
+    "@protobuf-ts/runtime" "^2.9.1"
+    "@protobuf-ts/runtime-rpc" "^2.9.1"
+
 "@protobuf-ts/plugin-framework@^2.9.1":
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/@protobuf-ts/plugin-framework/-/plugin-framework-2.9.1.tgz#b8a6b29386d34d54588230a620385534cff629fc"

@@ -1,3 +1,3 @@
 export enum FeatureError {
-	NotImplemented = "Feature Not Implemented"
+	NotImplemented = "Feature Not Implemented",
 }
