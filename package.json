@@ -11,7 +11,7 @@
 		"test": "yarn test:integration && yarn test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "yarn proto; prettier --plugin prettier-plugin-svelte --check . && eslint .",
+		"lint": "yarn proto && prettier --plugin prettier-plugin-svelte --check . && eslint .",
 		"format": "prettier --plugin prettier-plugin-svelte --write .",
 		"test:install": "playwright install --with-deps",
 		"test:integration": "playwright test",
