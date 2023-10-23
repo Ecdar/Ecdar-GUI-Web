@@ -12,10 +12,10 @@ fs.readdir(`${dir}/Ecdar-ProtoBuf`, (err, files) => {
 	if (err !== null) throw err;
 	for (let file of files.filter((name) => name.match(/.*\.proto/g))) {
 		const cmd = `npx protoc --ts_out ${out_dir} --proto_path ${dir}/Ecdar-ProtoBuf ${dir}/Ecdar-ProtoBuf/${file}`;
-		console.log(`Executing commmand: "${cmd}"`)
 		exec(
 			cmd,	
 			(err, stdout, stderr) => {
+				console.log(`Executing commmand: "${cmd}"`);
 				if (stdout !== null) console.log(stdout);
 				if (stderr !== null) console.error(stderr);
 				if (err !== null) console.error(err);
