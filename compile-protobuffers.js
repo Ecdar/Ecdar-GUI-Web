@@ -20,4 +20,6 @@ fs.readdir(`${dir}/Ecdar-ProtoBuf`, (err, files) => {
 			},
 		);
 	}
+
+	console.log("Finnished compiling protobuffers");
 });
