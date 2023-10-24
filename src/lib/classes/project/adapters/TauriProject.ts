@@ -9,7 +9,8 @@ import {
 	PROJECT_FILE_NAME_GLOBAL_DECLARATIONS,
 	PROJECT_FOLDER_NAME_SYSTEMS,
 } from "../Project";
-import type { Features } from "../features/Feature";
+import type { ProjectFeatures } from "../ProjectFeatures";
+import { Features } from "$lib/classes/features/Features";
 
 /**
  * Includes all the information needed to make an Ecdar Project
@@ -142,12 +143,12 @@ export class TauriProject extends Project {
 		return project;
 	};
 
-	override readonly features: Features = {
+	override readonly features: Features<ProjectFeatures> = new Features({
 		quickSave: async () => {
 			const { fs } = await import("@tauri-apps/api");
 			const dir = `${this.srcDir}/${this.name}`;
 			if (!(await fs.exists(dir))) {
-				await (this.features.save as () => Promise<void>)();
+				await this.features.execute("save");
 			}
 
 			await (this.writeToDir as (dir: string) => Promise<void>)(dir);
@@ -191,7 +192,7 @@ export class TauriProject extends Project {
 
 			await (this.writeToDir as (dir: string) => Promise<void>)(saveDir);
 		},
-	};
+	});
 
 	/**
 	 * DESTRUCTIVE FUNCTION

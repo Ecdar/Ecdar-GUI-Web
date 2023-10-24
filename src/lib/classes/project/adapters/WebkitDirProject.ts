@@ -8,7 +8,7 @@ import {
 	PROJECT_FILE_NAME_GLOBAL_DECLARATIONS,
 	PROJECT_FOLDER_NAME_SYSTEMS,
 } from "../Project";
-import type { Features } from "../features/Feature";
+
 export class WebkitDirProject extends Project {
 	constructor(
 		name = "New Project",
@@ -108,7 +108,6 @@ export class WebkitDirProject extends Project {
 			input.click();
 		});
 	};
-	override readonly features: Features = {};
 }
 
 /*

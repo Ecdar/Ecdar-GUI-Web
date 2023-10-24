@@ -1,7 +1,10 @@
-import type { Features } from "./Features";
+import { Features } from "../features/Features";
+import type { CommunicationFeatures } from "./CommunicationFeatures";
 
 export class Communication {
-	start(): void {}
+	static start(): Communication {
+		return new Communication();
+	}
 	end(): void {}
-	readonly features: Features = {};
+	readonly features: Features<CommunicationFeatures> = new Features({});
 }

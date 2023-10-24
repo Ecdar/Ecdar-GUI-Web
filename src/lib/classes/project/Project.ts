@@ -1,5 +1,6 @@
 import * as Automata from "../automaton";
-import type { Features, HasFeatures } from "./features/Feature";
+import { Features } from "../features/Features";
+import type { ProjectFeatures } from "./ProjectFeatures";
 
 export const PROJECT_FOLDER_NAME_SYSTEMS = "Systems";
 export const PROJECT_FOLDER_NAME_COMPONENTS = "Components";
@@ -7,7 +8,7 @@ export const PROJECT_FILE_NAME_QUERIES = "Queries.json";
 export const PROJECT_FILE_NAME_SYSTEM_DECLARATIONS = "SystemDeclarations.json";
 export const PROJECT_FILE_NAME_GLOBAL_DECLARATIONS = "GlobalDeclarations.json";
 
-export class Project implements HasFeatures, Automata.Named {
+export class Project implements Automata.Named {
 	/**
 	 * The name of the project, and the name of the save folder
 	 * */
@@ -41,7 +42,7 @@ export class Project implements HasFeatures, Automata.Named {
 	/**
 	 * List of optional features in the project
 	 * */
-	readonly features: Features = {};
+	readonly features: Features<ProjectFeatures> = new Features({});
 
 	constructor(
 		name = "New Project",
