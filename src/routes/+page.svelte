@@ -74,41 +74,41 @@
 				<p>Left</p>
 			</div>
 		</div>
-    <!-- Left resize Panel -->
-    <div
-      role="button"
-      id="leftresizer"
-      class="resizer"
-      tabindex="-1"
-      on:pointerdown={(event) => {
-        startResizingSidePanel(event, SidePanel.Left);
-      }}
-    />
-    <!-- Canvas -->
-    <div class="canvas">
-      <nav class="inner-nav2">Nav 2</nav>
-      <p>Canvas</p>
-      <DropDownMenu />
-      <LocationsWithContextMenu />
-    </div>
-    <!-- Right resize Panel -->
-    <div
-      role="button"
-      id="rightresizer"
-      class="resizer"
-      tabindex="-1"
-      on:pointerdown={(event) => {
-        startResizingSidePanel(event, SidePanel.Right);
-      }}
-    />
-    <!-- Right side Panel -->
-    <div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
-      <nav class="inner-nav3">
-        <QueryNav />
-      </nav>
-      <div class="sidePanelContent">
-        <Queries />
-      </div>
+		<!-- Left resize Panel -->
+		<div
+			role="button"
+			id="leftresizer"
+			class="resizer"
+			tabindex="-1"
+			on:pointerdown={(event) => {
+				startResizingSidePanel(event, SidePanel.Left);
+			}}
+		/>
+		<!-- Canvas -->
+		<div class="canvas">
+			<nav class="inner-nav2">Nav 2</nav>
+			<p>Canvas</p>
+			<DropDownMenu />
+			<LocationsWithContextMenu />
+		</div>
+		<!-- Right resize Panel -->
+		<div
+			role="button"
+			id="rightresizer"
+			class="resizer"
+			tabindex="-1"
+			on:pointerdown={(event) => {
+				startResizingSidePanel(event, SidePanel.Right);
+			}}
+		/>
+		<!-- Right side Panel -->
+		<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
+			<nav class="inner-nav3">
+				<QueryNav />
+			</nav>
+			<div class="sidePanelContent">
+				<Queries />
+			</div>
 		</div>
 		<!-- Right resize Panel -->
 		<div
