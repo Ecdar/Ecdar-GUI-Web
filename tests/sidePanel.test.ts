@@ -3,13 +3,13 @@ import { test, expect } from "@playwright/test";
 test("side panels exist", async ({ page }) => {
 	await page.goto("/");
 
-	await expect(page.locator(".sidePanel")).toHaveCount(2);
+	await expect(page.locator(".side-panel")).toHaveCount(2);
 });
 
 test("side panels have correct start flex-basis", async ({ page }) => {
 	await page.goto("/");
 
-	const sidePanels = await page.locator(".sidePanel").all();
+	const sidePanels = await page.locator(".side-panel").all();
 	for (const sidePanel of sidePanels) {
 		await expect(sidePanel).toHaveCSS("flex-basis", "300px");
 	}
@@ -18,16 +18,16 @@ test("side panels have correct start flex-basis", async ({ page }) => {
 test("resizers exist", async ({ page }) => {
 	await page.goto("/");
 
-	await expect(page.locator("#leftresizer")).toHaveCount(1);
-	await expect(page.locator("#rightresizer")).toHaveCount(1);
+	await expect(page.locator("#left-resizer")).toHaveCount(1);
+	await expect(page.locator("#right-resizer")).toHaveCount(1);
 });
 
 test("side panels can be resized", async ({ page }) => {
 	await page.goto("/");
 
-	const sidePanels = await page.locator(".sidePanel").all();
-	const leftresizer = page.locator("#leftresizer");
-	const rightresizer = page.locator("#rightresizer");
+	const sidePanels = await page.locator(".side-panel").all();
+	const leftresizer = page.locator("#left-resizer");
+	const rightresizer = page.locator("#right-resizer");
 	const target = page.locator("body");
 
 	const viewportSize = page.viewportSize();

@@ -61,16 +61,16 @@
 <nav id="main-nav"></nav>
 <main bind:this={mainContainer}>
 	<!-- Left side Panel -->
-	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
+	<div class="side-panel" style="flex-basis: {leftSidePanelWidth}px">
 		<nav class="inner-nav1">Nav 1</nav>
-		<div class="sidePanelContent">
+		<div class="side-panel-content">
 			<p>Left</p>
 		</div>
 	</div>
 	<!-- Left resize Panel -->
 	<div
 		role="button"
-		id="leftresizer"
+		id="left-resizer"
 		class="resizer"
 		tabindex="-1"
 		on:pointerdown={(event) => {
@@ -87,7 +87,7 @@
 	<!-- Right resize Panel -->
 	<div
 		role="button"
-		id="rightresizer"
+		id="right-resizer"
 		class="resizer"
 		tabindex="-1"
 		on:pointerdown={(event) => {
@@ -95,9 +95,9 @@
 		}}
 	/>
 	<!-- Right side Panel -->
-	<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
+	<div class="side-panel" style="flex-basis: {rightSidePanelWidth}px">
 		<nav class="inner-nav3">Nav 3</nav>
-		<div class="sidePanelContent">
+		<div class="side-panel-content">
 			<p>Right</p>
 		</div>
 	</div>
@@ -134,7 +134,7 @@
 		box-shadow: slategrey 0px 0px 1em;
 	}
 
-	.sidePanel {
+	.side-panel {
 		background-color: whitesmoke;
 		flex-basis: 10em;
 		overflow: hidden;
@@ -142,7 +142,7 @@
 		flex-direction: column;
 	}
 
-	.sidePanelContent {
+	.side-panel-content {
 		height: 100%;
 		width: 100%;
 		overflow: auto;
