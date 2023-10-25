@@ -2,6 +2,8 @@
 	import Console from "../lib/components/console/Console.svelte";
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
+	import Queries from "$lib/components/query/Queries.svelte";
+	import QueryNav from "$lib/components/query/QueryNav.svelte";
 
 	enum SidePanel {
 		Left,
@@ -96,9 +98,11 @@
 	/>
 	<!-- Right side Panel -->
 	<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
-		<nav class="inner-nav3">Nav 3</nav>
+		<nav class="inner-nav3">
+			<QueryNav />
+		</nav>
 		<div class="sidePanelContent">
-			<p>Right</p>
+			<Queries />
 		</div>
 	</div>
 </main>
@@ -145,7 +149,8 @@
 	.sidePanelContent {
 		height: 100%;
 		width: 100%;
-		overflow: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
 		white-space: nowrap;
 	}
 
