@@ -2,8 +2,7 @@
 	import TopBarBtn from "$lib/components/topBar/TopBarBtn.svelte";
 	import DropDownBtn from "$lib/components/topBar/DropDownBtn.svelte";
 	import { load } from "$lib/classes/project";
-	import * as Icon from "svelte-google-materialdesign-icons"
-	
+	import * as Icon from "svelte-google-materialdesign-icons";
 </script>
 
 <!--
@@ -14,35 +13,35 @@
 <div>
 	<TopBarBtn name="File">
 		<DropDownBtn
-			icon = {Icon.Note_add}
+			icon={Icon.Note_add}
 			name="New Project"
 			on:click={() => {
 				console.log("New Project");
 			}}
 		/>
 		<DropDownBtn
-			icon = {Icon.File_open}
+			icon={Icon.File_open}
 			name="Open Project"
 			on:click={async () => {
 				if (load != undefined) await load();
 			}}
 		/>
 		<DropDownBtn
-			icon = {Icon.File_open}
+			icon={Icon.File_open}
 			name="Recent Projects"
 			on:click={() => {
 				console.log("Recent Projects");
 			}}
 		/>
 		<DropDownBtn
-			icon = {Icon.Save}
+			icon={Icon.Save}
 			name="Save Project"
 			on:click={() => {
 				console.log("Save Project");
 			}}
 		/>
 		<DropDownBtn
-			icon = {Icon.Save}
+			icon={Icon.Save}
 			name="Save Project as"
 			on:click={() => {
 				console.log("Save Project as");
@@ -111,7 +110,6 @@
 <div>
 	<TopBarBtn name="View">
 		<DropDownBtn
-			
 			name="Project Panel"
 			on:click={() => {
 				console.log("Project Panel");
