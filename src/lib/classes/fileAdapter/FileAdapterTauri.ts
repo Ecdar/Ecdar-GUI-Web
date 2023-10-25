@@ -17,9 +17,10 @@ import {
 } from "$lib/classes/automaton";
 import { Project } from "$lib/classes/project/Project";
 import type { IFileAdapterImplementation } from "./FileAdapterImplementation";
+import { inTauri } from "$lib/tauri";
 export class FileAdapterTauri implements IFileAdapterImplementation {
 	supported() {
-		return Boolean("__TAURI__" in globalThis);
+		return inTauri;
 	}
 
 	private projectPath: string | undefined;
