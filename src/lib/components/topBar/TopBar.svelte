@@ -6,6 +6,10 @@
 	
 </script>
 
+<!--
+	- TopBarBtn: The button on the navbar, where name equal text displayed in button
+	- DropDownBtn: An element in the dropdown menu as a button, where name equal to text displayed in button and an icon, which can be empty
+-->
 <!--File top bar button-->
 <div>
 	<TopBarBtn name="File">
