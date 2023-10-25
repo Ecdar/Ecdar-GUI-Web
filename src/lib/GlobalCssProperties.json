@@ -1,13 +1,19 @@
 {
 	"mediaSchemes": [
 		{
-			"mediaFeature": "standard"
-		},
-		{
-			"mediaFeature": "prefers-color-scheme: light",
+			"mediaFeature": "standard",
 			"color": [
 				{
-					"attributeName": "--main-navigationbar-color",
+					"attributeName": "--navigationbar-text-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 1,
+						"valueTwo": 1,
+						"valueThree": 1
+					}
+				},
+				{
+					"attributeName": "--console-scrollbar-thumb-color",
 					"color": {
 						"colorGamut": "display-p3",
 						"valueOne": 0.22745098039,
@@ -16,21 +22,12 @@
 					}
 				},
 				{
-					"attributeName": "--canvas-topbar-color",
+					"attributeName": "--console-scrollbar-thumbhover-color",
 					"color": {
 						"colorGamut": "display-p3",
 						"valueOne": 0.2862745098,
 						"valueTwo": 0.34901960784,
 						"valueThree": 0.38823529411
-					}
-				},
-				{
-					"attributeName": "--sidebar-background-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.95686274509,
-						"valueTwo": 0.95686274509,
-						"valueThree": 0.95686274509
 					}
 				}
 			],
@@ -66,7 +63,7 @@
 			]
 		},
 		{
-			"mediaFeature": "prefers-color-scheme: dark",
+			"mediaFeature": "prefers-color-scheme: light",
 			"color": [
 				{
 					"attributeName": "--main-navigationbar-color",
@@ -87,42 +84,152 @@
 					}
 				},
 				{
-					"attributeName": "--sidebar-background-color",
+					"attributeName": "--canvas-text-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0,
+						"valueTwo": 0,
+						"valueThree": 0
+					}
+				},
+				{
+					"attributeName": "--sidebar-text-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0,
+						"valueTwo": 0,
+						"valueThree": 0
+					}
+				},
+				{
+					"attributeName": "--background-color",
 					"color": {
 						"colorGamut": "display-p3",
 						"valueOne": 0.95686274509,
 						"valueTwo": 0.95686274509,
 						"valueThree": 0.95686274509
 					}
-				}
-			],
-			"border": [
+				},
 				{
-					"attributeName": "--main-navigationbar-border",
-					"style": "solid",
-					"width": {
-						"size": 0.1,
-						"unit": "em"
-					},
+					"attributeName": "--console-selectedtab-color",
 					"color": {
 						"colorGamut": "display-p3",
-						"valueOne": 0.18823529411,
-						"valueTwo": 0.22745098039,
-						"valueThree": 0.25098039215
+						"valueOne": 0.2862745098,
+						"valueTwo": 0.34901960784,
+						"valueThree": 0.38823529411
 					}
 				},
 				{
-					"attributeName": "--main-innernavigationbar-border",
-					"style": "none solid solid solid",
-					"width": {
-						"size": 0.1,
-						"unit": "em"
-					},
+					"attributeName": "--console-unselectedtab-color",
 					"color": {
 						"colorGamut": "display-p3",
-						"valueOne": 0.18823529411,
-						"valueTwo": 0.22745098039,
-						"valueThree": 0.25098039215
+						"valueOne": 0.22745098039,
+						"valueTwo": 0.27450980392,
+						"valueThree": 0.30588235294
+					}
+				},
+				{
+					"attributeName": "--console-topbar-background-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.22745098039,
+						"valueTwo": 0.27450980392,
+						"valueThree": 0.30588235294
+					}
+				},
+				{
+					"attributeName": "--console-text-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0,
+						"valueTwo": 0,
+						"valueThree": 0
+					}
+				}
+			]
+		},
+		{
+			"mediaFeature": "prefers-color-scheme: dark",
+			"color": [
+				{
+					"attributeName": "--main-navigationbar-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.0156862745,
+						"valueTwo": 0.02352941176,
+						"valueThree": 0.03529411764
+					}
+				},
+				{
+					"attributeName": "--canvas-topbar-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.05490196078,
+						"valueTwo": 0.06666666666,
+						"valueThree": 0.09019607843
+					}
+				},
+				{
+					"attributeName": "--canvas-text-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 1,
+						"valueTwo": 1,
+						"valueThree": 1
+					}
+				},
+				{
+					"attributeName": "--sidebar-text-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 1,
+						"valueTwo": 1,
+						"valueThree": 1
+					}
+				},
+				{
+					"attributeName": "--background-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.09019607843,
+						"valueTwo": 0.10196078431,
+						"valueThree": 0.13333333333
+					}
+				},
+				{
+					"attributeName": "--console-selectedtab-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.05490196078,
+						"valueTwo": 0.06666666666,
+						"valueThree": 0.09019607843
+					}
+				},
+				{
+					"attributeName": "--console-unselectedtab-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.0156862745,
+						"valueTwo": 0.02352941176,
+						"valueThree": 0.03529411764
+					}
+				},
+				{
+					"attributeName": "--console-topbar-background-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.0156862745,
+						"valueTwo": 0.02352941176,
+						"valueThree": 0.03529411764
+					}
+				},
+				{
+					"attributeName": "--console-text-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 1,
+						"valueTwo": 1,
+						"valueThree": 1
 					}
 				}
 			]

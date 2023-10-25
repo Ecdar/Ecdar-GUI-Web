@@ -58,7 +58,9 @@
 </script>
 
 <!-- Top navigation Panel -->
-<nav id="main-nav"></nav>
+<nav id="main-nav">
+	<p>Main Nav</p>
+</nav>
 <main bind:this={mainContainer}>
 	<!-- Left side Panel -->
 	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
@@ -108,12 +110,13 @@
 <style>
 	nav {
 		height: 5em;
-		background-color: var(--main-navigationbar-color);
 		border: var(--main-navigationbar-border);
 		flex-shrink: 0;
 	}
 
 	#main-nav {
+		color: var(--navigationbar-text-color);
+		background-color: var(--main-navigationbar-color);
 		height: 2.5em;
 		min-height: 2.5em;
 	}
@@ -128,13 +131,17 @@
 	.inner-nav3 {
 		background-color: var(--main-navigationbar-color);
 		border: var(--main-innernavigationbar-border);
-		box-shadow: lightslategray 0px 0px 1em;
 	}
 
 	.inner-nav2 {
 		background-color: var(--canvas-topbar-color);
 		border: none;
-		box-shadow: slategrey 0px 0px 1em;
+	}
+
+	.inner-nav1,
+	.inner-nav2,
+	.inner-nav3 {
+		color: var(--innernavigationbar-text-color);
 	}
 
 	.sidePanel {
@@ -142,10 +149,11 @@
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
-		background-color: var(--sidebar-background-color);
+		background-color: var(--background-color);
 	}
 
 	.sidePanelContent {
+		color: var(--sidebar-text-color);
 		height: 100%;
 		width: 100%;
 		overflow: auto;
@@ -159,7 +167,8 @@
 	}
 
 	.canvas {
-		background-color: whitesmoke;
+		color: var(--canvas-text-color);
+		background-color: var(--background-color);
 		flex: 1;
 		width: 0;
 	}
