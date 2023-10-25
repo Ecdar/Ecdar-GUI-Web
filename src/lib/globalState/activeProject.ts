@@ -119,11 +119,34 @@ class ProjectMember<T extends keyof Project>
 	}
 }
 
+/**
+ * This store subscribes to changes / can make changes on the `name` member of the active `Project`.
+ */
 export const name = new ProjectMember("name");
+
+/**
+ * This store subscribes to changes / can make changes on the `components` member of the active `Project`.
+ */
 export const components = new ProjectMember("components");
+
+/**
+ * This store subscribes to changes / can make changes on the `systems` member of the active `Project`.
+ */
 export const systems = new ProjectMember("systems");
+
+/**
+ * This store subscribes to changes / can make changes on the `queries` member of the active `Project`.
+ */
 export const queries = new ProjectMember("queries");
+
+/**
+ * This store subscribes to changes / can make changes on the `systemDeclarations` member of the active `Project`.
+ */
 export const systemDeclarations = new ProjectMember("systemDeclarations");
+
+/**
+ * This store subscribes to changes / can make changes on the `globalDeclarations` member of the active `Project`.
+ */
 export const globalDeclarations = new ProjectMember("globalDeclarations");
 
 type TActiveView = Project["components"][0] | Project["systems"][0] | undefined;
