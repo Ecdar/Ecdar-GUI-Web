@@ -5,59 +5,13 @@
 		Arrow_downward,
 		Arrow_upward,
 	} from "svelte-google-materialdesign-icons";
-	import { onMount } from "svelte";
 
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
 	let consoleContainer: HTMLElement;
 	let consoleBar: HTMLElement;
 
-	let frontEndErrors: string[] = [
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-		"this is error 1",
-	];
+	let frontEndErrors: string[] = [];
 	let backEndErrors: string[] = [];
 
 	const consoleInitialSize: number = 300;
@@ -293,6 +247,7 @@
 		position: relative;
 		height: 3.8em;
 		margin: auto;
+		padding: 0 1em;
 		border-top: 0em;
 		border-bottom: 0em;
 		border-style: solid;
