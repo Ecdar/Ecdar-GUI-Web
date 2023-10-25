@@ -100,7 +100,7 @@ activeModel.set(
 				id: "2",
 				sourceLocation: "1",
 				targetLocation: "3",
-				status: Status.INPUT,
+				status: Status.OUTPUT,
 				sync: "",
 				update: "",
 				nails: [
