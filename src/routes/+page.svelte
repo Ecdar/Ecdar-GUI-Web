@@ -4,6 +4,8 @@
 	import Console from "$lib/components/console/Console.svelte";
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
+	import Queries from "$lib/components/query/Queries.svelte";
+	import QueryNav from "$lib/components/query/QueryNav.svelte";
 
 	enum SidePanel {
 		Left,
@@ -72,22 +74,41 @@
 				<p>Left</p>
 			</div>
 		</div>
-		<!-- Left resize Panel -->
-		<div
-			role="button"
-			id="leftresizer"
-			class="resizer"
-			tabindex="-1"
-			on:pointerdown={(event) => {
-				startResizingSidePanel(event, SidePanel.Left);
-			}}
-		/>
-		<!-- Canvas -->
-		<div class="canvas">
-			<nav class="inner-nav2">Nav 2</nav>
-			<p>Canvas</p>
-			<DropDownMenu />
-			<LocationsWithContextMenu />
+    <!-- Left resize Panel -->
+    <div
+      role="button"
+      id="leftresizer"
+      class="resizer"
+      tabindex="-1"
+      on:pointerdown={(event) => {
+        startResizingSidePanel(event, SidePanel.Left);
+      }}
+    />
+    <!-- Canvas -->
+    <div class="canvas">
+      <nav class="inner-nav2">Nav 2</nav>
+      <p>Canvas</p>
+      <DropDownMenu />
+      <LocationsWithContextMenu />
+    </div>
+    <!-- Right resize Panel -->
+    <div
+      role="button"
+      id="rightresizer"
+      class="resizer"
+      tabindex="-1"
+      on:pointerdown={(event) => {
+        startResizingSidePanel(event, SidePanel.Right);
+      }}
+    />
+    <!-- Right side Panel -->
+    <div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
+      <nav class="inner-nav3">
+        <QueryNav />
+      </nav>
+      <div class="sidePanelContent">
+        <Queries />
+      </div>
 		</div>
 		<!-- Right resize Panel -->
 		<div
@@ -168,7 +189,8 @@
 	.sidePanelContent {
 		height: 100%;
 		width: 100%;
-		overflow: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
 		white-space: nowrap;
 	}
 
