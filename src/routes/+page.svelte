@@ -3,9 +3,9 @@
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 	import Components from "$lib/components/project/component/Components.svelte";
-	import Systems from "$lib/components/project/system/systems.svelte";
+	import Systems from "$lib/components/project/system/Systems.svelte";
 	import { Description } from "svelte-google-materialdesign-icons";
-	import Projectnav from "$lib/components/project/projectnav.svelte";
+	import Projectnav from "$lib/components/project/ProjectNav.svelte";
 	enum SidePanel {
 		Left,
 		Right,

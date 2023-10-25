@@ -12,7 +12,7 @@
 	}
 </script>
 
-<div id="query-nav">
+<div id="project-nav">
 	<div>
 		<h1>Project</h1>
 	</div>
@@ -23,7 +23,7 @@
 </div>
 
 <style>
-	#query-nav {
+	#project-nav {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
