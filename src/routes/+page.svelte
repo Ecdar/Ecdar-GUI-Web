@@ -100,7 +100,7 @@
 	<!-- Right resize Panel -->
 	<div
 		role="button"
-		id="leftresizer"
+		id="rightresizer"
 		class="resizer"
 		tabindex="-1"
 		on:pointerdown={(event) => {
