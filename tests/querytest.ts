@@ -65,8 +65,9 @@ test("delete a specific query", async ({ page }) => {
 			.getByPlaceholder("Query");
 
 		await expect(queryInput).toHaveValue("");
-		// await queryInput.fill(`Playwright ${i}`);
-		// await expect(queryInput).toHaveValue(`Playwright ${i}`);
+		await queryInput.fill(`Playwright ${i}`);
+		await queryInput.press("Enter");
+		await expect(queryInput).toHaveValue(`Playwright ${i}`);
 	}
 
 	await expect(page.locator(".query")).toHaveCount(3);
@@ -81,5 +82,18 @@ test("delete a specific query", async ({ page }) => {
 
 	await expect(queries).toHaveCount(2);
 
-	//await expect(queries.nth(0)).
+	await expect(queries.nth(0).getByPlaceholder("Query")).toHaveValue(
+		"Playwright 0",
+	);
+	await expect(queries.nth(1).getByPlaceholder("Query")).toHaveValue(
+		"Playwright 2",
+	);
+});
+
+test("can change select menu option", async ({ page }) => {
+	await page.click("#add-query");
+	// 	await page
+	// 		.locator("#query-menu-1")
+	// 		.getByRole("button", { name: "" })
+	// 		.click();
 });

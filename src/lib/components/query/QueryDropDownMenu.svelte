@@ -30,7 +30,6 @@
 				text="Run Periodically"
 				click={(event) => {
 					isPeriodic = !isPeriodic;
-					event?.stopImmediatePropagation();
 				}}
 			/>
 		{:else}
@@ -39,7 +38,6 @@
 				text="Run Periodically"
 				click={(event) => {
 					isPeriodic = !isPeriodic;
-					event?.stopImmediatePropagation();
 				}}
 			/>
 		{/if}
