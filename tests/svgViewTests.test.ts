@@ -7,7 +7,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("drag and drop a location to a new position", async ({ page }) => {
-
 	const svg = page.locator("#node-1");
 
 	// Get the origiganl position of the element
@@ -34,7 +33,6 @@ test("drag and drop a location to a new position", async ({ page }) => {
 });
 
 test("drag and drop a nail", async ({ page }) => {
-
 	const svg = page.locator("#node-\\!");
 
 	// Get the origiganl position of the element
@@ -61,32 +59,34 @@ test("drag and drop a nail", async ({ page }) => {
 });
 
 test("see if the svg line moves with the nodes", async ({ page }) => {
-
 	const location = page.locator("#node-3");
 
 	// get the line location between the location and the nail
 	const line = page.locator("#edge-OUTPUT-1");
-	
+
 	// get the original location of the line
 	const oldSourceLocation: iPoint = {
 		x: parseInt((await line.getAttribute("x1")) ?? "1"),
 		y: parseInt((await line.getAttribute("y1")) ?? "1"),
 	};
-	
+
 	const oldTargetLocation: iPoint = {
 		x: parseInt((await line.getAttribute("x2")) ?? "1"),
 		y: parseInt((await line.getAttribute("y2")) ?? "1"),
 	};
 
 	// move the location by an offset of 80
-	await location.dragTo(location, { targetPosition: { x: 20, y: 100 }, force: true });
-	
+	await location.dragTo(location, {
+		targetPosition: { x: 20, y: 100 },
+		force: true,
+	});
+
 	// get the new location of the line
 	const newSourceLocation: iPoint = {
 		x: parseInt((await line.getAttribute("x1")) ?? "1"),
 		y: parseInt((await line.getAttribute("y1")) ?? "1"),
 	};
-	
+
 	const newTargetLocation: iPoint = {
 		x: parseInt((await line.getAttribute("x2")) ?? "1"),
 		y: parseInt((await line.getAttribute("y2")) ?? "1"),
@@ -95,5 +95,4 @@ test("see if the svg line moves with the nodes", async ({ page }) => {
 	// check if the line has moved (target is the location)
 	expect(newSourceLocation).toEqual(oldSourceLocation);
 	expect(newTargetLocation).not.toEqual(oldTargetLocation);
-	
 });
