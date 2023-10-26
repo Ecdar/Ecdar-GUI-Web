@@ -6,7 +6,7 @@
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 	import Components from "$lib/components/project/component/Components.svelte";
 	import Systems from "$lib/components/project/system/Systems.svelte";
-	import Projectnav from "$lib/components/project/ProjectNav.svelte";
+	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import { Description } from "svelte-google-materialdesign-icons";
@@ -73,7 +73,7 @@
 	{:else}
 		<!-- Left side Panel -->
 		<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
-			<nav class="inner-nav1"><Projectnav /></nav>
+			<nav class="inner-nav1"><ProjectNav /></nav>
 			<div class="sidePanelContent">
 				<div class="global-dec">
 					<div class="circle" style="background-color: grey">
