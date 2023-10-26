@@ -14,6 +14,7 @@
 		signal = controller.signal;
 		window.addEventListener("pointermove", onPointerMove, { signal });
 		window.addEventListener("pointerup", onPointerUp, { signal });
+		window.addEventListener("pointercancel", onPointerUp, { signal });
 	}
 
 	//Updates the position of the svg
