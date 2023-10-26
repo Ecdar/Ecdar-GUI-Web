@@ -72,21 +72,21 @@
 		<StartScreen />
 	{:else}
 		<!-- Left side Panel -->
-	<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
-		<nav class="inner-nav1"><Projectnav /></nav>
-		<div class="sidePanelContent">
-			<div class="global-dec">
-				<div class="circle" style="background-color: grey">
-					<div class="icon">
-						<Description size="100%" />
+		<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
+			<nav class="inner-nav1"><Projectnav /></nav>
+			<div class="sidePanelContent">
+				<div class="global-dec">
+					<div class="circle" style="background-color: grey">
+						<div class="icon">
+							<Description size="100%" />
+						</div>
 					</div>
+					<p>Global declaration</p>
 				</div>
-				<p>Global declaration</p>
+				<Components />
+				<Systems />
 			</div>
-			<Components />
-			<Systems />
 		</div>
-	</div>
 		<!-- Left resize Panel -->
 		<div
 			role="button"
