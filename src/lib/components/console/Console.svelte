@@ -247,6 +247,7 @@
 		position: relative;
 		height: 3.8em;
 		margin: auto;
+		padding: 0 1em;
 		border-top: 0em;
 		border-bottom: 0em;
 		border-style: solid;
