@@ -94,7 +94,7 @@ activeModel.set(
 				sync: "",
 				update: "",
 			},
-			// Add more edge objects here for additional connections
+			// Add more edge objects here for additional connection
 			{
 				guard: "c < 8",
 				id: "2",
