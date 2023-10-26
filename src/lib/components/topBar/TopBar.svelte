@@ -2,7 +2,21 @@
 	import TopBarBtn from "$lib/components/topBar/TopBarBtn.svelte";
 	import DropDownBtn from "$lib/components/topBar/DropDownBtn.svelte";
 	import DropDownCheckBox from "$lib/components/topBar/DropDownCheckBox.svelte";
-	import * as Icon from "svelte-google-materialdesign-icons";
+	import {
+		Note_add,
+		File_open,
+		Save,
+		Done_all,
+		Image,
+		Arrow_left,
+		Arrow_right,
+		Arrow_drop_down,
+		Arrow_drop_up,
+		Window,
+		Settings_input_composite,
+		Help,
+		Error,
+	} from "svelte-google-materialdesign-icons";
 </script>
 
 <!--
@@ -18,35 +32,35 @@
 <div>
 	<TopBarBtn name="File">
 		<DropDownBtn
-			icon={Icon.Note_add}
+			icon={Note_add}
 			name="New Project"
 			on:click={() => {
 				console.log("New Project");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.File_open}
+			icon={File_open}
 			name="Open Project"
 			on:click={() => {
 				console.log("Open Project");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.File_open}
+			icon={File_open}
 			name="Recent Projects"
 			on:click={() => {
 				console.log("Recent Projects");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Save}
+			icon={Save}
 			name="Save Project"
 			on:click={() => {
 				console.log("Save Project");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Save}
+			icon={Save}
 			name="Save Project as"
 			on:click={() => {
 				console.log("Save Project as");
@@ -54,21 +68,21 @@
 		/>
 
 		<DropDownBtn
-			icon={Icon.Done_all}
+			icon={Done_all}
 			name="New Test Plan"
 			on:click={() => {
 				console.log("New Test Plan");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Image}
+			icon={Image}
 			name="Export as Png"
 			on:click={() => {
 				console.log("Export as Png");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Image}
+			icon={Image}
 			name="Export without border as Png"
 			on:click={() => {
 				console.log("Export without border as Png");
@@ -81,28 +95,28 @@
 <div>
 	<TopBarBtn name="Edit">
 		<DropDownBtn
-			icon={Icon.Arrow_left}
+			icon={Arrow_left}
 			name="Move All Nodes Left"
 			on:click={() => {
 				console.log("Move All Nodes Left");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Arrow_right}
+			icon={Arrow_right}
 			name="Move All Nodes Right"
 			on:click={() => {
 				console.log("Move All Nodes Right");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Arrow_drop_up}
+			icon={Arrow_drop_up}
 			name="Move All Nodes Up"
 			on:click={() => {
 				console.log("Move All Nodes Up");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Arrow_drop_down}
+			icon={Arrow_drop_down}
 			name="Move All Nodes Down"
 			on:click={() => {
 				console.log("Move All Nodes Down");
@@ -148,7 +162,7 @@
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Window}
+			icon={Window}
 			name="Split canvas"
 			on:click={() => {
 				console.log("Split canvas");
@@ -180,7 +194,7 @@
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Settings_input_composite}
+			icon={Settings_input_composite}
 			name="Engine Options"
 			on:click={() => {
 				console.log("Engine Options");
@@ -193,21 +207,21 @@
 <div>
 	<TopBarBtn name="Help">
 		<DropDownBtn
-			icon={Icon.Help}
+			icon={Help}
 			name="Modelling Help"
 			on:click={() => {
 				console.log("Modelling Help");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Help}
+			icon={Help}
 			name="Testing Help"
 			on:click={() => {
 				console.log("Testing Help");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Error}
+			icon={Error}
 			name="About"
 			on:click={() => {
 				console.log("About");
