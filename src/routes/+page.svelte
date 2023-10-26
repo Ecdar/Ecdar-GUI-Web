@@ -103,9 +103,11 @@
 		/>
 		<!-- Right side Panel -->
 		<div class="side-panel" style="flex-basis: {rightSidePanelWidth}px">
-			<nav class="inner-nav3">Nav 3</nav>
-			<div class="side-panel-content">
-				<p>Right</p>
+			<nav class="inner-nav3">
+				<QueryNav />
+			</nav>
+			<div class="sidePanelContent">
+				<Queries />
 			</div>
 		</div>
 	{/if}
