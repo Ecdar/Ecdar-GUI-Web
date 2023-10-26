@@ -14,13 +14,13 @@
 	let frontEndErrors: string[] = [];
 	let backEndErrors: string[] = [];
 
-	const consoleInitialSize: string = "20em";
-	let consoleExtendedSize: string = consoleInitialSize;
-	let consoleCollapsedSize: string = "3.25em";
+	const consoleInitialSize: number = 300;
+	let consoleExtendedSize: number = consoleInitialSize;
+	let consoleCollapsedSize: number = 0;
 	let consoleSize = consoleCollapsedSize;
 
-	let consoleButtonColorOff: string = "slategrey";
-	let consoleButtonColorOn: string = "rgb(159, 174, 189)";
+	let consoleButtonColorOff: string = "var(--console-unselectedtab-color)";
+	let consoleButtonColorOn: string = "var(--console-selectedtab-color)";
 
 	/**
 	 * Function for resizing the console
@@ -28,7 +28,7 @@
 	 */
 	function resizeConsolePanel(event: PointerEvent) {
 		event.preventDefault();
-		consoleSize = (window.innerHeight - event.y).toString() + "px";
+		consoleSize = window.innerHeight - event.y - consoleBar.offsetHeight;
 		if (window.innerHeight - event.y < consoleBar.clientHeight) {
 			consoleSize = consoleInitialSize;
 			stopResizingConsolePanel(event);
@@ -120,12 +120,8 @@
 	}
 </script>
 
-<div
-	class="outerOverflow"
-	style="height: {consoleSize};"
-	bind:this={consoleContainer}
->
-	<div bind:this={consoleBar}>
+<div class="outerOverflow" bind:this={consoleContainer}>
+	<div bind:this={consoleBar} id="console-bar">
 		<div
 			role="button"
 			id="consoleResizer"
@@ -142,9 +138,9 @@
 			on:click={changeConsoleCollapsableTextAndHeight}
 		>
 			{#if currentlyCollapsed}
-				<Arrow_upward size="18" />
+				<Arrow_upward size="18" color="white" />
 			{:else}
-				<Arrow_downward size="18" />
+				<Arrow_downward size="18" color="white" />
 			{/if}
 		</button>
 
@@ -173,7 +169,7 @@
 			Backend
 		</button>
 	</div>
-	<div class="console">
+	<div class="console" style="height: {consoleSize}px;">
 		{#if currentTab == Tabs.Frontend}
 			{#each frontEndErrors as error}
 				<ConsoleLine componentText={error} />
@@ -188,16 +184,19 @@
 
 <style>
 	.console {
-		background-color: rgb(159, 174, 189);
+		background-color: var(--background-color);
 		width: 100%;
 		height: 100%;
 		overflow-y: scroll;
+	}
+
+	#console-bar {
 		min-height: 2.5em;
 	}
 
 	#consoleResizer {
 		background-color: black;
-		height: 0.3em;
+		height: 0.1em;
 	}
 
 	.console::-webkit-scrollbar {
@@ -206,19 +205,19 @@
 
 	.console::-webkit-scrollbar-track {
 		box-shadow: inset 0 0 1em grey;
-		background: lightslategray;
+		background: var(--sidebar-background-color);
 	}
 
 	.console::-webkit-scrollbar-thumb {
-		background: rgb(48, 54, 61);
+		background: var(--console-scrollbar-thumb-color);
 	}
 
 	.console::-webkit-scrollbar-thumb:hover {
-		background: rgb(33, 37, 42);
+		background: var(--console-scrollbar-thumbhover-color);
 	}
 
 	.collapsible {
-		background-color: lightslategrey;
+		background-color: var(--console-topbar-background-color);
 		float: right;
 		position: relative;
 		box-shadow: 0 3px 11px rgba(28, 28, 28, 0.55);
@@ -231,7 +230,7 @@
 	}
 
 	.collapsible:hover {
-		background-color: slategrey;
+		background-color: var(--console-selectedtab-color);
 	}
 
 	.outerOverflow {
@@ -239,11 +238,12 @@
 		margin: 0%;
 		padding: 0%;
 		flex-direction: column;
-		background-color: slategrey;
+		background-color: var(--console-topbar-background-color);
 		overflow: hidden;
 	}
 
 	.consoleTab {
+		color: var(--navigationbar-text-color);
 		position: relative;
 		height: 3.8em;
 		margin: auto;

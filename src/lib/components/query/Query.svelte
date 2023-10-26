@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {
-		Question_mark,
+		Help,
 		Done,
 		Warning,
 		Error,
@@ -12,7 +12,7 @@
 	export let name: string;
 	export let comment: string = "Comment";
 	export let server: string;
-	export let color: string = "lightgrey";
+	export let color: string = "var(--queries-element-color)";
 
 	const typeOptions = ["Spec", "Imp", "Con"];
 	const serverOptions = ["Reveaal"];
@@ -21,14 +21,14 @@
 <div class="query">
 	<div class="column">
 		<div class="left-column" style="background-color: {color}">
-			{#if color == "limegreen"}
-				<Done />
-			{:else if color == "yellow"}
-				<Warning />
-			{:else if color === "red"}
-				<Error />
+			{#if color === "var(--query-success-color)"}
+				<Done color="black" />
+			{:else if color === "var(--query-warning-color)"}
+				<Warning color="black" />
+			{:else if color === "var(--query-error-color)"}
+				<Error color="black" />
 			{:else}
-				<Question_mark />
+				<Help color="blacxk" />
 			{/if}
 			<select>
 				{#each typeOptions as typeOption}
@@ -64,12 +64,13 @@
 
 <style>
 	.query {
-		background-color: lightgrey;
+		background-color: var(--sidebar-element-color);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
 		border-bottom: 1px solid black;
+		color: var(--sidebar-text-color);
 	}
 
 	.column {
@@ -98,5 +99,7 @@
 	input[type="text"] {
 		width: 100%;
 		min-width: 5em;
+		background-color: var(--queries-input-background-color);
+		color: var(--sidebar-text-color);
 	}
 </style>

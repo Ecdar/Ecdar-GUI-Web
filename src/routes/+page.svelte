@@ -2,8 +2,6 @@
 	import { project } from "$lib/globalState/activeProject";
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
 	import Console from "$lib/components/console/Console.svelte";
-	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
-	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 	import Components from "$lib/components/project/component/Components.svelte";
 	import Systems from "$lib/components/project/system/Systems.svelte";
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
@@ -50,7 +48,7 @@
 	}
 
 	/**
-	 * Function for stopping resizing a sid panel
+	 * Function for stopping resizing a side panel
 	 * @param event
 	 */
 	function stopResizingSidePanel(event: PointerEvent) {
@@ -66,7 +64,9 @@
 </script>
 
 <!-- Top navigation Panel -->
-<nav id="main-nav"></nav>
+<nav id="main-nav">
+	<p>Main Nav</p>
+</nav>
 <main bind:this={mainContainer}>
 	{#if $project === undefined}
 		<StartScreen />
@@ -75,7 +75,10 @@
 		<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
 			<nav class="inner-nav1"><ProjectNav /></nav>
 			<div class="sidePanelContent">
-				<div class="global-dec">
+				<div
+					class="global-dec"
+					style="background-color: var(--sidebar-element-color);"
+				>
 					<div class="circle" style="background-color: grey">
 						<div class="icon">
 							<Description size="100%" />
@@ -100,9 +103,6 @@
 		<!-- Canvas -->
 		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
-			<p>Canvas</p>
-			<DropDownMenu />
-			<LocationsWithContextMenu />
 		</div>
 		<!-- Right resize Panel -->
 		<div
@@ -131,11 +131,13 @@
 <style>
 	nav {
 		height: 5em;
-		background-color: slategrey;
+		border: var(--main-navigationbar-border);
 		flex-shrink: 0;
 	}
 
 	#main-nav {
+		color: var(--navigationbar-text-color);
+		background-color: var(--main-navigationbar-color);
 		height: 2.5em;
 		min-height: 2.5em;
 	}
@@ -148,13 +150,19 @@
 
 	.inner-nav1,
 	.inner-nav3 {
-		background-color: slategrey;
-		box-shadow: lightslategray 0px 0px 1em;
+		background-color: var(--main-navigationbar-color);
+		border: var(--main-innernavigationbar-border);
 	}
 
 	.inner-nav2 {
-		background-color: lightslategrey;
-		box-shadow: slategrey 0px 0px 1em;
+		background-color: var(--canvas-topbar-color);
+		border: none;
+	}
+
+	.inner-nav1,
+	.inner-nav2,
+	.inner-nav3 {
+		color: var(--navigationbar-text-color);
 	}
 
 	.global-dec {
@@ -183,14 +191,13 @@
 	}
 
 	.sidePanel {
-		background-color: whitesmoke;
 		flex-basis: 10em;
 		overflow: hidden;
-		display: flex;
-		flex-direction: column;
+		background-color: var(--background-color);
 	}
 
 	.sidePanelContent {
+		color: var(--sidebar-text-color);
 		height: 100%;
 		width: 100%;
 		overflow-y: auto;
@@ -200,13 +207,19 @@
 
 	.resizer {
 		background-color: black;
-		flex-basis: 0.3em;
+		flex-basis: 0.1em;
 		cursor: col-resize;
 	}
 
 	.canvas {
-		background-color: whitesmoke;
-		flex: 1;
-		width: 0;
+		color: var(--canvas-text-color);
+		background-color: var(--background-color);
+		flex-grow: 1;
+	}
+
+	.canvas,
+	.sidePanel {
+		display: flex;
+		flex-direction: column;
 	}
 </style>
