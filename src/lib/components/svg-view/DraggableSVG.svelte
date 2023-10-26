@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { iPoint } from "$lib/interfaces/iPoint";
-	import { activeView } from "$lib/globalState/activeProject";
+	import { activeView } from "$lib/globalState/activeProject"
 	import { scale } from "$lib/globalState/scaleStore";
 
 	export let position: iPoint;
