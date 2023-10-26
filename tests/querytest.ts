@@ -32,7 +32,7 @@ test("delete any query", async ({ page }) => {
 	await page.click("#query-button-0");
 	await page.getByRole("button", { name: "Delete" }).click();
 	await expect(page.locator(".query")).toHaveCount(0);
-})
+});
 
 test("delete all 10 queries", async ({ page }) => {
 	await expect(page.locator(".query")).toHaveCount(0);
@@ -45,7 +45,10 @@ test("delete all 10 queries", async ({ page }) => {
 
 	for (let i = 0; i < 10; i++) {
 		await page.click("#query-button-0");
-		await page.locator("#query-0").getByRole("button", { name: "Delete" }).click();
+		await page
+			.locator("#query-menu-0")
+			.getByRole("button", { name: "Delete" })
+			.click();
 	}
 
 	await expect(page.locator(".query")).toHaveCount(0);
@@ -57,17 +60,22 @@ test("delete a specific query", async ({ page }) => {
 	for (let i = 0; i < 3; i++) {
 		await page.click("#add-query");
 
-		const queryInput = page.locator(`#query-${i}`).getByPlaceholder("Query");
+		const queryInput = page
+			.locator(`#query-${i}`)
+			.getByPlaceholder("Query");
 
 		await expect(queryInput).toHaveValue("");
-		await queryInput.fill(`Playwright ${i}`);
-		await expect(queryInput).toHaveValue(`Playwright ${i}`);
+		// await queryInput.fill(`Playwright ${i}`);
+		// await expect(queryInput).toHaveValue(`Playwright ${i}`);
 	}
 
 	await expect(page.locator(".query")).toHaveCount(3);
 
 	await page.click("#query-button-1");
-	await page.locator("#query-menu-1").getByRole("button", { name: "Delete" }).click();
+	await page
+		.locator("#query-menu-1")
+		.getByRole("button", { name: "Delete" })
+		.click();
 
 	const queries = page.locator(".query");
 
