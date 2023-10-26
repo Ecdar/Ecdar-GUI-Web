@@ -5,6 +5,9 @@
 	//Set dafult button name and icon
 	export let name: string = "Default";
 	export let icon: ComponentType = EmptyElement;
+	export let checkbox: boolean = false;
+
+	let checkboxMarked:boolean = false;
 
 	//Set icon attributes
 	const iconCtx = {
@@ -13,12 +16,23 @@
 		variation: "filled",
 	};
 	setContext("iconCtx", iconCtx);
+
+	
+
 </script>
 
 <!--Make each dropdown item, into button-->
 
-<button class="dropdown-item" on:click>
-	<svelte:component this={icon}></svelte:component>
+<button class="dropdown-item" on:click={() =>{checkboxMarked = !checkboxMarked}}>
+	{#if checkbox}
+		{#if checkboxMarked}
+			<svelte:component this={icon} color="black"></svelte:component>
+		{:else}
+			<svelte:component this={icon} color="transparent"></svelte:component>
+		{/if}
+	{:else}
+		<svelte:component this={icon}></svelte:component>
+	{/if}
 	<div class="align-text">{name}</div>
 </button>
 
@@ -38,4 +52,5 @@
 	.dropdown-item:hover {
 		filter: brightness(0.9);
 	}
+	
 </style>

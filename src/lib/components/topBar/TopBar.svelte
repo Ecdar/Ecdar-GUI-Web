@@ -2,46 +2,48 @@
 	import TopBarBtn from "$lib/components/topBar/TopBarBtn.svelte";
 	import DropDownBtn from "$lib/components/topBar/DropDownBtn.svelte";
 	import { load } from "$lib/classes/project";
-	import * as Icon from "svelte-google-materialdesign-icons";
+	import * as Icon from "svelte-google-materialdesign-icons"
+
+	
 </script>
 
 <!--
 	- TopBarBtn: The button on the navbar, where name equal text displayed in button
-	- DropDownBtn: An element in the dropdown menu as a button, where name equal to text displayed in button and an icon, which can be empty
+	- DropDownBtn: An element in the dropdown menu as a button, where name equal to text displayed in button and icon which can be empty
 -->
 <!--File top bar button-->
 <div>
 	<TopBarBtn name="File">
 		<DropDownBtn
-			icon={Icon.Note_add}
+			icon = {Icon.Note_add}
 			name="New Project"
 			on:click={() => {
 				console.log("New Project");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.File_open}
+			icon = {Icon.File_open}
 			name="Open Project"
 			on:click={async () => {
 				if (load != undefined) await load();
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.File_open}
+			icon = {Icon.File_open}
 			name="Recent Projects"
 			on:click={() => {
 				console.log("Recent Projects");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Save}
+			icon = {Icon.Save}
 			name="Save Project"
 			on:click={() => {
 				console.log("Save Project");
 			}}
 		/>
 		<DropDownBtn
-			icon={Icon.Save}
+			icon = {Icon.Save}
 			name="Save Project as"
 			on:click={() => {
 				console.log("Save Project as");
@@ -111,18 +113,24 @@
 	<TopBarBtn name="View">
 		<DropDownBtn
 			name="Project Panel"
+			icon={Icon.Done}
+			checkbox = {true}
 			on:click={() => {
 				console.log("Project Panel");
 			}}
 		/>
 		<DropDownBtn
 			name="Query Panel"
+			icon={Icon.Done}
+			checkbox = {true}
 			on:click={() => {
 				console.log("Query Panel");
 			}}
 		/>
 		<DropDownBtn
 			name="Autoscaling"
+			icon={Icon.Done}
+			checkbox = {true}
 			on:click={() => {
 				console.log("Autoscaling");
 			}}
@@ -148,12 +156,18 @@
 	<TopBarBtn name="Options">
 		<DropDownBtn
 			name="UI cache"
+			icon={Icon.Done}
+			checkbox = {true}
 			on:click={() => {
+				console.log();
 				console.log("UI cache");
 			}}
 		/>
+
 		<DropDownBtn
 			name="Periodic query execution"
+			icon={Icon.Done}
+			checkbox = {true}
 			on:click={() => {
 				console.log("Periodic query execution");
 			}}
@@ -194,6 +208,7 @@
 		/>
 	</TopBarBtn>
 </div>
+
 
 <style>
 	div {
