@@ -107,25 +107,6 @@
 			<div class="side-panel-content">
 				<p>Right</p>
 			</div>
-			<!-- Right resize Panel -->
-			<div
-				role="button"
-				id="rightresizer"
-				class="resizer"
-				tabindex="-1"
-				on:pointerdown={(event) => {
-					startResizingSidePanel(event, SidePanel.Right);
-				}}
-			/>
-			<!-- Right side Panel -->
-			<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
-				<nav class="inner-nav3">
-					<QueryNav />
-				</nav>
-				<div class="sidePanelContent">
-					<Queries />
-				</div>
-			</div>
 		</div>
 	{/if}
 </main>
