@@ -81,7 +81,7 @@
 		y2={index === lines.length - 1 ? calculateY2(line) : line.to.y}
 		marker-end={index === lines.length - 1 ? "url(#arrowhead)" : ""}
 		stroke-dasharray={edgeType === Status.INPUT ? "10,10" : ""}
-		id="edge{edgeType}{index}}"
+		id="edge-{edgeType}-{index}"
 	/>
 {/each}
 

@@ -18,8 +18,6 @@
 		y1={parentPosition.y}
 		x2={position.x}
 		y2={position.y}
-		stroke="gray"
-		stroke-width="2"
 	/>
 
 	<!-- text label background -->
@@ -43,3 +41,10 @@
 		{text}
 	</text>
 </DraggableSvg>
+
+<style>
+	line {
+		stroke: gray;
+		stroke-width: 2;
+	}
+</style>

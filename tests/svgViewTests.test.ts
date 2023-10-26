@@ -1,15 +1,14 @@
 import type { iPoint } from "$lib/interfaces/iPoint";
-import { expect, test } from "@playwright/test";
-import { beforeEach } from "vitest";
+import { test, expect } from "@playwright/test";
 
-beforeEach(async ({ page }) => {
-	
-})
+test.beforeEach(async ({ page }) => {
+	await page.goto("/");
+	await page.click("#start-new-project");
+});
 
 test("drag and drop a location to a new position", async ({ page }) => {
-	await page.goto("/");
 
-	const svg = page.locator("#node1");
+	const svg = page.locator("#node-1");
 
 	// Get the origiganl position of the element
 	const svgY = parseInt((await svg.getAttribute("cy")) ?? "1");
@@ -35,9 +34,8 @@ test("drag and drop a location to a new position", async ({ page }) => {
 });
 
 test("drag and drop a nail", async ({ page }) => {
-	await page.goto("/");
 
-	const svg = page.locator("#node\\!");
+	const svg = page.locator("#node-\\!");
 
 	// Get the origiganl position of the element
 	const svgY = parseInt((await svg.getAttribute("cy")) ?? "1");
@@ -63,13 +61,11 @@ test("drag and drop a nail", async ({ page }) => {
 });
 
 test("see if the svg line moves with the nodes", async ({ page }) => {
-	await page.goto("/");
 
-	const location = page.locator("#node3");
-	const nail = page.locator("#node\\!");
+	const location = page.locator("#node-3");
 
 	// get the line location between the location and the nail
-	const line = page.locator("edgeINPUT1");
+	const line = page.locator("#edge-OUTPUT-1");
 	
 	// get the original location of the line
 	const oldSourceLocation: iPoint = {
@@ -97,8 +93,7 @@ test("see if the svg line moves with the nodes", async ({ page }) => {
 	};
 
 	// check if the line has moved (target is the location)
-	expect(newSourceLocation).not.toBe(oldSourceLocation);
-	expect(newTargetLocation).not.toBe(oldTargetLocation);
-
+	expect(newSourceLocation).toEqual(oldSourceLocation);
+	expect(newTargetLocation).not.toEqual(oldTargetLocation);
 	
 });
