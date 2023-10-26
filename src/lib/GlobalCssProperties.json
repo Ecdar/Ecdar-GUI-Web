@@ -29,6 +29,33 @@
 						"valueTwo": 0.34901960784,
 						"valueThree": 0.38823529411
 					}
+				},
+				{
+					"attributeName": "--query-success-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.31372549019,
+						"valueTwo": 0.54901960784,
+						"valueThree": 0.27450980392
+					}
+				},
+				{
+					"attributeName": "--query-warning-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.98431372549,
+						"valueTwo": 0.75294117647,
+						"valueThree": 0.17647058823
+					}
+				},
+				{
+					"attributeName": "--query-error-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.82745098039,
+						"valueTwo": 0.18431372549,
+						"valueThree": 0.18431372549
+					}
 				}
 			],
 			"border": [
@@ -145,6 +172,33 @@
 						"valueTwo": 0,
 						"valueThree": 0
 					}
+				},
+				{
+					"attributeName": "--sidebar-element-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.93333333333,
+						"valueTwo": 0.93333333333,
+						"valueThree": 0.93333333333
+					}
+				},
+				{
+					"attributeName": "--sidebar-element-hover-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.81176470588,
+						"valueTwo": 0.84705882352,
+						"valueThree": 0.86274509803
+					}
+				},
+				{
+					"attributeName": "--queries-input-background-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 1,
+						"valueTwo": 1,
+						"valueThree": 1
+					}
 				}
 			]
 		},
@@ -230,6 +284,33 @@
 						"valueOne": 1,
 						"valueTwo": 1,
 						"valueThree": 1
+					}
+				},
+				{
+					"attributeName": "--sidebar-element-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.19215686274,
+						"valueTwo": 0.21176470588,
+						"valueThree": 0.23529411764
+					}
+				},
+				{
+					"attributeName": "--sidebar-element-hover-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.12215686274,
+						"valueTwo": 0.23176470588,
+						"valueThree": 0.25529411764
+					}
+				},
+				{
+					"attributeName": "--queries-input-background-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0.05490196078,
+						"valueTwo": 0.06666666666,
+						"valueThree": 0.09019607843
 					}
 				}
 			]

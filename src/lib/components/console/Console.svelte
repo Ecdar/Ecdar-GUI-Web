@@ -230,7 +230,7 @@
 	}
 
 	.collapsible:hover {
-		background-color: slategrey;
+		background-color: var(--console-selectedtab-color);
 	}
 
 	.outerOverflow {

@@ -28,18 +28,17 @@
 		width: 100%;
 	}
 	.system {
-		background-color: #eceff1;
+		background-color: var(--sidebar-element-color);
 		cursor: pointer;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 		padding: 10px;
 		border-bottom: 1px solid black;
-		transition: background-color 200ms;
 		height: 60px;
 	}
 	.system:hover {
-		background-color: #cfd8dc;
+		background-color: var(--sidebar-element-hover-color);
 	}
 	.icon {
 		display: flex;

@@ -77,7 +77,10 @@
 		<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
 			<nav class="inner-nav1"><ProjectNav /></nav>
 			<div class="sidePanelContent">
-				<div class="global-dec">
+				<div
+					class="global-dec"
+					style="background-color: var(--sidebar-element-color);"
+				>
 					<div class="circle" style="background-color: grey">
 						<div class="icon">
 							<Description size="100%" />
