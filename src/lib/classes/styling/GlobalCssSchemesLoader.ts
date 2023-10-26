@@ -7,7 +7,7 @@ import GlobalCssProperties from "../../GlobalCssProperties.json";
 import type { z } from "zod";
 
 /**
- * Class for handling global css schemes loader
+ * Class for handling the loading of different properties based on active media features
  */
 class GlobalCssSchemesLoader {
 	private _window: Window;
