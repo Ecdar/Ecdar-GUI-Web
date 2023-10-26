@@ -199,6 +199,15 @@
 						"valueTwo": 1,
 						"valueThree": 1
 					}
+				},
+				{
+					"attributeName": "--canvas-action-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 0,
+						"valueTwo": 0,
+						"valueThree": 0
+					}
 				}
 			]
 		},
@@ -311,6 +320,15 @@
 						"valueOne": 0.05490196078,
 						"valueTwo": 0.06666666666,
 						"valueThree": 0.09019607843
+					}
+				},
+				{
+					"attributeName": "--canvas-action-color",
+					"color": {
+						"colorGamut": "display-p3",
+						"valueOne": 1,
+						"valueTwo": 1,
+						"valueThree": 1
 					}
 				}
 			]
