@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ComponentType } from "svelte";
 
-	export let click: () => void;
+	export let click: (event: MouseEvent) => void;
 
 	export let icon: ComponentType;
 

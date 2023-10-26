@@ -1,58 +1,87 @@
 <script lang="ts">
-	import {
-		Question_mark,
-		Done,
-		Warning,
-		Error,
-		Arrow_right,
-		More_vert,
-	} from "svelte-google-materialdesign-icons";
+	import { Arrow_right, More_vert } from "svelte-google-materialdesign-icons";
+	import { Backend } from "$lib/classes/automaton/Backend";
+	import QueryDropDownMenu from "./QueryDropDownMenu.svelte";
 
-	export let type: string;
-	export let name: string;
-	export let comment: string = "Comment";
-	export let server: string;
-	export let color: string = "lightgrey";
+	export let query: string;
+	export let comment: string;
+	export let isPeriodic: boolean;
+	export let backend: Backend;
+	export let index: number;
 
-	const typeOptions = ["Spec", "Imp", "Con"];
-	const serverOptions = ["Reveaal"];
+	let [type, name] = query.split(":");
+
+	const typeOptions: Record<string, string> = {
+		specification: "Spec",
+		implementation: "Imp",
+		consistency: "Con",
+		reachability: "E<>",
+		refinement: "<=",
+		"local-consistensy": "LCon",
+		"bisim-minim": "Bsim",
+		"get-component": "Get",
+	};
+
+	const serverOptions: Record<string, Backend> = {
+		"J-Ecdar": Backend.J_ECDAR,
+		Reveaal: Backend.REVEAAL,
+	};
+
+	function onTypeChange(event: Event) {
+		type = (event.target as HTMLSelectElement).value;
+		query = `${type}:${name}`;
+	}
+
+	function onNameChange(event: Event) {
+		name = (event.target as HTMLInputElement).value;
+		query = `${type}:${name}`;
+	}
+
+	function onCommentChange(event: Event) {
+		comment = (event.target as HTMLInputElement).value;
+	}
+
+	function onBackendChange(event: Event) {
+		backend = serverOptions[(event.target as HTMLSelectElement).value];
+	}
 </script>
 
-<div class="query">
+<div class="query" id="query-{index}">
 	<div class="column">
-		<div class="left-column" style="background-color: {color}">
-			{#if color == "limegreen"}
-				<Done />
-			{:else if color == "yellow"}
-				<Warning />
-			{:else if color === "red"}
-				<Error />
-			{:else}
-				<Question_mark />
-			{/if}
-			<select>
-				{#each typeOptions as typeOption}
-					{#if typeOption === type}
-						<option selected>{typeOption}</option>
+		<div class="left-column">
+			<select on:change={onTypeChange}>
+				{#each Object.entries(typeOptions) as [full, short]}
+					{#if full === type}
+						<option value={full} selected>{short}</option>
 					{:else}
-						<option>{typeOption}</option>
+						<option value={full}>{short}</option>
 					{/if}
 				{/each}
 			</select>
 		</div>
 	</div>
 	<div class="column grow">
-		<input type="text" value={name} />
-		<input type="text" placeholder="Comment" value={comment} />
+		<input
+			type="text"
+			placeholder="Query"
+			value={name || ""}
+			on:change={onNameChange}
+		/>
+		<input
+			type="text"
+			placeholder="Comment"
+			value={comment || ""}
+			on:change={onCommentChange}
+		/>
 	</div>
 	<div class="column">
 		<div class="group">
 			<Arrow_right />
-			<More_vert />
+			<QueryDropDownMenu bind:isPeriodic {index} />
 		</div>
-		<select>
-			{#each serverOptions as serverOption}
-				{#if serverOption === server}
+		<select on:change={onBackendChange}>
+			{#each Object.keys(serverOptions) as serverOption, index}
+				{#if index === backend}
 					<option selected>{serverOption}</option>
 				{:else}
 					<option>{serverOption}</option>
@@ -78,6 +107,7 @@
 		align-items: center;
 		padding-right: 1em;
 	}
+
 	.left-column {
 		display: flex;
 		flex-direction: column;

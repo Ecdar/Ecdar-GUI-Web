@@ -1,46 +1,16 @@
 <script lang="ts">
 	import Query from "$lib/components/query/Query.svelte";
-
-	const queries = [
-		{
-			name: "Admin1",
-			type: "Spec",
-			server: "Reveaal",
-			color: "limegreen",
-		},
-		{
-			name: "Admin2",
-			type: "Imp",
-			comment: "I wrote this!",
-			server: "Reveaal",
-		},
-		{
-			name: "Coffee",
-			type: "Con",
-			comment: "",
-			server: "Reveaal",
-		},
-		{
-			name: "Admin1",
-			type: "Spec",
-			server: "Reveaal",
-			color: "red",
-		},
-		{
-			name: "Admin1",
-			type: "Spec",
-			server: "Reveaal",
-			color: "limegreen",
-		},
-		{
-			name: "Admin1",
-			type: "Spec",
-			server: "Reveaal",
-			color: "yellow",
-		},
-	];
+	import { queries } from "$lib/globalState/activeProject";
 </script>
 
-{#each queries as query}
-	<Query {...query} />
-{/each}
+{#key $queries?.arr}
+	{#each $queries?.arr || [] as query, index}
+		<Query
+			bind:query={query.query}
+			bind:comment={query.comment}
+			bind:isPeriodic={query.isPeriodic}
+			bind:backend={query.backend}
+			{index}
+		/>
+	{/each}
+{/key}

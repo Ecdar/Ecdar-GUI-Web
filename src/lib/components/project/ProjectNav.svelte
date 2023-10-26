@@ -3,6 +3,7 @@
 		Note_add,
 		Create_new_folder,
 	} from "svelte-google-materialdesign-icons";
+
 	function addComponent() {
 		console.log("Add component");
 	}

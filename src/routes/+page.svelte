@@ -167,6 +167,7 @@
 		border-bottom: 1px solid black;
 		transition: background-color 200ms;
 	}
+
 	.circle {
 		margin-right: 10px;
 		display: flex;
@@ -176,6 +177,7 @@
 		border-radius: 70px;
 		justify-content: center;
 	}
+
 	.icon {
 		display: flex;
 		vertical-align: middle;
