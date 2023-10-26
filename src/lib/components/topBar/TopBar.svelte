@@ -1,49 +1,52 @@
 <script lang="ts">
 	import TopBarBtn from "$lib/components/topBar/TopBarBtn.svelte";
 	import DropDownBtn from "$lib/components/topBar/DropDownBtn.svelte";
-	import { load } from "$lib/classes/project";
-	import * as Icon from "svelte-google-materialdesign-icons"
-
-	
+	import DropDownCheckBox from "$lib/components/topBar/DropDownCheckBox.svelte";
+	import * as Icon from "svelte-google-materialdesign-icons";
 </script>
 
 <!--
 	- TopBarBtn: The button on the navbar, where name equal text displayed in button
-	- DropDownBtn: An element in the dropdown menu as a button, where name equal to text displayed in button and icon which can be empty
+	- DropDownBtn: An element in the dropdown menu as a button, where name equal to text displayed 
+		in button and icon which can be empty
+	- DropDownCheckBox: An element in the dropdown menu as a checkbox, where name eqaul to text displayed. 
+		Has two functions on:checked and on:unchecked
+		Here icon should not be set.
 -->
+
 <!--File top bar button-->
 <div>
 	<TopBarBtn name="File">
 		<DropDownBtn
-			icon = {Icon.Note_add}
+			icon={Icon.Note_add}
 			name="New Project"
 			on:click={() => {
 				console.log("New Project");
 			}}
 		/>
 		<DropDownBtn
-			icon = {Icon.File_open}
+			icon={Icon.File_open}
 			name="Open Project"
-			on:click={async () => {
-				if (load != undefined) await load();
+			on:click={() => {
+				console.log("Open Project");
 			}}
 		/>
 		<DropDownBtn
-			icon = {Icon.File_open}
+			icon={Icon.File_open}
 			name="Recent Projects"
 			on:click={() => {
 				console.log("Recent Projects");
 			}}
 		/>
 		<DropDownBtn
-			icon = {Icon.Save}
+			icon={Icon.Save}
 			name="Save Project"
 			on:click={() => {
 				console.log("Save Project");
 			}}
 		/>
 		<DropDownBtn
-			icon = {Icon.Save}
+			icon={Icon.Save}
 			name="Save Project as"
 			on:click={() => {
 				console.log("Save Project as");
@@ -111,28 +114,31 @@
 <!--View top bar button-->
 <div>
 	<TopBarBtn name="View">
-		<DropDownBtn
+		<DropDownCheckBox
 			name="Project Panel"
-			icon={Icon.Done}
-			checkbox = {true}
-			on:click={() => {
-				console.log("Project Panel");
+			on:checked={() => {
+				console.log("checked Project Panel");
+			}}
+			on:unchecked={() => {
+				console.log("unchecked Project Panel");
 			}}
 		/>
-		<DropDownBtn
+		<DropDownCheckBox
 			name="Query Panel"
-			icon={Icon.Done}
-			checkbox = {true}
-			on:click={() => {
-				console.log("Query Panel");
+			on:checked={() => {
+				console.log("checked Query Panel");
+			}}
+			on:unchecked={() => {
+				console.log("unchecked Query Panel");
 			}}
 		/>
-		<DropDownBtn
+		<DropDownCheckBox
 			name="Autoscaling"
-			icon={Icon.Done}
-			checkbox = {true}
-			on:click={() => {
-				console.log("Autoscaling");
+			on:checked={() => {
+				console.log("checked Autoscaling");
+			}}
+			on:unchecked={() => {
+				console.log("unchecked Autoscaling");
 			}}
 		/>
 		<DropDownBtn
@@ -154,22 +160,23 @@
 <!--Options top bar button-->
 <div>
 	<TopBarBtn name="Options">
-		<DropDownBtn
+		<DropDownCheckBox
 			name="UI cache"
-			icon={Icon.Done}
-			checkbox = {true}
-			on:click={() => {
-				console.log();
-				console.log("UI cache");
+			on:checked={() => {
+				console.log("checked UI cache");
+			}}
+			on:unchecked={() => {
+				console.log("unchecked UI cache");
 			}}
 		/>
 
-		<DropDownBtn
+		<DropDownCheckBox
 			name="Periodic query execution"
-			icon={Icon.Done}
-			checkbox = {true}
-			on:click={() => {
-				console.log("Periodic query execution");
+			on:checked={() => {
+				console.log("checked Periodic query execution");
+			}}
+			on:unchecked={() => {
+				console.log("unchecked Periodic query execution");
 			}}
 		/>
 		<DropDownBtn
@@ -208,7 +215,6 @@
 		/>
 	</TopBarBtn>
 </div>
-
 
 <style>
 	div {
