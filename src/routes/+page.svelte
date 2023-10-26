@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { project } from "$lib/globalState/activeProject";
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
+	import SvgView from "$lib/components/svg-view/SvgView.svelte";
 	import Console from "$lib/components/console/Console.svelte";
 	import Components from "$lib/components/project/component/Components.svelte";
 	import Systems from "$lib/components/project/system/Systems.svelte";
@@ -103,6 +104,7 @@
 		<!-- Canvas -->
 		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
+			<SvgView />
 		</div>
 		<!-- Right resize Panel -->
 		<div
