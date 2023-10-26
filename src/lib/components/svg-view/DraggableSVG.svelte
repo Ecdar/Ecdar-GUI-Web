@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { iPoint } from "$lib/interfaces/iPoint";
-	import { activeModel } from "$lib/globalState/activeModel";
+	import { activeView } from "$lib/globalState/activeProject";
 	import { scale } from "$lib/globalState/scaleStore";
 
 	export let position: iPoint;
@@ -23,7 +23,7 @@
 		position.y += event.movementY / $scale;
 
 		// Update the active model
-		$activeModel = $activeModel;
+		activeView.fastUpdate();
 	}
 
 	//Removes the eventlisteners when the mouse is released using abortcontroller

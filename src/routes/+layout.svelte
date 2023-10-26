@@ -1,5 +1,17 @@
 <script lang="ts">
+	import { Component, Location } from "$lib/classes/automaton";
+	import { Point } from "$lib/classes/draw";
+	import { Project } from "$lib/classes/project/Project";
 	import ContextMenu from "$lib/components/contextMenu/ContextMenu.svelte";
+	import { activeView, project } from "$lib/globalState/activeProject";
+
+	const comp = new Component("bing", "", [
+		new Location("1", new Point(100, 100)),
+	]);
+
+	project.set(new Project("Test project", [comp]));
+
+	$activeView = comp;
 </script>
 
 <svelte:head>
