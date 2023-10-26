@@ -3,8 +3,6 @@
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
 	import SvgView from "$lib/components/svg-view/SvgView.svelte";
 	import Console from "$lib/components/console/Console.svelte";
-	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
-	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 	import Components from "$lib/components/project/component/Components.svelte";
 	import Systems from "$lib/components/project/system/Systems.svelte";
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
