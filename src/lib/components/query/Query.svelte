@@ -81,7 +81,7 @@
 		</div>
 		<select on:change={onBackendChange}>
 			{#each Object.keys(serverOptions) as serverOption, index}
-				{#if index === backend}
+				{#if Backend[index] === Backend[backend]}
 					<option selected>{serverOption}</option>
 				{:else}
 					<option>{serverOption}</option>

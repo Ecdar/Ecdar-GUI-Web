@@ -28,7 +28,7 @@
 			<Button
 				icon={Check_box}
 				text="Run Periodically"
-				click={(event) => {
+				click={() => {
 					isPeriodic = !isPeriodic;
 				}}
 			/>
@@ -36,7 +36,7 @@
 			<Button
 				icon={Check_box_outline_blank}
 				text="Run Periodically"
-				click={(event) => {
+				click={() => {
 					isPeriodic = !isPeriodic;
 				}}
 			/>
