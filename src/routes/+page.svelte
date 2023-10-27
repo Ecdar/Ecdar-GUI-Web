@@ -116,7 +116,7 @@
 			<nav class="inner-nav3">
 				<QueryNav />
 			</nav>
-			<div class="sidePanelContent">
+			<div class="side-panel-content">
 				<Queries />
 			</div>
 		</div>
