@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { project } from "$lib/globalState/activeProject";
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
+	import SvgView from "$lib/components/svg-view/SvgView.svelte";
 	import Console from "$lib/components/console/Console.svelte";
-	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
-	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 	import Components from "$lib/components/project/component/Components.svelte";
 	import Systems from "$lib/components/project/system/Systems.svelte";
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
@@ -50,7 +49,7 @@
 	}
 
 	/**
-	 * Function for stopping resizing a sid panel
+	 * Function for stopping resizing a side panel
 	 * @param event
 	 */
 	function stopResizingSidePanel(event: PointerEvent) {
@@ -100,9 +99,7 @@
 		<!-- Canvas -->
 		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
-			<p>Canvas</p>
-			<DropDownMenu />
-			<LocationsWithContextMenu />
+			<SvgView />
 		</div>
 		<!-- Right resize Panel -->
 		<div
@@ -186,8 +183,6 @@
 		background-color: whitesmoke;
 		flex-basis: 10em;
 		overflow: hidden;
-		display: flex;
-		flex-direction: column;
 	}
 
 	.sidePanelContent {
@@ -205,8 +200,12 @@
 	}
 
 	.canvas {
-		background-color: whitesmoke;
-		flex: 1;
-		width: 0;
+		flex-grow: 1;
+	}
+
+	.canvas,
+	.sidePanel {
+		display: flex;
+		flex-direction: column;
 	}
 </style>
