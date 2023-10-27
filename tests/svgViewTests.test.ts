@@ -19,7 +19,6 @@ test("drag and drop a location to a new position", async ({ page }) => {
 	const expectedX = svgX;
 	const expectedY = svgY + 80;
 
-	console.log(svgX, svgY);
 	//Offset by 80
 	await svg.dragTo(svg, { targetPosition: { x: 20, y: 100 }, force: true });
 
@@ -45,7 +44,6 @@ test("drag and drop a nail", async ({ page }) => {
 	const expectedX = svgX;
 	const expectedY = svgY + 80;
 
-	console.log(svgX, svgY);
 	//Offset by 80
 	await svg.dragTo(svg, { targetPosition: { x: 10, y: 90 }, force: true });
 
