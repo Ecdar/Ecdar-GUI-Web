@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Arrow_right, More_vert } from "svelte-google-materialdesign-icons";
+	import { Arrow_right } from "svelte-google-materialdesign-icons";
 	import { Backend } from "$lib/classes/automaton/Backend";
 	import QueryDropDownMenu from "./QueryDropDownMenu.svelte";
 

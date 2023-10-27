@@ -90,10 +90,25 @@ test("delete a specific query", async ({ page }) => {
 	);
 });
 
-test("can change select menu option", async ({ page }) => {
+test("can change to any select menu option", async ({ page }) => {
 	await page.click("#add-query");
-	// 	await page
-	// 		.locator("#query-menu-1")
-	// 		.getByRole("button", { name: "" })
-	// 		.click();
+
+	const combobox = page.locator("#query-0").getByRole("combobox").first();
+
+	const typeOptions: Record<string, string> = {
+		specification: "Spec",
+		implementation: "Imp",
+		consistency: "Con",
+		reachability: "E<>",
+		refinement: "<=",
+		"local-consistensy": "LCon",
+		"bisim-minim": "Bsim",
+		"get-component": "Get",
+	};
+
+	await expect(combobox).toHaveValue("specification");
+	for (const [key, value] of Object.entries(typeOptions)) {
+		await combobox.selectOption(value);
+		await expect(combobox).toHaveValue(key);
+	}
 });
