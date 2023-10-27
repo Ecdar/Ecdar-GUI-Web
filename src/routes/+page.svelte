@@ -2,7 +2,6 @@
 	import Console from "../lib/components/console/Console.svelte";
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
-	import { CommunicationReveaal } from "$lib/classes/communication/adapters/Reveaal";
 
 	enum SidePanel {
 		Left,
@@ -56,7 +55,6 @@
 			stopResizingSidePanel,
 		);
 	}
-
 </script>
 
 <!-- Top navigation Panel -->
