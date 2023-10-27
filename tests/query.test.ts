@@ -90,7 +90,33 @@ test("delete a specific query", async ({ page }) => {
 	);
 });
 
-test("can change to any select menu option", async ({ page }) => {
+test("can write in query field", async ({ page }) => {
+	await page.click("#add-query");
+
+	const queryInput = page.locator(`#query-0`).getByPlaceholder("Query");
+
+	await expect(queryInput).toHaveValue("");
+	for (const string of ["Query String", "Jesper", "Bastian", "Anton"]) {
+		await queryInput.fill(string);
+		await queryInput.press("Enter");
+		await expect(queryInput).toHaveValue(string);
+	}
+});
+
+test("can write in comment field", async ({ page }) => {
+	await page.click("#add-query");
+
+	const commentInput = page.locator(`#query-0`).getByPlaceholder("Comment");
+
+	await expect(commentInput).toHaveValue("");
+	for (const string of ["Comment String", "Anders", "Arnar", "Albert"]) {
+		await commentInput.fill(string);
+		await commentInput.press("Enter");
+		await expect(commentInput).toHaveValue(string);
+	}
+});
+
+test("can change type to all options", async ({ page }) => {
 	await page.click("#add-query");
 
 	const combobox = page.locator("#query-0").getByRole("combobox").first();
@@ -111,4 +137,50 @@ test("can change to any select menu option", async ({ page }) => {
 		await combobox.selectOption(value);
 		await expect(combobox).toHaveValue(key);
 	}
+});
+
+test("can change backend to all options", async ({ page }) => {
+	await page.click("#add-query");
+
+	const combobox = page.locator("#query-0").getByRole("combobox").nth(1);
+
+	const serverOptions = ["Reveaal", "J-Ecdar"];
+
+	await expect(combobox).toHaveValue("Reveaal");
+	for (const server of serverOptions) {
+		await combobox.selectOption(server);
+		await expect(combobox).toHaveValue(server);
+	}
+});
+
+test("can change isPeriodic", async ({ page }) => {
+	await page.click("#add-query");
+
+	const svgPath = page
+		.locator("#query-menu-0")
+		.locator("svg")
+		.first()
+		.locator("path");
+
+	const firstPath = await svgPath.getAttribute("d");
+
+	await page.click("#query-button-0");
+	await page
+		.locator("#query-menu-0")
+		.getByRole("button", { name: "Run Periodically" })
+		.click();
+
+	const secondPath = await svgPath.getAttribute("d");
+
+	expect(firstPath).not.toBe(secondPath);
+
+	await page.click("#query-button-0");
+	await page
+		.locator("#query-menu-0")
+		.getByRole("button", { name: "Run Periodically" })
+		.click();
+
+	const thirdPath = await svgPath.getAttribute("d");
+
+	expect(firstPath).toBe(thirdPath);
 });
