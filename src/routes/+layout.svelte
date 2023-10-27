@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { Component, Location } from "$lib/classes/automaton";
+	import { Component, Location, Nickname } from "$lib/classes/automaton";
 	import { Point } from "$lib/classes/draw";
 	import { Project } from "$lib/classes/project/Project";
 	import ContextMenu from "$lib/components/contextMenu/ContextMenu.svelte";
 	import { activeView, project } from "$lib/globalState/activeProject";
 
 	const comp = new Component("bing", "", [
-		new Location("1", new Point(100, 100)),
+		new Location(
+			"1",
+			new Point(100, 100),
+			new Nickname("testing", new Point(40, -40)),
+		),
 	]);
 
 	project.set(new Project("Test project", [comp]));
