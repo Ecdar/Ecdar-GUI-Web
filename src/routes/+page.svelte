@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { project } from "$lib/globalState/activeProject";
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
+	import SvgView from "$lib/components/svg-view/SvgView.svelte";
 	import Console from "$lib/components/console/Console.svelte";
-	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
-	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
+	import Components from "$lib/components/project/component/Components.svelte";
+	import Systems from "$lib/components/project/system/Systems.svelte";
+	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
+	import { Description } from "svelte-google-materialdesign-icons";
 
 	enum SidePanel {
 		Left,
@@ -46,7 +49,7 @@
 	}
 
 	/**
-	 * Function for stopping resizing a sid panel
+	 * Function for stopping resizing a side panel
 	 * @param event
 	 */
 	function stopResizingSidePanel(event: PointerEvent) {
@@ -69,9 +72,18 @@
 	{:else}
 		<!-- Left side Panel -->
 		<div class="side-panel" style="flex-basis: {leftSidePanelWidth}px">
-			<nav class="inner-nav1">Nav 1</nav>
+			<nav class="inner-nav1"><ProjectNav /></nav>
 			<div class="side-panel-content">
-				<p>Left</p>
+				<div class="global-dec">
+					<div class="circle" style="background-color: grey">
+						<div class="icon">
+							<Description size="100%" />
+						</div>
+					</div>
+					<p>Global declaration</p>
+				</div>
+				<Components />
+				<Systems />
 			</div>
 		</div>
 		<!-- Left resize Panel -->
@@ -87,9 +99,7 @@
 		<!-- Canvas -->
 		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
-			<p>Canvas</p>
-			<DropDownMenu />
-			<LocationsWithContextMenu />
+			<SvgView />
 		</div>
 		<!-- Right resize Panel -->
 		<div
@@ -144,12 +154,37 @@
 		box-shadow: slategrey 0px 0px 1em;
 	}
 
+	.global-dec {
+		background-color: #eceff1;
+		cursor: pointer;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 10px;
+		border-bottom: 1px solid black;
+		transition: background-color 200ms;
+	}
+
+	.circle {
+		margin-right: 10px;
+		display: flex;
+		height: 50px;
+		width: 50px;
+		min-width: 50px;
+		border-radius: 70px;
+		justify-content: center;
+	}
+
+	.icon {
+		display: flex;
+		vertical-align: middle;
+		padding: 15%;
+	}
+
 	.side-panel {
 		background-color: whitesmoke;
 		flex-basis: 10em;
 		overflow: hidden;
-		display: flex;
-		flex-direction: column;
 	}
 
 	.side-panel-content {
@@ -167,8 +202,12 @@
 	}
 
 	.canvas {
-		background-color: whitesmoke;
-		flex: 1;
-		width: 0;
+		flex-grow: 1;
+	}
+
+	.canvas,
+	.side-panel {
+		display: flex;
+		flex-direction: column;
 	}
 </style>
