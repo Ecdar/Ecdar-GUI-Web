@@ -8,7 +8,7 @@
 			<Description size="100%" />
 		</div>
 	</div>
-	<p>Global declaration</p>
+	<p>Global Declaration</p>
 </div>
 
 <style>
