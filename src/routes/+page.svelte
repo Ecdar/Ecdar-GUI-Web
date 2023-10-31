@@ -10,6 +10,7 @@
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import { Description } from "svelte-google-materialdesign-icons";
+	import EngineUi from "$lib/components/engineUI/EngineUI.svelte";
 
 	enum SidePanel {
 		Left,
@@ -67,6 +68,7 @@
 
 <!-- Top navigation Panel -->
 <nav id="main-nav"></nav>
+<EngineUi />
 <main bind:this={mainContainer}>
 	{#if $project === undefined}
 		<StartScreen />
