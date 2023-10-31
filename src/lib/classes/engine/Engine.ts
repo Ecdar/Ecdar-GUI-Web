@@ -29,21 +29,26 @@ export class Engine
 	/**
 	 * Type of engine
 	 * */
-	type: EngineType; //enum 
+	type: EngineType;  
 
-	
+	/**
+	 * Unique identifier
+	 * */
+	 id: number; 
 
 	constructor(
 		name: string,
 		address: string,
 	    portRangeStart: number,
 	    portRangeEnd: number,
-	    type: EngineType, //enum 
+	    type: EngineType,
+		id: number,  
 	) {
 		this.name = name;
 		this.address = address;
 		this.portRangeStart = portRangeStart;
 		this.portRangeEnd = portRangeEnd;
 		this.type = type;
+		this.id = id;
 	}
 }
