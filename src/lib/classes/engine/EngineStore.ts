@@ -31,10 +31,16 @@ import type { EngineType } from "./EngineTypes";
         this.defaultEngine = undefined;
      }
 
+     /**
+     * Create an Engine and pushes it to engineArray 
+    */
      CreateEngine(name: string, address: string, portRangeStart: number, portRangeEnd: number, type: EngineType){
         this.engineArray.push(new Engine(name, address, portRangeStart, portRangeEnd, type, this.engineId));
      }
     
+     /**
+     * Deletes the engine with the given id
+    */
      DeleteEngine(id: number){
         const engineIndex: number = this.engineArray.findIndex((engine: Engine) => {
             return engine.Id === id;
@@ -51,7 +57,9 @@ import type { EngineType } from "./EngineTypes";
             throw new Error("Engine Id dose not exist");
         }
      }
-    
+    /**
+     * Get engines based on id
+    */
     GetEngine(id: number): Engine{
         const engine: undefined | Engine = this.engineArray.find((engine: Engine) => {
             return engine.Id === id;
@@ -63,14 +71,23 @@ import type { EngineType } from "./EngineTypes";
             throw new Error("Could not find engine");
     }
 
+    /**
+     * Returns all engines in the store in the form of an array
+    */
     GetEngines(): Engine[]{
         return this.engineArray;
     }
-    
+
+    /**
+     * Coonvert the EngineStore to a JSON string
+    */
     Serialize(): string{
         return JSON.stringify(this);
     }
 
+    /**
+     * Reads fields and engines from JSON string, and applies them in the store
+    */
     DeSerialize(json: string){
         const parsedJSON: EngineStore = JSON.parse(json) as EngineStore;
         this.engineArray = parsedJSON.engineArray;
@@ -79,6 +96,7 @@ import type { EngineType } from "./EngineTypes";
 
         //run Engine constructer to validate input.
         parsedJSON.engineArray.forEach((engine) =>{
+            
             new Engine(engine.name, engine.address, engine.portRangeStart, engine.portRangeEnd, engine.type,engine.id)
         })
         
