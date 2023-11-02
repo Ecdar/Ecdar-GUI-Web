@@ -1,110 +1,109 @@
-import {EngineType} from "./EngineTypes"
+import { EngineType } from "./EngineType";
 
 /**
  * A Reveaal, JEcdar andd API engine definition
  * It stores the IP and port of an engine
  * */
-export class Engine
-{
+export class Engine {
 	/**
-	 * The name of the Engine
+	 * The #name of the Engine
 	 * */
-	private name: string = "";
-	get Name(): string {
-		return this.name;
+	#name: string = "";
+	get name(): string {
+		return this.#name;
 	}
-	set Name(name: string){
-		if(name != "")
-			this.name = name;
-		else
-			throw new Error("Enigne must have a name");
-		
+	set name(setName: string | undefined) {
+		if (setName != "" && setName !== undefined) this.#name = setName;
+		else throw new Error("Enigne must have a name");
 	}
 	/**
-	 * The IP address of the engine
+	 * The IP #address of the engine
 	 * */
-	private address: string = "";
-	get Address(): string{
-		return this.address;
+	#address: string = "";
+	get address(): string {
+		return this.#address;
 	}
-	set Address(ipAdress: string){
-		const regexTest: RegExp = new RegExp('^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$');
-		if(regexTest.test(ipAdress))
-			this.address = ipAdress
-		else
-			throw new Error(ipAdress +" Is an invalid IP address");
+	set address(ipAdress: string) {
+		const regexTest: RegExp = new RegExp(
+			"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+		);
+		if (regexTest.test(ipAdress)) this.#address = ipAdress;
+		else throw new Error(ipAdress + " Is an invalid IP address");
 	}
 	/**
 	 * The starting number of the portrange
 	 * */
-	private portRangeStart: number = 0;
-	get PortRangeStart() : number{
-		return this.portRangeStart;
-	} 
-	set PortRangeStart(portStart: number){
-		if(0 <= portStart && portStart <= 65352)
-			this.portRangeStart = portStart;
-		else
-			throw new Error("Invalid start port");
+	#portRangeStart: number = 0;
+	get portRangeStart(): number {
+		return this.#portRangeStart;
+	}
+	set portRangeStart(portStart: number) {
+		if (0 <= portStart && portStart <= 65352)
+			this.#portRangeStart = portStart;
+		else throw new Error("Invalid start port");
 	}
 
 	/**
 	 * The last number of the portrange
 	 * */
-	private portRangeEnd: number = 0;
-	get PortRangeEnd(): number{
-		return this.portRangeEnd;
+	#portRangeEnd: number = 0;
+	get portRangeEnd(): number {
+		return this.#portRangeEnd;
 	}
-	set PortRangeEnd(portEnd: number){
-		if(this.PortRangeStart <= portEnd && portEnd <= 65353)
-			this.portRangeEnd = portEnd;
-		else
-			throw new Error("Invalid end port");
+	set portRangeEnd(portEnd: number) {
+		if (this.portRangeStart <= portEnd && portEnd <= 65353)
+			this.#portRangeEnd = portEnd;
+		else throw new Error("Invalid end port");
 	}
 
 	/**
-	 * Type of engine
+	 * type of engine
 	 * */
-	private type: EngineType = 0;
-	get Type(): EngineType{
-		return this.type
-	}  
-	set Type(engineType: EngineType){
-		if(engineType in EngineType)
-			this.type = engineType;
-		else
-			throw new Error("Invalid engine type");
+	#type: EngineType = 0;
+	get type(): EngineType {
+		return this.#type;
+	}
+	set type(engineType: EngineType) {
+		if (engineType in EngineType) this.#type = engineType;
+		else throw new Error("Invalid engine #type");
 	}
 
 	/**
- 	* Unique identifier
- 	* */
-	private id: number = 0;
-	get Id(): number{
-		return this.id;
+	 * Unique identifier
+	 * */
+	#id: number = 0;
+	get id(): number {
+		return this.#id;
 	}
-	set Id(inputId: number){
-		if(inputId >= 0)
-			this.id = inputId;
-		else
-			throw new Error("Invalid Id");
-		
+	set id(inputId: number) {
+		if (inputId >= 0) this.#id = inputId;
+		else throw new Error("Invalid id");
 	}
 
 	constructor(
 		name: string,
 		address: string,
-	    portRangeStart: number,
-	    portRangeEnd: number,
-	    type: EngineType,
-		id: number,  
+		portRangeStart: number,
+		portRangeEnd: number,
+		type: EngineType,
+		id: number,
 	) {
-		this.Name = name;
-		this.Address = address;
-		this.PortRangeStart = portRangeStart;
-		this.PortRangeEnd = portRangeEnd;
-		this.Type = type;
-		this.Id = id;
+		this.name = name;
+		this.address = address;
+		this.portRangeStart = portRangeStart;
+		this.portRangeEnd = portRangeEnd;
+		this.type = type;
+		this.id = id;
 	}
 
+	toJSON() {
+		return {
+			name: this.#name,
+			address: this.#address,
+			portRangeStart: this.#portRangeStart,
+			portRangeEnd: this.#portRangeEnd,
+			type: this.#type,
+			id: this.#id,
+		};
+	}
 }
