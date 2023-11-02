@@ -7,19 +7,23 @@
 	export function showModal() {
 		dialogContainer?.showModal();
 	}
+
+	export function closeModal(){
+		dialogContainer.close();
+	}
 </script>
 
 <dialog bind:this={dialogContainer}>
-	<form method="dialog">
-		<div class="box">
-			<slot />
-		</div>
-	</form>
+	<div class="box">
+		<slot />
+	</div>
 </dialog>
 
 <style>
 	.box {
 		max-width: 100vw;
+		max-height: 75vh;
+		overflow-y: auto;
 		display: block;
 		position: fixed;
 		background-color: lightslategray;
