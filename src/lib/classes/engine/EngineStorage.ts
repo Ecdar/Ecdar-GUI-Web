@@ -35,7 +35,7 @@ export default class EngineStorage {
                 return engine.id === engine.id;
             },
         );
-        
+        console.log(index);
         if(engine === undefined || index > -1)
             this.#defaultEngine = engine;
         else
@@ -92,18 +92,34 @@ export default class EngineStorage {
 		}
 	}
 	/**
-	 * Get engines based on id
+	 * Get engines based on id or name
 	 */
-	getEngine(id: number): Engine {
-		const engine: undefined | Engine = this.engineArray.find(
-			(engine: Engine) => {
-				return engine.id === id;
-			},
-		);
+	getEngine(identifier: number | string): Engine {
+        let engine: undefined | Engine;
+
+        //Find engine based on id
+        if(typeof identifier === 'number'){
+            engine = this.engineArray.find(
+                (engine: Engine) => {
+                    return engine.id === identifier;
+                },
+            );
+        }
+		//Find engine based on name
+        else{
+            engine = this.engineArray.find(
+                (engine: Engine) => {
+                    return engine.name === identifier;
+                },
+            );
+        }
 		if (engine !== undefined) return engine;
 		else throw new Error("Could not find engine");
 	}
 
+    // getEngine(name:string): Engine{
+
+    // }
 	/**
 	 * Returns all engines in the store in the form of an array
 	 */
