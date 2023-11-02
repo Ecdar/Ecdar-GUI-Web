@@ -48,7 +48,7 @@
 {#if panelSide === SidePanelEnum.Right}
 	<div
 		role="button"
-		id="rightresizer"
+		id="right-resizer"
 		class="resizer"
 		tabindex="-1"
 		on:pointerdown={(event) => {
@@ -56,18 +56,18 @@
 		}}
 	/>
 {/if}
-<div class="sidePanel" style="flex-basis: {panelWidth}px">
+<div class="side-panel" style="flex-basis: {panelWidth}px">
 	<nav class="inner-nav">
 		<slot name="nav" />
 	</nav>
-	<div class="sidePanelContent">
+	<div class="side-panel-content">
 		<slot name="content" />
 	</div>
 </div>
 {#if panelSide === SidePanelEnum.Left}
 	<div
 		role="button"
-		id="leftresizer"
+		id="left-resizer"
 		class="resizer"
 		tabindex="-1"
 		on:pointerdown={(event) => {
@@ -88,7 +88,7 @@
 		box-shadow: lightslategray 0px 0px 1em;
 	}
 
-	.sidePanel {
+	.side-panel {
 		display: flex;
 		flex-direction: column;
 		flex-basis: 10em;
@@ -96,7 +96,7 @@
 		overflow: hidden;
 	}
 
-	.sidePanelContent {
+	.side-panel-content {
 		height: 100%;
 		width: 100%;
 		overflow-y: auto;
