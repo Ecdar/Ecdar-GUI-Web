@@ -3,18 +3,18 @@
 
 	const systems = [
 		{
-			name: "ost",
+			name: "Custom Name 1",
 			color: "red",
 		},
 		{
-			name: "horsens",
+			name: "Custom Name 2",
 			color: "green",
 		},
 		{
 			color: "skyblue",
 		},
 		{
-			name: "horsens",
+			name: "Custom Name 3",
 		},
 		{},
 	];
