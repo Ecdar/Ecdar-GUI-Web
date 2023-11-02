@@ -14,7 +14,7 @@ export default class EngineStorage {
 	 * */
 	#engineId: number = 0;
 	get engineId(): number {
-		return (this.#engineId = this.#engineId++); //auto inc
+		return (this.engineId = ++this.#engineId); //auto inc
 	}
 	set engineId(id: number) {
 		if (id >= 0) this.#engineId = id;
@@ -95,11 +95,11 @@ export default class EngineStorage {
 	 * Get engines based on id or name
 	 */
 	getEngine(identifier: number | string): Engine {
-        let engine: undefined | Engine;
+        let returnEngine: undefined | Engine;
 
         //Find engine based on id
         if(typeof identifier === 'number'){
-            engine = this.engineArray.find(
+            returnEngine = this.engineArray.find(
                 (engine: Engine) => {
                     return engine.id === identifier;
                 },
@@ -107,13 +107,13 @@ export default class EngineStorage {
         }
 		//Find engine based on name
         else{
-            engine = this.engineArray.find(
+            returnEngine = this.engineArray.find(
                 (engine: Engine) => {
                     return engine.name === identifier;
                 },
             );
         }
-		if (engine !== undefined) return engine;
+		if (returnEngine !== undefined) return returnEngine;
 		else throw new Error("Could not find engine");
 	}
 
@@ -123,7 +123,7 @@ export default class EngineStorage {
 	/**
 	 * Returns all engines in the store in the form of an array
 	 */
-	getEngines(): Engine[] {
+	getEngineArray(): Engine[] {
 		return this.engineArray;
 	}
 
@@ -137,7 +137,7 @@ export default class EngineStorage {
 	toJSON() {
 		return {
 			engineArray: this.engineArray,
-			engineId: this.engineId,
+			engineId: this.#engineId,
 			defaultEngine: this.defaultEngine,
 		};
 	}
@@ -223,16 +223,15 @@ try {
 	const store: EngineStorage = new EngineStorage();
 	store.deSerialize(JSON.stringify(obj));
 	store.createEngine("test2", "192.192.192.192", 5, 6, 1);
+    console.log(store.getEngine("test2"));
 	console.log(store);
 
-	const storeJSON = store.serialize();
+	// const storeJSON = store.serialize();
 
-	console.log(JSON.parse(storeJSON));
+	// console.log(JSON.parse(storeJSON));
 
-	store.deSerialize(storeJSON);
-	console.log(store);
-    // console.log(store.engineId);
-    // console.log(store.engineId);
+	// store.deSerialize(storeJSON);
+	// console.log(store.getEngine("test2"));
 } catch (error) {
 	console.log(error);
 }
