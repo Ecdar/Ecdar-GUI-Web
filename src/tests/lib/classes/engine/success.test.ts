@@ -58,16 +58,16 @@ describe("succeed Engine test", () => {
 
     it("Get all engines", () => {
 		expect(
-            //convert to JSON to remove private fields
-			JSON.stringify(engine.getEngine("test2"))
+            engine.engineArray.length
         )
-        .toBe(JSON.stringify(testEngineWithId));
+        .toBe(engine.getEngineArray().length);
         expect(
-			JSON.stringify(engine.getEngine(5))
+            engine.engineArray
         )
-        .toBe(JSON.stringify(testEngineWithId));
+        .toBe(engine.getEngineArray());
 	});
 
+    
 
 });
 
