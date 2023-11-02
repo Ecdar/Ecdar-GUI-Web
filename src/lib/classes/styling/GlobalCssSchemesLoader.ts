@@ -14,9 +14,6 @@ class GlobalCssSchemesLoader {
 	private _mediaSchemes: z.infer<typeof MediaSchemes>;
 	private _propertyNames: string[] = [];
 
-	// SUPPORTED MEDIA FEATURES
-	private _supportedMediaFeatures: string[] = ["prefers-color-scheme: dark"];
-
 	constructor(window: Window) {
 		this._window = window;
 
@@ -38,10 +35,7 @@ class GlobalCssSchemesLoader {
 		// Apply each of the mediafeatures in the order in which they are specified in the .json file
 		this._mediaSchemes.schemes.forEach((scheme) => {
 			// Return early if the medie feature does not match
-			if (
-				this._supportedMediaFeatures.includes(scheme.mediaFeature) &&
-				this._window.matchMedia(`(${scheme.mediaFeature})`).matches
-			) {
+			if (this._window.matchMedia(`(${scheme.mediaFeature})`).matches) {
 				this.applyCssVariables(scheme);
 			}
 		});
@@ -131,9 +125,9 @@ class GlobalCssSchemesLoader {
 	 * Method for adding appropriate event listeners
 	 */
 	private addEventListeners() {
-		this._supportedMediaFeatures.forEach((feature) => {
+		this._mediaSchemes.schemes.forEach((scheme) => {
 			this._window
-				.matchMedia(`(${feature})`)
+				.matchMedia(`(${scheme.mediaFeature})`)
 				.addEventListener("change", () => {
 					this.reapplyMediaFeatures();
 				});
