@@ -211,7 +211,7 @@
 
 	.resizer {
 		background-color: black;
-		flex-basis: 0.1em;
+		flex-basis: 0.2em;
 		cursor: col-resize;
 	}
 

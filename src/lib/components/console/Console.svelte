@@ -196,7 +196,7 @@
 
 	#consoleResizer {
 		background-color: black;
-		height: 0.1em;
+		height: 0.2em;
 	}
 
 	.console::-webkit-scrollbar {
