@@ -3,7 +3,8 @@
 		More_vert,
 		Request_page,
 	} from "svelte-google-materialdesign-icons";
-	export let name: string = "Component";
+
+	export let name: string = "System";
 	export let color: string = "grey";
 </script>
 

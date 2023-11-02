@@ -18,8 +18,8 @@
 		<h1>Project</h1>
 	</div>
 	<div>
-		<Note_add on:click={addComponent} />
 		<Create_new_folder on:click={addSystem} />
+		<Note_add on:click={addComponent} />
 	</div>
 </div>
 
