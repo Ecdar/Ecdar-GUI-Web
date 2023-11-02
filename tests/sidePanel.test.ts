@@ -23,8 +23,8 @@ test("resizers exist", async ({ page }) => {
 
 test("side panels can be resized", async ({ page }) => {
 	const sidePanels = await page.locator(".side-panel").all();
-	const leftresizer = page.locator("#left-resizer");
-	const rightresizer = page.locator("#right-resizer");
+	const leftResizer = page.locator("#left-resizer");
+	const rightResizer = page.locator("#right-resizer");
 	const target = page.locator("body");
 
 	const viewportSize = page.viewportSize();
@@ -35,11 +35,11 @@ test("side panels can be resized", async ({ page }) => {
 	}
 
 	for (const size of [10, 50, 100, 200]) {
-		await leftresizer.dragTo(target, {
+		await leftResizer.dragTo(target, {
 			targetPosition: { x: 300 - size, y: 0 },
 		});
 
-		await rightresizer.dragTo(target, {
+		await rightResizer.dragTo(target, {
 			targetPosition: { x: viewportSize.width - 300 + size, y: 20 },
 		});
 
@@ -50,11 +50,11 @@ test("side panels can be resized", async ({ page }) => {
 			);
 		}
 
-		await leftresizer.dragTo(target, {
+		await leftResizer.dragTo(target, {
 			targetPosition: { x: 300 + size, y: 0 },
 		});
 
-		await rightresizer.dragTo(target, {
+		await rightResizer.dragTo(target, {
 			targetPosition: { x: viewportSize.width - 300 - size, y: 20 },
 		});
 
