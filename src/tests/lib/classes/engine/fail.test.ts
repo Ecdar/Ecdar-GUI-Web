@@ -225,12 +225,12 @@ describe("fail engine test", () => {
 		}).toThrow();
 	});
 
-    it("fails on getting engine", () => {
+	it("fails on getting engine", () => {
 		expect(() => {
-			engine.getEngine(69)
+			engine.getEngine(69);
 		}).toThrow();
-        expect(() => {
-			engine.getEngine("coolName")
+		expect(() => {
+			engine.getEngine("coolName");
 		}).toThrow();
 	});
 });

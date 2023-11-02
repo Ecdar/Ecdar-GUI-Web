@@ -24,24 +24,19 @@ export default class EngineStorage {
 	 * Array of engines defined
 	 * */
 	#defaultEngine: Engine | undefined;
-    get defaultEngine(): Engine | undefined{
-        return this.#defaultEngine;
-    }
-    set defaultEngine(engine: Engine | undefined){
-        let index = -1
-        
-        index = this.engineArray.findIndex(
-            (engine: Engine) => {
-                return engine.id === engine.id;
-            },
-        );
-        console.log(index);
-        if(engine === undefined || index > -1)
-            this.#defaultEngine = engine;
-        else
-            throw new Error("Failed to set default engine");
-        
-    }
+	get defaultEngine(): Engine | undefined {
+		return this.#defaultEngine;
+	}
+	set defaultEngine(engine: Engine | undefined) {
+		let index = -1;
+
+		index = this.engineArray.findIndex((engine: Engine) => {
+			return engine.id === engine.id;
+		});
+		console.log(index);
+		if (engine === undefined || index > -1) this.#defaultEngine = engine;
+		else throw new Error("Failed to set default engine");
+	}
 
 	constructor() {
 		this.engineArray = new Array<Engine>();
@@ -95,31 +90,27 @@ export default class EngineStorage {
 	 * Get engines based on id or name
 	 */
 	getEngine(identifier: number | string): Engine {
-        let returnEngine: undefined | Engine;
+		let returnEngine: undefined | Engine;
 
-        //Find engine based on id
-        if(typeof identifier === 'number'){
-            returnEngine = this.engineArray.find(
-                (engine: Engine) => {
-                    return engine.id === identifier;
-                },
-            );
-        }
+		//Find engine based on id
+		if (typeof identifier === "number") {
+			returnEngine = this.engineArray.find((engine: Engine) => {
+				return engine.id === identifier;
+			});
+		}
 		//Find engine based on name
-        else{
-            returnEngine = this.engineArray.find(
-                (engine: Engine) => {
-                    return engine.name === identifier;
-                },
-            );
-        }
+		else {
+			returnEngine = this.engineArray.find((engine: Engine) => {
+				return engine.name === identifier;
+			});
+		}
 		if (returnEngine !== undefined) return returnEngine;
 		else throw new Error("Could not find engine");
 	}
 
-    // getEngine(name:string): Engine{
+	// getEngine(name:string): Engine{
 
-    // }
+	// }
 	/**
 	 * Returns all engines in the store in the form of an array
 	 */
@@ -223,7 +214,7 @@ try {
 	const store: EngineStorage = new EngineStorage();
 	store.deSerialize(JSON.stringify(obj));
 	store.createEngine("test2", "192.192.192.192", 5, 6, 1);
-    console.log(store.getEngine("test2"));
+	console.log(store.getEngine("test2"));
 	console.log(store);
 
 	// const storeJSON = store.serialize();
