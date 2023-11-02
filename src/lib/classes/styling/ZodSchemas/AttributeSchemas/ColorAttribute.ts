@@ -10,8 +10,21 @@ import { z } from "zod";
  * 		To convert the individual RGB values from the range 0-255 to the range 0-1 one simply has to use the following formula:
  * 			(old value)/255 = new value
  */
+
+const SupportedGamuts = z.enum([
+	"srgb",
+	"srgb-linear",
+	"display-p3",
+	"a98-rgb",
+	"prophoto-rgb",
+	"rec2020",
+	"xyz",
+	"xyz-d50",
+	"xyz-d65",
+]);
+
 const ColorWithAlpha = z.tuple([
-	z.string(), // The Color Gamut
+	SupportedGamuts, // The Color Gamut
 	z.number().min(0).max(1), // Red value (Range 0-1)
 	z.number().min(0).max(1), // Green value (Range 0-1)
 	z.number().min(0).max(1), // Blue value (Range 0-1)
@@ -19,7 +32,7 @@ const ColorWithAlpha = z.tuple([
 ]);
 
 const ColorWithoutAlpha = z.tuple([
-	z.string(), // The Color Gamut
+	SupportedGamuts, // The Color Gamut
 	z.number().min(0).max(1), // Red value (Range 0-1)
 	z.number().min(0).max(1), // Green value (Range 0-1)
 	z.number().min(0).max(1), // Blue value (Range 0-1)

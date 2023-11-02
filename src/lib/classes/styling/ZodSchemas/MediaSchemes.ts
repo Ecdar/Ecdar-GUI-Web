@@ -1,9 +1,10 @@
 import { z } from "zod";
-import MediaScheme from "./MediaScheme";
+import MediaScheme, { RequiredMediaScheme } from "./MediaScheme";
 
-const MediaSchemes = z.object({
-	default: MediaScheme,
-	schemes: z.array(MediaScheme),
-});
-
+const MediaSchemes = z
+	.object({
+		default: RequiredMediaScheme.required(),
+		schemes: z.array(MediaScheme),
+	})
+	.strict();
 export default MediaSchemes;

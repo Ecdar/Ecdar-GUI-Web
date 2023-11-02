@@ -140,25 +140,7 @@ class GlobalCssSchemesLoader {
 	 * @returns CSS color string
 	 */
 	private createCssColor(color: z.infer<typeof ColorValue>): string {
-		const supportedGamuts: string[] = [
-			"srgb",
-			"srgb-linear",
-			"display-p3",
-			"a98-rgb",
-			"prophoto-rgb",
-			"rec2020",
-			"xyz",
-			"xyz-d50",
-			"xyz-d65",
-		];
 		let cssColor: string;
-
-		// Check if color gamut is supported
-		if (!supportedGamuts.includes(color[0])) {
-			throw new Error(
-				`Color gamut "${color[0]}" specified in parsed global css styles, is not supported."`,
-			);
-		}
 
 		// Create CSS color string
 		if (color[4]) {

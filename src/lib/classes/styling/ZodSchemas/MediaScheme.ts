@@ -13,11 +13,22 @@ import {
  * 		https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
  */
 
-const MediaScheme = z.object({
-	mediaFeature: z.string(),
-	color: ColorVariables.optional(),
-	fontSize: FontSizeVariables.optional(),
-	border: BorderVariables.optional(),
-});
+export const RequiredMediaScheme = z
+	.object({
+		mediaFeature: z.string(),
+		color: ColorVariables.required(),
+		fontSize: FontSizeVariables.required(),
+		border: BorderVariables.required(),
+	})
+	.strict();
+
+const MediaScheme = z
+	.object({
+		mediaFeature: z.string(),
+		color: ColorVariables.partial().optional(),
+		fontSize: FontSizeVariables.partial().optional(),
+		border: BorderVariables.partial().optional(),
+	})
+	.strict();
 
 export default MediaScheme;
