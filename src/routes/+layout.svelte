@@ -6,7 +6,7 @@
 	if (browser) {
 		// Catch errors here and show error popup
 		try {
-			new GlobalCssSchemesLoader(window);
+			new GlobalCssSchemesLoader();
 		} catch (e) {
 			console.log(e);
 		}

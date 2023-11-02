@@ -10,12 +10,14 @@ import type { z } from "zod";
  * Class for handling the loading of different properties based on active media features
  */
 class GlobalCssSchemesLoader {
-	private _window: Window;
 	private _mediaSchemes: z.infer<typeof MediaSchemes>;
 	private _propertyNames: string[] = [];
 
-	constructor(window: Window) {
-		this._window = window;
+	constructor() {
+		if (!("window" in globalThis))
+			throw new Error(
+				"The CSS loader needs access to the window and DOM elements",
+			);
 
 		// Parse and apply the different properties
 		this._mediaSchemes = this.parseMediaFeatures();
@@ -35,7 +37,7 @@ class GlobalCssSchemesLoader {
 		// Apply each of the mediafeatures in the order in which they are specified in the .json file
 		this._mediaSchemes.schemes.forEach((scheme) => {
 			// Return early if the medie feature does not match
-			if (this._window.matchMedia(`(${scheme.mediaFeature})`).matches) {
+			if (window.matchMedia(`(${scheme.mediaFeature})`).matches) {
 				this.applyCssVariables(scheme);
 			}
 		});
@@ -49,7 +51,7 @@ class GlobalCssSchemesLoader {
 		// Apply color variables
 		if (feature.color) {
 			for (const [key, val] of Object.entries(feature.color)) {
-				this._window.document.documentElement.style.setProperty(
+				window.document.documentElement.style.setProperty(
 					key,
 					this.createCssColor(val),
 				);
@@ -60,7 +62,7 @@ class GlobalCssSchemesLoader {
 		// Apply font size variables
 		if (feature.fontSize) {
 			for (const [key, val] of Object.entries(feature.fontSize)) {
-				this._window.document.documentElement.style.setProperty(
+				window.document.documentElement.style.setProperty(
 					key,
 					val[0] + val[1], //TODO: Check the font size number
 				);
@@ -71,7 +73,7 @@ class GlobalCssSchemesLoader {
 		// Apply border variables
 		if (feature.border) {
 			for (const [key, val] of Object.entries(feature.border)) {
-				this._window.document.documentElement.style.setProperty(
+				window.document.documentElement.style.setProperty(
 					key,
 					this.createCssColor(val[2]) /* Border color */ +
 						" " +
@@ -90,9 +92,7 @@ class GlobalCssSchemesLoader {
 	 */
 	private clearAppliedProperties() {
 		this._propertyNames.forEach((attribute) => {
-			this._window.document.documentElement.style.removeProperty(
-				attribute,
-			);
+			window.document.documentElement.style.removeProperty(attribute);
 		});
 
 		this._propertyNames = [];
@@ -126,7 +126,7 @@ class GlobalCssSchemesLoader {
 	 */
 	private addEventListeners() {
 		this._mediaSchemes.schemes.forEach((scheme) => {
-			this._window
+			window
 				.matchMedia(`(${scheme.mediaFeature})`)
 				.addEventListener("change", () => {
 					this.reapplyMediaFeatures();
