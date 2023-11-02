@@ -1,7 +1,8 @@
 import { Engine } from "./Engine";
 import type { EngineType } from "./EngineType";
 /**
- * #
+ * Engine storage definition.
+ * Stores an array of Engine instances, and can create, delete or search the array
  * */
 export default class EngineStorage {
 	/**
@@ -33,7 +34,6 @@ export default class EngineStorage {
 		index = this.engineArray.findIndex((engine: Engine) => {
 			return engine.id === engine.id;
 		});
-		console.log(index);
 		if (engine === undefined || index > -1) this.#defaultEngine = engine;
 		else throw new Error("Failed to set default engine");
 	}
@@ -62,7 +62,6 @@ export default class EngineStorage {
 			type,
 			this.engineId,
 		);
-		console.log(newEngine);
 		this.engineArray.push(newEngine);
 	}
 
@@ -108,9 +107,6 @@ export default class EngineStorage {
 		else throw new Error("Could not find engine");
 	}
 
-	// getEngine(name:string): Engine{
-
-	// }
 	/**
 	 * Returns all engines in the store in the form of an array
 	 */
@@ -156,73 +152,4 @@ export default class EngineStorage {
 			);
 		});
 	}
-
-	/** Functions
-      
-      * getEngine (id) Morten
-      * GetdefaultEngine ()
-      * serialize ()
-      * deSerialize ()
-      * LoadFromJson (<JSON>) update engineId
-      * SaveToJSON () Morten
-      * getEngines ()
-      * */
-}
-
-//  constructor(
-//     name: string,
-//     address: string,
-//     portRangeStart: number,
-//     portRangeEnd: number,
-//     type: EngineType,
-//     id: number,
-// )
-//  const engObj = {
-//     name: "test",
-//     address: "2",
-//     portRangeStart: 5,
-//     portRangeEnd: 5,
-//     //type: 2,
-//     id: 1,
-//  }
-//  const engObj = {
-//     name: "test",
-//     address: "115.42.150.37",
-//     portRangeStart: 5,
-//     portRangeEnd: 5,
-//     //type: 2,
-//     id: 1,
-//  }
-const engObj = {
-	name: "test",
-	address: "115.42.150.37",
-	portRangeStart: 5,
-	portRangeEnd: 5,
-	type: 2,
-	id: 1,
-};
-
-console.log("Engine test");
-const obj = {
-	engineArray: [engObj],
-	engineId: 2,
-	defaultEngine: undefined,
-};
-
-try {
-	console.log(obj);
-	const store: EngineStorage = new EngineStorage();
-	store.deSerialize(JSON.stringify(obj));
-	store.createEngine("test2", "192.192.192.192", 5, 6, 1);
-	console.log(store.getEngine("test2"));
-	console.log(store);
-
-	// const storeJSON = store.serialize();
-
-	// console.log(JSON.parse(storeJSON));
-
-	// store.deSerialize(storeJSON);
-	// console.log(store.getEngine("test2"));
-} catch (error) {
-	console.log(error);
 }
