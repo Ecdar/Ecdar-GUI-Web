@@ -115,7 +115,7 @@ class GlobalCssSchemesLoader {
 
 		// Throwing error if the parsing failed
 		if (!parsedMediaFeatures.success) {
-			throw new Error(parsedMediaFeatures.error.message);
+			throw new TypeError(parsedMediaFeatures.error.message);
 		}
 
 		return parsedMediaFeatures.data;
