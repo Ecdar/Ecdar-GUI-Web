@@ -32,6 +32,65 @@
 				0.82745098039,
 				0.18431372549,
 				0.18431372549
+			],
+			"--main-navigationbar-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
+			],
+			"--canvas-topbar-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			],
+			"--canvas-text-color": ["display-p3", 0, 0, 0],
+			"--sidebar-text-color": ["display-p3", 0, 0, 0],
+			"--background-color": [
+				"display-p3",
+				0.95686274509,
+				0.95686274509,
+				0.95686274509
+			],
+			"--console-selectedtab-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			],
+			"--console-unselectedtab-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
+			],
+			"--console-topbar-background-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
+			],
+			"--console-text-color": ["display-p3", 0, 0, 0],
+			"--sidebar-element-color": [
+				"display-p3",
+				0.93333333333,
+				0.93333333333,
+				0.93333333333
+			],
+			"--sidebar-element-hover-color": [
+				"display-p3",
+				0.81176470588,
+				0.84705882352,
+				0.86274509803
+			],
+			"--queries-input-background-color": ["display-p3", 1, 1, 1],
+			"--canvas-action-color": ["display-p3", 0, 0, 0],
+			"--console-tab-hover-color": [
+				"display-p3",
+				0.3362745098,
+				0.39901960784,
+				0.43823529411
 			]
 		},
 		"fontSize": {
@@ -52,70 +111,6 @@
 		}
 	},
 	"schemes": [
-		{
-			"mediaFeature": "prefers-color-scheme: light",
-			"color": {
-				"--main-navigationbar-color": [
-					"display-p3",
-					0.22745098039,
-					0.27450980392,
-					0.30588235294
-				],
-				"--canvas-topbar-color": [
-					"display-p3",
-					0.2862745098,
-					0.34901960784,
-					0.38823529411
-				],
-				"--canvas-text-color": ["display-p3", 0, 0, 0],
-				"--sidebar-text-color": ["display-p3", 0, 0, 0],
-				"--background-color": [
-					"display-p3",
-					0.95686274509,
-					0.95686274509,
-					0.95686274509
-				],
-				"--console-selectedtab-color": [
-					"display-p3",
-					0.2862745098,
-					0.34901960784,
-					0.38823529411
-				],
-				"--console-unselectedtab-color": [
-					"display-p3",
-					0.22745098039,
-					0.27450980392,
-					0.30588235294
-				],
-				"--console-topbar-background-color": [
-					"display-p3",
-					0.22745098039,
-					0.27450980392,
-					0.30588235294
-				],
-				"--console-text-color": ["display-p3", 0, 0, 0],
-				"--sidebar-element-color": [
-					"display-p3",
-					0.93333333333,
-					0.93333333333,
-					0.93333333333
-				],
-				"--sidebar-element-hover-color": [
-					"display-p3",
-					0.81176470588,
-					0.84705882352,
-					0.86274509803
-				],
-				"--queries-input-background-color": ["display-p3", 1, 1, 1],
-				"--canvas-action-color": ["display-p3", 0, 0, 0],
-				"--console-tab-hover-color": [
-					"display-p3",
-					0.3362745098,
-					0.39901960784,
-					0.43823529411
-				]
-			}
-		},
 		{
 			"mediaFeature": "prefers-color-scheme: dark",
 			"color": {

@@ -15,12 +15,7 @@ class GlobalCssSchemesLoader {
 	private _propertyNames: string[] = [];
 
 	// SUPPORTED MEDIA FEATURES
-	private _supportedMediaFeatures: string[] = [
-		"prefers-color-scheme: dark",
-		"prefers-color-scheme: light",
-		"prefers-reduced-motion",
-		"prefers-reduced-transparency",
-	];
+	private _supportedMediaFeatures: string[] = ["prefers-color-scheme: dark"];
 
 	constructor(window: Window) {
 		this._window = window;
