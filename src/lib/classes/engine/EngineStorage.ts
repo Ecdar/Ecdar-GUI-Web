@@ -25,7 +25,7 @@ export default class EngineStorage {
 	 * */
 	#defaultEngine: Engine | undefined;
     get defaultEngine(): Engine | undefined{
-        return this.defaultEngine;
+        return this.#defaultEngine;
     }
     set defaultEngine(engine: Engine | undefined){
         let index = -1
@@ -203,7 +203,7 @@ export default class EngineStorage {
 //     id: 1,
 //  }
 const engObj = {
-	//name: "test",
+	name: "test",
 	address: "115.42.150.37",
 	portRangeStart: 5,
 	portRangeEnd: 5,
@@ -231,6 +231,8 @@ try {
 
 	store.deSerialize(storeJSON);
 	console.log(store);
+    // console.log(store.engineId);
+    // console.log(store.engineId);
 } catch (error) {
 	console.log(error);
 }
