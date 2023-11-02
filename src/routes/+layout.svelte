@@ -4,7 +4,12 @@
 	import { browser } from "$app/environment";
 
 	if (browser) {
-		new GlobalCssSchemesLoader(window);
+		// Catch errors here and show error popup
+		try {
+			new GlobalCssSchemesLoader(window);
+		} catch (e) {
+			console.log(e);
+		}
 	}
 </script>
 

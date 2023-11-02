@@ -1,4 +1,4 @@
-import type ColorValue from "./ZodSchemas/GenericSchemas/ColorValue";
+import type ColorValue from "./ZodSchemas/AttributeSchemas/ColorAttribute";
 import type MediaScheme from "./ZodSchemas/MediaScheme";
 
 import MediaSchemes from "./ZodSchemas/MediaSchemes";
@@ -11,7 +11,7 @@ import type { z } from "zod";
  */
 class GlobalCssSchemesLoader {
 	private _window: Window;
-	private _mediaSchemes: z.infer<typeof MediaScheme>[];
+	private _mediaSchemes: z.infer<typeof MediaSchemes>;
 	private _propertyNames: string[] = [];
 
 	// SUPPORTED MEDIA FEATURES
@@ -27,64 +27,73 @@ class GlobalCssSchemesLoader {
 
 		// Parse and apply the different properties
 		this._mediaSchemes = this.parseMediaFeatures();
-		this.applyMediaFeatures();
+		this.applySchemes();
 
 		// Add event listeners to supported features
 		this.addEventListeners();
-
-		// Gather the property names
-		this.gatherPropertyNames();
 	}
 
 	/**
 	 * Method for applying the specified styles
 	 */
-	applyMediaFeatures() {
+	applySchemes() {
+		// Apply standard css variables
+		this.applyCssVariables(this._mediaSchemes.default);
+
 		// Apply each of the mediafeatures in the order in which they are specified in the .json file
-		this._mediaSchemes.forEach((scheme) => {
+		this._mediaSchemes.schemes.forEach((scheme) => {
 			// Return early if the medie feature does not match
 			if (
-				!this._window.matchMedia(`(${scheme.mediaFeature})`).matches &&
-				scheme.mediaFeature !== "standard"
+				this._supportedMediaFeatures.includes(scheme.mediaFeature) &&
+				this._window.matchMedia(`(${scheme.mediaFeature})`).matches
 			) {
-				return;
-			}
-
-			// Set color properties
-			if (scheme.color) {
-				scheme.color.forEach((attribute) => {
-					this._window.document.documentElement.style.setProperty(
-						attribute.attributeName,
-						this.createCssColor(attribute.color),
-					);
-				});
-			}
-
-			// Set fontSize properties
-			if (scheme.fontSize) {
-				scheme.fontSize.forEach((attribute) => {
-					this._window.document.documentElement.style.setProperty(
-						attribute.attributeName,
-						attribute.size.size + attribute.size.unit, //TODO: Check the font size number
-					);
-				});
-			}
-
-			// Set border properties
-			if (scheme.border) {
-				scheme.border.forEach((attribute) => {
-					this._window.document.documentElement.style.setProperty(
-						attribute.attributeName,
-						this.createCssColor(attribute.color) +
-							" " +
-							attribute.style +
-							" " +
-							attribute.width.size +
-							attribute.width.unit,
-					);
-				});
+				this.applyCssVariables(scheme);
 			}
 		});
+	}
+
+	/**
+	 * Method for applying CSS variabels for a specific mediafeature
+	 * @param feature
+	 */
+	applyCssVariables(feature: z.infer<typeof MediaScheme>) {
+		// Apply color variables
+		if (feature.color) {
+			for (const [key, val] of Object.entries(feature.color)) {
+				this._window.document.documentElement.style.setProperty(
+					key,
+					this.createCssColor(val),
+				);
+				this._propertyNames.push(key);
+			}
+		}
+
+		// Apply font size variables
+		if (feature.fontSize) {
+			for (const [key, val] of Object.entries(feature.fontSize)) {
+				this._window.document.documentElement.style.setProperty(
+					key,
+					val[0] + val[1], //TODO: Check the font size number
+				);
+				this._propertyNames.push(key);
+			}
+		}
+
+		// Apply border variables
+		if (feature.border) {
+			for (const [key, val] of Object.entries(feature.border)) {
+				this._window.document.documentElement.style.setProperty(
+					key,
+					this.createCssColor(val[2]) /* Border color */ +
+						" " +
+						val[0] /* Border style */ +
+						" " +
+						val[1][0] /* Border size */ +
+						val[1][1] /* Border size unit */,
+				);
+				this._propertyNames.push(key);
+			}
+		}
 	}
 
 	/**
@@ -96,6 +105,8 @@ class GlobalCssSchemesLoader {
 				attribute,
 			);
 		});
+
+		this._propertyNames = [];
 	}
 
 	/**
@@ -103,47 +114,13 @@ class GlobalCssSchemesLoader {
 	 */
 	reapplyMediaFeatures() {
 		this.clearAppliedProperties();
-		this.applyMediaFeatures();
+		this.applySchemes();
 	}
 
 	/**
-	 * Method that gathers all property names from the config to be able to remove them later
+	 * Method for loading the GlobalCssProperties.json file
 	 */
-	gatherPropertyNames() {
-		this._mediaSchemes.forEach((scheme) => {
-			// Check and add color attribute names
-			if (scheme.color) {
-				scheme.color.forEach((attr) => {
-					if (!this._propertyNames.includes(attr.attributeName)) {
-						this._propertyNames.push(attr.attributeName);
-					}
-				});
-			}
-
-			// Check and add fontSize attribute names
-			if (scheme.fontSize) {
-				scheme.fontSize.forEach((attr) => {
-					if (!this._propertyNames.includes(attr.attributeName)) {
-						this._propertyNames.push(attr.attributeName);
-					}
-				});
-			}
-
-			// Check and add border attribute names
-			if (scheme.border) {
-				scheme.border.forEach((attr) => {
-					if (!this._propertyNames.includes(attr.attributeName)) {
-						this._propertyNames.push(attr.attributeName);
-					}
-				});
-			}
-		});
-	}
-
-	/**
-	 * Method for loading the ColorSchemes.json file
-	 */
-	private parseMediaFeatures(): z.infer<typeof MediaScheme>[] {
+	private parseMediaFeatures(): z.infer<typeof MediaSchemes> {
 		// Parsing media features
 		const parsedMediaFeatures = MediaSchemes.safeParse(GlobalCssProperties);
 
@@ -152,7 +129,7 @@ class GlobalCssSchemesLoader {
 			throw new Error(parsedMediaFeatures.error.message);
 		}
 
-		return parsedMediaFeatures.data.mediaSchemes;
+		return parsedMediaFeatures.data;
 	}
 
 	/**
@@ -188,18 +165,18 @@ class GlobalCssSchemesLoader {
 		let cssColor: string;
 
 		// Check if color gamut is supported
-		if (!supportedGamuts.includes(color.colorGamut)) {
+		if (!supportedGamuts.includes(color[0])) {
 			throw new Error(
-				`Color gamut "${color.colorGamut}" specified in parsed global css styles, is not supported."`,
+				`Color gamut "${color[0]}" specified in parsed global css styles, is not supported."`,
 			);
 		}
 
 		// Check if values are within range (0.0 - 1.0)
 		if (
-			this.outOfColorRange(color.valueOne) ||
-			this.outOfColorRange(color.valueTwo) ||
-			this.outOfColorRange(color.valueThree) ||
-			(color.alpha && this.outOfColorRange(color.alpha))
+			this.outOfColorRange(color[1]) ||
+			this.outOfColorRange(color[2]) ||
+			this.outOfColorRange(color[3]) ||
+			(color[4] && this.outOfColorRange(color[4]))
 		) {
 			throw new Error(
 				"Color value in parsed global css styles out of range (0.0 - 1.0).",
@@ -207,10 +184,10 @@ class GlobalCssSchemesLoader {
 		}
 
 		// Create CSS color string
-		if (color.alpha) {
-			cssColor = `color(${color.colorGamut} ${color.valueOne} ${color.valueTwo} ${color.valueThree} / ${color.alpha})`;
+		if (color[4]) {
+			cssColor = `color(${color[0]} ${color[1]} ${color[2]} ${color[3]} / ${color[4]})`;
 		} else {
-			cssColor = `color(${color.colorGamut} ${color.valueOne} ${color.valueTwo} ${color.valueThree})`;
+			cssColor = `color(${color[0]} ${color[1]} ${color[2]} ${color[3]})`;
 		}
 
 		return cssColor;

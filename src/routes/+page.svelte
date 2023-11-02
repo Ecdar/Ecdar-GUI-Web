@@ -154,6 +154,7 @@
 	.inner-nav3 {
 		background-color: var(--main-navigationbar-color);
 		border: var(--main-innernavigationbar-border);
+		font-size: var(--sidebar-navigationbar-fontsize);
 	}
 
 	.inner-nav2 {
@@ -200,6 +201,7 @@
 
 	.sidePanelContent {
 		color: var(--sidebar-text-color);
+		font-size: var(--sidebar-standard-fontsize);
 		height: 100%;
 		width: 100%;
 		overflow-y: auto;

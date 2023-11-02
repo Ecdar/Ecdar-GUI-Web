@@ -1,337 +1,189 @@
 {
-	"mediaSchemes": [
-		{
-			"mediaFeature": "standard",
-			"color": [
-				{
-					"attributeName": "--navigationbar-text-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 1,
-						"valueTwo": 1,
-						"valueThree": 1
-					}
-				},
-				{
-					"attributeName": "--console-scrollbar-thumb-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.22745098039,
-						"valueTwo": 0.27450980392,
-						"valueThree": 0.30588235294
-					}
-				},
-				{
-					"attributeName": "--console-scrollbar-thumbhover-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.2862745098,
-						"valueTwo": 0.34901960784,
-						"valueThree": 0.38823529411
-					}
-				},
-				{
-					"attributeName": "--query-success-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.31372549019,
-						"valueTwo": 0.54901960784,
-						"valueThree": 0.27450980392
-					}
-				},
-				{
-					"attributeName": "--query-warning-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.98431372549,
-						"valueTwo": 0.75294117647,
-						"valueThree": 0.17647058823
-					}
-				},
-				{
-					"attributeName": "--query-error-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.82745098039,
-						"valueTwo": 0.18431372549,
-						"valueThree": 0.18431372549
-					}
-				}
+	"default": {
+		"mediaFeature": "default",
+		"color": {
+			"--navigationbar-text-color": ["display-p3", 1, 1, 1, 0],
+			"--console-scrollbar-thumb-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
 			],
-			"border": [
-				{
-					"attributeName": "--main-navigationbar-border",
-					"style": "solid",
-					"width": {
-						"size": 0.1,
-						"unit": "em"
-					},
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.18823529411,
-						"valueTwo": 0.22745098039,
-						"valueThree": 0.25098039215
-					}
-				},
-				{
-					"attributeName": "--main-innernavigationbar-border",
-					"style": "none solid solid solid",
-					"width": {
-						"size": 0.1,
-						"unit": "em"
-					},
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.18823529411,
-						"valueTwo": 0.22745098039,
-						"valueThree": 0.25098039215
-					}
-				}
+			"--console-scrollbar-thumbhover-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			],
+			"--query-success-color": [
+				"display-p3",
+				0.31372549019,
+				0.54901960784,
+				0.27450980392
+			],
+			"--query-warning-color": [
+				"display-p3",
+				0.98431372549,
+				0.75294117647,
+				0.17647058823
+			],
+			"--query-error-color": [
+				"display-p3",
+				0.82745098039,
+				0.18431372549,
+				0.18431372549
 			]
 		},
+		"fontSize": {
+			"--sidebar-fontsize": [1, "rem"],
+			"--sidebar-navigationbar-fontsize": [1, "rem"]
+		},
+		"border": {
+			"--main-navigationbar-border": [
+				"solid",
+				[0.1, "em"],
+				["display-p3", 0.18823529411, 0.22745098039, 0.25098039215]
+			],
+			"--main-innernavigationbar-border": [
+				"none solid solid solid",
+				[0.1, "em"],
+				["display-p3", 0.18823529411, 0.22745098039, 0.25098039215]
+			]
+		}
+	},
+	"schemes": [
 		{
 			"mediaFeature": "prefers-color-scheme: light",
-			"color": [
-				{
-					"attributeName": "--main-navigationbar-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.22745098039,
-						"valueTwo": 0.27450980392,
-						"valueThree": 0.30588235294
-					}
-				},
-				{
-					"attributeName": "--canvas-topbar-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.2862745098,
-						"valueTwo": 0.34901960784,
-						"valueThree": 0.38823529411
-					}
-				},
-				{
-					"attributeName": "--canvas-text-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0,
-						"valueTwo": 0,
-						"valueThree": 0
-					}
-				},
-				{
-					"attributeName": "--sidebar-text-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0,
-						"valueTwo": 0,
-						"valueThree": 0
-					}
-				},
-				{
-					"attributeName": "--background-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.95686274509,
-						"valueTwo": 0.95686274509,
-						"valueThree": 0.95686274509
-					}
-				},
-				{
-					"attributeName": "--console-selectedtab-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.2862745098,
-						"valueTwo": 0.34901960784,
-						"valueThree": 0.38823529411
-					}
-				},
-				{
-					"attributeName": "--console-unselectedtab-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.22745098039,
-						"valueTwo": 0.27450980392,
-						"valueThree": 0.30588235294
-					}
-				},
-				{
-					"attributeName": "--console-topbar-background-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.22745098039,
-						"valueTwo": 0.27450980392,
-						"valueThree": 0.30588235294
-					}
-				},
-				{
-					"attributeName": "--console-text-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0,
-						"valueTwo": 0,
-						"valueThree": 0
-					}
-				},
-				{
-					"attributeName": "--sidebar-element-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.93333333333,
-						"valueTwo": 0.93333333333,
-						"valueThree": 0.93333333333
-					}
-				},
-				{
-					"attributeName": "--sidebar-element-hover-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.81176470588,
-						"valueTwo": 0.84705882352,
-						"valueThree": 0.86274509803
-					}
-				},
-				{
-					"attributeName": "--queries-input-background-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 1,
-						"valueTwo": 1,
-						"valueThree": 1
-					}
-				},
-				{
-					"attributeName": "--canvas-action-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0,
-						"valueTwo": 0,
-						"valueThree": 0
-					}
-				}
-			]
+			"color": {
+				"--main-navigationbar-color": [
+					"display-p3",
+					0.22745098039,
+					0.27450980392,
+					0.30588235294
+				],
+				"--canvas-topbar-color": [
+					"display-p3",
+					0.2862745098,
+					0.34901960784,
+					0.38823529411
+				],
+				"--canvas-text-color": ["display-p3", 0, 0, 0],
+				"--sidebar-text-color": ["display-p3", 0, 0, 0],
+				"--background-color": [
+					"display-p3",
+					0.95686274509,
+					0.95686274509,
+					0.95686274509
+				],
+				"--console-selectedtab-color": [
+					"display-p3",
+					0.2862745098,
+					0.34901960784,
+					0.38823529411
+				],
+				"--console-unselectedtab-color": [
+					"display-p3",
+					0.22745098039,
+					0.27450980392,
+					0.30588235294
+				],
+				"--console-topbar-background-color": [
+					"display-p3",
+					0.22745098039,
+					0.27450980392,
+					0.30588235294
+				],
+				"--console-text-color": ["display-p3", 0, 0, 0],
+				"--sidebar-element-color": [
+					"display-p3",
+					0.93333333333,
+					0.93333333333,
+					0.93333333333
+				],
+				"--sidebar-element-hover-color": [
+					"display-p3",
+					0.81176470588,
+					0.84705882352,
+					0.86274509803
+				],
+				"--queries-input-background-color": ["display-p3", 1, 1, 1],
+				"--canvas-action-color": ["display-p3", 0, 0, 0],
+				"--console-tab-hover-color": [
+					"display-p3",
+					0.3362745098,
+					0.39901960784,
+					0.43823529411
+				]
+			}
 		},
 		{
 			"mediaFeature": "prefers-color-scheme: dark",
-			"color": [
-				{
-					"attributeName": "--main-navigationbar-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.0156862745,
-						"valueTwo": 0.02352941176,
-						"valueThree": 0.03529411764
-					}
-				},
-				{
-					"attributeName": "--canvas-topbar-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.05490196078,
-						"valueTwo": 0.06666666666,
-						"valueThree": 0.09019607843
-					}
-				},
-				{
-					"attributeName": "--canvas-text-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 1,
-						"valueTwo": 1,
-						"valueThree": 1
-					}
-				},
-				{
-					"attributeName": "--sidebar-text-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 1,
-						"valueTwo": 1,
-						"valueThree": 1
-					}
-				},
-				{
-					"attributeName": "--background-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.09019607843,
-						"valueTwo": 0.10196078431,
-						"valueThree": 0.13333333333
-					}
-				},
-				{
-					"attributeName": "--console-selectedtab-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.05490196078,
-						"valueTwo": 0.06666666666,
-						"valueThree": 0.09019607843
-					}
-				},
-				{
-					"attributeName": "--console-unselectedtab-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.0156862745,
-						"valueTwo": 0.02352941176,
-						"valueThree": 0.03529411764
-					}
-				},
-				{
-					"attributeName": "--console-topbar-background-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.0156862745,
-						"valueTwo": 0.02352941176,
-						"valueThree": 0.03529411764
-					}
-				},
-				{
-					"attributeName": "--console-text-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 1,
-						"valueTwo": 1,
-						"valueThree": 1
-					}
-				},
-				{
-					"attributeName": "--sidebar-element-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.19215686274,
-						"valueTwo": 0.21176470588,
-						"valueThree": 0.23529411764
-					}
-				},
-				{
-					"attributeName": "--sidebar-element-hover-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.12215686274,
-						"valueTwo": 0.23176470588,
-						"valueThree": 0.25529411764
-					}
-				},
-				{
-					"attributeName": "--queries-input-background-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 0.05490196078,
-						"valueTwo": 0.06666666666,
-						"valueThree": 0.09019607843
-					}
-				},
-				{
-					"attributeName": "--canvas-action-color",
-					"color": {
-						"colorGamut": "display-p3",
-						"valueOne": 1,
-						"valueTwo": 1,
-						"valueThree": 1
-					}
-				}
-			]
+			"color": {
+				"--main-navigationbar-color": [
+					"display-p3",
+					0.0156862745,
+					0.02352941176,
+					0.03529411764
+				],
+				"--canvas-topbar-color": [
+					"display-p3",
+					0.05490196078,
+					0.06666666666,
+					0.09019607843
+				],
+				"--canvas-text-color": ["display-p3", 1, 1, 1],
+				"--sidebar-text-color": ["display-p3", 1, 1, 1],
+				"--background-color": [
+					"display-p3",
+					0.09019607843,
+					0.10196078431,
+					0.13333333333
+				],
+				"--console-selectedtab-color": [
+					"display-p3",
+					0.08490196078,
+					0.09666666666,
+					0.12019607843
+				],
+				"--console-unselectedtab-color": [
+					"display-p3",
+					0.0156862745,
+					0.02352941176,
+					0.03529411764
+				],
+				"--console-topbar-background-color": [
+					"display-p3",
+					0.0156862745,
+					0.02352941176,
+					0.03529411764
+				],
+				"--console-text-color": ["display-p3", 1, 1, 1],
+				"--sidebar-element-color": [
+					"display-p3",
+					0.19215686274,
+					0.21176470588,
+					0.23529411764
+				],
+				"--sidebar-element-hover-color": [
+					"display-p3",
+					0.12215686274,
+					0.23176470588,
+					0.25529411764
+				],
+				"--queries-input-background-color": [
+					"display-p3",
+					0.05490196078,
+					0.06666666666,
+					0.09019607843
+				],
+				"--canvas-action-color": ["display-p3", 1, 1, 1],
+				"--console-tab-hover-color": [
+					"display-p3",
+					0.13490196078,
+					0.14666666666,
+					0.17019607843
+				]
+			}
 		}
 	]
 }

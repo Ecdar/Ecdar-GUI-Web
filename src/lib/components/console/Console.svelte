@@ -255,7 +255,7 @@
 	}
 
 	.consoleTab:hover {
-		filter: brightness(0.9);
+		background-color: var(--console-tab-hover-color) !important;
 	}
 
 	.frontEndButton {

@@ -5,9 +5,9 @@ import { z } from "zod";
  * Example: "3em" would be represented as "size: 3" and "unit: 'em'"
  */
 
-const SizeValue = z.object({
-	size: z.number(),
-	unit: z.string(),
-});
+const SizeAttribute = z.tuple([
+	z.number(), // The numerical size
+	z.string(), // The unit of the size
+]);
 
-export default SizeValue;
+export default SizeAttribute;
