@@ -73,9 +73,9 @@
 		<StartScreen />
 	{:else}
 		<!-- Left side Panel -->
-		<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
+		<div class="side-panel" style="flex-basis: {leftSidePanelWidth}px">
 			<nav class="inner-nav1"><ProjectNav /></nav>
-			<div class="sidePanelContent">
+			<div class="side-panel-content">
 				<div
 					class="global-dec"
 					style="background-color: var(--sidebar-element-color);"
@@ -94,7 +94,7 @@
 		<!-- Left resize Panel -->
 		<div
 			role="button"
-			id="leftresizer"
+			id="left-resizer"
 			class="resizer"
 			tabindex="-1"
 			on:pointerdown={(event) => {
@@ -109,7 +109,7 @@
 		<!-- Right resize Panel -->
 		<div
 			role="button"
-			id="rightresizer"
+			id="right-resizer"
 			class="resizer"
 			tabindex="-1"
 			on:pointerdown={(event) => {
@@ -117,11 +117,11 @@
 			}}
 		/>
 		<!-- Right side Panel -->
-		<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
+		<div class="side-panel" style="flex-basis: {rightSidePanelWidth}px">
 			<nav class="inner-nav3">
 				<QueryNav />
 			</nav>
-			<div class="sidePanelContent">
+			<div class="side-panel-content">
 				<Queries />
 			</div>
 		</div>
@@ -178,6 +178,7 @@
 		border-bottom: 1px solid black;
 		transition: background-color 200ms;
 	}
+
 	.circle {
 		margin-right: 10px;
 		display: flex;
@@ -187,19 +188,20 @@
 		border-radius: 70px;
 		justify-content: center;
 	}
+
 	.icon {
 		display: flex;
 		vertical-align: middle;
 		padding: 15%;
 	}
 
-	.sidePanel {
+	.side-panel {
 		flex-basis: 10em;
 		overflow: hidden;
 		background-color: var(--background-color);
 	}
 
-	.sidePanelContent {
+	.side-panel-content {
 		color: var(--sidebar-text-color);
 		font-size: var(--sidebar-standard-fontsize);
 		height: 100%;
@@ -222,7 +224,7 @@
 	}
 
 	.canvas,
-	.sidePanel {
+	.side-panel {
 		display: flex;
 		flex-direction: column;
 	}

@@ -120,11 +120,11 @@
 	}
 </script>
 
-<div class="outerOverflow" bind:this={consoleContainer}>
+<div class="outer-overflow" bind:this={consoleContainer}>
 	<div bind:this={consoleBar} id="console-bar">
 		<div
 			role="button"
-			id="consoleResizer"
+			id="console-resizer"
 			class="resizer"
 			tabindex="-1"
 			on:pointerdown={(event) => {
@@ -146,7 +146,7 @@
 
 		<button
 			type="button"
-			class="consoleTab frontEndButton unselectable"
+			class="console-tab front-end-button unselectable"
 			style="background-color: {currentTab == Tabs.Frontend
 				? consoleButtonColorOn
 				: consoleButtonColorOff}"
@@ -158,7 +158,7 @@
 		</button>
 		<button
 			type="button"
-			class="consoleTab unselectable"
+			class="console-tab unselectable"
 			style="background-color: {currentTab == Tabs.Backend
 				? consoleButtonColorOn
 				: consoleButtonColorOff};"
@@ -194,7 +194,7 @@
 		min-height: 2.5em;
 	}
 
-	#consoleResizer {
+	#console-resizer {
 		background-color: black;
 		height: 0.2em;
 	}
@@ -233,7 +233,7 @@
 		background-color: var(--console-selectedtab-color);
 	}
 
-	.outerOverflow {
+	.outer-overflow {
 		display: flex;
 		margin: 0%;
 		padding: 0%;
@@ -242,7 +242,7 @@
 		overflow: hidden;
 	}
 
-	.consoleTab {
+	.console-tab {
 		color: var(--navigationbar-text-color);
 		position: relative;
 		height: 3.8em;
@@ -254,11 +254,11 @@
 		float: left;
 	}
 
-	.consoleTab:hover {
+	.console-tab:hover {
 		background-color: var(--console-tab-hover-color) !important;
 	}
 
-	.frontEndButton {
+	.front-end-button {
 		border-left: 0;
 		border-right: 0;
 	}
