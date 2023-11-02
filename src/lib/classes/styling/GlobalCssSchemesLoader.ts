@@ -160,18 +160,6 @@ class GlobalCssSchemesLoader {
 			);
 		}
 
-		// Check if values are within range (0.0 - 1.0)
-		if (
-			this.outOfColorRange(color[1]) ||
-			this.outOfColorRange(color[2]) ||
-			this.outOfColorRange(color[3]) ||
-			(color[4] && this.outOfColorRange(color[4]))
-		) {
-			throw new Error(
-				"Color value in parsed global css styles out of range (0.0 - 1.0).",
-			);
-		}
-
 		// Create CSS color string
 		if (color[4]) {
 			cssColor = `color(${color[0]} ${color[1]} ${color[2]} ${color[3]} / ${color[4]})`;
@@ -180,15 +168,6 @@ class GlobalCssSchemesLoader {
 		}
 
 		return cssColor;
-	}
-
-	/**
-	 * Support method for checking if color is within range
-	 * @param value
-	 * @returns Boolean value representing if value is out of range
-	 */
-	private outOfColorRange(value: number): boolean {
-		return value > 1 || value < 0;
 	}
 }
 

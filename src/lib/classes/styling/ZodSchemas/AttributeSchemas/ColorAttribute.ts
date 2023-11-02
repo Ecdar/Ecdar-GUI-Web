@@ -12,17 +12,17 @@ import { z } from "zod";
  */
 const ColorWithAlpha = z.tuple([
 	z.string(), // The Color Gamut
-	z.number(), // Red value (Range 0-1)
-	z.number(), // Green value (Range 0-1)
-	z.number(), // Blue value (Range 0-1)
-	z.number().optional(), // Optional alpha value
+	z.number().min(0).max(1), // Red value (Range 0-1)
+	z.number().min(0).max(1), // Green value (Range 0-1)
+	z.number().min(0).max(1), // Blue value (Range 0-1)
+	z.number().min(0).max(1), // Optional alpha value
 ]);
 
 const ColorWithoutAlpha = z.tuple([
 	z.string(), // The Color Gamut
-	z.number(), // Red value (Range 0-1)
-	z.number(), // Green value (Range 0-1)
-	z.number(), // Blue value (Range 0-1)
+	z.number().min(0).max(1), // Red value (Range 0-1)
+	z.number().min(0).max(1), // Green value (Range 0-1)
+	z.number().min(0).max(1), // Blue value (Range 0-1)
 ]);
 
 const ColorAttribute = z.union([ColorWithoutAlpha, ColorWithAlpha]);
