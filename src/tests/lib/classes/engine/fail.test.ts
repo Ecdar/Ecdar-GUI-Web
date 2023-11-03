@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import EngineStorage from "$lib/classes/engine/EngineStorage";
 import type { Engine } from "$lib/classes/engine/Engine";
 
-describe("fail deserialize test", () => {
+describe("fail engine test", () => {
 	const engine = new EngineStorage();
 
 	// Missing fields
@@ -213,11 +213,6 @@ describe("fail deserialize test", () => {
 	});
 
 	it("fails on setting default engine", () => {
-		//setup
-		engine.createEngine("a", "123.123.123.213", 2, 5, 2);
-		console.log(engine);
-
-		//expect(() => {engine.defaultEngine = engine.engineArray[0]}).toThrow();
 		expect(() => {
 			engine.defaultEngine = {
 				name: "test",
@@ -227,6 +222,15 @@ describe("fail deserialize test", () => {
 				type: 2,
 				id: 1,
 			} as Engine;
+		}).toThrow();
+	});
+
+	it("fails on getting engine", () => {
+		expect(() => {
+			engine.getEngine(69);
+		}).toThrow();
+		expect(() => {
+			engine.getEngine("coolName");
 		}).toThrow();
 	});
 });
@@ -357,20 +361,3 @@ const wrongId = {
 	type: 2,
 	id: -5,
 };
-
-// try {
-// 	console.log(obj);
-// 	const store: EngineStorage = new EngineStorage();
-// 	store.deSerialize(JSON.stringify(obj));
-// 	store.createEngine("test2", "192.192.192.192", 5, 6, 1);
-// 	console.log(store);
-
-// 	const storeJSON = store.serialize();
-
-// 	console.log(JSON.parse(storeJSON));
-
-// 	store.deSerialize(storeJSON);
-// 	console.log(store);
-// } catch (error) {
-// 	console.log(error);
-// }
