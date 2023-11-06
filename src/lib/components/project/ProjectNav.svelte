@@ -3,12 +3,22 @@
 		Note_add,
 		Create_new_folder,
 	} from "svelte-google-materialdesign-icons";
+	import { components, systems } from "$lib/globalState/activeProject";
+	import { Component } from "$lib/classes/automaton/Component";
+	import { System } from "$lib/classes/automaton/System";
+
 	function addComponent() {
-		console.log("Add component");
+		const newComponent = new Component("New Component");
+		newComponent.color = "grey";
+		$components?.push(newComponent);
+		$components = $components;
 	}
 
 	function addSystem() {
-		console.log("Add system");
+		const newSystem = new System("New System");
+		newSystem.color = "lightgrey";
+		$systems?.push(newSystem);
+		$systems = $systems;
 	}
 </script>
 
@@ -17,8 +27,8 @@
 		<h1>Project</h1>
 	</div>
 	<div>
-		<Create_new_folder on:click={addSystem} />
-		<Note_add on:click={addComponent} />
+		<Create_new_folder on:click={addComponent} />
+		<Note_add on:click={addSystem} />
 	</div>
 </div>
 

@@ -1,24 +1,23 @@
 <script lang="ts">
-	import {
-		More_vert,
-		Request_page,
-	} from "svelte-google-materialdesign-icons";
+	import { Request_page } from "svelte-google-materialdesign-icons";
+	import type { System } from "$lib/classes/automaton/System";
+	import SystemDropDownMenu from "./SystemDropDownMenu.svelte";
 
-	export let name: string = "System";
-	export let color: string = "grey";
+	export let system: System;
+	export let index: number;
 </script>
 
 <div class="system">
 	<div class="left">
-		<div class="circle" style="background-color: {color}">
+		<div class="circle" style="background-color: {system.color}">
 			<div class="icon">
 				<Request_page size="100%" />
 			</div>
 		</div>
-		<p>{name}</p>
+		<p>{system.name}</p>
 	</div>
 	<div>
-		<More_vert />
+		<SystemDropDownMenu {index} />
 	</div>
 </div>
 
@@ -38,7 +37,6 @@
 		padding: 10px;
 		border-bottom: 1px solid black;
 		transition: background-color 200ms;
-		height: 60px;
 	}
 
 	.system:hover {

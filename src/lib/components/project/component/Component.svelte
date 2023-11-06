@@ -1,24 +1,23 @@
 <script lang="ts">
-	import {
-		More_vert,
-		Folder_special,
-	} from "svelte-google-materialdesign-icons";
+	import { Folder_special } from "svelte-google-materialdesign-icons";
+	import type { Component } from "$lib/classes/automaton/Component";
+	import ComponentDropDownMenu from "./ComponentDropDownMenu.svelte";
 
-	export let name: string = "Component";
-	export let color: string = "grey";
+	export let component: Component;
+	export let index: number;
 </script>
 
 <div class="component">
 	<div class="left">
-		<div class="circle" style="background-color: {color}">
+		<div class="circle" style="background-color: {component.color}">
 			<div class="icon">
 				<Folder_special size="100%" />
 			</div>
 		</div>
-		<p>{name}</p>
+		<p>{component.name}</p>
 	</div>
 	<div>
-		<More_vert />
+		<ComponentDropDownMenu {index} />
 	</div>
 </div>
 
