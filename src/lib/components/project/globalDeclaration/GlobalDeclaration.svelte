@@ -23,6 +23,10 @@
 		transition: background-color 200ms;
 	}
 
+	.global-dec:hover {
+		background-color: #cfd8dc;
+	}
+
 	.circle {
 		margin-right: 10px;
 		display: flex;
