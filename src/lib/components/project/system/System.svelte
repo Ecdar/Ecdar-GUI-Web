@@ -5,6 +5,10 @@
 
 	export let system: System;
 	export let index: number;
+
+	function handleDoubleClick() {
+		system.name = prompt("New name:", system.name) || system.name;
+	}
 </script>
 
 <div class="system">
@@ -14,7 +18,7 @@
 				<Request_page size="100%" />
 			</div>
 		</div>
-		<p>{system.name}</p>
+		<p on:dblclick={handleDoubleClick}>{system.name}</p>
 	</div>
 	<div>
 		<SystemDropDownMenu {index} />

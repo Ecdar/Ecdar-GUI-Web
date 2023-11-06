@@ -5,6 +5,10 @@
 
 	export let component: Component;
 	export let index: number;
+
+	function handleDoubleClick() {
+		component.name = prompt("New name:", component.name) || component.name;
+	}
 </script>
 
 <div class="component">
@@ -14,7 +18,7 @@
 				<Folder_special size="100%" />
 			</div>
 		</div>
-		<p>{component.name}</p>
+		<p on:dblclick={handleDoubleClick}>{component.name}</p>
 	</div>
 	<div>
 		<ComponentDropDownMenu {index} />
