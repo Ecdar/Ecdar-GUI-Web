@@ -11,14 +11,14 @@
 	}
 </script>
 
-<div class="system">
+<div class="system" on:dblclick={handleDoubleClick} role="button" tabindex="-1">
 	<div class="left">
 		<div class="circle" style="background-color: {system.color}">
 			<div class="icon">
 				<Request_page size="100%" />
 			</div>
 		</div>
-		<p on:dblclick={handleDoubleClick}>{system.name}</p>
+		<p>{system.name}</p>
 	</div>
 	<div>
 		<SystemDropDownMenu {index} />

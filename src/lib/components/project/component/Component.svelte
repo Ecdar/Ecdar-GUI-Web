@@ -11,14 +11,19 @@
 	}
 </script>
 
-<div class="component">
+<div
+	class="component"
+	on:dblclick={handleDoubleClick}
+	role="button"
+	tabindex="-1"
+>
 	<div class="left">
 		<div class="circle" style="background-color: {component.color}">
 			<div class="icon">
 				<Folder_special size="100%" />
 			</div>
 		</div>
-		<p on:dblclick={handleDoubleClick}>{component.name}</p>
+		<p>{component.name}</p>
 	</div>
 	<div>
 		<ComponentDropDownMenu {index} />
