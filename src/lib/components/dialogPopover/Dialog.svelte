@@ -8,7 +8,7 @@
 		dialogContainer?.showModal();
 	}
 
-	export function closeModal(){
+	export function closeModal() {
 		dialogContainer.close();
 	}
 </script>

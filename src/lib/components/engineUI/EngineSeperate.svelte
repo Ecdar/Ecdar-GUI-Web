@@ -1,32 +1,31 @@
 <script lang="ts">
-	import type EngineStorage from "$lib/classes/engine/EngineStorage";
+	import { EngineType } from "$lib/classes/engine/EngineType";
 	import Dialog from "../dialogPopover/Dialog.svelte";
+	import type { EngineDTO } from "./EngineDTO";
 
 	let formElement: HTMLFormElement;
 	let modalContainer: Dialog;
+    let nameContainer: HTMLInputElement;
 
 	export let defaultChecked: number;
-	export let engineStorage: EngineStorage | undefined;
-	export let engineID: number | undefined;
-	let nameContainer: HTMLInputElement;
+	export let currentEngine: EngineDTO;
 
 	function deleteEngine() {
-		if (engineID == undefined) {
-			formElement.parentNode?.removeChild(formElement);
-			return;
-		}
-		engineStorage?.deleteEngine(engineID);
+		currentEngine.address = "-1";
 	}
 
 	function showModal() {
 		modalContainer.showModal();
 	}
+    function onNameChange(){
+        currentEngine.name = nameContainer.value;
+    }
 </script>
 
 <Dialog bind:this={modalContainer}>
 	<h2>
-		Are you sure you wish to delete the engine {#if engineID !== undefined}
-			{engineID}
+		Are you sure you wish to delete the engine: {#if currentEngine.name !== undefined}
+			{currentEngine.name}
 		{/if}
 	</h2>
 	<form method="dialog">
@@ -39,32 +38,26 @@
 	<button type="submit" id="show-modal" on:click={showModal}>Delete</button>
 	<br />
 	<label for="name">Name:</label>
-	<input
-		type="text"
-		placeholder="Name"
-		name="name"
-		bind:this={nameContainer}
-	/> <br />
+	<input type="text" placeholder="Name" id="name" on:change={onNameChange} bind:this={nameContainer}/> <br />
 	<label for="IP">IP Address:</label>
-	<input type="text" placeholder="IP" name="IP" /> <br />
-	<label for="IP">Start Port:</label>
-	<input type="text" placeholder="7000" name="IP" /> <br />
-	<label for="IP">End Port:</label>
-	<input type="text" placeholder="7000" name="IP" /> <br />
+	<input type="text" placeholder="IP" id="IP" /> <br />
+	<label for="STARTPORT">Port:</label>
+	<input type="number" placeholder="7000" id="STARTPORT" /> -
+	<input type="number" placeholder="7000" id="ENDPORT" /> <br />
 	<input
 		type="radio"
 		id="reveaal"
 		name="engine_type"
 		value="Reveaal"
-		checked={defaultChecked == 0}
+		checked={defaultChecked == EngineType.Reveaal}
 	/>
-	<label for="reveeal">Reveaal</label> <br />
+	<label for="reveaal">Reveaal</label> <br />
 	<input
 		type="radio"
 		id="jecdar"
 		name="engine_type"
 		value="JEcdar"
-		checked={defaultChecked == 1}
+		checked={defaultChecked == EngineType.JEcdar}
 	/>
 	<label for="jecdar">JEcdar</label> <br />
 	<input
@@ -72,7 +65,7 @@
 		id="reveaalapi"
 		name="engine_type"
 		value="API"
-		checked={defaultChecked == 2}
+		checked={defaultChecked == EngineType.API}
 	/>
 	<label for="reveaalapi">Ecdar API</label> <br />
 </form>
