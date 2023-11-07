@@ -43,9 +43,7 @@
 	function onSubmit() {
 		tempEngines.forEach((engine) => {
 			if (engine.id == -1) {
-				if (engine.address == "-1") {
-					return;
-				}
+				if(engine.name == "" || engine.address == "" || engine.portRangeStart == -1 || engine.portRangeEnd == -1) return;
 				engines.createEngine(
 					engine.name,
 					engine.address,
@@ -69,6 +67,10 @@
 			}
 		});
 	}
+
+	function closeModal(){
+		dialogContainer.closeModal();
+	}
 </script>
 
 <button on:click={showEngineUI}> Show</button>
@@ -76,6 +78,6 @@
 	<form on:submit={onSubmit}>
 		<EnginePanel {tempEngines} />
 		<button on:click={addNewEngine} type="button">Add new engine</button>
-		<button>Save</button>
+		<button on:click={closeModal}>Save</button>
 	</form>
 </Dialog>
