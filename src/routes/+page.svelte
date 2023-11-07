@@ -5,6 +5,7 @@
 	import Console from "$lib/components/console/Console.svelte";
 	import Components from "$lib/components/project/component/Components.svelte";
 	import Systems from "$lib/components/project/system/Systems.svelte";
+	import ToolsNav from "$lib/components/tools/ToolsNav.svelte"
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
@@ -72,7 +73,11 @@
 	{:else}
 		<!-- Left side Panel -->
 		<div class="side-panel" style="flex-basis: {leftSidePanelWidth}px">
-			<nav class="inner-nav1"><ProjectNav /></nav>
+			<nav class="inner-nav1"><ToolsNav/></nav>
+			<div class="side-panel-content">
+
+			</div>
+			<nav class="inner-nav2"><ProjectNav /></nav>
 			<div class="side-panel-content">
 				<div class="global-dec">
 					<div class="circle" style="background-color: grey">
