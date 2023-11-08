@@ -14,13 +14,12 @@
 <style>
 	:global(*) {
 		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
 	}
 
 	:global(body) {
 		height: 100vh;
 		display: flex;
 		flex-direction: column;
+		margin: 0;
 	}
 </style>
