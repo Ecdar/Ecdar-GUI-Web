@@ -6,7 +6,7 @@
 	import Button from "$lib/components/overlayMenu/elements/Button.svelte";
 
 	export let description: string;
-	export let color;
+	export let color: string;
 	export let index: number;
 
 	const menuId = `component-menu-${index}`;
