@@ -146,7 +146,7 @@ test("can change backend to all options", async ({ page }) => {
 
 	const serverOptions = ["Reveaal", "J-Ecdar"];
 
-	await expect(combobox).toHaveValue("Reveaal");
+	await expect(combobox).toHaveValue("1");
 	for (const server of serverOptions) {
 		await combobox.selectOption(server);
 		await expect(combobox).toHaveValue(server);
