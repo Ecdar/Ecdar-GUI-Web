@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { project } from "$lib/globalState/activeProject";
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
+	import SvgView from "$lib/components/svg-view/SvgView.svelte";
 	import Console from "$lib/components/console/Console.svelte";
-	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
-	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 	import Components from "$lib/components/project/component/Components.svelte";
 	import Systems from "$lib/components/project/system/Systems.svelte";
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
@@ -52,7 +51,7 @@
 	}
 
 	/**
-	 * Function for stopping resizing a sid panel
+	 * Function for stopping resizing a side panel
 	 * @param event
 	 */
 	function stopResizingSidePanel(event: PointerEvent) {
@@ -77,9 +76,9 @@
 		<StartScreen />
 	{:else}
 		<!-- Left side Panel -->
-		<div class="sidePanel" style="flex-basis: {leftSidePanelWidth}px">
+		<div class="side-panel" style="flex-basis: {leftSidePanelWidth}px">
 			<nav class="inner-nav1"><ProjectNav /></nav>
-			<div class="sidePanelContent">
+			<div class="side-panel-content">
 				<div class="global-dec">
 					<div class="circle" style="background-color: grey">
 						<div class="icon">
@@ -95,7 +94,7 @@
 		<!-- Left resize Panel -->
 		<div
 			role="button"
-			id="leftresizer"
+			id="left-resizer"
 			class="resizer"
 			tabindex="-1"
 			on:pointerdown={(event) => {
@@ -105,14 +104,12 @@
 		<!-- Canvas -->
 		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
-			<p>Canvas</p>
-			<DropDownMenu />
-			<LocationsWithContextMenu />
+			<SvgView />
 		</div>
 		<!-- Right resize Panel -->
 		<div
 			role="button"
-			id="rightresizer"
+			id="right-resizer"
 			class="resizer"
 			tabindex="-1"
 			on:pointerdown={(event) => {
@@ -120,11 +117,11 @@
 			}}
 		/>
 		<!-- Right side Panel -->
-		<div class="sidePanel" style="flex-basis: {rightSidePanelWidth}px">
+		<div class="side-panel" style="flex-basis: {rightSidePanelWidth}px">
 			<nav class="inner-nav3">
 				<QueryNav />
 			</nav>
-			<div class="sidePanelContent">
+			<div class="side-panel-content">
 				<Queries />
 			</div>
 		</div>
@@ -173,6 +170,7 @@
 		border-bottom: 1px solid black;
 		transition: background-color 200ms;
 	}
+
 	.circle {
 		margin-right: 10px;
 		display: flex;
@@ -182,21 +180,20 @@
 		border-radius: 70px;
 		justify-content: center;
 	}
+
 	.icon {
 		display: flex;
 		vertical-align: middle;
 		padding: 15%;
 	}
 
-	.sidePanel {
+	.side-panel {
 		background-color: whitesmoke;
 		flex-basis: 10em;
 		overflow: hidden;
-		display: flex;
-		flex-direction: column;
 	}
 
-	.sidePanelContent {
+	.side-panel-content {
 		height: 100%;
 		width: 100%;
 		overflow-y: auto;
@@ -211,8 +208,12 @@
 	}
 
 	.canvas {
-		background-color: whitesmoke;
-		flex: 1;
-		width: 0;
+		flex-grow: 1;
+	}
+
+	.canvas,
+	.side-panel {
+		display: flex;
+		flex-direction: column;
 	}
 </style>
