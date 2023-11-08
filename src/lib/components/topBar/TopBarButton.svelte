@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TopBarDropDown from "../topBar/TopBarDropDown.svelte";
+	import TopBarDropDown from "./TopBarDropDown.svelte";
 
 	export let name: string = "Default";
 
@@ -31,31 +31,31 @@
 </div>
 
 <style>
-	.container {
-		position: absolute;
-		height: 0px;
-		z-index: 100;
-	}
-
 	div {
 		height: 100%;
 	}
 
 	button {
 		height: 100%;
-		background-color: slategrey;
+		background-color: var(--main-navigationbar-color);
 		border-color: transparent;
-		border-right: 2px solid black;
-		color: rgb(0, 0, 0);
+		border-right: 2px solid white;
+		color: var(--navigationbar-text-color);
 	}
 
 	button:hover {
-		filter: brightness(0.9);
+		background-color: var(--navigationbar-button-hover-color);
 	}
 
 	.unselectable {
 		-webkit-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+	}
+
+	.container {
+		position: absolute;
+		height: 0px;
+		z-index: 100;
 	}
 </style>

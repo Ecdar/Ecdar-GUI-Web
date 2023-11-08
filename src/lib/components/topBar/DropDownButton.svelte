@@ -8,13 +8,13 @@
 	export let color: string = "black";
 
 	//Set icon attributes
-	const iconCtx = {
+	const iconContext = {
 		strokeWidth: "1.5",
 		size: "15",
 		variation: "filled",
 		color: color,
 	};
-	setContext("iconCtx", iconCtx);
+	setContext("iconContext", iconContext);
 </script>
 
 <!--Make each dropdown item, into button-->

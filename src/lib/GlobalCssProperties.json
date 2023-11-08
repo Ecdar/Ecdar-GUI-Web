@@ -2,7 +2,7 @@
 	"default": {
 		"mediaFeature": "default",
 		"color": {
-			"--navigationbar-text-color": ["display-p3", 1, 1, 1, 0],
+			"--navigationbar-text-color": ["display-p3", 1, 1, 1],
 			"--console-scrollbar-thumb-color": [
 				"display-p3",
 				0.22745098039,
@@ -91,6 +91,12 @@
 				0.3362745098,
 				0.39901960784,
 				0.43823529411
+			],
+			"--navigationbar-button-hover-color": [
+				"display-p3",
+				0.3362745098,
+				0.39901960784,
+				0.43823529411
 			]
 		},
 		"fontSize": {
@@ -173,6 +179,12 @@
 				],
 				"--canvas-action-color": ["display-p3", 1, 1, 1],
 				"--console-tab-hover-color": [
+					"display-p3",
+					0.13490196078,
+					0.14666666666,
+					0.17019607843
+				],
+				"--navigationbar-button-hover-color": [
 					"display-p3",
 					0.13490196078,
 					0.14666666666,

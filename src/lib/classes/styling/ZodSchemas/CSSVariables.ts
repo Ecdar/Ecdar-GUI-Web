@@ -29,6 +29,7 @@ export const ColorVariables = z
 		"--queries-input-background-color": ColorAttribute,
 		"--canvas-action-color": ColorAttribute,
 		"--console-tab-hover-color": ColorAttribute,
+		"--navigationbar-button-hover-color": ColorAttribute,
 	})
 	.strict();
 

@@ -140,11 +140,9 @@
 	}
 
 	#main-nav {
-		color: var(--navigationbar-text-color);
 		background-color: var(--main-navigationbar-color);
-		height: 2.5em;
-		min-height: 2.5em;
-		border-bottom: 0.3em solid black;
+		height: 2em;
+		border-bottom: 0.2em solid black;
 	}
 
 	main {
