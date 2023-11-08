@@ -28,7 +28,7 @@
 			{:else if color === "var(--query-error-color)"}
 				<Error color="black" />
 			{:else}
-				<Help color="blacxk" />
+				<Help color="black" />
 			{/if}
 			<select>
 				{#each typeOptions as typeOption}
