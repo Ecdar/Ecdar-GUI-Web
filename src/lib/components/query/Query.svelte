@@ -4,12 +4,12 @@
 	import QueryDropDownMenu from "./QueryDropDownMenu.svelte";
 
 	export let query: string;
+	export let type: string;
+	export let name: string;
 	export let comment: string;
 	export let isPeriodic: boolean;
 	export let backend: Backend;
 	export let index: number;
-
-	let [type, name] = query.split(":");
 
 	const typeOptions: Record<string, string> = {
 		specification: "Spec",
@@ -27,65 +27,31 @@
 		Reveaal: Backend.REVEAAL,
 	};
 
-	function onTypeChange(event: Event) {
-		type = (event.target as HTMLSelectElement).value;
-		query = `${type}:${name}`;
-	}
-
-	function onNameChange(event: Event) {
-		name = (event.target as HTMLInputElement).value;
-		query = `${type}:${name}`;
-	}
-
-	function onCommentChange(event: Event) {
-		comment = (event.target as HTMLInputElement).value;
-	}
-
-	function onBackendChange(event: Event) {
-		backend = serverOptions[(event.target as HTMLSelectElement).value];
-	}
+	$: query = `${type}:${name}`;
 </script>
 
 <div class="query" id="query-{index}">
 	<div class="column">
 		<div class="left-column">
-			<select on:change={onTypeChange}>
+			<select bind:value={type}>
 				{#each Object.entries(typeOptions) as [full, short]}
-					{#if full === type}
-						<option value={full} selected>{short}</option>
-					{:else}
-						<option value={full}>{short}</option>
-					{/if}
+					<option value={full}>{short}</option>
 				{/each}
 			</select>
 		</div>
 	</div>
 	<div class="column grow">
-		<input
-			type="text"
-			placeholder="Query"
-			value={name || ""}
-			on:change={onNameChange}
-		/>
-		<input
-			type="text"
-			placeholder="Comment"
-			value={comment || ""}
-			on:change={onCommentChange}
-		/>
+		<input type="text" placeholder="Query" bind:value={name} />
+		<input type="text" placeholder="Comment" bind:value={comment} />
 	</div>
 	<div class="column">
 		<div class="group">
 			<Arrow_right />
 			<QueryDropDownMenu bind:isPeriodic {index} />
 		</div>
-		<select on:change={onBackendChange}>
-			{#each Object.keys(serverOptions) as serverOption, index}
-				{#if Backend[index] === Backend[backend]}
-					<option selected>{serverOption}</option>
-				{:else}
-					<option>{serverOption}</option>
-				{/if}
+		<select bind:value={backend}>
+			{#each Object.keys(serverOptions) as serverOption, serverIndex}
+				<option value={serverIndex}>{serverOption}</option>
 			{/each}
 		</select>
 	</div>
