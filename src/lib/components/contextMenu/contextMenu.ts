@@ -1,5 +1,5 @@
 import type { ComponentType } from "svelte";
-import type { PointLike } from "$lib/classes/draw";
+import type { IPoint } from "$lib/classes/draw";
 import { content as contentStore, anchor, open } from "./state";
 import { PointElement } from "../overlayMenu/PointElement";
 import type { ContextMenuProps } from "./ContextMenuProps";
@@ -32,7 +32,7 @@ export function contextMenu(
 }
 
 function openOverlayMenu(
-	point: PointLike,
+	point: IPoint,
 	component: ComponentType,
 	props: ContextMenuProps,
 ) {

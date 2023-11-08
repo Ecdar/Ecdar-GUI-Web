@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
 	import { afterUpdate, onDestroy } from "svelte";
-	import { Point, type PointLike } from "$lib/classes/draw";
+	import { Point, type IPoint } from "$lib/classes/draw";
 	import { PointElement } from "./PointElement";
 	import {
 		computePosition,
@@ -34,7 +34,7 @@
 	 * The absolute position of the context menu.
 	 * `anchor` sets the suggested position of the menu, but the real position might be different to make the menu more visible.
 	 */
-	let position: PointLike = new Point(0, 0);
+	let position: IPoint = new Point(0, 0);
 
 	/**
 	 * Used to unregister the event listeners that close the context menu. They should only be active when it is open.

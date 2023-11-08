@@ -23,7 +23,7 @@
  */
 
 import type { Writable, Subscriber, Unsubscriber, Updater } from "svelte/store";
-import type { Project } from "$lib/classes/project/Project";
+import type { Project } from "$lib/classes/automaton/Project";
 
 let projectStore: Project | undefined;
 

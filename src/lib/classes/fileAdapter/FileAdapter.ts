@@ -1,4 +1,4 @@
-import type { Project } from "../project/Project";
+import type { Project } from "../automaton/Project";
 import type { IFileAdapterImplementation } from "./FileAdapterImplementation";
 import { FileAdapterTauri } from "./FileAdapterTauri";
 import { FileAdapterFallback } from "./FileAdapterFallback";
