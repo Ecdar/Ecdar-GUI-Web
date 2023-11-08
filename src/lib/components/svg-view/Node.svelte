@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { iPoint } from "$lib/interfaces/iPoint";
-	import DraggableSVG from "./DraggableSVG.svelte";
+	import DraggableSVG from "./helpers/DraggableSVG.svelte";
 
 	export let position: iPoint;
 	export let text: string;

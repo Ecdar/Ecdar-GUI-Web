@@ -8,6 +8,7 @@
 		type CurrentValues,
 		type PanzoomChangeEvent,
 	} from "./panzoom/panzoom";
+	import Component from "./Component.svelte";
 
 	/**
 	 * The parent svg element that the entire view is shown with.
@@ -88,6 +89,8 @@
 				bind:nickname={location.nickname}
 			/>
 		{/each}
+
+		<Component />
 
 		<!-- Arrowhead used at the end of edges -->
 		<defs>
