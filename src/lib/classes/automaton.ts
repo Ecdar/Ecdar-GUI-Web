@@ -6,12 +6,12 @@
 
 // Component classes
 export { Component } from "./automaton/component/Component";
-export { LocationEdge } from "./automaton/component/LocationEdge";
 export { Location } from "./automaton/component/Location";
 export { Invariant } from "./automaton/component/Invariant";
 export { Nickname } from "./automaton/component/Nickname";
-export { NailProperty } from "./automaton/component/NailProperty";
+export { LocationEdge } from "./automaton/component/LocationEdge";
 export { LocationEdgeNail } from "./automaton/component/LocationEdgeNail";
+export { NailProperty } from "./automaton/component/NailProperty";
 
 // Component helpers
 export { LocationEdgeStatus } from "./automaton/component/LocationEdgeStatus";
