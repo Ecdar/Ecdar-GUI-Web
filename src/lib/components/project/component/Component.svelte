@@ -27,7 +27,7 @@
 		<p>{name}</p>
 	</div>
 	<div>
-		<ComponentDropDownMenu bind:description {index} />
+		<ComponentDropDownMenu bind:description bind:color {index} />
 	</div>
 </div>
 

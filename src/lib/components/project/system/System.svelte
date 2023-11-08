@@ -22,7 +22,7 @@
 		<p>{name}</p>
 	</div>
 	<div>
-		<SystemDropDownMenu bind:description {index} />
+		<SystemDropDownMenu bind:description bind:color {index} />
 	</div>
 </div>
 
