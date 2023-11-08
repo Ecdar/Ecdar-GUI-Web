@@ -5,6 +5,7 @@
 	import Panel from "$lib/components/overlayMenu/Panel.svelte";
 	import Button from "$lib/components/overlayMenu/elements/Button.svelte";
 
+	export let description: string;
 	export let index: number;
 
 	const menuId = `system-menu-${index}`;
@@ -15,6 +16,9 @@
 	<More_vert />
 </button>
 <OverlayMenu anchor={button} id={menuId}>
+	<Panel>
+		<p>{description}</p>
+	</Panel>
 	<Panel>
 		<Button
 			icon={Delete}

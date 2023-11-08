@@ -10,6 +10,7 @@
 	function addComponent() {
 		const newComponent = new Component("New Component");
 		newComponent.color = "grey";
+		newComponent.description = "This is a description.";
 		$components?.push(newComponent);
 		$components = $components;
 	}
@@ -17,6 +18,7 @@
 	function addSystem() {
 		const newSystem = new System("New System");
 		newSystem.color = "lightgrey";
+		newSystem.description = "This is a description.";
 		$systems?.push(newSystem);
 		$systems = $systems;
 	}

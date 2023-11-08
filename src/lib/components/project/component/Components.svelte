@@ -4,5 +4,10 @@
 </script>
 
 {#each $components || [] as component, index}
-	<Component bind:component {index} />
+	<Component
+		bind:name={component.name}
+		bind:description={component.description}
+		bind:color={component.color}
+		{index}
+	/>
 {/each}

@@ -4,5 +4,10 @@
 </script>
 
 {#each $systems || [] as system, index}
-	<System bind:system {index} />
+	<System
+		bind:name={system.name}
+		bind:description={system.description}
+		bind:color={system.color}
+		{index}
+	/>
 {/each}

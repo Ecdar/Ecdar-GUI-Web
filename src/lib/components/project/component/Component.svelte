@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { Folder_special } from "svelte-google-materialdesign-icons";
-	import type { Component } from "$lib/classes/automaton/Component";
 	import ComponentDropDownMenu from "./ComponentDropDownMenu.svelte";
 
-	export let component: Component;
+	export let name: string;
+	export let description: string;
+	export let color: string;
 	export let index: number;
 
 	function handleDoubleClick() {
-		component.name = prompt("New name:", component.name) || component.name;
+		name = prompt("New name:", name) || name;
 	}
 </script>
 
@@ -18,15 +19,15 @@
 	tabindex="-1"
 >
 	<div class="left">
-		<div class="circle" style="background-color: {component.color}">
+		<div class="circle" style="background-color: {color}">
 			<div class="icon">
 				<Folder_special size="100%" />
 			</div>
 		</div>
-		<p>{component.name}</p>
+		<p>{name}</p>
 	</div>
 	<div>
-		<ComponentDropDownMenu {index} />
+		<ComponentDropDownMenu bind:description {index} />
 	</div>
 </div>
 

@@ -1,27 +1,28 @@
 <script lang="ts">
 	import { Request_page } from "svelte-google-materialdesign-icons";
-	import type { System } from "$lib/classes/automaton/System";
 	import SystemDropDownMenu from "./SystemDropDownMenu.svelte";
 
-	export let system: System;
+	export let name: string;
+	export let description: string;
+	export let color: string;
 	export let index: number;
 
 	function handleDoubleClick() {
-		system.name = prompt("New name:", system.name) || system.name;
+		name = prompt("New name:", name) || name;
 	}
 </script>
 
 <div class="system" on:dblclick={handleDoubleClick} role="button" tabindex="-1">
 	<div class="left">
-		<div class="circle" style="background-color: {system.color}">
+		<div class="circle" style="background-color: {color}">
 			<div class="icon">
 				<Request_page size="100%" />
 			</div>
 		</div>
-		<p>{system.name}</p>
+		<p>{name}</p>
 	</div>
 	<div>
-		<SystemDropDownMenu {index} />
+		<SystemDropDownMenu bind:description {index} />
 	</div>
 </div>
 
