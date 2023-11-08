@@ -10,6 +10,8 @@
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import { Description } from "svelte-google-materialdesign-icons";
 
+	import TopBar from "$lib/components/topBar/TopBar.svelte";
+
 	enum SidePanel {
 		Left,
 		Right,
@@ -66,7 +68,7 @@
 
 <!-- Top navigation Panel -->
 <nav id="main-nav">
-	<p>Main Nav</p>
+	<TopBar />
 </nav>
 <main bind:this={mainContainer}>
 	{#if $project === undefined}
@@ -142,6 +144,7 @@
 		background-color: var(--main-navigationbar-color);
 		height: 2.5em;
 		min-height: 2.5em;
+		border-bottom: 0.3em solid black;
 	}
 
 	main {
