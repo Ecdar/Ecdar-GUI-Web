@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { EngineType } from "$lib/classes/engine/EngineType";
-	import type { event } from "@tauri-apps/api";
-	import Dialog from "../dialogPopover/Dialog.svelte";
+	import Modal from "../dialogPopover/Modal.svelte";
 	import type { EngineDTO } from "./EngineDTO";
+	import { Delete } from "svelte-google-materialdesign-icons"
 
 	let formElement: HTMLFormElement;
-	let modalContainer: Dialog;
+	let modalContainer: Modal;
 	let nameContainer: HTMLInputElement;
 	let ipAddressContainer: HTMLInputElement;
 	let startPortContainer: HTMLInputElement;
@@ -64,40 +64,45 @@
 	}
 </script>
 
-<Dialog bind:this={modalContainer}>
-	<h2>
-		Are you sure you wish to delete the engine: {#if currentEngine.name !== undefined}
-			{currentEngine.name}
-		{/if}
-	</h2>
-	<button on:click={deleteEngine} type="button"> Yes </button>
-	<button on:click={closeModal} type="button"> No </button>
-</Dialog>
+<Modal bind:this={modalContainer}>
+	<div class="delete-dialog">
+		<div class="inner-delete-dialog">
+			<h4>
+				Are you sure you wish to delete the engine: {#if currentEngine.name !== undefined}
+					{currentEngine.name}
+				{/if}
+			</h4>
+			<button on:click={deleteEngine} type="button"> Yes </button>
+			<button on:click={closeModal} type="button"> No </button>
+		</div>
+	</div>
+</Modal>
 
 <form bind:this={formElement}>
-	<button type="button" id="show-modal" on:click={showModal}>Delete</button>
-	<br />
-	<label for="name">Name:</label>
+	Name:
 	<input
 		type="text"
 		placeholder="Name"
 		id="name"
 		on:change={onNameChange}
 		bind:this={nameContainer}
-	/> <br />
-	<label for="IP">IP Address:</label>
+	/> 
+	<button type="button" id="show-modal" class="delete-button" on:click={showModal}><Delete size=18 /></button> 
+	<br />
+	IP Address:
 	<input
 		type="text"
-		placeholder="IP"
+		placeholder="192.168.1.1"
 		id="IP"
 		on:change={onIPChange}
 		bind:this={ipAddressContainer}
 	/> <br />
-	<label for="STARTPORT">Port:</label>
+	Port range:
 	<input
 		type="number"
 		placeholder="7000"
 		id="STARTPORT"
+		class="port-input"
 		on:change={onStartPortChange}
 		bind:this={startPortContainer}
 	/>
@@ -106,6 +111,7 @@
 		type="number"
 		placeholder="7000"
 		id="ENDPORT"
+		class="port-input"
 		on:change={onEndPortChange}
 		bind:this={endPortContainer}
 	/> <br />
@@ -114,29 +120,100 @@
 		id="reveaal"
 		name="engine_type"
 		value="Reveaal"
+		class="radio-inputs"
 		checked={defaultChecked == EngineType.Reveaal}
 		on:change={onEngineTypeChange}
 		bind:this={engineTypeContainer}
 	/>
-	<label for="reveaal">Reveaal</label> <br />
+	Reveaal<br />
 	<input
 		type="radio"
 		id="jecdar"
 		name="engine_type"
 		value="JEcdar"
+		class="radio-inputs"
 		checked={defaultChecked == EngineType.JEcdar}
 		on:change={onEngineTypeChange}
 		bind:this={engineTypeContainer}
 	/>
-	<label for="jecdar">JEcdar</label> <br />
+	JEcdar<br />
 	<input
 		type="radio"
 		id="reveaalapi"
 		name="engine_type"
 		value="API"
+		class="radio-inputs"
 		checked={defaultChecked == EngineType.API}
 		on:change={onEngineTypeChange}
 		bind:this={engineTypeContainer}
 	/>
-	<label for="reveaalapi">Ecdar API</label> <br />
+	Ecdar API<br />
 </form>
+
+<style>
+	form {
+		background-color: rgb(159, 174, 189);
+		padding: 0.2em;
+	}
+
+	.delete-button {
+		border: 0;
+		padding: 0 0.1em 0 0.1em;
+		background-color: transparent;
+		float: right;
+	}
+
+	.delete-dialog {
+		padding: 0.6em;
+	}
+
+	.inner-delete-dialog {
+		padding: 0.2em;
+		background-color: rgb(159, 174, 189);
+	}
+
+	#IP {
+		width: 10em;
+	}
+
+	.port-input {
+		width: 4em;
+		border: none;
+		border-bottom: 0.05em solid black;
+		background-color: rgb(159, 174, 189);
+		text-align: center;
+	}
+
+	.port-input::placeholder {
+		color: rgb(68, 68, 68);
+	}
+
+	.port-input::-webkit-inner-spin-button,
+	.port-input::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	.port-input::-moz-inner-spin-button,
+	.port-input::-moz-outer-spin-button {
+		-moz-appearance: none;
+		margin: 0;
+	}
+
+	input[type=text] {
+		border: none;
+		border-bottom: 0.05em solid black;
+		background-color: rgb(159, 174, 189);
+		margin: 0.2em;
+	}
+
+	input[type=text]::placeholder {
+		color: rgb(68, 68, 68);
+	}
+
+	.radio-inputs {
+		cursor: pointer;
+		margin: 0.15em;
+		border-radius: 50%;
+	}
+</style>
