@@ -144,7 +144,7 @@ test("can change backend to all options", async ({ page }) => {
 
 	const combobox = page.locator("#query-0").getByRole("combobox").nth(1);
 
-	const serverOptions = ["Reveaal", "J-Ecdar"];
+	const serverOptions = ["0", "1"];
 
 	await expect(combobox).toHaveValue("1");
 	for (const server of serverOptions) {
