@@ -62,5 +62,8 @@
 		background: none;
 		border: none;
 		cursor: pointer;
+		height: 24px;
+		padding: 0;
+		color: var(--sidebar-text-color);
 	}
 </style>
