@@ -63,7 +63,7 @@
 	}
 
 	.project-item {
-		background-color: #eceff1;
+		background-color: var(--sidebar-element-color);
 		cursor: pointer;
 		display: flex;
 		justify-content: flex-start;
@@ -74,7 +74,7 @@
 	}
 
 	.project-item:hover {
-		background-color: #cfd8dc;
+		background-color: var(--sidebar-element-hover-color);
 	}
 
 	.icon {
