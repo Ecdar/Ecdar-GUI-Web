@@ -11,8 +11,9 @@ This style guide contains information about file, class and variable naming conv
   - [Classes](#classNamingConvention)
   - [Variables](#variableNamingConvention)
   - [Functions and Methods](#functionNamingConvention)
-- [Code Practices](#codePractices)
+- [Good Code Practices](#codePractices)
 - [TypeScript Type Practices](#types)
+- [Comment Practices](#commentPractices)
 - [Folder Structure](#folderStructure)
 
 ---
@@ -81,6 +82,33 @@ Functions and members should be in _camelCase_.
 - **DO NOT** use _@ts-ignore_ or _@ts-expect-error_ as they disable TypeScript checks
 
 For a more in-depth and complete style one can visit the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+
+---
+
+### Comment Practices: {#commentPractices}
+
+Use JSDoc comments for classes, methods and functions. JSDoc comments are useful as they can provide a lot of information.
+An example of a JSDoc comment can be seen in the following code block:
+
+```typescript
+/**
+ * Function for concatenating two strings.
+ *
+ * @param {string} a - The first input string
+ * @param {string} b - The second input string
+ * @returns {string} The concatenation of `a` and `b`
+ */
+function concat(a: string, b: string): string {
+  return a + b;
+}
+```
+
+For more information on JSDoc comments, visit [@use JSDoc](https://jsdoc.app)
+
+#### Comment writing guidelines:
+
+1. Avoid obvious comments i.e. code that is self-explanatory.
+2. Write comments for complex code that explains what it does.
 
 ---
 
