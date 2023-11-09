@@ -90,8 +90,6 @@
 			/>
 		{/each}
 
-		<Component />
-
 		<!-- Arrowhead used at the end of edges -->
 		<defs>
 			<marker
@@ -122,6 +120,7 @@
 		touch-action: none;
 		cursor: move;
 	}
+	
 	.panzoom-element {
 		user-select: none;
 		touch-action: none;

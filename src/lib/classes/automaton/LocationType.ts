@@ -14,7 +14,7 @@ export enum LocationType {
 	INITIAL = "INITIAL",
 
 	/**
-	 * No modifires
+	 * No modifiers
 	 * */
 	NORMAL = "NORMAL",
 
