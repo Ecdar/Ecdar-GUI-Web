@@ -2,7 +2,7 @@
 	import { EngineType } from "$lib/classes/engine/EngineType";
 	import Modal from "../dialogPopover/Modal.svelte";
 	import type { EngineDTO } from "./EngineDTO";
-	import { Delete } from "svelte-google-materialdesign-icons";
+	import { Delete, Close, Done } from "svelte-google-materialdesign-icons";
 
 	let formElement: HTMLFormElement;
 	let modalContainer: Modal;
@@ -71,20 +71,8 @@
 				Are you sure you wish to delete the engine:
 				{currentEngine.name}
 			</h4>
-			<button
-				on:click={deleteEngine}
-				type="button"
-				class="delete-selection"
-			>
-				Yes
-			</button>
-			<button
-				on:click={closeModal}
-				type="button"
-				class="delete-selection"
-			>
-				No
-			</button>
+			<button on:click={deleteEngine} type="button" class="delete-selection"> <Done size=18/> </button>
+			<button on:click={closeModal} type="button" class="delete-selection"> <Close size=18/> </button>
 		</div>
 	</div>
 </Modal>
@@ -235,12 +223,10 @@
 	}
 
 	.delete-selection {
-		background-color: rgb(159, 174, 189);
-		border: none;
-		border-bottom: 0.05em solid black;
-		cursor: pointer;
+		border: 0;
 		padding: 0.2em;
-		margin: 0 0.2em 0.2em 0.2em;
+		background-color: transparent;
+		cursor: pointer;
 	}
 
 	#delete-text {
