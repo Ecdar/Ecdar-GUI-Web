@@ -1,5 +1,16 @@
 <script lang="ts">
 	import ContextMenu from "$lib/components/contextMenu/ContextMenu.svelte";
+	import GlobalCssSchemesLoader from "$lib/classes/styling/GlobalCssSchemesLoader";
+	import { browser } from "$app/environment";
+
+	if (browser) {
+		// Catch errors here and show error popup
+		try {
+			new GlobalCssSchemesLoader();
+		} catch (e) {
+			console.log(e);
+		}
+	}
 </script>
 
 <svelte:head>

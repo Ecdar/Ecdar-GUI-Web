@@ -6,7 +6,7 @@
 			name: "Admin1",
 			type: "Spec",
 			server: "Reveaal",
-			color: "limegreen",
+			color: "var(--query-success-color)",
 		},
 		{
 			name: "Admin2",
@@ -24,19 +24,19 @@
 			name: "Admin1",
 			type: "Spec",
 			server: "Reveaal",
-			color: "red",
+			color: "var(--query-error-color)",
 		},
 		{
 			name: "Admin1",
 			type: "Spec",
 			server: "Reveaal",
-			color: "limegreen",
+			color: "var(--query-success-color)",
 		},
 		{
 			name: "Admin1",
 			type: "Spec",
 			server: "Reveaal",
-			color: "yellow",
+			color: "var(--query-warning-color)",
 		},
 	];
 </script>
