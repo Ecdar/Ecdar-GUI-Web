@@ -1,32 +1,32 @@
-# Style guide {#introduction}
+# Style guide
 
 **Introduction**
 This style guide contains information about file, class and variable naming conventions, code practices, file structure and rules about the usage of TS types.
 
 **Table of content:**
 
-- [Naming Conventions](#namingConventions)
-  - [Folder](#folderNamingConvention)
-  - [Files](#filesNamingConvention)
-  - [Classes](#classNamingConvention)
-  - [Variables](#variableNamingConvention)
-  - [Functions and Methods](#functionNamingConvention)
-- [Good Code Practices](#codePractices)
-- [TypeScript Type Practices](#types)
-- [Comment Practices](#commentPractices)
-- [Folder Structure](#folderStructure)
+- [Naming Conventions](#naming-conventions)
+  - [Folder](#folder)
+  - [Files](#files)
+  - [Classes](#classes)
+  - [Variables](#variables)
+  - [Functions and Methods](#functions-and-methods)
+- [Good Code Practices](#good-code-practices)
+- [TypeScript Type Practices](#typescript-type-practices)
+- [Comment Practices](#comment-practices)
+- [Folder Structure](#folder-structure)
 
 ---
 
-### Naming Conventions: {#namingConventions}
+### Naming Conventions:
 
 The following naming conventions were agreed upon in the set-up phase of the project and should always be followed.
 
-#### Folder {#folderNamingConvention}
+#### Folder
 
 Folder names should be in _camelCase_.
 
-#### Files {#filesNamingConvention}
+#### Files
 
 **_.ts_** files that
 
@@ -40,11 +40,11 @@ Folder names should be in _camelCase_.
 
 **_.json_** files should be in _PascalCase_
 
-#### Classes {#classNamingConvention}
+#### Classes
 
 Class names should be in _PascalCase_
 
-#### Variables {#variableNamingConvention}
+#### Variables
 
 - Variable names should be in _camelCase_.
 - Private properties should begin with \_ (underscore)
@@ -52,13 +52,13 @@ Class names should be in _PascalCase_
   - ~~siteCtx~~ should be siteContext
   - ~~testBtn~~ should be testButton
 
-#### Functions and Methods {#functionNamingConvention}
+#### Functions and Methods
 
 Functions and members should be in _camelCase_.
 
 ---
 
-### Good Code Practices: {#codePractices}
+### Good Code Practices:
 
 - Use _const_ instead of _let_ whenever possible.
 - Use _async/await_ instead of _Promises_ whenever possible.
@@ -72,7 +72,7 @@ Functions and members should be in _camelCase_.
 
 ---
 
-### TypeScript Type Practices: {#types}
+### TypeScript Type Practices:
 
 - Mark function parameters and object properties as optional (_?_) if they can be omitted.
 - Mark properties as _readonly_ if it should not be changed after being created.
@@ -85,7 +85,7 @@ For a more in-depth and complete style one can visit the [Google TypeScript Styl
 
 ---
 
-### Comment Practices: {#commentPractices}
+### Comment Practices:
 
 Use JSDoc comments for classes, methods and functions. JSDoc comments are useful as they can provide a lot of information.
 An example of a JSDoc comment can be seen in the following code block:
@@ -112,7 +112,7 @@ For more information on JSDoc comments, visit [@use JSDoc](https://jsdoc.app)
 
 ---
 
-### Folder Structure: {#folderStructure}
+### Folder Structure:
 
 The following folder structure is meant to be a guideline of where one should put specific files and folders.
 
