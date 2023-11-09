@@ -15,8 +15,12 @@
 	export let index: number;
 
 	const menuId = `query-menu-${index}`;
-
 	let button: HTMLElement;
+
+	function togglePeriodicCheck(event: MouseEvent) {
+		event.stopPropagation();
+		isPeriodic = !isPeriodic;
+	}
 </script>
 
 <button bind:this={button} popovertarget={menuId} id={`query-button-${index}`}>
@@ -28,17 +32,13 @@
 			<Button
 				icon={Check_box}
 				text="Run Periodically"
-				click={() => {
-					isPeriodic = !isPeriodic;
-				}}
+				click={togglePeriodicCheck}
 			/>
 		{:else}
 			<Button
 				icon={Check_box_outline_blank}
 				text="Run Periodically"
-				click={() => {
-					isPeriodic = !isPeriodic;
-				}}
+				click={togglePeriodicCheck}
 			/>
 		{/if}
 	</Panel>
