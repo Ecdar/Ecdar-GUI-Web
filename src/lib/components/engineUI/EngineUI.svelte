@@ -3,7 +3,7 @@
 	import EngineStorage from "$lib/classes/engine/EngineStorage";
 	import Modal from "../dialogPopover/Modal.svelte";
 	import EnginePanel from "./EnginePanel.svelte";
-	import { Save, Add, Cancel } from "svelte-google-materialdesign-icons"
+	import { Save, Add, Cancel } from "svelte-google-materialdesign-icons";
 
 	let dialogContainer: Modal;
 	let engines: EngineStorage = new EngineStorage();
@@ -24,13 +24,12 @@
 			tempEngines.push(tempEngine);
 		});
 
-		if(tempEngines.length == 0){
+		if (tempEngines.length == 0) {
 			addNewEngine();
 		}
 
 		tempEngines = tempEngines;
 
-		
 		dialogContainer.showModal();
 	}
 
@@ -51,7 +50,13 @@
 	function onSubmit() {
 		tempEngines.forEach((engine) => {
 			if (engine.id == -1) {
-				if(engine.name == "" || engine.address == "" || engine.portRangeStart == -1 || engine.portRangeEnd == -1) return;
+				if (
+					engine.name == "" ||
+					engine.address == "" ||
+					engine.portRangeStart == -1 ||
+					engine.portRangeEnd == -1
+				)
+					return;
 				engines.createEngine(
 					engine.name,
 					engine.address,
@@ -76,7 +81,7 @@
 		});
 	}
 
-	function closeModal(){
+	function closeModal() {
 		dialogContainer.closeModal();
 	}
 </script>
@@ -87,9 +92,21 @@
 		<div class="engine-panel">
 			<EnginePanel {tempEngines} />
 		</div>
-		<button on:click={addNewEngine} type="button" id="add-button" class="unselectable"><Add size=18/></button>
-		<button on:click={closeModal} id="save-button" class="unselectable"><Save size=18/></button>
-		<button on:click={closeModal} type="button" id="cancel-button" class="unselectable"><Cancel size=18/></button>
+		<button
+			on:click={addNewEngine}
+			type="button"
+			id="add-button"
+			class="unselectable"><Add size="18" /></button
+		>
+		<button on:click={closeModal} id="save-button" class="unselectable"
+			><Save size="18" /></button
+		>
+		<button
+			on:click={closeModal}
+			type="button"
+			id="cancel-button"
+			class="unselectable"><Cancel size="18" /></button
+		>
 	</form>
 </Modal>
 
@@ -98,23 +115,22 @@
 		padding: 0.5rem 0rem 0.5rem 1rem;
 	}
 
-	#add-button{
+	#add-button {
 		border: 0;
 		padding: 0.2em 0 0 0;
 		background-color: transparent;
 		outline: none;
 		cursor: pointer;
-		
 	}
 
-	#save-button{
+	#save-button {
 		border: 0;
 		padding: 0.2em 0 0 0;
 		background-color: transparent;
 		cursor: pointer;
 	}
 
-	#cancel-button{
+	#cancel-button {
 		border: 0;
 		padding: 0;
 		background-color: transparent;
@@ -133,5 +149,4 @@
 	.engine-panel {
 		padding-bottom: 0.2rem;
 	}
-
 </style>

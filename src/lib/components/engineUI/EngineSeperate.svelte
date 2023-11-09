@@ -2,7 +2,7 @@
 	import { EngineType } from "$lib/classes/engine/EngineType";
 	import Modal from "../dialogPopover/Modal.svelte";
 	import type { EngineDTO } from "./EngineDTO";
-	import { Delete } from "svelte-google-materialdesign-icons"
+	import { Delete } from "svelte-google-materialdesign-icons";
 
 	let formElement: HTMLFormElement;
 	let modalContainer: Modal;
@@ -12,7 +12,7 @@
 	let endPortContainer: HTMLInputElement;
 	let engineTypeContainer: HTMLInputElement;
 
-	export let defaultChecked: number;
+	export let defaultChecked: EngineType;
 	export let currentEngine: EngineDTO;
 
 	function deleteEngine() {
@@ -32,7 +32,7 @@
 		currentEngine.address = ipAddressContainer.value;
 	}
 
-	function onStartPortChange(e:Event) {
+	function onStartPortChange() {
 		currentEngine.portRangeStart = Number(startPortContainer.value);
 	}
 
@@ -59,7 +59,7 @@
 		}
 	}
 
-	function closeModal(){
+	function closeModal() {
 		modalContainer.closeModal();
 	}
 </script>
@@ -68,12 +68,23 @@
 	<div class="delete-dialog">
 		<div class="inner-delete-dialog">
 			<h4 id="delete-text">
-				Are you sure you wish to delete the engine: {#if currentEngine.name !== undefined}
-					{currentEngine.name}
-				{/if}
+				Are you sure you wish to delete the engine:
+				{currentEngine.name}
 			</h4>
-			<button on:click={deleteEngine} type="button" class="delete-selection"> Yes </button>
-			<button on:click={closeModal} type="button" class="delete-selection"> No </button>
+			<button
+				on:click={deleteEngine}
+				type="button"
+				class="delete-selection"
+			>
+				Yes
+			</button>
+			<button
+				on:click={closeModal}
+				type="button"
+				class="delete-selection"
+			>
+				No
+			</button>
 		</div>
 	</div>
 </Modal>
@@ -86,8 +97,13 @@
 		id="name"
 		on:change={onNameChange}
 		bind:this={nameContainer}
-	/> 
-	<button type="button" id="show-modal" class="delete-button" on:click={showModal}><Delete size=18 /></button> 
+	/>
+	<button
+		type="button"
+		id="show-modal"
+		class="delete-button"
+		on:click={showModal}><Delete size="18" /></button
+	>
 	<br />
 	IP Address:
 	<input
@@ -201,14 +217,14 @@
 		margin: 0;
 	}
 
-	input[type=text] {
+	input[type="text"] {
 		border: none;
 		border-bottom: 0.05em solid black;
 		background-color: rgb(159, 174, 189);
 		margin: 0.2em;
 	}
 
-	input[type=text]::placeholder {
+	input[type="text"]::placeholder {
 		color: rgb(68, 68, 68);
 	}
 
