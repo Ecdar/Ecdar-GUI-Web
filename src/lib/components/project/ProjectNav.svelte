@@ -29,8 +29,8 @@
 		<h1>Project</h1>
 	</div>
 	<div>
-		<Create_new_folder on:click={addComponent} />
-		<Note_add on:click={addSystem} />
+		<Create_new_folder on:click={addComponent} id="add-component" />
+		<Note_add on:click={addSystem} id="add-system" />
 	</div>
 </div>
 

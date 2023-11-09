@@ -11,7 +11,7 @@ test("Starts only with Global Declaration", async ({ page }) => {
 });
 
 // test("Add a component", async ({ page }) => {
-// 	await expect(page.locator(".component")).toHaveCount(0);
+// 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 // 	await page.click("#add-component");
-// 	await expect(page.locator(".component")).toHaveCount(1);
+// 	await expect(page.locator(".project-item.component")).toHaveCount(1);
 // });
