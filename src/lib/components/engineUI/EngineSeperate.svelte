@@ -10,7 +10,6 @@
 	let ipAddressContainer: HTMLInputElement;
 	let startPortContainer: HTMLInputElement;
 	let endPortContainer: HTMLInputElement;
-	let engineTypeContainer: HTMLInputElement;
 
 	export let defaultChecked: EngineType;
 	export let currentEngine: EngineDTO;
@@ -139,7 +138,6 @@
 		class="radio-inputs"
 		checked={defaultChecked == EngineType.Reveaal}
 		on:change={onEngineTypeChange}
-		bind:this={engineTypeContainer}
 	/>
 	Reveaal<br />
 	<input
@@ -150,7 +148,6 @@
 		class="radio-inputs"
 		checked={defaultChecked == EngineType.JEcdar}
 		on:change={onEngineTypeChange}
-		bind:this={engineTypeContainer}
 	/>
 	JEcdar<br />
 	<input
@@ -161,7 +158,6 @@
 		class="radio-inputs"
 		checked={defaultChecked == EngineType.API}
 		on:change={onEngineTypeChange}
-		bind:this={engineTypeContainer}
 	/>
 	Ecdar API<br />
 </form>

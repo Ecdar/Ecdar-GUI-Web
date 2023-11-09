@@ -53,6 +53,7 @@
 				if (
 					engine.name == "" ||
 					engine.address == "" ||
+					engine.address == "-1" ||
 					engine.portRangeStart == -1 ||
 					engine.portRangeEnd == -1
 				)
