@@ -7,9 +7,9 @@
 		<h1>Queries</h1>
 	</div>
 	<div>
-		<Add />
-		<Arrow_right />
-		<Menu />
+		<Add color="currentColor" />
+		<Arrow_right color="currentColor" />
+		<Menu color="currentColor" />
 	</div>
 </div>
 
