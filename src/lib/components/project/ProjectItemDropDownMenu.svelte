@@ -106,6 +106,11 @@
 </OverlayMenu>
 
 <style>
+	button {
+		color: var(--sidebar-text-color);
+		padding: 0;
+	}
+
 	p {
 		margin: 0.5em 0;
 	}
