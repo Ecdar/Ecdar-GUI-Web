@@ -30,4 +30,12 @@
 		top: 50%;
 		left: 50%;
 	}
+
+	dialog {
+		max-width: 100vw;
+		width: 100vw;
+		max-height: 100vh;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.2);
+	}
 </style>
