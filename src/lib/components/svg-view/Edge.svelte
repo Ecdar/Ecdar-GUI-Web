@@ -92,7 +92,7 @@
 
 <style>
 	line {
-		stroke: black;
+		stroke: var(--canvas-action-color);
 		stroke-width: 2;
 	}
 </style>

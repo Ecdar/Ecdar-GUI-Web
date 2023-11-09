@@ -14,13 +14,13 @@
 	let frontEndErrors: string[] = [];
 	let backEndErrors: string[] = [];
 
-	const consoleInitialSize: string = "20em";
-	let consoleExtendedSize: string = consoleInitialSize;
-	let consoleCollapsedSize: string = "3.25em";
+	const consoleInitialSize: number = 300;
+	let consoleExtendedSize: number = consoleInitialSize;
+	let consoleCollapsedSize: number = 0;
 	let consoleSize = consoleCollapsedSize;
 
-	let consoleButtonColorOff: string = "slategrey";
-	let consoleButtonColorOn: string = "rgb(159, 174, 189)";
+	let consoleButtonColorOff: string = "var(--console-unselectedtab-color)";
+	let consoleButtonColorOn: string = "var(--console-selectedtab-color)";
 
 	/**
 	 * Function for resizing the console
@@ -28,7 +28,7 @@
 	 */
 	function resizeConsolePanel(event: PointerEvent) {
 		event.preventDefault();
-		consoleSize = (window.innerHeight - event.y).toString() + "px";
+		consoleSize = window.innerHeight - event.y - consoleBar.offsetHeight;
 		if (window.innerHeight - event.y < consoleBar.clientHeight) {
 			consoleSize = consoleInitialSize;
 			stopResizingConsolePanel(event);
@@ -120,15 +120,11 @@
 	}
 </script>
 
-<div
-	class="outerOverflow"
-	style="height: {consoleSize};"
-	bind:this={consoleContainer}
->
-	<div bind:this={consoleBar}>
+<div class="outer-overflow" bind:this={consoleContainer}>
+	<div bind:this={consoleBar} id="console-bar">
 		<div
 			role="button"
-			id="consoleResizer"
+			id="console-resizer"
 			class="resizer"
 			tabindex="-1"
 			on:pointerdown={(event) => {
@@ -142,15 +138,15 @@
 			on:click={changeConsoleCollapsableTextAndHeight}
 		>
 			{#if currentlyCollapsed}
-				<Arrow_upward size="18" />
+				<Arrow_upward size="18" color="white" />
 			{:else}
-				<Arrow_downward size="18" />
+				<Arrow_downward size="18" color="white" />
 			{/if}
 		</button>
 
 		<button
 			type="button"
-			class="consoleTab frontEndButton unselectable"
+			class="console-tab front-end-button unselectable"
 			style="background-color: {currentTab == Tabs.Frontend
 				? consoleButtonColorOn
 				: consoleButtonColorOff}"
@@ -162,7 +158,7 @@
 		</button>
 		<button
 			type="button"
-			class="consoleTab unselectable"
+			class="console-tab unselectable"
 			style="background-color: {currentTab == Tabs.Backend
 				? consoleButtonColorOn
 				: consoleButtonColorOff};"
@@ -173,7 +169,7 @@
 			Backend
 		</button>
 	</div>
-	<div class="console">
+	<div class="console" style="height: {consoleSize}px;">
 		{#if currentTab == Tabs.Frontend}
 			{#each frontEndErrors as error}
 				<ConsoleLine componentText={error} />
@@ -188,16 +184,19 @@
 
 <style>
 	.console {
-		background-color: rgb(159, 174, 189);
+		background-color: var(--background-color);
 		width: 100%;
 		height: 100%;
 		overflow-y: scroll;
+	}
+
+	#console-bar {
 		min-height: 2.5em;
 	}
 
-	#consoleResizer {
+	#console-resizer {
 		background-color: black;
-		height: 0.3em;
+		height: 0.2em;
 	}
 
 	.console::-webkit-scrollbar {
@@ -206,19 +205,19 @@
 
 	.console::-webkit-scrollbar-track {
 		box-shadow: inset 0 0 1em grey;
-		background: lightslategray;
+		background: var(--sidebar-background-color);
 	}
 
 	.console::-webkit-scrollbar-thumb {
-		background: rgb(48, 54, 61);
+		background: var(--console-scrollbar-thumb-color);
 	}
 
 	.console::-webkit-scrollbar-thumb:hover {
-		background: rgb(33, 37, 42);
+		background: var(--console-scrollbar-thumbhover-color);
 	}
 
 	.collapsible {
-		background-color: lightslategrey;
+		background-color: var(--console-topbar-background-color);
 		float: right;
 		position: relative;
 		box-shadow: 0 3px 11px rgba(28, 28, 28, 0.55);
@@ -231,19 +230,20 @@
 	}
 
 	.collapsible:hover {
-		background-color: slategrey;
+		background-color: var(--console-selectedtab-color);
 	}
 
-	.outerOverflow {
+	.outer-overflow {
 		display: flex;
 		margin: 0%;
 		padding: 0%;
 		flex-direction: column;
-		background-color: slategrey;
+		background-color: var(--console-topbar-background-color);
 		overflow: hidden;
 	}
 
-	.consoleTab {
+	.console-tab {
+		color: var(--navigationbar-text-color);
 		position: relative;
 		height: 3.8em;
 		margin: auto;
@@ -254,11 +254,11 @@
 		float: left;
 	}
 
-	.consoleTab:hover {
-		filter: brightness(0.9);
+	.console-tab:hover {
+		background-color: var(--console-tab-hover-color) !important;
 	}
 
-	.frontEndButton {
+	.front-end-button {
 		border-left: 0;
 		border-right: 0;
 	}

@@ -3,6 +3,7 @@
 		More_vert,
 		Folder_special,
 	} from "svelte-google-materialdesign-icons";
+
 	export let name: string = "Component";
 	export let color: string = "grey";
 </script>
@@ -27,8 +28,9 @@
 		align-items: center;
 		width: 100%;
 	}
+
 	.component {
-		background-color: #eceff1;
+		background-color: var(--sidebar-element-color);
 		cursor: pointer;
 		display: flex;
 		justify-content: flex-start;
@@ -37,14 +39,17 @@
 		border-bottom: 1px solid black;
 		transition: background-color 200ms;
 	}
+
 	.component:hover {
-		background-color: #cfd8dc;
+		background-color: var(--sidebar-element-hover-color);
 	}
+
 	.icon {
 		display: flex;
 		vertical-align: middle;
 		padding: 15%;
 	}
+
 	.circle {
 		margin-right: 10px;
 		display: flex;
