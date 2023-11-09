@@ -2,12 +2,11 @@
 	import { project } from "$lib/globalState/activeProject";
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
 	import SvgView from "$lib/components/svg-view/SvgView.svelte";
-	import Console from "$lib/components/console/Console.svelte";
-	import Components from "$lib/components/project/component/Components.svelte";
-	import Systems from "$lib/components/project/system/Systems.svelte";
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
-	import Queries from "$lib/components/query/Queries.svelte";
+	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
+	import Queries from "$lib/components/query/Queries.svelte";
+	import Console from "$lib/components/console/Console.svelte";
 	import { Description } from "svelte-google-materialdesign-icons";
 
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
@@ -77,7 +76,9 @@
 	{:else}
 		<!-- Left side Panel -->
 		<div class="side-panel" style="flex-basis: {leftSidePanelWidth}px">
-			<nav class="inner-nav1"><ProjectNav /></nav>
+			<nav class="inner-nav1">
+				<ProjectNav />
+			</nav>
 			<div class="side-panel-content">
 				<div class="global-dec">
 					<div class="circle" style="background-color: grey">
@@ -87,8 +88,7 @@
 					</div>
 					<p>Global declaration</p>
 				</div>
-				<Components />
-				<Systems />
+				<ProjectItems />
 			</div>
 		</div>
 		<!-- Left resize Panel -->

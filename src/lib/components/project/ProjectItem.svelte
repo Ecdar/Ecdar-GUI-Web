@@ -1,28 +1,46 @@
 <script lang="ts">
-	import { Request_page } from "svelte-google-materialdesign-icons";
+	import {
+		Folder_special,
+		Request_page,
+	} from "svelte-google-materialdesign-icons";
+	import ComponentDropDownMenu from "./ComponentDropDownMenu.svelte";
 	import SystemDropDownMenu from "./SystemDropDownMenu.svelte";
 
 	export let name: string;
 	export let description: string;
 	export let color: string;
 	export let index: number;
+	export let itemType: string;
 
 	function handleDoubleClick() {
 		name = prompt("New name:", name) || name;
 	}
 </script>
 
-<div class="system" on:dblclick={handleDoubleClick} role="button" tabindex="-1">
+<div
+	class="project-item"
+	on:dblclick={handleDoubleClick}
+	role="button"
+	tabindex="-1"
+>
 	<div class="left">
 		<div class="circle" style="background-color: {color}">
 			<div class="icon">
-				<Request_page size="100%" />
+				{#if itemType === "component"}
+					<Folder_special size="100%" />
+				{:else}
+					<Request_page size="100%" />
+				{/if}
 			</div>
 		</div>
 		<p>{name}</p>
 	</div>
 	<div>
-		<SystemDropDownMenu bind:description bind:color {index} />
+		{#if itemType === "component"}
+			<ComponentDropDownMenu bind:description bind:color {index} />
+		{:else}
+			<SystemDropDownMenu bind:description bind:color {index} />
+		{/if}
 	</div>
 </div>
 
@@ -33,7 +51,7 @@
 		width: 100%;
 	}
 
-	.system {
+	.project-item {
 		background-color: #eceff1;
 		cursor: pointer;
 		display: flex;
@@ -44,7 +62,7 @@
 		transition: background-color 200ms;
 	}
 
-	.system:hover {
+	.project-item:hover {
 		background-color: #cfd8dc;
 	}
 

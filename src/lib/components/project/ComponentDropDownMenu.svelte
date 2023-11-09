@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { More_vert, Delete } from "svelte-google-materialdesign-icons";
-	import { systems } from "$lib/globalState/activeProject";
+	import { components } from "$lib/globalState/activeProject";
 	import OverlayMenu from "$lib/components/overlayMenu/OverlayMenu.svelte";
 	import Panel from "$lib/components/overlayMenu/Panel.svelte";
 	import Button from "$lib/components/overlayMenu/elements/Button.svelte";
@@ -9,7 +9,7 @@
 	export let color: string;
 	export let index: number;
 
-	const menuId = `system-menu-${index}`;
+	const menuId = `component-menu-${index}`;
 	let button: HTMLElement;
 </script>
 
@@ -17,7 +17,7 @@
 	class="dropdown"
 	bind:this={button}
 	popovertarget={menuId}
-	id={`system-button-${index}`}
+	id={`component-button-${index}`}
 >
 	<More_vert />
 </button>
@@ -30,15 +30,16 @@
 			icon={Delete}
 			text="Delete"
 			click={() => {
-				$systems?.splice(index, 1);
-				$systems = $systems;
+				$components?.splice(index, 1);
+				$components = $components;
 			}}
 		/>
 	</Panel>
 	<Panel>
-		{#each ["red", "blue", "green"] as colorOption}
+		{#each ["grey", "orange", "red", "pink", "purple", "blue", "skyblue", "cyan", "green", "brown"] as colorOption}
 			<button
-				class="color {colorOption}"
+				style="background-color: {colorOption}"
+				class="color"
 				on:click={() => {
 					color = colorOption;
 				}}
@@ -59,17 +60,5 @@
 		height: 2em;
 		width: 2em;
 		border-radius: 100%;
-	}
-
-	.color.red {
-		background-color: red;
-	}
-
-	.color.blue {
-		background-color: blue;
-	}
-
-	.color.green {
-		background-color: green;
 	}
 </style>
