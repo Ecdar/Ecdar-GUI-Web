@@ -86,7 +86,7 @@ test("Delete 10 systems", async ({ page }) => {
 	}
 
 	await expect(page.locator(".project-item.system")).toHaveCount(10);
-	
+
 	for (let i = 0; i < 10; i++) {
 		await page.click("#system-button-0");
 		await page
@@ -98,7 +98,6 @@ test("Delete 10 systems", async ({ page }) => {
 	await expect(page.locator(".project-item.system")).toHaveCount(0);
 });
 
-
 test("Delete 10 components", async ({ page }) => {
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 
@@ -107,7 +106,7 @@ test("Delete 10 components", async ({ page }) => {
 	}
 
 	await expect(page.locator(".project-item.component")).toHaveCount(10);
-	
+
 	for (let i = 0; i < 10; i++) {
 		await page.click("#component-button-0");
 		await page
@@ -115,19 +114,22 @@ test("Delete 10 components", async ({ page }) => {
 			.getByRole("button", { name: "Delete" })
 			.click();
 	}
-	
+
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 });
 
 test("Delete the grey component", async ({ page }) => {
 	for (let i = 0; i < 3; i++) {
 		await page.click("#add-component");
-	
+
 		await page.click(`#component-button-${i}`);
 		await page
-			.locator(`#component-menu-${i}`).locator(`.colors > button:nth-child(${i + 1})`).first().click();
+			.locator(`#component-menu-${i}`)
+			.locator(`.colors > button:nth-child(${i + 1})`)
+			.first()
+			.click();
 	}
-	
+
 	await page.click("#component-button-0");
 	await page
 		.locator("#component-menu-0")
@@ -137,10 +139,15 @@ test("Delete the grey component", async ({ page }) => {
 	const components = page.locator(".project-item.component");
 
 	await expect(components).toHaveCount(2);
-	await expect(components.nth(0).locator(".circle")).toHaveCSS("background-color", "rgb(255, 165, 0)");
-	await expect(components.nth(1).locator(".circle")).toHaveCSS("background-color", "rgb(255, 0, 0)");
-})
-
+	await expect(components.nth(0).locator(".circle")).toHaveCSS(
+		"background-color",
+		"rgb(255, 165, 0)",
+	);
+	await expect(components.nth(1).locator(".circle")).toHaveCSS(
+		"background-color",
+		"rgb(255, 0, 0)",
+	);
+});
 
 test("Can toggle includeInPeriodicCheck", async ({ page }) => {
 	await page.click("#add-component");
@@ -177,10 +184,15 @@ test("Can toggle includeInPeriodicCheck", async ({ page }) => {
 test("Description should stay the same after edited", async ({ page }) => {
 	await page.click("#add-component");
 
-	await page.click("#component-button-0")
-	await page.locator("#component-menu-0").getByRole("textbox").fill("This is a new description.");
+	await page.click("#component-button-0");
+	await page
+		.locator("#component-menu-0")
+		.getByRole("textbox")
+		.fill("This is a new description.");
 	await page.keyboard.press("Escape");
 
-	await page.click("#component-button-0")
-	await expect(page.locator("#component-menu-0").getByRole("textbox")).toHaveValue("This is a new description.");
+	await page.click("#component-button-0");
+	await expect(
+		page.locator("#component-menu-0").getByRole("textbox"),
+	).toHaveValue("This is a new description.");
 });
