@@ -23,6 +23,7 @@
 	let leftSidePanelWidth: number = 300;
 	let rightSidePanelWidth: number = 300;
 	let mainContainer: HTMLElement;
+	let engineUIContainer: EngineUi;
 
 	/**
 	 * Function for resizing a sidepanel
@@ -65,12 +66,16 @@
 			stopResizingSidePanel,
 		);
 	}
+
+	function openEngineUI() {
+		engineUIContainer.showEngineUI();
+	}
 </script>
 
 <!-- Top navigation Panel -->
-<EngineUi />
+<EngineUi bind:this={engineUIContainer}/>
 <nav id="main-nav">
-	<TopBar />
+	<TopBar on:toggle={openEngineUI}/>
 </nav>
 <main bind:this={mainContainer}>
 	{#if $project === undefined}

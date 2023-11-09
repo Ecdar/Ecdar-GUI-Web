@@ -17,6 +17,12 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
+	import { createEventDispatcher } from 'svelte'
+	const dispatch = createEventDispatcher();
+
+	function toggle() {
+		dispatch('toggle');
+	}
 </script>
 
 <!--
@@ -196,9 +202,7 @@
 		<DropDownButton
 			icon={Settings_input_composite}
 			name="Engine Options"
-			on:click={() => {
-				console.log("Engine Options");
-			}}
+			on:click={() => toggle()}
 		/>
 	</TopBarButton>
 </div>

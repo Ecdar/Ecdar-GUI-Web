@@ -86,7 +86,6 @@
 	}
 </script>
 
-<button on:click={showEngineUI}> Show</button>
 <Modal bind:this={dialogContainer}>
 	<form on:submit={onSubmit}>
 		<div class="engine-panel">
