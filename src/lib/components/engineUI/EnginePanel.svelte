@@ -34,6 +34,7 @@
 		display: grid;
 		row-gap: 1rem;
 		grid-template-columns: repeat(0,1fr);
+		min-width: 16em;
 	}
 
 	.engines::-webkit-scrollbar {
