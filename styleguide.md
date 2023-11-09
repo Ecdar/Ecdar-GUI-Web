@@ -11,6 +11,7 @@ This style guide contains information about file, class and variable naming conv
   - [Classes](#classes)
   - [Variables](#variables)
   - [Functions and Methods](#functions-and-methods)
+  - [HTML & CSS](#html--css)
 - [Good Code Practices](#good-code-practices)
 - [TypeScript Type Practices](#typescript-type-practices)
 - [Comment Practices](#comment-practices)
