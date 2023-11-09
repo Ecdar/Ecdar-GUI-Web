@@ -1,15 +1,22 @@
 <script lang="ts">
-	import { Arrow_right } from "svelte-google-materialdesign-icons";
 	import { Backend } from "$lib/classes/automaton/Backend";
 	import QueryDropDownMenu from "./QueryDropDownMenu.svelte";
+	import {
+		Help,
+		Done,
+		Warning,
+		Error,
+		Arrow_right,
+	} from "svelte-google-materialdesign-icons";
 
 	export let query: string;
 	export let type: string;
 	export let name: string;
-	export let comment: string;
 	export let isPeriodic: boolean;
 	export let backend: Backend;
 	export let index: number;
+	export let comment: string = "Comment";
+	export let color: string = "var(--queries-element-color)";
 
 	const typeOptions: Record<string, string> = {
 		specification: "Spec",
@@ -32,7 +39,16 @@
 
 <div class="query" id="query-{index}">
 	<div class="column">
-		<div class="left-column">
+		<div class="left-column" style="background-color: {color}">
+			{#if color === "var(--query-success-color)"}
+				<Done color="black" />
+			{:else if color === "var(--query-warning-color)"}
+				<Warning color="black" />
+			{:else if color === "var(--query-error-color)"}
+				<Error color="black" />
+			{:else}
+				<Help color="black" />
+			{/if}
 			<select bind:value={type}>
 				{#each Object.entries(typeOptions) as [full, short]}
 					<option value={full}>{short}</option>
@@ -59,12 +75,13 @@
 
 <style>
 	.query {
-		background-color: lightgrey;
+		background-color: var(--sidebar-element-color);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
 		border-bottom: 1px solid black;
+		color: var(--sidebar-text-color);
 	}
 
 	.column {
@@ -94,5 +111,7 @@
 	input[type="text"] {
 		width: 100%;
 		min-width: 5em;
+		background-color: var(--queries-input-background-color);
+		color: var(--sidebar-text-color);
 	}
 </style>
