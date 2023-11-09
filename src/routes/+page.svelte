@@ -69,7 +69,6 @@
 <nav id="main-nav">
 	<TopBar />
 </nav>
-
 <main bind:this={mainContainer}>
 	{#if $project === undefined}
 		<StartScreen />
@@ -80,7 +79,10 @@
 				<ProjectNav />
 			</nav>
 			<div class="side-panel-content">
-				<div class="global-dec">
+				<div
+					class="global-dec"
+					style="background-color: var(--sidebar-element-color);"
+				>
 					<div class="circle" style="background-color: grey">
 						<div class="icon">
 							<Description size="100%" />
@@ -133,14 +135,14 @@
 <style>
 	nav {
 		height: 5em;
-		background-color: slategrey;
+		border: var(--main-navigationbar-border);
 		flex-shrink: 0;
 	}
 
 	#main-nav {
-		height: 2.5em;
-		min-height: 2.5em;
-		border-bottom: 0.3em solid black;
+		background-color: var(--main-navigationbar-color);
+		height: 2em;
+		border-bottom: 0.2em solid black;
 	}
 
 	main {
@@ -151,13 +153,20 @@
 
 	.inner-nav1,
 	.inner-nav3 {
-		background-color: slategrey;
-		box-shadow: lightslategray 0px 0px 1em;
+		background-color: var(--main-navigationbar-color);
+		border: var(--main-innernavigationbar-border);
+		font-size: var(--sidebar-navigationbar-fontsize);
 	}
 
 	.inner-nav2 {
-		background-color: lightslategrey;
-		box-shadow: slategrey 0px 0px 1em;
+		background-color: var(--canvas-topbar-color);
+		border: none;
+	}
+
+	.inner-nav1,
+	.inner-nav2,
+	.inner-nav3 {
+		color: var(--navigationbar-text-color);
 	}
 
 	.global-dec {
@@ -188,12 +197,14 @@
 	}
 
 	.side-panel {
-		background-color: whitesmoke;
 		flex-basis: 10em;
 		overflow: hidden;
+		background-color: var(--background-color);
 	}
 
 	.side-panel-content {
+		color: var(--sidebar-text-color);
+		font-size: var(--sidebar-standard-fontsize);
 		height: 100%;
 		width: 100%;
 		overflow-y: auto;
@@ -203,11 +214,13 @@
 
 	.resizer {
 		background-color: black;
-		flex-basis: 0.3em;
+		flex-basis: 0.2em;
 		cursor: col-resize;
 	}
 
 	.canvas {
+		color: var(--canvas-text-color);
+		background-color: var(--background-color);
 		flex-grow: 1;
 	}
 
