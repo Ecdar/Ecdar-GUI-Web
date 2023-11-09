@@ -71,8 +71,20 @@
 				Are you sure you wish to delete the engine:
 				{currentEngine.name}
 			</h4>
-			<button on:click={deleteEngine} type="button" class="delete-selection"> <Done size=18/> </button>
-			<button on:click={closeModal} type="button" class="delete-selection"> <Close size=18/> </button>
+			<button
+				on:click={deleteEngine}
+				type="button"
+				class="delete-selection"
+			>
+				<Done size="18" />
+			</button>
+			<button
+				on:click={closeModal}
+				type="button"
+				class="delete-selection"
+			>
+				<Close size="18" />
+			</button>
 		</div>
 	</div>
 </Modal>
