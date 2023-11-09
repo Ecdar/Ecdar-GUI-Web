@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { project } from "$lib/globalState/activeProject";
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
+	import TopBar from "$lib/components/topBar/TopBar.svelte";
 	import SidePanel from "$lib/components/sidePanel/SidePanel.svelte";
 	import { SidePanelEnum } from "$lib/components/sidePanel/SidePanelEnum";
 	import SvgView from "$lib/components/svg-view/SvgView.svelte";
@@ -16,7 +17,9 @@
 </script>
 
 <!-- Top navigation Panel -->
-<nav id="main-nav"></nav>
+<nav id="main-nav">
+	<TopBar />
+</nav>
 <main bind:this={mainContainer}>
 	{#if $project === undefined}
 		<StartScreen />
@@ -50,13 +53,14 @@
 <style>
 	nav {
 		height: 5em;
-		background-color: slategrey;
+		border: var(--main-navigationbar-border);
 		flex-shrink: 0;
 	}
 
 	#main-nav {
-		height: 2.5em;
-		min-height: 2.5em;
+		background-color: var(--main-navigationbar-color);
+		height: 2em;
+		border-bottom: 0.2em solid black;
 	}
 
 	main {
@@ -66,13 +70,16 @@
 	}
 
 	.inner-nav2 {
-		background-color: lightslategrey;
-		box-shadow: slategrey 0px 0px 1em;
+		background-color: var(--canvas-topbar-color);
+		color: var(--navigationbar-text-color);
+		border: none;
 	}
 
 	.canvas {
 		display: flex;
 		flex-direction: column;
+		color: var(--canvas-text-color);
+		background-color: var(--background-color);
 		flex-grow: 1;
 	}
 </style>
