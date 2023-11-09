@@ -17,7 +17,7 @@
 	}
 </script>
 
-<div class="project-item">
+<div class="project-item {itemType}">
 	<div
 		class="left"
 		on:dblclick={handleDoubleClick}
