@@ -143,6 +143,7 @@
 		-webkit-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+		color: var(--console-text-color);
 	}
 
 	.engine-panel {

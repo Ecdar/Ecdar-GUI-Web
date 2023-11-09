@@ -169,8 +169,9 @@
 
 <style>
 	form {
-		background-color: rgb(159, 174, 189);
+		background-color: var(--console-selectedtab-color);
 		padding: 0.2em;
+		color: var(--console-text-color);
 	}
 
 	.delete-button {
@@ -179,6 +180,7 @@
 		background-color: transparent;
 		float: right;
 		cursor: pointer;
+		color: var(--console-text-color);
 	}
 
 	.delete-dialog {
@@ -187,7 +189,7 @@
 
 	.inner-delete-dialog {
 		padding: 0.2em;
-		background-color: rgb(159, 174, 189);
+		background-color: var(--console-selectedtab-color);
 	}
 
 	#IP {
@@ -197,13 +199,13 @@
 	.port-input {
 		width: 4em;
 		border: none;
-		border-bottom: 0.05em solid black;
-		background-color: rgb(159, 174, 189);
+		border-bottom: 0.05em solid var(--engine-ui-underline-color);
+		background-color: var(--console-selectedtab-color);
 		text-align: center;
 	}
 
 	.port-input::placeholder {
-		color: rgb(68, 68, 68);
+		color: var(--engine-ui-input-text-placeholder-color);
 	}
 
 	.port-input::-webkit-inner-spin-button,
@@ -220,13 +222,13 @@
 
 	input[type="text"] {
 		border: none;
-		border-bottom: 0.05em solid black;
-		background-color: rgb(159, 174, 189);
+		border-bottom: 0.05em solid var(--engine-ui-underline-color);
+		background-color: var(--console-selectedtab-color);
 		margin: 0.2em;
 	}
 
 	input[type="text"]::placeholder {
-		color: rgb(68, 68, 68);
+		color: var(--engine-ui-input-text-placeholder-color);
 	}
 
 	.radio-inputs {
@@ -237,15 +239,17 @@
 
 	.delete-selection {
 		border: 0;
-		border-bottom: 0.05em solid black;
+		border-bottom: 0.05em solid var(--engine-ui-underline-color);
 		padding: 0.2em 0.2em 0 0.2em;
 		background-color: transparent;
 		cursor: pointer;
 		margin-left: 0.5em;
 		margin-right: 0.5em;
+		color: var(--console-text-color);
 	}
 
 	#delete-text {
 		margin: 0.2em;
+		color: var(--console-text-color);
 	}
 </style>

@@ -23,9 +23,10 @@
 	h2 {
 		margin-bottom: 0.3em;
 		padding: 0.15em;
-		background-color: rgb(159, 174, 189);
+		background-color: var(--console-selectedtab-color);
 		width: fit-content;
 		text-shadow: 0.05em 0.05em 0.05em grey;
+		color: var(--console-text-color);
 	}
 
 	.engines {
@@ -35,6 +36,7 @@
 		row-gap: 1rem;
 		grid-template-columns: repeat(0, 1fr);
 		min-width: 16em;
+		
 	}
 
 	.engines::-webkit-scrollbar {
@@ -42,19 +44,19 @@
 	}
 
 	.engines::-webkit-scrollbar-track {
-		box-shadow: inset 0 0 1em slategray;
-		background: lightslategray;
+		box-shadow: inset 0 0 1em var(--console-unselectedtab-color);
+		background: var(--console-unselectedtab-color);
 	}
 
 	.engines::-webkit-scrollbar-thumb {
-		background: rgb(73, 78, 84);
+		background: var(--engine-ui-scrollbar-thumb-background-color);
 		border-radius: 4em;
-		border: 0.3em solid slategray;
+		border: 0.3em solid var(--engine-ui-scrollbar-thumb-color);
 		border-top: 0;
 		border-bottom: 0;
 	}
 
 	.engines::-webkit-scrollbar-thumb:hover {
-		background: rgb(49, 54, 61);
+		background: var(--engine-ui-scrollbar-thumb-color);
 	}
 </style>

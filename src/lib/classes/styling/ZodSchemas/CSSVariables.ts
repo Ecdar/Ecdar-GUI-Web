@@ -30,6 +30,10 @@ export const ColorVariables = z
 		"--canvas-action-color": ColorAttribute,
 		"--console-tab-hover-color": ColorAttribute,
 		"--navigationbar-button-hover-color": ColorAttribute,
+		"--engine-ui-underline-color": ColorAttribute,
+		"--engine-ui-input-text-placeholder-color": ColorAttribute,
+		"--engine-ui-scrollbar-thumb-background-color": ColorAttribute,
+		"--engine-ui-scrollbar-thumb-color": ColorAttribute,
 	})
 	.strict();
 

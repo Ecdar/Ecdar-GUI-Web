@@ -24,7 +24,7 @@
 		max-width: 100vw;
 		display: block;
 		position: fixed;
-		background-color: slategray;
+		background-color: var(--console-unselectedtab-color);
 		z-index: 100;
 		transform: translate(-50%, -50%);
 		top: 50%;
