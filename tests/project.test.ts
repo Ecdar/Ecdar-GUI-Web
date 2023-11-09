@@ -1,5 +1,4 @@
-import { test, expect, type Dialog } from "@playwright/test";
-import { P } from "@tauri-apps/api/event-41a9edf5";
+import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
@@ -87,7 +86,7 @@ test("Delete 10 systems", async ({ page }) => {
 	}
 
 	await expect(page.locator(".project-item.system")).toHaveCount(10);
-	
+
 	for (let i = 0; i < 10; i++) {
 		await page.click("#system-button-0");
 		await page
@@ -99,7 +98,6 @@ test("Delete 10 systems", async ({ page }) => {
 	await expect(page.locator(".project-item.system")).toHaveCount(0);
 });
 
-
 test("Delete 10 components", async ({ page }) => {
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 
@@ -108,7 +106,7 @@ test("Delete 10 components", async ({ page }) => {
 	}
 
 	await expect(page.locator(".project-item.component")).toHaveCount(10);
-	
+
 	for (let i = 0; i < 10; i++) {
 		await page.click("#component-button-0");
 		await page
@@ -116,8 +114,6 @@ test("Delete 10 components", async ({ page }) => {
 			.getByRole("button", { name: "Delete" })
 			.click();
 	}
-	
+
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 });
-
-
