@@ -220,9 +220,12 @@
 
 	.delete-selection {
 		border: 0;
-		padding: 0.2em;
+		border-bottom: 0.05em solid black;
+		padding: 0.2em 0.2em 0 0.2em;
 		background-color: transparent;
 		cursor: pointer;
+		margin-left: 0.5em;
+		margin-right: 0.5em;
 	}
 
 	#delete-text {
