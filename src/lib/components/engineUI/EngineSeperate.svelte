@@ -67,13 +67,13 @@
 <Modal bind:this={modalContainer}>
 	<div class="delete-dialog">
 		<div class="inner-delete-dialog">
-			<h4>
+			<h4 id="delete-text">
 				Are you sure you wish to delete the engine: {#if currentEngine.name !== undefined}
 					{currentEngine.name}
 				{/if}
 			</h4>
-			<button on:click={deleteEngine} type="button"> Yes </button>
-			<button on:click={closeModal} type="button"> No </button>
+			<button on:click={deleteEngine} type="button" class="delete-selection"> Yes </button>
+			<button on:click={closeModal} type="button" class="delete-selection"> No </button>
 		</div>
 	</div>
 </Modal>
@@ -161,6 +161,7 @@
 		padding: 0 0.1em 0 0.1em;
 		background-color: transparent;
 		float: right;
+		cursor: pointer;
 	}
 
 	.delete-dialog {
@@ -215,5 +216,18 @@
 		cursor: pointer;
 		margin: 0.15em;
 		border-radius: 50%;
+	}
+
+	.delete-selection {
+		background-color: rgb(159, 174, 189);
+		border: none;
+		border-bottom: 0.05em solid black;
+		cursor: pointer;
+		padding: 0.2em;
+		margin: 0 0.2em 0.2em 0.2em;
+	}
+
+	#delete-text {
+		margin: 0.2em;
 	}
 </style>
