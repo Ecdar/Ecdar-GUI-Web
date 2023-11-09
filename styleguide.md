@@ -56,6 +56,12 @@ Class names should be in _PascalCase_
 
 Functions and members should be in _camelCase_.
 
+#### HTML & CSS
+
+- CSS classes and id's should be in _kebab-case_
+- CSS variables loaded using the _GlobalCssSchemesLoader_ should be in _kebab-case_ with an initial _--_
+  - Example: _--test-css-variable-name_
+
 ---
 
 ### Good Code Practices:
@@ -66,7 +72,7 @@ Functions and members should be in _camelCase_.
 - Use private properties to encapsulate implementation details that are not relevant to other components.
 - If a function cant be described based on its name it is too big and should be split.
 
-**_File structure specificfics:_**
+**_File structure specifics:_**
 
 - Group related files in the same directory.
 
