@@ -8,6 +8,7 @@
 		bind:name={component.name}
 		bind:description={component.description}
 		bind:color={component.color}
+		bind:isPeriodic={component.includeInPeriodicCheck}
 		itemType="component"
 		{index}
 	/>

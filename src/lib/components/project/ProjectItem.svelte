@@ -3,27 +3,27 @@
 		Folder_special,
 		Request_page,
 	} from "svelte-google-materialdesign-icons";
-	import ComponentDropDownMenu from "./ComponentDropDownMenu.svelte";
-	import SystemDropDownMenu from "./SystemDropDownMenu.svelte";
+	import ProjectItemDropDownMenu from "./ProjectItemDropDownMenu.svelte";
 
 	export let name: string;
 	export let description: string;
 	export let color: string;
+	export let includeInPeriodicCheck: boolean = false;
 	export let index: number;
-	export let itemType: string;
+	export let itemType: "system" | "component";
 
 	function handleDoubleClick() {
 		name = prompt("New name:", name) || name;
 	}
 </script>
 
-<div
-	class="project-item"
-	on:dblclick={handleDoubleClick}
-	role="button"
-	tabindex="-1"
->
-	<div class="left">
+<div class="project-item">
+	<div
+		class="left"
+		on:dblclick={handleDoubleClick}
+		role="button"
+		tabindex="-1"
+	>
 		<div class="circle" style="background-color: {color}">
 			<div class="icon">
 				{#if itemType === "component"}
@@ -37,9 +37,20 @@
 	</div>
 	<div>
 		{#if itemType === "component"}
-			<ComponentDropDownMenu bind:description bind:color {index} />
+			<ProjectItemDropDownMenu
+				bind:description
+				bind:color
+				bind:includeInPeriodicCheck
+				{index}
+				{itemType}
+			/>
 		{:else}
-			<SystemDropDownMenu bind:description bind:color {index} />
+			<ProjectItemDropDownMenu
+				bind:description
+				bind:color
+				{index}
+				{itemType}
+			/>
 		{/if}
 	</div>
 </div>
