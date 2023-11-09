@@ -78,25 +78,29 @@
 
 <style>
 	nav {
+		background-color: var(--canvas-topbar-color);
+		color: var(--navigationbar-text-color);
 		height: 5em;
-		background-color: slategrey;
 		flex-shrink: 0;
 	}
 
 	.inner-nav {
-		background-color: slategrey;
-		box-shadow: lightslategray 0px 0px 1em;
+		background-color: var(--main-navigationbar-color);
+		border: var(--main-innernavigationbar-border);
+		font-size: var(--sidebar-navigationbar-fontsize);
 	}
 
 	.side-panel {
+		background-color: var(--background-color);
 		display: flex;
 		flex-direction: column;
 		flex-basis: 10em;
-		background-color: whitesmoke;
 		overflow: hidden;
 	}
 
 	.side-panel-content {
+		color: var(--sidebar-text-color);
+		font-size: var(--sidebar-standard-fontsize);
 		height: 100%;
 		width: 100%;
 		overflow-y: auto;
@@ -106,7 +110,7 @@
 
 	.resizer {
 		background-color: black;
-		flex-basis: 0.3em;
+		flex-basis: 0.2em;
 		cursor: col-resize;
 	}
 </style>
