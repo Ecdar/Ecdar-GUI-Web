@@ -8,7 +8,7 @@
 <h2>Engines</h2>
 <div class="engines">
 	{#each tempEngines as engine}
-		<EngineSeperate defaultChecked={engine.type} currentEngine={engine} />
+		<EngineSeperate defaultChecked={engine.type} currentEngine={engine} tempEngines={tempEngines}/>
 		<hr />
 	{/each}
 </div>

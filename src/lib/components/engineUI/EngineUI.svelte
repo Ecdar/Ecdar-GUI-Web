@@ -29,7 +29,6 @@
 		}
 
 		tempEngines = tempEngines;
-
 		dialogContainer.showModal();
 	}
 
@@ -91,7 +90,7 @@
 <Modal bind:this={dialogContainer}>
 	<form on:submit={onSubmit}>
 		<div class="engine-panel">
-			<EnginePanel {tempEngines} />
+			<EnginePanel tempEngines={tempEngines} />
 		</div>
 		<button
 			on:click={addNewEngine}

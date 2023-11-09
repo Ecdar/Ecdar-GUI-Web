@@ -13,8 +13,13 @@
 
 	export let defaultChecked: EngineType;
 	export let currentEngine: EngineDTO;
+	export let tempEngines: Array<EngineDTO>;
 
 	function deleteEngine() {
+		if(tempEngines.length == 1) {
+			closeModal();
+			return;
+		}
 		currentEngine.address = "-1";
 		formElement.parentNode?.removeChild(formElement);
 		closeModal();
