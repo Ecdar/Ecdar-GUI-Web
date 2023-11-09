@@ -12,8 +12,8 @@
 
 	export let description: string;
 	export let color: string;
-	export let index: number;
 	export let includeInPeriodicCheck: boolean = false;
+	export let index: number;
 	export let itemType: "system" | "component";
 
 	const colorOptions = [
