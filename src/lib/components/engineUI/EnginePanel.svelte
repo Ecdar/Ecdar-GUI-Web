@@ -8,7 +8,7 @@
 <h2>Engines</h2>
 <div class="engines">
 	{#each tempEngines as engine}
-		<EngineSeperate defaultChecked={2} currentEngine={engine} />
+		<EngineSeperate defaultChecked={engine.type} currentEngine={engine} />
 		<hr />
 	{/each}
 </div>
@@ -19,7 +19,7 @@
 		padding: 0;
 		color: 0 0 0 0;
 	}
-	
+
 	h2 {
 		margin-bottom: 0.3em;
 		padding: 0.15em;
@@ -33,7 +33,7 @@
 		overflow-y: scroll;
 		display: grid;
 		row-gap: 1rem;
-		grid-template-columns: repeat(0,1fr);
+		grid-template-columns: repeat(0, 1fr);
 		min-width: 16em;
 	}
 
@@ -57,6 +57,4 @@
 	.engines::-webkit-scrollbar-thumb:hover {
 		background: rgb(49, 54, 61);
 	}
-	
-	
 </style>

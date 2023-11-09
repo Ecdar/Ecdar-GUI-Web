@@ -1,11 +1,11 @@
 <script lang="ts">
 	let dialogContainer: HTMLDialogElement;
-	
+
 	/**
 	 * Function for showing the current modal
 	 */
 	export function showModal() {
-		dialogContainer?.showModal();
+		dialogContainer.showModal();
 	}
 
 	export function closeModal() {
