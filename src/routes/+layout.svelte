@@ -16,50 +16,6 @@
 	import { browser } from "$app/environment";
 	import { activeView, project } from "$lib/globalState/activeProject";
 
-	const comp = new Component(
-		"bing",
-		"",
-		[
-			new Location(
-				"1",
-				new Point(100, 100),
-				new Nickname("testing", new Point(40, -40)),
-			),
-			new Location(
-				"2",
-				new Point(200, 200),
-				new Nickname("testing2", new Point(40, -40)),
-			),
-		],
-		[
-			new Edge(
-				"test",
-				undefined,
-				"1",
-				"2",
-				Status.OUTPUT,
-				undefined,
-				undefined,
-				undefined,
-				undefined,
-				undefined,
-				[
-					new Nail(
-						new Property(
-							PropertyType.SYNCHRONIZATION,
-							new Point(150, 150),
-						),
-						new Point(150, 150),
-					),
-				],
-			),
-		],
-	);
-
-	project.set(new Project("Test project", [comp]));
-
-	$activeView = comp;
-
 	if (browser) {
 		// Catch errors here and show error popup
 		try {
