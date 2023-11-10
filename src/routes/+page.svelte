@@ -8,10 +8,9 @@
 	import Console from "$lib/components/console/Console.svelte";
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import GlobalDeclaration from "$lib/components/project/globalDeclaration/GlobalDeclaration.svelte";
-	import Components from "$lib/components/project/component/Components.svelte";
-	import Systems from "$lib/components/project/system/Systems.svelte";
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
+	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 
 	let mainContainer: HTMLElement;
 </script>
@@ -29,8 +28,7 @@
 			<ProjectNav slot="nav" />
 			<div slot="content">
 				<GlobalDeclaration />
-				<Components />
-				<Systems />
+				<ProjectItems />
 			</div>
 		</SidePanel>
 		<!-- Canvas -->
