@@ -53,7 +53,7 @@ yarn test
 
 ## Styleguide
 
-For information about file, class, interface and variable naming conventions, code practices, project file structure and rules about the usage of TS types, read the [styleguide](../styleguide.md) file.
+For information about file, class, interface and variable naming conventions, code practices, project file structure, and rules about the usage of TS types, read the [styleguide](../styleguide.md) file.
 
 ## TODO
 
