@@ -2,13 +2,13 @@
 
 **Table of content:**
 
-- [Style guide](#style-guide)
+- [Style Guide](#style-guide)
   - [Naming Conventions](#naming-conventions)
     - [Folder](#folder)
     - [Files](#files)
     - [Classes](#classes)
     - [Variables](#variables)
-    - [Functions and Methods](#functions-and-methods)
+    - [Functions & Methods](#functions--methods)
     - [HTML & CSS](#html--css)
   - [Good Code Practices](#good-code-practices)
   - [TypeScript Type Practices](#typescript-type-practices)
@@ -18,13 +18,13 @@
   - [General JSON Structure](#general-json-structure)
   - [Supporting New CSS Media Features](#supporting-new-css-media-features)
   - [Adding CSS Variables](#adding-css-variables)
-    - [Example of adding a new CSS variable](#example-of-adding-a-new-css-variable)
-    - [Specifying a CSS color attribute](#specifying-a-css-color-attribute)
+    - [Example Of Adding A New CSS Variable](#example-of-adding-a-new-css-variable)
+    - [Specifying A CSS Color Attribute](#specifying-a-css-color-attribute)
   - [Using CSS Variables](#using-css-variables)
 
 ---
 
-## Style guide
+## Style Guide
 
 **Introduction**
 This style guide contains information about file, class and variable naming conventions, code practices, file structure and rules about the usage of TS types.
@@ -68,7 +68,7 @@ Interface names should be in _PascalCase_ and begin with an uppercase "I" to ind
   - ~~siteCtx~~ should be siteContext
   - ~~testBtn~~ should be testButton
 
-#### Functions and Methods
+#### Functions & Methods
 
 Functions and members should be in _camelCase_.
 
@@ -224,7 +224,7 @@ A list of media features can be seen on the [MDN Web Docs: Using media queries](
 
 The allowed CSS variables are listed in the _CSSVariables.ts_ file. To add support for new CSS variables these have to be added to the corresponding list.
 
-#### Example of adding a new CSS variable
+#### Example Of Adding A New CSS Variable
 
 The process of adding new CSS variables are the following:
 
@@ -249,7 +249,7 @@ export const ColorVariables = z.object({
 
 3. (Optional) Further specify the CSS variable in other media schemes e.g. add a darkmode version.
 
-#### Specifying a CSS color attribute
+#### Specifying A CSS Color Attribute
 
 The color attribute is based on the CSS _color()_ function. The color function takes four parameters and a fifth optional parameter. The syntax is defined as following:
 
