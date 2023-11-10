@@ -149,7 +149,10 @@ export const systemDeclarations = new ProjectMember("systemDeclarations");
  */
 export const globalDeclarations = new ProjectMember("globalDeclarations");
 
-type TActiveView = Project["components"][0] | Project["systems"][0] | undefined;
+export type TActiveView =
+	| Project["components"][0]
+	| Project["systems"][0]
+	| undefined;
 let activeViewStore: TActiveView;
 const activeViewSubscribers = new Set<Subscriber<TActiveView>>();
 
