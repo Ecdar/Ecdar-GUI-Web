@@ -32,6 +32,8 @@ Folder names should be in _camelCase_.
 **_.ts_** files that
 
 - Exports a single class should be in _PascalCase_
+- Exports a single interface should be in _PascalCase_ and begin with an uppercase "I".
+  - Ex. interface called _IPoint_ should be in a file called _IPoint.ts_ to indicate that it exports an interface.
 - Does not export a single class should be in _camelCase_
 
 **_.svelte_** files that
@@ -41,9 +43,10 @@ Folder names should be in _camelCase_.
 
 **_.json_** files should be in _PascalCase_
 
-#### Classes
+#### Classes and Interfaces
 
 Class names should be in _PascalCase_
+Interface names should be in _PascalCase_ and begin with an uppercase "I" to indicate that it is an interface.
 
 #### Variables
 
