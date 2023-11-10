@@ -1,21 +1,33 @@
-# Style guide
-
-**Introduction**
-This style guide contains information about file, class and variable naming conventions, code practices, file structure and rules about the usage of TS types.
+# Conventions used throughout the project
 
 **Table of content:**
 
-- [Naming Conventions](#naming-conventions)
-  - [Folder](#folder)
-  - [Files](#files)
-  - [Classes](#classes)
-  - [Variables](#variables)
-  - [Functions and Methods](#functions-and-methods)
-  - [HTML & CSS](#html--css)
-- [Good Code Practices](#good-code-practices)
-- [TypeScript Type Practices](#typescript-type-practices)
-- [Comment Practices](#comment-practices)
-- [Folder Structure](#folder-structure)
+- [Style guide](#style-guide)
+  - [Naming Conventions](#naming-conventions)
+    - [Folder](#folder)
+    - [Files](#files)
+    - [Classes](#classes)
+    - [Variables](#variables)
+    - [Functions and Methods](#functions-and-methods)
+    - [HTML & CSS](#html--css)
+  - [Good Code Practices](#good-code-practices)
+  - [TypeScript Type Practices](#typescript-type-practices)
+  - [Comment Practices](#comment-practices)
+  - [Folder Structure](#folder-structure)
+- [Using the CSS Schemes Loader](#using-the-css-schemes-loader)
+  - [General JSON Structure](#general-json-structure)
+  - [Supporting New CSS Media Features](#supporting-new-css-media-features)
+  - [Adding CSS Variables](#adding-css-variables)
+    - [Example of adding a new CSS variable](#example-of-adding-a-new-css-variable)
+    - [Specifying a CSS color attribute](#specifying-a-css-color-attribute)
+  - [Using CSS Variables](#using-css-variables)
+
+---
+
+## Style guide
+
+**Introduction**
+This style guide contains information about file, class and variable naming conventions, code practices, file structure and rules about the usage of TS types.
 
 ---
 
@@ -152,4 +164,141 @@ The following folder structure is meant to be a guideline of where one should pu
     └── <-- Test files here.
             Folder structure should copy the project structure,
             and put tests in their corresponding folders -->
+```
+
+## Using the CSS Schemes Loader
+
+The CSS loader was created to support dynamic loading of color schemes and userdefined colorschemes.
+
+### General JSON Structure
+
+The different media schemes are stored using a JSON file. The root of this file contains a default mediascheme and a list of mediaschemes:
+
+```ts
+const MediaSchemes = z
+  .object({
+    default: RequiredMediaScheme.required(),
+    schemes: z.array(MediaScheme),
+  })
+  .strict();
+```
+
+1. _Default scheme:_ Requires all defined CSS variables to have a default fallback value to prevent the situation where an elements does not have styling.
+   This scheme automatically also functions as the "light mode" styling.
+2. _List of mediaschemes_: Contains specifications of some CSS variables that overwrites the standard values in case the mediafeature matches the browser.
+   Example: A mediascheme has mediafeature "prefers-color-scheme: dark". This feature is matched when the browser is set to dark mode.
+
+### Supporting New CSS Media Features
+
+To add support for additional mediafeatures one has to add a new mediafeature object to the _schemes_ array located in the root of the JSON file.
+
+The _MediaScheme_ definition looks like the following:
+
+```ts
+const MediaScheme = z
+  .object({
+    mediaFeature: z.string(),
+    color: ColorVariables.partial().optional(),
+    fontSize: FontSizeVariables.partial().optional(),
+    border: BorderVariables.partial().optional(),
+  })
+  .strict();
+```
+
+As seen in the above definition of _MediaScheme_ one is not required to specify any color, fontSize or border, meaning that one only has to specify the variables specifically needed for that scheme.
+
+An example of a new media scheme can be seen below:
+
+```json
+{
+  "mediaFeature": "prefers-reduced-motion",
+  "color": {},
+  "fontSize": {},
+  "border": {}
+}
+```
+
+A list of media features can be seen on the [MDN Web Docs: Using media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries).
+
+### Adding CSS Variables
+
+The allowed CSS variables are listed in the _CSSVariables.ts_ file. To add support for new CSS variables these have to be added to the corresponding list.
+
+#### Example of adding a new CSS variable
+
+The process of adding new CSS variables are the following:
+
+1. Add the name and type of the variable to the correct scheme in the _CSSVariables.ts_ file.
+   _Example:_ Adding a color called _--css-color-name_ of the type _ColorAttribute_.
+
+```ts
+export const ColorVariables = z.object({
+  ...
+	"--css-color-name": ColorAttribute,
+}).strict();
+```
+
+2. Add a default value in the _default_ scheme in the JSON file.
+
+```ts
+"color": {
+  ...
+	"--navigationbar-text-color": ["display-p3", 1, 1, 1],
+}
+```
+
+3. (Optional) Further specify the CSS variable in other media schemes e.g. add a darkmode version.
+
+#### Specifying a CSS color attribute
+
+The color attribute is based on the CSS _color()_ function. The color function takes four parameters and a fifth optional parameter. The syntax is defined as following:
+
+```CSS
+color(colorspace value-one value-two value-three / optional-alpha-value);
+```
+
+The _colorspace_ value should be one of the colorspaces listed in the _SupportedGamuts_ enum in the _ColorAttribute.ts_ file and the four numerical values should be within the range 0-1.
+
+Now that the implementation specifics have been discussed we can take a look at how one would define a color in the JSON file. An example of _ColorAttribute_ is seen in the following:
+
+```json
+"--console-scrollbar-thumb-color": [
+  "display-p3",
+  0.22745098039,
+  0.27450980392,
+  0.30588235294
+],
+```
+
+For more information on the _color()_ function see [MDN Web Docs: color()](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color)
+
+### Using CSS Variables
+
+The specified CSS variables are extremely easy to apply in the GUI as they are simply added as CSS properties in the root file.
+
+Examples of applying the CSS variable _--background-color_ are:
+
+```CSS
+.side-panel {
+  ...
+  background-color: var(--background-color);
+}
+```
+
+```html
+<div style="background-color: var(--background-color);">...</div>
+```
+
+A more advanced implementation switching between two CSS variables:
+
+```html
+<script>
+  let buttonActive: string = "var(--button-active)";
+  let buttonInActive: string = "var(--button-inactive)";
+</script>
+<button
+  style="background-color: { currentTab == thisTab
+  ? buttonActive
+  : buttonInActive}"
+></button>
 ```
