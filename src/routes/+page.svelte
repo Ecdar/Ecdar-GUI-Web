@@ -5,13 +5,14 @@
 	import Console from "$lib/components/console/Console.svelte";
 	import Components from "$lib/components/project/component/Components.svelte";
 	import Systems from "$lib/components/project/system/Systems.svelte";
-	import ToolsNav from "$lib/components/tools/ToolsNav.svelte"
+	import ToolBarNav from "$lib/components/toolBar/ToolsBarNav.svelte"
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import { Description } from "svelte-google-materialdesign-icons";
 
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
+	import ToolBar from "$lib/components/toolBar/ToolBar.svelte";
 
 	enum SidePanel {
 		Left,
@@ -78,9 +79,10 @@
 	{:else}
 		<!-- Left side Panel -->
 		<div class="side-panel" style="flex-basis: {leftSidePanelWidth}px">
-			<nav class="inner-nav1"><ToolsNav/></nav>
-			<div class="side-panel-content">
-
+			<nav class="inner-nav1">
+				<ToolBarNav/></nav>
+			<div class="side-panel-toolbar-content">
+				<ToolBar></ToolBar>
 			</div>
 			<nav class="inner-nav2"><ProjectNav /></nav>
 			<div class="side-panel-content">
@@ -196,6 +198,10 @@
 		background-color: whitesmoke;
 		flex-basis: 10em;
 		overflow: hidden;
+	}
+
+	.side-panel-toolbar-content {
+		height: 50px;
 	}
 
 	.side-panel-content {
