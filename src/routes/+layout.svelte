@@ -12,7 +12,7 @@
 	import { Point } from "$lib/classes/draw";
 	import { Project } from "$lib/classes/project/Project";
 	import ContextMenu from "$lib/components/contextMenu/ContextMenu.svelte";
-  import GlobalCssSchemesLoader from "$lib/classes/styling/GlobalCssSchemesLoader";
+	import GlobalCssSchemesLoader from "$lib/classes/styling/GlobalCssSchemesLoader";
 	import { browser } from "$app/environment";
 	import { activeView, project } from "$lib/globalState/activeProject";
 
@@ -59,7 +59,6 @@
 	project.set(new Project("Test project", [comp]));
 
 	$activeView = comp;
-	
 
 	if (browser) {
 		// Catch errors here and show error popup
