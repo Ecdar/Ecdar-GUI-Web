@@ -1,20 +1,7 @@
 <script lang="ts">
-	import {
-		Component,
-		Location,
-		Nickname,
-		Edge,
-		Status,
-		Nail,
-		PropertyType,
-		Property,
-	} from "$lib/classes/automaton";
-	import { Point } from "$lib/classes/draw";
-	import { Project } from "$lib/classes/project/Project";
 	import ContextMenu from "$lib/components/contextMenu/ContextMenu.svelte";
 	import GlobalCssSchemesLoader from "$lib/classes/styling/GlobalCssSchemesLoader";
 	import { browser } from "$app/environment";
-	import { activeView, project } from "$lib/globalState/activeProject";
 
 	if (browser) {
 		// Catch errors here and show error popup
