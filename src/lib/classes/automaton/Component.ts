@@ -1,7 +1,5 @@
 import { Point, Dimensions } from "$lib/classes/draw";
-
 import { Edge, Location, type Named, Raw } from "../automaton";
-import {} from "./raw/RawComponent";
 
 /**
  * # An Ecdar component
