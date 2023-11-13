@@ -1,33 +1,32 @@
-import type { FromRaw } from "./AutomatonClass";
 import { IdMap } from "./IdMap";
-import type { RawStringId } from "./raw/RawId";
 import { Project } from "./Project";
-import { ProjectId } from "./ProjectId";
+import type { ProjectId, ProjectIdInput } from "./ProjectId";
+import type { RawProjectId } from "./raw/RawProjectId";
 import type { RawProjects } from "./raw/RawProjects";
+import type { FromRaw } from "./AutomatonClass";
+import type { ProjectIds } from "./ProjectIds";
 
 export class Projects extends IdMap<
 	Project,
 	ProjectId,
-	string,
-	RawStringId,
+	ProjectIdInput,
+	RawProjectId,
 	RawProjects
 > {
-	constructor() {
-		super(ProjectId);
-	}
-
 	toRaw() {
 		return [...this].map((project) => project.toRaw());
 	}
 
-	static readonly fromRaw: FromRaw<RawProjects, undefined, Projects> = (
-		raw,
-	) => {
-		const projects = new Projects();
+	static readonly fromRaw: FromRaw<
+		RawProjects,
+		{ projectIds: ProjectIds },
+		Projects
+	> = (raw, { projectIds }) => {
+		const projects = new Projects(projectIds);
 		for (const rawProject of raw) {
 			const id = rawProject.name
-				? projects.getNewIdFromRaw(rawProject.name)
-				: projects.getNewOrderedId();
+				? projects.ids.getNewIdFromRaw(rawProject.name)
+				: projects.ids.getNewOrderedId();
 
 			if (!id)
 				if (rawProject.name) {

@@ -1,23 +1,24 @@
 import { z } from "zod";
+import { ZodRawSystemId } from "./RawSystemId";
 import { ZodRawPosition } from "../../raw/RawPosition";
 import { ZodRawDimensions } from "../../raw/RawDimensions";
-import { ZodRawComponentInstance } from "./RawComponentInstance";
-import { ZodRawOperator } from "./RawOperator";
+import { ZodRawComponentInstances } from "./RawComponentInstances";
+import { ZodRawOperators } from "./RawOperators";
 import { ZodRawComponentEdge } from "./RawComponentEdge";
 
 /**
  * Used to parse a RawSystem through Zod
  */
 export const ZodRawSystem = z.object({
-	name: z.string(),
-	description: z.string(),
-	...ZodRawPosition.shape,
-	...ZodRawDimensions.shape,
-	color: z.string(),
-	systemRootX: ZodRawPosition.shape.x,
-	componentInstances: ZodRawComponentInstance.array(),
-	operators: ZodRawOperator.array(),
-	edges: ZodRawComponentEdge.array(),
+	name: ZodRawSystemId,
+	description: z.string().optional(),
+	...ZodRawPosition.partial().shape,
+	...ZodRawDimensions.partial().shape,
+	color: z.string().optional(),
+	systemRootX: ZodRawPosition.shape.x.optional(),
+	componentInstances: ZodRawComponentInstances.optional(),
+	operators: ZodRawOperators.optional(),
+	edges: ZodRawComponentEdge.array().optional(),
 });
 
 /**

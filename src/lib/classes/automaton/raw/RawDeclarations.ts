@@ -1,11 +1,10 @@
 import { z } from "zod";
-import { DeclarationType } from "../DeclarationType";
 
 /**
  * Used to parse a RawDecalaration through Zod
  */
 export const ZodRawDeclarations = z.object({
-	name: z.nativeEnum(DeclarationType),
+	name: z.string(),
 	declarations: z.string().optional(),
 });
 

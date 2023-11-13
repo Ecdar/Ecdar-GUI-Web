@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { ZodRawComponent } from "../component/raw/RawComponent";
-import { ZodRawSystem } from "../system/raw/RawSystem";
+import { ZodRawComponents } from "../component/raw/RawComponents";
+import { ZodRawSystems } from "../system/raw/RawSystems";
 import { ZodRawQuery } from "./RawQuery";
 import { ZodRawSystemDeclarations } from "./RawSystemDeclarations";
 import { ZodRawGlobalDeclarations } from "./RawGlobalDeclarations";
@@ -10,8 +10,8 @@ import { ZodRawGlobalDeclarations } from "./RawGlobalDeclarations";
  */
 export const ZodRawProject = z.object({
 	name: z.string().optional(),
-	components: ZodRawComponent.array().optional(),
-	systems: ZodRawSystem.array().optional(),
+	components: ZodRawComponents.optional(),
+	systems: ZodRawSystems.optional(),
 	queries: ZodRawQuery.array().optional(),
 	systemDeclarations: ZodRawSystemDeclarations.optional(),
 	globalDeclarations: ZodRawGlobalDeclarations.optional(),

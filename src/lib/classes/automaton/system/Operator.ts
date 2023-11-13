@@ -1,9 +1,9 @@
-import type { FromRaw } from "../AutomatonClass";
+import { SystemMember } from "./SystemMember";
 import type { RawOperator } from "./raw/RawOperator";
+import type { SystemMemberId } from "./SystemMemberId";
 import { OperatorType } from "./OperatorType";
 import { Position } from "../Position";
-import type { SystemMemberId } from "./SystemMemberId";
-import { SystemMember } from "./SystemMember";
+import type { FromRaw } from "../AutomatonClass";
 
 /**
  * Defines an operator for a System

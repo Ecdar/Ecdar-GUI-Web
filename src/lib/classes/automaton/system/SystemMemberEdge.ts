@@ -3,6 +3,11 @@ import type { SystemMemberId } from "./SystemMemberId";
 import type { RawComponentEdge } from "./raw/RawComponentEdge";
 
 /**
+ * References the origin of the parent system.
+ */
+export const origin = Symbol("Origin");
+
+/**
  * Describes the edges of a system.
  */
 export class SystemMemberEdge extends AutomatonClass<RawComponentEdge> {
@@ -10,7 +15,7 @@ export class SystemMemberEdge extends AutomatonClass<RawComponentEdge> {
 		/**
 		 * The beginning of the edge
 		 */
-		public parent: SystemMemberId,
+		public parent: SystemMemberId | typeof origin,
 
 		/**
 		 * The end of the edge
@@ -25,7 +30,7 @@ export class SystemMemberEdge extends AutomatonClass<RawComponentEdge> {
 	 */
 	toRaw() {
 		return {
-			parent: this.parent.toRaw(),
+			parent: this.parent === origin ? 0 : this.parent.toRaw(),
 			child: this.child.toRaw(),
 		};
 	}
@@ -35,7 +40,7 @@ export class SystemMemberEdge extends AutomatonClass<RawComponentEdge> {
 	 */
 	static readonly fromRaw: FromRaw<
 		RawComponentEdge,
-		{ parent: SystemMemberId; child: SystemMemberId },
+		{ parent: SystemMemberId | typeof origin; child: SystemMemberId },
 		SystemMemberEdge
 	> = (raw, { parent, child }) => {
 		return new SystemMemberEdge(parent, child);

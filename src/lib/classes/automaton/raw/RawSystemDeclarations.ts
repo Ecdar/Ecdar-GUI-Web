@@ -1,11 +1,12 @@
 import { z } from "zod";
+import { ZodRawDeclarations } from "./RawDeclarations";
 
 /**
  * Used to parse a RawSystemDeclaration through Zod
  */
 export const ZodRawSystemDeclarations = z.object({
-	name: z.literal("System declarations").optional(),
-	declarations: z.string().optional(),
+	...ZodRawDeclarations.shape,
+	name: z.literal("System Declarations").optional(),
 });
 
 /**

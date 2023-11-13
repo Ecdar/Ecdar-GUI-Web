@@ -1,6 +1,6 @@
 import { AutomatonClass, type FromRaw } from "../AutomatonClass";
 import type { RawLocation } from "./raw/RawLocation";
-import type { LocationId } from "./LocationId";
+import type { LocationId } from "../LocationId";
 import { LocationType } from "./LocationType";
 import { LocationUrgency } from "./LocationUrgency";
 import { Position } from "../Position";
@@ -15,7 +15,7 @@ export class Location extends AutomatonClass<RawLocation> {
 		/**
 		 * The id of the Location
 		 */
-		id: LocationId,
+		readonly id: LocationId,
 
 		/**
 		 * The Type of the Location
@@ -35,7 +35,7 @@ export class Location extends AutomatonClass<RawLocation> {
 		/**
 		 * The position of the Location
 		 */
-		position: Position = new Position(defaultX, defaultY),
+		readonly position: Position = new Position(defaultX, defaultY),
 
 		/**
 		 * The Nickname of the Location
@@ -48,20 +48,9 @@ export class Location extends AutomatonClass<RawLocation> {
 		invariant?: Invariant,
 	) {
 		super();
-		this.id = id;
 		this.type = type;
-		this.position = position;
 		this.nickname = nickname;
 		this.invariant = invariant;
-	}
-
-	#id!: LocationId;
-	get id() {
-		return this.#id;
-	}
-	set id(value) {
-		this.#id = value;
-		this.typeCheck();
 	}
 
 	#type!: LocationType;
@@ -70,16 +59,11 @@ export class Location extends AutomatonClass<RawLocation> {
 	}
 	set type(value) {
 		this.#type = value;
-		this.typeCheck();
-	}
-
-	#position!: Position;
-	get position() {
-		return this.#position;
-	}
-	set position(value) {
-		this.#position = value;
-		this.positionCheck();
+		if (this.type !== this.id.type) {
+			throw new TypeError(
+				`Cannot have a location (${this.id.rawId}) of type ${this.type} with an ID of type ${this.id.type}.`,
+			);
+		}
 	}
 
 	#nickname: Nickname | undefined;
@@ -100,16 +84,6 @@ export class Location extends AutomatonClass<RawLocation> {
 		this.positionCheck();
 	}
 
-	private typeCheck() {
-		/**
-		 * TODO: Ideally this warning should be an error, but it is likely that real projects will fail this check.
-		 */
-		if (this.type !== this.id.type) {
-			console.warn(
-				`Having a location (${this.id.rawId}) of type ${this.type} with an ID of type ${this.id.type} seems like a bad idea.`,
-			);
-		}
-	}
 	private positionCheck() {
 		if (
 			this.nickname &&

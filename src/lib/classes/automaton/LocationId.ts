@@ -1,24 +1,40 @@
-import { Id } from "../Id";
-import type { RawId, RawStringId } from "../raw/RawId";
-import { LocationType } from "./LocationType";
-import type { FromRaw } from "../AutomatonClass";
+import { Id } from "./Id";
+import type { RawId, RawStringId } from "./raw/RawId";
+import { LocationType } from "./component/LocationType";
+import type { FromRaw } from "./AutomatonClass";
+import type { RawLocationId } from "./raw/RawLocationId";
 
 export type LocationIdInput = RawId | { type: LocationType; order: number };
-export class LocationId extends Id<LocationIdInput, RawStringId> {
-	#type: LocationType = LocationType.NORMAL;
-	get type() {
-		return this.#type;
+
+export class LocationId extends Id<LocationIdInput, RawLocationId> {
+	constructor(id: LocationIdInput | RawLocationId) {
+		super(id);
+		this.applyParse(this.parse(id));
 	}
 
-	protected parse(input: LocationIdInput) {
+	/**
+	 * The logical type of location.
+	 * This should not be part of the ID, but we can't change the data structure, so here we are.
+	 */
+	get type() {
+		return this._type;
+	}
+	_type: LocationType = LocationType.NORMAL;
+
+	parse(this: void, input: LocationIdInput) {
 		let rawId;
 		let order;
 		let orders;
+		let type = LocationType.NORMAL;
 		if (typeof input === "object") {
-			let precursor = "L";
+			let precursor: string;
 			switch (input.type) {
+				case LocationType.NORMAL: {
+					precursor = "L";
+					break;
+				}
 				case LocationType.UNIVERSAL: {
-					precursor = "UL";
+					precursor = "U";
 					break;
 				}
 				case LocationType.INCONSISTENT: {
@@ -35,7 +51,7 @@ export class LocationId extends Id<LocationIdInput, RawStringId> {
 			rawId = input;
 			const ordersMatches = [
 				...input.matchAll(
-					/(?<isUniversal>U)?(?<isInconsistent>I)?(?<isLocation>L)?(?<number>[\+\-]?\d+)/giu,
+					/(?<isUniversal>U)?(?<isInconsistent>I)?L?(?<number>[+-]?\d+)/giu,
 				),
 			];
 			const ordersParsed: {
@@ -63,10 +79,10 @@ export class LocationId extends Id<LocationIdInput, RawStringId> {
 					 * This would require testing to make sure it is compatible with some of the more crazy Id's that Ecdar generates.
 					 */
 					if (orderMatch.groups.isUniversal) {
-						this.#type = LocationType.UNIVERSAL;
+						type = LocationType.UNIVERSAL;
 					}
 					if (orderMatch.groups.isInconsistent) {
-						this.#type = LocationType.INCONSISTENT;
+						type = LocationType.INCONSISTENT;
 					}
 				}
 			}
@@ -76,7 +92,20 @@ export class LocationId extends Id<LocationIdInput, RawStringId> {
 				orders = ordersParsed.map((parsed) => parsed.number);
 			}
 		}
-		return { rawId, order, orders };
+
+		return { rawId, order, orders, type };
+	}
+
+	protected applyParse(parsed: {
+		rawId: RawLocationId;
+		order: number | undefined;
+		orders: number[] | undefined;
+		type: LocationType;
+	}) {
+		this._rawId = parsed.rawId;
+		this._order = parsed.order;
+		this._orders = parsed.orders;
+		this._type = parsed.type;
 	}
 
 	static readonly fromRaw: FromRaw<RawStringId, undefined, LocationId> = (

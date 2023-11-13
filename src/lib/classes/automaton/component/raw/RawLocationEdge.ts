@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ZodRawLocationEdgeId } from "../../raw/RawLocationEdgeId";
 import { ZodRawNail } from "./RawNail";
 import { LocationEdgeStatus } from "../LocationEdgeStatus";
 
@@ -6,7 +7,7 @@ import { LocationEdgeStatus } from "../LocationEdgeStatus";
  * Used to parse a RawLocationEdge through Zod
  */
 export const ZodRawLocationEdge = z.object({
-	id: z.string(),
+	id: ZodRawLocationEdgeId,
 	group: z.string().optional(),
 	sourceLocation: z.string(),
 	targetLocation: z.string(),

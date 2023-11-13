@@ -1,33 +1,19 @@
-import { IdScopedMap } from "../IdScopedMap";
-import type { RawNumberId } from "../raw/RawId";
-import type { SystemMember } from "./SystemMember";
-import type { SystemMemberId, SystemMemberIdInput } from "./SystemMemberId";
-import type { RawComponentInstance } from "./raw/RawComponentInstance";
-import type { RawComponentInstances } from "./raw/RawComponentInstances";
+import { IdMapScoped } from "../IdMapScoped";
 import { ComponentInstance } from "./ComponentInstance";
-import type { IdMap } from "../IdMap";
+import type { SystemMemberId, SystemMemberIdInput } from "./SystemMemberId";
+import type { RawNumberId } from "../raw/RawId";
+import type { RawComponentInstances } from "./raw/RawComponentInstances";
 import type { FromRaw } from "../AutomatonClass";
+import type { SystemMemberIds } from "./SystemMemberIds";
+import type { Components } from "../component/Components";
 
-export class ComponentInstances extends IdScopedMap<
-	SystemMember<RawComponentInstance>,
+export class ComponentInstances extends IdMapScoped<
 	ComponentInstance,
 	SystemMemberId,
 	SystemMemberIdInput,
 	RawNumberId,
 	RawComponentInstances
 > {
-	constructor(
-		map: IdMap<
-			SystemMember<any>,
-			SystemMemberId,
-			SystemMemberIdInput,
-			RawNumberId,
-			any
-		>,
-	) {
-		super(map, ComponentInstance);
-	}
-
 	toRaw() {
 		return [...this].map((componentInstance) => componentInstance.toRaw());
 	}
@@ -35,19 +21,14 @@ export class ComponentInstances extends IdScopedMap<
 	static readonly fromRaw: FromRaw<
 		RawComponentInstances,
 		{
-			systemMembers: IdMap<
-				SystemMember<any>,
-				SystemMemberId,
-				SystemMemberIdInput,
-				RawNumberId,
-				any
-			>;
+			systemMemberIds: SystemMemberIds;
+			componentIds: Components["ids"];
 		},
 		ComponentInstances
-	> = (raw, { systemMembers }) => {
-		const componentInstances = new ComponentInstances(systemMembers);
+	> = (raw, { systemMemberIds, componentIds }) => {
+		const componentInstances = new ComponentInstances(systemMemberIds);
 		for (const rawComponentInstance of raw) {
-			const id = componentInstances.getNewIdFromRaw(
+			const id = componentInstances.ids.getNewIdFromRaw(
 				rawComponentInstance.id,
 			);
 
@@ -58,7 +39,10 @@ export class ComponentInstances extends IdScopedMap<
 				);
 
 			componentInstances.add(
-				ComponentInstance.fromRaw(rawComponentInstance, { id }),
+				ComponentInstance.fromRaw(rawComponentInstance, {
+					id,
+					componentIds,
+				}),
 			);
 		}
 		return componentInstances;

@@ -1,33 +1,18 @@
-import { IdScopedMap } from "../IdScopedMap";
-import type { RawNumberId } from "../raw/RawId";
-import type { SystemMember } from "./SystemMember";
-import type { SystemMemberId, SystemMemberIdInput } from "./SystemMemberId";
-import type { RawOperator } from "./raw/RawOperator";
-import type { RawOperators } from "./raw/RawOperators";
+import { IdMapScoped } from "../IdMapScoped";
 import { Operator } from "./Operator";
-import type { IdMap } from "../IdMap";
+import type { SystemMemberId, SystemMemberIdInput } from "./SystemMemberId";
+import type { RawSystemMemberId } from "./raw/RawSystemMemberId";
+import type { RawOperators } from "./raw/RawOperators";
 import type { FromRaw } from "../AutomatonClass";
+import type { SystemMemberIds } from "./SystemMemberIds";
 
-export class Operators extends IdScopedMap<
-	SystemMember<RawOperator>,
+export class Operators extends IdMapScoped<
 	Operator,
 	SystemMemberId,
 	SystemMemberIdInput,
-	RawNumberId,
+	RawSystemMemberId,
 	RawOperators
 > {
-	constructor(
-		map: IdMap<
-			SystemMember<any>,
-			SystemMemberId,
-			SystemMemberIdInput,
-			RawNumberId,
-			any
-		>,
-	) {
-		super(map, Operator);
-	}
-
 	toRaw() {
 		return [...this].map((operator) => operator.toRaw());
 	}
@@ -35,19 +20,13 @@ export class Operators extends IdScopedMap<
 	static readonly fromRaw: FromRaw<
 		RawOperators,
 		{
-			systemMembers: IdMap<
-				SystemMember<any>,
-				SystemMemberId,
-				SystemMemberIdInput,
-				RawNumberId,
-				any
-			>;
+			systemMemberIds: SystemMemberIds;
 		},
 		Operators
-	> = (raw, { systemMembers }) => {
-		const operators = new Operators(systemMembers);
+	> = (raw, { systemMemberIds }) => {
+		const operators = new Operators(systemMemberIds);
 		for (const rawOperator of raw) {
-			const id = operators.getNewIdFromRaw(rawOperator.id);
+			const id = operators.ids.getNewIdFromRaw(rawOperator.id);
 
 			if (!id)
 				//TODO: Make this a user-friendly message with different options for recovering

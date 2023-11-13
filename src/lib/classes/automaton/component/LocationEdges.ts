@@ -1,22 +1,19 @@
 import { IdMap } from "../IdMap";
-import { LocationEdgeId } from "./LocationEdgeId";
-import type { RawStringId } from "../raw/RawId";
+import { LocationEdge } from "./LocationEdge";
+import type { LocationEdgeId, LocationEdgeIdInput } from "../LocationEdgeId";
+import type { RawLocationEdgeId } from "../raw/RawLocationEdgeId";
 import type { RawLocationEdges } from "./raw/RawLocationEdges";
 import type { FromRaw } from "../AutomatonClass";
-import type { LocationsSubset } from "./LocationsSubset";
-import { LocationEdge } from "./LocationEdge";
+import type { IIdStore } from "../IdStore";
+import type { LocationIds } from "../LocationIds";
 
 export class LocationEdges extends IdMap<
 	LocationEdge,
 	LocationEdgeId,
-	RawStringId,
-	RawStringId,
+	LocationEdgeIdInput,
+	RawLocationEdgeId,
 	RawLocationEdges
 > {
-	constructor() {
-		super(LocationEdgeId);
-	}
-
 	/**
 	 * Converts the LocationEdges to a RawLocationEdges
 	 */
@@ -29,12 +26,19 @@ export class LocationEdges extends IdMap<
 	 */
 	static readonly fromRaw: FromRaw<
 		RawLocationEdges,
-		{ locations: LocationsSubset },
+		{
+			locationEdgeIds: IIdStore<
+				LocationEdgeId,
+				LocationEdgeIdInput,
+				RawLocationEdgeId
+			>;
+			locationIds: LocationIds;
+		},
 		LocationEdges
-	> = (raw, { locations }) => {
-		const locationEdges = new LocationEdges();
+	> = (raw, { locationEdgeIds, locationIds }) => {
+		const locationEdges = new LocationEdges(locationEdgeIds);
 		for (const rawLocationEdge of raw) {
-			const id = locationEdges.getNewIdFromRaw(rawLocationEdge.id);
+			const id = locationEdges.ids.getNewIdFromRaw(rawLocationEdge.id);
 
 			if (!id)
 				//TODO: Make this a user-friendly message with different options for recovering
@@ -42,15 +46,15 @@ export class LocationEdges extends IdMap<
 					`Cannot load raw LocationEdges where multiple id's are equivalent: ${rawLocationEdge.id}`,
 				);
 
-			const source = locations.getId(rawLocationEdge.sourceLocation);
-			if (!source || !locations.has(rawLocationEdge.sourceLocation))
+			const source = locationIds.get(rawLocationEdge.sourceLocation);
+			if (!source)
 				//TODO: Make this a user-friendly message with different options for recovering
 				throw new TypeError(
 					`Cannot load raw LocationEdge ${rawLocationEdge.id} because its source Location doesn't exist: ${rawLocationEdge.sourceLocation}`,
 				);
 
-			const target = locations.getId(rawLocationEdge.targetLocation);
-			if (!target || !locations.has(rawLocationEdge.targetLocation))
+			const target = locationIds.get(rawLocationEdge.targetLocation);
+			if (!target)
 				//TODO: Make this a user-friendly message with different options for recovering
 				throw new TypeError(
 					`Cannot load raw LocationEdge ${rawLocationEdge.id} because its target Location doesn't exist: ${rawLocationEdge.targetLocation}`,

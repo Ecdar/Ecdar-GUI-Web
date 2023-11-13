@@ -1,17 +1,18 @@
-import { ZodRawLocation } from "./RawLocation";
-import { ZodRawLocationEdge } from "./RawLocationEdge";
+import { z } from "zod";
+import { ZodRawComponentId } from "./RawComponentId";
+import { ZodRawLocations } from "./RawLocations";
+import { ZodRawLocationEdges } from "./RawLocationEdges";
 import { ZodRawPosition } from "../../raw/RawPosition";
 import { ZodRawDimensions } from "../../raw/RawDimensions";
-import { z } from "zod";
 
 /**
  * Used to parse a RawComponent through Zod
  */
 export const ZodRawComponent = z.object({
-	name: z.string(),
+	name: ZodRawComponentId,
 	declarations: z.string().optional(),
-	locations: ZodRawLocation.array().optional().default([]),
-	edges: ZodRawLocationEdge.array().optional().default([]),
+	locations: ZodRawLocations.optional(),
+	edges: ZodRawLocationEdges.optional(),
 	description: z.string().optional(),
 	...ZodRawPosition.partial().shape,
 	...ZodRawDimensions.partial().shape,

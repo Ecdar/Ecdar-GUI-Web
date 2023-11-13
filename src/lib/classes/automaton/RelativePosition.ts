@@ -1,5 +1,5 @@
 import { AutomatonClass, type FromRaw } from "./AutomatonClass";
-import type { Position } from "./Position";
+import type { IPosition, Position } from "./Position";
 import type { RawRelativePosition } from "./raw/RawRelativePosition";
 
 /**
@@ -7,7 +7,10 @@ import type { RawRelativePosition } from "./raw/RawRelativePosition";
  *
  * If the reference Position changes coordinates, the RelativePosition will automatically change coordinates to keep the same relative distance as before.
  */
-export class RelativePosition extends AutomatonClass<RawRelativePosition> {
+export class RelativePosition
+	extends AutomatonClass<RawRelativePosition>
+	implements IPosition
+{
 	constructor(
 		/**
 		 * The Position that this RelativePosition will be placed relative to.

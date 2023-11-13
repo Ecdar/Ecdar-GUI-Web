@@ -1,8 +1,10 @@
-import type { FromRaw } from "../AutomatonClass";
-import type { RawComponentInstance } from "./raw/RawComponentInstance";
 import { SystemMember } from "./SystemMember";
+import type { RawComponentInstance } from "./raw/RawComponentInstance";
 import type { SystemMemberId } from "./SystemMemberId";
+import type { ComponentId } from "../component/ComponentId";
 import { Position } from "../Position";
+import type { Components } from "../component/Components";
+import type { FromRaw } from "../AutomatonClass";
 
 const defaultX = 0;
 const defaultY = 0;
@@ -20,9 +22,9 @@ export class ComponentInstance extends SystemMember<RawComponentInstance> {
 		public id: SystemMemberId,
 
 		/**
-		 * The name of the component this references
+		 * The id of the component being shown
 		 */
-		public name: string,
+		public component: ComponentId,
 
 		/**
 		 * The position of the component this references
@@ -38,7 +40,7 @@ export class ComponentInstance extends SystemMember<RawComponentInstance> {
 	toRaw() {
 		return {
 			id: this.id.toRaw(),
-			componentName: this.name,
+			componentName: this.component.toRaw(),
 			...this.position.toRaw(),
 		};
 	}
@@ -48,12 +50,19 @@ export class ComponentInstance extends SystemMember<RawComponentInstance> {
 	 */
 	static readonly fromRaw: FromRaw<
 		RawComponentInstance,
-		{ id: SystemMemberId },
+		{ id: SystemMemberId; componentIds: Components["ids"] },
 		ComponentInstance
-	> = (raw, { id }) => {
+	> = (raw, { id, componentIds }) => {
+		const component = componentIds.get(raw.componentName);
+		if (!component) {
+			//TODO: Make this a user-friendly message with different options for recovering
+			throw new TypeError(
+				`Cannot load a raw ComponentInstance that references a nonexistent component: ${raw.componentName}`,
+			);
+		}
 		return new ComponentInstance(
 			id,
-			raw.componentName,
+			component,
 			Position.fromRaw({ x: raw.x ?? defaultX, y: raw.y ?? defaultY }),
 		);
 	};

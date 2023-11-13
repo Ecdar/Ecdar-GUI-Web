@@ -1,18 +1,25 @@
-import { IdMap } from "../IdMap";
-import { Location } from "./Location";
-import { LocationId } from "./LocationId";
-import type { RawStringId } from "../raw/RawId";
-import type { RawLocations } from "./raw/RawLocations";
+import { Location } from "../component/Location";
+import type { LocationId, LocationIdInput } from "../LocationId";
+import type { RawLocationId } from "../raw/RawLocationId";
+import type { RawLocations } from "../component/raw/RawLocations";
 import type { FromRaw } from "../AutomatonClass";
+import type { LocationIds } from "../LocationIds";
+import { IdMapScoped } from "../IdMapScoped";
 
-export class Locations extends IdMap<
+export class Locations extends IdMapScoped<
 	Location,
 	LocationId,
-	RawStringId,
+	LocationIdInput,
+	RawLocationId,
 	RawLocations
 > {
-	constructor() {
-		super(LocationId);
+	constructor(
+		/**
+		 * The location ids to use in the map.
+		 */
+		readonly ids: LocationIds,
+	) {
+		super(ids);
 	}
 
 	/**
@@ -25,12 +32,14 @@ export class Locations extends IdMap<
 	/**
 	 * Converts a RawLocations to a Locations
 	 */
-	static readonly fromRaw: FromRaw<RawLocations, undefined, Locations> = (
-		raw,
-	) => {
-		const locations = new Locations();
+	static readonly fromRaw: FromRaw<
+		RawLocations,
+		{ locationIds: LocationIds },
+		Locations
+	> = (raw, { locationIds }) => {
+		const locations = new Locations(locationIds);
 		for (const rawLocation of raw) {
-			const id = locations.getNewIdFromRaw(rawLocation.id);
+			const id = locations.ids.getNewIdFromRaw(rawLocation.id);
 
 			if (!id)
 				//TODO: Make this a user-friendly message with different options for recovering

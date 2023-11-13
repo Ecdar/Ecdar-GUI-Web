@@ -1,5 +1,5 @@
 import { AutomatonClass, type FromRaw } from "../AutomatonClass";
-import type { RawProperty } from "./raw/RawProperty";
+import type { RawNailProperty } from "./raw/RawNailProperty";
 import { NailPropertyType } from "./NailPropertyType";
 import { RelativePosition } from "../RelativePosition";
 import type { Position } from "../Position";
@@ -7,7 +7,7 @@ import type { Position } from "../Position";
 /**
  * The properties of a nail
  */
-export class NailProperty extends AutomatonClass<RawProperty> {
+export class NailProperty extends AutomatonClass<RawNailProperty> {
 	constructor(
 		/**
 		 * The type of property
@@ -33,7 +33,7 @@ export class NailProperty extends AutomatonClass<RawProperty> {
 	}
 
 	static readonly fromRaw: FromRaw<
-		RawProperty,
+		RawNailProperty,
 		{ positionReference: Position },
 		NailProperty
 	> = (raw, references) => {

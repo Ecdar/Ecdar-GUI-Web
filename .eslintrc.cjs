@@ -28,4 +28,10 @@ module.exports = {
       },
     },
   ],
+  rules: {
+    "@typescript-eslint/no-invalid-void-type": [
+      "error",
+      { allowAsThisParameter: true },
+    ],
+  },
 };

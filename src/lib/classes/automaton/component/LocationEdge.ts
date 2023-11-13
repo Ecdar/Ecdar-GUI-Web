@@ -1,7 +1,7 @@
 import { AutomatonClass, type FromRaw } from "../AutomatonClass";
 import type { RawLocationEdge } from "./raw/RawLocationEdge";
-import type { LocationEdgeId } from "./LocationEdgeId";
-import type { LocationId } from "./LocationId";
+import type { LocationEdgeId } from "../LocationEdgeId";
+import type { LocationId } from "../LocationId";
 import { LocationEdgeStatus } from "./LocationEdgeStatus";
 import { LocationEdgeNail } from "./LocationEdgeNail";
 
@@ -14,7 +14,7 @@ export class LocationEdge extends AutomatonClass<RawLocationEdge> {
 		/**
 		 * The id of the edge
 		 */
-		public id: LocationEdgeId,
+		readonly id: LocationEdgeId,
 
 		/**
 		 * Unused

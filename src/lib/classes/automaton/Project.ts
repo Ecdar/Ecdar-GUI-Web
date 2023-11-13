@@ -3,7 +3,8 @@ import type { RawProject } from "./raw/RawProject";
 import type { HasId } from "./HasId";
 import type { ProjectId } from "./ProjectId";
 import { Components } from "./component/Components";
-import { Locations } from "./Locations";
+import { LocationIds } from "./LocationIds";
+import { LocationEdgeIds } from "./LocationEdgeIds";
 import { Systems } from "./system/Systems";
 import { Query } from "./Query";
 import { SystemDeclarations } from "./SystemDeclarations";
@@ -17,22 +18,27 @@ export class Project
 		/**
 		 * The name of the project, and the name of the save folder
 		 */
-		public id: ProjectId,
+		readonly id: ProjectId,
 
 		/**
-		 * All locations in the project
+		 * All location ids in the project
 		 */
-		readonly locations: Locations = new Locations(),
+		readonly locationIds: LocationIds = new LocationIds(),
+
+		/**
+		 * All edge ids in the project
+		 */
+		readonly edgeIds: LocationEdgeIds = new LocationEdgeIds(),
 
 		/**
 		 * All components in the project
 		 */
-		public components: Components,
+		public components: Components = new Components(),
 
 		/**
 		 * All systems in the project
 		 */
-		public systems: Systems,
+		public systems: Systems = new Systems(),
 
 		/**
 		 * All queries in the project
@@ -67,12 +73,20 @@ export class Project
 		raw,
 		{ id },
 	) => {
-		const locations = new Locations();
+		const locationIds = new LocationIds();
+		const locationEdgeIds = new LocationEdgeIds();
+		const components = Components.fromRaw(raw.components ?? [], {
+			locationIds,
+			locationEdgeIds,
+		});
 		return new Project(
 			id,
-			locations,
-			Components.fromRaw(raw.components ?? [], { locations }),
-			Systems.fromRaw(raw.systems ?? []),
+			locationIds,
+			locationEdgeIds,
+			components,
+			Systems.fromRaw(raw.systems ?? [], {
+				componentIds: components.ids,
+			}),
 			raw.queries
 				? raw.queries.map((rawQuery) => Query.fromRaw(rawQuery))
 				: undefined,

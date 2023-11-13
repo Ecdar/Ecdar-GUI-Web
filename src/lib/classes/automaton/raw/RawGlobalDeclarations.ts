@@ -1,11 +1,12 @@
 import { z } from "zod";
+import { ZodRawDeclarations } from "./RawDeclarations";
 
 /**
  * Used to parse a RawGlobalDeclaration through Zod
  */
 export const ZodRawGlobalDeclarations = z.object({
-	name: z.literal("Global declarations").optional(),
-	declarations: z.string().optional(),
+	...ZodRawDeclarations.shape,
+	name: z.literal("Global Declarations").optional(),
 });
 
 /**

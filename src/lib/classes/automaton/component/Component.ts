@@ -2,14 +2,17 @@ import { AutomatonClass, type FromRaw } from "../AutomatonClass";
 import type { RawComponent } from "./raw/RawComponent";
 import type { HasId } from "../HasId";
 import type { ComponentId } from "./ComponentId";
-import { LocationsSubset } from "./LocationsSubset";
-import type { Locations } from "../Locations";
-import type { LocationId } from "./LocationId";
+import { Locations } from "./Locations";
+import type { LocationId } from "../LocationId";
 import { LocationEdges } from "./LocationEdges";
 import { Position } from "../Position";
 import { Dimensions } from "../Dimensions";
 import { LocationType } from "./LocationType";
 import { Location } from "./Location";
+import type { LocationIds } from "../LocationIds";
+import type { LocationEdgeIds } from "../LocationEdgeIds";
+import type { RawLocationId } from "../raw/RawLocationId";
+import type { RawLocations } from "./raw/RawLocations";
 
 const defaultX = 0;
 const defaultY = 0;
@@ -29,7 +32,7 @@ export class Component
 		/**
 		 * The name of the component
 		 */
-		public id: ComponentId,
+		readonly id: ComponentId,
 
 		/**
 		 * The declarations of the component ex "clock t;"
@@ -37,9 +40,9 @@ export class Component
 		public declarations: string = "",
 
 		/**
-		 * A list of Locations in the System
+		 * A list of Locations in the Component
 		 */
-		readonly locations: LocationsSubset,
+		readonly locations: Locations,
 
 		/**
 		 * The component's initial location
@@ -85,12 +88,13 @@ export class Component
 	}
 
 	/**
-	 * The component's initial location
+	 * The initial Location in the Component
 	 */
 	get initialLocation() {
 		return this.#initialLocation;
 	}
 	set initialLocation(id: LocationId) {
+		this.#initialLocation = id;
 		if (!this.locations.has(id))
 			throw new TypeError(
 				"Cannot set an initial location that is not part of the list of locations",
@@ -103,10 +107,14 @@ export class Component
 	 * Converts the Component to a RawComponent
 	 */
 	toRaw() {
+		const rawLocations = this.locations.toRaw();
 		return {
 			name: this.id.toRaw(),
 			declarations: this.declarations,
-			locations: this.locations.toRaw(),
+			locations: setInitialLocation(
+				this.initialLocation.toRaw(),
+				rawLocations,
+			),
 			edges: this.edges.toRaw(),
 			description: this.description,
 			x: this.position.x,
@@ -123,18 +131,25 @@ export class Component
 	 */
 	static readonly fromRaw: FromRaw<
 		RawComponent,
-		{ id: ComponentId; locations: Locations },
+		{
+			id: ComponentId;
+			locationIds: LocationIds;
+			locationEdgeIds: LocationEdgeIds;
+		},
 		Component
-	> = (raw, { id, locations }) => {
-		const locationsSubset = LocationsSubset.fromRaw(raw.locations, {
-			locationsMap: locations,
+	> = (raw, { id, locationIds, locationEdgeIds }) => {
+		const locations = Locations.fromRaw(raw.locations ?? [], {
+			locationIds,
 		});
 		return new Component(
 			id,
 			raw.declarations,
-			locationsSubset,
+			locations,
 			findInitialLocation(locations, raw.locations),
-			LocationEdges.fromRaw(raw.edges, { locations: locationsSubset }),
+			LocationEdges.fromRaw(raw.edges ?? [], {
+				locationIds,
+				locationEdgeIds,
+			}),
 			raw.description,
 			Position.fromRaw({ x: raw.x ?? defaultX, y: raw.y ?? defaultY }),
 			Dimensions.fromRaw({
@@ -147,25 +162,38 @@ export class Component
 	};
 }
 
+function setInitialLocation(
+	rawInitialLocation: RawLocationId,
+	rawLocations: RawLocations,
+) {
+	for (const rawLocation of rawLocations) {
+		if (rawLocation.id === rawInitialLocation) {
+			rawLocation.type = "INITIAL";
+			return rawLocations;
+		}
+	}
+}
+
 function findInitialLocation(
 	locations: Locations,
-	locationsRaw: RawComponent["locations"],
+	rawLocations: RawComponent["locations"],
 ): LocationId {
 	const initialLocationsRaw = [];
-	for (const location of locationsRaw) {
+	for (const location of rawLocations ?? []) {
 		if (location.type === "INITIAL") initialLocationsRaw.push(location.id);
 	}
 	if (initialLocationsRaw.length === 0) {
-		const newId = locations.getNewOrderedId(LocationType.NORMAL);
+		const newId = locations.ids.getNewOrderedId(LocationType.NORMAL);
 		locations.add(new Location(newId));
 		initialLocationsRaw.push(newId.toRaw());
 	} else if (initialLocationsRaw.length < 1) {
+		//TODO: Make this a user-friendly message with different options for recovering
 		throw new TypeError(
 			"Cannot load a Component that has more than one initial Locations",
 		);
 	}
 
-	const initialLocation = locations.getId(initialLocationsRaw[0]);
+	const initialLocation = locations.ids.get(initialLocationsRaw[0]);
 	if (!initialLocation)
 		throw new TypeError(
 			"This should never happen, the initial location should have been loaded into the Locations store",

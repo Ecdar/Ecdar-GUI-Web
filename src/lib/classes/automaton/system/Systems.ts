@@ -1,31 +1,35 @@
-import type { FromRaw } from "../AutomatonClass";
 import { IdMap } from "../IdMap";
-import type { RawStringId } from "../raw/RawId";
 import { System } from "./System";
-import { SystemId } from "./SystemId";
+import type { SystemId, SystemIdInput } from "./SystemId";
+import type { RawStringId } from "../raw/RawId";
 import type { RawSystems } from "./raw/RawSystems";
+import { SystemIds } from "./SystemIds";
+import type { FromRaw } from "../AutomatonClass";
+import type { Components } from "../component/Components";
 
 export class Systems extends IdMap<
 	System,
 	SystemId,
-	string,
+	SystemIdInput,
 	RawStringId,
 	RawSystems
 > {
 	constructor() {
-		super(SystemId);
+		super(new SystemIds());
 	}
 
 	toRaw() {
 		return [...this].map((system) => system.toRaw());
 	}
 
-	static readonly fromRaw: FromRaw<RawSystems, undefined, Systems> = (
-		raw,
-	) => {
+	static readonly fromRaw: FromRaw<
+		RawSystems,
+		{ componentIds: Components["ids"] },
+		Systems
+	> = (raw, { componentIds }) => {
 		const systems = new Systems();
 		for (const rawSystem of raw) {
-			const id = systems.getNewIdFromRaw(rawSystem.name);
+			const id = systems.ids.getNewIdFromRaw(rawSystem.name);
 
 			if (!id)
 				//TODO: Make this a user-friendly message with different options for recovering
@@ -33,7 +37,7 @@ export class Systems extends IdMap<
 					`Cannot load raw Systems where multiple names are equivalent: ${rawSystem.name}`,
 				);
 
-			systems.add(System.fromRaw(rawSystem, { id }));
+			systems.add(System.fromRaw(rawSystem, { id, componentIds }));
 		}
 		return systems;
 	};

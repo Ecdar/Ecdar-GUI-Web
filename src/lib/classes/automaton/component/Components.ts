@@ -1,20 +1,22 @@
 import type { FromRaw } from "../AutomatonClass";
 import { IdMap } from "../IdMap";
-import type { Locations } from "../Locations";
+import type { LocationEdgeIds } from "../LocationEdgeIds";
+import type { LocationIds } from "../LocationIds";
 import type { RawStringId } from "../raw/RawId";
 import { Component } from "./Component";
-import { ComponentId } from "./ComponentId";
+import type { ComponentId, ComponentIdInput } from "./ComponentId";
+import { ComponentIds } from "./ComponentIds";
 import type { RawComponents } from "./raw/RawComponents";
 
 export class Components extends IdMap<
 	Component,
 	ComponentId,
-	string,
+	ComponentIdInput,
 	RawStringId,
 	RawComponents
 > {
 	constructor() {
-		super(ComponentId);
+		super(new ComponentIds());
 	}
 
 	toRaw() {
@@ -23,12 +25,12 @@ export class Components extends IdMap<
 
 	static readonly fromRaw: FromRaw<
 		RawComponents,
-		{ locations: Locations },
+		{ locationIds: LocationIds; locationEdgeIds: LocationEdgeIds },
 		Components
-	> = (raw, { locations }) => {
+	> = (raw, { locationIds, locationEdgeIds }) => {
 		const components = new Components();
 		for (const rawComponent of raw) {
-			const id = components.getNewIdFromRaw(rawComponent.name);
+			const id = components.ids.getNewIdFromRaw(rawComponent.name);
 
 			if (!id)
 				//TODO: Make this a user-friendly message with different options for recovering
@@ -36,7 +38,13 @@ export class Components extends IdMap<
 					`Cannot load raw Components where multiple names are equivalent: ${rawComponent.name}`,
 				);
 
-			components.add(Component.fromRaw(rawComponent, { id, locations }));
+			components.add(
+				Component.fromRaw(rawComponent, {
+					id,
+					locationIds,
+					locationEdgeIds,
+				}),
+			);
 		}
 		return components;
 	};

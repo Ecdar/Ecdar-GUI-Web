@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ZodRawLocationId } from "../../raw/RawLocationId";
 import { LocationType } from "../LocationType";
 import { LocationUrgency } from "../LocationUrgency";
 import { ZodRawPosition } from "../../raw/RawPosition";
@@ -9,7 +10,7 @@ import { ZodRawInvariant } from "./RawInvariant";
  * Used to parse a RawLoaction through Zod
  */
 export const ZodRawLocation = z.object({
-	id: z.string(),
+	id: ZodRawLocationId,
 	type: z.enum(["INITIAL", ...Object.values(LocationType)]).optional(),
 	urgency: z.nativeEnum(LocationUrgency).optional(),
 	color: z.string().optional(),

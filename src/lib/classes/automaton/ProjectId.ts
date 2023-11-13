@@ -1,9 +1,10 @@
-import type { FromRaw } from "./AutomatonClass";
+import type { RawProjectId } from "./raw/RawProjectId";
 import { Id } from "./Id";
-import type { RawId, RawStringId } from "./raw/RawId";
 
-export class ProjectId extends Id<RawId, RawStringId> {
-	protected parse(input: string | number) {
+export type ProjectIdInput = number | RawProjectId;
+
+export class ProjectId extends Id<ProjectIdInput, RawProjectId> {
+	parse(this: void, input: string | number) {
 		let rawId;
 		let order;
 		let orders;
@@ -13,11 +14,15 @@ export class ProjectId extends Id<RawId, RawStringId> {
 		} else {
 			rawId = input;
 			const ordersMatches = [
-				...input.matchAll(/((?<number>[\+\-]?\d+))/giu),
+				...input.matchAll(/((?<number>[+-]?\d+))/giu),
 			];
 			const ordersParsed = ordersMatches
-				.filter((match) => match.groups?.number)
-				.map((match) => parseInt(match.groups!.number))
+				.map((match) => {
+					if (typeof match.groups?.numer !== "string") {
+						return NaN;
+					}
+					return parseInt(match.groups.number);
+				})
 				.filter((number) => !isNaN(number));
 			if (ordersParsed.length === 1) {
 				order = ordersParsed[0];
@@ -28,9 +33,13 @@ export class ProjectId extends Id<RawId, RawStringId> {
 		return { rawId, order, orders };
 	}
 
-	static readonly fromRaw: FromRaw<RawStringId, undefined, ProjectId> = (
-		raw,
-	) => {
-		return new ProjectId(raw);
-	};
+	protected applyParse(parsed: {
+		rawId: RawProjectId;
+		order: number | undefined;
+		orders: number[] | undefined;
+	}) {
+		this._rawId = parsed.rawId;
+		this._order = parsed.order;
+		this._orders = parsed.orders;
+	}
 }

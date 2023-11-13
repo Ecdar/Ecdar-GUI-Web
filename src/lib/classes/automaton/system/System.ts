@@ -4,10 +4,17 @@ import type { HasId } from "../HasId";
 import type { SystemId } from "./SystemId";
 import { Position } from "../Position";
 import { Dimensions } from "../Dimensions";
-import { SystemMemberEdge } from "./SystemMemberEdge";
-import { SystemMembers } from "./SystemMembers";
+import { SystemMemberEdge, origin } from "./SystemMemberEdge";
+import { SystemMemberIds } from "./SystemMemberIds";
 import { ComponentInstances } from "./ComponentInstances";
 import { Operators } from "./Operators";
+import type { Components } from "../component/Components";
+
+const defaultX = 0;
+const defaultY = 0;
+
+const defaultWidth = 100;
+const defaultHeight = 100;
 
 /**
  * An Ecdar System
@@ -20,7 +27,7 @@ export class System
 		/**
 		 * The name of the system
 		 */
-		public id: SystemId,
+		readonly id: SystemId,
 
 		/**
 		 * The description of the system
@@ -30,12 +37,15 @@ export class System
 		/**
 		 * The position of the system
 		 */
-		public position: Position = new Position(0, 0),
+		public position: Position = new Position(defaultX, defaultY),
 
 		/**
 		 * The dimensions of the system
 		 */
-		public dimensions: Dimensions = new Dimensions(0, 0),
+		public dimensions: Dimensions = new Dimensions(
+			defaultWidth,
+			defaultHeight,
+		),
 
 		/**
 		 * The color of the system
@@ -43,25 +53,25 @@ export class System
 		public color: string = "",
 
 		/**
-		 * The coordinate of root of the system
+		 * The coordinate of the root of the system
 		 */
 		public systemRootX: number = 0,
 
 		/**
-		 * A list of members in the system.
-		 * Members can be component instances or operators. They all share the same unique ID's to allow them to be connected with edges.
+		 * A list of all member ids in the system.
+		 * Members can be component instances or operators. They all share the same unique ids to allow them to be connected with edges.
 		 */
-		members: SystemMembers | undefined,
+		readonly memberIds: SystemMemberIds = new SystemMemberIds(),
 
 		/**
 		 * A list of component instances in the system
 		 */
-		componentInstances: ComponentInstances | undefined,
+		componentInstances?: ComponentInstances,
 
 		/**
 		 * A list of operators in the system
 		 */
-		operators: Operators | undefined,
+		operators?: Operators,
 
 		/**
 		 * A list of edges in the system
@@ -70,25 +80,11 @@ export class System
 	) {
 		super();
 
-		this.#members = members || new SystemMembers();
 		this.#componentInstances =
-			componentInstances || new ComponentInstances(this.members);
-		this.#operators = operators || new Operators(this.members);
+			componentInstances || new ComponentInstances(this.memberIds);
+		this.#operators = operators || new Operators(this.memberIds);
 		this.membersCheck();
 	}
-
-	/**
-	 * A list of members in the system.
-	 * Members can be component instances or operators. They all share the same unique ID's to allow them to be connected with edges.
-	 */
-	get members() {
-		return this.#members;
-	}
-	set members(value) {
-		this.#members = value;
-		this.membersCheck();
-	}
-	#members!: SystemMembers;
 
 	/**
 	 * A list of component instances in the system
@@ -118,14 +114,14 @@ export class System
 	 * Ensures that the scoped stores are all based on the main `members` store.
 	 */
 	private membersCheck() {
-		if (this.componentInstances.map !== this.members) {
+		if (this.componentInstances.ids !== this.memberIds) {
 			throw new TypeError(
-				"The component instances map must be based on the members map.",
+				"The component instances id store must be the member id store.",
 			);
 		}
-		if (this.operators.map !== this.members) {
+		if (this.operators.ids !== this.memberIds) {
 			throw new TypeError(
-				"The operators map must be based on the members map.",
+				"The operators id store must be the member id store.",
 			);
 		}
 	}
@@ -150,32 +146,42 @@ export class System
 	/**
 	 * Converts a RawSystem to a System
 	 */
-	static readonly fromRaw: FromRaw<RawSystem, { id: SystemId }, System> = (
-		raw,
-		{ id },
-	) => {
-		const members = new SystemMembers();
+	static readonly fromRaw: FromRaw<
+		RawSystem,
+		{ id: SystemId; componentIds: Components["ids"] },
+		System
+	> = (raw, { id, componentIds }) => {
+		const memberIds = new SystemMemberIds();
 		return new System(
 			id,
 			raw.description,
-			Position.fromRaw(raw),
-			Dimensions.fromRaw(raw),
+			Position.fromRaw({ x: raw.x ?? defaultX, y: raw.y ?? defaultY }),
+			Dimensions.fromRaw({
+				width: raw.width ?? defaultWidth,
+				height: raw.height ?? defaultHeight,
+			}),
 			raw.color,
 			raw.systemRootX,
-			members,
-			ComponentInstances.fromRaw(raw.componentInstances, {
-				systemMembers: members,
+			memberIds,
+			ComponentInstances.fromRaw(raw.componentInstances ?? [], {
+				systemMemberIds: memberIds,
+				componentIds,
 			}),
-			Operators.fromRaw(raw.operators, { systemMembers: members }),
-			raw.edges.map((rawSystemEdge) => {
-				const parent = members.getId(rawSystemEdge.parent);
+			Operators.fromRaw(raw.operators ?? [], {
+				systemMemberIds: memberIds,
+			}),
+			raw.edges?.map((rawSystemEdge) => {
+				const parent =
+					rawSystemEdge.parent === 0
+						? origin
+						: memberIds.get(rawSystemEdge.parent);
 				if (!parent) {
 					//TODO: Make this a user-friendly message with different options for recovering
 					throw new TypeError(
 						`Cannot generate an edge where the parent doesn't exist: ${rawSystemEdge.parent}`,
 					);
 				}
-				const child = members.getId(rawSystemEdge.child);
+				const child = memberIds.get(rawSystemEdge.child);
 				if (!child) {
 					//TODO: Make this a user-friendly message with different options for recovering
 					throw new TypeError(
