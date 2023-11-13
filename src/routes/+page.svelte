@@ -8,7 +8,7 @@
 	import Queries from "$lib/components/query/Queries.svelte";
 	import Console from "$lib/components/console/Console.svelte";
 	import { Description } from "svelte-google-materialdesign-icons";
-	import type iEngineUIComponent from "$lib/interfaces/iEngineUIComponent";
+	import type iEngineUIComponent from "$lib/interfaces/IEngineUIComponent";
 
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
 	import EngineUi from "$lib/components/engineUI/EngineUI.svelte";

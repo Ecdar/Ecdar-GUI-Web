@@ -1,3 +1,3 @@
-export default interface iEngineUIComponent {
+export default interface IEngineUIComponent {
 	showEngineUI: () => void;
 }

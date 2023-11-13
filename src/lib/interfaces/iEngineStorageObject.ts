@@ -1,6 +1,6 @@
 import type { Engine } from "$lib/classes/engine/Engine";
 
-export interface iEngineStorageObject {
+export default interface IEngineStorageObject {
 	engineArray: Array<Engine>;
 	engineId: number;
 	defaultEngine?: Engine;

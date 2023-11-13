@@ -1,4 +1,4 @@
-import type { iEngineStorageObject } from "$lib/interfaces/iEngineStorageObject";
+import type IEngineStorageObject from "$lib/interfaces/IEngineStorageObject";
 import { Engine } from "./Engine";
 import type { EngineType } from "./EngineType";
 /**
@@ -137,9 +137,9 @@ export default class EngineStorage {
 	 * Reads fields and engines from JSON string, and applies them in the store
 	 */
 	static deSerialize(json: string) {
-		const parsedJSON: iEngineStorageObject = JSON.parse(
+		const parsedJSON: IEngineStorageObject = JSON.parse(
 			json,
-		) as iEngineStorageObject;
+		) as IEngineStorageObject;
 		this.engineArray = [];
 		this.engineId = parsedJSON.engineId;
 		this.defaultEngine = parsedJSON.defaultEngine;

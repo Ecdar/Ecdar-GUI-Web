@@ -3,7 +3,7 @@
 	import Modal from "../dialogPopover/Modal.svelte";
 	import type { EngineDTO } from "./EngineDTO";
 	import { Delete, Close, Done } from "svelte-google-materialdesign-icons";
-	import type iModalComponent from "$lib/interfaces/iModalComponent";
+	import type iModalComponent from "$lib/interfaces/IModalComponent";
 
 	let formElement: HTMLFormElement;
 	let modalContainer: Modal & iModalComponent;
@@ -225,6 +225,7 @@
 		border: none;
 		border-bottom: 0.05em solid var(--engine-ui-underline-color);
 		background-color: var(--console-selectedtab-color);
+		color: var(--console-text-color);
 		margin: 0.2em;
 	}
 

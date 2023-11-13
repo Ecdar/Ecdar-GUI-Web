@@ -1,4 +1,4 @@
-export default interface ModalComponent {
+export default interface IModalComponent {
 	closeModal: () => void;
 	showModal: () => void;
 }
