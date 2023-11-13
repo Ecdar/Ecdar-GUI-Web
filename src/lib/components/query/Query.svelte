@@ -1,24 +1,43 @@
 <script lang="ts">
+	import { Backend } from "$lib/classes/automaton/Backend";
+	import QueryDropDownMenu from "./QueryDropDownMenu.svelte";
 	import {
 		Help,
 		Done,
 		Warning,
 		Error,
 		Arrow_right,
-		More_vert,
 	} from "svelte-google-materialdesign-icons";
 
+	export let query: string;
 	export let type: string;
 	export let name: string;
+	export let isPeriodic: boolean;
+	export let backend: Backend;
+	export let index: number;
 	export let comment: string = "Comment";
-	export let server: string;
 	export let color: string = "var(--queries-element-color)";
 
-	const typeOptions = ["Spec", "Imp", "Con"];
-	const serverOptions = ["Reveaal"];
+	const typeOptions: Record<string, string> = {
+		specification: "Spec",
+		implementation: "Imp",
+		consistency: "Con",
+		reachability: "E<>",
+		refinement: "<=",
+		"local-consistensy": "LCon",
+		"bisim-minim": "Bsim",
+		"get-component": "Get",
+	};
+
+	const serverOptions: Record<string, Backend> = {
+		"J-Ecdar": Backend.J_ECDAR,
+		Reveaal: Backend.REVEAAL,
+	};
+
+	$: query = `${type}:${name}`;
 </script>
 
-<div class="query">
+<div class="query" id="query-{index}">
 	<div class="column">
 		<div class="left-column" style="background-color: {color}">
 			{#if color === "var(--query-success-color)"}
@@ -30,33 +49,25 @@
 			{:else}
 				<Help color="black" />
 			{/if}
-			<select>
-				{#each typeOptions as typeOption}
-					{#if typeOption === type}
-						<option selected>{typeOption}</option>
-					{:else}
-						<option>{typeOption}</option>
-					{/if}
+			<select bind:value={type}>
+				{#each Object.entries(typeOptions) as [full, short]}
+					<option value={full}>{short}</option>
 				{/each}
 			</select>
 		</div>
 	</div>
 	<div class="column grow">
-		<input type="text" value={name} />
-		<input type="text" placeholder="Comment" value={comment} />
+		<input type="text" placeholder="Query" bind:value={name} />
+		<input type="text" placeholder="Comment" bind:value={comment} />
 	</div>
 	<div class="column">
 		<div class="group">
 			<Arrow_right />
-			<More_vert />
+			<QueryDropDownMenu bind:isPeriodic {index} />
 		</div>
-		<select>
-			{#each serverOptions as serverOption}
-				{#if serverOption === server}
-					<option selected>{serverOption}</option>
-				{:else}
-					<option>{serverOption}</option>
-				{/if}
+		<select bind:value={backend}>
+			{#each Object.keys(serverOptions) as serverOption, serverIndex}
+				<option value={serverIndex}>{serverOption}</option>
 			{/each}
 		</select>
 	</div>
@@ -79,6 +90,7 @@
 		align-items: center;
 		padding-right: 1em;
 	}
+
 	.left-column {
 		display: flex;
 		flex-direction: column;
