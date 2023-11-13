@@ -63,7 +63,9 @@ Interface names should be in _PascalCase_ and begin with an uppercase "I" to ind
 #### Variables
 
 - Variable names should be in _camelCase_.
-- Private properties should begin with \_ (underscore)
+- Private properties should begin with \_ (underscore) or #:
+  - _\__ (underscore): represents a variable using the native TypeScript access modifier _private_. The private TypeScript access modifier is a compile-time construct that prevents private properties from being accessed outside the class. The private property of the variable is however similar to public variable during runtime.
+  - **_#_**: represents a JavaScript private field and is a runtime feature that enforces privacy, making the field inaccessible outside the class even during runtime.
 - Variable names should be written in full.
   - ~~siteCtx~~ should be siteContext
   - ~~testBtn~~ should be testButton
