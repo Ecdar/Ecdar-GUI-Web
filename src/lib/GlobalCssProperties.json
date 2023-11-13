@@ -98,28 +98,23 @@
 				0.39901960784,
 				0.43823529411
 			],
-			"--engine-ui-underline-color": [
-				"display-p3",
-				0,
-				0,
-				0
-			],
+			"--engine-ui-underline-color": ["display-p3", 0, 0, 0],
 			"--engine-ui-input-text-placeholder-color": [
 				"display-p3",
-				0.0588, 
-				0.0588, 
+				0.0588,
+				0.0588,
 				0.0588
 			],
-			"--engine-ui-scrollbar-thumb-background-color":[
+			"--engine-ui-scrollbar-thumb-background-color": [
 				"display-p3",
-				0.5608, 
-				0.4980, 
+				0.5608,
+				0.498,
 				0.4353
 			],
 			"--engine-ui-scrollbar-thumb-color": [
 				"display-p3",
-				0.7137, 
-				0.6941, 
+				0.7137,
+				0.6941,
 				0.6706
 			]
 		},
@@ -214,16 +209,11 @@
 					0.14666666666,
 					0.17019607843
 				],
-				"--engine-ui-underline-color": [
-					"display-p3",
-					1,
-					1,
-					1
-				],
+				"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
 				"--engine-ui-input-text-placeholder-color": [
 					"display-p3",
-					0.7333, 
-					0.7333, 
+					0.7333,
+					0.7333,
 					0.7333
 				],
 				"--engine-ui-scrollbar-thumb-background-color": [
@@ -232,12 +222,7 @@
 					0.95,
 					0.95
 				],
-				"--engine-ui-scrollbar-thumb-color": [
-					"display-p3",
-					0,
-					0,
-					0
-				]
+				"--engine-ui-scrollbar-thumb-color": ["display-p3", 0, 0, 0]
 			}
 		}
 	]

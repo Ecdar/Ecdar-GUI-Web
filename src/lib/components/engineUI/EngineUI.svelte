@@ -4,14 +4,14 @@
 	import Modal from "../dialogPopover/Modal.svelte";
 	import EnginePanel from "./EnginePanel.svelte";
 	import { Save, Add, Cancel } from "svelte-google-materialdesign-icons";
+	import type iModalComponent from "$lib/interfaces/iModalComponent";
 
-	let dialogContainer: Modal;
-	let engines: EngineStorage = new EngineStorage();
+	let dialogContainer!: Modal & iModalComponent;
 	let tempEngines: EngineDTO[] = [];
 
 	export function showEngineUI() {
 		tempEngines = [];
-		engines.getEngineArray().forEach((engine) => {
+		EngineStorage.getEngineArray().forEach((engine) => {
 			let tempEngine: EngineDTO = {
 				address: engine.address,
 				name: engine.name,
@@ -29,7 +29,7 @@
 		}
 
 		tempEngines = tempEngines;
-		dialogContainer.showModal();
+		if ("showModal" in dialogContainer) dialogContainer.showModal();
 	}
 
 	function addNewEngine() {
@@ -57,7 +57,7 @@
 					engine.portRangeEnd == -1
 				)
 					return;
-				engines.createEngine(
+				EngineStorage.createEngine(
 					engine.name,
 					engine.address,
 					engine.portRangeStart,
@@ -67,10 +67,10 @@
 			}
 			if (engine.id != -1) {
 				if (engine.address == "-1") {
-					engines.deleteEngine(engine.id);
+					EngineStorage.deleteEngine(engine.id);
 					return;
 				}
-				let tempEngine = engines.getEngine(engine.id);
+				let tempEngine = EngineStorage.getEngine(engine.id);
 
 				tempEngine.address = engine.address;
 				tempEngine.name = engine.name;
@@ -89,7 +89,7 @@
 <Modal bind:this={dialogContainer}>
 	<form on:submit={onSubmit}>
 		<div class="engine-panel">
-			<EnginePanel tempEngines={tempEngines} />
+			<EnginePanel {tempEngines} />
 		</div>
 		<button
 			on:click={addNewEngine}

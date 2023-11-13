@@ -17,11 +17,11 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
-	import { createEventDispatcher } from 'svelte'
+	import { createEventDispatcher } from "svelte";
 	const dispatch = createEventDispatcher();
 
 	function toggle() {
-		dispatch('toggle');
+		dispatch("toggle");
 	}
 </script>
 
@@ -202,7 +202,9 @@
 		<DropDownButton
 			icon={Settings_input_composite}
 			name="Engine Options"
-			on:click={() => toggle()}
+			on:click={() => {
+				toggle();
+			}}
 		/>
 	</TopBarButton>
 </div>

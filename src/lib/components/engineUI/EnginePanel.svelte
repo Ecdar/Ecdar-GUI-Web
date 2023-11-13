@@ -8,7 +8,11 @@
 <h2>Engines</h2>
 <div class="engines">
 	{#each tempEngines as engine}
-		<EngineSeperate defaultChecked={engine.type} currentEngine={engine} tempEngines={tempEngines}/>
+		<EngineSeperate
+			defaultChecked={engine.type}
+			currentEngine={engine}
+			{tempEngines}
+		/>
 		<hr />
 	{/each}
 </div>
@@ -36,7 +40,6 @@
 		row-gap: 1rem;
 		grid-template-columns: repeat(0, 1fr);
 		min-width: 16em;
-		
 	}
 
 	.engines::-webkit-scrollbar {

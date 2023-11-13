@@ -3,9 +3,10 @@
 	import Modal from "../dialogPopover/Modal.svelte";
 	import type { EngineDTO } from "./EngineDTO";
 	import { Delete, Close, Done } from "svelte-google-materialdesign-icons";
+	import type iModalComponent from "$lib/interfaces/iModalComponent";
 
 	let formElement: HTMLFormElement;
-	let modalContainer: Modal;
+	let modalContainer: Modal & iModalComponent;
 	let nameContainer: HTMLInputElement;
 	let ipAddressContainer: HTMLInputElement;
 	let startPortContainer: HTMLInputElement;
@@ -16,7 +17,7 @@
 	export let tempEngines: Array<EngineDTO>;
 
 	function deleteEngine() {
-		if(tempEngines.length == 1) {
+		if (tempEngines.length == 1) {
 			closeModal();
 			return;
 		}

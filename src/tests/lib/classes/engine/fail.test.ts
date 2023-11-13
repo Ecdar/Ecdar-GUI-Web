@@ -3,8 +3,6 @@ import EngineStorage from "$lib/classes/engine/EngineStorage";
 import type { Engine } from "$lib/classes/engine/Engine";
 
 describe("fail engine test", () => {
-	const engine = new EngineStorage();
-
 	// Missing fields
 	it("fails on missing name", () => {
 		const obj = {
@@ -13,7 +11,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -24,7 +22,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -35,7 +33,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -46,7 +44,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -57,7 +55,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -68,7 +66,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -81,7 +79,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -92,7 +90,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -103,7 +101,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -114,7 +112,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -125,7 +123,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -136,7 +134,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -147,7 +145,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -158,7 +156,7 @@ describe("fail engine test", () => {
 			defaultEngine: undefined,
 		};
 		expect(() => {
-			engine.deSerialize(JSON.stringify(obj));
+			EngineStorage.deSerialize(JSON.stringify(obj));
 		}).toThrow();
 	});
 
@@ -166,55 +164,55 @@ describe("fail engine test", () => {
 
 	it("fails on wrong function input", () => {
 		expect(() => {
-			engine.createEngine("", "123.123.123.213", 2, 4, 2);
+			EngineStorage.createEngine("", "123.123.123.213", 2, 4, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "1234.123.123.213", 2, 4, 2);
+			EngineStorage.createEngine("a", "1234.123.123.213", 2, 4, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "123.123.123.213", -1, 4, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", -1, 4, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "123.123.123.213", 5555555, 4, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", 5555555, 4, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "123.123.123.213", 2, 1, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", 2, 1, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "123.123.123.213", 2, 555555, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", 2, 555555, 2);
 		}).toThrow();
 	});
 
 	it("fails on deleting engine", () => {
 		expect(() => {
-			engine.deleteEngine(1);
+			EngineStorage.deleteEngine(1);
 		}).toThrow();
 	});
 
 	it("fails on wrong function input", () => {
 		expect(() => {
-			engine.createEngine("", "123.123.123.213", 2, 4, 2);
+			EngineStorage.createEngine("", "123.123.123.213", 2, 4, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "1234.123.123.213", 2, 4, 2);
+			EngineStorage.createEngine("a", "1234.123.123.213", 2, 4, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "123.123.123.213", -1, 4, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", -1, 4, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "123.123.123.213", 5555555, 4, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", 5555555, 4, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "123.123.123.213", 2, 1, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", 2, 1, 2);
 		}).toThrow();
 		expect(() => {
-			engine.createEngine("a", "123.123.123.213", 2, 555555, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", 2, 555555, 2);
 		}).toThrow();
 	});
 
 	it("fails on setting default engine", () => {
 		expect(() => {
-			engine.defaultEngine = {
+			EngineStorage.defaultEngine = {
 				name: "test",
 				address: "123.123.123.123",
 				portRangeStart: 5,
@@ -227,10 +225,10 @@ describe("fail engine test", () => {
 
 	it("fails on getting engine", () => {
 		expect(() => {
-			engine.getEngine(69);
+			EngineStorage.getEngine(69);
 		}).toThrow();
 		expect(() => {
-			engine.getEngine("coolName");
+			EngineStorage.getEngine("coolName");
 		}).toThrow();
 	});
 });

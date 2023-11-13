@@ -9,6 +9,7 @@
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import { Description } from "svelte-google-materialdesign-icons";
+	import type iEngineUIComponent from "$lib/interfaces/iEngineUIComponent";
 
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
 	import EngineUi from "$lib/components/engineUI/EngineUI.svelte";
@@ -23,7 +24,7 @@
 	let leftSidePanelWidth: number = 300;
 	let rightSidePanelWidth: number = 300;
 	let mainContainer: HTMLElement;
-	let engineUIContainer: EngineUi;
+	let engineUIContainer: EngineUi & iEngineUIComponent;
 
 	/**
 	 * Function for resizing a sidepanel
@@ -73,9 +74,9 @@
 </script>
 
 <!-- Top navigation Panel -->
-<EngineUi bind:this={engineUIContainer}/>
+<EngineUi bind:this={engineUIContainer} />
 <nav id="main-nav">
-	<TopBar on:toggle={openEngineUI}/>
+	<TopBar on:toggle={openEngineUI} />
 </nav>
 <main bind:this={mainContainer}>
 	{#if $project === undefined}
