@@ -29,7 +29,7 @@
 		}
 
 		tempEngines = tempEngines;
-		if ("showModal" in dialogContainer) dialogContainer.showModal();
+		dialogContainer.showModal();
 	}
 
 	function addNewEngine() {
