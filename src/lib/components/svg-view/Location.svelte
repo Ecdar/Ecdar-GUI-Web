@@ -26,7 +26,7 @@
 	bind:this={group}
 	use:contextMenu={{ content: LocationMenu, props: menuProps }}
 >
-	{#if nickname}
+	{#if nickname?.name}
 		<Label
 			bind:position={nickname.position}
 			bind:parentPosition={position}

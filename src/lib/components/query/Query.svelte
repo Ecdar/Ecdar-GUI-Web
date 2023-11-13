@@ -14,7 +14,7 @@
 	export let name: string;
 	export let isPeriodic: boolean;
 	// TODO: pipe this in
-	let backend: 0;
+	let backend = 0;
 	export let index: number;
 	export let comment: string = "Comment";
 	export let color: string = "var(--queries-element-color)";
