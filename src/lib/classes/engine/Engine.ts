@@ -14,7 +14,7 @@ export class Engine {
 	}
 	set name(setName: string | undefined) {
 		if (setName != "" && setName !== undefined) this.#name = setName;
-		else throw new Error("Enigne must have a name");
+		else throw new Error("Engine must have a name");
 	}
 	/**
 	 * The IP #address of the engine
