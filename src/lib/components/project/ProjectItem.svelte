@@ -19,7 +19,7 @@
 
 <button
 	class="project-item {itemType}"
-	id="{itemType}-{id?.rawId}"
+	id="{itemType}-{id.rawId}"
 	on:click={setAsActive}
 >
 	<div class="left" on:dblclick={rename} role="button" tabindex="-1">

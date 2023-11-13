@@ -31,7 +31,7 @@
 		"brown",
 	];
 
-	const menuId = `${itemType}-menu-${id?.rawId}`;
+	const menuId = `${itemType}-menu-${id.rawId}`;
 	let button: HTMLElement;
 
 	function togglePeriodicCheck(event: MouseEvent) {
@@ -44,7 +44,7 @@
 	class="dropdown"
 	bind:this={button}
 	popovertarget={menuId}
-	id={`${itemType}-button-${id?.rawId}`}
+	id={`${itemType}-button-${id.rawId}`}
 >
 	<More_vert />
 </button>
