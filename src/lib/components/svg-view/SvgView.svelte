@@ -2,21 +2,19 @@
 	import { onMount } from "svelte";
 	import {
 		activeView,
-		type TActiveView,
+		type ActiveView,
 	} from "$lib/globalState/activeProject";
 	import { locationRecord } from "$lib/components/svg-view/state";
 	import { scale } from "$lib/globalState/scaleStore";
 	import Location from "$lib/components/svg-view/Location.svelte";
 	import Edge from "./Edge.svelte";
+	import type { SystemMemberEdge } from "$lib/classes/automaton/system/SystemMemberEdge";
+	import { Component } from "$lib/classes/automaton/component/Component";
+	import { LocationEdge } from "$lib/classes/automaton/component/LocationEdge";
 	import Panzoom, {
 		type CurrentValues,
 		type PanzoomChangeEvent,
 	} from "./panzoom/panzoom";
-	import {
-		SystemEdge,
-		Edge as AutomatonEdge,
-		Component,
-	} from "$lib/classes/automaton";
 
 	/**
 	 * The parent svg element that the entire view is shown with.
@@ -64,15 +62,15 @@
 	}
 
 	function filterSystemEdges(
-		edges: SystemEdge[] | AutomatonEdge[] | undefined,
-	): AutomatonEdge[] {
+		edges: SystemMemberEdge[] | LocationEdge[] | undefined,
+	): LocationEdge[] {
 		if (!edges) return [];
 		return edges.filter(
-			(edge): edge is AutomatonEdge => edge instanceof AutomatonEdge,
+			(edge): edge is LocationEdge => edge instanceof LocationEdge,
 		);
 	}
 
-	function locationsAsArray(view: TActiveView) {
+	function locationsAsArray(view: ActiveView) {
 		if (view instanceof Component) {
 			// TODO: support more than just components
 			return Object.values(view.locations);
