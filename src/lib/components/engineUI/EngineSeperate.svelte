@@ -124,6 +124,8 @@
 		placeholder="7000"
 		id="STARTPORT"
 		class="port-input"
+		min="0"
+		max="65535"
 		on:change={onStartPortChange}
 		bind:this={startPortContainer}
 	/>
@@ -133,6 +135,8 @@
 		placeholder="7000"
 		id="ENDPORT"
 		class="port-input"
+		min="0"
+		max="65535"
 		on:change={onEndPortChange}
 		bind:this={endPortContainer}
 	/> <br />
@@ -202,6 +206,7 @@
 		border: none;
 		border-bottom: 0.05em solid var(--engine-ui-underline-color);
 		background-color: var(--console-selectedtab-color);
+		color: var(--console-text-color);
 		text-align: center;
 	}
 
