@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { Add, Arrow_right, Menu } from "svelte-google-materialdesign-icons";
 	import { queries } from "$lib/globalState/activeProject";
-	import { Backend } from "$lib/classes/automaton/Backend";
+	//import { Backend } from "$lib/classes/automaton/Backend";
 	import { Query } from "$lib/classes/automaton/Query";
 
 	function addQuery() {
-		$queries?.arr.push(
-			new Query("specification:", "", false, Backend.REVEAAL),
-		);
+		$queries?.push(new Query("specification:", "", false));
 		$queries = $queries;
 	}
 </script>

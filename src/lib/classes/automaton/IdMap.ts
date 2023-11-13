@@ -57,6 +57,12 @@ export interface IIdMap<
 	get(id: I): C | undefined;
 
 	/**
+	 * Use this if you know for sure that the member exists.
+	 * Will get the member with that ID. If it does not exist, will throw an exception.
+	 */
+	getSure(id: I): C;
+
+	/**
 	 * Will add a new member to the store.
 	 *
 	 * This fails if you try to add a member that already exists.
@@ -191,6 +197,15 @@ export abstract class IdMap<
 				"An `id` should always have order, higherOrder, or a string-based rawId",
 			);
 		}
+	}
+
+	getSure(id: I) {
+		const member = this.get(id);
+		if (!member)
+			throw new TypeError(
+				"Accessing a member that should exist, but doesn't",
+			);
+		return member;
 	}
 
 	add(member: C) {

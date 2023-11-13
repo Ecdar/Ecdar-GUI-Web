@@ -1,26 +1,29 @@
 <script lang="ts">
-	import { PropertyType, Status } from "$lib/classes/automaton";
+	import {
+		NailPropertyType,
+		LocationEdgeStatus,
+	} from "$lib/classes/automaton";
 	import type { iPoint } from "$lib/interfaces/iPoint";
 	import type { iNail } from "$lib/interfaces/iNail";
 	import Nail from "./Nail.svelte";
 
 	export let sourcePoint: iPoint;
 	export let targetPoint: iPoint;
-	export let edgeType: Status;
+	export let edgeType: LocationEdgeStatus;
 	export let nails: iNail[];
 	let points: iPoint[] = [];
 
 	function nailSymbol(nail: iNail): string {
 		switch (nail.property.type) {
-			case PropertyType.GUARD:
+			case NailPropertyType.GUARD:
 				return "<";
-			case PropertyType.SYNCHRONIZATION:
-				return edgeType === Status.INPUT ? "?" : "!";
-			case PropertyType.UPDATE:
+			case NailPropertyType.SYNCHRONIZATION:
+				return edgeType === LocationEdgeStatus.INPUT ? "?" : "!";
+			case NailPropertyType.UPDATE:
 				return "=";
-			case PropertyType.SELECTION:
+			case NailPropertyType.SELECTION:
 				return ":";
-			case PropertyType.NONE:
+			case NailPropertyType.NONE:
 			default:
 				return "";
 		}
@@ -80,7 +83,7 @@
 		x2={index === lines.length - 1 ? calculateX2(line) : line.to.x}
 		y2={index === lines.length - 1 ? calculateY2(line) : line.to.y}
 		marker-end={index === lines.length - 1 ? "url(#arrowhead)" : ""}
-		stroke-dasharray={edgeType === Status.INPUT ? "10,10" : ""}
+		stroke-dasharray={edgeType === LocationEdgeStatus.INPUT ? "10,10" : ""}
 		id="edge-{edgeType}-{index}"
 	/>
 {/each}

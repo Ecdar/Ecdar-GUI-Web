@@ -35,11 +35,6 @@ export class Component
 		readonly id: ComponentId,
 
 		/**
-		 * The declarations of the component ex "clock t;"
-		 */
-		public declarations: string = "",
-
-		/**
 		 * A list of Locations in the Component
 		 */
 		readonly locations: Locations,
@@ -53,6 +48,11 @@ export class Component
 		 * A list of Edges in the Component
 		 */
 		public edges: LocationEdges,
+
+		/**
+		 * The declarations of the component ex "clock t;"
+		 */
+		public declarations: string = "",
 
 		/**
 		 * A description of the Component
@@ -143,13 +143,13 @@ export class Component
 		});
 		return new Component(
 			id,
-			raw.declarations,
 			locations,
 			findInitialLocation(locations, raw.locations),
 			LocationEdges.fromRaw(raw.edges ?? [], {
 				locationIds,
 				locationEdgeIds,
 			}),
+			raw.declarations,
 			raw.description,
 			Position.fromRaw({ x: raw.x ?? defaultX, y: raw.y ?? defaultY }),
 			Dimensions.fromRaw({

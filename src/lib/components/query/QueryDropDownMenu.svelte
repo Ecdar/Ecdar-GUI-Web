@@ -50,7 +50,7 @@
 			icon={Delete}
 			text="Delete"
 			click={() => {
-				$queries?.arr.splice(index, 1);
+				$queries?.splice(index, 1);
 				$queries = $queries;
 			}}
 		/>

@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { Project } from "$lib/classes/project/Project";
 	import { project } from "$lib/globalState/activeProject";
+	import { Project } from "$lib/classes/automaton/Project";
 
 	function startNewProject() {
-		$project = new Project();
+		const id = $projects.ids.getNewOrderedId();
+		$project = new Project(id);
 	}
 </script>
 

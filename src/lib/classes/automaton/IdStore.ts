@@ -52,6 +52,12 @@ export interface IIdStore<I extends Id<IT, RT>, IT, RT extends RawId & IT>
 	get(rawId: RT): I | undefined;
 
 	/**
+	 * Use this if you know for sure that the ID exists.
+	 * Will get an ID. If it does not exist, will throw an exception.
+	 */
+	getSure(rawId: RT): I;
+
+	/**
 	 * Allows you to rename an ID if the new raw ID is not used by another ID.
 	 * If the rename was succesfull, will return `true`, otherwise will return `false`.
 	 */
@@ -159,8 +165,8 @@ export class IdStore<I extends Id<IT, RT>, IT, RT extends RawId & IT>
 		return Boolean(this.get(rawId));
 	}
 
-	get(id: IT) {
-		const parsed = this.parse(id);
+	get(input: IT) {
+		const parsed = this.parse(input);
 		if (parsed.order !== undefined) {
 			return this.orderedMap[parsed.order];
 		} else if (parsed.orders) {
@@ -173,6 +179,15 @@ export class IdStore<I extends Id<IT, RT>, IT, RT extends RawId & IT>
 				"An `id` should always have order, higherOrder, or a string-based rawId",
 			);
 		}
+	}
+
+	getSure(input: IT) {
+		const id = this.get(input);
+		if (!id)
+			throw new TypeError(
+				"Accessing an id that should exist, but doesn't",
+			);
+		return id;
 	}
 
 	protected add(id: I) {

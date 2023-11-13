@@ -29,6 +29,8 @@ import type { Component, System } from "$lib/classes/automaton";
 type ProjectKeys = Pick<
 	Project,
 	| "id"
+	| "locationIds"
+	| "edgeIds"
 	| "components"
 	| "systems"
 	| "queries"
@@ -43,6 +45,8 @@ const memberSubscribers: {
 	[key in keyof ProjectKeys]: Set<Subscriber<Project[key] | undefined>>;
 } = {
 	id: new Set(),
+	locationIds: new Set(),
+	edgeIds: new Set(),
 	components: new Set(),
 	systems: new Set(),
 	queries: new Set(),
@@ -58,7 +62,7 @@ const memberSubscribers: {
  */
 export const project: Writable<Project | undefined> = {
 	set(value) {
-		projectStore = value;
+		projectValue = value;
 		for (const subscriber of projectSubscribers) {
 			subscriber(projectValue);
 		}
@@ -138,6 +142,16 @@ class ProjectMemberStore<T extends keyof ProjectKeys>
  * This store subscribes to changes / can make changes on the `name` member of the active `Project`.
  */
 export const name = new ProjectMemberStore("id");
+
+/**
+ * This store subscribes to changes / can make changes on the `locationIds` member of the active `Project`.
+ */
+export const locationIds = new ProjectMemberStore("locationIds");
+
+/**
+ * This store subscribes to changes / can make changes on the `edgeIds` member of the active `Project`.
+ */
+export const edgeIds = new ProjectMemberStore("edgeIds");
 
 /**
  * This store subscribes to changes / can make changes on the `components` member of the active `Project`.
