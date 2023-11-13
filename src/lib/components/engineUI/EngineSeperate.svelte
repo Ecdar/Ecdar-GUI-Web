@@ -16,6 +16,9 @@
 	export let currentEngine: EngineDTO;
 	export let tempEngines: Array<EngineDTO>;
 
+	/**
+	 * Delete an engine by setting the adress of the engine to -1 and removing it from the view
+	 */
 	function deleteEngine() {
 		if (tempEngines.length == 1) {
 			closeModal();

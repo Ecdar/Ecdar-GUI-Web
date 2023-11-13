@@ -8,6 +8,9 @@
 		dialogContainer.showModal();
 	}
 
+	/**
+	 * Function for closing the current modal
+	 */
 	export function closeModal() {
 		dialogContainer.close();
 	}

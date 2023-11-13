@@ -9,6 +9,9 @@
 	let dialogContainer!: Modal & iModalComponent;
 	let tempEngines: EngineDTO[] = [];
 
+	/**
+	 * Reset the engineUI view and show the engineUI
+	*/
 	export function showEngineUI() {
 		tempEngines = [];
 		EngineStorage.getEngineArray().forEach((engine) => {
@@ -32,6 +35,9 @@
 		dialogContainer.showModal();
 	}
 
+	/**
+	 * Add a new engine to the view
+	 */
 	function addNewEngine() {
 		let newEngine: EngineDTO = {
 			address: "",
@@ -46,6 +52,9 @@
 		tempEngines = tempEngines;
 	}
 
+	/**
+	 * onSubmit place all the temporary engines into EngineStorage, and delete the engines which have been deleted
+	 */
 	function onSubmit() {
 		tempEngines.forEach((engine) => {
 			if (engine.id == -1) {
