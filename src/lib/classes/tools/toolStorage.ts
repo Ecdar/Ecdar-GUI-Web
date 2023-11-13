@@ -33,8 +33,10 @@ export class ToolStorage {
 
     //Select a tool, if the tool does not exist, select default tool
 	selectTool(tool: string): Tool {
-		return (this.#selected =
-			this.toolArray.find((element) => element._name === tool) ??
-			new DefaultTool());
+		const selectToolIndex: number = this.toolArray.findIndex((element) => element._name === tool);
+		if(selectToolIndex > -1){
+			return this.#selected = this.toolArray[selectToolIndex]
+		}
+		else throw new Error("Failed to select tool");
 	}
 }

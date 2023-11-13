@@ -5,9 +5,12 @@ export class Tool {
 
 
 	onClick(/*Component*/) {
-        /*fix this christian*/ 
 	}
 
+	onDrag(/*Component*/){
+	}
+
+	
 
 	//Get set name
 	get name(): string {

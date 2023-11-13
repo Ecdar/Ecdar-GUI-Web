@@ -17,9 +17,6 @@ describe("Success Tools test", () => {
 		toolStorage.selectTool("Location");
 		expect(toolStorage.selected).toEqual(new LocationTool());
 
-		toolStorage.selectTool("");
-		expect(toolStorage.selected).toEqual(new DefaultTool());
-
 	});
 
 	
