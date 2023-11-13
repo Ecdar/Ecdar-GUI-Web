@@ -37,13 +37,17 @@
         color: "black",
     };
     setContext("iconCtx", iconCtx);
+
+    const slugify = (str = "") =>
+        str.toLowerCase().replace(/ /g, "-").replace(/\./g, "");
 </script>
 
 
-<label class="tool-bar-item" class:selected={isSelected}>
+<label class="tool-bar-item" for={slugify(name)} class:selected={isSelected}>
     <input
         type="radio"
         name="tools"
+        id={slugify(name)}
         value={name}
         on:change={handleRadioChange}
         on:click={handleClick}
@@ -69,6 +73,9 @@
     .selected {
         background-color: #007bff; /* Set your desired background color for the selected button */
         color: white; /* Set the text color for the selected button */
+    }
+    label:has(input[type="radio"]:checked) {
+		  background-color: red;
     }
 
 </style>
