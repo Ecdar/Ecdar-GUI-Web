@@ -171,7 +171,7 @@
 		background-color: #fff;
 		border-radius: 0.75em;
 		margin: 0;
-		padding: 0.2em;
+		padding: 0.5em;
 
 		position: fixed;
 		display: flex;

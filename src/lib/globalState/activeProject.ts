@@ -164,7 +164,7 @@ export const systemDeclarations = new ProjectMemberStore("systemDeclarations");
  */
 export const globalDeclarations = new ProjectMemberStore("globalDeclarations");
 
-type ActiveView = Component | System | undefined;
+export type ActiveView = Component | System | undefined;
 let activeViewValue: ActiveView;
 const activeViewSubscribers = new Set<Subscriber<ActiveView>>();
 

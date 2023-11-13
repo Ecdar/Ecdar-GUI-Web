@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { activeModel } from "$lib/globalState/activeModel";
+	import {
+		activeView,
+		type TActiveView,
+	} from "$lib/globalState/activeProject";
+	import { locationRecord } from "$lib/components/svg-view/state";
 	import { scale } from "$lib/globalState/scaleStore";
 	import Location from "$lib/components/svg-view/Location.svelte";
 	import Edge from "./Edge.svelte";
@@ -8,6 +12,11 @@
 		type CurrentValues,
 		type PanzoomChangeEvent,
 	} from "./panzoom/panzoom";
+	import {
+		SystemEdge,
+		Edge as AutomatonEdge,
+		Component,
+	} from "$lib/classes/automaton";
 
 	/**
 	 * The parent svg element that the entire view is shown with.
@@ -53,6 +62,24 @@
 		const easing = "ease-out";
 		transition = active ? `transform ${duration}ms ${easing}` : "none";
 	}
+
+	function filterSystemEdges(
+		edges: SystemEdge[] | AutomatonEdge[] | undefined,
+	): AutomatonEdge[] {
+		if (!edges) return [];
+		return edges.filter(
+			(edge): edge is AutomatonEdge => edge instanceof AutomatonEdge,
+		);
+	}
+
+	function locationsAsArray(view: TActiveView) {
+		if (view instanceof Component) {
+			// TODO: support more than just components
+			return Object.values(view.locations);
+		} else {
+			return [];
+		}
+	}
 </script>
 
 <svg
@@ -69,19 +96,21 @@
 		style:transition
 	>
 		<!--All edges are drawn with their reference to their source location-->
-		{#each $activeModel.edges as edge}
-			<Edge
-				bind:sourcePoint={$activeModel.locations[edge.sourceLocation]
-					.position}
-				bind:targetPoint={$activeModel.locations[edge.targetLocation]
-					.position}
-				nails={edge.nails}
-				edgeType={edge.status}
-			/>
+		{#each filterSystemEdges($activeView?.edges) as edge}
+			{#if "sourceLocation" in edge}
+				<Edge
+					bind:sourcePoint={$locationRecord[edge.sourceLocation]
+						.position}
+					bind:targetPoint={$locationRecord[edge.targetLocation]
+						.position}
+					nails={edge.nails}
+					edgeType={edge.status}
+				/>
+			{/if}
 		{/each}
 
 		<!--All locations are drawn-->
-		{#each Object.values({ ...$activeModel.locations }) as location}
+		{#each locationsAsArray($activeView) as location}
 			<Location
 				locationID={location.id}
 				bind:position={location.position}
