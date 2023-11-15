@@ -51,6 +51,10 @@ Tests can be run with:
 yarn test
 ```
 
+## Styleguide
+
+For information about file, class, interface and variable naming conventions, code practices, project file structure, and rules about the usage of TS types, read the [styleguide](../styleguide.md) file.
+
 ## TODO
 
 TODO: We need to add a lot of documentation on how our code is organized. We should try to mimic the documentation for the old GUI: https://github.com/Ecdar/Ecdar-GUI/blob/main/.github/CONTRIBUTING.md
