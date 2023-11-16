@@ -11,7 +11,7 @@
 
 	/**
 	 * Reset the engineUI view and show the engineUI
-	*/
+	 */
 	export function showEngineUI() {
 		tempEngines = [];
 		EngineStorage.getEngineArray().forEach((engine) => {
