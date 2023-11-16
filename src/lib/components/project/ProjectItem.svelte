@@ -27,9 +27,9 @@
 		<div class="circle" style="background-color: {color}">
 			<div class="icon">
 				{#if itemType === "component"}
-					<Folder_special size="100%" />
+					<Folder_special size="100%" tabindex="-1" />
 				{:else}
-					<Request_page size="100%" />
+					<Request_page size="100%" tabindex="-1" />
 				{/if}
 			</div>
 		</div>

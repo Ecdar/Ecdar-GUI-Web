@@ -5,7 +5,7 @@
 <div class="global-dec" style="background-color: var(--sidebar-element-color);">
 	<div class="circle" style="background-color: grey">
 		<div class="icon">
-			<Description size="100%" />
+			<Description size="100%" tabindex="-1" />
 		</div>
 	</div>
 	<p>Global Declarations</p>

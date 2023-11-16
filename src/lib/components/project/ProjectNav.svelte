@@ -29,12 +29,22 @@
 		<h1>Project</h1>
 	</div>
 	<div>
-		<Create_new_folder on:click={addComponent} id="add-component" />
-		<Note_add on:click={addSystem} id="add-system" />
+		<button on:click={addComponent}>
+			<Create_new_folder tabindex="-1" id="add-component" />
+		</button>
+		<button on:click={addSystem}>
+			<Note_add tabindex="-1" id="add-system" />
+		</button>
 	</div>
 </div>
 
 <style>
+	button {
+		background: none;
+		border: none;
+		color: var(--navigationbar-text-color);
+	}
+
 	#project-nav {
 		display: flex;
 		justify-content: space-between;

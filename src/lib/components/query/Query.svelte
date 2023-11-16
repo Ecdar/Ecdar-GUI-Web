@@ -41,13 +41,13 @@
 	<div class="column">
 		<div class="left-column" style="background-color: {color}">
 			{#if color === "var(--query-success-color)"}
-				<Done color="black" />
+				<Done color="black" tabindex="-1" />
 			{:else if color === "var(--query-warning-color)"}
-				<Warning color="black" />
+				<Warning color="black" tabindex="-1" />
 			{:else if color === "var(--query-error-color)"}
-				<Error color="black" />
+				<Error color="black" tabindex="-1" />
 			{:else}
-				<Help color="black" />
+				<Help color="black" tabindex="-1" />
 			{/if}
 			<select bind:value={type}>
 				{#each Object.entries(typeOptions) as [full, short]}
@@ -62,7 +62,9 @@
 	</div>
 	<div class="column">
 		<div class="group">
-			<Arrow_right />
+			<button>
+				<Arrow_right tabindex="-1" />
+			</button>
 			<QueryDropDownMenu bind:isPeriodic {index} />
 		</div>
 		<select bind:value={backend}>
@@ -74,6 +76,12 @@
 </div>
 
 <style>
+	button {
+		color: var(--navigationbar-text-color);
+		background: none;
+		border: none;
+	}
+
 	.query {
 		background-color: var(--sidebar-element-color);
 		display: flex;

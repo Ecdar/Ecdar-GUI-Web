@@ -17,13 +17,25 @@
 		<h1>Queries</h1>
 	</div>
 	<div>
-		<Add color="currentColor" on:click={addQuery} id="add-query" />
-		<Arrow_right color="currentColor" />
-		<Menu color="currentColor" />
+		<button on:click={addQuery}>
+			<Add color="currentColor" id="add-query" tabindex="-1" />
+		</button>
+		<button>
+			<Arrow_right color="currentColor" tabindex="-1" />
+		</button>
+		<button>
+			<Menu color="currentColor" tabindex="-1" />
+		</button>
 	</div>
 </div>
 
 <style>
+	button {
+		color: var(--navigationbar-text-color);
+		background: none;
+		border: none;
+	}
+
 	#query-nav {
 		display: flex;
 		justify-content: space-between;
