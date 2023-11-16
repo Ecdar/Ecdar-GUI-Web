@@ -20,11 +20,15 @@
 	 * Delete an engine by setting the adress of the engine to -1 and removing it from the view
 	 */
 	function deleteEngine() {
+		currentEngine.address = "-1";
 		if (tempEngines.length == 1) {
+			nameContainer.value = "";
+			ipAddressContainer.value = "";
+			startPortContainer.value = "";
+			endPortContainer.value = "";
 			closeModal();
 			return;
 		}
-		currentEngine.address = "-1";
 		formElement.parentNode?.removeChild(formElement);
 		closeModal();
 	}
