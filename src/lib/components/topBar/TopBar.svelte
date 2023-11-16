@@ -34,7 +34,9 @@
 		<DropDownButton
 			icon={Note_add}
 			name="New Project"
-			on:click={() => {}}
+			on:click={() => {
+				console.log("New Project");
+			}}
 		/>
 		<DropDownButton
 			icon={File_open}
