@@ -26,6 +26,7 @@
 			ipAddressContainer.value = "";
 			startPortContainer.value = "";
 			endPortContainer.value = "";
+			currentEngine.name = "";
 			closeModal();
 			return;
 		}
