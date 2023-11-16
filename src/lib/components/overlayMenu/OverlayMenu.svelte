@@ -80,10 +80,17 @@
 			passive: true,
 			signal: closeListenersController.signal,
 		});
-		window.addEventListener("click", () => (open = false), {
-			passive: true,
-			signal: closeListenersController.signal,
-		});
+		window.addEventListener(
+			"click",
+			(event) => {
+				event.stopPropagation(); // TODO: Make the users of the overlay menu be able to define the used setting.
+				event.preventDefault();
+				open = false;
+			},
+			{
+				signal: closeListenersController.signal,
+			},
+		);
 		window.addEventListener(
 			"keydown",
 			(event) => {
