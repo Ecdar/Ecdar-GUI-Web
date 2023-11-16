@@ -65,7 +65,6 @@
 		display: flex;
 		flex: 1;
 		overflow: hidden;
-		background-color: var(--background-color);
 	}
 
 	.inner-nav2 {
@@ -78,7 +77,6 @@
 		display: flex;
 		flex-direction: column;
 		color: var(--canvas-text-color);
-		background-color: var(--background-color);
 		flex-grow: 1;
 	}
 </style>
