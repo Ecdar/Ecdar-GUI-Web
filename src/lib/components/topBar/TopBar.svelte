@@ -17,7 +17,6 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
-	import { Console } from "$lib/classes/console/Console";
 </script>
 
 <!--
@@ -35,10 +34,7 @@
 		<DropDownButton
 			icon={Note_add}
 			name="New Project"
-			on:click={() => {
-				Console.writeLineFrontend("test");
-				console.log("New Project + print");
-			}}
+			on:click={() => {}}
 		/>
 		<DropDownButton
 			icon={File_open}

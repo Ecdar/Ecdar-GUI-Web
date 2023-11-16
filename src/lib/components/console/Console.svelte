@@ -6,15 +6,11 @@
 		Arrow_upward,
 	} from "svelte-google-materialdesign-icons";
 	import { Console } from "$lib/classes/console/Console";
-	import { writable } from "svelte/store";
 
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
 	let consoleContainer: HTMLElement;
 	let consoleBar: HTMLElement;
-
-	// let frontEndErrors: string[] = [];
-	// let backEndErrors: string[] = [];
 
 	const consoleInitialSize: number = 300;
 	let consoleExtendedSize: number = consoleInitialSize;
@@ -96,30 +92,6 @@
 		currentTab = tab;
 	}
 
-	// /**
-	//  *Function for sending an error to a specific tab in the console
-	//  *@param error
-	//  *@param tab
-	//  */
-	// export function sendErrorToTab(error: string, tab: Tabs) {
-	// 	switch (tab) {
-	// 		case Tabs.Frontend:
-	// 			frontEndErrors.push(error);
-	// 			frontEndErrors = frontEndErrors;
-	// 			break;
-	// 		case Tabs.Backend:
-	// 			backEndErrors.push(error);
-	// 			backEndErrors = backEndErrors;
-	// 			break;
-	// 		case Tabs.All:
-	// 			frontEndErrors.push(error);
-	// 			backEndErrors.push(error);
-	// 			frontEndErrors = frontEndErrors;
-	// 			break;
-	// 		default:
-	// 			break;
-	// 	}
-	// }
 	let frontendConsole = Console.frontendConsoleLines;
 	let backendConsole = Console.backendConsoleLines;
 </script>
