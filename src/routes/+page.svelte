@@ -65,6 +65,7 @@
 		display: flex;
 		flex: 1;
 		overflow: hidden;
+		background-color: var(--background-color);
 	}
 
 	.inner-nav2 {
