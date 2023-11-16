@@ -77,7 +77,6 @@
 		display: flex;
 		flex-direction: column;
 		color: var(--canvas-text-color);
-		background-color: var(--background-color);
 		flex-grow: 1;
 	}
 </style>
