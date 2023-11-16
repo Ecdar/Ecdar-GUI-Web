@@ -4,9 +4,9 @@
 	import Modal from "../dialogPopover/Modal.svelte";
 	import EnginePanel from "./EnginePanel.svelte";
 	import { Save, Add, Cancel } from "svelte-google-materialdesign-icons";
-	import type iModalComponent from "$lib/interfaces/IModalComponent";
+	import type IModalComponent from "$lib/interfaces/IModalComponent";
 
-	let dialogContainer!: Modal & iModalComponent;
+	let dialogContainer!: Modal & IModalComponent;
 	let tempEngines: EngineDTO[] = [];
 
 	/**
