@@ -13,3 +13,9 @@
 		>Start a new project</button
 	>
 </div>
+
+<style>
+	h1 {
+		color: var(--canvas-text-color);
+	}
+</style>
