@@ -34,6 +34,7 @@ export const ColorVariables = z
 		"--engine-ui-input-text-placeholder-color": ColorAttribute,
 		"--engine-ui-scrollbar-thumb-background-color": ColorAttribute,
 		"--engine-ui-scrollbar-thumb-color": ColorAttribute,
+		"--engine-ui-text-color": ColorAttribute,
 	})
 	.strict();
 

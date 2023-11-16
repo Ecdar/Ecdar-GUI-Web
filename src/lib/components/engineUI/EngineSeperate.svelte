@@ -12,7 +12,6 @@
 	let startPortContainer: HTMLInputElement;
 	let endPortContainer: HTMLInputElement;
 
-	export let defaultChecked: EngineType;
 	export let currentEngine: EngineDTO;
 	export let tempEngines: Array<EngineDTO>;
 
@@ -39,37 +38,22 @@
 	}
 	function onNameChange() {
 		currentEngine.name = nameContainer.value;
+		currentEngine.hasBeenChanged = true;
 	}
 
 	function onIPChange() {
 		currentEngine.address = ipAddressContainer.value;
+		currentEngine.hasBeenChanged = true;
 	}
 
 	function onStartPortChange() {
 		currentEngine.portRangeStart = Number(startPortContainer.value);
+		currentEngine.hasBeenChanged = true;
 	}
 
 	function onEndPortChange() {
 		currentEngine.portRangeEnd = Number(endPortContainer.value);
-	}
-
-	function onEngineTypeChange(e: Event) {
-		let temp: HTMLInputElement = <HTMLInputElement>e.target;
-
-		switch (temp.value) {
-			case "Reveaal":
-				currentEngine.type = EngineType.Reveaal;
-				break;
-			case "JEcdar":
-				currentEngine.type = EngineType.JEcdar;
-				break;
-			case "API":
-				currentEngine.type = EngineType.API;
-				break;
-			default:
-				currentEngine.type = defaultChecked;
-				break;
-		}
+		currentEngine.hasBeenChanged = true;
 	}
 
 	function closeModal() {
@@ -81,8 +65,12 @@
 	<div class="delete-dialog">
 		<div class="inner-delete-dialog">
 			<h4 id="delete-text">
+				{#if currentEngine.name !== ""}					
 				Are you sure you wish to delete the engine:
 				{currentEngine.name}
+				{:else}
+				Are you sure you wish to delete this engine?
+				{/if}
 			</h4>
 			<button
 				on:click={deleteEngine}
@@ -103,97 +91,71 @@
 </Modal>
 
 <form bind:this={formElement}>
-	Name:
-	<input
-		type="text"
-		placeholder="Name"
-		id="name"
-		on:change={onNameChange}
-		bind:this={nameContainer}
-	/>
-	<button
-		type="button"
-		id="show-modal"
-		class="delete-button"
-		on:click={showModal}><Delete size="18" /></button
-	>
-	<br />
-	IP Address:
-	<input
-		type="text"
-		placeholder="192.168.1.1"
-		id="IP"
-		on:change={onIPChange}
-		bind:this={ipAddressContainer}
-	/> <br />
-	Port range:
-	<input
-		type="number"
-		placeholder="7000"
-		id="STARTPORT"
-		class="port-input"
-		min="0"
-		max="65535"
-		on:change={onStartPortChange}
-		bind:this={startPortContainer}
-	/>
-	-
-	<input
-		type="number"
-		placeholder="7000"
-		id="ENDPORT"
-		class="port-input"
-		min="0"
-		max="65535"
-		on:change={onEndPortChange}
-		bind:this={endPortContainer}
-	/> <br />
-	<input
-		type="radio"
-		id="reveaal"
-		name="engine_type"
-		value="Reveaal"
-		class="radio-inputs"
-		checked={defaultChecked == EngineType.Reveaal}
-		on:change={onEngineTypeChange}
-	/>
-	Reveaal<br />
-	<input
-		type="radio"
-		id="jecdar"
-		name="engine_type"
-		value="JEcdar"
-		class="radio-inputs"
-		checked={defaultChecked == EngineType.JEcdar}
-		on:change={onEngineTypeChange}
-	/>
-	JEcdar<br />
-	<input
-		type="radio"
-		id="reveaalapi"
-		name="engine_type"
-		value="API"
-		class="radio-inputs"
-		checked={defaultChecked == EngineType.API}
-		on:change={onEngineTypeChange}
-	/>
-	Ecdar API<br />
+	<div id="name-box" class="box">
+		Name:
+		<input
+			type="text"
+			placeholder="Name"
+			id="name"
+			on:change={onNameChange}
+			bind:this={nameContainer}
+		/>
+		<button
+			type="button"
+			id="show-modal"
+			class="delete-button"
+			on:click={showModal}><Delete size="18" /></button
+		>
+	</div>
+	<div class="box">
+		IP Address:
+		<input
+			type="text"
+			placeholder="192.168.1.1"
+			id="IP"
+			on:change={onIPChange}
+			bind:this={ipAddressContainer}
+		/> 
+	</div>
+	<div id="port-range-box" class="box">
+		Port range:
+		<input
+			type="number"
+			placeholder="7000"
+			id="STARTPORT"
+			class="port-input"
+			min="0"
+			max="65535"
+			on:change={onStartPortChange}
+			bind:this={startPortContainer}
+		/>
+		-
+		<input
+			type="number"
+			placeholder="7000"
+			id="ENDPORT"
+			class="port-input"
+			min="0"
+			max="65535"
+			on:change={onEndPortChange}
+			bind:this={endPortContainer}
+		/> 
+	</div>
 </form>
 
 <style>
 	form {
 		background-color: var(--console-selectedtab-color);
 		padding: 0.2em;
-		color: var(--console-text-color);
+		color: var(--engine-ui-text-color);
 	}
 
 	.delete-button {
 		border: 0;
-		padding: 0 0.1em 0 0.1em;
+		padding: 0 0.1em 0 2em;
 		background-color: transparent;
-		float: right;
 		cursor: pointer;
-		color: var(--console-text-color);
+		color: var(--engine-ui-text-color);
 	}
 
 	.delete-dialog {
@@ -205,21 +167,29 @@
 		background-color: var(--console-selectedtab-color);
 	}
 
+	#name {
+		width: 90%;
+		padding: 0.4em 0.4em 0.2em 0.4em;
+	}
+
 	#IP {
-		width: 10em;
+		width: 70%;
+		padding: 0.4em 0.4em 0.2em 0.4em;
 	}
 
 	.port-input {
-		width: 4em;
+		width: 37%;
 		border: none;
 		border-bottom: 0.05em solid var(--engine-ui-underline-color);
 		background-color: var(--console-selectedtab-color);
-		color: var(--console-text-color);
+		color: var(--engine-ui-text-color);
 		text-align: center;
+		padding: 0.4em 0.4em 0.2em 0.4em;
 	}
 
 	.port-input::placeholder {
 		color: var(--engine-ui-input-text-placeholder-color);
+		text-align: center;
 	}
 
 	.port-input::-webkit-inner-spin-button,
@@ -238,18 +208,13 @@
 		border: none;
 		border-bottom: 0.05em solid var(--engine-ui-underline-color);
 		background-color: var(--console-selectedtab-color);
-		color: var(--console-text-color);
+		color: var(--engine-ui-text-color);
 		margin: 0.2em;
 	}
 
 	input[type="text"]::placeholder {
 		color: var(--engine-ui-input-text-placeholder-color);
-	}
-
-	.radio-inputs {
-		cursor: pointer;
-		margin: 0.15em;
-		border-radius: 50%;
+		text-align: center;
 	}
 
 	.delete-selection {
@@ -260,11 +225,28 @@
 		cursor: pointer;
 		margin-left: 0.5em;
 		margin-right: 0.5em;
-		color: var(--console-text-color);
+		color: var(--engine-ui-text-color);
 	}
 
 	#delete-text {
 		margin: 0.2em;
-		color: var(--console-text-color);
+		color: var(--engine-ui-text-color);
 	}
+
+	.box {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		width: 30em;
+		padding: 0.1rem 0.4rem 0.1rem 0.4rem;
+	}
+
+	#port-range-box {
+		padding-bottom: 1rem;
+	}
+
+	#name-box {
+		padding-top: 0.5rem;
+	}
+
 </style>

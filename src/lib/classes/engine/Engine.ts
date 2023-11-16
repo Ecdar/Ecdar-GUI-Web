@@ -80,6 +80,8 @@ export class Engine {
 		else throw new Error("Invalid id");
 	}
 
+	hasBeenChanged: boolean = false;
+
 	constructor(
 		name: string,
 		address: string,

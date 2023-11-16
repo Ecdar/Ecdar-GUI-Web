@@ -3,11 +3,14 @@
 	import EngineStorage from "$lib/classes/engine/EngineStorage";
 	import Modal from "../dialogPopover/Modal.svelte";
 	import EnginePanel from "./EnginePanel.svelte";
-	import { Save, Add, Cancel } from "svelte-google-materialdesign-icons";
+	import { Save, Add, Close, Done } from "svelte-google-materialdesign-icons";
 	import type IModalComponent from "$lib/interfaces/IModalComponent";
+
 
 	let dialogContainer!: Modal & IModalComponent;
 	let tempEngines: EngineDTO[] = [];
+	let unsavedChangesModal: Modal & IModalComponent;
+	let incorrectInformationModal: Modal & IModalComponent;
 
 	/**
 	 * Reset the engineUI view and show the engineUI
@@ -22,6 +25,7 @@
 				portRangeStart: engine.portRangeStart,
 				type: engine.type,
 				id: engine.id,
+				hasBeenChanged: false,
 			};
 
 			tempEngines.push(tempEngine);
@@ -46,10 +50,24 @@
 			portRangeStart: -1,
 			type: 0,
 			id: -1,
+			hasBeenChanged: false,
 		};
 
 		tempEngines.push(newEngine);
 		tempEngines = tempEngines;
+	}
+
+	/**
+	 * Check if any of the engines have been changed
+	 * @returns true if any of the engines have been changed
+	 */
+	function checkIfChanged() {
+		tempEngines.forEach((engine) => {
+			if (engine.hasBeenChanged) {
+				return true;
+			}
+		});
+		return false;
 	}
 
 	/**
@@ -59,21 +77,10 @@
 		tempEngines.forEach((engine) => {
 			if (engine.id == -1) {
 				if (
-					engine.name == "" ||
-					engine.address == "" ||
-					engine.address == "-1" ||
-					engine.portRangeStart == -1 ||
-					engine.portRangeEnd == -1
-				)
-					return;
-				EngineStorage.createEngine(
-					engine.name,
-					engine.address,
-					engine.portRangeStart,
-					engine.portRangeEnd,
-					engine.type,
-				);
-			}
+					engine.address == "-1"
+					) return;
+					handleCreateNewEngine(engine);
+				}
 			if (engine.id != -1) {
 				if (engine.address == "-1") {
 					EngineStorage.deleteEngine(engine.id);
@@ -90,9 +97,47 @@
 		});
 	}
 
+	function handleCreateNewEngine(engine: EngineDTO) {
+		try {
+			EngineStorage.createEngine(
+				engine.name,
+				engine.address,
+				engine.portRangeStart,
+				engine.portRangeEnd,
+				engine.type,
+			);		
+		} catch (error) {
+			console.log(error); // Send to real console
+		}
+	}
+
+
+	/**
+	 * Close the modal, but check if there are any unsaved changes
+	 */
 	function closeModal() {
+		if(!checkIfChanged()) {
+			unsavedChangesModal.showModal();
+			return;
+		}
 		dialogContainer.closeModal();
 	}
+
+	/**
+	 * Forcefully close the modal
+	 */
+	function forceCloseDialogContainer() {
+		closeUnsavedChangesDialog();
+		dialogContainer.closeModal();
+	}
+
+	/**
+	 * Close the unsaved changes dialog
+	 */
+	function closeUnsavedChangesDialog() {
+		unsavedChangesModal.closeModal();
+	}
+	
 </script>
 
 <Modal bind:this={dialogContainer}>
@@ -100,27 +145,75 @@
 		<div class="engine-panel">
 			<EnginePanel {tempEngines} />
 		</div>
-		<button
-			on:click={addNewEngine}
-			type="button"
-			id="add-button"
-			class="unselectable"><Add size="18" /></button
-		>
-		<button on:click={closeModal} id="save-button" class="unselectable"
-			><Save size="18" /></button
-		>
-		<button
-			on:click={closeModal}
-			type="button"
-			id="cancel-button"
-			class="unselectable"><Cancel size="18" /></button
-		>
+		<div id="button-box">
+			<button on:click={closeModal} id="save-button" class="unselectable"
+				><Save size="18" /></button
+			>
+			<button
+				on:click={addNewEngine}
+				type="button"
+				id="add-button"
+				class="unselectable"><Add size="18" /></button
+			>
+			<button
+				on:click={closeModal}
+				type="button"
+				id="close-button"
+				class="unselectable"><Close size="18" /></button
+			>
+		</div>
 	</form>
+</Modal>
+
+<Modal bind:this={unsavedChangesModal}>
+	<div class="modal-dialog">
+		<div class="inner-modal-dialog">
+			<h4 id="modal-text">
+				You have unsaved changes. Are you sure you wish to close the Engine tab?
+				Your changes may not be saved.
+			</h4>
+			<button
+				on:click={forceCloseDialogContainer}
+				class="modal-selection"
+			>
+				<Done size="18" />
+			</button>
+			<button
+				on:click={closeUnsavedChangesDialog}
+				class="modal-selection"
+			>
+				<Close size="18" />
+			</button>
+		</div>
+	</div>
+</Modal>
+
+<Modal bind:this={incorrectInformationModal}>
+	<div>
+		<div>
+			<h4 id="modal-text">
+				The information could not be processed. Check the input and try again.
+			</h4>
+			<button
+				on:click={incorrectInformationModal.closeModal}
+				class="modal-selection"
+			>
+				<Done size="18" />
+			</button>
+		</div>
+	</div>
 </Modal>
 
 <style>
 	form {
 		padding: 0.5rem 0rem 0.5rem 1rem;
+	}
+
+	#button-box {
+		padding-top: 0.5rem;
+		display: flex;
+		width: 100%;
+		height: 3em;
 	}
 
 	#add-button {
@@ -129,6 +222,8 @@
 		background-color: transparent;
 		outline: none;
 		cursor: pointer;
+		margin-left: auto;
+		margin-bottom: auto;
 	}
 
 	#save-button {
@@ -138,11 +233,11 @@
 		cursor: pointer;
 	}
 
-	#cancel-button {
+	#close-button {
 		border: 0;
 		padding: 0;
 		background-color: transparent;
-		float: right;
+		margin-left: auto;
 		padding-right: 1rem;
 		padding-top: 0.2em;
 		cursor: pointer;
@@ -152,10 +247,36 @@
 		-webkit-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
-		color: var(--console-text-color);
+		color: var(--engine-ui-text-color);
 	}
 
 	.engine-panel {
 		padding-bottom: 0.2rem;
 	}
+
+	.modal-selection {
+		border: 0;
+		border-bottom: 0.05em solid var(--engine-ui-underline-color);
+		padding: 0.2em 0.2em 0 0.2em;
+		background-color: transparent;
+		cursor: pointer;
+		margin-left: 0.5em;
+		margin-right: 0.5em;
+		color: var(--engine-ui-text-color);
+	}
+
+	#modal-text {
+		margin: 0.2em;
+		color: var(--engine-ui-text-color);
+	}
+
+	.modal-dialog {
+		padding: 0.6em;
+	}
+
+	.inner-modal-dialog {
+		padding: 0.2em;
+		background-color: var(--console-selectedtab-color);
+	}
+
 </style>

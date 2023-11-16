@@ -9,7 +9,6 @@
 <div class="engines">
 	{#each tempEngines as engine}
 		<EngineSeperate
-			defaultChecked={engine.type}
 			currentEngine={engine}
 			{tempEngines}
 		/>
@@ -30,7 +29,7 @@
 		background-color: var(--console-selectedtab-color);
 		width: fit-content;
 		text-shadow: 0.05em 0.05em 0.05em grey;
-		color: var(--console-text-color);
+		color: var(--engine-ui-text-color);
 	}
 
 	.engines {
