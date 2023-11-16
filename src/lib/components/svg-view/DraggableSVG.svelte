@@ -5,19 +5,31 @@
 
 	export let position: iPoint;
 
+	let element: SVGElement;
 	let controller: AbortController;
 	let signal: AbortSignal;
 
-	//Sets up eventlisteners when the mouse is pressed down on the svg
-	function onPointerDown() {
+	/**
+	 * Function for setting up event listeners when the mouse is pressed down on the svg
+	 * @param {PointerEvent} event
+	 */
+	function onPointerDown(event: PointerEvent) {
 		controller = new AbortController();
 		signal = controller.signal;
-		window.addEventListener("pointermove", onPointerMove, { signal });
-		window.addEventListener("pointerup", onPointerUp, { signal });
-		window.addEventListener("pointercancel", onPointerUp, { signal });
+
+		event.preventDefault();
+		event.stopPropagation();
+
+		element.setPointerCapture(event.pointerId);
+		element.addEventListener("pointermove", onPointerMove, { signal });
+		element.addEventListener("pointerup", onPointerUp, { signal });
+		element.addEventListener("pointercancel", onPointerUp, { signal });
 	}
 
-	//Updates the position of the svg
+	/**
+	 * Function for updating the position of the svg
+	 * @param {PointerEvent} event
+	 */
 	function onPointerMove(event: PointerEvent) {
 		position.x += event.movementX / $scale;
 		position.y += event.movementY / $scale;
@@ -26,8 +38,12 @@
 		activeView.fastUpdate();
 	}
 
-	//Removes the eventlisteners when the mouse is released using abortcontroller
-	function onPointerUp() {
+	/**
+	 * Function for removing the event listeners when the mouse is released using AbortController
+	 * @param {PointerEvent} event
+	 */
+	function onPointerUp(event: PointerEvent) {
+		element.releasePointerCapture(event.pointerId);
 		controller.abort();
 
 		// Update the active view properly
@@ -36,6 +52,13 @@
 </script>
 
 <!-- The svg element that is draggable -->
-<g on:pointerdown={onPointerDown} role="none" class="draggable panzoom-exclude">
+<g
+	bind:this={element}
+	on:pointerdown={(event) => {
+		onPointerDown(event);
+	}}
+	role="none"
+	class="draggable panzoom-exclude"
+>
 	<slot />
 </g>

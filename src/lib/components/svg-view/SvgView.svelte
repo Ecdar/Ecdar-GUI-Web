@@ -40,6 +40,7 @@
 	/**
 	 * When the svg is zoomed, we update the svelte store with the new scale.
 	 * We need to know this value when we move stuff with the cursor, such as when moving locations.
+	 * @param {PanzoomChangeEvent} event
 	 */
 	function scaleChange(event: PanzoomChangeEvent) {
 		$scale = event.detail.scale;
@@ -47,6 +48,7 @@
 
 	/**
 	 * This function is called by the panzoom class, to set the correct svg zoom.
+	 * @param {CurrentValues} { x, y, scale }
 	 */
 	let transform: string | undefined;
 	function setTransform({ x, y, scale }: CurrentValues) {
@@ -55,6 +57,7 @@
 
 	/**
 	 * This function is called by the panzoom class, to enable or disable zoom animations.
+	 * @param {boolean} active
 	 */
 	let transition: string = "none";
 	function setTransition(active: boolean) {
@@ -63,6 +66,11 @@
 		transition = active ? `transform ${duration}ms ${easing}` : "none";
 	}
 
+	/**
+	 * Filters an array of edges to only include AutomatonEdges.
+	 * @param {SystemEdge[] | AutomatonEdge[] | undefined} edges - The array of edges to filter.
+	 * @returns {AutomatonEdge[]} - The filtered array of AutomatonEdges.
+	 */
 	function filterSystemEdges(
 		edges: SystemEdge[] | AutomatonEdge[] | undefined,
 	): AutomatonEdge[] {
@@ -72,6 +80,11 @@
 		);
 	}
 
+	/**
+	 * Returns an array of locations for a given active view.
+	 * @param {TActiveView} view - The active view to get the locations from.
+	 * @returns {Array} - An array of locations.
+	 */
 	function locationsAsArray(view: TActiveView) {
 		if (view instanceof Component) {
 			// TODO: support more than just components
