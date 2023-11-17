@@ -6,6 +6,7 @@ import GlobalCssProperties from "../../GlobalCssProperties.json";
 
 import type { z } from "zod";
 import type TransitionAttribute from "./ZodSchemas/AttributeSchemas/TransitionAttribute";
+import type NumberUnitAttribute from "./ZodSchemas/AttributeSchemas/NumberUnitAttribute";
 
 /**
  * Class for handling the loading of different properties based on active media features
@@ -175,13 +176,23 @@ class GlobalCssSchemesLoader {
 			transitionString += ` ${transition[1][0] + transition[1][1]}`;
 		}
 		if (transition[2]) {
-			transitionString += ` ${transition[2]}`;
+			if (this.isNumberUnitAttribute(transition[2]))
+				transitionString += ` ${transition[2]}`;
+			else {
+				transitionString += ` ${transition[2][0]}${transition[2][1]}`;
+			}
 		}
 		if (transition[3]) {
 			transitionString += ` ${transition[3][0] + transition[3][1]}`;
 		}
 
 		return transitionString;
+	}
+
+	isNumberUnitAttribute(
+		input: string | z.infer<typeof NumberUnitAttribute>,
+	): input is string {
+		return Boolean(typeof input === "string");
 	}
 }
 
