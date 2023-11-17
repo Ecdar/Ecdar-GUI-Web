@@ -32,5 +32,6 @@
 		display: flex;
 		flex-direction: column;
 		margin: 0;
+		background-color: var(--background-color);
 	}
 </style>

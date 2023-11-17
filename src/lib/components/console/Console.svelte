@@ -22,7 +22,7 @@
 
 	/**
 	 * Function for resizing the console
-	 * @param event
+	 * @param {PointerEvent} event
 	 */
 	function resizeConsolePanel(event: PointerEvent) {
 		event.preventDefault();
@@ -36,7 +36,7 @@
 
 	/**
 	 * Function for starting resizing the console
-	 * @param event
+	 * @param {PointerEvent} event
 	 */
 	function startResizingConsolePanel(event: PointerEvent) {
 		event.preventDefault();
@@ -55,7 +55,7 @@
 
 	/**
 	 * Function for stopping resizing the console
-	 * @param event
+	 * @param {PointerEvent} event
 	 */
 	function stopResizingConsolePanel(event: PointerEvent) {
 		consoleContainer.releasePointerCapture(event.pointerId);
@@ -86,14 +86,16 @@
 
 	/**
 	 *Function for changing the current tab of the console
-	 *@param tab
+	 *@param {Tabs} tab
 	 */
 	function changeTab(tab: Tabs) {
 		currentTab = tab;
 	}
 
+
 	let frontendConsole = Console.frontendConsoleLines;
 	let backendConsole = Console.backendConsoleLines;
+
 </script>
 
 <div class="outer-overflow" bind:this={consoleContainer}>
