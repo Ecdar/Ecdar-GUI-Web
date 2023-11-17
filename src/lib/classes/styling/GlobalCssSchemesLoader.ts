@@ -149,8 +149,8 @@ class GlobalCssSchemesLoader {
 
 	/**
 	 * Method for checking and creating CSS color string
-	 * @param {z.infer<typeof ColorValue>} color
-	 * @returns {string} CSS color string
+	 * @param color
+	 * @returns CSS color string
 	 */
 	private createCssColor(color: z.infer<typeof ColorValue>): string {
 		let cssColor: string;
@@ -165,6 +165,11 @@ class GlobalCssSchemesLoader {
 		return cssColor;
 	}
 
+	/**
+	 * Creates a CSS transition string based on the provided transition attribute.
+	 * @param transition - The transition attribute to create the transition string from.
+	 * @returns The CSS transition string.
+	 */
 	private createTransition(
 		transition: z.infer<typeof TransitionAttribute>,
 	): string {
@@ -189,6 +194,11 @@ class GlobalCssSchemesLoader {
 		return transitionString;
 	}
 
+	/**
+	 * Checks if the given input is a string or represents a number unit attribute.
+	 * @param input - The input to check.
+	 * @returns True if the input is a string, false otherwise.
+	 */
 	isNumberUnitAttribute(
 		input: string | z.infer<typeof NumberUnitAttribute>,
 	): input is string {
