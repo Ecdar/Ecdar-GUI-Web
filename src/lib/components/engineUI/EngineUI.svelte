@@ -6,12 +6,14 @@
 	import { Save, Add, Close, Done } from "svelte-google-materialdesign-icons";
 	import type IModalComponent from "$lib/interfaces/IModalComponent";
 	import type EngineSeperate from "./EngineSeperate.svelte";
+	import type IEngineSeperateComponent from "$lib/interfaces/IEngineSeperateComponent";
 	let dialogContainer!: Modal & IModalComponent;
 	let tempEngines: EngineDTO[] = [];
 	let unsavedChangesModal: Modal & IModalComponent;
 	let incorrectInformationModal: Modal & IModalComponent;
 
-	let engineSeperateArray: Array<EngineSeperate> = [];
+	let engineSeperateArray: Array<EngineSeperate & IEngineSeperateComponent> =
+		[];
 
 	/**
 	 * Reset the engineUI view and show the engineUI
@@ -102,7 +104,6 @@
 			engineSeperateArray.forEach((engine) => {
 				engine.setUpEngineSeperate();
 			});
-			console.log("Error on saving: " + error);
 			incorrectInformationModal.showModal();
 		}
 	}

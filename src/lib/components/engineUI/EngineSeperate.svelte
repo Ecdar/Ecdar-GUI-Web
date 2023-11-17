@@ -106,8 +106,7 @@
 	}
 
 	function validateName() {
-		if (nameContainer.value != "" && nameContainer.value !== undefined)
-			return true;
+		if (nameContainer.value != "") return true;
 
 		return false;
 	}
