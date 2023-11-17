@@ -3,6 +3,7 @@
 	import OverlayMenu from "$lib/components/overlayMenu/OverlayMenu.svelte";
 	import Panel from "$lib/components/overlayMenu/Panel.svelte";
 	import Button from "$lib/components/overlayMenu/elements/Button.svelte";
+	import SvgButton from "$lib/components/buttons/SvgButton.svelte";
 	import {
 		More_vert,
 		Check_box,
@@ -27,9 +28,13 @@
 	}
 </script>
 
-<button bind:this={button} popovertarget={menuId} id={`query-button-${index}`}>
-	<More_vert tabindex="-1" />
-</button>
+<SvgButton
+	bind:button
+	icon={More_vert}
+	popovertarget={menuId}
+	id={`query-button-${index}`}
+	color="var(--sidebar-text-color)"
+/>
 <OverlayMenu anchor={button} id={menuId}>
 	<Panel>
 		<Button
@@ -52,12 +57,3 @@
 		/>
 	</Panel>
 </OverlayMenu>
-
-<style>
-	button {
-		color: var(--navigationbar-text-color);
-		display: flex;
-		background: none;
-		border: none;
-	}
-</style>

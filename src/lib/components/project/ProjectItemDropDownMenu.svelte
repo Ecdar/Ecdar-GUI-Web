@@ -9,6 +9,7 @@
 	import OverlayMenu from "$lib/components/overlayMenu/OverlayMenu.svelte";
 	import Panel from "$lib/components/overlayMenu/Panel.svelte";
 	import Button from "$lib/components/overlayMenu/elements/Button.svelte";
+	import SvgButton from "$lib/components/buttons/SvgButton.svelte";
 
 	export let description: string;
 	export let color: string;
@@ -48,14 +49,13 @@
 	}
 </script>
 
-<button
-	class="dropdown"
-	bind:this={button}
+<SvgButton
+	bind:button
+	icon={More_vert}
 	popovertarget={menuId}
 	id={`${itemType}-button-${index}`}
->
-	<More_vert tabindex="-1" />
-</button>
+	color="var(--sidebar-text-color)"
+/>
 <OverlayMenu anchor={button} id={menuId}>
 	{#if itemType === "component"}
 		<Panel>
@@ -118,12 +118,6 @@
 
 	p {
 		margin: 0.5em 0;
-	}
-
-	.dropdown {
-		background: none;
-		border: none;
-		cursor: pointer;
 	}
 
 	.colors {

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Backend } from "$lib/classes/automaton/Backend";
+	import SvgButton from "$lib/components/buttons/SvgButton.svelte";
 	import QueryDropDownMenu from "./QueryDropDownMenu.svelte";
 	import {
 		Help,
@@ -35,6 +36,10 @@
 	};
 
 	$: query = `${type}:${name}`;
+
+	function runQuery() {
+		console.log("Run query");
+	}
 </script>
 
 <div class="query" id="query-{index}">
@@ -62,9 +67,12 @@
 	</div>
 	<div class="column">
 		<div class="group">
-			<button>
-				<Arrow_right tabindex="-1" />
-			</button>
+			<SvgButton
+				icon={Arrow_right}
+				click={runQuery}
+				id="run-query"
+				color="var(--sidebar-text-color)"
+			/>
 			<QueryDropDownMenu bind:isPeriodic {index} />
 		</div>
 		<select bind:value={backend}>

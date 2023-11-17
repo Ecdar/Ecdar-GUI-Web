@@ -4,11 +4,21 @@
 	import { Backend } from "$lib/classes/automaton/Backend";
 	import { Query } from "$lib/classes/automaton/Query";
 
+	import SvgButton from "$lib/components/buttons/SvgButton.svelte";
+
 	function addQuery() {
 		$queries?.arr.push(
 			new Query("specification:", "", false, Backend.REVEAAL),
 		);
 		$queries = $queries;
+	}
+
+	function runAllQueries() {
+		console.log("Run all queries");
+	}
+
+	function resetAllStatus() {
+		console.log("Reset all status");
 	}
 </script>
 
@@ -16,24 +26,29 @@
 	<div>
 		<h1>Queries</h1>
 	</div>
-	<div>
-		<button on:click={addQuery}>
-			<Add color="currentColor" id="add-query" tabindex="-1" />
-		</button>
-		<button>
-			<Arrow_right color="currentColor" tabindex="-1" />
-		</button>
-		<button>
-			<Menu color="currentColor" tabindex="-1" />
-		</button>
+	<div class="buttons">
+		<SvgButton icon={Add} click={addQuery} size={30} id="add-query" />
+		<SvgButton
+			icon={Arrow_right}
+			click={runAllQueries}
+			size={30}
+			id="run-all-queries"
+		/>
+		<SvgButton
+			icon={Menu}
+			click={resetAllStatus}
+			size={30}
+			id="reset-all-status"
+		/>
 	</div>
 </div>
 
 <style>
-	button {
+	.buttons {
 		color: var(--navigationbar-text-color);
 		background: none;
 		border: none;
+		display: flex;
 	}
 
 	#query-nav {

@@ -34,4 +34,8 @@
 		margin: 0;
 		background-color: var(--background-color);
 	}
+
+	:global(svg) {
+		outline: none;
+	}
 </style>
