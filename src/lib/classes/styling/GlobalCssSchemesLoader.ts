@@ -45,7 +45,7 @@ class GlobalCssSchemesLoader {
 
 	/**
 	 * Method for applying CSS variabels for a specific mediafeature
-	 * @param {z.infer<typeof MediaScheme>} feature
+	 * @param feature
 	 */
 	applyCssVariables(feature: z.infer<typeof MediaScheme>) {
 		// Apply color variables
@@ -136,8 +136,8 @@ class GlobalCssSchemesLoader {
 
 	/**
 	 * Method for checking and creating CSS color string
-	 * @param {z.infer<typeof ColorValue>} color
-	 * @returns {string} CSS color string
+	 * @param color
+	 * @returns CSS color string
 	 */
 	private createCssColor(color: z.infer<typeof ColorValue>): string {
 		let cssColor: string;

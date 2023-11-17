@@ -40,7 +40,7 @@
 
 	/**
 	 * Function for toggling the includeInPeriodicCheck variable
-	 * @param {MouseEvent} event
+	 * @param event
 	 */
 	function togglePeriodicCheck(event: MouseEvent) {
 		event.stopPropagation();

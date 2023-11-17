@@ -19,7 +19,7 @@
 
 	/**
 	 * Function for toggling the isPeriodic variable
-	 * @param {MouseEvent} event
+	 * @param event
 	 */
 	function togglePeriodicCheck(event: MouseEvent) {
 		event.stopPropagation();
