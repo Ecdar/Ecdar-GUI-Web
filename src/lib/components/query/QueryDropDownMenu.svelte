@@ -26,7 +26,7 @@
 <button bind:this={button} popovertarget={menuId} id={`query-button-${index}`}>
 	<More_vert />
 </button>
-<OverlayMenu anchor={button} id={menuId}>
+<OverlayMenu anchor={button} id={menuId} closeOnReopen={true}>
 	<Panel>
 		{#if isPeriodic}
 			<Button

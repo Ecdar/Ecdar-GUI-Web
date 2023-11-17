@@ -46,7 +46,7 @@
 >
 	<More_vert />
 </button>
-<OverlayMenu anchor={button} id={menuId}>
+<OverlayMenu anchor={button} id={menuId} closeOnReopen={true}>
 	{#if itemType === "component"}
 		<Panel>
 			<p>Configuration</p>

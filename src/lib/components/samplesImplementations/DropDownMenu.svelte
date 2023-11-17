@@ -10,7 +10,7 @@
 </script>
 
 <button bind:this={button} popovertarget={menuId}>Files</button>
-<OverlayMenu anchor={button} id={menuId}>
+<OverlayMenu anchor={button} id={menuId} closeOnReopen={true}>
 	<Panel>
 		<Button icon={Download} text="Load" click={() => {}} />
 	</Panel>

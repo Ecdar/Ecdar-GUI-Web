@@ -27,6 +27,11 @@
 	 */
 	export let id: string | undefined = undefined;
 
+	/**
+	 * A boolean value defining whether or not the overlay menu should close when the opening button is pressed while it is already open.
+	 */
+	export let closeOnReopen: boolean = false;
+
 	let overlayMenuPopover: HTMLElement | undefined;
 	let overlayMenu: HTMLElement | undefined;
 
@@ -83,9 +88,17 @@
 		window.addEventListener(
 			"click",
 			(event) => {
-				event.stopPropagation(); // TODO: Make the users of the overlay menu be able to define the used setting.
-				event.preventDefault();
-				open = false;
+				//if (closeOnReopen) event.preventDefault();
+				//event.stopPropagation();
+				//open = false;
+				const clickedElement = event.target as HTMLElement;
+				if (
+					overlayMenuPopover &&
+					!overlayMenuPopover.contains(clickedElement) &&
+					!clickedElement.matches(`[popovertarget="${id}"]`)
+				) {
+					open = false;
+				}
 			},
 			{
 				signal: closeListenersController.signal,
