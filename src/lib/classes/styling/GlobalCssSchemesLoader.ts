@@ -5,6 +5,7 @@ import MediaSchemes from "./ZodSchemas/MediaSchemes";
 import GlobalCssProperties from "../../GlobalCssProperties.json";
 
 import type { z } from "zod";
+import type TransitionAttribute from "./ZodSchemas/AttributeSchemas/TransitionAttribute";
 
 /**
  * Class for handling the loading of different properties based on active media features
@@ -85,6 +86,17 @@ class GlobalCssSchemesLoader {
 				this._propertyNames.push(key);
 			}
 		}
+
+		// Apply transition variables
+		if (feature.transition) {
+			for (const [key, val] of Object.entries(feature.transition)) {
+				window.document.documentElement.style.setProperty(
+					key,
+					this.createTransition(val),
+				);
+				this._propertyNames.push(key);
+			}
+		}
 	}
 
 	/**
@@ -150,6 +162,26 @@ class GlobalCssSchemesLoader {
 		}
 
 		return cssColor;
+	}
+
+	private createTransition(
+		transition: z.infer<typeof TransitionAttribute>,
+	): string {
+		if (transition[0] === "none") return transition[0];
+
+		let transitionString: string = transition[0];
+
+		if (transition[1]) {
+			transitionString += ` ${transition[1][0] + transition[1][1]}`;
+		}
+		if (transition[2]) {
+			transitionString += ` ${transition[2]}`;
+		}
+		if (transition[3]) {
+			transitionString += ` ${transition[3][0] + transition[3][1]}`;
+		}
+
+		return transitionString;
 	}
 }
 

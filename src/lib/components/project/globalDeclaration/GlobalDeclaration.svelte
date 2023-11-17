@@ -2,7 +2,7 @@
 	import { Description } from "svelte-google-materialdesign-icons";
 </script>
 
-<div class="global-dec" style="background-color: var(--sidebar-element-color);">
+<div id="global-dec">
 	<div class="circle" style="background-color: grey">
 		<div class="icon">
 			<Description size="100%" />
@@ -12,19 +12,19 @@
 </div>
 
 <style>
-	.global-dec {
-		background-color: #eceff1;
+	#global-dec {
+		background-color: var(--sidebar-element-color);
+		transition: var(--sidebar-element-transition);
 		cursor: pointer;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 		padding: 10px;
 		border-bottom: 1px solid black;
-		transition: background-color 200ms;
 	}
 
-	.global-dec:hover {
-		background-color: #cfd8dc;
+	#global-dec:hover {
+		background-color: var(--sidebar-element-hover-color);
 	}
 
 	.circle {

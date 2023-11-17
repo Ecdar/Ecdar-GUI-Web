@@ -8,8 +8,8 @@
 
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
-	let consoleContainer: HTMLElement;
 	let consoleBar: HTMLElement;
+	let consoleElement: HTMLElement;
 
 	let frontEndErrors: string[] = [];
 	let backEndErrors: string[] = [];
@@ -43,16 +43,11 @@
 	function startResizingConsolePanel(event: PointerEvent) {
 		event.preventDefault();
 		if (currentlyCollapsed) return;
-		consoleContainer.setPointerCapture(event.pointerId);
-		consoleContainer.addEventListener("pointermove", resizeConsolePanel);
-		consoleContainer.addEventListener(
-			"pointerup",
-			stopResizingConsolePanel,
-		);
-		consoleContainer.addEventListener(
-			"pointercancel",
-			stopResizingConsolePanel,
-		);
+		consoleElement.style.transition = "none";
+		consoleBar.setPointerCapture(event.pointerId);
+		consoleBar.addEventListener("pointermove", resizeConsolePanel);
+		consoleBar.addEventListener("pointerup", stopResizingConsolePanel);
+		consoleBar.addEventListener("pointercancel", stopResizingConsolePanel);
 	}
 
 	/**
@@ -60,13 +55,11 @@
 	 * @param {PointerEvent} event
 	 */
 	function stopResizingConsolePanel(event: PointerEvent) {
-		consoleContainer.releasePointerCapture(event.pointerId);
-		consoleContainer.removeEventListener("pointermove", resizeConsolePanel);
-		consoleContainer.removeEventListener(
-			"pointerup",
-			stopResizingConsolePanel,
-		);
-		consoleContainer.removeEventListener(
+		consoleElement.style.transition = "var(--console-height-transition)";
+		consoleBar.releasePointerCapture(event.pointerId);
+		consoleBar.removeEventListener("pointermove", resizeConsolePanel);
+		consoleBar.removeEventListener("pointerup", stopResizingConsolePanel);
+		consoleBar.removeEventListener(
 			"pointercancel",
 			stopResizingConsolePanel,
 		);
@@ -77,6 +70,7 @@
 	 *Function for changing between the status of the console
 	 */
 	function changeConsoleCollapsableTextAndHeight() {
+		consoleElement.style.transition = "var(--console-height-transition)";
 		if (currentlyCollapsed) {
 			consoleSize = consoleExtendedSize;
 			currentlyCollapsed = false;
@@ -120,7 +114,7 @@
 	}
 </script>
 
-<div class="outer-overflow" bind:this={consoleContainer}>
+<div class="outer-overflow">
 	<div bind:this={consoleBar} id="console-bar">
 		<div
 			role="button"
@@ -169,7 +163,11 @@
 			Backend
 		</button>
 	</div>
-	<div class="console" style="height: {consoleSize}px;">
+	<div
+		bind:this={consoleElement}
+		class="console"
+		style="height: {consoleSize}px;"
+	>
 		{#if currentTab == Tabs.Frontend}
 			{#each frontEndErrors as error}
 				<ConsoleLine componentText={error} />
@@ -244,6 +242,7 @@
 
 	.console-tab {
 		color: var(--navigationbar-text-color);
+		transition: var(--console-tab-hover-transition);
 		position: relative;
 		height: 3.8em;
 		margin: auto;
