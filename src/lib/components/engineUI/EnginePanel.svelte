@@ -3,14 +3,16 @@
 	import type { EngineDTO } from "./EngineDTO";
 
 	export let tempEngines: Array<EngineDTO>;
+	export let engineSeperateArray: Array<EngineSeperate>;
 </script>
 
 <h2>Engines</h2>
 <div class="engines">
-	{#each tempEngines as engine}
+	{#each tempEngines as engine, index}
 		<EngineSeperate
 			currentEngine={engine}
 			{tempEngines}
+			bind:this={engineSeperateArray[index]}
 		/>
 		<hr />
 	{/each}

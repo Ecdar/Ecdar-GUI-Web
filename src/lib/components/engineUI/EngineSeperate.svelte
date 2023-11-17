@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { EngineType } from "$lib/classes/engine/EngineType";
 	import Modal from "../dialogPopover/Modal.svelte";
 	import type { EngineDTO } from "./EngineDTO";
 	import { Delete, Close, Done } from "svelte-google-materialdesign-icons";
@@ -12,8 +11,26 @@
 	let startPortContainer: HTMLInputElement;
 	let endPortContainer: HTMLInputElement;
 
+	let nameBorderColour: string = "var(--engine-ui-underline-color)";
+	let ipBorderColour: string = "var(--engine-ui-underline-color)";
+	let portColour: string = "var(--engine-ui-underline-color)";
+
+	const regexTest: RegExp = new RegExp(
+		"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+	);
+
+	let engineUIErrorUnderlineColour: string =
+		"var(--engine-ui-error-underline-color)";
+	let engineUIUnderlineColour: string = "var(--engine-ui-underline-color)";
+
 	export let currentEngine: EngineDTO;
 	export let tempEngines: Array<EngineDTO>;
+
+	export const setUpEngineSeperate = () => {
+		changeNameBorder();
+		changeIpBorder();
+		validatePort();
+	};
 
 	/**
 	 * Delete an engine by setting the adress of the engine to -1 and removing it from the view
@@ -39,25 +56,90 @@
 	function onNameChange() {
 		currentEngine.name = nameContainer.value;
 		currentEngine.hasBeenChanged = true;
+		changeNameBorder();
+	}
+
+	function changeNameBorder() {
+		if (!validateName()) {
+			nameBorderColour = engineUIErrorUnderlineColour;
+		} else {
+			nameBorderColour = engineUIUnderlineColour;
+		}
 	}
 
 	function onIPChange() {
 		currentEngine.address = ipAddressContainer.value;
 		currentEngine.hasBeenChanged = true;
+		changeIpBorder();
+	}
+
+	function changeIpBorder() {
+		if (!validateIP()) {
+			ipBorderColour = engineUIErrorUnderlineColour;
+		} else {
+			ipBorderColour = engineUIUnderlineColour;
+		}
 	}
 
 	function onStartPortChange() {
 		currentEngine.portRangeStart = Number(startPortContainer.value);
 		currentEngine.hasBeenChanged = true;
+		validatePort();
 	}
 
 	function onEndPortChange() {
 		currentEngine.portRangeEnd = Number(endPortContainer.value);
 		currentEngine.hasBeenChanged = true;
+		validatePort();
+	}
+
+	function validatePort() {
+		if (!validateStartPort() || !validateEndPort()) {
+			portColour = engineUIErrorUnderlineColour;
+		} else {
+			portColour = engineUIUnderlineColour;
+		}
 	}
 
 	function closeModal() {
 		modalContainer.closeModal();
+	}
+
+	function validateName() {
+		if (nameContainer.value != "" && nameContainer.value !== undefined)
+			return true;
+
+		return false;
+	}
+
+	function validateIP() {
+		if (ipAddressContainer.value.match(regexTest)) {
+			return true;
+		}
+		return false;
+	}
+
+	function validateStartPort() {
+		if (
+			0 <= Number(startPortContainer.value) &&
+			Number(startPortContainer.value) <= 65352 &&
+			Number(startPortContainer.value) <=
+				Number(endPortContainer.value) &&
+			startPortContainer.value != ""
+		)
+			return true;
+
+		return false;
+	}
+
+	function validateEndPort() {
+		if (
+			Number(endPortContainer.value) <= 65353 &&
+			Number(startPortContainer.value) <= Number(endPortContainer.value)
+		)
+			return true;
+
+		return false;
 	}
 </script>
 
@@ -65,11 +147,11 @@
 	<div class="delete-dialog">
 		<div class="inner-delete-dialog">
 			<h4 id="delete-text">
-				{#if currentEngine.name !== ""}					
-				Are you sure you wish to delete the engine:
-				{currentEngine.name}
+				{#if currentEngine.name !== ""}
+					Are you sure you wish to delete the engine:
+					{currentEngine.name}
 				{:else}
-				Are you sure you wish to delete this engine?
+					Are you sure you wish to delete this engine?
 				{/if}
 			</h4>
 			<button
@@ -97,8 +179,10 @@
 			type="text"
 			placeholder="Name"
 			id="name"
+			value={currentEngine.name}
 			on:change={onNameChange}
 			bind:this={nameContainer}
+			style="--borderColour: {nameBorderColour}"
 		/>
 		<button
 			type="button"
@@ -113,9 +197,11 @@
 			type="text"
 			placeholder="192.168.1.1"
 			id="IP"
+			value={currentEngine.address != "-1" ? currentEngine.address : ""}
 			on:change={onIPChange}
 			bind:this={ipAddressContainer}
-		/> 
+			style="--borderColour: {ipBorderColour}"
+		/>
 	</div>
 	<div id="port-range-box" class="box">
 		Port range:
@@ -126,8 +212,12 @@
 			class="port-input"
 			min="0"
 			max="65535"
+			value={currentEngine.portRangeStart != -1
+				? currentEngine.portRangeStart
+				: ""}
 			on:change={onStartPortChange}
 			bind:this={startPortContainer}
+			style="--borderColour: {portColour}"
 		/>
 		-
 		<input
@@ -137,9 +227,13 @@
 			class="port-input"
 			min="0"
 			max="65535"
+			value={currentEngine.portRangeEnd != -1
+				? currentEngine.portRangeEnd
+				: ""}
 			on:change={onEndPortChange}
 			bind:this={endPortContainer}
-		/> 
+			style="--borderColour: {portColour}"
+		/>
 	</div>
 </form>
 
@@ -170,17 +264,19 @@
 	#name {
 		width: 90%;
 		padding: 0.4em 0.4em 0.2em 0.4em;
+		border-bottom: 0.05em solid var(--borderColour);
 	}
 
 	#IP {
 		width: 70%;
 		padding: 0.4em 0.4em 0.2em 0.4em;
+		border-bottom: 0.05em solid var(--borderColour);
 	}
 
 	.port-input {
 		width: 37%;
 		border: none;
-		border-bottom: 0.05em solid var(--engine-ui-underline-color);
+		border-bottom: 0.05em solid var(--borderColour);
 		background-color: var(--console-selectedtab-color);
 		color: var(--engine-ui-text-color);
 		text-align: center;
@@ -206,7 +302,6 @@
 
 	input[type="text"] {
 		border: none;
-		border-bottom: 0.05em solid var(--engine-ui-underline-color);
 		background-color: var(--console-selectedtab-color);
 		color: var(--engine-ui-text-color);
 		margin: 0.2em;
@@ -248,5 +343,4 @@
 	#name-box {
 		padding-top: 0.5rem;
 	}
-
 </style>

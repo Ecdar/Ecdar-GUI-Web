@@ -2,7 +2,12 @@
 	"default": {
 		"mediaFeature": "default",
 		"color": {
-			"--navigationbar-text-color": ["display-p3", 1, 1, 1],
+			"--navigationbar-text-color": [
+				"display-p3",
+				1,
+				1,
+				1
+			],
 			"--console-scrollbar-thumb-color": [
 				"display-p3",
 				0.22745098039,
@@ -45,8 +50,18 @@
 				0.34901960784,
 				0.38823529411
 			],
-			"--canvas-text-color": ["display-p3", 0, 0, 0],
-			"--sidebar-text-color": ["display-p3", 0, 0, 0],
+			"--canvas-text-color": [
+				"display-p3",
+				0,
+				0,
+				0
+			],
+			"--sidebar-text-color": [
+				"display-p3",
+				0,
+				0,
+				0
+			],
 			"--background-color": [
 				"display-p3",
 				0.95686274509,
@@ -71,7 +86,12 @@
 				0.27450980392,
 				0.30588235294
 			],
-			"--console-text-color": ["display-p3", 0, 0, 0],
+			"--console-text-color": [
+				"display-p3",
+				0,
+				0,
+				0
+			],
 			"--sidebar-element-color": [
 				"display-p3",
 				0.93333333333,
@@ -84,8 +104,18 @@
 				0.84705882352,
 				0.86274509803
 			],
-			"--queries-input-background-color": ["display-p3", 1, 1, 1],
-			"--canvas-action-color": ["display-p3", 0, 0, 0],
+			"--queries-input-background-color": [
+				"display-p3",
+				1,
+				1,
+				1
+			],
+			"--canvas-action-color": [
+				"display-p3",
+				0,
+				0,
+				0
+			],
 			"--console-tab-hover-color": [
 				"display-p3",
 				0.3362745098,
@@ -98,7 +128,18 @@
 				0.39901960784,
 				0.43823529411
 			],
-			"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
+			"--engine-ui-underline-color": [
+				"display-p3",
+				1,
+				1,
+				1
+			],
+			"--engine-ui-error-underline-color": [
+				"display-p3",
+				0.82745098039,
+				0.18431372549,
+				0.18431372549
+			],
 			"--engine-ui-input-text-placeholder-color": [
 				"display-p3",
 				0.8,
@@ -125,19 +166,41 @@
 			]
 		},
 		"fontSize": {
-			"--sidebar-fontsize": [1, "rem"],
-			"--sidebar-navigationbar-fontsize": [1, "rem"]
+			"--sidebar-fontsize": [
+				1,
+				"rem"
+			],
+			"--sidebar-navigationbar-fontsize": [
+				1,
+				"rem"
+			]
 		},
 		"border": {
 			"--main-navigationbar-border": [
 				"solid",
-				[0.1, "em"],
-				["display-p3", 0.18823529411, 0.22745098039, 0.25098039215]
+				[
+					0.1,
+					"em"
+				],
+				[
+					"display-p3",
+					0.18823529411,
+					0.22745098039,
+					0.25098039215
+				]
 			],
 			"--main-innernavigationbar-border": [
 				"none solid solid solid",
-				[0.1, "em"],
-				["display-p3", 0.18823529411, 0.22745098039, 0.25098039215]
+				[
+					0.1,
+					"em"
+				],
+				[
+					"display-p3",
+					0.18823529411,
+					0.22745098039,
+					0.25098039215
+				]
 			]
 		}
 	},
@@ -157,8 +220,18 @@
 					0.06666666666,
 					0.09019607843
 				],
-				"--canvas-text-color": ["display-p3", 1, 1, 1],
-				"--sidebar-text-color": ["display-p3", 1, 1, 1],
+				"--canvas-text-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
+				"--sidebar-text-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
 				"--background-color": [
 					"display-p3",
 					0.09019607843,
@@ -183,7 +256,12 @@
 					0.02352941176,
 					0.03529411764
 				],
-				"--console-text-color": ["display-p3", 1, 1, 1],
+				"--console-text-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
 				"--sidebar-element-color": [
 					"display-p3",
 					0.19215686274,
@@ -202,7 +280,12 @@
 					0.06666666666,
 					0.09019607843
 				],
-				"--canvas-action-color": ["display-p3", 1, 1, 1],
+				"--canvas-action-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
 				"--console-tab-hover-color": [
 					"display-p3",
 					0.13490196078,
@@ -215,7 +298,18 @@
 					0.14666666666,
 					0.17019607843
 				],
-				"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
+				"--engine-ui-underline-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
+				"--engine-ui-error-underline-color": [
+					"display-p3",
+					0.82745098039,
+					0.18431372549,
+					0.18431372549
+				],
 				"--engine-ui-input-text-placeholder-color": [
 					"display-p3",
 					0.7333,
@@ -228,14 +322,18 @@
 					0.95,
 					0.95
 				],
-				"--engine-ui-scrollbar-thumb-color": ["display-p3", 0, 0, 0],
+				"--engine-ui-scrollbar-thumb-color": [
+					"display-p3",
+					0,
+					0,
+					0
+				],
 				"--engine-ui-text-color": [
 					"display-p3",
 					1,
 					1,
 					1
 				]
-
 			}
 		}
 	]

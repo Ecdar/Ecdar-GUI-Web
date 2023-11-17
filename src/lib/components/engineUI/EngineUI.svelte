@@ -5,12 +5,13 @@
 	import EnginePanel from "./EnginePanel.svelte";
 	import { Save, Add, Close, Done } from "svelte-google-materialdesign-icons";
 	import type IModalComponent from "$lib/interfaces/IModalComponent";
-
-
+	import type EngineSeperate from "./EngineSeperate.svelte";
 	let dialogContainer!: Modal & IModalComponent;
 	let tempEngines: EngineDTO[] = [];
 	let unsavedChangesModal: Modal & IModalComponent;
 	let incorrectInformationModal: Modal & IModalComponent;
+
+	let engineSeperateArray: Array<EngineSeperate> = [];
 
 	/**
 	 * Reset the engineUI view and show the engineUI
@@ -74,52 +75,58 @@
 	 * onSubmit place all the temporary engines into EngineStorage, and delete the engines which have been deleted
 	 */
 	function onSubmit() {
-		tempEngines.forEach((engine) => {
-			if (engine.id == -1) {
-				if (
-					engine.address == "-1"
-					) return;
+		try {
+			tempEngines.forEach((engine) => {
+				if (engine.id == -1) {
+					if (engine.address == "-1") return;
 					handleCreateNewEngine(engine);
 				}
-			if (engine.id != -1) {
-				if (engine.address == "-1") {
-					EngineStorage.deleteEngine(engine.id);
-					return;
+				if (engine.id != -1) {
+					if (engine.address == "-1") {
+						EngineStorage.deleteEngine(engine.id);
+						return;
+					}
+					let tempEngine = EngineStorage.getEngine(engine.id);
+
+					tempEngine.address = engine.address;
+					tempEngine.name = engine.name;
+					tempEngine.portRangeStart = engine.portRangeStart;
+					tempEngine.portRangeEnd = engine.portRangeEnd;
+					tempEngine.type = engine.type;
 				}
-				let tempEngine = EngineStorage.getEngine(engine.id);
-
-				tempEngine.address = engine.address;
-				tempEngine.name = engine.name;
-				tempEngine.portRangeStart = engine.portRangeStart;
-				tempEngine.portRangeEnd = engine.portRangeEnd;
-				tempEngine.type = engine.type;
-			}
-		});
-	}
-
-	function handleCreateNewEngine(engine: EngineDTO) {
-		try {
-			EngineStorage.createEngine(
-				engine.name,
-				engine.address,
-				engine.portRangeStart,
-				engine.portRangeEnd,
-				engine.type,
-			);		
+			});
+			tempEngines = [];
+			tempEngines = tempEngines;
+			forceCloseDialogContainer();
 		} catch (error) {
-			console.log(error); // Send to real console
+			engineSeperateArray.forEach((engine) => {
+				engine.setUpEngineSeperate();
+			});
+			console.log("Error on saving: " + error);
+			incorrectInformationModal.showModal();
 		}
 	}
 
+	function handleCreateNewEngine(engine: EngineDTO) {
+		EngineStorage.createEngine(
+			engine.name,
+			engine.address,
+			engine.portRangeStart,
+			engine.portRangeEnd,
+			engine.type,
+		);
+	}
 
 	/**
 	 * Close the modal, but check if there are any unsaved changes
 	 */
 	function closeModal() {
-		if(!checkIfChanged()) {
+		if (!checkIfChanged()) {
 			unsavedChangesModal.showModal();
 			return;
 		}
+		tempEngines = [];
+		tempEngines = tempEngines;
 		dialogContainer.closeModal();
 	}
 
@@ -137,16 +144,15 @@
 	function closeUnsavedChangesDialog() {
 		unsavedChangesModal.closeModal();
 	}
-	
 </script>
 
 <Modal bind:this={dialogContainer}>
 	<form on:submit={onSubmit}>
 		<div class="engine-panel">
-			<EnginePanel {tempEngines} />
+			<EnginePanel {tempEngines} {engineSeperateArray} />
 		</div>
 		<div id="button-box">
-			<button on:click={closeModal} id="save-button" class="unselectable"
+			<button on:click={onSubmit} id="save-button" class="unselectable"
 				><Save size="18" /></button
 			>
 			<button
@@ -169,8 +175,8 @@
 	<div class="modal-dialog">
 		<div class="inner-modal-dialog">
 			<h4 id="modal-text">
-				You have unsaved changes. Are you sure you wish to close the Engine tab?
-				Your changes may not be saved.
+				You have unsaved changes. Are you sure you wish to close the
+				Engine tab? Your changes may not be saved.
 			</h4>
 			<button
 				on:click={forceCloseDialogContainer}
@@ -189,10 +195,11 @@
 </Modal>
 
 <Modal bind:this={incorrectInformationModal}>
-	<div>
-		<div>
+	<div class="modal-dialog">
+		<div class="inner-modal-dialog">
 			<h4 id="modal-text">
-				The information could not be processed. Check the input and try again.
+				The information could not be processed. Check the input and try
+				again.
 			</h4>
 			<button
 				on:click={incorrectInformationModal.closeModal}
@@ -271,12 +278,11 @@
 	}
 
 	.modal-dialog {
-		padding: 0.6em;
+		padding: 1em;
 	}
 
 	.inner-modal-dialog {
 		padding: 0.2em;
 		background-color: var(--console-selectedtab-color);
 	}
-
 </style>
