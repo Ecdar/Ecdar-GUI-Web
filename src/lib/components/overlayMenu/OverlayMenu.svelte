@@ -88,17 +88,9 @@
 		window.addEventListener(
 			"click",
 			(event) => {
-				//if (closeOnReopen) event.preventDefault();
-				//event.stopPropagation();
-				//open = false;
-				const clickedElement = event.target as HTMLElement;
-				if (
-					overlayMenuPopover &&
-					!overlayMenuPopover.contains(clickedElement) &&
-					!clickedElement.matches(`[popovertarget="${id}"]`)
-				) {
-					open = false;
-				}
+				if (closeOnReopen) event.preventDefault();
+				event.stopPropagation();
+				open = false;
 			},
 			{
 				signal: closeListenersController.signal,
