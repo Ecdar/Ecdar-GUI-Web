@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ComponentType } from "svelte";
-	import { number } from "zod";
 
 	export let click: (event: MouseEvent) => void = () => {};
 	export let icon: ComponentType;

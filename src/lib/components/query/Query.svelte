@@ -84,12 +84,6 @@
 </div>
 
 <style>
-	button {
-		color: var(--navigationbar-text-color);
-		background: none;
-		border: none;
-	}
-
 	.query {
 		background-color: var(--sidebar-element-color);
 		display: flex;
