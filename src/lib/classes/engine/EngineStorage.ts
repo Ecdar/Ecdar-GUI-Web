@@ -50,7 +50,7 @@ class EngineStorage {
 	/**
 	 * Create an Engine and pushes it to engineArray
 	 */
-	 createEngine(
+	createEngine(
 		name: string,
 		address: string,
 		portRangeStart: number,
@@ -158,5 +158,5 @@ class EngineStorage {
 		});
 	}
 }
-let engineStorage = new EngineStorage();
-export default engineStorage as EngineStorage;
+const engineStorage = new EngineStorage();
+export default engineStorage;
