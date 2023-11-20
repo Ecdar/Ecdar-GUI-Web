@@ -17,6 +17,7 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
+	import { fileAdapter } from "$lib/classes/fileAdapter/FileAdapter";
 </script>
 
 <!--
@@ -41,8 +42,8 @@
 		<DropDownButton
 			icon={File_open}
 			name="Open Project"
-			on:click={() => {
-				console.log("Open Project");
+			on:click={async () => {
+				fileAdapter.load(await fileAdapter.openDialog());
 			}}
 		/>
 		<DropDownButton
@@ -55,15 +56,15 @@
 		<DropDownButton
 			icon={Save}
 			name="Save Project"
-			on:click={() => {
-				console.log("Save Project");
+			on:click={async () => {
+				await fileAdapter.save(undefined);
 			}}
 		/>
 		<DropDownButton
 			icon={Save}
 			name="Save Project as"
-			on:click={() => {
-				console.log("Save Project as");
+			on:click={async () => {
+				await fileAdapter.save(await fileAdapter.saveDialog()); //TODO: write
 			}}
 		/>
 
