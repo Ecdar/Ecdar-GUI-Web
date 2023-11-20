@@ -2,6 +2,7 @@
 	import Console from "../lib/components/console/Console.svelte";
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
+	import { callEndpoint } from "$lib/classes/communication";
 
 	enum SidePanel {
 		Left,
@@ -81,6 +82,7 @@
 	<div class="canvas">
 		<nav class="inner-nav2">Nav 2</nav>
 		<p>Canvas</p>
+		<button on:click={() => { console.log(callEndpoint("ecdarBackend", "getUserToken", { ip : "127.0.0.1:4000", body : {}})); }}>Click Me</button>
 		<DropDownMenu />
 		<LocationsWithContextMenu />
 	</div>
