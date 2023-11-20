@@ -11,20 +11,18 @@
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
-
-	let mainContainer: HTMLElement;
 </script>
 
 <!-- Top navigation Panel -->
 <nav id="main-nav">
 	<TopBar />
 </nav>
-<main bind:this={mainContainer}>
+<main>
 	{#if $project === undefined}
 		<StartScreen />
 	{:else}
 		<!-- Left side -->
-		<SidePanel panelSide={SidePanelEnum.Left} {mainContainer}>
+		<SidePanel panelSide={SidePanelEnum.Left}>
 			<ProjectNav slot="nav" />
 			<div slot="content">
 				<GlobalDeclaration />
@@ -37,7 +35,7 @@
 			<SvgView />
 		</div>
 		<!-- Right side -->
-		<SidePanel panelSide={SidePanelEnum.Right} {mainContainer}>
+		<SidePanel panelSide={SidePanelEnum.Right}>
 			<QueryNav slot="nav" />
 			<div slot="content">
 				<Queries />
@@ -77,7 +75,6 @@
 		display: flex;
 		flex-direction: column;
 		color: var(--canvas-text-color);
-		background-color: var(--background-color);
 		flex-grow: 1;
 	}
 </style>
