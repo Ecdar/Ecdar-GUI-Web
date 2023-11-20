@@ -224,7 +224,10 @@
 			icon={Error}
 			name="About"
 			on:click={() => {
-				console.log("About");
+				var answer = window.confirm("This will open Ecdars webpage.");
+				if(answer){
+					window.open("https://www.ecdar.net/");
+				}
 			}}
 		/>
 	</TopBarButton>
