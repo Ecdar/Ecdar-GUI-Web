@@ -12,6 +12,7 @@ export async function writeProjectRecursive(
 	relativePath: string,
 	fs: FileSystem,
 ): Promise<void> {
+	// TODO: move to own console
 	console.info("WRITING TO " + relativePath + fileElement.filename);
 
 	switch (fileElement.type) {

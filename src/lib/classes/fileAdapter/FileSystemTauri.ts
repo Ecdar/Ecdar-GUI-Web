@@ -2,7 +2,7 @@ import type { FileEntry } from "@tauri-apps/api/fs";
 import { FileSystem } from "./FileSystem";
 import { inTauri } from "$lib/tauri";
 
-export class TauriFileSystem extends FileSystem {
+export class FileSystemTauri extends FileSystem {
 	static supported = inTauri;
 
 	async saveDialog(path: string | undefined): Promise<string | undefined> {

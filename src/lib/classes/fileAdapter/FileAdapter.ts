@@ -4,8 +4,8 @@ import { ZodRawComponent } from "../automaton/component/raw/RawComponent";
 import { deserializeRaw } from "../jsonAdapter/zodSerializers";
 import {
 	writeProjectRecursive,
-	type IFileElement,
 	readProjectRecursive,
+	type IFileElement,
 } from "./RecursiveFilesSystem";
 import type { RawProject } from "../automaton/raw/RawProject";
 import { ZodRawGlobalDeclarations } from "../automaton/raw/RawGlobalDeclarations";
@@ -17,15 +17,35 @@ import { get } from "svelte/store";
 import type { Components } from "../automaton/component/Components";
 import type { Systems } from "../automaton/system/Systems";
 import type { FileSystem } from "./FileSystem";
-import { TauriFileSystem } from "./FileAdapterTauri";
+import { FileSystemTauri } from "./FileSystemTauri";
+import { FileSystemFallback } from "./FileSystemFallback";
 
-let rawProject: RawProject;
-let fs: FileSystem;
-let savePath: string;
+export class FileAdapter {
+	rawProject: RawProject;
+	fs: FileSystem;
+	savePath: string;
 
-class FileAdapter {
+	constructor(fs?: FileSystem) {
+		this.rawProject = {
+			systems: [],
+			components: [],
+		};
+		this.savePath = "";
+
+		if (fs) {
+			this.fs = fs;
+			return;
+		}
+
+		if (FileSystemTauri.supported) {
+			this.fs = new FileSystemTauri();
+		} else {
+			this.fs = new FileSystemFallback();
+		} // TODO: add universal after implementing it
+	}
+
 	async openDialog(): Promise<string> {
-		const path = await fs.openDialog();
+		const path = await this.fs.openDialog();
 
 		if (!path) throw new Error("No path selected");
 
@@ -33,7 +53,7 @@ class FileAdapter {
 	}
 
 	async saveDialog(): Promise<string> {
-		const path = await fs.saveDialog(savePath);
+		const path = await this.fs.saveDialog(this.savePath);
 
 		if (!path) throw new Error("No path selected");
 
@@ -77,20 +97,20 @@ class FileAdapter {
 				},
 			],
 		};
-		if (!path && !savePath)
+		if (!path && !this.savePath)
 			throw new Error("Unable to save: No path selected");
 		path = path
 			? path.split("/").slice(0, -2).join("/")
-			: savePath.split("/").slice(0, -2).join("/");
-		await writeProjectRecursive(fileProject, path + "/", fs);
+			: this.savePath.split("/").slice(0, -2).join("/");
+		await writeProjectRecursive(fileProject, path + "/", this.fs);
 	}
 
-	async load(path: string): Promise<void> {
-		savePath = path;
-		const FileElements = await readProjectRecursive(path, fs);
+	async load(path: string): Promise<Project> {
+		this.savePath = path;
+		const FileElements = await readProjectRecursive(path, this.fs);
 
 		// reset rawProject
-		rawProject = {
+		this.rawProject = {
 			systems: [],
 			components: [],
 		};
@@ -103,18 +123,20 @@ class FileAdapter {
 			else this.loadFile(file);
 		}
 
-		project.set(
-			Project.fromRaw(rawProject, {
-				id: new ProjectId(path.split("/").slice(-2)[0]),
-			}),
-		);
+		return Project.fromRaw(this.rawProject, {
+			id: new ProjectId(path.split("/").slice(-2)[0]),
+		});
+	}
+
+	setFS(newFS: FileSystem): void {
+		this.fs = newFS;
 	}
 
 	private loadFile(file: IFileElement): void {
 		switch (file.filename) {
 			case "GlobalDeclarations.json":
 				console.log("Loading global declarations ... ");
-				rawProject.globalDeclarations = deserializeRaw(
+				this.rawProject.globalDeclarations = deserializeRaw(
 					ZodRawGlobalDeclarations,
 					file.content ?? "",
 				);
@@ -124,7 +146,7 @@ class FileAdapter {
 
 			case "Queries.json":
 				console.log("Loading queries ... ");
-				rawProject.queries = deserializeRaw(
+				this.rawProject.queries = deserializeRaw(
 					z.array(ZodRawQuery),
 					file.content ?? "",
 				);
@@ -166,7 +188,7 @@ class FileAdapter {
 				ZodRawComponent,
 				file.content ?? "",
 			);
-			rawProject.components?.push(component);
+			this.rawProject.components?.push(component);
 		}
 	}
 
@@ -174,14 +196,10 @@ class FileAdapter {
 		for (const file of files) {
 			if (file.type === "directory") continue;
 			const system = deserializeRaw(ZodRawSystem, file.content ?? "");
-			rawProject.systems?.push(system);
+			this.rawProject.systems?.push(system);
 		}
 	}
 }
-
-if (TauriFileSystem.supported) {
-	fs = new TauriFileSystem();
-} // TODO: add universal after implementing it
 
 function mapFiles<T extends Components | Systems>(input: T): IFileElement[] {
 	const output: IFileElement[] = [];
@@ -194,5 +212,3 @@ function mapFiles<T extends Components | Systems>(input: T): IFileElement[] {
 	}
 	return output;
 }
-
-export const fileAdapter = new FileAdapter();

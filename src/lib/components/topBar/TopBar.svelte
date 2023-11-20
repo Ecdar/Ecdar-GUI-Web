@@ -17,7 +17,13 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
-	import { fileAdapter } from "$lib/classes/fileAdapter/FileAdapter";
+	import { FileAdapter } from "$lib/classes/fileAdapter/FileAdapter";
+	import { onMount } from "svelte";
+	import { project } from "$lib/globalState/activeProject";
+	let fileAdapter: FileAdapter;
+	onMount(() => {
+		fileAdapter = new FileAdapter();
+	});
 </script>
 
 <!--
@@ -43,7 +49,9 @@
 			icon={File_open}
 			name="Open Project"
 			on:click={async () => {
-				fileAdapter.load(await fileAdapter.openDialog());
+				project.set(
+					await fileAdapter.load(await fileAdapter.openDialog()),
+				);
 			}}
 		/>
 		<DropDownButton
