@@ -14,7 +14,6 @@
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 
-	let mainContainer: HTMLElement;
 	let engineUIContainer: EngineUi & IEngineUIComponent;
 
 	function openEngineUI() {

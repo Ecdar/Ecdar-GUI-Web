@@ -5,22 +5,21 @@ import type { EngineType } from "./EngineType";
  * Engine storage definition.
  * Stores an array of Engine instances, and can create, delete or search the array
  * */
-export default class EngineStorage {
-	_: number = 0;
+class EngineStorage {
 	/**
 	 * Array of engines defined
 	 * */
-	static engineArray: Array<Engine> = [];
+	engineArray: Array<Engine> = [];
 
 	/**
 	 * variable used to give unique id to engines
 	 * */
-	static #engineId: number = 0;
+	#engineId: number = 0;
 
-	static get engineId(): number {
+	get engineId(): number {
 		return (this.engineId = ++this.#engineId); //auto inc
 	}
-	static set engineId(id: number) {
+	set engineId(id: number) {
 		if (id >= 0) this.#engineId = id;
 		else throw new Error("Invalid engineId");
 	}
@@ -28,11 +27,11 @@ export default class EngineStorage {
 	/**
 	 * Array of engines defined
 	 * */
-	static #defaultEngine: Engine | undefined;
-	static get defaultEngine(): Engine | undefined {
+	#defaultEngine: Engine | undefined;
+	get defaultEngine(): Engine | undefined {
 		return this.#defaultEngine;
 	}
-	static set defaultEngine(engine: Engine | undefined) {
+	set defaultEngine(engine: Engine | undefined) {
 		let index = -1;
 
 		index = this.engineArray.findIndex((engine: Engine) => {
@@ -43,15 +42,15 @@ export default class EngineStorage {
 	}
 
 	constructor() {
-		EngineStorage.engineArray = new Array<Engine>();
-		EngineStorage.engineId = 0;
-		EngineStorage.defaultEngine = undefined;
+		this.engineArray = new Array<Engine>();
+		this.engineId = 0;
+		this.defaultEngine = undefined;
 	}
 
 	/**
 	 * Create an Engine and pushes it to engineArray
 	 */
-	static createEngine(
+	 createEngine(
 		name: string,
 		address: string,
 		portRangeStart: number,
@@ -72,7 +71,7 @@ export default class EngineStorage {
 	/**
 	 * Deletes the engine with the given id
 	 */
-	static deleteEngine(id: number) {
+	deleteEngine(id: number) {
 		const engineIndex: number = this.engineArray.findIndex(
 			(engine: Engine) => {
 				return engine.id === id;
@@ -92,7 +91,7 @@ export default class EngineStorage {
 	/**
 	 * Get engines based on id or name
 	 */
-	static getEngine(identifier: number | string): Engine {
+	getEngine(identifier: number | string): Engine {
 		let returnEngine: undefined | Engine;
 
 		//Find engine based on id
@@ -114,18 +113,18 @@ export default class EngineStorage {
 	/**
 	 * Returns all engines in the store in the form of an array
 	 */
-	static getEngineArray(): Engine[] {
+	getEngineArray(): Engine[] {
 		return this.engineArray;
 	}
 
 	/**
 	 * Coonvert the EngineStorage to a JSON string
 	 */
-	static serialize(): string {
+	serialize(): string {
 		return JSON.stringify(this);
 	}
 
-	static toJSON() {
+	toJSON() {
 		return {
 			engineArray: this.engineArray,
 			engineId: this.#engineId,
@@ -136,7 +135,7 @@ export default class EngineStorage {
 	/**
 	 * Reads fields and engines from JSON string, and applies them in the store
 	 */
-	static deSerialize(json: string) {
+	deSerialize(json: string) {
 		const parsedJSON: IEngineStorageObject = JSON.parse(
 			json,
 		) as IEngineStorageObject;
@@ -159,3 +158,5 @@ export default class EngineStorage {
 		});
 	}
 }
+let engineStorage = new EngineStorage();
+export default engineStorage as EngineStorage;
