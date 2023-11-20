@@ -91,6 +91,9 @@
 	 *@param tab
 	 */
 	function changeTab(tab: Tabs) {
+		if (currentlyCollapsed) {
+			changeConsoleCollapsableTextAndHeight();
+		}
 		currentTab = tab;
 	}
 
