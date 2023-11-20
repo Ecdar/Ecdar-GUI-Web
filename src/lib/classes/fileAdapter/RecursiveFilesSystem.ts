@@ -1,4 +1,4 @@
-import type { IFileSystem } from "./IFileSystem";
+import type { FileSystem } from "./FileSystem";
 
 export interface IFileElement {
 	type: "file" | "directory";
@@ -10,7 +10,7 @@ export interface IFileElement {
 export async function writeProjectRecursive(
 	fileElement: IFileElement,
 	relativePath: string,
-	fs: IFileSystem,
+	fs: FileSystem,
 ): Promise<void> {
 	console.info("WRITING TO " + relativePath + fileElement.filename);
 
@@ -43,7 +43,7 @@ export async function writeProjectRecursive(
 
 export async function readProjectRecursive(
 	relativePath: string,
-	fs: IFileSystem,
+	fs: FileSystem,
 ): Promise<IFileElement> {
 	const fileElement: IFileElement = {
 		type: "directory",

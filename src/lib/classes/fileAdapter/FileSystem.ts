@@ -1,4 +1,4 @@
-export abstract class IFileSystem {
+export abstract class FileSystem {
 	abstract openDialog(): Promise<string | undefined>;
 	abstract saveDialog(path: string | undefined): Promise<string | undefined>;
 	abstract exists(path: string): Promise<boolean>;

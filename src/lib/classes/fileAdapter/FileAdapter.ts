@@ -16,11 +16,11 @@ import { ProjectId } from "../automaton/ProjectId";
 import { get } from "svelte/store";
 import type { Components } from "../automaton/component/Components";
 import type { Systems } from "../automaton/system/Systems";
-import type { IFileSystem } from "./IFileSystem";
+import type { FileSystem } from "./FileSystem";
 import { TauriFileSystem } from "./FileAdapterTauri";
 
 let rawProject: RawProject;
-let fs: IFileSystem;
+let fs: FileSystem;
 let savePath: string;
 
 class FileAdapter {
