@@ -1,17 +1,16 @@
 import { Tabs } from "$lib/classes/Tabs";
 import { writable, type Writable } from "svelte/store";
 
-export class Console {
-	static frontendConsoleLines: Writable<string[]> = writable([]);
-	static backendConsoleLines: Writable<string[]> = writable([]);
-	_: number = 0;
+class Console {
+	frontendConsoleLines: Writable<string[]> = writable([]);
+	backendConsoleLines: Writable<string[]> = writable([]);
 
-	static writeLineFrontend(textLine: string) {
-		Console.frontendConsoleLines.update((items) => [...items, textLine]);
+	writeLineFrontend(textLine: string) {
+		this.frontendConsoleLines.update((items) => [...items, textLine]);
 	}
 
-	static writeLineBackend(textLine: string) {
-		Console.backendConsoleLines.update((items) => [...items, textLine]);
+	writeLineBackend(textLine: string) {
+		this.backendConsoleLines.update((items) => [...items, textLine]);
 	}
 
 	/**
@@ -19,19 +18,19 @@ export class Console {
 	 *@param error
 	 *@param tab
 	 */
-	static sendErrorToTab(error: string, tab: Tabs) {
+	sendErrorToTab(error: string, tab: Tabs) {
 		switch (tab) {
 			case Tabs.Frontend:
-				Console.writeLineFrontend(error);
+				this.writeLineFrontend(error);
 
 				break;
 			case Tabs.Backend:
-				Console.writeLineBackend(error);
+				this.writeLineBackend(error);
 
 				break;
 			case Tabs.All:
-				Console.writeLineBackend(error);
-				Console.writeLineFrontend(error);
+				this.writeLineBackend(error);
+				this.writeLineFrontend(error);
 
 				break;
 			default:
@@ -39,3 +38,6 @@ export class Console {
 		}
 	}
 }
+
+const instance: Console = new Console();
+export default instance;

@@ -5,7 +5,7 @@
 		Arrow_downward,
 		Arrow_upward,
 	} from "svelte-google-materialdesign-icons";
-	import { Console } from "$lib/classes/console/Console";
+	import Console from "$lib/classes/console/Console";
 
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
