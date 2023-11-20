@@ -118,6 +118,7 @@
 
 	p {
 		margin: 0.5em 0;
+		text-align: left;
 	}
 
 	.colors {
