@@ -35,6 +35,10 @@
 		background-color: var(--background-color);
 	}
 
+	:global(button:not(:disabled)){
+		cursor: pointer;
+	}
+
 	:global(svg) {
 		outline: none;
 	}
