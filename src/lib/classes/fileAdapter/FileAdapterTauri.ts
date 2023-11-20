@@ -1,9 +1,9 @@
 import type { FileEntry } from "@tauri-apps/api/fs";
-import type { IFileSystem } from "./IFileSystem";
+import { IFileSystem } from "./IFileSystem";
 import { inTauri } from "$lib/tauri";
 
-export class TauriFileSystem implements IFileSystem {
-	static supported = () => inTauri;
+export class TauriFileSystem extends IFileSystem {
+	static supported = inTauri;
 
 	async saveDialog(path: string | undefined): Promise<string | undefined> {
 		const dialog = await import("@tauri-apps/api/dialog");
