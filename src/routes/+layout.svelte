@@ -35,7 +35,7 @@
 		background-color: var(--background-color);
 	}
 
-	:global(button:not(:disabled)){
+	:global(button:not(:disabled)) {
 		cursor: pointer;
 	}
 

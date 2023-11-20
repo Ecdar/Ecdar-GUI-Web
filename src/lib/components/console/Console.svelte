@@ -134,18 +134,6 @@
 		/>
 		<button
 			type="button"
-			class="collapsible unselectable"
-			on:click={changeConsoleCollapsableTextAndHeight}
-		>
-			{#if currentlyCollapsed}
-				<Arrow_upward size="18" color="white" />
-			{:else}
-				<Arrow_downward size="18" color="white" />
-			{/if}
-		</button>
-
-		<button
-			type="button"
 			class="console-tab front-end-button unselectable"
 			style="background-color: {currentTab == Tabs.Frontend
 				? consoleButtonColorOn
@@ -167,6 +155,18 @@
 			}}
 		>
 			Backend
+		</button>
+
+		<button
+			type="button"
+			class="collapsible unselectable"
+			on:click={changeConsoleCollapsableTextAndHeight}
+		>
+			{#if currentlyCollapsed}
+				<Arrow_upward size="18" color="white" />
+			{:else}
+				<Arrow_downward size="18" color="white" />
+			{/if}
 		</button>
 	</div>
 	<div class="console" style="height: {consoleSize}px;">
@@ -252,6 +252,7 @@
 		border-bottom: 0em;
 		border-style: solid;
 		float: left;
+		outline-offset: -2px;
 	}
 
 	.console-tab:hover {
@@ -262,6 +263,7 @@
 		border-left: 0;
 		border-right: 0;
 	}
+
 	.unselectable {
 		-webkit-user-select: none;
 		-ms-user-select: none;
