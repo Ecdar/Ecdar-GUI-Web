@@ -180,7 +180,7 @@ class FileAdapter {
 }
 
 if (TauriFileSystem.supported()) {
-	fs = new TauriFileSystem();
+	fs = new TauriFileSystem() as IFileSystem;
 } // TODO: add universal after implementing it
 
 function mapFiles<T extends Components | Systems>(input: T): IFileElement[] {
