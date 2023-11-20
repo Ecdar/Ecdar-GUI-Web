@@ -1,5 +1,6 @@
 <script lang="ts">
 	let dialogContainer: HTMLDialogElement;
+	export let ModalCloseOnBackdrop: boolean;
 
 	/**
 	 * Function for showing the current modal
@@ -14,9 +15,26 @@
 	export function closeModal() {
 		dialogContainer.close();
 	}
+
+	/**
+	 * Function for closing the current modal when the backdrop is clicked if
+	 * ModalCloseOnBackdrop is true
+	 */
+	function closeModalOnBackdropClick() {
+		if (ModalCloseOnBackdrop) {
+			dialogContainer.close();
+		}
+	}
 </script>
 
-<dialog bind:this={dialogContainer}>
+<!--TODO: Remove this when supported by Svelte-->
+<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
+<dialog
+	bind:this={dialogContainer}
+	on:click|self={() => {
+		closeModalOnBackdropClick();
+	}}
+>
 	<div class="box">
 		<slot />
 	</div>

@@ -142,7 +142,7 @@
 	}
 </script>
 
-<Modal bind:this={modalContainer}>
+<Modal bind:this={modalContainer} ModalCloseOnBackdrop={false}>
 	<div class="delete-dialog">
 		<div class="inner-delete-dialog">
 			<h4 id="delete-text">
