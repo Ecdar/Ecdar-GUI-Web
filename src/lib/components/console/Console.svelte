@@ -24,7 +24,7 @@
 
 	/**
 	 * Function for resizing the console
-	 * @param event
+	 * @param {PointerEvent} event
 	 */
 	function resizeConsolePanel(event: PointerEvent) {
 		event.preventDefault();
@@ -38,7 +38,7 @@
 
 	/**
 	 * Function for starting resizing the console
-	 * @param event
+	 * @param {PointerEvent} event
 	 */
 	function startResizingConsolePanel(event: PointerEvent) {
 		event.preventDefault();
@@ -57,7 +57,7 @@
 
 	/**
 	 * Function for stopping resizing the console
-	 * @param event
+	 * @param {PointerEvent} event
 	 */
 	function stopResizingConsolePanel(event: PointerEvent) {
 		consoleContainer.releasePointerCapture(event.pointerId);
@@ -88,16 +88,19 @@
 
 	/**
 	 *Function for changing the current tab of the console
-	 *@param tab
+	 *@param {Tabs} tab
 	 */
 	function changeTab(tab: Tabs) {
+		if (currentlyCollapsed) {
+			changeConsoleCollapsableTextAndHeight();
+		}
 		currentTab = tab;
 	}
 
 	/**
 	 *Function for sending an error to a specific tab in the console
-	 *@param error
-	 *@param tab
+	 *@param {string} error
+	 *@param {Tabs} tab
 	 */
 	export function sendErrorToTab(error: string, tab: Tabs) {
 		switch (tab) {

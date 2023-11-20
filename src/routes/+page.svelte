@@ -27,12 +27,12 @@
 <nav id="main-nav">
 	<TopBar on:toggle={openEngineUI} />
 </nav>
-<main bind:this={mainContainer}>
+<main>
 	{#if $project === undefined}
 		<StartScreen />
 	{:else}
 		<!-- Left side -->
-		<SidePanel panelSide={SidePanelEnum.Left} {mainContainer}>
+		<SidePanel panelSide={SidePanelEnum.Left}>
 			<ProjectNav slot="nav" />
 			<div slot="content">
 				<GlobalDeclaration />
@@ -45,7 +45,7 @@
 			<SvgView />
 		</div>
 		<!-- Right side -->
-		<SidePanel panelSide={SidePanelEnum.Right} {mainContainer}>
+		<SidePanel panelSide={SidePanelEnum.Right}>
 			<QueryNav slot="nav" />
 			<div slot="content">
 				<Queries />
