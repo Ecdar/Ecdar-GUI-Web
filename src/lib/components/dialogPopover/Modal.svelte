@@ -1,6 +1,6 @@
 <script lang="ts">
 	let dialogContainer: HTMLDialogElement;
-	export let ModalCloseOnBackdrop: boolean;
+	export let ModalCloseOnBackdrop: boolean = false;
 
 	/**
 	 * Function for showing the current modal

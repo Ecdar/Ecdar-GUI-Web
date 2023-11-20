@@ -147,7 +147,7 @@
 	}
 </script>
 
-<Modal bind:this={dialogContainer} ModalCloseOnBackdrop={false}>
+<Modal bind:this={dialogContainer}>
 	<form on:submit={onSubmit}>
 		<div class="engine-panel">
 			<EnginePanel {tempEngines} {engineSeperateArray} />
@@ -172,7 +172,7 @@
 	</form>
 </Modal>
 
-<Modal bind:this={unsavedChangesModal} ModalCloseOnBackdrop={false}>
+<Modal bind:this={unsavedChangesModal}>
 	<div class="modal-dialog">
 		<div class="inner-modal-dialog">
 			<h4 id="modal-text">
@@ -195,7 +195,7 @@
 	</div>
 </Modal>
 
-<Modal bind:this={incorrectInformationModal} ModalCloseOnBackdrop={false}>
+<Modal bind:this={incorrectInformationModal}>
 	<div class="modal-dialog">
 		<div class="inner-modal-dialog">
 			<h4 id="modal-text">
