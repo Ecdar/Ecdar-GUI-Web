@@ -11,7 +11,7 @@
 
 	/**
 	 * Function for setting up event listeners when the mouse is pressed down on the svg
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function onPointerDown(event: PointerEvent) {
 		controller = new AbortController();
@@ -28,7 +28,7 @@
 
 	/**
 	 * Function for updating the position of the svg
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function onPointerMove(event: PointerEvent) {
 		position.x += event.movementX / $scale;
@@ -40,7 +40,7 @@
 
 	/**
 	 * Function for removing the event listeners when the mouse is released using AbortController
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function onPointerUp(event: PointerEvent) {
 		element.releasePointerCapture(event.pointerId);

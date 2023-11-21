@@ -3,6 +3,7 @@
 		Note_add,
 		Create_new_folder,
 	} from "svelte-google-materialdesign-icons";
+	import SvgButton from "$lib/components/buttons/SvgButton.svelte";
 	import { components, systems } from "$lib/globalState/activeProject";
 	import { Component } from "$lib/classes/automaton/Component";
 	import { System } from "$lib/classes/automaton/System";
@@ -28,9 +29,19 @@
 	<div>
 		<h1>Project</h1>
 	</div>
-	<div>
-		<Create_new_folder on:click={addComponent} id="add-component" />
-		<Note_add on:click={addSystem} id="add-system" />
+	<div class="buttons">
+		<SvgButton
+			icon={Create_new_folder}
+			click={addComponent}
+			size={30}
+			id="add-component"
+		/>
+		<SvgButton
+			icon={Note_add}
+			click={addSystem}
+			size={30}
+			id="add-system"
+		/>
 	</div>
 </div>
 
@@ -41,5 +52,9 @@
 		align-items: center;
 		height: 100%;
 		padding: 0 1em;
+	}
+
+	.buttons {
+		display: flex;
 	}
 </style>
