@@ -36,6 +36,8 @@ export const ColorVariables = z
 		"--engine-ui-scrollbar-thumb-background-color": ColorAttribute,
 		"--engine-ui-scrollbar-thumb-color": ColorAttribute,
 		"--engine-ui-text-color": ColorAttribute,
+		"--engine-ui-background-color": ColorAttribute,
+		"--engine-ui-button-color": ColorAttribute,
 	})
 	.strict();
 

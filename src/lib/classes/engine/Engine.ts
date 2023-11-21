@@ -27,6 +27,11 @@ export class Engine {
 		const regexTest: RegExp = new RegExp(
 			"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
 		);
+		if (this.useBundle) {
+			this.#address = "127.0.0.1";
+			return;
+		}
+
 		if (regexTest.test(ipAdress)) this.#address = ipAdress;
 		else throw new Error(ipAdress + " Is an invalid IP address");
 	}
@@ -82,6 +87,8 @@ export class Engine {
 
 	hasBeenChanged: boolean = false;
 
+	useBundle: boolean = false;
+
 	constructor(
 		name: string,
 		address: string,
@@ -89,7 +96,9 @@ export class Engine {
 		portRangeEnd: number,
 		type: EngineType,
 		id: number,
+		useBundle: boolean,
 	) {
+		this.useBundle = useBundle;
 		this.name = name;
 		this.address = address;
 		this.portRangeStart = portRangeStart;

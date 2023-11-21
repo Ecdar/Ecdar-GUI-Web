@@ -29,6 +29,7 @@
 				type: engine.type,
 				id: engine.id,
 				hasBeenChanged: false,
+				useBundle: engine.useBundle,
 			};
 
 			tempEngines.push(tempEngine);
@@ -54,6 +55,7 @@
 			type: 0,
 			id: -1,
 			hasBeenChanged: false,
+			useBundle: false,
 		};
 
 		tempEngines.push(newEngine);
@@ -90,11 +92,13 @@
 					}
 					let tempEngine = EngineStorage.getEngine(engine.id);
 
+					tempEngine.useBundle = engine.useBundle;
 					tempEngine.address = engine.address;
 					tempEngine.name = engine.name;
 					tempEngine.portRangeStart = engine.portRangeStart;
 					tempEngine.portRangeEnd = engine.portRangeEnd;
 					tempEngine.type = engine.type;
+					tempEngine.hasBeenChanged = false;
 				}
 			});
 			tempEngines = [];
@@ -115,6 +119,7 @@
 			engine.portRangeStart,
 			engine.portRangeEnd,
 			engine.type,
+			engine.useBundle,
 		);
 	}
 
@@ -284,6 +289,6 @@
 
 	.inner-modal-dialog {
 		padding: 0.2em;
-		background-color: var(--console-selectedtab-color);
+		background-color: var(--engine-ui-background-color);
 	}
 </style>

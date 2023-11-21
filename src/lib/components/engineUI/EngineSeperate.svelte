@@ -1,8 +1,15 @@
 <script lang="ts">
 	import Modal from "../dialogPopover/Modal.svelte";
 	import type { EngineDTO } from "./EngineDTO";
-	import { Delete, Close, Done } from "svelte-google-materialdesign-icons";
+	import {
+		Delete,
+		Close,
+		Done,
+		Check_box,
+		Check_box_outline_blank,
+	} from "svelte-google-materialdesign-icons";
 	import type iModalComponent from "$lib/interfaces/IModalComponent";
+	import Button from "../overlayMenu/elements/Button.svelte";
 
 	let formElement: HTMLFormElement;
 	let modalContainer: Modal & iModalComponent;
@@ -74,6 +81,11 @@
 	}
 
 	function changeIpBorder() {
+		if (currentEngine.useBundle) {
+			ipBorderColour = "grey";
+			return;
+		}
+
 		if (!validateIP()) {
 			ipBorderColour = engineUIErrorUnderlineColour;
 		} else {
@@ -112,6 +124,7 @@
 	}
 
 	function validateIP() {
+		if (currentEngine.useBundle) return true;
 		if (ipAddressContainer.value.match(regexTest)) {
 			return true;
 		}
@@ -139,6 +152,12 @@
 			return true;
 
 		return false;
+	}
+
+	function toggleUseBundle(event: MouseEvent) {
+		event.stopPropagation();
+		currentEngine.useBundle = !currentEngine.useBundle;
+		changeIpBorder();
 	}
 </script>
 
@@ -199,8 +218,30 @@
 			value={currentEngine.address != "-1" ? currentEngine.address : ""}
 			on:change={onIPChange}
 			bind:this={ipAddressContainer}
-			style="--borderColour: {ipBorderColour}"
+			style="--borderColour: {ipBorderColour}; color: {currentEngine.useBundle
+				? 'grey'
+				: 'var(--engine-ui-text-color)'}"
+			readonly={currentEngine.useBundle}
 		/>
+		<div id="local-button" class="unselectable">
+			{#if currentEngine.useBundle}
+				<Button
+					icon={Check_box}
+					text="Use Bundle"
+					click={toggleUseBundle}
+					backgroundColor={"var(--engine-ui-button-color)"}
+					buttonColor={"var(--engine-ui-text-color)"}
+				/>
+			{:else}
+				<Button
+					icon={Check_box_outline_blank}
+					text="Use Bundle"
+					click={toggleUseBundle}
+					backgroundColor={"var(--engine-ui-button-color)"}
+					buttonColor={"var(--engine-ui-text-color)"}
+				/>
+			{/if}
+		</div>
 	</div>
 	<div id="port-range-box" class="box">
 		Port range:
@@ -237,8 +278,14 @@
 </form>
 
 <style>
+	.unselectable {
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
 	form {
-		background-color: var(--console-selectedtab-color);
+		background-color: var(--engine-ui-background-color);
 		padding: 0.2em;
 		color: var(--engine-ui-text-color);
 	}
@@ -257,7 +304,7 @@
 
 	.inner-delete-dialog {
 		padding: 0.2em;
-		background-color: var(--console-selectedtab-color);
+		background-color: var(--engine-ui-background-color);
 	}
 
 	#name {
@@ -267,7 +314,7 @@
 	}
 
 	#IP {
-		width: 70%;
+		width: 60%;
 		padding: 0.4em 0.4em 0.2em 0.4em;
 		border-bottom: 0.05em solid var(--borderColour);
 	}
@@ -276,7 +323,7 @@
 		width: 37%;
 		border: none;
 		border-bottom: 0.05em solid var(--borderColour);
-		background-color: var(--console-selectedtab-color);
+		background-color: var(--engine-ui-background-color);
 		color: var(--engine-ui-text-color);
 		text-align: center;
 		padding: 0.4em 0.4em 0.2em 0.4em;
@@ -301,7 +348,7 @@
 
 	input[type="text"] {
 		border: none;
-		background-color: var(--console-selectedtab-color);
+		background-color: var(--engine-ui-background-color);
 		color: var(--engine-ui-text-color);
 		margin: 0.2em;
 	}
@@ -331,7 +378,7 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		width: 30em;
+		width: 32em;
 		padding: 0.1rem 0.4rem 0.1rem 0.4rem;
 	}
 
@@ -341,5 +388,9 @@
 
 	#name-box {
 		padding-top: 0.5rem;
+	}
+
+	#local-button {
+		width: 24%;
 	}
 </style>

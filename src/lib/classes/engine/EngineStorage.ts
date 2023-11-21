@@ -56,6 +56,7 @@ class EngineStorage {
 		portRangeStart: number,
 		portRangeEnd: number,
 		type: EngineType,
+		useBundle: boolean,
 	) {
 		const newEngine = new Engine(
 			name,
@@ -64,6 +65,7 @@ class EngineStorage {
 			portRangeEnd,
 			type,
 			this.engineId,
+			useBundle,
 		);
 		this.engineArray.push(newEngine);
 	}
@@ -153,6 +155,7 @@ class EngineStorage {
 					engine.portRangeEnd,
 					engine.type,
 					engine.id,
+					engine.useBundle,
 				),
 			);
 		});

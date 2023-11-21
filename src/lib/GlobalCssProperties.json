@@ -123,7 +123,19 @@
 				0.6941,
 				0.6706
 			],
-			"--engine-ui-text-color": ["display-p3", 1, 1, 1]
+			"--engine-ui-text-color": ["display-p3", 1, 1, 1],
+			"--engine-ui-background-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			],
+			"--engine-ui-button-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			]
 		},
 		"fontSize": {
 			"--sidebar-fontsize": [1, "rem"],
@@ -236,6 +248,18 @@
 					0.95
 				],
 				"--engine-ui-scrollbar-thumb-color": ["display-p3", 0, 0, 0],
+				"--engine-ui-background-color": [
+					"display-p3",
+					0.08490196078,
+					0.09666666666,
+					0.12019607843
+				],
+				"--engine-ui-button-color": [
+					"display-p3",
+					0.08490196078,
+					0.09666666666,
+					0.12019607843
+				],
 				"--engine-ui-text-color": ["display-p3", 1, 1, 1]
 			}
 		}
