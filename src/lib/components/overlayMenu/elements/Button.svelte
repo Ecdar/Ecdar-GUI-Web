@@ -15,6 +15,7 @@
 <button
 	on:click={click}
 	style="background-color: {backgroundColor}; color: {buttonColor}"
+	tabindex="-1"
 >
 	<svelte:component this={icon} ariaLabel="" class="icon" />
 	<p>{text}</p>

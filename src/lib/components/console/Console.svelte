@@ -24,7 +24,7 @@
 
 	/**
 	 * Function for resizing the console
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function resizeConsolePanel(event: PointerEvent) {
 		event.preventDefault();
@@ -38,7 +38,7 @@
 
 	/**
 	 * Function for starting resizing the console
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function startResizingConsolePanel(event: PointerEvent) {
 		event.preventDefault();
@@ -57,7 +57,7 @@
 
 	/**
 	 * Function for stopping resizing the console
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function stopResizingConsolePanel(event: PointerEvent) {
 		consoleContainer.releasePointerCapture(event.pointerId);
@@ -88,7 +88,7 @@
 
 	/**
 	 *Function for changing the current tab of the console
-	 *@param {Tabs} tab
+	 *@param tab
 	 */
 	function changeTab(tab: Tabs) {
 		if (currentlyCollapsed) {
@@ -99,8 +99,8 @@
 
 	/**
 	 *Function for sending an error to a specific tab in the console
-	 *@param {string} error
-	 *@param {Tabs} tab
+	 *@param error
+	 *@param tab
 	 */
 	export function sendErrorToTab(error: string, tab: Tabs) {
 		switch (tab) {
@@ -137,18 +137,6 @@
 		/>
 		<button
 			type="button"
-			class="collapsible unselectable"
-			on:click={changeConsoleCollapsableTextAndHeight}
-		>
-			{#if currentlyCollapsed}
-				<Arrow_upward size="18" color="white" />
-			{:else}
-				<Arrow_downward size="18" color="white" />
-			{/if}
-		</button>
-
-		<button
-			type="button"
 			class="console-tab front-end-button unselectable"
 			style="background-color: {currentTab == Tabs.Frontend
 				? consoleButtonColorOn
@@ -170,6 +158,18 @@
 			}}
 		>
 			Backend
+		</button>
+
+		<button
+			type="button"
+			class="collapsible unselectable"
+			on:click={changeConsoleCollapsableTextAndHeight}
+		>
+			{#if currentlyCollapsed}
+				<Arrow_upward size="18" color="white" />
+			{:else}
+				<Arrow_downward size="18" color="white" />
+			{/if}
 		</button>
 	</div>
 	<div class="console" style="height: {consoleSize}px;">
@@ -255,6 +255,7 @@
 		border-bottom: 0em;
 		border-style: solid;
 		float: left;
+		outline-offset: -2px;
 	}
 
 	.console-tab:hover {
@@ -265,6 +266,7 @@
 		border-left: 0;
 		border-right: 0;
 	}
+
 	.unselectable {
 		-webkit-user-select: none;
 		-ms-user-select: none;
