@@ -51,8 +51,6 @@ export class FileAdapter {
 		rawProject: RawProject,
 		path: string | undefined,
 	): Promise<void> {
-		if (!rawProject) throw new Error("No project loaded");
-
 		const fileProject: IFileElement = {
 			type: "directory",
 			filename:

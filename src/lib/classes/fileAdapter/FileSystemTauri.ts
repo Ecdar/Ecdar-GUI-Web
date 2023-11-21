@@ -55,12 +55,14 @@ export class FileSystemTauri extends FileSystem {
 		await fs.writeFile(path, content);
 	}
 
-	async isFile(path: string): Promise<boolean> {
+	isFile(path: string): Promise<boolean> {
 		// if the path isn't .json or .json/ then it is a folder
-		return path.endsWith(".json") || path.endsWith(".json/");
+		return new Promise((resolve) => {
+			resolve(path.endsWith(".json") || path.endsWith(".json/"));
+		});
 	}
 
 	async isDirectory(path: string): Promise<boolean> {
-		return !this.isFile(path);
+		return !(await this.isFile(path));
 	}
 }
