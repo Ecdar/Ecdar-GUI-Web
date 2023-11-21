@@ -46,6 +46,7 @@ describe("Console array tests", () => {
 
 		expect(backendArray[backendArray.length - 1].split(" - ")[1]).toBe(string);
 		expect(frontendArray[frontendArray.length - 1].split(" - ")[1]).toBe(string2);
+
 	});
 });
 
