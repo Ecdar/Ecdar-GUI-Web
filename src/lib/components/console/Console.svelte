@@ -95,10 +95,8 @@
 		currentTab = tab;
 	}
 
-
 	let frontendConsole = Console.frontendConsoleLines;
 	let backendConsole = Console.backendConsoleLines;
-
 </script>
 
 <div class="outer-overflow" bind:this={consoleContainer}>

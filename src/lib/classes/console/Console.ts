@@ -25,7 +25,7 @@ class Console {
 	 *Function for getting a copy of the frontend tab's store
 	 *@returns Frontend tab's string array
 	 */
-	getFrontendArray(): string[]{
+	getFrontendArray(): string[] {
 		return get(this.frontendConsoleLines);
 	}
 
@@ -33,7 +33,7 @@ class Console {
 	 *Function for getting a copy of the backend tab's store
 	 *@returns Backend tab's string array
 	 */
-	getBackendArray(): string[]{
+	getBackendArray(): string[] {
 		return get(this.backendConsoleLines);
 	}
 
