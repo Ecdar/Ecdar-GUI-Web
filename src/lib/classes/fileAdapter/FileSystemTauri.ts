@@ -1,6 +1,6 @@
 import type { FileEntry } from "@tauri-apps/api/fs";
 import { FileSystem } from "./FileSystem";
-import { inTauri } from "$lib/tauri";
+import { inTauri } from "../../tauri";
 
 export class FileSystemTauri extends FileSystem {
 	static supported = inTauri;
@@ -55,12 +55,12 @@ export class FileSystemTauri extends FileSystem {
 		await fs.writeFile(path, content);
 	}
 
-	isFile(path: string): boolean {
+	async isFile(path: string): Promise<boolean> {
 		// if the path isn't .json or .json/ then it is a folder
 		return path.endsWith(".json") || path.endsWith(".json/");
 	}
 
-	isDirectory(path: string): boolean {
+	async isDirectory(path: string): Promise<boolean> {
 		return !this.isFile(path);
 	}
 }

@@ -46,14 +46,14 @@ export abstract class FileSystem {
 	 * @param path The path to check
 	 * @returns A boolean of whether the path is a file
 	 */
-	abstract isFile(path: string): boolean;
+	abstract isFile(path: string): Promise<boolean>;
 
 	/**
 	 * A method to check whether a path is a directory or not
 	 * @param path The path to check
 	 * @returns A boolean of whether the path is a directory
 	 */
-	abstract isDirectory(path: string): boolean;
+	abstract isDirectory(path: string): Promise<boolean>;
 
 	/**
 	 * A method to read a file

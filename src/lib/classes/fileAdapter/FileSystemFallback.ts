@@ -1,4 +1,5 @@
 import { FileSystem } from "./FileSystem";
+import type { IFileElement } from "./RecursiveFilesSystem";
 
 export class FileSystemFallback extends FileSystem {
 	private fileInput: HTMLInputElement;
@@ -69,12 +70,12 @@ export class FileSystemFallback extends FileSystem {
 		throw new Error("Method not implemented.");
 	}
 
-	isFile(path: string): boolean {
+	async isFile(path: string): Promise<boolean> {
 		if (path.endsWith(".json")) return true;
 
 		return false;
 	}
-	isDirectory(path: string): boolean {
+	async isDirectory(path: string): Promise<boolean> {
 		return !this.isFile(path);
 	}
 

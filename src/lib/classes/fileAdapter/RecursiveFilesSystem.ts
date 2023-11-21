@@ -13,7 +13,7 @@ export async function writeProjectRecursive(
 	fs: FileSystem,
 ): Promise<void> {
 	// TODO: move to own console
-	console.info("WRITING TO " + relativePath + fileElement.filename);
+	//console.info("WRITING TO " + relativePath + fileElement.filename);
 
 	switch (fileElement.type) {
 		case "directory": {
@@ -55,13 +55,13 @@ export async function readProjectRecursive(
 	const filenames = await fs.readDir(relativePath);
 
 	for (const filename of filenames) {
-		if (fs.isDirectory(relativePath + filename)) {
+		if (await fs.isDirectory(relativePath + filename)) {
 			if (/\/\.[^/]*\/?$/u.test(relativePath + filename + "/")) continue;
 
 			fileElement.children?.push(
 				await readProjectRecursive(relativePath + filename + "/", fs),
 			);
-		} else if (fs.isFile(relativePath + filename)) {
+		} else if (await fs.isFile(relativePath + filename)) {
 			fileElement.children?.push({
 				type: "file",
 				filename,
