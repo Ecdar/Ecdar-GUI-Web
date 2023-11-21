@@ -10,7 +10,8 @@ class Console {
 	 *@param textLine - The textline to be printed by the Console
 	 */
 	writeLineFrontend(textLine: string) {
-		this.frontendConsoleLines.update((items) => [...items, textLine]);
+		const timeStamp = this.createTimeStamp();
+		this.frontendConsoleLines.update((items) => [...items, `${timeStamp} - ${textLine}`]);
 	}
 
 	/**
@@ -18,7 +19,8 @@ class Console {
 	 *@param textLine - The textline to be printed by the Console
 	 */
 	writeLineBackend(textLine: string) {
-		this.backendConsoleLines.update((items) => [...items, textLine]);
+		const timeStamp = this.createTimeStamp();
+		this.backendConsoleLines.update((items) => [...items, `${timeStamp} - ${textLine}`]);
 	}
 
 	/**
@@ -60,6 +62,12 @@ class Console {
 			default:
 				break;
 		}
+	}
+
+	createTimeStamp() {
+		const dateObject = new Date(Date.now());
+
+		return dateObject.toLocaleString();  //Output: 2/20/2023, 7:41:42 AM	
 	}
 }
 

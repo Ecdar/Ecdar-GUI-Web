@@ -17,6 +17,8 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
+	import Console from "../console/Console.svelte";
+	import writableConsole from "$lib/classes/console/Console";
 </script>
 
 <!--
@@ -36,6 +38,7 @@
 			name="New Project"
 			on:click={() => {
 				console.log("New Project");
+				writableConsole.writeLineFrontend("test");
 			}}
 		/>
 		<DropDownButton
