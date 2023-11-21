@@ -37,32 +37,40 @@ export class LocationEdges extends IdMap<
 		LocationEdges
 	> = (raw, { locationEdgeIds, locationIds }) => {
 		const locationEdges = new LocationEdges(locationEdgeIds);
-		for (const rawLocationEdge of raw) {
-			const id = locationEdges.ids.getNewIdFromRaw(rawLocationEdge.id);
-
-			if (!id)
-				//TODO: Make this a user-friendly message with different options for recovering
-				throw new TypeError(
-					`Cannot load raw LocationEdges where multiple id's are equivalent: ${rawLocationEdge.id}`,
+		if (raw) {
+			for (const rawLocationEdge of raw) {
+				const id = locationEdges.ids.getNewIdFromRaw(
+					rawLocationEdge.id,
 				);
 
-			const source = locationIds.get(rawLocationEdge.sourceLocation);
-			if (!source)
-				//TODO: Make this a user-friendly message with different options for recovering
-				throw new TypeError(
-					`Cannot load raw LocationEdge ${rawLocationEdge.id} because its source Location doesn't exist: ${rawLocationEdge.sourceLocation}`,
-				);
+				if (!id)
+					//TODO: Make this a user-friendly message with different options for recovering
+					throw new TypeError(
+						`Cannot load raw LocationEdges where multiple id's are equivalent: ${rawLocationEdge.id}`,
+					);
 
-			const target = locationIds.get(rawLocationEdge.targetLocation);
-			if (!target)
-				//TODO: Make this a user-friendly message with different options for recovering
-				throw new TypeError(
-					`Cannot load raw LocationEdge ${rawLocationEdge.id} because its target Location doesn't exist: ${rawLocationEdge.targetLocation}`,
-				);
+				const source = locationIds.get(rawLocationEdge.sourceLocation);
+				if (!source)
+					//TODO: Make this a user-friendly message with different options for recovering
+					throw new TypeError(
+						`Cannot load raw LocationEdge ${rawLocationEdge.id} because its source Location doesn't exist: ${rawLocationEdge.sourceLocation}`,
+					);
 
-			locationEdges.add(
-				LocationEdge.fromRaw(rawLocationEdge, { id, source, target }),
-			);
+				const target = locationIds.get(rawLocationEdge.targetLocation);
+				if (!target)
+					//TODO: Make this a user-friendly message with different options for recovering
+					throw new TypeError(
+						`Cannot load raw LocationEdge ${rawLocationEdge.id} because its target Location doesn't exist: ${rawLocationEdge.targetLocation}`,
+					);
+
+				locationEdges.add(
+					LocationEdge.fromRaw(rawLocationEdge, {
+						id,
+						source,
+						target,
+					}),
+				);
+			}
 		}
 		return locationEdges;
 	};

@@ -23,10 +23,12 @@ export class SystemDeclarations extends Declarations<
 	 * Converts the SystemDeclarations to a RawSystemDeclarations
 	 */
 	toRaw() {
-		return {
-			name: this.type,
-			declarations: this.declarations,
-		};
+		return this.declarations === ""
+			? undefined
+			: {
+					name: this.type,
+					declarations: this.declarations,
+			  };
 	}
 
 	/**
@@ -37,6 +39,6 @@ export class SystemDeclarations extends Declarations<
 		undefined,
 		SystemDeclarations
 	> = (raw) => {
-		return new SystemDeclarations(raw.declarations);
+		return new SystemDeclarations(raw?.declarations);
 	};
 }

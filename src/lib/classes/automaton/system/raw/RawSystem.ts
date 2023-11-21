@@ -4,7 +4,7 @@ import { ZodRawPosition } from "../../raw/RawPosition";
 import { ZodRawDimensions } from "../../raw/RawDimensions";
 import { ZodRawComponentInstances } from "./RawComponentInstances";
 import { ZodRawOperators } from "./RawOperators";
-import { ZodRawComponentEdge } from "./RawComponentEdge";
+import { ZodRawSystemMemberEdge } from "./RawSystemMemberEdge";
 
 /**
  * Used to parse a RawSystem through Zod
@@ -18,7 +18,7 @@ export const ZodRawSystem = z.object({
 	systemRootX: ZodRawPosition.shape.x.optional(),
 	componentInstances: ZodRawComponentInstances.optional(),
 	operators: ZodRawOperators.optional(),
-	edges: ZodRawComponentEdge.array().optional(),
+	edges: ZodRawSystemMemberEdge.array().optional(),
 });
 
 /**

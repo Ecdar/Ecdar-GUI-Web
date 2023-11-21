@@ -12,7 +12,7 @@ export class Invariant extends AutomatonClass<RawInvariant> {
 		 * The invariant function
 		 * ex c >= 8
 		 */
-		public fn: string,
+		public fn: string = "",
 
 		/**
 		 * The position of the invariant

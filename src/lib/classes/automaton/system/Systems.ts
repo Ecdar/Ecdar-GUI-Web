@@ -19,7 +19,9 @@ export class Systems extends IdMap<
 	}
 
 	toRaw() {
-		return [...this].map((system) => system.toRaw());
+		return this.size === 0
+			? undefined
+			: [...this].map((system) => system.toRaw());
 	}
 
 	static readonly fromRaw: FromRaw<
@@ -28,16 +30,18 @@ export class Systems extends IdMap<
 		Systems
 	> = (raw, { componentIds }) => {
 		const systems = new Systems();
-		for (const rawSystem of raw) {
-			const id = systems.ids.getNewIdFromRaw(rawSystem.name);
+		if (raw) {
+			for (const rawSystem of raw) {
+				const id = systems.ids.getNewIdFromRaw(rawSystem.name);
 
-			if (!id)
-				//TODO: Make this a user-friendly message with different options for recovering
-				throw new TypeError(
-					`Cannot load raw Systems where multiple names are equivalent: ${rawSystem.name}`,
-				);
+				if (!id)
+					//TODO: Make this a user-friendly message with different options for recovering
+					throw new TypeError(
+						`Cannot load raw Systems where multiple names are equivalent: ${rawSystem.name}`,
+					);
 
-			systems.add(System.fromRaw(rawSystem, { id, componentIds }));
+				systems.add(System.fromRaw(rawSystem, { id, componentIds }));
+			}
 		}
 		return systems;
 	};

@@ -4,7 +4,7 @@ import { ZodRawLocationEdge } from "./RawLocationEdge";
 /**
  * Used to parse a RawLocationEdges through Zod
  */
-export const ZodRawLocationEdges = z.array(ZodRawLocationEdge);
+export const ZodRawLocationEdges = z.array(ZodRawLocationEdge).optional();
 
 /**
  * The raw Object for a LocationEdges that is used to save and communicate in JSON.

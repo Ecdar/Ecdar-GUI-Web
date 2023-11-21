@@ -15,7 +15,9 @@ export class ComponentInstances extends IdMapScoped<
 	RawComponentInstances
 > {
 	toRaw() {
-		return [...this].map((componentInstance) => componentInstance.toRaw());
+		return this.size === 0
+			? undefined
+			: [...this].map((componentInstance) => componentInstance.toRaw());
 	}
 
 	static readonly fromRaw: FromRaw<
@@ -27,23 +29,25 @@ export class ComponentInstances extends IdMapScoped<
 		ComponentInstances
 	> = (raw, { systemMemberIds, componentIds }) => {
 		const componentInstances = new ComponentInstances(systemMemberIds);
-		for (const rawComponentInstance of raw) {
-			const id = componentInstances.ids.getNewIdFromRaw(
-				rawComponentInstance.id,
-			);
-
-			if (!id)
-				//TODO: Make this a user-friendly message with different options for recovering
-				throw new TypeError(
-					`Cannot load raw ComponentInstances where multiple id's are equivalent: ${rawComponentInstance.id}`,
+		if (raw) {
+			for (const rawComponentInstance of raw) {
+				const id = componentInstances.ids.getNewIdFromRaw(
+					rawComponentInstance.id,
 				);
 
-			componentInstances.add(
-				ComponentInstance.fromRaw(rawComponentInstance, {
-					id,
-					componentIds,
-				}),
-			);
+				if (!id)
+					//TODO: Make this a user-friendly message with different options for recovering
+					throw new TypeError(
+						`Cannot load raw ComponentInstances where multiple id's are equivalent: ${rawComponentInstance.id}`,
+					);
+
+				componentInstances.add(
+					ComponentInstance.fromRaw(rawComponentInstance, {
+						id,
+						componentIds,
+					}),
+				);
+			}
 		}
 		return componentInstances;
 	};

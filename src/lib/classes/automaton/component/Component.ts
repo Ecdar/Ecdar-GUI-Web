@@ -138,14 +138,14 @@ export class Component
 		},
 		Component
 	> = (raw, { id, locationIds, locationEdgeIds }) => {
-		const locations = Locations.fromRaw(raw.locations ?? [], {
+		const locations = Locations.fromRaw(raw.locations, {
 			locationIds,
 		});
 		return new Component(
 			id,
 			locations,
 			findInitialLocation(locations, raw.locations),
-			LocationEdges.fromRaw(raw.edges ?? [], {
+			LocationEdges.fromRaw(raw.edges, {
 				locationIds,
 				locationEdgeIds,
 			}),
@@ -166,6 +166,8 @@ function setInitialLocation(
 	rawInitialLocation: RawLocationId,
 	rawLocations: RawLocations,
 ) {
+	if (!rawLocations)
+		throw new TypeError("There should always be at least one raw location");
 	for (const rawLocation of rawLocations) {
 		if (rawLocation.id === rawInitialLocation) {
 			rawLocation.type = "INITIAL";

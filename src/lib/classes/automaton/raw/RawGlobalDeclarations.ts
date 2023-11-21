@@ -4,10 +4,12 @@ import { ZodRawDeclarations } from "./RawDeclarations";
 /**
  * Used to parse a RawGlobalDeclaration through Zod
  */
-export const ZodRawGlobalDeclarations = z.object({
-	...ZodRawDeclarations.shape,
-	name: z.literal("Global Declarations").optional(),
-});
+export const ZodRawGlobalDeclarations = z
+	.object({
+		...ZodRawDeclarations.shape,
+		name: z.literal("Global Declarations").optional(),
+	})
+	.optional();
 
 /**
  * The raw Object for a GlobalDeclarations that is used to save and communicate in JSON.

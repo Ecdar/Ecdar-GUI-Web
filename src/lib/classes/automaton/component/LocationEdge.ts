@@ -63,7 +63,7 @@ export class LocationEdge extends AutomatonClass<RawLocationEdge> {
 		/**
 		 * Unused
 		 */
-		public isLocked: boolean = true,
+		public isLocked: boolean = false,
 
 		/**
 		 * The nails of the edge

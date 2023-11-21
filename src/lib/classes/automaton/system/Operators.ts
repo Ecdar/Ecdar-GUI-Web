@@ -14,7 +14,9 @@ export class Operators extends IdMapScoped<
 	RawOperators
 > {
 	toRaw() {
-		return [...this].map((operator) => operator.toRaw());
+		return this.size === 0
+			? undefined
+			: [...this].map((operator) => operator.toRaw());
 	}
 
 	static readonly fromRaw: FromRaw<
@@ -25,16 +27,18 @@ export class Operators extends IdMapScoped<
 		Operators
 	> = (raw, { systemMemberIds }) => {
 		const operators = new Operators(systemMemberIds);
-		for (const rawOperator of raw) {
-			const id = operators.ids.getNewIdFromRaw(rawOperator.id);
+		if (raw) {
+			for (const rawOperator of raw) {
+				const id = operators.ids.getNewIdFromRaw(rawOperator.id);
 
-			if (!id)
-				//TODO: Make this a user-friendly message with different options for recovering
-				throw new TypeError(
-					`Cannot load raw Operators where multiple id's are equivalent: ${rawOperator.id}`,
-				);
+				if (!id)
+					//TODO: Make this a user-friendly message with different options for recovering
+					throw new TypeError(
+						`Cannot load raw Operators where multiple id's are equivalent: ${rawOperator.id}`,
+					);
 
-			operators.add(Operator.fromRaw(rawOperator, { id }));
+				operators.add(Operator.fromRaw(rawOperator, { id }));
+			}
 		}
 		return operators;
 	};

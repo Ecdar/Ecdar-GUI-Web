@@ -4,11 +4,11 @@ import type { HasId } from "../HasId";
 import type { SystemId } from "./SystemId";
 import { Position } from "../Position";
 import { Dimensions } from "../Dimensions";
-import { SystemMemberEdge, origin } from "./SystemMemberEdge";
 import { SystemMemberIds } from "./SystemMemberIds";
 import { ComponentInstances } from "./ComponentInstances";
 import { Operators } from "./Operators";
 import type { Components } from "../component/Components";
+import { SystemMemberEdges } from "./SystemMemberEdges";
 
 const defaultX = 0;
 const defaultY = 0;
@@ -76,7 +76,7 @@ export class System
 		/**
 		 * A list of edges in the system
 		 */
-		public edges: SystemMemberEdge[] = [],
+		public edges: SystemMemberEdges = new SystemMemberEdges(),
 	) {
 		super();
 
@@ -139,7 +139,7 @@ export class System
 			systemRootX: this.systemRootX,
 			componentInstances: this.componentInstances.toRaw(),
 			operators: this.operators.toRaw(),
-			edges: this.edges.map((edge) => edge.toRaw()),
+			edges: this.edges.toRaw(),
 		};
 	}
 
@@ -151,7 +151,7 @@ export class System
 		{ id: SystemId; componentIds: Components["ids"] },
 		System
 	> = (raw, { id, componentIds }) => {
-		const memberIds = new SystemMemberIds();
+		const systemMemberIds = new SystemMemberIds();
 		return new System(
 			id,
 			raw.description,
@@ -162,36 +162,16 @@ export class System
 			}),
 			raw.color,
 			raw.systemRootX,
-			memberIds,
-			ComponentInstances.fromRaw(raw.componentInstances ?? [], {
-				systemMemberIds: memberIds,
+			systemMemberIds,
+			ComponentInstances.fromRaw(raw.componentInstances, {
+				systemMemberIds,
 				componentIds,
 			}),
-			Operators.fromRaw(raw.operators ?? [], {
-				systemMemberIds: memberIds,
+			Operators.fromRaw(raw.operators, {
+				systemMemberIds,
 			}),
-			raw.edges?.map((rawSystemEdge) => {
-				const parent =
-					rawSystemEdge.parent === 0
-						? origin
-						: memberIds.get(rawSystemEdge.parent);
-				if (!parent) {
-					//TODO: Make this a user-friendly message with different options for recovering
-					throw new TypeError(
-						`Cannot generate an edge where the parent doesn't exist: ${rawSystemEdge.parent}`,
-					);
-				}
-				const child = memberIds.get(rawSystemEdge.child);
-				if (!child) {
-					//TODO: Make this a user-friendly message with different options for recovering
-					throw new TypeError(
-						`Cannot generate an edge where the child doesn't exist: ${rawSystemEdge.child}`,
-					);
-				}
-				return SystemMemberEdge.fromRaw(rawSystemEdge, {
-					parent,
-					child,
-				});
+			SystemMemberEdges.fromRaw(raw.edges, {
+				systemMemberIds,
 			}),
 		);
 	};

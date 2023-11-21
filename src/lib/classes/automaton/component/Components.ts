@@ -20,7 +20,9 @@ export class Components extends IdMap<
 	}
 
 	toRaw() {
-		return [...this].map((component) => component.toRaw());
+		return this.size === 0
+			? undefined
+			: [...this].map((component) => component.toRaw());
 	}
 
 	static readonly fromRaw: FromRaw<
@@ -29,22 +31,24 @@ export class Components extends IdMap<
 		Components
 	> = (raw, { locationIds, locationEdgeIds }) => {
 		const components = new Components();
-		for (const rawComponent of raw) {
-			const id = components.ids.getNewIdFromRaw(rawComponent.name);
+		if (raw) {
+			for (const rawComponent of raw) {
+				const id = components.ids.getNewIdFromRaw(rawComponent.name);
 
-			if (!id)
-				//TODO: Make this a user-friendly message with different options for recovering
-				throw new TypeError(
-					`Cannot load raw Components where multiple names are equivalent: ${rawComponent.name}`,
+				if (!id)
+					//TODO: Make this a user-friendly message with different options for recovering
+					throw new TypeError(
+						`Cannot load raw Components where multiple names are equivalent: ${rawComponent.name}`,
+					);
+
+				components.add(
+					Component.fromRaw(rawComponent, {
+						id,
+						locationIds,
+						locationEdgeIds,
+					}),
 				);
-
-			components.add(
-				Component.fromRaw(rawComponent, {
-					id,
-					locationIds,
-					locationEdgeIds,
-				}),
-			);
+			}
 		}
 		return components;
 	};

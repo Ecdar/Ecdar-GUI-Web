@@ -14,7 +14,7 @@ export class Nickname extends AutomatonClass<RawNickname> {
 		/**
 		 * The actual nickname
 		 */
-		public name: string,
+		public name: string = "",
 
 		/**
 		 * The position of the Nickname

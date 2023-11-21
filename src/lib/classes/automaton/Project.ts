@@ -6,7 +6,7 @@ import { Components } from "./component/Components";
 import { LocationIds } from "./LocationIds";
 import { LocationEdgeIds } from "./LocationEdgeIds";
 import { Systems } from "./system/Systems";
-import { Query } from "./Query";
+import { Queries } from "./Queries";
 import { SystemDeclarations } from "./SystemDeclarations";
 import { GlobalDeclarations } from "./GlobalDeclarations";
 
@@ -43,7 +43,7 @@ export class Project
 		/**
 		 * All queries in the project
 		 */
-		public queries: Query[] = [],
+		public queries: Queries = new Queries(),
 
 		/**
 		 * The system declarations in the project
@@ -59,14 +59,20 @@ export class Project
 	}
 
 	toRaw() {
-		return {
+		const raw = {
 			name: this.id.toRaw(),
 			components: this.components.toRaw(),
 			systems: this.systems.toRaw(),
-			queries: this.queries.map((query) => query.toRaw()),
+			queries: this.queries.toRaw(),
 			systemDeclarations: this.systemDeclarations.toRaw(),
 			globalDeclarations: this.globalDeclarations.toRaw(),
 		};
+		if (!raw.components) delete raw.components;
+		if (!raw.systems) delete raw.systems;
+		if (!raw.queries) delete raw.queries;
+		if (!raw.systemDeclarations) delete raw.systemDeclarations;
+		if (!raw.globalDeclarations) delete raw.globalDeclarations;
+		return raw;
 	}
 
 	static readonly fromRaw: FromRaw<RawProject, { id: ProjectId }, Project> = (
@@ -75,7 +81,7 @@ export class Project
 	) => {
 		const locationIds = new LocationIds();
 		const locationEdgeIds = new LocationEdgeIds();
-		const components = Components.fromRaw(raw.components ?? [], {
+		const components = Components.fromRaw(raw.components, {
 			locationIds,
 			locationEdgeIds,
 		});
@@ -84,14 +90,12 @@ export class Project
 			locationIds,
 			locationEdgeIds,
 			components,
-			Systems.fromRaw(raw.systems ?? [], {
+			Systems.fromRaw(raw.systems, {
 				componentIds: components.ids,
 			}),
-			raw.queries
-				? raw.queries.map((rawQuery) => Query.fromRaw(rawQuery))
-				: undefined,
-			SystemDeclarations.fromRaw(raw.systemDeclarations ?? {}),
-			GlobalDeclarations.fromRaw(raw.globalDeclarations ?? {}),
+			Queries.fromRaw(raw.queries),
+			SystemDeclarations.fromRaw(raw.systemDeclarations),
+			GlobalDeclarations.fromRaw(raw.globalDeclarations),
 		);
 	};
 }

@@ -23,10 +23,12 @@ export class GlobalDeclarations extends Declarations<
 	 * Converts the GlobalDeclarations to a RawGlobalDeclarations
 	 */
 	toRaw() {
-		return {
-			name: this.type,
-			declarations: this.declarations,
-		};
+		return this.declarations === ""
+			? undefined
+			: {
+					name: this.type,
+					declarations: this.declarations,
+			  };
 	}
 
 	/**
@@ -37,6 +39,6 @@ export class GlobalDeclarations extends Declarations<
 		undefined,
 		GlobalDeclarations
 	> = (raw) => {
-		return new GlobalDeclarations(raw.declarations);
+		return new GlobalDeclarations(raw?.declarations);
 	};
 }
