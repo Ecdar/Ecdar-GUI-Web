@@ -1,4 +1,11 @@
 import { EngineType } from "./EngineType";
+import {
+	comparePortRange,
+	validateEndPort,
+	validateIP,
+	validateName,
+	validateStartPort,
+} from "./Validation";
 
 /**
  * A Reveaal, JEcdar andd API engine definition
@@ -13,7 +20,8 @@ export class Engine {
 		return this.#name;
 	}
 	set name(setName: string | undefined) {
-		if (setName != "" && setName !== undefined) this.#name = setName;
+		if (validateName(setName) && setName !== undefined)
+			this.#name = setName;
 		else throw new Error("Engine must have a name");
 	}
 	/**
@@ -24,15 +32,12 @@ export class Engine {
 		return this.#address;
 	}
 	set address(ipAdress: string) {
-		const regexTest: RegExp = new RegExp(
-			"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
-		);
 		if (this.useBundle) {
 			this.#address = "127.0.0.1";
 			return;
 		}
 
-		if (regexTest.test(ipAdress)) this.#address = ipAdress;
+		if (validateIP(ipAdress)) this.#address = ipAdress;
 		else throw new Error(ipAdress + " Is an invalid IP address");
 	}
 	/**
@@ -43,8 +48,7 @@ export class Engine {
 		return this.#portRangeStart;
 	}
 	set portRangeStart(portStart: number) {
-		if (0 <= portStart && portStart <= 65352)
-			this.#portRangeStart = portStart;
+		if (validateStartPort(portStart)) this.#portRangeStart = portStart;
 		else throw new Error("Invalid start port");
 	}
 
@@ -56,7 +60,10 @@ export class Engine {
 		return this.#portRangeEnd;
 	}
 	set portRangeEnd(portEnd: number) {
-		if (this.portRangeStart <= portEnd && portEnd <= 65353)
+		if (
+			comparePortRange(this.#portRangeStart, portEnd) &&
+			validateEndPort(portEnd)
+		)
 			this.#portRangeEnd = portEnd;
 		else throw new Error("Invalid end port");
 	}

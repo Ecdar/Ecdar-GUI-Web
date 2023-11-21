@@ -10,6 +10,13 @@
 	} from "svelte-google-materialdesign-icons";
 	import type iModalComponent from "$lib/interfaces/IModalComponent";
 	import Button from "../overlayMenu/elements/Button.svelte";
+	import {
+		comparePortRange,
+		validateEndPort,
+		validateIP,
+		validateName,
+		validateStartPort,
+	} from "$lib/classes/engine/Validation";
 
 	let formElement: HTMLFormElement;
 	let modalContainer: Modal & iModalComponent;
@@ -21,10 +28,6 @@
 	let nameBorderColour: string = "var(--engine-ui-underline-color)";
 	let ipBorderColour: string = "var(--engine-ui-underline-color)";
 	let portColour: string = "var(--engine-ui-underline-color)";
-
-	const regexTest: RegExp = new RegExp(
-		"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
-	);
 
 	let engineUIErrorUnderlineColour: string =
 		"var(--engine-ui-error-underline-color)";
@@ -67,7 +70,7 @@
 	}
 
 	function changeNameBorder() {
-		if (!validateName()) {
+		if (!validateName(nameContainer.value)) {
 			nameBorderColour = engineUIErrorUnderlineColour;
 		} else {
 			nameBorderColour = engineUIUnderlineColour;
@@ -85,8 +88,7 @@
 			ipBorderColour = "grey";
 			return;
 		}
-
-		if (!validateIP()) {
+		if (!validateIP(ipAddressContainer.value)) {
 			ipBorderColour = engineUIErrorUnderlineColour;
 		} else {
 			ipBorderColour = engineUIUnderlineColour;
@@ -106,7 +108,18 @@
 	}
 
 	function validatePort() {
-		if (!validateStartPort() || !validateEndPort()) {
+		if (startPortContainer.value == "" || endPortContainer.value == "") {
+			portColour = engineUIErrorUnderlineColour;
+			return;
+		}
+		if (
+			!validateStartPort(Number(startPortContainer.value)) ||
+			!validateEndPort(Number(endPortContainer.value)) ||
+			!comparePortRange(
+				Number(startPortContainer.value),
+				Number(endPortContainer.value),
+			)
+		) {
 			portColour = engineUIErrorUnderlineColour;
 		} else {
 			portColour = engineUIUnderlineColour;
@@ -115,43 +128,6 @@
 
 	function closeModal() {
 		modalContainer.closeModal();
-	}
-
-	function validateName() {
-		if (nameContainer.value != "") return true;
-
-		return false;
-	}
-
-	function validateIP() {
-		if (currentEngine.useBundle) return true;
-		if (ipAddressContainer.value.match(regexTest)) {
-			return true;
-		}
-		return false;
-	}
-
-	function validateStartPort() {
-		if (
-			0 <= Number(startPortContainer.value) &&
-			Number(startPortContainer.value) <= 65352 &&
-			Number(startPortContainer.value) <=
-				Number(endPortContainer.value) &&
-			startPortContainer.value != ""
-		)
-			return true;
-
-		return false;
-	}
-
-	function validateEndPort() {
-		if (
-			Number(endPortContainer.value) <= 65353 &&
-			Number(startPortContainer.value) <= Number(endPortContainer.value)
-		)
-			return true;
-
-		return false;
 	}
 
 	function toggleUseBundle(event: MouseEvent) {
