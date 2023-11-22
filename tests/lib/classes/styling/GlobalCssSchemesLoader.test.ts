@@ -23,7 +23,7 @@ test("loads light theme", async ({ page }) => {
 
 test("prefers motion", async ({ page }) => {
 	await page.emulateMedia({ reducedMotion: null });
-	await expect(page.locator(".global-dec")).toHaveCSS(
+	await expect(page.locator("#global-dec")).toHaveCSS(
 		"transition",
 		"background-color 0.2s ease 0s",
 	);
@@ -31,5 +31,8 @@ test("prefers motion", async ({ page }) => {
 
 test("prefers reduced motion", async ({ page }) => {
 	await page.emulateMedia({ reducedMotion: "reduce" });
-	await expect(page.locator(".global-dec")).toHaveCSS("transition", "none");
+	await expect(page.locator("#global-dec")).toHaveCSS(
+		"transition",
+		"none 0s ease 0s",
+	);
 });
