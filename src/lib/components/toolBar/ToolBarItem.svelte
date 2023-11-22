@@ -1,18 +1,27 @@
 <script lang="ts">
     import { getContext, setContext, type ComponentType} from "svelte";
+    import { tooltip } from 'svooltip';
+	import 'svooltip/styles.css'; // Include default styling
+
     export let icon: ComponentType;
     export let name: string;
     export let onClick: () => void;
+    export let description: string;
 
-    let groupBind = "";
     let isSelected: boolean = getContext("selectedItem") === name;
     
+    /**
+     * Calls the on:Click function on the button
+     */
     function handleClick() {
         if (onClick) {
             onClick(); 
         }
     }
     
+    /**
+     * Handles the function if the radio button is selected
+     */
     function handleRadioChange() {
         if(getContext("selectedItem") === name){
             isSelected = false;
@@ -43,14 +52,14 @@
 </script>
 
 
-<label class="tool-bar-item" for={slugify(name)} class:selected={isSelected}>
+<label class="tool-bar-item" for={slugify(name)} use:tooltip={{content: description}}>
     <input
         type="radio"
         name="tools"
         id={slugify(name)}
         value={name}
         on:change={handleRadioChange}
-        on:click={handleClick}
+        on:click={onClick}
         style="display: none;"
     />
     <svelte:component this={icon}></svelte:component>
@@ -59,23 +68,18 @@
 <style>
     .tool-bar-item {
         display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px; /* Set your desired width */
-        height: 40px; /* Set your desired height */
-        border: 2px solid #007bff; /* Set your desired border properties */
+        align-items: left;
+        justify-content: space-evenly;
+        width: calc(100%/9); /* adjusts the space evenly to the tools. In this case 9 buttons*/
+        border-right: 2px solid black; /* Set your desired border properties */
+        border-bottom: 2px solid black; 
+        border-top: 2px solid black;
         cursor: pointer;
-        margin: 0px; /* Adjust margin as needed */
+        margin-bottom: -2px;
         background-color: transparent;
     }
-    input[type="radio"]:checked::before{background-color: green
-    }
-    .selected {
-        background-color: #007bff; /* Set your desired background color for the selected button */
-        color: white; /* Set the text color for the selected button */
-    }
     label:has(input[type="radio"]:checked) {
-		  background-color: red;
-    }
-
+		  background-color: grey;
+    }   
+    
 </style>
