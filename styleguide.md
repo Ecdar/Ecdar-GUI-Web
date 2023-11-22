@@ -2,25 +2,27 @@
 
 **Table of content:**
 
-- [Style Guide](#style-guide)
-  - [Naming Conventions](#naming-conventions)
-    - [Folder](#folder)
-    - [Files](#files)
-    - [Classes](#classes)
-    - [Variables](#variables)
-    - [Functions & Methods](#functions--methods)
-    - [HTML & CSS](#html--css)
-  - [Good Code Practices](#good-code-practices)
-  - [TypeScript Type Practices](#typescript-type-practices)
-  - [Comment Practices](#comment-practices)
-  - [Folder Structure](#folder-structure)
-- [Using the CSS Schemes Loader](#using-the-css-schemes-loader)
-  - [General JSON Structure](#general-json-structure)
-  - [Supporting New CSS Media Features](#supporting-new-css-media-features)
-  - [Adding CSS Variables](#adding-css-variables)
-    - [Example Of Adding A New CSS Variable](#example-of-adding-a-new-css-variable)
-    - [Specifying A CSS Color Attribute](#specifying-a-css-color-attribute)
-  - [Using CSS Variables](#using-css-variables)
+- [Conventions used throughout the project](#conventions-used-throughout-the-project)
+  - [Style Guide](#style-guide)
+    - [Naming Conventions:](#naming-conventions)
+      - [Folder](#folder)
+      - [Files](#files)
+      - [Classes and Interfaces](#classes-and-interfaces)
+      - [Variables](#variables)
+      - [Functions \& Methods](#functions--methods)
+      - [HTML \& CSS](#html--css)
+    - [Good Code Practices:](#good-code-practices)
+    - [TypeScript Type Practices:](#typescript-type-practices)
+    - [Comment Practices:](#comment-practices)
+      - [Comment writing guidelines:](#comment-writing-guidelines)
+    - [Folder Structure:](#folder-structure)
+  - [Using the CSS Schemes Loader](#using-the-css-schemes-loader)
+    - [General JSON Structure](#general-json-structure)
+    - [Supporting New CSS Media Features](#supporting-new-css-media-features)
+    - [Adding CSS Variables](#adding-css-variables)
+      - [Example Of Adding A New CSS Variable](#example-of-adding-a-new-css-variable)
+      - [Specifying A CSS Color Attribute](#specifying-a-css-color-attribute)
+    - [Using CSS Variables](#using-css-variables)
 
 ---
 
@@ -118,9 +120,9 @@ An example of a JSDoc comment can be seen in the following code block:
 /**
  * Function for concatenating two strings.
  *
- * @param {string} a - The first input string
- * @param {string} b - The second input string
- * @returns {string} The concatenation of `a` and `b`
+ * @param a - The first input string
+ * @param b - The second input string
+ * @returns The concatenation of `a` and `b`
  */
 function concat(a: string, b: string): string {
   return a + b;

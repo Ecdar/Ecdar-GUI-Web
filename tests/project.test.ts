@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("Starts only with Global Declaration", async ({ page }) => {
-	await expect(page.locator(".global-dec")).toHaveCount(1);
+	await expect(page.locator("#global-dec")).toHaveCount(1);
 	await expect(page.locator(".project-item")).toHaveCount(0);
 });
 
@@ -141,11 +141,11 @@ test("Delete the grey component", async ({ page }) => {
 	await expect(components).toHaveCount(2);
 	await expect(components.nth(0).locator(".circle")).toHaveCSS(
 		"background-color",
-		"rgb(255, 165, 0)",
+		"rgb(199, 0, 57)",
 	);
 	await expect(components.nth(1).locator(".circle")).toHaveCSS(
 		"background-color",
-		"rgb(255, 0, 0)",
+		"rgb(231, 76, 60)",
 	);
 });
 

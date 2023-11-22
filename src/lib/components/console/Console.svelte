@@ -5,14 +5,12 @@
 		Arrow_downward,
 		Arrow_upward,
 	} from "svelte-google-materialdesign-icons";
+	import Console from "$lib/classes/console/Console";
 
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
-	let consoleContainer: HTMLElement;
 	let consoleBar: HTMLElement;
-
-	let frontEndErrors: string[] = [];
-	let backEndErrors: string[] = [];
+	let consoleElement: HTMLElement;
 
 	const consoleInitialSize: number = 300;
 	let consoleExtendedSize: number = consoleInitialSize;
@@ -24,7 +22,7 @@
 
 	/**
 	 * Function for resizing the console
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function resizeConsolePanel(event: PointerEvent) {
 		event.preventDefault();
@@ -38,35 +36,28 @@
 
 	/**
 	 * Function for starting resizing the console
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function startResizingConsolePanel(event: PointerEvent) {
 		event.preventDefault();
 		if (currentlyCollapsed) return;
-		consoleContainer.setPointerCapture(event.pointerId);
-		consoleContainer.addEventListener("pointermove", resizeConsolePanel);
-		consoleContainer.addEventListener(
-			"pointerup",
-			stopResizingConsolePanel,
-		);
-		consoleContainer.addEventListener(
-			"pointercancel",
-			stopResizingConsolePanel,
-		);
+		consoleElement.style.transition = "none";
+		consoleBar.setPointerCapture(event.pointerId);
+		consoleBar.addEventListener("pointermove", resizeConsolePanel);
+		consoleBar.addEventListener("pointerup", stopResizingConsolePanel);
+		consoleBar.addEventListener("pointercancel", stopResizingConsolePanel);
 	}
 
 	/**
 	 * Function for stopping resizing the console
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function stopResizingConsolePanel(event: PointerEvent) {
-		consoleContainer.releasePointerCapture(event.pointerId);
-		consoleContainer.removeEventListener("pointermove", resizeConsolePanel);
-		consoleContainer.removeEventListener(
-			"pointerup",
-			stopResizingConsolePanel,
-		);
-		consoleContainer.removeEventListener(
+		consoleElement.style.transition = "var(--console-height-transition)";
+		consoleBar.releasePointerCapture(event.pointerId);
+		consoleBar.removeEventListener("pointermove", resizeConsolePanel);
+		consoleBar.removeEventListener("pointerup", stopResizingConsolePanel);
+		consoleBar.removeEventListener(
 			"pointercancel",
 			stopResizingConsolePanel,
 		);
@@ -77,6 +68,7 @@
 	 *Function for changing between the status of the console
 	 */
 	function changeConsoleCollapsableTextAndHeight() {
+		consoleElement.style.transition = "var(--console-height-transition)";
 		if (currentlyCollapsed) {
 			consoleSize = consoleExtendedSize;
 			currentlyCollapsed = false;
@@ -88,7 +80,7 @@
 
 	/**
 	 *Function for changing the current tab of the console
-	 *@param {Tabs} tab
+	 *@param tab
 	 */
 	function changeTab(tab: Tabs) {
 		if (currentlyCollapsed) {
@@ -97,33 +89,11 @@
 		currentTab = tab;
 	}
 
-	/**
-	 *Function for sending an error to a specific tab in the console
-	 *@param {string} error
-	 *@param {Tabs} tab
-	 */
-	export function sendErrorToTab(error: string, tab: Tabs) {
-		switch (tab) {
-			case Tabs.Frontend:
-				frontEndErrors.push(error);
-				frontEndErrors = frontEndErrors;
-				break;
-			case Tabs.Backend:
-				backEndErrors.push(error);
-				backEndErrors = backEndErrors;
-				break;
-			case Tabs.All:
-				frontEndErrors.push(error);
-				backEndErrors.push(error);
-				frontEndErrors = frontEndErrors;
-				break;
-			default:
-				break;
-		}
-	}
+	let frontendConsole = Console.frontendConsoleLines;
+	let backendConsole = Console.backendConsoleLines;
 </script>
 
-<div class="outer-overflow" bind:this={consoleContainer}>
+<div class="outer-overflow">
 	<div bind:this={consoleBar} id="console-bar">
 		<div
 			role="button"
@@ -135,18 +105,6 @@
 			}}
 			style="cursor: {currentlyCollapsed ? 'auto' : 'row-resize'};"
 		/>
-		<button
-			type="button"
-			class="collapsible unselectable"
-			on:click={changeConsoleCollapsableTextAndHeight}
-		>
-			{#if currentlyCollapsed}
-				<Arrow_upward size="18" color="white" />
-			{:else}
-				<Arrow_downward size="18" color="white" />
-			{/if}
-		</button>
-
 		<button
 			type="button"
 			class="console-tab front-end-button unselectable"
@@ -171,14 +129,30 @@
 		>
 			Backend
 		</button>
+
+		<button
+			type="button"
+			class="collapsible unselectable"
+			on:click={changeConsoleCollapsableTextAndHeight}
+		>
+			{#if currentlyCollapsed}
+				<Arrow_upward size="18" color="white" />
+			{:else}
+				<Arrow_downward size="18" color="white" />
+			{/if}
+		</button>
 	</div>
-	<div class="console" style="height: {consoleSize}px;">
+	<div
+		bind:this={consoleElement}
+		class="console"
+		style="height: {consoleSize}px;"
+	>
 		{#if currentTab == Tabs.Frontend}
-			{#each frontEndErrors as error}
+			{#each $frontendConsole as error}
 				<ConsoleLine componentText={error} />
 			{/each}
 		{:else if currentTab == Tabs.Backend}
-			{#each backEndErrors as error}
+			{#each $backendConsole as error}
 				<ConsoleLine componentText={error} />
 			{/each}
 		{/if}
@@ -247,6 +221,7 @@
 
 	.console-tab {
 		color: var(--navigationbar-text-color);
+		transition: var(--console-tab-hover-transition);
 		position: relative;
 		height: 3.8em;
 		margin: auto;
@@ -255,6 +230,7 @@
 		border-bottom: 0em;
 		border-style: solid;
 		float: left;
+		outline-offset: -2px;
 	}
 
 	.console-tab:hover {
@@ -265,6 +241,7 @@
 		border-left: 0;
 		border-right: 0;
 	}
+
 	.unselectable {
 		-webkit-user-select: none;
 		-ms-user-select: none;
