@@ -225,7 +225,7 @@
 			name="About"
 			on:click={() => {
 				var answer = window.confirm("This will open Ecdars webpage.");
-				if(answer){
+				if (answer) {
 					window.open("https://www.ecdar.net/");
 				}
 			}}

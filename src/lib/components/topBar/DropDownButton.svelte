@@ -19,7 +19,7 @@
 <!--Make each dropdown item, into button-->
 
 <button class="dropdown-item" on:click>
-	<svelte:component color={color} this={icon}></svelte:component>
+	<svelte:component this={icon} {color}></svelte:component>
 	<div class="align-text">{name}</div>
 </button>
 
