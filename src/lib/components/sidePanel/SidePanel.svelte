@@ -10,7 +10,7 @@
 
 	/**
 	 * Function for resizing a sidepanel
-	 * @param {MouseEvent} event
+	 * @param event
 	 */
 	function resizeSidePanel(event: MouseEvent) {
 		event.preventDefault();
@@ -23,7 +23,7 @@
 
 	/**
 	 * Function for starting resizing a side panel
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function startResizingSidePanel(event: PointerEvent) {
 		controller = new AbortController();
@@ -46,7 +46,7 @@
 
 	/**
 	 * Function for stopping resizing a side panel
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function stopResizingSidePanel(event: PointerEvent) {
 		resizer.releasePointerCapture(event.pointerId);

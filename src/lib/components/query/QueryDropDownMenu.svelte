@@ -3,6 +3,7 @@
 	import OverlayMenu from "$lib/components/overlayMenu/OverlayMenu.svelte";
 	import Panel from "$lib/components/overlayMenu/Panel.svelte";
 	import Button from "$lib/components/overlayMenu/elements/Button.svelte";
+	import SvgButton from "$lib/components/buttons/SvgButton.svelte";
 	import {
 		More_vert,
 		Check_box,
@@ -17,30 +18,30 @@
 	const menuId = `query-menu-${index}`;
 	let button: HTMLElement;
 
+	/**
+	 * Function for toggling the isPeriodic variable
+	 * @param event
+	 */
 	function togglePeriodicCheck(event: MouseEvent) {
 		event.stopPropagation();
 		isPeriodic = !isPeriodic;
 	}
 </script>
 
-<button bind:this={button} popovertarget={menuId} id={`query-button-${index}`}>
-	<More_vert />
-</button>
+<SvgButton
+	bind:button
+	icon={More_vert}
+	popovertarget={menuId}
+	id={`query-button-${index}`}
+	color="var(--sidebar-text-color)"
+/>
 <OverlayMenu anchor={button} id={menuId}>
 	<Panel>
-		{#if isPeriodic}
-			<Button
-				icon={Check_box}
-				text="Run Periodically"
-				click={togglePeriodicCheck}
-			/>
-		{:else}
-			<Button
-				icon={Check_box_outline_blank}
-				text="Run Periodically"
-				click={togglePeriodicCheck}
-			/>
-		{/if}
+		<Button
+			icon={isPeriodic ? Check_box : Check_box_outline_blank}
+			text="Run Periodically"
+			click={togglePeriodicCheck}
+		/>
 	</Panel>
 	<Panel>
 		<Button icon={Restart_alt} text="Clear Status" click={() => {}} />
@@ -56,14 +57,3 @@
 		/>
 	</Panel>
 </OverlayMenu>
-
-<style>
-	button {
-		background: none;
-		border: none;
-		cursor: pointer;
-		height: 24px;
-		padding: 0;
-		color: var(--sidebar-text-color);
-	}
-</style>

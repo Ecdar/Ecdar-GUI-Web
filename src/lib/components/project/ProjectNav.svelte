@@ -14,6 +14,7 @@
 	import { System } from "$lib/classes/automaton/system/System";
 	import { Locations } from "$lib/classes/automaton/component/Locations";
 	import { LocationEdges } from "$lib/classes/automaton/component/LocationEdges";
+	import SvgButton from "$lib/components/buttons/SvgButton.svelte";
 
 	function addComponent() {
 		if (!$components || !$locationIds || !$edgeIds) return;
@@ -46,9 +47,19 @@
 	<div>
 		<h1>Project</h1>
 	</div>
-	<div>
-		<Create_new_folder on:click={addComponent} id="add-component" />
-		<Note_add on:click={addSystem} id="add-system" />
+	<div class="buttons">
+		<SvgButton
+			icon={Create_new_folder}
+			click={addComponent}
+			size={30}
+			id="add-component"
+		/>
+		<SvgButton
+			icon={Note_add}
+			click={addSystem}
+			size={30}
+			id="add-system"
+		/>
 	</div>
 </div>
 
@@ -59,5 +70,9 @@
 		align-items: center;
 		height: 100%;
 		padding: 0 1em;
+	}
+
+	.buttons {
+		display: flex;
 	}
 </style>
