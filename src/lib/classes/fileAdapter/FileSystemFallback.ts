@@ -1,6 +1,7 @@
 import { FileSystem } from "./FileSystem";
 
 export class FileSystemFallback extends FileSystem {
+	static supported = true;
 	private fileInput: HTMLInputElement;
 
 	constructor() {
@@ -10,8 +11,20 @@ export class FileSystemFallback extends FileSystem {
 		this.fileInput.webkitdirectory = true;
 	}
 
-	exists(path: string): Promise<boolean> {
-		throw new Error("Method not implemented.");
+	exists(): Promise<boolean> {
+		throw new Error("Saving in browser not supported");
+	}
+
+	saveDialog(): Promise<string | undefined> {
+		throw new Error("Saving in browser not supported");
+	}
+
+	createDir(): Promise<void> {
+		alert("Saving in browser not supported");
+		throw new Error("Saving in browser not supported");
+	}
+	writeFile(): Promise<void> {
+		throw new Error("Saving in browser not supported");
 	}
 
 	readDir(path: string): Promise<string[]> {
@@ -57,34 +70,27 @@ export class FileSystemFallback extends FileSystem {
 
 	async openDialog(): Promise<string | undefined> {
 		return new Promise<string | undefined>((resolve) => {
-			this.fileInput.addEventListener("change", () => {
-				if (
-					this.fileInput.files != null &&
-					this.fileInput.files.length > 0
-				) {
-					resolve(
-						this.fileInput.files[0].webkitRelativePath
-							.split("/")
-							.slice(0, -1)
-							.join("/"),
-					);
-				} else {
-					resolve(undefined);
-				}
-			});
+			this.fileInput.addEventListener(
+				"change",
+				() => {
+					if (
+						this.fileInput.files != null &&
+						this.fileInput.files.length > 0
+					) {
+						resolve(
+							this.fileInput.files[0].webkitRelativePath
+								.split("/")
+								.slice(0, -1)
+								.join("/"),
+						);
+					} else {
+						resolve(undefined);
+					}
+				},
+				{ once: true },
+			);
 			this.fileInput.click();
 		});
-	}
-
-	saveDialog(path: string | undefined): Promise<string | undefined> {
-		throw new Error("Method not implemented.");
-	}
-
-	createDir(path: string): Promise<void> {
-		throw new Error("Method not implemented.");
-	}
-	writeFile(path: string, content: string): Promise<void> {
-		throw new Error("Method not implemented.");
 	}
 
 	async isFile(path: string): Promise<boolean> {
@@ -98,9 +104,7 @@ export class FileSystemFallback extends FileSystem {
 	}
 
 	async readFile(path: string): Promise<string> {
-		console.log("reading " + path);
-
-		const test = await new Promise<string>((resolve, reject) => {
+		return await new Promise<string>((resolve, reject) => {
 			if (this.fileInput.files != null) {
 				for (const file of this.fileInput.files) {
 					if (file.webkitRelativePath === path) {
@@ -120,11 +124,6 @@ export class FileSystemFallback extends FileSystem {
 			} else {
 				reject(new Error("No files selected"));
 			}
-			//input.click();
 		});
-
-		console.log(test);
-
-		return test;
 	}
 }

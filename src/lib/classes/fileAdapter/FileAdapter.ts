@@ -125,33 +125,26 @@ export class FileAdapter {
 	private loadFile(rawProject: RawProject, file: IFileElement): void {
 		switch (file.filename) {
 			case "GlobalDeclarations.json":
-				//console.log("Loading global declarations ... ");
 				rawProject.globalDeclarations = deserializeRaw(
 					ZodRawGlobalDeclarations,
 					file.content ?? "",
 				);
-
-				//console.log("Done");
 				break;
 
 			case "SystemDeclarations.json":
-				//console.log("Loading system declarations ... ");
 				rawProject.systemDeclarations = deserializeRaw(
 					ZodRawSystemDeclarations,
 					file.content ?? "",
 				);
 
-				//console.log("Done");
 				break;
 
 			case "Queries.json":
-				//console.log("Loading queries ... ");
 				rawProject.queries = deserializeRaw(
 					z.array(ZodRawQuery),
 					file.content ?? "",
 				);
 
-				//console.log("Done");
 				break;
 
 			default:
@@ -162,16 +155,11 @@ export class FileAdapter {
 	private loadDirectory(rawProject: RawProject, file: IFileElement): void {
 		switch (file.filename) {
 			case "Components":
-				//console.log("Loading components ... ");
 				this.loadComponents(rawProject, file.children ?? []);
-
-				//console.log("Done");
 				break;
-			case "Systems":
-				//console.log("Loading systems ... ");
-				this.loadSystems(rawProject, file.children ?? []);
 
-				//console.log("Done");
+			case "Systems":
+				this.loadSystems(rawProject, file.children ?? []);
 				break;
 
 			default:
@@ -185,8 +173,6 @@ export class FileAdapter {
 	): void {
 		for (const file of files) {
 			if (file.type === "directory") continue;
-			//console.log("loading component" + file.filename);
-			//console.log(file.content);
 			const component = deserializeRaw(
 				ZodRawComponent,
 				file.content ?? "",

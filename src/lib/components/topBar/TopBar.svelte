@@ -22,6 +22,7 @@
 	import { project } from "$lib/globalState/activeProject";
 	import { ProjectId } from "$lib/classes/automaton/ProjectId";
 	import { Project } from "$lib/classes/automaton";
+	import { get } from "svelte/store";
 	let fileAdapter: FileAdapter;
 	onMount(() => {
 		fileAdapter = new FileAdapter();
@@ -72,14 +73,24 @@
 			icon={Save}
 			name="Save Project"
 			on:click={async () => {
-				await fileAdapter.save(undefined);
+				const _project = get(project);
+
+				await fileAdapter.save(
+					_project ? _project.toRaw() : {},
+					undefined,
+				);
 			}}
 		/>
 		<DropDownButton
 			icon={Save}
 			name="Save Project as"
 			on:click={async () => {
-				await fileAdapter.save(await fileAdapter.saveDialog()); //TODO: write
+				const _project = get(project);
+
+				await fileAdapter.save(
+					_project ? _project.toRaw() : {},
+					await fileAdapter.saveDialog(),
+				);
 			}}
 		/>
 

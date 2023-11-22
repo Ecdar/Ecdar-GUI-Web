@@ -63,5 +63,5 @@ export abstract class FileSystem {
 	abstract readFile(path: string): Promise<string>;
 
 	// A boolean of whether the file system is supported
-	static supported: boolean;
+	static supported: boolean = false;
 }
