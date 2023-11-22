@@ -1,5 +1,4 @@
 import { FileSystem } from "./FileSystem";
-import type { IFileElement } from "./RecursiveFilesSystem";
 
 export class FileSystemFallback extends FileSystem {
 	private fileInput: HTMLInputElement;
@@ -12,34 +11,47 @@ export class FileSystemFallback extends FileSystem {
 	}
 
 	exists(path: string): Promise<boolean> {
-		return new Promise<boolean>((resolve, reject) => {
-			this.fileInput.addEventListener("change", () => {
-				if (this.fileInput.files != null) {
-					const files = Array.from(this.fileInput.files).map(
-						(file) => file.webkitRelativePath,
-					);
-					resolve(files.includes(path));
-				} else {
-					reject(new Error("No files selected"));
-				}
-			});
-			this.fileInput.click();
-		});
+		throw new Error("Method not implemented.");
 	}
 
 	readDir(path: string): Promise<string[]> {
+		// now that we have the relative wekit path, we can use it to get the directory
 		return new Promise<string[]>((resolve, reject) => {
-			this.fileInput.addEventListener("change", () => {
-				if (this.fileInput.files != null) {
-					const files = Array.from(this.fileInput.files)
-						.map((file) => file.webkitRelativePath)
-						.filter((filePath) => filePath.startsWith(path));
-					resolve(files);
-				} else {
-					reject(new Error("No files selected"));
-				}
-			});
-			this.fileInput.click();
+			if (this.fileInput.files && this.fileInput.files.length > 0) {
+				const files = Array.from(this.fileInput.files)
+					.filter((file: File) =>
+						file.webkitRelativePath.startsWith(path),
+					)
+					.map((file: File) => file.webkitRelativePath);
+
+				// some elements have too deep a path, so we filter them out
+
+				const seenFolders: string[] = [];
+
+				let filteredFiles = files.filter((file) => {
+					const splitPath = file.split("/");
+
+					// here we check if the split path is deeper than the path we are looking for
+					// if it is we save the folder name and return false
+
+					if (splitPath.length > path.split("/").length - 1) {
+						const folderName =
+							splitPath[path.split("/").length - 1];
+
+						if (!seenFolders.includes(folderName)) {
+							seenFolders.push(folderName);
+							return false;
+						}
+					}
+
+					return splitPath.length === path.split("/").length; // this starts with a / and there for we do not add one to the length
+				});
+
+				filteredFiles = filteredFiles.concat(seenFolders);
+				resolve(filteredFiles);
+			} else {
+				reject("No files selected.");
+			}
 		});
 	}
 
@@ -50,7 +62,12 @@ export class FileSystemFallback extends FileSystem {
 					this.fileInput.files != null &&
 					this.fileInput.files.length > 0
 				) {
-					resolve(this.fileInput.files[0].webkitRelativePath);
+					resolve(
+						this.fileInput.files[0].webkitRelativePath
+							.split("/")
+							.slice(0, -1)
+							.join("/"),
+					);
 				} else {
 					resolve(undefined);
 				}
@@ -71,42 +88,43 @@ export class FileSystemFallback extends FileSystem {
 	}
 
 	async isFile(path: string): Promise<boolean> {
-		if (path.endsWith(".json")) return true;
+		if (path.endsWith(".json")) return Promise.resolve(true);
 
-		return false;
+		return Promise.resolve(false);
 	}
+
 	async isDirectory(path: string): Promise<boolean> {
-		return !this.isFile(path);
+		return !(await this.isFile(path));
 	}
 
 	async readFile(path: string): Promise<string> {
-		return new Promise<string>((resolve, reject) => {
-			const input = document.createElement("input");
-			input.type = "file";
-			input.addEventListener("change", () => {
-				if (input.files != null) {
-					for (const file of input.files) {
-						if (file.webkitRelativePath === path) {
-							const reader = new FileReader();
-							reader.addEventListener(
-								"load",
-								() => {
-									resolve(reader.result as string);
-								},
-								{ once: true },
-							);
-							reader.readAsText(file);
-							return;
-						}
+		console.log("reading " + path);
+
+		const test = await new Promise<string>((resolve, reject) => {
+			if (this.fileInput.files != null) {
+				for (const file of this.fileInput.files) {
+					if (file.webkitRelativePath === path) {
+						const reader = new FileReader();
+						reader.addEventListener(
+							"load",
+							() => {
+								resolve(reader.result as string);
+							},
+							{ once: true },
+						);
+						reader.readAsText(file);
+						return;
 					}
-					reject(
-						new Error(`File ${path} not found in selected files`),
-					);
-				} else {
-					reject(new Error("No files selected"));
 				}
-			});
-			input.click();
+				reject(new Error(`File ${path} not found in selected files`));
+			} else {
+				reject(new Error("No files selected"));
+			}
+			//input.click();
 		});
+
+		console.log(test);
+
+		return test;
 	}
 }

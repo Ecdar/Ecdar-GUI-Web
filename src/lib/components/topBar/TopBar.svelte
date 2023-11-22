@@ -20,6 +20,8 @@
 	import { FileAdapter } from "$lib/classes/fileAdapter/FileAdapter";
 	import { onMount } from "svelte";
 	import { project } from "$lib/globalState/activeProject";
+	import { ProjectId } from "$lib/classes/automaton/ProjectId";
+	import { Project } from "$lib/classes/automaton";
 	let fileAdapter: FileAdapter;
 	onMount(() => {
 		fileAdapter = new FileAdapter();
@@ -49,9 +51,14 @@
 			icon={File_open}
 			name="Open Project"
 			on:click={async () => {
-				project.set(
-					await fileAdapter.load(await fileAdapter.openDialog()),
+				const path = await fileAdapter.openDialog();
+
+				const newProject = Project.fromRaw(
+					await fileAdapter.load(path),
+					{ id: new ProjectId(path) },
 				);
+
+				project.set(newProject);
 			}}
 		/>
 		<DropDownButton
