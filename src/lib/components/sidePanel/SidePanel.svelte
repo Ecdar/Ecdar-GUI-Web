@@ -2,8 +2,11 @@
 	import { SidePanelEnum } from "./SidePanelEnum";
 
 	export let panelSide: SidePanelEnum;
-	export let mainContainer: HTMLElement;
+
+	let resizer: HTMLElement;
 	let panelWidth: number = 300;
+	let controller: AbortController;
+	let signal: AbortSignal;
 
 	/**
 	 * Function for resizing a sidepanel
@@ -23,11 +26,22 @@
 	 * @param event
 	 */
 	function startResizingSidePanel(event: PointerEvent) {
+		controller = new AbortController();
+		signal = controller.signal;
+
 		event.preventDefault();
-		mainContainer.setPointerCapture(event.pointerId);
-		mainContainer.addEventListener("pointermove", resizeSidePanel);
-		mainContainer.addEventListener("pointerup", stopResizingSidePanel);
-		mainContainer.addEventListener("pointercancel", stopResizingSidePanel);
+		event.stopPropagation();
+
+		resizer.setPointerCapture(event.pointerId);
+		resizer.addEventListener("pointermove", resizeSidePanel, {
+			signal,
+		});
+		resizer.addEventListener("pointerup", stopResizingSidePanel, {
+			signal,
+		});
+		resizer.addEventListener("pointercancel", stopResizingSidePanel, {
+			signal,
+		});
 	}
 
 	/**
@@ -35,18 +49,14 @@
 	 * @param event
 	 */
 	function stopResizingSidePanel(event: PointerEvent) {
-		mainContainer.releasePointerCapture(event.pointerId);
-		mainContainer.removeEventListener("pointermove", resizeSidePanel);
-		mainContainer.removeEventListener("pointerup", stopResizingSidePanel);
-		mainContainer.removeEventListener(
-			"pointercancel",
-			stopResizingSidePanel,
-		);
+		resizer.releasePointerCapture(event.pointerId);
+		controller.abort();
 	}
 </script>
 
 {#if panelSide === SidePanelEnum.Right}
 	<div
+		bind:this={resizer}
 		role="button"
 		id="right-resizer"
 		class="resizer"
@@ -66,6 +76,7 @@
 </div>
 {#if panelSide === SidePanelEnum.Left}
 	<div
+		bind:this={resizer}
 		role="button"
 		id="left-resizer"
 		class="resizer"

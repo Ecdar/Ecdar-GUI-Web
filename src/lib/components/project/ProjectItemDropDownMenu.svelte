@@ -9,6 +9,7 @@
 	import OverlayMenu from "$lib/components/overlayMenu/OverlayMenu.svelte";
 	import Panel from "$lib/components/overlayMenu/Panel.svelte";
 	import Button from "$lib/components/overlayMenu/elements/Button.svelte";
+	import SvgButton from "$lib/components/buttons/SvgButton.svelte";
 
 	export let description: string;
 	export let color: string;
@@ -17,52 +18,55 @@
 	export let itemType: "system" | "component";
 
 	const colorOptions = [
-		"grey",
-		"orange",
-		"red",
-		"pink",
-		"purple",
-		"blue",
-		"skyblue",
-		"cyan",
-		"green",
-		"brown",
+		"#8B0000", // Dark Red
+		"#C70039", // Imperial Red
+		"#e74c3c", // Alizarin Crimson
+		"#FF5733", // Dark Orange
+		"#f39c12", // Orange
+		"#FFC300", // Vivid Yellow
+		"#e67e22", // Carrot
+		"#d35400", // Pumpkin
+		"#2ecc71", // Emerald
+		"#1abc9c", // Turquoise
+		"#3498db", // Dodger Blue
+		"#34495e", // Wet Asphalt
+		"#2c3e50", // Midnight Blue
+		"#9b59b6", // Amethyst
+		"#581845", // Dark Purple
+		"#900C3F", // Deep Red
 	];
 
 	const menuId = `${itemType}-menu-${index}`;
 	let button: HTMLElement;
 
+	/**
+	 * Function for toggling the includeInPeriodicCheck variable
+	 * @param event
+	 */
 	function togglePeriodicCheck(event: MouseEvent) {
 		event.stopPropagation();
 		includeInPeriodicCheck = !includeInPeriodicCheck;
 	}
 </script>
 
-<button
-	class="dropdown"
-	bind:this={button}
+<SvgButton
+	bind:button
+	icon={More_vert}
 	popovertarget={menuId}
 	id={`${itemType}-button-${index}`}
->
-	<More_vert />
-</button>
+	color="var(--sidebar-text-color)"
+/>
 <OverlayMenu anchor={button} id={menuId}>
 	{#if itemType === "component"}
 		<Panel>
 			<p>Configuration</p>
-			{#if includeInPeriodicCheck}
-				<Button
-					icon={Check_box}
-					text="Include in periodic check"
-					click={togglePeriodicCheck}
-				/>
-			{:else}
-				<Button
-					icon={Check_box_outline_blank}
-					text="Include in periodic check"
-					click={togglePeriodicCheck}
-				/>
-			{/if}
+			<Button
+				icon={includeInPeriodicCheck
+					? Check_box
+					: Check_box_outline_blank}
+				text="Include in periodic check"
+				click={togglePeriodicCheck}
+			/>
 		</Panel>
 	{/if}
 	<Panel>
@@ -75,7 +79,7 @@
 				<button
 					style="background-color: {colorOption}"
 					class="color"
-					on:click={() => {
+					on:click|stopPropagation={() => {
 						color = colorOption;
 					}}
 				/>
@@ -109,16 +113,12 @@
 	button {
 		color: var(--sidebar-text-color);
 		padding: 0;
+		display: flex;
 	}
 
 	p {
 		margin: 0.5em 0;
-	}
-
-	.dropdown {
-		background: none;
-		border: none;
-		cursor: pointer;
+		text-align: left;
 	}
 
 	.colors {

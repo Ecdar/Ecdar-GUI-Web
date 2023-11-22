@@ -9,7 +9,7 @@
 </script>
 
 <button on:click={click}>
-	<svelte:component this={icon} ariaLabel="" class="icon" />
+	<svelte:component this={icon} ariaLabel="" class="icon" tabindex="-1" />
 	<p>{text}</p>
 </button>
 
