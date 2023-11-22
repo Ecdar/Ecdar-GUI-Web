@@ -5,14 +5,12 @@
 		Arrow_downward,
 		Arrow_upward,
 	} from "svelte-google-materialdesign-icons";
+	import Console from "$lib/classes/console/Console";
 
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
 	let consoleBar: HTMLElement;
 	let consoleElement: HTMLElement;
-
-	let frontEndErrors: string[] = [];
-	let backEndErrors: string[] = [];
 
 	const consoleInitialSize: number = 300;
 	let consoleExtendedSize: number = consoleInitialSize;
@@ -24,7 +22,7 @@
 
 	/**
 	 * Function for resizing the console
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function resizeConsolePanel(event: PointerEvent) {
 		event.preventDefault();
@@ -38,7 +36,7 @@
 
 	/**
 	 * Function for starting resizing the console
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function startResizingConsolePanel(event: PointerEvent) {
 		event.preventDefault();
@@ -52,7 +50,7 @@
 
 	/**
 	 * Function for stopping resizing the console
-	 * @param {PointerEvent} event
+	 * @param event
 	 */
 	function stopResizingConsolePanel(event: PointerEvent) {
 		consoleElement.style.transition = "var(--console-height-transition)";
@@ -82,36 +80,17 @@
 
 	/**
 	 *Function for changing the current tab of the console
-	 *@param {Tabs} tab
+	 *@param tab
 	 */
 	function changeTab(tab: Tabs) {
+		if (currentlyCollapsed) {
+			changeConsoleCollapsableTextAndHeight();
+		}
 		currentTab = tab;
 	}
 
-	/**
-	 *Function for sending an error to a specific tab in the console
-	 *@param {string} error
-	 *@param {Tabs} tab
-	 */
-	export function sendErrorToTab(error: string, tab: Tabs) {
-		switch (tab) {
-			case Tabs.Frontend:
-				frontEndErrors.push(error);
-				frontEndErrors = frontEndErrors;
-				break;
-			case Tabs.Backend:
-				backEndErrors.push(error);
-				backEndErrors = backEndErrors;
-				break;
-			case Tabs.All:
-				frontEndErrors.push(error);
-				backEndErrors.push(error);
-				frontEndErrors = frontEndErrors;
-				break;
-			default:
-				break;
-		}
-	}
+	let frontendConsole = Console.frontendConsoleLines;
+	let backendConsole = Console.backendConsoleLines;
 </script>
 
 <div class="outer-overflow">
@@ -126,18 +105,6 @@
 			}}
 			style="cursor: {currentlyCollapsed ? 'auto' : 'row-resize'};"
 		/>
-		<button
-			type="button"
-			class="collapsible unselectable"
-			on:click={changeConsoleCollapsableTextAndHeight}
-		>
-			{#if currentlyCollapsed}
-				<Arrow_upward size="18" color="white" />
-			{:else}
-				<Arrow_downward size="18" color="white" />
-			{/if}
-		</button>
-
 		<button
 			type="button"
 			class="console-tab front-end-button unselectable"
@@ -162,6 +129,18 @@
 		>
 			Backend
 		</button>
+
+		<button
+			type="button"
+			class="collapsible unselectable"
+			on:click={changeConsoleCollapsableTextAndHeight}
+		>
+			{#if currentlyCollapsed}
+				<Arrow_upward size="18" color="white" />
+			{:else}
+				<Arrow_downward size="18" color="white" />
+			{/if}
+		</button>
 	</div>
 	<div
 		bind:this={consoleElement}
@@ -169,11 +148,11 @@
 		style="height: {consoleSize}px;"
 	>
 		{#if currentTab == Tabs.Frontend}
-			{#each frontEndErrors as error}
+			{#each $frontendConsole as error}
 				<ConsoleLine componentText={error} />
 			{/each}
 		{:else if currentTab == Tabs.Backend}
-			{#each backEndErrors as error}
+			{#each $backendConsole as error}
 				<ConsoleLine componentText={error} />
 			{/each}
 		{/if}
@@ -251,6 +230,7 @@
 		border-bottom: 0em;
 		border-style: solid;
 		float: left;
+		outline-offset: -2px;
 	}
 
 	.console-tab:hover {
@@ -261,6 +241,7 @@
 		border-left: 0;
 		border-right: 0;
 	}
+
 	.unselectable {
 		-webkit-user-select: none;
 		-ms-user-select: none;

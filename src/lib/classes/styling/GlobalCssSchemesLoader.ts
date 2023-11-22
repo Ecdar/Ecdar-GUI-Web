@@ -47,7 +47,7 @@ class GlobalCssSchemesLoader {
 
 	/**
 	 * Method for applying CSS variabels for a specific mediafeature
-	 * @param {z.infer<typeof MediaScheme>} feature
+	 * @param feature
 	 */
 	applyCssVariables(feature: z.infer<typeof MediaScheme>) {
 		// Apply color variables

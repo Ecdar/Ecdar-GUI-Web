@@ -10,6 +10,9 @@
 ### NPM ###
 node_modules
 
+### yarn ###
+yarn-error.log
+
 ### SvelteKit ###
 /build
 /.svelte-kit
