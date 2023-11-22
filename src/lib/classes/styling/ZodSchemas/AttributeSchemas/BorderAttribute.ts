@@ -1,6 +1,6 @@
 import { z } from "zod";
 import ColorAttribute from "./ColorAttribute";
-import SizeAttribute from "./SizeAttribute";
+import NumberUnitAttribute from "./NumberUnitAttribute";
 
 /**
  * Represents a border in CSS.
@@ -9,7 +9,7 @@ import SizeAttribute from "./SizeAttribute";
 
 const BorderAttribute = z.tuple([
 	z.string(), // Border style string
-	SizeAttribute, // Thickness of the border
+	NumberUnitAttribute, // Thickness of the border
 	ColorAttribute, // The color of the border
 ]);
 
