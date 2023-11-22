@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, type ComponentType } from "svelte";
-	import DropDownBtn from "./DropDownBtn.svelte";
+	import DropDownButton from "./DropDownButton.svelte";
 	import { Done } from "svelte-google-materialdesign-icons";
 	import {
 		checkboxStates,
@@ -38,7 +38,7 @@
 
 <!--Make each dropdown item, into button-->
 {#key unique}
-	<DropDownBtn
+	<DropDownButton
 		{name}
 		{icon}
 		color={checked ? "black" : "transparent"}

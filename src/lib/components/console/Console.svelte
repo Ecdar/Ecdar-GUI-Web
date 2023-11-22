@@ -5,22 +5,20 @@
 		Arrow_downward,
 		Arrow_upward,
 	} from "svelte-google-materialdesign-icons";
+	import Console from "$lib/classes/console/Console";
 
 	let currentlyCollapsed: boolean = true;
 	let currentTab: Tabs = Tabs.Frontend;
 	let consoleContainer: HTMLElement;
 	let consoleBar: HTMLElement;
 
-	let frontEndErrors: string[] = [];
-	let backEndErrors: string[] = [];
-
-	const consoleInitialSize: string = "20em";
-	let consoleExtendedSize: string = consoleInitialSize;
-	let consoleCollapsedSize: string = "3.25em";
+	const consoleInitialSize: number = 300;
+	let consoleExtendedSize: number = consoleInitialSize;
+	let consoleCollapsedSize: number = 0;
 	let consoleSize = consoleCollapsedSize;
 
-	let consoleButtonColorOff: string = "slategrey";
-	let consoleButtonColorOn: string = "rgb(159, 174, 189)";
+	let consoleButtonColorOff: string = "var(--console-unselectedtab-color)";
+	let consoleButtonColorOn: string = "var(--console-selectedtab-color)";
 
 	/**
 	 * Function for resizing the console
@@ -28,7 +26,7 @@
 	 */
 	function resizeConsolePanel(event: PointerEvent) {
 		event.preventDefault();
-		consoleSize = (window.innerHeight - event.y).toString() + "px";
+		consoleSize = window.innerHeight - event.y - consoleBar.offsetHeight;
 		if (window.innerHeight - event.y < consoleBar.clientHeight) {
 			consoleSize = consoleInitialSize;
 			stopResizingConsolePanel(event);
@@ -91,41 +89,18 @@
 	 *@param tab
 	 */
 	function changeTab(tab: Tabs) {
+		if (currentlyCollapsed) {
+			changeConsoleCollapsableTextAndHeight();
+		}
 		currentTab = tab;
 	}
 
-	/**
-	 *Function for sending an error to a specific tab in the console
-	 *@param error
-	 *@param tab
-	 */
-	export function sendErrorToTab(error: string, tab: Tabs) {
-		switch (tab) {
-			case Tabs.Frontend:
-				frontEndErrors.push(error);
-				frontEndErrors = frontEndErrors;
-				break;
-			case Tabs.Backend:
-				backEndErrors.push(error);
-				backEndErrors = backEndErrors;
-				break;
-			case Tabs.All:
-				frontEndErrors.push(error);
-				backEndErrors.push(error);
-				frontEndErrors = frontEndErrors;
-				break;
-			default:
-				break;
-		}
-	}
+	let frontendConsole = Console.frontendConsoleLines;
+	let backendConsole = Console.backendConsoleLines;
 </script>
 
-<div
-	class="outer-overflow"
-	style="height: {consoleSize};"
-	bind:this={consoleContainer}
->
-	<div bind:this={consoleBar}>
+<div class="outer-overflow" bind:this={consoleContainer}>
+	<div bind:this={consoleBar} id="console-bar">
 		<div
 			role="button"
 			id="console-resizer"
@@ -136,18 +111,6 @@
 			}}
 			style="cursor: {currentlyCollapsed ? 'auto' : 'row-resize'};"
 		/>
-		<button
-			type="button"
-			class="collapsible unselectable"
-			on:click={changeConsoleCollapsableTextAndHeight}
-		>
-			{#if currentlyCollapsed}
-				<Arrow_upward size="18" />
-			{:else}
-				<Arrow_downward size="18" />
-			{/if}
-		</button>
-
 		<button
 			type="button"
 			class="console-tab front-end-button unselectable"
@@ -172,14 +135,26 @@
 		>
 			Backend
 		</button>
+
+		<button
+			type="button"
+			class="collapsible unselectable"
+			on:click={changeConsoleCollapsableTextAndHeight}
+		>
+			{#if currentlyCollapsed}
+				<Arrow_upward size="18" color="white" />
+			{:else}
+				<Arrow_downward size="18" color="white" />
+			{/if}
+		</button>
 	</div>
-	<div class="console">
+	<div class="console" style="height: {consoleSize}px;">
 		{#if currentTab == Tabs.Frontend}
-			{#each frontEndErrors as error}
+			{#each $frontendConsole as error}
 				<ConsoleLine componentText={error} />
 			{/each}
 		{:else if currentTab == Tabs.Backend}
-			{#each backEndErrors as error}
+			{#each $backendConsole as error}
 				<ConsoleLine componentText={error} />
 			{/each}
 		{/if}
@@ -188,16 +163,19 @@
 
 <style>
 	.console {
-		background-color: rgb(159, 174, 189);
+		background-color: var(--background-color);
 		width: 100%;
 		height: 100%;
 		overflow-y: scroll;
+	}
+
+	#console-bar {
 		min-height: 2.5em;
 	}
 
 	#console-resizer {
 		background-color: black;
-		height: 0.3em;
+		height: 0.2em;
 	}
 
 	.console::-webkit-scrollbar {
@@ -206,19 +184,19 @@
 
 	.console::-webkit-scrollbar-track {
 		box-shadow: inset 0 0 1em grey;
-		background: lightslategray;
+		background: var(--sidebar-background-color);
 	}
 
 	.console::-webkit-scrollbar-thumb {
-		background: rgb(48, 54, 61);
+		background: var(--console-scrollbar-thumb-color);
 	}
 
 	.console::-webkit-scrollbar-thumb:hover {
-		background: rgb(33, 37, 42);
+		background: var(--console-scrollbar-thumbhover-color);
 	}
 
 	.collapsible {
-		background-color: lightslategrey;
+		background-color: var(--console-topbar-background-color);
 		float: right;
 		position: relative;
 		box-shadow: 0 3px 11px rgba(28, 28, 28, 0.55);
@@ -231,7 +209,7 @@
 	}
 
 	.collapsible:hover {
-		background-color: slategrey;
+		background-color: var(--console-selectedtab-color);
 	}
 
 	.outer-overflow {
@@ -239,11 +217,12 @@
 		margin: 0%;
 		padding: 0%;
 		flex-direction: column;
-		background-color: slategrey;
+		background-color: var(--console-topbar-background-color);
 		overflow: hidden;
 	}
 
 	.console-tab {
+		color: var(--navigationbar-text-color);
 		position: relative;
 		height: 3.8em;
 		margin: auto;
@@ -252,16 +231,18 @@
 		border-bottom: 0em;
 		border-style: solid;
 		float: left;
+		outline-offset: -2px;
 	}
 
 	.console-tab:hover {
-		filter: brightness(0.9);
+		background-color: var(--console-tab-hover-color) !important;
 	}
 
 	.front-end-button {
 		border-left: 0;
 		border-right: 0;
 	}
+
 	.unselectable {
 		-webkit-user-select: none;
 		-ms-user-select: none;
