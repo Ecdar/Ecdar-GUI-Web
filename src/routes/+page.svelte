@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { project } from "$lib/globalState/activeProject";
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
+	import Toolbar from "$lib/components/toolBar/Toolbar.svelte"
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
 	import SidePanel from "$lib/components/sidePanel/SidePanel.svelte";
 	import { SidePanelEnum } from "$lib/components/sidePanel/SidePanelEnum";
@@ -23,8 +24,9 @@
 	{:else}
 		<!-- Left side -->
 		<SidePanel panelSide={SidePanelEnum.Left}>
-			<ProjectNav slot="nav" />
+			<ProjectNav  slot="nav"/>
 			<div slot="content">
+				<Toolbar/>
 				<GlobalDeclaration />
 				<ProjectItems />
 			</div>

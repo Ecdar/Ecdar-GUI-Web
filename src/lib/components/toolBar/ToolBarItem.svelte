@@ -43,7 +43,6 @@
         strokeWidth: "1.5",
         size: "100%",
         variation: "filled",
-        color: "black",
     };
     setContext("iconCtx", iconCtx);
 
@@ -62,7 +61,7 @@
         on:click={onClick}
         style="display: none;"
     />
-    <svelte:component this={icon}></svelte:component>
+    <svelte:component this={icon} style="var(--toolbar-icon-color)"></svelte:component>
 </label>
 
 <style>
@@ -71,15 +70,13 @@
         align-items: left;
         justify-content: space-evenly;
         width: calc(100%/9); /* adjusts the space evenly to the tools. In this case 9 buttons*/
-        border-right: 2px solid black; /* Set your desired border properties */
-        border-bottom: 2px solid black; 
-        border-top: 2px solid black;
+        border: var(--main-innernavigationbar-border);
         cursor: pointer;
         margin-bottom: -2px;
-        background-color: transparent;
+        background-color: var(--toolbar-icon-background-color);
     }
     label:has(input[type="radio"]:checked) {
-		  background-color: grey;
+		  background-color: var(--toolbar-selected-color);
     }   
     
 </style>

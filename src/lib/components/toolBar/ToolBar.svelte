@@ -1,12 +1,13 @@
 <script lang="ts">
-	import ToolBarItem from "./ToolBarItem.svelte";
+	import ToolBarItem from "./ToolbarItem.svelte";
 	import {
 		Content_cut,
 		Arrow_downward,
 		Arrow_upward,
 	} from "svelte-google-materialdesign-icons";
+	import SidePanel from "$lib/components/sidePanel/SidePanel.svelte";
 	
-	export let collapsed: boolean = true;
+	export let collapsed: boolean = false;
 	const initalSize: string = "fits-content";
 	let extendedSize: string = initalSize;
 	let collapsedSize: string = "0em";
@@ -38,9 +39,9 @@
 			on:click={collapseOrExpand}
 		>
 			{#if collapsed}
-				<Arrow_upward size="18" />
+				<Arrow_upward size="18" color="white"/>
 			{:else}
-				<Arrow_downward size="18" />
+				<Arrow_downward size="18"  color="white"/>
 			{/if}
 		</button>
 	</div>
@@ -140,11 +141,12 @@
 	.tool-bar-style{
 		font-size: 0; /* This removes the space between buttons*/ 
 		margin-right: -2px;
-		margin-bottom: 2px;
+		margin-bottom: 0px;
 	}
 	nav {
+		background-color: var(--main-navigationbar-color);
+		color: var(--navigationbar-text-color);
 		height: 5em;
-		background-color: slategrey;
 		flex-shrink: 0;
 	}
 	#tools-nav {
@@ -153,10 +155,10 @@
 		align-items: center;
 		height: 100%;
 		padding: 0 1em;
-		margin-bottom: 2px;
+		margin-bottom: 0px;
 	}
 	.collapsible {
-		background-color: lightslategrey;
+		background-color: var(--console-topbar-background-color);
 		float: right;
 		position: relative;
 		box-shadow: 0 3px 11px rgba(28, 28, 28, 0.55);
@@ -167,7 +169,7 @@
 	}
 
 	.collapsible:hover {
-		background-color: slategrey;
+		background-color: var(--console-selectedtab-color);
 	}
 	
 </style>
