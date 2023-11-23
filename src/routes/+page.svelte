@@ -24,9 +24,9 @@
 	{:else}
 		<!-- Left side -->
 		<SidePanel panelSide={SidePanelEnum.Left}>
+			<Toolbar slot="toolbar"/>
 			<ProjectNav  slot="nav"/>
 			<div slot="content">
-				<Toolbar/>
 				<GlobalDeclaration />
 				<ProjectItems />
 			</div>
