@@ -23,10 +23,28 @@
 	import { ProjectId } from "$lib/classes/automaton/ProjectId";
 	import { Project } from "$lib/classes/automaton";
 	import { get } from "svelte/store";
+	import { SavingNotSupportedError } from "$lib/classes/fileAdapter/FileSystemFallback";
 	let fileAdapter: FileAdapter;
 	onMount(() => {
 		fileAdapter = new FileAdapter();
 	});
+
+	async function save(saveAs: boolean = false) {
+		try {
+			const _project = get(project);
+
+			await fileAdapter.save(
+				_project ? _project.toRaw() : {},
+				saveAs ? await fileAdapter.saveDialog() : undefined,
+			);
+		} catch (error) {
+			if (error instanceof SavingNotSupportedError) {
+				alert(
+					"Saving not supported in browser please use desktop app or export your project",
+				);
+			}
+		}
+	}
 </script>
 
 <!--
@@ -72,25 +90,15 @@
 		<DropDownButton
 			icon={Save}
 			name="Save Project"
-			on:click={async () => {
-				const _project = get(project);
-
-				await fileAdapter.save(
-					_project ? _project.toRaw() : {},
-					undefined,
-				);
+			on:click={() => {
+				save();
 			}}
 		/>
 		<DropDownButton
 			icon={Save}
 			name="Save Project as"
-			on:click={async () => {
-				const _project = get(project);
-
-				await fileAdapter.save(
-					_project ? _project.toRaw() : {},
-					await fileAdapter.saveDialog(),
-				);
+			on:click={() => {
+				save(true);
 			}}
 		/>
 

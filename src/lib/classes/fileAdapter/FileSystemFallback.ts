@@ -1,5 +1,7 @@
 import { FileSystem } from "./FileSystem";
 
+export class SavingNotSupportedError extends Error {}
+
 export class FileSystemFallback extends FileSystem {
 	static supported = true;
 	private fileInput: HTMLInputElement;
@@ -12,19 +14,18 @@ export class FileSystemFallback extends FileSystem {
 	}
 
 	exists(): Promise<boolean> {
-		throw new Error("Saving in browser not supported");
+		throw new SavingNotSupportedError();
 	}
 
 	saveDialog(): Promise<string | undefined> {
-		throw new Error("Saving in browser not supported");
+		throw new SavingNotSupportedError();
 	}
 
 	createDir(): Promise<void> {
-		alert("Saving in browser not supported");
-		throw new Error("Saving in browser not supported");
+		throw new SavingNotSupportedError();
 	}
 	writeFile(): Promise<void> {
-		throw new Error("Saving in browser not supported");
+		throw new SavingNotSupportedError();
 	}
 
 	readDir(path: string): Promise<string[]> {
