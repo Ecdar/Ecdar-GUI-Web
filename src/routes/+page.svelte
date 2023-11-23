@@ -3,7 +3,6 @@
 	import DropDownMenu from "$lib/components/samplesImplementations/DropDownMenu.svelte";
 	import LocationsWithContextMenu from "$lib/components/samplesImplementations/LocationsWithContextMenu.svelte";
 	import { callEndpoint } from "$lib/classes/communication";
-
 	enum SidePanel {
 		Left,
 		Right,

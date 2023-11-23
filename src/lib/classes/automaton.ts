@@ -8,6 +8,9 @@
 // Raw Types
 export * as Raw from "./automaton/raw";
 
+// THE PROJECT
+export { Project } from './automaton/Project';
+
 // Enums
 export { Backend } from "./automaton/Backend";
 export { DeclarationType } from "./automaton/DeclarationType";
