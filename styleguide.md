@@ -16,6 +16,7 @@
     - [Comment Practices:](#comment-practices)
       - [Comment writing guidelines:](#comment-writing-guidelines)
     - [Folder Structure:](#folder-structure)
+    - [Test writing guidelines:](#tests-writing-guidelines)
   - [Using the CSS Schemes Loader](#using-the-css-schemes-loader)
     - [General JSON Structure](#general-json-structure)
     - [Supporting New CSS Media Features](#supporting-new-css-media-features)
@@ -161,13 +162,35 @@ The following folder structure is meant to be a guideline of where one should pu
 │   │       └── samplesImplementations
 │   │           └── <-- An example of how one would implement and use a specific component -->
 │   │
-│   └── routes
-│       └── <-- Files for routing and global layout -->
+│   ├── routes
+│   │   └── <-- Files for routing and global layout -->
+│   └── tests
+│       └── <-- Unit test files here.
+                Folder structure should copy the project structure starting from src,
+                and put tests in their corresponing folders ->
 ├── static
 └── tests
-    └── <-- Test files here.
-            Folder structure should copy the project structure,
-            and put tests in their corresponding folders -->
+    └── <-- End-to-end test files here.
+            Folder structure should copy the project structure starting from src,
+            and put tests in their corresponing folders -->
+```
+
+### Tests writing guidelines:
+
+- There should be a one to one relation between files testet and test files.
+- When writing end-to-end tests the test names should explain the test.
+- When writing unit tests, the describe and it functions should be used in a way such that they form a sentence.
+
+An example of a unit test:
+
+```
+describe('Circle class', => {
+  describe('area is calculated when', => {
+    it('sets the radius', => { ... });
+    it('sets the diameter', => { ... });
+    it('sets the circumference', => { ... });
+  });
+});
 ```
 
 ## Using the CSS Schemes Loader
