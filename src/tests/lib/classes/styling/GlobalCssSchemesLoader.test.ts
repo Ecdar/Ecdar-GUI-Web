@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import GlobalCssSchemesLoader from "$lib/classes/styling/GlobalCssSchemesLoader";
 
-describe("Throw New Error", () => {
-	it("No Window", () => {
+describe("CSS loader tests", () => {
+	it("has no access to the Window element", () => {
 		expect(() => {
 			new GlobalCssSchemesLoader();
 		}).toThrowError(
