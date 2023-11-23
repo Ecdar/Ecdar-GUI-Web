@@ -47,12 +47,7 @@
 			],
 			"--canvas-text-color": ["display-p3", 0, 0, 0],
 			"--sidebar-text-color": ["display-p3", 0, 0, 0],
-			"--background-color": [
-				"display-p3",
-				0.95686274509,
-				0.95686274509,
-				0.95686274509
-			],
+			"--background-color": ["display-p3", 0.95686, 0.95686, 0.95686],
 			"--console-selectedtab-color": [
 				"display-p3",
 				0.2862745098,
@@ -139,12 +134,7 @@
 				],
 				"--canvas-text-color": ["display-p3", 1, 1, 1],
 				"--sidebar-text-color": ["display-p3", 1, 1, 1],
-				"--background-color": [
-					"display-p3",
-					0.09019607843,
-					0.10196078431,
-					0.13333333333
-				],
+				"--background-color": ["display-p3", 0.0902, 0.10196, 0.13333],
 				"--console-selectedtab-color": [
 					"display-p3",
 					0.08490196078,
