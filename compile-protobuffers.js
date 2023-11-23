@@ -20,7 +20,7 @@ async function main() {
 			  --proto_path ${dir}/Ecdar-ProtoBuf \\
 			  ${dir}/Ecdar-ProtoBuf/${file}
 		  `),
-			),
+		),
 	);
 	console.log("Finnished compiling protobuffers");
 }
