@@ -28,7 +28,10 @@ test("Check and uncheck Project Panel checkbox", async ({ page }) => {
 	expect(color).toBe("transparent");
 });
 
-test("Clicking about button", async ({ context, page }) => {
+test("Navigating to Help -> About and open Ecdar webpage", async ({
+	context,
+	page,
+}) => {
 	const pagePromise = context.waitForEvent("page");
 
 	await page.getByRole("button", { name: "Help", exact: true }).click();
