@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Services, WithIp, Writeable } from "../communication";
+import { toSnakeCase, type Services, type WithIp, type Writeable } from "../communication";
 
 
 export async function communicationTauri<
@@ -17,10 +17,4 @@ export async function communicationTauri<
   return await invoke(`${serviceSnake}_${endpointSnake}`, { payload : input});
 }
 
-function toSnakeCase(input : string) : string{
-  input = input[0].toLowerCase() + input.substring(1);
-  return input.replace(/[A-Z]/g, (x) => {
-	  return "_" + x.toLowerCase();
-  });
-}
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Services, WithIp, Writeable } from "../communication";
+import { toSnakeCase, type Services, type WithIp, type Writeable } from "../communication";
 
 export async function communicationWeb<
 	S extends keyof Services,
@@ -9,8 +9,8 @@ export async function communicationWeb<
 	endpoint: E,
 	input: WithIp<Writeable<Awaited<ReturnType<Services[S][E]>["request"]>>>,
 ): Awaited<ReturnType<Services[S][E]>["response"]> {
-	const servicePascal = toPascal(service);
-	const endpointPascal = toPascal(endpoint);
+	const servicePascal = toSnakeCase(service);
+	const endpointPascal = toSnakeCase(endpoint);
 	const response = await axios.post(
 		`${servicePascal}/${endpointPascal}`,
 		input,
@@ -21,9 +21,5 @@ export async function communicationWeb<
 	}
 
 	return response.data as Promise<ReturnType<typeof communicationWeb<S, E>>>;
-}
-
-function toPascal(input : string) : string {
-  return input[0].toUpperCase() + input.substring(1);
 }
 

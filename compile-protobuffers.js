@@ -1,4 +1,4 @@
-import { exec } from "child_process";
+import { execSync } from "child_process";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -12,7 +12,7 @@ fs.readdir(`${dir}/Ecdar-ProtoBuf`, (err, files) => {
 	if (err !== null) throw err;
 	for (let file of files.filter((name) => name.match(/.*\.proto/g))) {
 		const cmd = `npx protoc --ts_out ${out_dir} --proto_path ${dir}/Ecdar-ProtoBuf ${dir}/Ecdar-ProtoBuf/${file}`;
-		exec(cmd, (err, stdout, stderr) => {
+		execSync(cmd, (err, stdout, stderr) => {
 			console.log(`Executing commmand: "${cmd}"`);
 			if (stdout !== null) console.log(stdout);
 			if (stderr !== null) console.error(stderr);
