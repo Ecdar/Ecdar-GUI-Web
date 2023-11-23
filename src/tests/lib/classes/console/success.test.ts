@@ -49,7 +49,8 @@ describe("Console class", () => {
 				string,
 			);
 			expect(
-				frontendArray[frontendArray.length - 1].split(" - ")[1]).toBe(string2);
+				frontendArray[frontendArray.length - 1].split(" - ")[1],
+			).toBe(string2);
 		});
 	});
 });
