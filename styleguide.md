@@ -177,7 +177,7 @@ The following folder structure is meant to be a guideline of where one should pu
 
 ### Tests writing guidelines:
 
-- There should be a one to one relation between files testet and test files.
+- There should be a one to one relation between files tested and test files.
 - When writing end-to-end tests the test names should explain the test.
 - When writing unit tests, the describe and it functions should be used in a way such that they form a sentence.
 
