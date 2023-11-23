@@ -47,12 +47,7 @@
 			],
 			"--canvas-text-color": ["display-p3", 0, 0, 0],
 			"--sidebar-text-color": ["display-p3", 0, 0, 0],
-			"--background-color": [
-				"display-p3",
-				0.95686274509,
-				0.95686274509,
-				0.95686274509
-			],
+			"--background-color": ["display-p3", 0.95686, 0.95686, 0.95686],
 			"--console-selectedtab-color": [
 				"display-p3",
 				0.2862745098,
@@ -114,6 +109,11 @@
 				[0.1, "em"],
 				["display-p3", 0.18823529411, 0.22745098039, 0.25098039215]
 			]
+		},
+		"transition": {
+			"--console-tab-hover-transition": ["background-color", [200, "ms"]],
+			"--console-height-transition": ["height", [200, "ms"]],
+			"--sidebar-element-transition": ["background-color", [200, "ms"]]
 		}
 	},
 	"schemes": [
@@ -134,12 +134,7 @@
 				],
 				"--canvas-text-color": ["display-p3", 1, 1, 1],
 				"--sidebar-text-color": ["display-p3", 1, 1, 1],
-				"--background-color": [
-					"display-p3",
-					0.09019607843,
-					0.10196078431,
-					0.13333333333
-				],
+				"--background-color": ["display-p3", 0.0902, 0.10196, 0.13333],
 				"--console-selectedtab-color": [
 					"display-p3",
 					0.08490196078,
@@ -190,6 +185,14 @@
 					0.14666666666,
 					0.17019607843
 				]
+			}
+		},
+		{
+			"mediaFeature": "prefers-reduced-motion",
+			"transition": {
+				"--console-tab-hover-transition": ["none"],
+				"--console-height-transition": ["none"],
+				"--sidebar-element-transition": ["none"]
 			}
 		}
 	]

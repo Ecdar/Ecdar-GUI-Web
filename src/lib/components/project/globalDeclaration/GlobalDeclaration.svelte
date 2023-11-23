@@ -7,7 +7,7 @@
 </script>
 
 <button on:click={handleGlobalDeclarationsClick}>
-	<div class="global-dec">
+	<div id="global-dec">
 		<div class="circle" style="background-color: grey">
 			<div class="icon">
 				<Description size="100%" tabindex="-1" />
@@ -32,17 +32,18 @@
 		outline-offset: -1px;
 	}
 
-	.global-dec {
+	#global-dec {
 		background-color: var(--sidebar-element-color);
+		transition: var(--sidebar-element-transition);
 		cursor: pointer;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 		padding: 10px;
-		transition: background-color 200ms;
+		border-bottom: 1px solid black;
 	}
 
-	.global-dec:hover {
+	#global-dec:hover {
 		background-color: var(--sidebar-element-hover-color);
 	}
 

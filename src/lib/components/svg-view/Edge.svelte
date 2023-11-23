@@ -3,6 +3,7 @@
 	import type { iPoint } from "$lib/interfaces/iPoint";
 	import type { iNail } from "$lib/interfaces/iNail";
 	import Nail from "./Nail.svelte";
+	import { scale } from "$lib/globalState/scaleStore";
 
 	export let sourcePoint: iPoint;
 	export let targetPoint: iPoint;
@@ -47,7 +48,7 @@
 	function calculateX2(line: { from: iPoint; to: iPoint }): number {
 		return (
 			line.to.x -
-			20 *
+			25 *
 				Math.cos(
 					Math.atan2(
 						line.to.y - line.from.y,
@@ -61,7 +62,7 @@
 	function calculateY2(line: { from: iPoint; to: iPoint }): number {
 		return (
 			line.to.y -
-			20 *
+			25 *
 				Math.sin(
 					Math.atan2(
 						line.to.y - line.from.y,
@@ -70,6 +71,9 @@
 				)
 		);
 	}
+
+	$: dashedStroke =
+		edgeType === Status.INPUT ? `${2 * 8 - $scale},${2 * 8 - $scale}` : "";
 </script>
 
 <!-- Lines -->
@@ -80,7 +84,7 @@
 		x2={index === lines.length - 1 ? calculateX2(line) : line.to.x}
 		y2={index === lines.length - 1 ? calculateY2(line) : line.to.y}
 		marker-end={index === lines.length - 1 ? "url(#arrowhead)" : ""}
-		stroke-dasharray={edgeType === Status.INPUT ? "10,10" : ""}
+		stroke-dasharray={dashedStroke}
 		id="edge-{edgeType}-{index}"
 	/>
 {/each}
