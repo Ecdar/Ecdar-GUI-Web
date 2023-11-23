@@ -1,6 +1,4 @@
 import * as Automata from "../automaton";
-import { Features } from "../features/Features";
-import type { ProjectFeatures } from "./ProjectFeatures";
 
 export const PROJECT_FOLDER_NAME_SYSTEMS = "Systems";
 export const PROJECT_FOLDER_NAME_COMPONENTS = "Components";
@@ -38,11 +36,6 @@ export class Project implements Automata.Named {
 	 * The global declarations of the project
 	 * */
 	globalDeclarations: Automata.Declaration;
-
-	/**
-	 * List of optional features in the project
-	 * */
-	readonly features: Features<ProjectFeatures> = new Features({});
 
 	constructor(
 		name = "New Project",
@@ -84,10 +77,4 @@ export class Project implements Automata.Named {
 			globalDeclarations,
 		);
 	}
-
-	/**
-	 * OPTIONAL:
-	 * Loads a project from disk
-	 * */
-	static readonly load?: () => Promise<Project> = undefined;
 }

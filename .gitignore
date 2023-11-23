@@ -10,6 +10,9 @@
 ### NPM ###
 node_modules
 
+### yarn ###
+yarn-error.log
+
 ### SvelteKit ###
 /build
 /.svelte-kit
@@ -68,3 +71,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+test-results/

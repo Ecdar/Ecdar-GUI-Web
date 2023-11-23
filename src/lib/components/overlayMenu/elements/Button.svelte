@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ComponentType } from "svelte";
 
-	export let click: () => void;
+	export let click: (event: MouseEvent) => void;
 
 	export let icon: ComponentType;
 
@@ -9,7 +9,7 @@
 </script>
 
 <button on:click={click}>
-	<svelte:component this={icon} ariaLabel="" class="icon" />
+	<svelte:component this={icon} ariaLabel="" class="icon" tabindex="-1" />
 	<p>{text}</p>
 </button>
 

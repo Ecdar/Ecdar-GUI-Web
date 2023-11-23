@@ -1,0 +1,209 @@
+{
+	"default": {
+		"mediaFeature": "default",
+		"color": {
+			"--navigationbar-text-color": ["display-p3", 1, 1, 1],
+			"--console-scrollbar-thumb-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
+			],
+			"--console-scrollbar-thumbhover-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			],
+			"--query-success-color": [
+				"display-p3",
+				0.31372549019,
+				0.54901960784,
+				0.27450980392
+			],
+			"--query-warning-color": [
+				"display-p3",
+				0.98431372549,
+				0.75294117647,
+				0.17647058823
+			],
+			"--query-error-color": [
+				"display-p3",
+				0.82745098039,
+				0.18431372549,
+				0.18431372549
+			],
+			"--main-navigationbar-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
+			],
+			"--canvas-topbar-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			],
+			"--canvas-text-color": ["display-p3", 0, 0, 0],
+			"--sidebar-text-color": ["display-p3", 0, 0, 0],
+			"--background-color": [
+				"display-p3",
+				0.95686274509,
+				0.95686274509,
+				0.95686274509
+			],
+			"--console-selectedtab-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			],
+			"--console-unselectedtab-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
+			],
+			"--console-topbar-background-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
+			],
+			"--console-text-color": ["display-p3", 0, 0, 0],
+			"--sidebar-element-color": [
+				"display-p3",
+				0.93333333333,
+				0.93333333333,
+				0.93333333333
+			],
+			"--sidebar-element-hover-color": [
+				"display-p3",
+				0.81176470588,
+				0.84705882352,
+				0.86274509803
+			],
+			"--queries-input-background-color": ["display-p3", 1, 1, 1],
+			"--canvas-action-color": ["display-p3", 0, 0, 0],
+			"--console-tab-hover-color": [
+				"display-p3",
+				0.3362745098,
+				0.39901960784,
+				0.43823529411
+			],
+			"--navigationbar-button-hover-color": [
+				"display-p3",
+				0.3362745098,
+				0.39901960784,
+				0.43823529411
+			]
+		},
+		"fontSize": {
+			"--sidebar-fontsize": [1, "rem"],
+			"--sidebar-navigationbar-fontsize": [1, "rem"]
+		},
+		"border": {
+			"--main-navigationbar-border": [
+				"solid",
+				[0.1, "em"],
+				["display-p3", 0.18823529411, 0.22745098039, 0.25098039215]
+			],
+			"--main-innernavigationbar-border": [
+				"none solid solid solid",
+				[0.1, "em"],
+				["display-p3", 0.18823529411, 0.22745098039, 0.25098039215]
+			]
+		},
+		"transition": {
+			"--console-tab-hover-transition": ["background-color", [200, "ms"]],
+			"--console-height-transition": ["height", [200, "ms"]],
+			"--sidebar-element-transition": ["background-color", [200, "ms"]]
+		}
+	},
+	"schemes": [
+		{
+			"mediaFeature": "prefers-color-scheme: dark",
+			"color": {
+				"--main-navigationbar-color": [
+					"display-p3",
+					0.0156862745,
+					0.02352941176,
+					0.03529411764
+				],
+				"--canvas-topbar-color": [
+					"display-p3",
+					0.05490196078,
+					0.06666666666,
+					0.09019607843
+				],
+				"--canvas-text-color": ["display-p3", 1, 1, 1],
+				"--sidebar-text-color": ["display-p3", 1, 1, 1],
+				"--background-color": [
+					"display-p3",
+					0.09019607843,
+					0.10196078431,
+					0.13333333333
+				],
+				"--console-selectedtab-color": [
+					"display-p3",
+					0.08490196078,
+					0.09666666666,
+					0.12019607843
+				],
+				"--console-unselectedtab-color": [
+					"display-p3",
+					0.0156862745,
+					0.02352941176,
+					0.03529411764
+				],
+				"--console-topbar-background-color": [
+					"display-p3",
+					0.0156862745,
+					0.02352941176,
+					0.03529411764
+				],
+				"--console-text-color": ["display-p3", 1, 1, 1],
+				"--sidebar-element-color": [
+					"display-p3",
+					0.19215686274,
+					0.21176470588,
+					0.23529411764
+				],
+				"--sidebar-element-hover-color": [
+					"display-p3",
+					0.12215686274,
+					0.23176470588,
+					0.25529411764
+				],
+				"--queries-input-background-color": [
+					"display-p3",
+					0.05490196078,
+					0.06666666666,
+					0.09019607843
+				],
+				"--canvas-action-color": ["display-p3", 1, 1, 1],
+				"--console-tab-hover-color": [
+					"display-p3",
+					0.13490196078,
+					0.14666666666,
+					0.17019607843
+				],
+				"--navigationbar-button-hover-color": [
+					"display-p3",
+					0.13490196078,
+					0.14666666666,
+					0.17019607843
+				]
+			}
+		},
+		{
+			"mediaFeature": "prefers-reduced-motion",
+			"transition": {
+				"--console-tab-hover-transition": ["none"],
+				"--console-height-transition": ["none"],
+				"--sidebar-element-transition": ["none"]
+			}
+		}
+	]
+}
