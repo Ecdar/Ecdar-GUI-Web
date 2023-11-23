@@ -183,7 +183,7 @@ The following folder structure is meant to be a guideline of where one should pu
 
 An example of a unit test:
 
-```
+```typescript
 describe('Circle class', => {
   describe('area is calculated when', => {
     it('sets the radius', => { ... });
