@@ -1,6 +1,10 @@
 import axios from "axios";
-import { toSnakeCase, type Services, type WithIp, type Writeable } from "../communication";
-
+import {
+	toSnakeCase,
+	type Services,
+	type WithIp,
+	type Writeable,
+} from "../communication";
 
 export async function communicationTauri<
 	S extends keyof Services,
@@ -10,11 +14,9 @@ export async function communicationTauri<
 	endpoint: E,
 	input: WithIp<Writeable<Awaited<ReturnType<Services[S][E]>["request"]>>>,
 ): Awaited<ReturnType<Services[S][E]>["response"]> {
-  const { invoke } = await import("@tauri-apps/api");
-  const serviceSnake = toSnakeCase(service);
-  const endpointSnake = toSnakeCase(endpoint);
+	const { invoke } = await import("@tauri-apps/api");
+	const serviceSnake = toSnakeCase(service);
+	const endpointSnake = toSnakeCase(endpoint);
 
-  return await invoke(`${serviceSnake}_${endpointSnake}`, { payload : input});
+	return await invoke(`${serviceSnake}_${endpointSnake}`, { payload: input });
 }
-
-

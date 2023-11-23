@@ -12,14 +12,13 @@ export type WithIp<T> = {
 	body: T;
 };
 
-export type Writeable<T> = { -readonly [P in keyof T] : T[P] }
+export type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 
 export const callEndpoint = inTauri ? communicationTauri : communicationWeb;
 
-export function toSnakeCase(input : string) : string{
-  input = input[0].toLowerCase() + input.substring(1);
-  return input.replace(/[A-Z]/g, (x) => {
-	  return "_" + x.toLowerCase();
-  });
+export function toSnakeCase(input: string): string {
+	input = input[0].toLowerCase() + input.substring(1);
+	return input.replace(/[A-Z]/g, (x) => {
+		return "_" + x.toLowerCase();
+	});
 }
-

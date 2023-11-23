@@ -81,7 +81,6 @@
 	<div class="canvas">
 		<nav class="inner-nav2">Nav 2</nav>
 		<p>Canvas</p>
-		<button on:click={() => { console.log(callEndpoint("ecdarBackend", "getUserToken", { ip : "127.0.0.1:4000", body : {}})); }}>Click Me</button>
 		<DropDownMenu />
 		<LocationsWithContextMenu />
 	</div>

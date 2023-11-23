@@ -1,5 +1,10 @@
 import axios from "axios";
-import { toSnakeCase, type Services, type WithIp, type Writeable } from "../communication";
+import {
+	toSnakeCase,
+	type Services,
+	type WithIp,
+	type Writeable,
+} from "../communication";
 
 export async function communicationWeb<
 	S extends keyof Services,
@@ -22,4 +27,3 @@ export async function communicationWeb<
 
 	return response.data as Promise<ReturnType<typeof communicationWeb<S, E>>>;
 }
-
