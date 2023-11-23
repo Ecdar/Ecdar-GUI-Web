@@ -10,27 +10,31 @@ if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir);
 
 async function main() {
 	let files = await readdir(`${dir}/Ecdar-ProtoBuf`);
-	await Promise.all(files.filter(name => name.match(/.*\.proto/g)).map(file => 
-		runCmd(`
+	await Promise.all(
+		files
+			.filter((name) => name.match(/.*\.proto/g))
+			.map((file) =>
+				runCmd(`
 		  npx protoc \\
 			  --ts_out ${out_dir} \\
 			  --proto_path ${dir}/Ecdar-ProtoBuf \\
 			  ${dir}/Ecdar-ProtoBuf/${file}
-		  `)
-	));
+		  `),
+			),
+	);
 	console.log("Finnished compiling protobuffers");
 }
 
-function readdir(dir){
+function readdir(dir) {
 	return new Promise((res, rej) => {
 		fs.readdir(dir, (err, files) => {
 			if (err !== null) rej(err);
 			else res(files);
 		});
-	})
+	});
 }
 
-function runCmd(cmd){
+function runCmd(cmd) {
 	return new Promise((res, _) => {
 		console.log(`Executing commmand: "${cmd}"`);
 		exec(cmd, (err, stdout, stderr) => {
@@ -39,8 +43,7 @@ function runCmd(cmd){
 			if (err !== null) console.error(err);
 			res();
 		});
-	})
+	});
 }
 
 main();
-
