@@ -12,15 +12,15 @@ async function main() {
 	let files = await readdir(`${dir}/Ecdar-ProtoBuf`);
 	await Promise.all(
 		files
-			.filter((name) => name.match(/.*\.proto/g))
-			.map((file) =>
+			.filter(name => name.match(/.*\.proto/g))
+			.map(file =>
 				runCmd(`
-		  npx protoc \\
-			  --ts_out ${out_dir} \\
-			  --proto_path ${dir}/Ecdar-ProtoBuf \\
-			  ${dir}/Ecdar-ProtoBuf/${file}
-		  `),
-		),
+					npx protoc \\
+						--ts_out ${out_dir} \\
+						--proto_path ${dir}/Ecdar-ProtoBuf \\
+						${dir}/Ecdar-ProtoBuf/${file}
+				`)
+			)
 	);
 	console.log("Finnished compiling protobuffers");
 }
