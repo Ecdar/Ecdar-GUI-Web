@@ -37,6 +37,7 @@
 	"dependencies": {
 		"@floating-ui/dom": "^1.5.3",
 		"@tauri-apps/api": "^1.5.1",
+		"idb-keyval": "^6.2.1",
 		"svelte-google-materialdesign-icons": "^0.8.2",
 		"zod": "^3.22.4"
 	}

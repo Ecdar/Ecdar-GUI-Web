@@ -4,6 +4,7 @@
 import { z } from "zod";
 import ColorAttribute from "./AttributeSchemas/ColorAttribute";
 import BorderAttribute from "./AttributeSchemas/BorderAttribute";
+import FontAttribute from "./AttributeSchemas/FontAttribute";
 import SizeValue from "./AttributeSchemas/SizeAttribute";
 
 // Supported CSS color variables
@@ -33,11 +34,20 @@ export const ColorVariables = z
 	})
 	.strict();
 
+export const ColorVariablesPartial = ColorVariables.partial();
+
 // Supported CSS font size variables
 export const FontSizeVariables = z
 	.object({
 		"--sidebar-fontsize": SizeValue,
 		"--sidebar-navigationbar-fontsize": SizeValue,
+	})
+	.strict();
+
+// Supported CSS font family variables
+export const FontFamilyVariables = z
+	.object({
+		"--font-family": FontAttribute,
 	})
 	.strict();
 

@@ -1,14 +1,16 @@
 <script lang="ts">
 	import ContextMenu from "$lib/components/contextMenu/ContextMenu.svelte";
 	import GlobalCssSchemesLoader from "$lib/classes/styling/GlobalCssSchemesLoader";
+	import Console from "$lib/classes/console/Console";
 	import { browser } from "$app/environment";
 
 	if (browser) {
 		// Catch errors here and show error popup
 		try {
-			new GlobalCssSchemesLoader();
-		} catch (e) {
-			console.log(e);
+			GlobalCssSchemesLoader.init();
+		} catch (error) {
+			if (error instanceof TypeError || error instanceof Error)
+				Console.writeLineFrontend(error.message);
 		}
 	}
 </script>
@@ -25,6 +27,7 @@
 <style>
 	:global(*) {
 		box-sizing: border-box;
+		font-family: var(--font-family);
 	}
 
 	:global(body) {

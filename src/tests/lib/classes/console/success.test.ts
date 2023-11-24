@@ -1,6 +1,6 @@
 import { Tabs } from "$lib/classes/Tabs";
 import { describe, it, expect } from "vitest";
-import Console from "../../../../lib/classes/console/Console";
+import Console from "$lib/classes/console/Console";
 
 describe("Console array tests", () => {
 	it("Check array length", () => {

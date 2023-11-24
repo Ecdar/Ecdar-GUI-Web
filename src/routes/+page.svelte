@@ -11,6 +11,8 @@
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
+
+	import Settings from "$lib/components/settings/Settings.svelte";
 </script>
 
 <!-- Top navigation Panel -->
@@ -32,7 +34,8 @@
 		<!-- Canvas -->
 		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
-			<SvgView />
+			<!-- <SvgView /> -->
+			<Settings />
 		</div>
 		<!-- Right side -->
 		<SidePanel panelSide={SidePanelEnum.Right}>
@@ -72,8 +75,6 @@
 	}
 
 	.canvas {
-		display: flex;
-		flex-direction: column;
 		color: var(--canvas-text-color);
 		flex-grow: 1;
 	}
