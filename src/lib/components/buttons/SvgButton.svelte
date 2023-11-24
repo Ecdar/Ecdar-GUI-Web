@@ -6,20 +6,30 @@
 	export let id: string;
 	export let size: number = 24;
 	export let color: string = "currentColor";
+	export let alignItems: string = "left";
 	export let button: HTMLElement | undefined = undefined;
 	export let popovertarget: string | undefined = undefined;
+	export let slotSide: "left" | "right" = "right";
 </script>
 
-<button bind:this={button} on:click={click} {popovertarget}>
-	<svelte:component
-		this={icon}
-		{id}
-		{size}
-		{color}
-		ariaLabel=""
-		tabindex="-1"
-	/>
-</button>
+<div style="float: right">
+	<button bind:this={button} on:click={click} {popovertarget}>
+		{#if slotSide === "left"}
+			<slot />
+		{/if}
+		<svelte:component
+			this={icon}
+			{id}
+			{size}
+			{color}
+			ariaLabel=""
+			tabindex="-1"
+		/>
+		{#if slotSide === "right"}
+			<slot />
+		{/if}
+	</button>
+</div>
 
 <style>
 	button {
@@ -27,6 +37,7 @@
 		background: none;
 		border: none;
 		display: flex;
+		text-align: right;
 		align-items: center;
 		border-radius: 0.5em;
 		width: 100%;
