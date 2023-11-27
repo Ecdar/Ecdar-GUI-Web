@@ -76,7 +76,9 @@
 	}
 
 	$: dashedStroke =
-		edgeType === Status.INPUT ? `${2 * 8 - $scale},${2 * 8 - $scale}` : "";
+		edgeType === LocationEdgeStatus.INPUT
+			? `${2 * 8 - $scale},${2 * 8 - $scale}`
+			: "";
 </script>
 
 <!-- Lines -->
