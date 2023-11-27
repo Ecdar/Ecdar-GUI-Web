@@ -14,6 +14,7 @@ export class LocationEdgeId extends Id<LocationEdgeIdInput, RawLocationEdgeId> {
 			order = id;
 		} else {
 			rawId = id;
+			// Extracts a number following "E" in the input string.
 			const ordersMatches = [...id.matchAll(/E?(?<number>[+-]?\d+)/giu)]
 				.map((match) => {
 					if (typeof match.groups?.number !== "string") {

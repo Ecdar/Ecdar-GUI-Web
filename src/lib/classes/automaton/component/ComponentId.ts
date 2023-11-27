@@ -14,6 +14,7 @@ export class ComponentId extends Id<ComponentIdInput, RawComponentId> {
 		} else {
 			rawId = input;
 			const ordersMatches = [
+				// Extracts a number following "Component " in the input string.
 				...input.matchAll(/Component (?<number>[+-]?\d+)/giu),
 			];
 			const ordersParsed = ordersMatches

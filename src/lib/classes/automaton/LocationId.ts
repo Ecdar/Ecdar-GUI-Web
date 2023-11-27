@@ -50,6 +50,7 @@ export class LocationId extends Id<LocationIdInput, RawLocationId> {
 		} else {
 			rawId = input;
 			const ordersMatches = [
+				// Extracts a number following a variation of "L", "UL", "IL" in the input string.
 				...input.matchAll(
 					/(?<isUniversal>U)?(?<isInconsistent>I)?L?(?<number>[+-]?\d+)/giu,
 				),

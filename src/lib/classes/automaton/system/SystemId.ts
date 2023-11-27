@@ -14,6 +14,7 @@ export class SystemId extends Id<SystemIdInput, RawSystemId> {
 		} else {
 			rawId = input;
 			const ordersMatches = [
+				// Extracts a number following "System " in the input string.
 				...input.matchAll(/System (?<number>[+-]?\d+)/giu),
 			];
 			const ordersParsed = ordersMatches

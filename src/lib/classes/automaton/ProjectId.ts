@@ -14,6 +14,7 @@ export class ProjectId extends Id<ProjectIdInput, RawProjectId> {
 		} else {
 			rawId = input;
 			const ordersMatches = [
+				// Extracts a number following "Project " in the input string.
 				...input.matchAll(/Project (?<number>[+-]?\d+)/giu),
 			];
 			const ordersParsed = ordersMatches
