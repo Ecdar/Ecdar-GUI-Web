@@ -1,19 +1,19 @@
 import axios from "axios";
 import {
 	toSnakeCase,
-	type Services,
-	type WithIp,
-	type Writeable,
+	type Service,
+	type Endpoint,
+	type Input,
+	type Output,
 } from "../communication";
 
+/**
+ * Calls Ecdar web on /service/endpoint
+ * */
 export async function communicationWeb<
-	S extends keyof Services,
-	E extends keyof Services[S],
->(
-	service: S,
-	endpoint: E,
-	input: WithIp<Writeable<Awaited<ReturnType<Services[S][E]>["request"]>>>,
-): Awaited<ReturnType<Services[S][E]>["response"]> {
+	S extends keyof Service,
+	E extends keyof Endpoint<S>,
+>(service: S, endpoint: E, input: Input<S, E>): Promise<Output<S, E>> {
 	const serviceSnake = toSnakeCase(service);
 	const endpointSnake = toSnakeCase(endpoint);
 	const response = await axios.post(
@@ -25,5 +25,5 @@ export async function communicationWeb<
 		throw new Error("communication failed with code: " + response.status);
 	}
 
-	return response.data as Promise<ReturnType<typeof communicationWeb<S, E>>>;
+	return response.data as Promise<Output<S, E>>;
 }

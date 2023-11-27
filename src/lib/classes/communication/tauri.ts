@@ -1,18 +1,18 @@
 import {
 	toSnakeCase,
-	type Services,
-	type WithIp,
-	type Writeable,
+	type Service,
+	type Endpoint,
+	type Output,
+	type Input,
 } from "../communication";
 
+/**
+ * Calls a gRPC bacend through tauri
+ * */
 export async function communicationTauri<
-	S extends keyof Services,
-	E extends keyof Services[S],
->(
-	service: S,
-	endpoint: E,
-	input: WithIp<Writeable<Awaited<ReturnType<Services[S][E]>["request"]>>>,
-): Awaited<ReturnType<Services[S][E]>["response"]> {
+	S extends keyof Service,
+	E extends keyof Endpoint<S>,
+>(service: S, endpoint: E, input: Input<S, E>): Promise<Output<S, E>> {
 	const { invoke } = await import("@tauri-apps/api");
 	const serviceSnake = toSnakeCase(service);
 	const endpointSnake = toSnakeCase(endpoint);
