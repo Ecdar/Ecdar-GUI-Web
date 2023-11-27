@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("Starts only with Global Declaration", async ({ page }) => {
-	await expect(page.locator(".global-dec")).toHaveCount(1);
+	await expect(page.locator("#global-dec")).toHaveCount(1);
 	await expect(page.locator(".project-item")).toHaveCount(0);
 });
 

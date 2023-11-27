@@ -164,6 +164,7 @@
 	.overlay-menu-popover {
 		border: none;
 		background: none;
+		cursor: default;
 	}
 
 	.overlay-menu {

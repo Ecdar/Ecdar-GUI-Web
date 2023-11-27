@@ -87,13 +87,14 @@
 	.project-item {
 		background-color: var(--sidebar-element-color);
 		border: none;
+		transition: var(--sidebar-element-transition);
 		cursor: pointer;
 		width: 100%;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 		padding: 10px;
-		transition: background-color 200ms;
+		border-bottom: 1px solid black;
 	}
 
 	.project-item:hover {
