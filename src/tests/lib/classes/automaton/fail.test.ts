@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { deserializeRaw } from "$lib/classes/jsonAdapter/zodSerializers";
+import { deserializeRaw } from "$lib/classes/projectHandler/zodSerializers";
 import { ZodRawLocation } from "$lib/classes/automaton/component/raw/RawLocation";
 
 describe("fail test", () => {

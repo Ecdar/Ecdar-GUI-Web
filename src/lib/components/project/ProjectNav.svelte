@@ -37,7 +37,6 @@
 		if (!$systems) return;
 		const newSystem = new System($systems.ids.getNewOrderedId());
 		newSystem.color = "lightgrey";
-		newSystem.description = "This is a description.";
 		$systems.add(newSystem);
 		$systems = $systems;
 	}
