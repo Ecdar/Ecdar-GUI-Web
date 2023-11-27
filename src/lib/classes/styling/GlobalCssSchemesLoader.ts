@@ -1,8 +1,5 @@
 import type ColorAttribute from "./ZodSchemas/AttributeSchemas/ColorAttribute";
-import {
-	ColorVariables,
-	ColorVariablesPartial,
-} from "./ZodSchemas/CSSVariables";
+import { ColorVariablesPartial } from "./ZodSchemas/CSSVariables";
 import { type MediaScheme, CustomScheme } from "./ZodSchemas/MediaScheme";
 import { MediaSchemes, CustomSchemes } from "./ZodSchemas/MediaSchemes";
 
@@ -335,7 +332,7 @@ class GlobalCssSchemesLoader {
 			.flatMap((scheme) =>
 				Object.entries(scheme.color).map(([key, val]) => {
 					const tempColors = [val[1], val[2], val[3]];
-					if (val[4]) tempColors.push(val[4]);
+					if (val[4] !== undefined) tempColors.push(val[4]);
 
 					return {
 						variable: key,

@@ -104,7 +104,7 @@
 			"--sidebar-navigationbar-fontsize": [1, "rem"]
 		},
 		"fontFamily": {
-			"--font-family": ["Tahoma, sans-serif"]
+			"--font-family": ["CustomFont, sans-serif"]
 		},
 		"border": {
 			"--main-navigationbar-border": [
@@ -193,9 +193,6 @@
 					0.14666666666,
 					0.17019607843
 				]
-			},
-			"fontFamily": {
-				"--font-family": ["Comic Sans MS, sans-serif"]
 			}
 		}
 	]
