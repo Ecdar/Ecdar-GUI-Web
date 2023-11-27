@@ -47,6 +47,7 @@
 			],
 			"--canvas-text-color": ["display-p3", 0, 0, 0],
 			"--sidebar-text-color": ["display-p3", 0, 0, 0],
+			"--text-color": ["display-p3", 0, 0, 0],
 			"--background-color": [
 				"display-p3",
 				0.95686274509,
@@ -134,6 +135,7 @@
 				],
 				"--canvas-text-color": ["display-p3", 1, 1, 1],
 				"--sidebar-text-color": ["display-p3", 1, 1, 1],
+				"--text-color": ["display-p3", 1, 1, 1],
 				"--background-color": [
 					"display-p3",
 					0.09019607843,

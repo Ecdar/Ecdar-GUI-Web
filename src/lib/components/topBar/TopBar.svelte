@@ -6,7 +6,6 @@
 		Note_add,
 		File_open,
 		Save,
-		Done_all,
 		Image,
 		Arrow_left,
 		Arrow_right,
@@ -17,34 +16,14 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
-	import { FileAdapter } from "$lib/classes/fileAdapter/FileAdapter";
+	import type { projectHandler as ProjectHandler } from "$lib/classes/projectHandler/ProjectHandler";
 	import { onMount } from "svelte";
-	import { project } from "$lib/globalState/activeProject";
-	import { ProjectId } from "$lib/classes/automaton/ProjectId";
-	import { Project } from "$lib/classes/automaton";
-	import { get } from "svelte/store";
-	import { SavingNotSupportedError } from "$lib/classes/fileAdapter/FileSystemFallback";
-	let fileAdapter: FileAdapter;
-	onMount(() => {
-		fileAdapter = new FileAdapter();
+	let projectHandler: typeof ProjectHandler;
+	onMount(async () => {
+		projectHandler = (
+			await import("$lib/classes/projectHandler/ProjectHandler")
+		).projectHandler;
 	});
-
-	async function save(saveAs: boolean = false) {
-		try {
-			const _project = get(project);
-
-			await fileAdapter.save(
-				_project ? _project.toRaw() : {},
-				saveAs ? await fileAdapter.saveDialog() : undefined,
-			);
-		} catch (error) {
-			if (error instanceof SavingNotSupportedError) {
-				alert(
-					"Saving not supported in browser please use desktop app or export your project",
-				);
-			}
-		}
-	}
 </script>
 
 <!--
@@ -63,21 +42,14 @@
 			icon={Note_add}
 			name="New Project"
 			on:click={() => {
-				console.log("New Project");
+				projectHandler.openNewProject();
 			}}
 		/>
 		<DropDownButton
 			icon={File_open}
 			name="Open Project"
 			on:click={async () => {
-				const path = await fileAdapter.openDialog();
-
-				const newProject = Project.fromRaw(
-					await fileAdapter.load(path),
-					{ id: new ProjectId(path) },
-				);
-
-				project.set(newProject);
+				await projectHandler.openProject();
 			}}
 		/>
 		<DropDownButton
@@ -90,23 +62,29 @@
 		<DropDownButton
 			icon={Save}
 			name="Save Project"
-			on:click={() => {
-				save();
+			on:click={async () => {
+				await projectHandler.quickSaveProject();
 			}}
 		/>
 		<DropDownButton
 			icon={Save}
 			name="Save Project as"
-			on:click={() => {
-				save(true);
+			on:click={async () => {
+				await projectHandler.saveProject();
 			}}
 		/>
-
 		<DropDownButton
-			icon={Done_all}
-			name="New Test Plan"
-			on:click={() => {
-				console.log("New Test Plan");
+			icon={Save}
+			name="Export as JSON"
+			on:click={async () => {
+				await projectHandler.exportProject();
+			}}
+		/>
+		<DropDownButton
+			icon={File_open}
+			name="Import from JSON"
+			on:click={async () => {
+				await projectHandler.importProject();
 			}}
 		/>
 		<DropDownButton
@@ -246,13 +224,6 @@
 			name="Modelling Help"
 			on:click={() => {
 				console.log("Modelling Help");
-			}}
-		/>
-		<DropDownButton
-			icon={Help}
-			name="Testing Help"
-			on:click={() => {
-				console.log("Testing Help");
 			}}
 		/>
 		<DropDownButton
