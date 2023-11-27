@@ -14,10 +14,10 @@ export async function communicationWeb<
 	endpoint: E,
 	input: WithIp<Writeable<Awaited<ReturnType<Services[S][E]>["request"]>>>,
 ): Awaited<ReturnType<Services[S][E]>["response"]> {
-	const servicePascal = toSnakeCase(service);
-	const endpointPascal = toSnakeCase(endpoint);
+	const serviceSnake = toSnakeCase(service);
+	const endpointSnake = toSnakeCase(endpoint);
 	const response = await axios.post(
-		`${servicePascal}/${endpointPascal}`,
+		`${serviceSnake}/${endpointSnake}`,
 		input,
 	);
 
