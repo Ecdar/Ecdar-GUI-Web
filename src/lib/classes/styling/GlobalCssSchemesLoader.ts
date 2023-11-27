@@ -5,8 +5,9 @@ import { MediaSchemes, CustomSchemes } from "./ZodSchemas/MediaSchemes";
 
 import GlobalCssProperties from "../../GlobalCssProperties.json";
 
+import Console from "$lib/classes/console/Console";
 import { get, set, update } from "idb-keyval";
-import { z } from "zod";
+import type { z } from "zod";
 
 export type ConvertedValue = {
 	variable: string;
@@ -41,7 +42,11 @@ class GlobalCssSchemesLoader {
 		// Add event listeners to supported features
 		this.addEventListeners();
 
-		this.loadCustomSchemes();
+		this.loadCustomSchemes().catch((error: Error) => {
+			Console.writeLineFrontend(
+				`Failed loading custom colors: ${error.message}`,
+			);
+		});
 	}
 
 	/**
@@ -58,13 +63,16 @@ class GlobalCssSchemesLoader {
 	 * @returns A promise that resolves to the parsed result of the custom schemes.
 	 */
 	async checkCustomSchemes(): Promise<z.infer<typeof CustomSchemes>> {
-		const result = await get(this._idbKey);
+		const result: z.infer<typeof CustomSchemes> | undefined = await get(
+			this._idbKey,
+		);
 		const parsedResult = CustomSchemes.safeParse(result);
 
 		if (parsedResult.success) return parsedResult.data;
 
 		// If there is no data or data is malformed, reset
-		const newCustomScheme = this.parseEmptyCustomScheme();
+		const newCustomScheme: z.infer<typeof CustomSchemes> =
+			this.parseEmptyCustomScheme();
 
 		await set(this._idbKey, newCustomScheme);
 
@@ -98,8 +106,12 @@ class GlobalCssSchemesLoader {
 			const parsedAttribute = ColorVariablesPartial.safeParse(attribute);
 
 			// Early return if the stored object does not parse
-			if (!parsedAttribute.success || !parsedSchemes.success)
-				return customSchemes; // TODO: This should result in a popup
+			if (!parsedAttribute.success || !parsedSchemes.success) {
+				Console.writeLineFrontend(
+					"The colorscheme was corrupted resulting in it being reset.",
+				);
+				return this.parseEmptyCustomScheme();
+			}
 
 			// Finding the index of the specific media feature if it already exists
 			const index = parsedSchemes.data.findIndex(
@@ -142,7 +154,12 @@ class GlobalCssSchemesLoader {
 			const parsedSchemes = CustomSchemes.safeParse(customSchemes);
 
 			// Early return if the stored object does not parse
-			if (!parsedSchemes.success) return customSchemes; // TODO: This should result in a popup
+			if (!parsedSchemes.success) {
+				Console.writeLineFrontend(
+					"The colorscheme was corrupted resulting in it being reset.",
+				);
+				return this.parseEmptyCustomScheme();
+			}
 
 			// Finding the index of the specific media feature if it already exists
 			const index = parsedSchemes.data.findIndex(
@@ -152,7 +169,11 @@ class GlobalCssSchemesLoader {
 			if (index === -1) return parsedSchemes;
 
 			// Delete the specified color variable
-			delete parsedSchemes.data[index].color[attributeKey];
+			parsedSchemes.data[index].color = Object.fromEntries(
+				Object.entries(parsedSchemes.data[index].color).filter(
+					([key]) => key !== attributeKey,
+				),
+			);
 
 			return parsedSchemes.data;
 		});
@@ -267,7 +288,11 @@ class GlobalCssSchemesLoader {
 	reapplyMediaFeatures() {
 		this.clearAppliedProperties();
 		this.applySchemes();
-		this.loadCustomSchemes();
+		this.loadCustomSchemes().catch((error: Error) => {
+			Console.writeLineFrontend(
+				`Failed loading custom colors: ${error.message}`,
+			);
+		});
 	}
 
 	/**
@@ -323,11 +348,9 @@ class GlobalCssSchemesLoader {
 		mediaFeature: string,
 	): Promise<ConvertedValue[]> {
 		const customSchemes = await this.checkCustomSchemes();
-		let convertedValues: ConvertedValue[];
-
 		// Filters the custom schemes (Only returning the mathing schemes which is a single one)
 		// Maps all of the defined color entries in that specific scheme
-		convertedValues = customSchemes
+		return customSchemes
 			.filter((scheme) => scheme.mediaFeature === mediaFeature)
 			.flatMap((scheme) =>
 				Object.entries(scheme.color).map(([key, val]) => {
@@ -341,8 +364,6 @@ class GlobalCssSchemesLoader {
 					};
 				}),
 			);
-
-		return convertedValues;
 	}
 
 	/**
@@ -351,26 +372,8 @@ class GlobalCssSchemesLoader {
 	 * @param scheme - The Zod schema to extract CSS variable keys from.
 	 * @returns An array of CSS variable keys.
 	 */
-	getCssVariableKeys<T extends z.ZodTypeAny>(scheme: T): string[] {
-		if (scheme === null || scheme === undefined) return [];
-		if (scheme instanceof z.ZodNullable || scheme instanceof z.ZodOptional)
-			return this.getCssVariableKeys(scheme.unwrap());
-		if (scheme instanceof z.ZodArray)
-			return this.getCssVariableKeys(scheme.element);
-		if (scheme instanceof z.ZodObject) {
-			const entries = Object.entries(scheme.shape);
-			return entries.flatMap(([key, value]) => {
-				const nested =
-					value instanceof z.ZodType
-						? this.getCssVariableKeys(value).map(
-								(subKey) => `${key}.${subKey}`,
-						  )
-						: [];
-				return nested.length ? nested : key;
-			});
-		}
-
-		return [];
+	getCssVariableKeys(scheme: typeof ColorVariablesPartial): string[] {
+		return Object.keys(scheme.shape);
 	}
 }
 

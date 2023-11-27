@@ -1,3 +1,4 @@
+import Console from "$lib/classes/console/Console";
 import { get, set, del } from "idb-keyval";
 
 class GlobalFontLoader {
@@ -8,15 +9,23 @@ class GlobalFontLoader {
 			throw new Error("The CSS loader needs access to the DOM elements");
 		}
 
-		this.setCustomFont();
+		this.setCustomFont().catch((error: Error) => {
+			Console.writeLineFrontend(
+				`Failed to set cutom fonts: ${error.message}`,
+			);
+		});
 	}
 
 	/**
 	 * Clears the custom font from the document and deletes it from the IndexedDB.
 	 */
 	async clearCustomFont() {
-		document.fonts.clear();
-		await del(this._idbKey);
+		const storedFont: Blob | undefined = await get(this._idbKey);
+
+		if (storedFont) {
+			await del(this._idbKey);
+			document.fonts.clear();
+		}
 	}
 
 	/**
@@ -28,8 +37,10 @@ class GlobalFontLoader {
 	async setCustomFont(newFont?: Blob) {
 		const fontBlob: Blob | undefined = newFont ?? (await get(this._idbKey));
 
+		// No fonts have been set
 		if (fontBlob === undefined) {
-			throw new TypeError("Expected type Blob but got undefined");
+			console.log("No fonts have been loaded");
+			return;
 		}
 
 		const fontFace: FontFace = new FontFace(
@@ -37,11 +48,18 @@ class GlobalFontLoader {
 			`url(${URL.createObjectURL(fontBlob)})`,
 		);
 
-		const loadedFont = await fontFace.load();
+		try {
+			const loadedFont = await fontFace.load();
 
-		// Remove any previously added fonts and add the new one
-		document.fonts.clear();
-		document.fonts.add(loadedFont);
+			// Remove any previously added fonts and add the new one
+			document.fonts.clear();
+			document.fonts.add(loadedFont);
+		} catch (error: unknown) {
+			if (error instanceof TypeError || error instanceof DOMException)
+				Console.writeLineFrontend(
+					`A font could not be loaded: ${error.message}`,
+				);
+		}
 	}
 
 	/**
@@ -49,7 +67,17 @@ class GlobalFontLoader {
 	 * @param file - The font file to upload.
 	 * @throws Error if the loaded font file is null.
 	 */
-	async uploadCustomFont(file: File) {
+	uploadCustomFont(event: Event) {
+		const target = event.target as HTMLInputElement;
+
+		if (target.files === null) {
+			Console.writeLineFrontend(
+				`A font could not be loaded: File is null`,
+			);
+			return;
+		}
+
+		const file: File = target.files[0];
 		const reader = new FileReader();
 
 		reader.onload = async () => {
@@ -57,7 +85,7 @@ class GlobalFontLoader {
 				throw new Error("Loaded font file is null");
 
 			const fontBlob = new Blob([reader.result]);
-			this.setCustomFont(fontBlob);
+			await this.setCustomFont(fontBlob);
 
 			await set(this._idbKey, fontBlob);
 		};

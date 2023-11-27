@@ -12,7 +12,7 @@
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 
-	import Settings from "$lib/components/settings/Settings.svelte";
+	import Settings from "$lib/components/settings/SettingsView.svelte";
 </script>
 
 <!-- Top navigation Panel -->
