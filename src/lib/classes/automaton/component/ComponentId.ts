@@ -41,14 +41,5 @@ export class ComponentId extends Id<ComponentIdInput, RawComponentId> {
 		this._rawId = parsed.rawId;
 		this._order = parsed.order;
 		this._orders = parsed.orders;
-
-		if (this._orders === undefined) {
-			this._higherOrder = undefined;
-		} else {
-			this._higherOrder = [
-				this._orders.length,
-				this._orders.reduce((total, next) => total + next, 0),
-			];
-		}
 	}
 }
