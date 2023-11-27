@@ -19,7 +19,7 @@ export type Service = {
 };
 
 /**
- * Extracts the keys of endpoints i Services
+ * Extracts the keys of endpoints in Services
  * */
 export type Endpoint<S extends keyof Service> = Service[S];
 
