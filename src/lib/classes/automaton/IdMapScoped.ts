@@ -1,5 +1,4 @@
 import type { RawId } from "./raw/RawId";
-import type { z } from "zod";
 import type { HasId } from "./HasId";
 import { Id } from "./Id";
 import { IdMap } from "./IdMap";
@@ -16,7 +15,7 @@ export abstract class IdMapScoped<
 	I extends Id<IT, RT>,
 	IT extends string | number | object,
 	RT extends RawId & IT,
-	R extends z.infer<z.AnyZodObject>,
+	R,
 > extends IdMap<C, I, IT, RT, R> {
 	has(id: I): boolean {
 		if (id.owner !== this) return false;

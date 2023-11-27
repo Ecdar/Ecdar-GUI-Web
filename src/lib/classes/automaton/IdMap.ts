@@ -1,7 +1,6 @@
 import type { RawId } from "./raw/RawId";
 import type { HasId } from "./HasId";
 import { Id } from "./Id";
-import type { z } from "zod";
 import { AutomatonClass } from "./AutomatonClass";
 import type { IIdStore } from "./IdStore";
 
@@ -103,7 +102,7 @@ export abstract class IdMap<
 		I extends Id<IT, RT>,
 		IT,
 		RT extends RawId & IT,
-		R extends z.infer<z.AnyZodObject>,
+		R,
 	>
 	extends AutomatonClass<R>
 	implements IIdMap<C, I, IT, RT>

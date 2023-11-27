@@ -1,6 +1,4 @@
-import type { z } from "zod";
-
-export abstract class AutomatonClass<R extends z.infer<z.AnyZodObject>> {
+export abstract class AutomatonClass<R> {
 	/**
 	 * Converts the class to its raw counterpart
 	 */
