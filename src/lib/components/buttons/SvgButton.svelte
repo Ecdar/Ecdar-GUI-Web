@@ -6,17 +6,19 @@
 	export let id: string;
 	export let size: number = 24;
 	export let color: string = "currentColor";
-	export let alignItems: string = "left";
+	export let justifyContend: "flex-start" | "flex-end" | "center" =
+		"flex-start";
 	export let button: HTMLElement | undefined = undefined;
 	export let popovertarget: string | undefined = undefined;
-	export let slotSide: "left" | "right" = "right";
 </script>
 
-<div style="float: right">
-	<button bind:this={button} on:click={click} {popovertarget}>
-		{#if slotSide === "left"}
-			<slot />
-		{/if}
+<div>
+	<button
+		style="justify-content: {justifyContend}"
+		bind:this={button}
+		on:click={click}
+		{popovertarget}
+	>
 		<svelte:component
 			this={icon}
 			{id}
@@ -24,10 +26,9 @@
 			{color}
 			ariaLabel=""
 			tabindex="-1"
+			style="margin: 1%;"
 		/>
-		{#if slotSide === "right"}
-			<slot />
-		{/if}
+		<slot />
 	</button>
 </div>
 
@@ -37,7 +38,6 @@
 		background: none;
 		border: none;
 		display: flex;
-		text-align: right;
 		align-items: center;
 		border-radius: 0.5em;
 		width: 100%;
