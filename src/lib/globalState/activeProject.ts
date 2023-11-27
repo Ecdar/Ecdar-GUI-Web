@@ -90,10 +90,6 @@ export const project: Writable<Project | undefined> = {
 	},
 };
 
-//globalThis.project = project;
-
-//project.subscribe((v) => console.log(v));
-
 /**
  * This store only subscribes to changes made to a specific member on the Project,
  * and if you update it, it will not trigger updates in any other scoped store.
