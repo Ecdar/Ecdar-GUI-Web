@@ -32,7 +32,7 @@ class GlobalCssSchemesLoader {
 	/**
 	 * Method for applying the specified styles
 	 */
-	applySchemes() {
+	private applySchemes() {
 		// Apply standard css variables
 		this.applyCssVariables(this._mediaSchemes.default);
 
@@ -49,7 +49,7 @@ class GlobalCssSchemesLoader {
 	 * Method for applying CSS variabels for a specific mediafeature
 	 * @param feature
 	 */
-	applyCssVariables(feature: z.infer<typeof MediaScheme>) {
+	private applyCssVariables(feature: z.infer<typeof MediaScheme>) {
 		// Apply color variables
 		if (feature.color) {
 			for (const [key, val] of Object.entries(feature.color)) {
@@ -114,7 +114,7 @@ class GlobalCssSchemesLoader {
 	/**
 	 * Method for re-applying the specified styles
 	 */
-	reapplyMediaFeatures() {
+	private reapplyMediaFeatures() {
 		this.clearAppliedProperties();
 		this.applySchemes();
 	}
