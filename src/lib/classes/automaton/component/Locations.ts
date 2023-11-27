@@ -38,16 +38,18 @@ export class Locations extends IdMapScoped<
 		Locations
 	> = (raw, { locationIds }) => {
 		const locations = new Locations(locationIds);
-		for (const rawLocation of raw) {
-			const id = locations.ids.getNewIdFromRaw(rawLocation.id);
+		if(raw){
+			for (const rawLocation of raw) {
+				const id = locations.ids.getNewIdFromRaw(rawLocation.id);
 
-			if (!id)
-				//TODO: Make this a user-friendly message with different options for recovering
-				throw new TypeError(
-					`Cannot load raw Locations where multiple id's are equivalent: ${rawLocation.id}`,
-				);
+				if (!id)
+					//TODO: Make this a user-friendly message with different options for recovering
+					throw new TypeError(
+						`Cannot load raw Locations where multiple id's are equivalent: ${rawLocation.id}`,
+					);
 
-			locations.add(Location.fromRaw(rawLocation, { id }));
+				locations.add(Location.fromRaw(rawLocation, { id }));
+			}
 		}
 		return locations;
 	};
