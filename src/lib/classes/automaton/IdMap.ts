@@ -33,7 +33,7 @@ enum SetMode {
 export interface IIdMap<
 	C extends HasId<I>,
 	I extends Id<IT, RT>,
-	IT,
+	IT extends object | number | string,
 	RT extends RawId & IT,
 > extends Iterable<C> {
 	/**
@@ -100,7 +100,7 @@ export interface IIdMap<
 export abstract class IdMap<
 		C extends HasId<I>,
 		I extends Id<IT, RT>,
-		IT,
+		IT extends string | number | object,
 		RT extends RawId & IT,
 		R,
 	>

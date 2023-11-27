@@ -8,9 +8,12 @@ import type { HasId } from "./HasId";
  * Id's are unique classes that also contain a unique raw value that they can serialize to and from.
  *
  * They can contain numeric information, allowing you to order them and generate the next Id in the list.
- * THey can also just be text-based, requiring manual unique input for each new Id.
+ * They can also just be text-based, requiring manual unique input for each new Id.
  */
-export abstract class Id<I, R extends RawId & I> extends AutomatonClass<R> {
+export abstract class Id<
+	I extends number | string | object,
+	R extends RawId & I,
+> extends AutomatonClass<R> {
 	constructor(id: I | R) {
 		super();
 
