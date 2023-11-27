@@ -116,7 +116,7 @@ export class IdStore<I extends Id<IT, RT>, IT, RT extends RawId & IT>
 	/**
 	 * The next value that can be used to generate a unique ID.
 	 */
-	protected nextOrderedIndex: number = 0;
+	protected nextOrderedIndex: number = 1;
 
 	/**
 	 * Will find the next value that is free to generate a unique ID.

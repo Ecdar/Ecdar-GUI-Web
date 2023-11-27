@@ -14,7 +14,7 @@ export class LocationIds extends IdStore<
 
 	getNewOrderedId(type: LocationType = LocationType.NORMAL) {
 		super.findNextOrderedIndex();
-		const newId = new super.idConstructor({
+		const newId = new this.idConstructor({
 			type,
 			order: this.nextOrderedIndex,
 		});

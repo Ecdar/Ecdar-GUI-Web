@@ -14,11 +14,11 @@ export class ProjectId extends Id<ProjectIdInput, RawProjectId> {
 		} else {
 			rawId = input;
 			const ordersMatches = [
-				...input.matchAll(/((?<number>[+-]?\d+))/giu),
+				...input.matchAll(/Project (?<number>[+-]?\d+)/giu),
 			];
 			const ordersParsed = ordersMatches
 				.map((match) => {
-					if (typeof match.groups?.numer !== "string") {
+					if (typeof match.groups?.number !== "string") {
 						return NaN;
 					}
 					return parseInt(match.groups.number);
