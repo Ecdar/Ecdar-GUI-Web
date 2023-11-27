@@ -38,7 +38,7 @@ export class Locations extends IdMapScoped<
 		Locations
 	> = (raw, { locationIds }) => {
 		const locations = new Locations(locationIds);
-		if(raw){
+		if (raw) {
 			for (const rawLocation of raw) {
 				const id = locations.ids.getNewIdFromRaw(rawLocation.id);
 
