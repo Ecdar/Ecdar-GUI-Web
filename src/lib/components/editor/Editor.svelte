@@ -14,7 +14,7 @@
 	onMount(async () => {
 		let { CodeJar } = await import("codejar");
 		let node = document.createElement("div");
-		node.style.maxHeight= "80vh";
+		node.className = "editor-text";
 		CodeJar(node, ((n : HTMLElement) => {
 			let code = n.textContent as string;
 			code = hljs.highlight(code, {language : "ecdar"}).value;
@@ -30,5 +30,11 @@
   #editor {
 	  width: 100%;
 	  height: 100%;
+	  max-width: 80vw;
+	  overflow: hidden;
+  }
+  :global(.editor-text){
+	height: 100%;
+	text-wrap: nowrap !important;
   }
 </style>
