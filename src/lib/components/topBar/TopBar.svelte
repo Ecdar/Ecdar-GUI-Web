@@ -17,6 +17,10 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
+
+	let aboutVisible:boolean = false;
+
+
 </script>
 
 <!--
@@ -29,7 +33,7 @@
 -->
 
 <!--File top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="File">
 		<DropDownButton
 			icon={Note_add}
@@ -92,7 +96,7 @@
 </div>
 
 <!--Edit top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="Edit">
 		<DropDownButton
 			icon={Arrow_left}
@@ -126,7 +130,7 @@
 </div>
 
 <!--View top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="View">
 		<DropDownCheckBox
 			name="Project Panel"
@@ -172,7 +176,7 @@
 </div>
 
 <!--Options top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="Options">
 		<DropDownCheckBox
 			name="UI cache"
@@ -204,7 +208,7 @@
 </div>
 
 <!--Help top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="Help">
 		<DropDownButton
 			icon={Help}
@@ -224,19 +228,66 @@
 			icon={Error}
 			name="About"
 			on:click={() => {
-				var answer = window.confirm("This will open Ecdars webpage.");
-				if (answer) {
-					window.open("https://www.ecdar.net/");
-				}
+				aboutVisible = true;
 			}}
 		/>
 	</TopBarButton>
 </div>
 
+{#if aboutVisible}
+	<div class="pageblocker">
+		<div class="aboutBox">
+			<div style="position: absolute; left: 2%;">
+				<h1>Ecdar v.</h1>
+				Made by: <br>
+				Us 
+				<br><br><br>
+				For more information, go to <a target="_blank" href="https://www.ecdar.net/">Ecdar.net</a>
+			</div>
+			<button class="aboutBtn" on:click={() => {
+				aboutVisible = false;
+			}}>
+			Close
+			</button>
+		</div>
+	</div>
+{/if}
+
+
 <style>
-	div {
+	
+
+	.pageblocker{
+		z-index: 1000;;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+
+
+	.container{
 		height: 100%;
 		display: block;
 		float: left;
 	}
+
+	.aboutBox{
+		height: 15em;
+		width: 35em;
+		position: absolute;
+  		top: 50%;
+  		left: 50%;
+  		transform: translate(-50%, -50%);
+
+		background-color: white;
+		border: 2px solid black;
+	}
+
+	.aboutBtn{
+		position: absolute;
+		bottom: 2%;
+		right: 2%;
+	}
+	
 </style>

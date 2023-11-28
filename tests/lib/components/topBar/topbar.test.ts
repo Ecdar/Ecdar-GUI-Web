@@ -28,31 +28,18 @@ test("Check and uncheck Project Panel checkbox", async ({ page }) => {
 	expect(color).toBe("transparent");
 });
 
-test("Navigating to Help -> About and open Ecdar webpage", async ({
-	context,
-	page,
+test("Navigating to Help, then About", async ({
+	page
 }) => {
-	const pagePromise = context.waitForEvent("page");
-
 	await page.getByRole("button", { name: "Help", exact: true }).click();
-
-	const popup = new Promise((res, rej) => {
-		page.on("dialog", (dialog) => {
-			dialog
-				.accept()
-				.then(() => {
-					res(undefined);
-				})
-				.catch(() => {
-					rej();
-				});
-		});
-	});
 
 	await page.getByRole("button", { name: "error About" }).click();
 
-	const newPage = await pagePromise;
-	await newPage.waitForLoadState();
-	await popup;
-	expect(await newPage.title()).toEqual("ECDAR");
+	const aboutBox = await page.locator(".aboutBox").locator("h1").innerHTML();
+
+	await expect(aboutBox).toBe("Ecdar v.");
+
+	await page.getByRole("button", {name: "Close"}).click();
+
+
 });
