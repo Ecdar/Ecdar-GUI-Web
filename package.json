@@ -1,6 +1,9 @@
 {
 	"name": "ecdar-gui",
 	"version": "rolling",
+	"engines": {
+		"node": ">=20.10.0"
+	},
 	"private": true,
 	"type": "module",
 	"scripts": {
