@@ -176,7 +176,7 @@ describe("System", () => {
 		expect(system.operators.size).toBe(raw.operators?.length);
 		const operatorId = system.operators.ids.get(2);
 		expect(operatorId).toBeDefined();
-		if(!operatorId) throw new Error("Make typescript happy");
+		if (!operatorId) throw new Error("Make typescript happy");
 		const operator = system.operators.get(operatorId);
 		expect(operator).toBeDefined();
 		expect(operator?.id.toRaw()).toBe(raw.operators?.[0].id);

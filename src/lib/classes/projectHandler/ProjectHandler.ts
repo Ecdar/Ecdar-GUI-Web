@@ -44,7 +44,7 @@ class ProjectHandler {
 	/**
 	 * Will load the provided example project and set it as the active project.
 	 */
-	async openExampleProject(exampleLoader: () => Promise<{name?: string}>) {
+	async openExampleProject(exampleLoader: () => Promise<{ name?: string }>) {
 		const rawProject = ZodRawProject.parse(await exampleLoader());
 		rawProject.name ||= "Example project";
 		this.registerProjectAccess(undefined);
