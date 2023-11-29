@@ -6,10 +6,20 @@
 </script>
 
 {#each tabs as tab, index}
-	<button on:click={() => (activeTab = index)}>{tab.label}</button>
+	<button
+		class:active={activeTab === index}
+		on:click={() => (activeTab = index)}>{tab.label}</button
+	>
 {/each}
 
 <br />
 <hr />
 
 <svelte:component this={tabs[activeTab].component} />
+
+<style>
+	.active {
+		background-color: pink;
+		font-size: 200px;
+	}
+</style>

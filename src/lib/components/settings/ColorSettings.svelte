@@ -10,6 +10,10 @@
 		ColorVariablesPartial,
 	} from "$lib/classes/styling/ZodSchemas/CSSVariables";
 
+	/**
+	 * Enum representing different themes for the color settings.
+	 * @enum Theme
+	 */
 	enum Theme {
 		"Dark" = "prefers-color-scheme: dark",
 		"Light" = "prefers-color-scheme: light",
@@ -25,7 +29,9 @@
 		ColorVariablesPartial,
 	);
 
-	// Add a custom color
+	/**
+	 * Adds a custom color.
+	 */
 	function addCustomColor() {
 		if (selectedProperty === undefined) return;
 
@@ -43,7 +49,10 @@
 		loadCustomizedColors().catch(writeLoadError);
 	}
 
-	// Updates existing custom color
+	/**
+	 * Updates the custom color based on the converted value.
+	 * @param convertedValue - The converted value to update the custom color.
+	 */
 	function updateCustomColor(convertedValue: ConvertedValue) {
 		GlobalCssSchemesLoader.addCustomColor(
 			selectedTheme,
@@ -62,7 +71,10 @@
 		loadCustomizedColors().catch(writeLoadError);
 	}
 
-	// Delete a custom color
+	/**
+	 * Deletes a custom color.
+	 * @param convertedValue - The converted value to be deleted.
+	 */
 	function deleteCustomColor(convertedValue: ConvertedValue) {
 		GlobalCssSchemesLoader.deleteCustomColor(
 			selectedTheme,
@@ -76,7 +88,9 @@
 		loadCustomizedColors().catch(writeLoadError);
 	}
 
-	// Reset ALL custom colors
+	/**
+	 * Resets the custom colors to their default values.
+	 */
 	function resetCustomColors() {
 		if (confirm("Are you sure that you want to reset ALL custom colors?")) {
 			GlobalCssSchemesLoader.resetCustomColors()
@@ -91,7 +105,12 @@
 		}
 	}
 
-	// Turns '--background-color' into 'Background Color'
+	/**
+	 * Turns '--background-color' into 'Background Color'
+	 *
+	 * @param property - The property to make pretty.
+	 * @returns The pretty version of the property.
+	 */
 	function prettyProperty(property: string): string {
 		return property
 			.replace(/^--/, "") // Replaces first two dashes with nothing '--' => ''
@@ -99,13 +118,20 @@
 			.replace(/\b\w/g, (character) => character.toUpperCase()); // Capitalises first letter of each word
 	}
 
+	/**
+	 * Writes the load error to the console.
+	 * @param error - The error object.
+	 */
 	function writeLoadError(error: Error) {
 		Console.writeLineFrontend(
 			`Failed to reset and reload custom colors: ${error.message}`,
 		);
 	}
 
-	// Load Custom Color Variables
+	/**
+	 * Load Custom Color Variables
+	 * @returns void promise
+	 */
 	async function loadCustomizedColors() {
 		customizedColors =
 			await GlobalCssSchemesLoader.getCustomColorVariables(selectedTheme);
