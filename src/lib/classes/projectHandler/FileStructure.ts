@@ -85,6 +85,7 @@ class FileStructureDirectoryNamed<
 	) {
 		super();
 	}
+	// TODO: This works as intended but is causing a type error. Please fix.
 	async toRaw(
 		handle: IDirectoryHandle<IFileSystemHandle, IFileHandle>,
 	): Promise<{

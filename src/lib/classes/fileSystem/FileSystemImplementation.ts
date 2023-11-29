@@ -114,6 +114,8 @@ export interface IDirectoryHandle<
 	/**
 	 * Gets the directory with that name.
 	 *
+	 * TODO: This is causing type errors in the implementations. Seems like it has something to do with it returning "this". Please fix.
+	 *
 	 * @throws can either return undefined or throw an error if the item os not accessible.
 	 */
 	getDirectoryHandle(
