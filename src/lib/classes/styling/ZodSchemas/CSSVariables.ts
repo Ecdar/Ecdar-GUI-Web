@@ -4,7 +4,8 @@
 import { z } from "zod";
 import ColorAttribute from "./AttributeSchemas/ColorAttribute";
 import BorderAttribute from "./AttributeSchemas/BorderAttribute";
-import SizeValue from "./AttributeSchemas/SizeAttribute";
+import TransitionAttribute from "./AttributeSchemas/TransitionAttribute";
+import NumberUnitAttribute from "./AttributeSchemas/NumberUnitAttribute";
 
 // Supported CSS color variables
 export const ColorVariables = z
@@ -44,8 +45,8 @@ export const ColorVariables = z
 // Supported CSS font size variables
 export const FontSizeVariables = z
 	.object({
-		"--sidebar-fontsize": SizeValue,
-		"--sidebar-navigationbar-fontsize": SizeValue,
+		"--sidebar-fontsize": NumberUnitAttribute,
+		"--sidebar-navigationbar-fontsize": NumberUnitAttribute,
 	})
 	.strict();
 
@@ -54,5 +55,13 @@ export const BorderVariables = z
 	.object({
 		"--main-navigationbar-border": BorderAttribute,
 		"--main-innernavigationbar-border": BorderAttribute,
+	})
+	.strict();
+
+export const TransitionVariables = z
+	.object({
+		"--console-tab-hover-transition": TransitionAttribute,
+		"--console-height-transition": TransitionAttribute,
+		"--sidebar-element-transition": TransitionAttribute,
 	})
 	.strict();
