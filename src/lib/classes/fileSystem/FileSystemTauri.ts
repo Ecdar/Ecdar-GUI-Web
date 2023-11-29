@@ -477,7 +477,7 @@ async function wellKnownDirectoryToPath(
 }
 
 /**
- * Converts a standard filer picker filter to a tauri-compatible filter.
+ * Converts a standard file picker filter to a tauri-compatible filter.
  */
 function saveTypesToFilters(
 	saveTypes: FileSystemSaveTypes | undefined,

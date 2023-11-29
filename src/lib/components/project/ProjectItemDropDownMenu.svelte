@@ -41,7 +41,6 @@
 	];
 
 	const menuId = `${UniqeId}-menu`;
-	$: console.log(menuId);
 	let button: HTMLElement;
 
 	/**
