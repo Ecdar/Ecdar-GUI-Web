@@ -17,5 +17,7 @@ export async function communicationTauri<
 	const serviceSnake = toSnakeCase(service);
 	const endpointSnake = toSnakeCase(endpoint);
 
-	return await invoke(`${serviceSnake}_${endpointSnake}`, { payload: input });
+	return (await invoke(`${serviceSnake}_${endpointSnake}`, {
+		payload: input,
+	})) as Promise<Output<S, E>>;
 }
