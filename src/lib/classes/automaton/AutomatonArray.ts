@@ -8,10 +8,6 @@ export class AutomatonArray<T extends AutomatonClass<R>, R>
 	extends Array<T>
 	implements AutomatonClass<R[] | undefined>
 {
-	constructor(items: T[] = []) {
-		super(...items);
-	}
-
 	/**
 	 * Converts the array of items to an array of raw items.
 	 */
