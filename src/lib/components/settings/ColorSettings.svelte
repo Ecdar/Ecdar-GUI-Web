@@ -148,6 +148,45 @@
 		) as keyof z.infer<typeof ColorVariablesPartial>;
 	}
 
+	/**
+	 * Converts a hex color to display-p3.
+	 * @param hex - The hex color to convert.
+	 * @returns The converted color.
+	 */
+	function hexToDisplayP3(hex: string): number[] {
+		return [
+			parseInt(hex.slice(1, 3), 16) / 255,
+			parseInt(hex.slice(3, 5), 16) / 255,
+			parseInt(hex.slice(5, 7), 16) / 255,
+			1,
+		];
+	}
+
+	/**
+	 * Converts a display-p3 color to hex.
+	 * @param displayP3 - The display-p3 color to convert.
+	 * @returns The converted color.
+	 */
+	function displayP3ToHex(displayP3: number[]): string {
+		const toHex = (value: number) => {
+			const hex = Math.round(value * 255).toString(16);
+			return hex.length === 1 ? "0" + hex : hex;
+		};
+
+		return "#" + displayP3.slice(0, 3).map(toHex).join("");
+	}
+
+	/**
+	 * Updates the input color boxes to preview the color from the input picker.
+	 * @param event - The event object.
+	 * @param index - The index of the color in the list to update.
+	 */
+	function previewColorPicker(event: Event, index: number) {
+		customizedColors[index].values = hexToDisplayP3(
+			(event.target as HTMLInputElement).value,
+		);
+	}
+
 	onMount(() => {
 		loadCustomizedColors().catch(writeLoadError);
 
@@ -160,73 +199,186 @@
 	});
 </script>
 
-<select bind:value={selectedTheme} on:change={loadCustomizedColors}>
-	{#each Object.entries(Theme) as [theme, value]}
-		<option {value}>{theme}</option>
-	{/each}
-</select>
-<select bind:value={selectedProperty}>
-	{#each cssVariableKeys as key}
-		{#if !customizedColors
-			.map((convertedValue) => convertedValue.variable)
-			.includes(key)}
-			<option value={key}>{prettyProperty(key)}</option>
-		{/if}
-	{/each}
-</select>
-
-{#each [0, 1, 2] as index}
-	<input
-		type="number"
-		min="0"
-		max="1"
-		step="0.01"
-		placeholder="1"
-		required
-		bind:value={color[index]}
-	/>
-{/each}
-<input
-	type="number"
-	min="0"
-	max="1"
-	step="0.01"
-	required
-	bind:value={color[3]}
-/>
-
-<button
-	disabled={selectedProperty === undefined || color.includes(null)}
-	on:click={addCustomColor}>Add</button
->
-<button on:click={resetCustomColors} style="background-color: red"
-	>Reset All</button
->
-
-{#each customizedColors as convertedValue}
-	<div style="display: flex; justify-content: space-between;">
+<div class="top">
+	<div class="left-top">
 		<div>
-			<p style="display: inline-block;">
-				{prettyProperty(convertedValue.variable)}:
-			</p>
+			<p>Theme</p>
+			<select bind:value={selectedTheme} on:change={loadCustomizedColors}>
+				{#each Object.entries(Theme) as [theme, value]}
+					<option {value}>{theme}</option>
+				{/each}
+			</select>
 		</div>
-		<div style="display: flex; align-items: center">
-			<button
-				on:click={() => {
-					updateCustomColor(convertedValue);
-				}}>Update</button
-			>
-			<button
-				on:click={() => {
-					deleteCustomColor(convertedValue);
-				}}>Delete</button
-			>
+		<div>
+			<p>Property</p>
+			<select bind:value={selectedProperty}>
+				{#each cssVariableKeys as key}
+					{#if !customizedColors
+						.map((convertedValue) => convertedValue.variable)
+						.includes(key)}
+						<option value={key}>{prettyProperty(key)}</option>
+					{/if}
+				{/each}
+			</select>
+		</div>
 
-			{#each convertedValue.values as value}
-				<input type="number" min="0" max="1" step="0.01" bind:value />
+		<div>
+			<p>Color</p>
+			{#each [0, 1, 2] as index}
+				<input
+					type="number"
+					min="0"
+					max="1"
+					step="0.01"
+					placeholder="1"
+					required
+					bind:value={color[index]}
+				/>
 			{/each}
 		</div>
-	</div>
+		<div>
+			<p>Alpha</p>
+			<input
+				type="number"
+				min="0"
+				max="1"
+				step="0.01"
+				required
+				bind:value={color[3]}
+			/>
+		</div>
 
-	<br />
-{/each}
+		<div>
+			<button
+				disabled={selectedProperty === undefined ||
+					color.includes(null)}
+				on:click={addCustomColor}>Add</button
+			>
+		</div>
+	</div>
+	<div>
+		<button class="reset" on:click={resetCustomColors}
+			>Reset All Colors</button
+		>
+	</div>
+</div>
+
+<hr />
+
+<div class="bottom">
+	{#each customizedColors as convertedValue, index}
+		<div class="custom-color">
+			<div>
+				<p>
+					{prettyProperty(convertedValue.variable)}:
+				</p>
+			</div>
+			<div class="custom-color-options">
+				<button
+					on:click={() => {
+						updateCustomColor(convertedValue);
+					}}>Update</button
+				>
+				<button
+					on:click={() => {
+						deleteCustomColor(convertedValue);
+					}}>Delete</button
+				>
+
+				{#each convertedValue.values as value}
+					<input
+						type="number"
+						min="0"
+						max="1"
+						step="0.01"
+						bind:value
+					/>
+				{/each}
+				<input
+					type="color"
+					value={displayP3ToHex(convertedValue.values)}
+					on:input={(event) => previewColorPicker(event, index)}
+				/>
+			</div>
+		</div>
+
+		<br />
+	{/each}
+</div>
+
+<style>
+	p {
+		margin-bottom: 0.5em;
+	}
+
+	select,
+	input,
+	button {
+		height: 2.5em;
+	}
+
+	input[type="color"]::-moz-color-swatch {
+		border: none;
+	}
+
+	input[type="color"]::-webkit-color-swatch-wrapper {
+		padding: 0;
+	}
+
+	input[type="color"]::-webkit-color-swatch {
+		border: none;
+	}
+
+	button {
+		background-color: darkgreen;
+		color: var(--navigationbar-text-color);
+		border: none;
+		padding: 0.5em 1em;
+	}
+
+	hr {
+		margin: 0;
+		height: 0.2em;
+		border: none;
+		background-color: black;
+	}
+
+	button[disabled],
+	.reset {
+		background-color: darkred;
+	}
+
+	.top {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.top,
+	.bottom {
+		margin: 1em;
+	}
+
+	.left-top {
+		display: flex;
+		align-items: flex-end;
+	}
+
+	.left-top div {
+		margin: 0.25em;
+	}
+
+	.custom-color {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.custom-color-options {
+		display: flex;
+		align-items: center;
+	}
+
+	.custom-color-options * {
+		margin: 0.25em;
+	}
+</style>

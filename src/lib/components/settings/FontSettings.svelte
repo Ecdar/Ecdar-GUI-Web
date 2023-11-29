@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import GlobalFontLoader from "$lib/classes/styling/GlobalFontLoader";
 	import Console from "$lib/classes/console/Console";
 </script>
@@ -13,9 +13,13 @@
 
 <button
 	on:click={() => {
-		GlobalFontLoader.clearCustomFont().catch(() => {
-			Console.writeLineFrontend(`An error occured while resetting fonts`);
-		});
+		if (confirm("Are you sure that you want to reset the custom font?")) {
+			GlobalFontLoader.clearCustomFont().catch(() => {
+				Console.writeLineFrontend(
+					`An error occured while resetting fonts`,
+				);
+			});
+		}
 	}}>Reset Font</button
 >
 
