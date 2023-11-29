@@ -176,12 +176,13 @@ describe("System", () => {
 		expect(system.operators.size).toBe(raw.operators?.length);
 		const operatorId = system.operators.ids.get(2);
 		expect(operatorId).toBeDefined();
+		if(!operatorId) throw new Error("Make typescript happy");
 		const operator = system.operators.get(operatorId);
 		expect(operator).toBeDefined();
-		expect(operator.id.toRaw()).toBe(raw.operators?.[0].id);
-		expect(operator.position.x).toBe(raw.operators?.[0].x);
-		expect(operator.position.y).toBe(raw.operators?.[0].y);
-		expect(operator.type.toLowerCase()).toBe(raw.operators?.[0].type);
+		expect(operator?.id.toRaw()).toBe(raw.operators?.[0].id);
+		expect(operator?.position.x).toBe(raw.operators?.[0].x);
+		expect(operator?.position.y).toBe(raw.operators?.[0].y);
+		expect(operator?.type.toLowerCase()).toBe(raw.operators?.[0].type);
 		expect(system.edges.length).toBe(raw.edges?.length);
 		expect((system.edges[1].parent as SystemMemberId).toRaw()).toBe(
 			raw.edges?.[1].parent,
@@ -235,7 +236,7 @@ describe("GlobalDeclarations", () => {
 		);
 		const globalDeclarations = GlobalDeclarations.fromRaw(raw);
 
-		expect(globalDeclarations.declarations).toBe(raw.declarations);
+		expect(globalDeclarations.declarations).toBe(raw?.declarations);
 	});
 
 	it("serializes and deserializes to the same object", () => {
@@ -257,7 +258,7 @@ describe("SystemDeclarations", () => {
 		);
 		const systemDeclarations = SystemDeclarations.fromRaw(raw);
 
-		expect(systemDeclarations.declarations).toBe(raw.declarations);
+		expect(systemDeclarations.declarations).toBe(raw?.declarations);
 	});
 
 	it("serializes and deserializes to the same object", () => {
