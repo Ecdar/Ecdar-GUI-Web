@@ -2,7 +2,7 @@
 	"name": "ecdar-gui",
 	"version": "rolling",
 	"engines": {
-		"node": ">=20.10.0"
+		"node": ">=20.x.x"
 	},
 	"private": true,
 	"type": "module",
