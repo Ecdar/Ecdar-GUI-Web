@@ -28,18 +28,14 @@ test("Check and uncheck Project Panel checkbox", async ({ page }) => {
 	expect(color).toBe("transparent");
 });
 
-test("Navigating to Help, then About", async ({
-	page
-}) => {
+test("Navigating to Help, then About", async ({ page }) => {
 	await page.getByRole("button", { name: "Help", exact: true }).click();
 
 	await page.getByRole("button", { name: "error About" }).click();
 
 	const aboutBox = await page.locator(".aboutBox").locator("h1").innerHTML();
 
-	await expect(aboutBox).toBe("Ecdar v.");
+	expect(aboutBox).toBe("Ecdar v. 0.1");
 
-	await page.getByRole("button", {name: "Close"}).click();
-
-
+	await page.getByRole("button", { name: "Close" }).click();
 });

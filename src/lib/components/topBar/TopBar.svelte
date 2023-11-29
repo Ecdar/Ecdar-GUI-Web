@@ -18,9 +18,7 @@
 		Error,
 	} from "svelte-google-materialdesign-icons";
 
-	let aboutVisible:boolean = false;
-
-
+	let aboutVisible: boolean = false;
 </script>
 
 <!--
@@ -238,56 +236,59 @@
 	<div class="pageblocker">
 		<div class="aboutBox">
 			<div style="position: absolute; left: 2%;">
-				<h1>Ecdar v.</h1>
-				Made by: <br>
-				Us 
-				<br><br><br>
-				For more information, go to <a target="_blank" href="https://www.ecdar.net/">Ecdar.net</a>
+				<h1>Ecdar v. 0.1</h1>
+				Made by:<br />
+				5. Semester Software, Aalborg University
+				<br /><br /><br /><br />
+				For more information, go to
+				<a target="_blank" href="https://www.ecdar.net/"
+					>www.Ecdar.net</a
+				>
 			</div>
-			<button class="aboutBtn" on:click={() => {
-				aboutVisible = false;
-			}}>
-			Close
+			<button
+				class="aboutBtn"
+				on:click={() => {
+					aboutVisible = false;
+				}}
+			>
+				Close
 			</button>
 		</div>
 	</div>
 {/if}
 
-
 <style>
-	
-
-	.pageblocker{
-		z-index: 1000;;
+	.pageblocker {
+		z-index: 1000;
 		position: absolute;
 		height: 100%;
 		width: 100%;
+		left: 0px;
+		top: 0px;
 		background-color: rgba(0, 0, 0, 0.4);
 	}
 
-
-	.container{
+	.container {
 		height: 100%;
 		display: block;
 		float: left;
 	}
 
-	.aboutBox{
+	.aboutBox {
 		height: 15em;
 		width: 35em;
 		position: absolute;
-  		top: 50%;
-  		left: 50%;
-  		transform: translate(-50%, -50%);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 
 		background-color: white;
 		border: 2px solid black;
 	}
 
-	.aboutBtn{
+	.aboutBtn {
 		position: absolute;
 		bottom: 2%;
 		right: 2%;
 	}
-	
 </style>
