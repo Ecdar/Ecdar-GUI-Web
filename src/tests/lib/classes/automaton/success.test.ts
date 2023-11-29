@@ -3123,10 +3123,6 @@ const projectData = JSON.stringify({
 			engine: "Reveaal",
 		},
 	],
-	systemDeclarations: {
-		name: "System Declarations",
-		declarations: "",
-	},
 	globalDeclarations: {
 		name: "Global Declarations",
 		declarations: "broadcast chan pub, grant, patent, coin, tea, cof;",
