@@ -8,6 +8,8 @@ import GlobalCssProperties from "../../GlobalCssProperties.json";
 import Console from "$lib/classes/console/Console";
 import { get, set, update } from "idb-keyval";
 import type { z } from "zod";
+import type TransitionAttribute from "./ZodSchemas/AttributeSchemas/TransitionAttribute";
+import type NumberUnitAttribute from "./ZodSchemas/AttributeSchemas/NumberUnitAttribute";
 
 export type ConvertedValue = {
 	variable: string;
@@ -203,9 +205,8 @@ class GlobalCssSchemesLoader {
 	/**
 	 * Method for applying the specified styles
 	 */
-	applySchemes() {
-		if (this._mediaSchemes === undefined) return;
-
+	private applySchemes() {
+    if (this._mediaSchemes === undefined) return;
 		// Apply standard css variables
 		this.applyCssVariables(this._mediaSchemes.default);
 
@@ -222,7 +223,7 @@ class GlobalCssSchemesLoader {
 	 * Method for applying CSS variables for a specific media feature
 	 * @param feature
 	 */
-	applyCssVariables(feature: z.infer<typeof MediaScheme>) {
+	private applyCssVariables(feature: z.infer<typeof MediaScheme>) {
 		// Apply color variables
 		if (feature.color) {
 			for (const [key, val] of Object.entries(feature.color)) {
@@ -258,6 +259,17 @@ class GlobalCssSchemesLoader {
 				);
 			}
 		}
+
+		// Apply transition variables
+		if (feature.transition) {
+			for (const [key, val] of Object.entries(feature.transition)) {
+				window.document.documentElement.style.setProperty(
+					key,
+					this.createTransition(val),
+				);
+				this._propertyNames.push(key);
+			}
+		}
 	}
 
 	/**
@@ -285,7 +297,7 @@ class GlobalCssSchemesLoader {
 	/**
 	 * Method for re-applying the specified styles
 	 */
-	reapplyMediaFeatures() {
+	private reapplyMediaFeatures() {
 		this.clearAppliedProperties();
 		this.applySchemes();
 		this.loadCustomSchemes().catch((error: Error) => {
@@ -374,6 +386,46 @@ class GlobalCssSchemesLoader {
 	 */
 	getCssVariableKeys(scheme: typeof ColorVariablesPartial): string[] {
 		return Object.keys(scheme.shape);
+	}
+
+	/**
+	 * Creates a CSS transition string based on the provided transition attribute.
+	 * @param transition - The transition attribute to create the transition string from.
+	 * @returns The CSS transition string.
+	 */
+	private createTransition(
+		transition: z.infer<typeof TransitionAttribute>,
+	): string {
+		if (transition[0] === "none") return transition[0];
+
+		let transitionString: string = transition[0];
+
+		if (transition[1]) {
+			transitionString += ` ${transition[1][0] + transition[1][1]}`;
+		}
+		if (transition[2]) {
+			if (this.isNumberUnitAttribute(transition[2]))
+				transitionString += ` ${transition[2]}`;
+			else {
+				transitionString += ` ${transition[2][0]}${transition[2][1]}`;
+			}
+		}
+		if (transition[3]) {
+			transitionString += ` ${transition[3][0] + transition[3][1]}`;
+		}
+
+		return transitionString;
+	}
+
+	/**
+	 * Checks if the given input is a string or represents a number unit attribute.
+	 * @param input - The input to check.
+	 * @returns True if the input is a string, false otherwise.
+	 */
+	isNumberUnitAttribute(
+		input: string | z.infer<typeof NumberUnitAttribute>,
+	): input is string {
+		return Boolean(typeof input === "string");
 	}
 }
 

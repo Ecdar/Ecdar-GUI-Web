@@ -4,6 +4,7 @@ import {
 	FontSizeVariables,
 	FontFamilyVariables,
 	BorderVariables,
+	TransitionVariables,
 } from "./CSSVariables";
 
 /**
@@ -21,6 +22,7 @@ export const RequiredMediaScheme = z
 		fontSize: FontSizeVariables.required(),
 		fontFamily: FontFamilyVariables.required(),
 		border: BorderVariables.required(),
+		transition: TransitionVariables.required(),
 	})
 	.strict();
 
@@ -31,6 +33,7 @@ export const MediaScheme = z
 		fontSize: FontSizeVariables.partial().optional(),
 		fontFamily: FontFamilyVariables.partial().optional(),
 		border: BorderVariables.partial().optional(),
+		transition: TransitionVariables.partial().optional(),
 	})
 	.strict();
 

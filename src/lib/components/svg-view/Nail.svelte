@@ -6,6 +6,8 @@
 
 	export let position: iPoint;
 	export let text: string;
+
+	const radius = text == "" ? 5 : 10;
 </script>
 
-<Node {text} radius={10} bind:position />
+<Node {text} {radius} bind:position />
