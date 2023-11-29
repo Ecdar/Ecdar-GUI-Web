@@ -24,6 +24,11 @@
 		color: var(--navigationbar-text-color);
 		border: none;
 		padding: 0.5em 1em;
+		transition: background-color 200ms;
+	}
+
+	button:hover {
+		background-color: var(--console-tab-hover-color);
 	}
 
 	hr {

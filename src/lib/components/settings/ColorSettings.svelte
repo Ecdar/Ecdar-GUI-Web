@@ -20,7 +20,7 @@
 	}
 
 	let color: (number | null)[] = [null, null, null, 1];
-	let selectedTheme: Theme = Theme.Dark;
+	let selectedTheme: Theme;
 	let customizedColors: ConvertedValue[] = [];
 	let selectedProperty:
 		| keyof z.infer<typeof ColorVariablesPartial>
@@ -38,7 +38,7 @@
 		GlobalCssSchemesLoader.addCustomColor(
 			selectedTheme,
 			ColorVariablesPartial.parse({
-				[selectedProperty]: ["display-p3", ...color],
+				[selectedProperty]: ["srgb", ...color],
 			}),
 		).catch((error: Error) => {
 			Console.writeLineFrontend(
@@ -57,10 +57,7 @@
 		GlobalCssSchemesLoader.addCustomColor(
 			selectedTheme,
 			ColorVariablesPartial.parse({
-				[convertedValue.variable]: [
-					"display-p3",
-					...convertedValue.values,
-				],
+				[convertedValue.variable]: ["srgb", ...convertedValue.values],
 			}),
 		).catch((error: Error) => {
 			Console.writeLineFrontend(
@@ -149,53 +146,71 @@
 	}
 
 	/**
-	 * Converts a hex color to display-p3.
+	 * Converts a hex color to the color range 0-1
 	 * @param hex - The hex color to convert.
 	 * @returns The converted color.
 	 */
-	function hexToDisplayP3(hex: string): number[] {
+	function hexToCorrectColorRange(hex: string): number[] {
+		const toRoundedColorRange = (value: string) => {
+			return Number((parseInt(value, 16) / 255).toFixed(4));
+		};
+
 		return [
-			parseInt(hex.slice(1, 3), 16) / 255,
-			parseInt(hex.slice(3, 5), 16) / 255,
-			parseInt(hex.slice(5, 7), 16) / 255,
+			toRoundedColorRange(hex.slice(1, 3)),
+			toRoundedColorRange(hex.slice(3, 5)),
+			toRoundedColorRange(hex.slice(5, 7)),
 			1,
 		];
 	}
 
 	/**
-	 * Converts a display-p3 color to hex.
-	 * @param displayP3 - The display-p3 color to convert.
+	 * Converts a color within the range 0-1 to hex.
+	 * @param color - The color to convert.
 	 * @returns The converted color.
 	 */
-	function displayP3ToHex(displayP3: number[]): string {
-		const toHex = (value: number) => {
+	function correctColorRangeToHex(color: (number | null)[]): string {
+		const toHex = (value: number | null) => {
+			if (value === null || value < 0) return "00";
+			if (value > 255) return "FF";
+
 			const hex = Math.round(value * 255).toString(16);
+
 			return hex.length === 1 ? "0" + hex : hex;
 		};
 
-		return "#" + displayP3.slice(0, 3).map(toHex).join("");
+		return "#" + color.slice(0, 3).map(toHex).join("");
 	}
 
 	/**
-	 * Updates the input color boxes to preview the color from the input picker.
+	 * Updates the lists input colors to preview the color from the input picker.
 	 * @param event - The event object.
 	 * @param index - The index of the color in the list to update.
 	 */
-	function previewColorPicker(event: Event, index: number) {
-		customizedColors[index].values = hexToDisplayP3(
+	function previewListColorPicker(event: Event, index: number) {
+		customizedColors[index].values = hexToCorrectColorRange(
+			(event.target as HTMLInputElement).value,
+		);
+	}
+
+	/**
+	 * Updates the top input colors to preview the color from the input picker.
+	 * @param event - The event object.
+	 */
+	function previewTopColorPicker(event: Event) {
+		color = hexToCorrectColorRange(
 			(event.target as HTMLInputElement).value,
 		);
 	}
 
 	onMount(() => {
-		loadCustomizedColors().catch(writeLoadError);
-
 		// Initialize the component with the current colorscheme
 		Object.entries(Theme).forEach(([, theme]) => {
 			if (window.matchMedia(`(${theme})`).matches) {
 				selectedTheme = theme;
 			}
 		});
+
+		loadCustomizedColors().catch(writeLoadError);
 	});
 </script>
 
@@ -227,10 +242,10 @@
 			{#each [0, 1, 2] as index}
 				<input
 					type="number"
+					placeholder="0 to 1"
 					min="0"
 					max="1"
-					step="0.01"
-					placeholder="1"
+					step="0.0001"
 					required
 					bind:value={color[index]}
 				/>
@@ -240,24 +255,37 @@
 			<p>Alpha</p>
 			<input
 				type="number"
+				placeholder="0 to 1"
 				min="0"
 				max="1"
-				step="0.01"
+				step="0.0001"
 				required
 				bind:value={color[3]}
+			/>
+		</div>
+		<div class="top-picker">
+			<p>Picker</p>
+			<input
+				type="color"
+				value={correctColorRangeToHex(color)}
+				on:input={(event) => {
+					previewTopColorPicker(event);
+				}}
 			/>
 		</div>
 
 		<div>
 			<button
+				class="add"
 				disabled={selectedProperty === undefined ||
-					color.includes(null)}
+					color.includes(null) ||
+					color.some((e) => e === null || e < 0 || e > 1)}
 				on:click={addCustomColor}>Add</button
 			>
 		</div>
 	</div>
 	<div>
-		<button class="reset" on:click={resetCustomColors}
+		<button class="delete" on:click={resetCustomColors}
 			>Reset All Colors</button
 		>
 	</div>
@@ -269,36 +297,71 @@
 	{#each customizedColors as convertedValue, index}
 		<div class="custom-color">
 			<div>
-				<p>
+				<h3>
 					{prettyProperty(convertedValue.variable)}:
-				</p>
+				</h3>
 			</div>
 			<div class="custom-color-options">
-				<button
-					on:click={() => {
-						updateCustomColor(convertedValue);
-					}}>Update</button
-				>
-				<button
-					on:click={() => {
-						deleteCustomColor(convertedValue);
-					}}>Delete</button
-				>
-
-				{#each convertedValue.values as value}
+				<div>
+					{#each convertedValue.values as value, index}
+						{#if index < 3}
+							<input
+								type="number"
+								placeholder="0 to 1"
+								min="0"
+								max="1"
+								step="0.0001"
+								required
+								bind:value
+							/>
+						{/if}
+					{/each}
+				</div>
+				<div>
 					<input
 						type="number"
+						placeholder="0 to 1"
 						min="0"
 						max="1"
-						step="0.01"
-						bind:value
+						step="0.0001"
+						required
+						bind:value={convertedValue.values[3]}
 					/>
-				{/each}
-				<input
-					type="color"
-					value={displayP3ToHex(convertedValue.values)}
-					on:input={(event) => previewColorPicker(event, index)}
-				/>
+				</div>
+				<div>
+					<input
+						type="color"
+						value={correctColorRangeToHex(convertedValue.values)}
+						on:input={(event) => {
+							previewListColorPicker(event, index);
+						}}
+					/>
+				</div>
+				<div>
+					<button
+						class="add"
+						disabled={convertedValue.values.some(
+							(e) => typeof e !== "number" || e < 0 || e > 1,
+						)}
+						on:click={() => {
+							updateCustomColor(convertedValue);
+						}}>Update</button
+					>
+				</div>
+				<div>
+					<button
+						class="delete"
+						on:click={() => {
+							if (
+								confirm(
+									"Are you sure that you want to delete this custom color?",
+								)
+							) {
+								deleteCustomColor(convertedValue);
+							}
+						}}>Delete</button
+					>
+				</div>
 			</div>
 		</div>
 
@@ -308,7 +371,18 @@
 
 <style>
 	p {
+		margin-top: 0;
 		margin-bottom: 0.5em;
+	}
+
+	h3 {
+		margin: 0;
+	}
+
+	select {
+		-webkit-appearance: menulist-button;
+		appearance: menulist-button;
+		line-height: 2.5em;
 	}
 
 	select,
@@ -329,11 +403,15 @@
 		border: none;
 	}
 
+	input:invalid {
+		outline: 1px solid red;
+	}
+
 	button {
-		background-color: darkgreen;
 		color: var(--navigationbar-text-color);
 		border: none;
 		padding: 0.5em 1em;
+		transition: background-color 200ms;
 	}
 
 	hr {
@@ -343,14 +421,34 @@
 		background-color: black;
 	}
 
-	button[disabled],
-	.reset {
-		background-color: darkred;
+	button[disabled] {
+		filter: opacity(0.5);
+	}
+
+	.add {
+		background-color: var(--settings-safe-button-color);
+	}
+
+	.add:hover {
+		filter: brightness(1.2);
+	}
+
+	.delete {
+		background-color: var(--settings-danger-button-color);
+	}
+
+	.delete:hover {
+		filter: brightness(1.2);
 	}
 
 	.top {
 		display: flex;
 		justify-content: space-between;
+	}
+
+	.top-picker {
+		display: flex;
+		flex-direction: column;
 	}
 
 	.top,
@@ -378,7 +476,7 @@
 		align-items: center;
 	}
 
-	.custom-color-options * {
+	.custom-color-options div {
 		margin: 0.25em;
 	}
 </style>

@@ -97,7 +97,9 @@
 				0.3362745098,
 				0.39901960784,
 				0.43823529411
-			]
+			],
+			"--settings-danger-button-color": ["srgb", 0.498, 0.0902, 0.0549],
+			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667]
 		},
 		"fontSize": {
 			"--sidebar-fontsize": [1, "rem"],
