@@ -18,7 +18,7 @@ export const compileProtobuffers = {
 					  yarn protoc \\
 						  --ts_out ${OUT_DIR} \\
 						  --proto_path ${PROTOBUFF_DIR} \\
-						  ${PROTOBUFF_DIR}/${file}
+						  ${PROTOBUFF_DIR}${file}
 					`),
 				),
 		);
