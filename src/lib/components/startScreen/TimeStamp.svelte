@@ -1,15 +1,30 @@
 <script lang="ts">
-	export let timeStamp: number;
+	import { onMount } from "svelte";
 
-	const days = Math.floor(timeStamp / (24 * 60 * 60 * 1000));
-	const hours = Math.floor(timeStamp / (60 * 60 * 1000));
-	const minutes = Math.floor((timeStamp / (60 * 1000)) % 60);
-	const seconds = Math.floor((timeStamp / 1000) % 60);
+	export let timeStamp: number;
+	let time = Date.now();
+
+	let days: number, hours: number, minutes: number, seconds: number;
+
+	$: days = Math.floor((timeStamp - time) / (24 * 60 * 60 * 1000));
+	$: hours = Math.floor((timeStamp - time) / (60 * 60 * 1000));
+	$: minutes = Math.floor(((timeStamp - time) / (60 * 1000)) % 60);
+	$: seconds = Math.floor(((timeStamp - time) / 1000) % 60);
 
 	$: console.log(days, hours, minutes, seconds);
 
 	export const relativeTimeFormat = new Intl.RelativeTimeFormat("en", {
 		numeric: "auto",
+	});
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			time = Date.now();
+		}, 10 * 1000); // Update every 10 seconds
+
+		return () => {
+			clearInterval(interval);
+		};
 	});
 </script>
 

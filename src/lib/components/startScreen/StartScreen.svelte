@@ -91,8 +91,7 @@
 						</p>
 						<p class="accessed-text">
 							Accessed <TimeStamp
-								timeStamp={recentProject.lastAccessed -
-									Date.now()}
+								timeStamp={recentProject.lastAccessed}
 							/>
 						</p>
 					</SvgButton>
