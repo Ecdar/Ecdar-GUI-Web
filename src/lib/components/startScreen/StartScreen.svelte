@@ -18,8 +18,6 @@
 			await import("$lib/classes/projectHandler/ProjectHandler")
 		).projectHandler;
 	});
-
-	const relativeTimeFormat = new Intl.RelativeTimeFormat();
 </script>
 
 <div style="display: flex; flex-direction: column; width: 100%">
