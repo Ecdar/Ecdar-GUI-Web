@@ -5,6 +5,7 @@ import type { RawProject } from "./src/lib/classes/automaton/raw/RawProject";
 import { DirectoryHandleNodejs } from "./src/lib/classes/fileSystem/FileSystemNodejs";
 import { FileStructureProject } from "./src/lib/classes/projectHandler/FileStructure";
 import { serializeRaw } from "./src/lib/classes/projectHandler/zodSerializers";
+import chalk from "chalk";
 
 const sourcePath = "./Ecdar-Common/Project-Examples/examples/";
 const bundlePath = "./src/lib/projectExamples";
@@ -76,6 +77,6 @@ export const bundleProjectExamples = {
 				}`,
 			);
 		}
-		console.log("✔ bundled project examples");
+		console.log(`${chalk.green("✔")} bundled project examples`);
 	},
 };
