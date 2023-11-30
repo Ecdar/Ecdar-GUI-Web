@@ -31,9 +31,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: yarn
 
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v2
-
       - name: Install dependencies
         run: yarn install
 

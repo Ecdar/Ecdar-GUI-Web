@@ -58,7 +58,7 @@ function isClosed(): Promise<void> {
 						res();
 						break;
 					} catch {
-						[] // NO EMPTY BLOCK STATEMENTS :)
+						[]; // NO EMPTY BLOCK STATEMENTS :)
 					}
 				}
 			})
