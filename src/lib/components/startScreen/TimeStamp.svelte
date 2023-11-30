@@ -11,8 +11,6 @@
 	$: minutes = Math.floor(((timeStamp - time) / (60 * 1000)) % 60);
 	$: seconds = Math.floor(((timeStamp - time) / 1000) % 60);
 
-	$: console.log(days, hours, minutes, seconds);
-
 	export const relativeTimeFormat = new Intl.RelativeTimeFormat("en", {
 		numeric: "auto",
 	});
