@@ -15,7 +15,7 @@ export const compileProtobuffers = {
 				.filter((file) => file.match(/.*\.proto/g))
 				.map((file) =>
 					runcmd(`
-					  npx protoc \\
+					  yarn protoc \\
 						  --ts_out ${OUT_DIR} \\
 						  --proto_path ${PROTOBUFF_DIR} \\
 						  ${PROTOBUFF_DIR}/${file}
