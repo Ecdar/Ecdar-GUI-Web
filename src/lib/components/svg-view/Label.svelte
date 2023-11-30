@@ -16,14 +16,14 @@
 		d="M5 20 l215 0"
 		x1={parentPosition.x}
 		y1={parentPosition.y}
-		x2={position.x + parentPosition.x}
-		y2={position.y + parentPosition.y}
+		x2={position.x}
+		y2={position.y}
 	/>
 
 	<!-- text label background -->
 	<rect
-		x={position.x + parentPosition.x - text.length * 5}
-		y={position.y + parentPosition.y - 10}
+		x={position.x - text.length * 5}
+		y={position.y - 10}
 		width={text.length * 10}
 		height="20"
 		fill="darkgray"
@@ -33,8 +33,8 @@
 
 	<!-- text label -->
 	<text
-		x={position.x + parentPosition.x}
-		y={position.y + parentPosition.y + centerOffset}
+		x={position.x}
+		y={position.y + centerOffset}
 		text-anchor="middle"
 		role="none"
 	>

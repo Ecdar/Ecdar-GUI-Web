@@ -1,38 +1,40 @@
-// AUTOMATION TYPES
-// Each of the Major Classes are what is the output of loading the ECDAR json files
-// Each of the Minor Classes and Enums  are helper classes to the Major Classes
-//
-// If a type is Raw, then that is the format of the ECDAR json files
-//
+/**
+ * AUTOMATON TYPES
+ * Each of the Major Classes are what is the output of loading the ECDAR json files
+ * Each of the Minor Classes and Enums are helper classes to the Major Classes
+ */
 
-// Raw Types
-export * as Raw from "./automaton/raw";
+// Component classes
+export { Component } from "./automaton/component/Component";
+export { Location } from "./automaton/component/Location";
+export { Invariant } from "./automaton/component/Invariant";
+export { Nickname } from "./automaton/component/Nickname";
+export { LocationEdge } from "./automaton/component/LocationEdge";
+export { LocationEdgeNail } from "./automaton/component/LocationEdgeNail";
+export { NailProperty } from "./automaton/component/NailProperty";
 
-// Enums
+// Component helpers
+export { LocationEdgeStatus } from "./automaton/component/LocationEdgeStatus";
+export { LocationType } from "./automaton/component/LocationType";
+export { NailPropertyType } from "./automaton/component/NailPropertyType";
+export { LocationUrgency } from "./automaton/component/LocationUrgency";
+
+// System classes
+export { System } from "./automaton/system/System";
+export { ComponentInstance } from "./automaton/system/ComponentInstance";
+export { Operator } from "./automaton/system/Operator";
+export { SystemMemberEdge } from "./automaton/system/SystemMemberEdge";
+
+// System helpers
+export { OperatorType } from "./automaton/system/OperatorType";
+
+// General Classes
+export { SystemDeclarations } from "./automaton/SystemDeclarations";
+export { GlobalDeclarations } from "./automaton/GlobalDeclarations";
+export { Query } from "./automaton/Query";
+export { Project } from "./automaton/Project";
+export { Position } from "./automaton/Position";
+export { Dimensions } from "./automaton/Dimensions";
+
+// General helpers
 export { Backend } from "./automaton/Backend";
-export { DeclarationType } from "./automaton/DeclarationType";
-export { Status } from "./automaton/Status";
-export { LocationType } from "./automaton/LocationType";
-export { OperatorType } from "./automaton/OperatorType";
-export { PropertyType } from "./automaton/PropertyType";
-export { Urgency } from "./automaton/Urgency";
-
-// Minor Classes
-export { Invariant } from "./automaton/Invariant";
-export { Nickname } from "./automaton/Nickname";
-export { Operator } from "./automaton/Operator";
-export { Property } from "./automaton/Property";
-export { SystemEdge } from "./automaton/SystemEdge";
-export { ComponentInstance } from "./automaton/ComponentInstance";
-export { Nail } from "./automaton/Nail";
-
-// Major Classes
-export { Declaration } from "./automaton/Declaration";
-export { Component } from "./automaton/Component";
-export { Edge } from "./automaton/Edge";
-export { Location } from "./automaton/Location";
-export { Query, Queries } from "./automaton/Query";
-export { System } from "./automaton/System";
-
-// Interfaces
-export type { Named } from "./automaton/Named";

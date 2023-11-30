@@ -28,4 +28,12 @@ module.exports = {
       },
     },
   ],
+  rules: {
+    // TODO: Enable this rule in the future. Production code should not output to console.
+    //"no-console": "error",
+    "@typescript-eslint/no-invalid-void-type": [
+      "error",
+      { allowAsThisParameter: true },
+    ],
+  },
 };
