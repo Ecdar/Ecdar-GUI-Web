@@ -226,7 +226,7 @@
 		</div>
 		<div>
 			<p>Property</p>
-			<select bind:value={selectedProperty}>
+			<select class="fixed-width" bind:value={selectedProperty}>
 				{#each cssVariableKeys as key}
 					{#if !customizedColors
 						.map((convertedValue) => convertedValue.variable)
@@ -446,13 +446,16 @@
 		justify-content: space-between;
 	}
 
+	.fixed-width {
+		width: 15em;
+	}
+
 	.top-picker {
 		display: flex;
 		flex-direction: column;
 	}
 
-	.top,
-	.bottom {
+	.top {
 		margin: 1em;
 	}
 
@@ -463,6 +466,11 @@
 
 	.left-top div {
 		margin: 0.25em;
+	}
+
+	.bottom {
+		margin: 1em 1em 0 1em;
+		overflow-y: auto;
 	}
 
 	.custom-color {

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { createEventDispatcher } from "svelte";
 	import TopBarButton from "$lib/components/topBar/TopBarButton.svelte";
 	import DropDownButton from "$lib/components/topBar/DropDownButton.svelte";
 	import DropDownCheckBox from "$lib/components/topBar/DropDownCheckBox.svelte";
@@ -13,10 +14,13 @@
 		Arrow_drop_down,
 		Arrow_drop_up,
 		Window,
+		Settings,
 		Settings_input_composite,
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
+
+	const dispatch = createEventDispatcher();
 </script>
 
 <!--
@@ -183,7 +187,6 @@
 				console.log("unchecked UI cache");
 			}}
 		/>
-
 		<DropDownCheckBox
 			name="Periodic query execution"
 			on:checked={() => {
@@ -198,6 +201,14 @@
 			name="Engine Options"
 			on:click={() => {
 				console.log("Engine Options");
+			}}
+		/>
+		<DropDownButton
+			icon={Settings}
+			name="Settings"
+			on:click={() => {
+				dispatch("toggleSettings");
+				console.log("Dispatched");
 			}}
 		/>
 	</TopBarButton>
