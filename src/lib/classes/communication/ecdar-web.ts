@@ -27,7 +27,5 @@ export async function communicationWeb<
 		throw new Error("communication failed with code: " + response.status);
 	}
 
-	const content = (await response.json()) as Output<S, E>;
-
-	return content;
+	return response.json() as Promise<Output<S, E>>;
 }

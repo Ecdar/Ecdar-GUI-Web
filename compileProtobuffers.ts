@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import fs from "fs-extra";
-import { flockSync } from "fs-ext";
-import { exec } from "node:child_process";
+//import { flockSync } from "fs-ext";
+import { exec, execSync } from "node:child_process";
 
 const PROTOBUFF_DIR = "./Ecdar-ProtoBuf/";
 const OUT_DIR = "./src/lib/protobuf/";
@@ -10,7 +10,7 @@ export const compileProtobuffers = {
 	name: "Compiling protobuffers",
 
 	buildStart: async () => {
-		await isClosed();
+		await isClosed2();
 		await fs.ensureDir(OUT_DIR);
 		await Promise.all(
 			(await fs.readdir(PROTOBUFF_DIR))
@@ -45,6 +45,20 @@ function runcmd(cmd: string): Promise<void> {
 	});
 }
 
+function isClosed2() : Promise<void> {
+	return new Promise(res => {
+		for(;;){
+			try {
+				execSync("yarn protoc --version")
+				res();
+				break;
+			} catch {
+				[]; // NO EMPTY BLOCK STATEMENTS
+			}
+		}
+	});
+}
+/*
 function isClosed(): Promise<void> {
 	return new Promise((res) => {
 		fs.open("./node_modules/.bin/protoc", "w+")
@@ -67,3 +81,4 @@ function isClosed(): Promise<void> {
 			});
 	});
 }
+*/
