@@ -23,7 +23,7 @@
 <div style="display: flex; flex-direction: column; width: 100%">
 	<h1 style="text-align: center;">Welcome to Ecdar</h1>
 	<div
-		style="display: flex; width: 100%; height: 100vh; justify-content: center;"
+		style="display: flex; width: 100%; height: 100vh; justify-content: center; overflow: hidden; "
 	>
 		<div class="flex-column">
 			<div class="bottom-border">
@@ -121,14 +121,12 @@
 
 	.scrollable {
 		overflow-y: auto;
-		overflow: hidden;
 	}
 
 	.flex-column {
 		display: flex;
 		flex-direction: column;
 		width: 50%;
-		margin-bottom: 50%;
 		margin: 5%;
 	}
 </style>
