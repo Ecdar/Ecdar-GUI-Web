@@ -33,14 +33,14 @@ class GlobalFontLoader {
 	 * If a new font is provided, it will be used. Otherwise, the font will be retrieved from the IndexedDB using the specified key.
 	 * @param newFont - Optional. The new font to be set.
 	 * @throws TypeError if the fontBlob is undefined.
+	 * @returns A promise that resolves to a boolean indicating whether the font was set successfully.
 	 */
-	async setCustomFont(newFont?: Blob) {
+	async setCustomFont(newFont?: Blob): Promise<boolean> {
 		const fontBlob: Blob | undefined = newFont ?? (await get(this._idbKey));
 
 		// No fonts have been set
 		if (fontBlob === undefined) {
-			console.log("No fonts have been loaded");
-			return;
+			return true;
 		}
 
 		const fontFace: FontFace = new FontFace(
@@ -55,11 +55,18 @@ class GlobalFontLoader {
 			document.fonts.clear();
 			document.fonts.add(loadedFont);
 		} catch (error: unknown) {
-			if (error instanceof TypeError || error instanceof DOMException)
+			if (error instanceof TypeError) {
 				Console.writeLineFrontend(
 					`A font could not be loaded: ${error.message}`,
 				);
+			} else if (error instanceof DOMException) {
+				Console.writeLineFrontend(`Unable to parse font`);
+			}
+
+			return false;
 		}
+
+		return true;
 	}
 
 	/**
@@ -67,30 +74,64 @@ class GlobalFontLoader {
 	 * @param file - The font file to upload.
 	 * @throws Error if the loaded font file is null.
 	 */
-	uploadCustomFont(event: Event) {
+	uploadCustomFont(event: Event, uploadButtonReference: HTMLButtonElement) {
 		const target = event.target as HTMLInputElement;
 
 		if (target.files === null) {
 			Console.writeLineFrontend(
 				`A font could not be loaded: File is null`,
 			);
+			// Alert user about the error
+			this.setButtonStyleWarning(uploadButtonReference);
 			return;
 		}
 
 		const file: File = target.files[0];
 		const reader = new FileReader();
 
+		const supportedTypes = ["ttf", "otf"];
+		const fileType = file.name.split(".").at(-1);
+
+		if (fileType !== undefined && !supportedTypes.includes(fileType)) {
+			Console.writeLineFrontend(
+				`Uploaded font has type ".${fileType}" which is not supported.`,
+			);
+			// Alert user about the error
+			this.setButtonStyleWarning(uploadButtonReference);
+			return;
+		}
+
 		reader.onload = async () => {
-			if (reader.result === null)
-				throw new Error("Loaded font file is null");
+			if (reader.result === null) {
+				Console.writeLineFrontend("Loaded font file is null");
+				return;
+			}
 
 			const fontBlob = new Blob([reader.result]);
-			await this.setCustomFont(fontBlob);
+			const loadingSuccess = await this.setCustomFont(fontBlob);
 
-			await set(this._idbKey, fontBlob);
+			if (loadingSuccess) {
+				await set(this._idbKey, fontBlob);
+				// Remove possible warning styling
+				uploadButtonReference.removeAttribute("title");
+				uploadButtonReference.removeAttribute("style");
+			} else {
+				// Alert user about the error
+				this.setButtonStyleWarning(uploadButtonReference);
+			}
 		};
 
 		reader.readAsArrayBuffer(file);
+	}
+
+	private setButtonStyleWarning(uploadButtonReference: HTMLButtonElement) {
+		// Alert user about the error
+		uploadButtonReference.setAttribute(
+			"title",
+			"Read the error in the console",
+		);
+		uploadButtonReference.style.backgroundColor =
+			"var(--settings-danger-button-color)";
 	}
 }
 

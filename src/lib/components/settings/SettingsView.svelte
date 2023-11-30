@@ -19,7 +19,9 @@
 	];
 </script>
 
-<Tabs tabs={settingTabs} />
+<div id="setting-tabs-container">
+	<Tabs tabs={settingTabs} />
+</div>
 
 <button
 	on:click={() => {

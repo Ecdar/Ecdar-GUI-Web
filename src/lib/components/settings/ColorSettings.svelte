@@ -222,7 +222,11 @@
 	<div class="left-top">
 		<div>
 			<p>Theme</p>
-			<select bind:value={selectedTheme} on:change={loadCustomizedColors}>
+			<select
+				id="select-theme"
+				bind:value={selectedTheme}
+				on:change={loadCustomizedColors}
+			>
 				{#each Object.entries(Theme) as [theme, value]}
 					<option {value}>{theme}</option>
 				{/each}
@@ -230,7 +234,11 @@
 		</div>
 		<div>
 			<p>Property</p>
-			<select class="fixed-width" bind:value={selectedProperty}>
+			<select
+				id="select-property"
+				class="fixed-width"
+				bind:value={selectedProperty}
+			>
 				{#each cssVariableKeys as key}
 					{#if !customizedColors
 						.map((convertedValue) => convertedValue.variable)
@@ -280,6 +288,7 @@
 
 		<div>
 			<button
+				id="add-color"
 				class="add"
 				disabled={selectedProperty === undefined ||
 					color.includes(null) ||
@@ -288,90 +297,93 @@
 			>
 		</div>
 	</div>
-	<div>
-		<button class="delete" on:click={resetCustomColors}
+	<div class="delete-container">
+		<button id="reset-colors" class="delete" on:click={resetCustomColors}
 			>Reset All Colors</button
 		>
 	</div>
 </div>
 
-<hr />
-
-<div class="bottom">
-	{#each customizedColors as convertedValue, index}
-		<div class="custom-color">
-			<div>
-				<h3>
-					{prettyProperty(convertedValue.variable)}:
-				</h3>
+{#if customizedColors.length > 0}
+	<hr />
+	<div class="bottom">
+		{#each customizedColors as convertedValue, index}
+			<div class="custom-color">
+				<div>
+					<h3>
+						{prettyProperty(convertedValue.variable)}:
+					</h3>
+				</div>
+				<div class="custom-color-options">
+					<div>
+						{#each convertedValue.values as value, index}
+							{#if index < 3}
+								<input
+									type="number"
+									placeholder="0 to 1"
+									min="0"
+									max="1"
+									step="0.0001"
+									required
+									bind:value
+								/>
+							{/if}
+						{/each}
+					</div>
+					<div>
+						<input
+							type="number"
+							placeholder="0 to 1"
+							min="0"
+							max="1"
+							step="0.0001"
+							required
+							bind:value={convertedValue.values[3]}
+						/>
+					</div>
+					<div>
+						<input
+							type="color"
+							value={correctColorRangeToHex(
+								convertedValue.values,
+							)}
+							on:input={(event) => {
+								previewListColorPicker(event, index);
+							}}
+						/>
+					</div>
+					<div>
+						<button
+							class="add"
+							disabled={convertedValue.values.some(
+								(e) => typeof e !== "number" || e < 0 || e > 1,
+							)}
+							on:click={() => {
+								updateCustomColor(convertedValue);
+							}}>Update</button
+						>
+					</div>
+					<div>
+						<button
+							class="delete"
+							on:click={() => {
+								if (
+									confirm(
+										"Are you sure that you want to delete this custom color?",
+									)
+								) {
+									deleteCustomColor(convertedValue);
+								}
+							}}>Delete</button
+						>
+					</div>
+				</div>
 			</div>
-			<div class="custom-color-options">
-				<div>
-					{#each convertedValue.values as value, index}
-						{#if index < 3}
-							<input
-								type="number"
-								placeholder="0 to 1"
-								min="0"
-								max="1"
-								step="0.0001"
-								required
-								bind:value
-							/>
-						{/if}
-					{/each}
-				</div>
-				<div>
-					<input
-						type="number"
-						placeholder="0 to 1"
-						min="0"
-						max="1"
-						step="0.0001"
-						required
-						bind:value={convertedValue.values[3]}
-					/>
-				</div>
-				<div>
-					<input
-						type="color"
-						value={correctColorRangeToHex(convertedValue.values)}
-						on:input={(event) => {
-							previewListColorPicker(event, index);
-						}}
-					/>
-				</div>
-				<div>
-					<button
-						class="add"
-						disabled={convertedValue.values.some(
-							(e) => typeof e !== "number" || e < 0 || e > 1,
-						)}
-						on:click={() => {
-							updateCustomColor(convertedValue);
-						}}>Update</button
-					>
-				</div>
-				<div>
-					<button
-						class="delete"
-						on:click={() => {
-							if (
-								confirm(
-									"Are you sure that you want to delete this custom color?",
-								)
-							) {
-								deleteCustomColor(convertedValue);
-							}
-						}}>Delete</button
-					>
-				</div>
-			</div>
-		</div>
 
-		<br />
-	{/each}
-</div>
+			<br />
+		{/each}
+	</div>
+{/if}
 
 <style>
 	p {
@@ -443,10 +455,17 @@
 
 	.delete {
 		background-color: darkred;
+		color: white;
 	}
 
 	.delete:hover {
 		filter: brightness(1.2);
+	}
+
+	.delete-container {
+		display: flex;
+		align-items: flex-end;
+		margin: 0.25em;
 	}
 
 	.top {
