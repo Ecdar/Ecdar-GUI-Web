@@ -3,6 +3,14 @@
 		type CurrentValues,
 		type PanzoomChangeEvent,
 	} from "./panzoom/panzoom";
+
+	import { onMount } from "svelte";
+	import { scale } from "$lib/globalState/scaleStore";
+	import { activeView } from "$lib/globalState/activeProject";
+	import { Component as automatonComponent } from "$lib/classes/automaton/component/Component";
+	import Edge from "./Edge.svelte";
+	import Location from "$lib/components/svg-view/Location.svelte";
+	import { System } from "$lib/classes/automaton/system/System";
 	import Component from "./Component.svelte";
 
 	/**
@@ -64,28 +72,31 @@
 		style:transform
 		style:transition
 	>
-		{#if $activeView instanceof Component}
+		{#if $activeView instanceof automatonComponent}
 			{@const component = $activeView}
-			<!--All edges are drawn with their reference to their source location-->
-			{#each $activeView.edges as edge}
-				<Edge
-					sourcePoint={component.locations.getSure(edge.source)
-						.position}
-					targetPoint={component.locations.getSure(edge.target)
-						.position}
-					nails={edge.nails}
-					edgeType={edge.status}
-				/>
-			{/each}
 
-			<!--All locations are drawn-->
-			{#each $activeView.locations as location}
-				<Location
-					locationId={location.id}
-					bind:position={location.position}
-					bind:nickname={location.nickname}
-				/>
-			{/each}
+			<Component>
+				<!--All edges are drawn with their reference to their source location-->
+				{#each $activeView.edges as edge}
+					<Edge
+						sourcePoint={component.locations.getSure(edge.source)
+							.position}
+						targetPoint={component.locations.getSure(edge.target)
+							.position}
+						nails={edge.nails}
+						edgeType={edge.status}
+					/>
+				{/each}
+
+				<!--All locations are drawn-->
+				{#each $activeView.locations as location}
+					<Location
+						locationId={location.id}
+						bind:position={location.position}
+						bind:nickname={location.nickname}
+					/>
+				{/each}
+			</Component>
 		{:else if $activeView instanceof System}
 			<text>TODO: Not implemented yet</text>
 		{/if}

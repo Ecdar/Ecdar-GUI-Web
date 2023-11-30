@@ -37,6 +37,7 @@
 				>&lt; &gt;</text
 			>
 		</g>
+		<slot />
 	</DraggableSvg>
 </g>
 

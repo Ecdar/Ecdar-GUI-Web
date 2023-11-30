@@ -7,7 +7,9 @@
 	export let position: iPoint;
 	export let text: string;
 
-	const radius = text == "" ? 5 : 10;
+	let radius: number;
+	// having this reactive fixes some bugs where some nails were small
+	$: radius = text == "" ? 5 : 10;
 </script>
 
 <Node {text} {radius} bind:position />
