@@ -44,11 +44,11 @@ function runcmd(cmd: string): Promise<void> {
 	});
 }
 
-function isClosed2() : Promise<void> {
-	return new Promise(res => {
-		for(;;){
+function isClosed2(): Promise<void> {
+	return new Promise((res) => {
+		for (;;) {
 			try {
-				execSync("yarn protoc --version")
+				execSync("yarn protoc --version");
 				res();
 				break;
 			} catch {
@@ -57,4 +57,3 @@ function isClosed2() : Promise<void> {
 		}
 	});
 }
-
