@@ -67,5 +67,9 @@ export const TransitionVariables = z
 		"--console-tab-hover-transition": TransitionAttribute,
 		"--console-height-transition": TransitionAttribute,
 		"--sidebar-element-transition": TransitionAttribute,
+		"--settings-filter-transition": TransitionAttribute,
+		"--settings-background-color-transition": TransitionAttribute,
+		"--tabs-background-color-transition": TransitionAttribute,
+		"--svgbutton-background-color-transition": TransitionAttribute,
 	})
 	.strict();

@@ -38,7 +38,7 @@
 		color: var(--navigationbar-text-color);
 		border: none;
 		padding: 0.5em 1em;
-		transition: background-color 200ms;
+		transition: var(--settings-background-color-transition);
 	}
 
 	.delete {
