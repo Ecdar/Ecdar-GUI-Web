@@ -11,14 +11,13 @@
 	}
 </script>
 
-{#each $queries?.arr || [] as query, index}
+{#each $queries || [] as query, index}
 	<Query
 		bind:query={query.query}
 		type={getType(query.query)}
 		name={getName(query.query)}
 		bind:comment={query.comment}
 		bind:isPeriodic={query.isPeriodic}
-		bind:backend={query.backend}
 		{index}
 	/>
 {/each}

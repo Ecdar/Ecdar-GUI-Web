@@ -5,6 +5,8 @@
 		Check_box,
 		Check_box_outline_blank,
 	} from "svelte-google-materialdesign-icons";
+	import { SystemId } from "$lib/classes/automaton/system/SystemId";
+	import { ComponentId } from "$lib/classes/automaton/component/ComponentId";
 	import { systems, components } from "$lib/globalState/activeProject";
 	import OverlayMenu from "$lib/components/overlayMenu/OverlayMenu.svelte";
 	import Panel from "$lib/components/overlayMenu/Panel.svelte";
@@ -14,8 +16,10 @@
 	export let description: string;
 	export let color: string;
 	export let includeInPeriodicCheck: boolean = false;
-	export let index: number;
+	export let id: SystemId | ComponentId;
 	export let itemType: "system" | "component";
+
+	const UniqeId = id.rawId.split(" ").join("-").toLowerCase();
 
 	const colorOptions = [
 		"#8B0000", // Dark Red
@@ -36,7 +40,7 @@
 		"#900C3F", // Deep Red
 	];
 
-	const menuId = `${itemType}-menu-${index}`;
+	const menuId = `${UniqeId}-menu`;
 	let button: HTMLElement;
 
 	/**
@@ -53,7 +57,7 @@
 	bind:button
 	icon={More_vert}
 	popovertarget={menuId}
-	id={`${itemType}-button-${index}`}
+	id={`${UniqeId}-button`}
 	color="var(--sidebar-text-color)"
 />
 <OverlayMenu anchor={button} id={menuId}>
@@ -91,18 +95,12 @@
 			icon={Delete}
 			text="Delete"
 			click={() => {
-				// this is switch because it will support more than 2 in the future
-				switch (itemType) {
-					case "system":
-						$systems?.splice(index, 1);
-						$systems = $systems;
-						break;
-					case "component":
-						$components?.splice(index, 1);
-						$components = $components;
-						break;
-					default:
-						break;
+				if (id instanceof SystemId) {
+					$systems?.delete(id);
+					$systems = $systems;
+				} else if (id instanceof ComponentId) {
+					$components?.delete(id);
+					$components = $components;
 				}
 			}}
 		/>

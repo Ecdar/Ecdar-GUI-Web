@@ -1,22 +1,15 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import {
-		activeView,
-		type TActiveView,
-	} from "$lib/globalState/activeProject";
-	import { locationRecord } from "$lib/components/svg-view/state";
-	import { scale } from "$lib/globalState/scaleStore";
-	import Location from "$lib/components/svg-view/Location.svelte";
-	import Edge from "./Edge.svelte";
 	import Panzoom, {
 		type CurrentValues,
 		type PanzoomChangeEvent,
 	} from "./panzoom/panzoom";
-	import {
-		SystemEdge,
-		Edge as AutomatonEdge,
-		Component,
-	} from "$lib/classes/automaton";
+	import { onMount } from "svelte";
+	import { scale } from "$lib/globalState/scaleStore";
+	import { activeView } from "$lib/globalState/activeProject";
+	import { Component } from "$lib/classes/automaton/component/Component";
+	import Edge from "./Edge.svelte";
+	import Location from "$lib/components/svg-view/Location.svelte";
+	import { System } from "$lib/classes/automaton/system/System";
 
 	/**
 	 * The parent svg element that the entire view is shown with.
@@ -62,24 +55,6 @@
 		const easing = "ease-out";
 		transition = active ? `transform ${duration}ms ${easing}` : "none";
 	}
-
-	function filterSystemEdges(
-		edges: SystemEdge[] | AutomatonEdge[] | undefined,
-	): AutomatonEdge[] {
-		if (!edges) return [];
-		return edges.filter(
-			(edge): edge is AutomatonEdge => edge instanceof AutomatonEdge,
-		);
-	}
-
-	function locationsAsArray(view: TActiveView) {
-		if (view instanceof Component) {
-			// TODO: support more than just components
-			return Object.values(view.locations);
-		} else {
-			return [];
-		}
-	}
 </script>
 
 <svg
@@ -95,28 +70,31 @@
 		style:transform
 		style:transition
 	>
-		<!--All edges are drawn with their reference to their source location-->
-		{#each filterSystemEdges($activeView?.edges) as edge}
-			{#if "sourceLocation" in edge}
+		{#if $activeView instanceof Component}
+			{@const component = $activeView}
+			<!--All edges are drawn with their reference to their source location-->
+			{#each $activeView.edges as edge}
 				<Edge
-					bind:sourcePoint={$locationRecord[edge.sourceLocation]
+					sourcePoint={component.locations.getSure(edge.source)
 						.position}
-					bind:targetPoint={$locationRecord[edge.targetLocation]
+					targetPoint={component.locations.getSure(edge.target)
 						.position}
 					nails={edge.nails}
 					edgeType={edge.status}
 				/>
-			{/if}
-		{/each}
+			{/each}
 
-		<!--All locations are drawn-->
-		{#each locationsAsArray($activeView) as location}
-			<Location
-				locationID={location.id}
-				bind:position={location.position}
-				bind:nickname={location.nickname}
-			/>
-		{/each}
+			<!--All locations are drawn-->
+			{#each $activeView.locations as location}
+				<Location
+					locationId={location.id}
+					bind:position={location.position}
+					bind:nickname={location.nickname}
+				/>
+			{/each}
+		{:else if $activeView instanceof System}
+			<text>TODO: Not implemented yet</text>
+		{/if}
 
 		<!-- Arrowhead used at the end of edges -->
 		<defs>

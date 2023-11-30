@@ -23,6 +23,10 @@ vite.config.ts.timestamp-*
 ### Protobuffers ###
 /src/lib/proto/
 
+#### Project examples ###
+/src/lib/projectExamples.ts
+/src/lib/projectExamples
+
 ### macOS ###
 *.DS_Store
 .AppleDouble

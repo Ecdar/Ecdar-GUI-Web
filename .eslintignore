@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
+/Ecdar-Common
 /build
 /.svelte-kit
 /package
