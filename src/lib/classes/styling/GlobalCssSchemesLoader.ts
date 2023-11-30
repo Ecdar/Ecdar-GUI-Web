@@ -54,7 +54,7 @@ class GlobalCssSchemesLoader {
 	/**
 	 * Loads custom CSS schemes.
 	 */
-	async loadCustomSchemes() {
+	private async loadCustomSchemes() {
 		const customSchemes = await this.checkCustomSchemes();
 		this.applyCustomSchemes(customSchemes);
 	}
@@ -64,7 +64,7 @@ class GlobalCssSchemesLoader {
 	 * If custom schemes do not exist, creates new custom schemes and returns them.
 	 * @returns A promise that resolves to the parsed result of the custom schemes.
 	 */
-	async checkCustomSchemes(): Promise<z.infer<typeof CustomSchemes>> {
+	private async checkCustomSchemes(): Promise<z.infer<typeof CustomSchemes>> {
 		const result: z.infer<typeof CustomSchemes> | undefined = await get(
 			this._idbKey,
 		);
@@ -85,7 +85,7 @@ class GlobalCssSchemesLoader {
 	 * Applies custom CSS schemes based on the provided media schemes.
 	 * @param customSchemes - The array of custom media schemes.
 	 */
-	applyCustomSchemes(customSchemes: z.infer<typeof CustomSchemes>) {
+	private applyCustomSchemes(customSchemes: z.infer<typeof CustomSchemes>) {
 		customSchemes.forEach((scheme) => {
 			if (window.matchMedia(`(${scheme.mediaFeature})`).matches) {
 				this.applyCssVariables(scheme);
@@ -186,7 +186,7 @@ class GlobalCssSchemesLoader {
 	/**
 	 * Parse an empty custom scheme
 	 */
-	parseEmptyCustomScheme(): z.infer<typeof CustomSchemes> {
+	private parseEmptyCustomScheme(): z.infer<typeof CustomSchemes> {
 		return CustomSchemes.parse([
 			{ mediaFeature: "prefers-color-scheme: dark" },
 			{ mediaFeature: "prefers-color-scheme: light" },
@@ -206,7 +206,7 @@ class GlobalCssSchemesLoader {
 	 * Method for applying the specified styles
 	 */
 	private applySchemes() {
-    if (this._mediaSchemes === undefined) return;
+		if (this._mediaSchemes === undefined) return;
 		// Apply standard css variables
 		this.applyCssVariables(this._mediaSchemes.default);
 
@@ -422,10 +422,10 @@ class GlobalCssSchemesLoader {
 	 * @param input - The input to check.
 	 * @returns True if the input is a string, false otherwise.
 	 */
-	isNumberUnitAttribute(
+	private isNumberUnitAttribute(
 		input: string | z.infer<typeof NumberUnitAttribute>,
 	): input is string {
-		return Boolean(typeof input === "string");
+		return typeof input === "string";
 	}
 }
 
