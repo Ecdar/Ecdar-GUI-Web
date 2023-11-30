@@ -1,6 +1,5 @@
 import chalk from "chalk";
 import fs from "fs-extra";
-//import { flockSync } from "fs-ext";
 import { exec, execSync } from "node:child_process";
 
 const PROTOBUFF_DIR = "./Ecdar-ProtoBuf/";
@@ -58,27 +57,4 @@ function isClosed2() : Promise<void> {
 		}
 	});
 }
-/*
-function isClosed(): Promise<void> {
-	return new Promise((res) => {
-		fs.open("./node_modules/.bin/protoc", "w+")
-			.then((fd) => {
-				for (;;) {
-					try {
-						flockSync(fd, "ex");
-						fs.close(fd)
-							.then(() => {})
-							.catch(() => {});
-						res();
-						break;
-					} catch {
-						[]; // NO EMPTY BLOCK STATEMENTS :)
-					}
-				}
-			})
-			.catch(() => {
-				throw new Error("Forgot to call yarn install");
-			});
-	});
-}
-*/
+

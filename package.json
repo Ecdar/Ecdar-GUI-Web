@@ -33,7 +33,6 @@
 		"eslint": "^8.51.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte": "^2.34.0",
-		"fs-ext": "^2.0.0",
 		"fs-extra": "^11.2.0",
 		"prettier": "^3.0.3",
 		"prettier-plugin-svelte": "^3.0.3",
