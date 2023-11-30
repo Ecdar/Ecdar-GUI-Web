@@ -121,6 +121,7 @@
 
 	.scrollable {
 		overflow-y: auto;
+		overflow: hidden;
 	}
 
 	.flex-column {
