@@ -1,4 +1,4 @@
-import type { IEcdarBackendClient } from "$lib/proto/services.client";
+import type { IEcdarBackendClient } from "$lib/protobuf/services.client";
 import { inTauri } from "$lib/tauri";
 import { communicationWeb } from "./communication/ecdar-web";
 import { communicationTauri } from "./communication/tauri";

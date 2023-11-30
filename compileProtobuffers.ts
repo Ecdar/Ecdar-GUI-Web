@@ -3,12 +3,13 @@ import fs from "fs-extra";
 import { exec } from "node:child_process";
 
 const PROTOBUFF_DIR = "./Ecdar-ProtoBuf/";
-const OUT_DIR = "./src/lib/proto/";
+const OUT_DIR = "./src/lib/protobuf/";
 
 export const compileProtobuffers = {
 	name: "Compiling protobuffers",
 
 	buildStart: async () => {
+		await fs.ensureDir(OUT_DIR);
 		await Promise.all(
 			(await fs.readdir(PROTOBUFF_DIR))
 				.filter((file) => file.match(/.*\.proto/g))

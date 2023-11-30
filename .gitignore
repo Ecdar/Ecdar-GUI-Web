@@ -21,7 +21,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 ### Protobuffers ###
-/src/lib/proto/
+/src/lib/protobuf/
 
 #### Project examples ###
 /src/lib/projectExamples.ts
