@@ -9,9 +9,9 @@ export const compileProtobuffers = {
 	name: "Compiling protobuffers",
 
 	buildStart: async () => {
-		await isClosed2();
+		await isClosed();
 		await fs.ensureDir(OUT_DIR);
-		await Promise.all(
+		const res = await Promise.all(
 			(await fs.readdir(PROTOBUFF_DIR))
 				.filter((file) => file.match(/.*\.proto/g))
 				.map((file) =>
@@ -23,6 +23,12 @@ export const compileProtobuffers = {
 					`),
 				),
 		);
+
+		if (res.length === 0) {
+			const err = `Failed to compile protobuffers, ${PROTOBUFF_DIR} is empty`;
+			console.error(`${chalk.red("❌")}${err}`);
+			throw new Error(err);
+		}
 		console.log(`${chalk.green("✔")} Compiled Protobuffers: Done`);
 	},
 };
@@ -44,7 +50,7 @@ function runcmd(cmd: string): Promise<void> {
 	});
 }
 
-function isClosed2(): Promise<void> {
+function isClosed(): Promise<void> {
 	return new Promise((res) => {
 		for (;;) {
 			try {
