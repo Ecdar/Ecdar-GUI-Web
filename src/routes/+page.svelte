@@ -36,7 +36,7 @@
 			</div>
 		</SidePanel>
 		<!-- Canvas -->
-		<div class="canvas" on:toggleSettings={toggleSettings}>
+		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
 			{#if showSettings}
 				<Settings on:toggleSettings={toggleSettings} />

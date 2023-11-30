@@ -208,7 +208,6 @@
 			name="Settings"
 			on:click={() => {
 				dispatch("toggleSettings");
-				console.log("Dispatched");
 			}}
 		/>
 	</TopBarButton>

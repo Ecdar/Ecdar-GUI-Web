@@ -89,7 +89,11 @@
 	 * Resets the custom colors to their default values.
 	 */
 	function resetCustomColors() {
-		if (confirm("Are you sure that you want to reset ALL custom colors?")) {
+		if (
+			confirm(
+				"Are you sure that you want to reset ALL custom colors for all themes?",
+			)
+		) {
 			GlobalCssSchemesLoader.resetCustomColors()
 				.then(async () => {
 					await loadCustomizedColors();
@@ -171,7 +175,7 @@
 	function correctColorRangeToHex(color: (number | null)[]): string {
 		const toHex = (value: number | null) => {
 			if (value === null || value < 0) return "00";
-			if (value > 255) return "FF";
+			if (value > 1) return "FF";
 
 			const hex = Math.round(value * 255).toString(16);
 
@@ -391,6 +395,10 @@
 		height: 2.5em;
 	}
 
+	input[type="color"] {
+		cursor: pointer;
+	}
+
 	input[type="color"]::-moz-color-swatch {
 		border: none;
 	}
@@ -411,7 +419,7 @@
 		color: var(--navigationbar-text-color);
 		border: none;
 		padding: 0.5em 1em;
-		transition: background-color 200ms;
+		transition: var(--settings-filter-transition);
 	}
 
 	hr {
@@ -421,7 +429,7 @@
 		background-color: black;
 	}
 
-	button[disabled] {
+	button:disabled {
 		filter: opacity(0.5);
 	}
 
@@ -429,12 +437,12 @@
 		background-color: var(--settings-safe-button-color);
 	}
 
-	.add:hover {
+	.add:hover:enabled {
 		filter: brightness(1.2);
 	}
 
 	.delete {
-		background-color: var(--settings-danger-button-color);
+		background-color: darkred;
 	}
 
 	.delete:hover {
