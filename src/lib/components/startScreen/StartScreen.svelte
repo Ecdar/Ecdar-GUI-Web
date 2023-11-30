@@ -32,7 +32,7 @@
 				<SvgButton
 					click={startNewProject}
 					icon={Add}
-					id={`new-project`}
+					id={`start-new-project`}
 					color="var(--sidebar-text-color)"
 					justifyContend="center"
 					><p style="font-size: 1.7em">
