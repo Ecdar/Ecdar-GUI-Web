@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
 	import { afterUpdate, onDestroy } from "svelte";
-	import { Point, type PointLike } from "$lib/classes/draw";
+	import type { iPoint } from "$lib/interfaces/iPoint";
+	import { Point } from "./Point";
 	import { PointElement } from "./PointElement";
 	import {
 		computePosition,
@@ -34,7 +35,7 @@
 	 * The absolute position of the context menu.
 	 * `anchor` sets the suggested position of the menu, but the real position might be different to make the menu more visible.
 	 */
-	let position: PointLike = new Point(0, 0);
+	let position: iPoint = new Point(0, 0);
 
 	/**
 	 * Used to unregister the event listeners that close the context menu. They should only be active when it is open.
@@ -163,6 +164,7 @@
 	.overlay-menu-popover {
 		border: none;
 		background: none;
+		cursor: default;
 	}
 
 	.overlay-menu {
@@ -170,7 +172,7 @@
 		background-color: #fff;
 		border-radius: 0.75em;
 		margin: 0;
-		padding: 0.2em;
+		padding: 0.5em;
 
 		position: fixed;
 		display: flex;

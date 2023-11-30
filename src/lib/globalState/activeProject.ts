@@ -23,15 +23,30 @@
  */
 
 import type { Writable, Subscriber, Unsubscriber, Updater } from "svelte/store";
-import type { Project } from "$lib/classes/project/Project";
+import type { Project } from "$lib/classes/automaton/Project";
+import type { Component, System } from "$lib/classes/automaton";
 
-let projectStore: Project | undefined;
+type ProjectKeys = Pick<
+	Project,
+	| "id"
+	| "locationIds"
+	| "edgeIds"
+	| "components"
+	| "systems"
+	| "queries"
+	| "systemDeclarations"
+	| "globalDeclarations"
+>;
+
+let projectValue: Project | undefined;
 
 const projectSubscribers = new Set<Subscriber<Project | undefined>>();
 const memberSubscribers: {
-	[key in keyof Project]: Set<Subscriber<Project[key] | undefined>>;
+	[key in keyof ProjectKeys]: Set<Subscriber<Project[key] | undefined>>;
 } = {
-	name: new Set(),
+	id: new Set(),
+	locationIds: new Set(),
+	edgeIds: new Set(),
 	components: new Set(),
 	systems: new Set(),
 	queries: new Set(),
@@ -47,9 +62,9 @@ const memberSubscribers: {
  */
 export const project: Writable<Project | undefined> = {
 	set(value) {
-		projectStore = value;
+		projectValue = value;
 		for (const subscriber of projectSubscribers) {
-			subscriber(projectStore);
+			subscriber(projectValue);
 		}
 		// TODO: This "as" conversion is killing some type safety. Is there a better way to represent this operation?
 		for (const [key, subscribers] of Object.entries(memberSubscribers) as [
@@ -57,16 +72,16 @@ export const project: Writable<Project | undefined> = {
 			Set<Subscriber<Project[keyof Project] | undefined>>,
 		][]) {
 			for (const subscriber of subscribers) {
-				subscriber(projectStore?.[key]);
+				subscriber(projectValue?.[key]);
 			}
 		}
 	},
 	update(updater) {
-		project.set(updater(projectStore));
+		project.set(updater(projectValue));
 	},
 	subscribe(subscriber) {
 		projectSubscribers.add(subscriber);
-		subscriber(projectStore);
+		subscriber(projectValue);
 
 		const unsubscribe: Unsubscriber = () => {
 			projectSubscribers.delete(subscriber);
@@ -79,30 +94,30 @@ export const project: Writable<Project | undefined> = {
  * This store only subscribes to changes made to a specific member on the Project,
  * and if you update it, it will not trigger updates in any other scoped store.
  */
-class ProjectMember<T extends keyof Project>
+class ProjectMemberStore<T extends keyof ProjectKeys>
 	implements Writable<Project[T] | undefined>
 {
 	constructor(private key: T) {}
 	private get storeMember() {
-		return projectStore?.[this.key];
+		return projectValue?.[this.key];
 	}
 	private get subscribers() {
 		return memberSubscribers[this.key];
 	}
 	set(value: Project[T] | undefined) {
-		if (projectStore === undefined && value !== undefined) {
+		if (projectValue === undefined && value !== undefined) {
 			throw new TypeError(
 				"Cannot set a member of the project when no project is open",
 			);
 		}
-		if (projectStore !== undefined && value === undefined) {
+		if (projectValue !== undefined && value === undefined) {
 			throw new TypeError("Cannot remove a member on an open project");
 		}
 		for (const subscriber of memberSubscribers[this.key]) {
 			subscriber(this.storeMember);
 		}
 		for (const subscriber of projectSubscribers) {
-			subscriber(projectStore);
+			subscriber(projectValue);
 		}
 	}
 	update(updater: Updater<Project[T] | undefined>) {
@@ -122,46 +137,56 @@ class ProjectMember<T extends keyof Project>
 /**
  * This store subscribes to changes / can make changes on the `name` member of the active `Project`.
  */
-export const name = new ProjectMember("name");
+export const name = new ProjectMemberStore("id");
+
+/**
+ * This store subscribes to changes / can make changes on the `locationIds` member of the active `Project`.
+ */
+export const locationIds = new ProjectMemberStore("locationIds");
+
+/**
+ * This store subscribes to changes / can make changes on the `edgeIds` member of the active `Project`.
+ */
+export const edgeIds = new ProjectMemberStore("edgeIds");
 
 /**
  * This store subscribes to changes / can make changes on the `components` member of the active `Project`.
  */
-export const components = new ProjectMember("components");
+export const components = new ProjectMemberStore("components");
 
 /**
  * This store subscribes to changes / can make changes on the `systems` member of the active `Project`.
  */
-export const systems = new ProjectMember("systems");
+export const systems = new ProjectMemberStore("systems");
 
 /**
  * This store subscribes to changes / can make changes on the `queries` member of the active `Project`.
  */
-export const queries = new ProjectMember("queries");
+export const queries = new ProjectMemberStore("queries");
 
 /**
  * This store subscribes to changes / can make changes on the `systemDeclarations` member of the active `Project`.
  */
-export const systemDeclarations = new ProjectMember("systemDeclarations");
+export const systemDeclarations = new ProjectMemberStore("systemDeclarations");
 
 /**
  * This store subscribes to changes / can make changes on the `globalDeclarations` member of the active `Project`.
  */
-export const globalDeclarations = new ProjectMember("globalDeclarations");
+export const globalDeclarations = new ProjectMemberStore("globalDeclarations");
 
-type TActiveView = Project["components"][0] | Project["systems"][0] | undefined;
-let activeViewStore: TActiveView;
-const activeViewSubscribers = new Set<Subscriber<TActiveView>>();
+export type ActiveView = Component | System | undefined;
+let activeViewValue: ActiveView;
+const activeViewSubscribers = new Set<Subscriber<ActiveView>>();
 
-class ActiveView implements Writable<TActiveView> {
-	set(value: TActiveView) {
+class ActiveViewStore implements Writable<ActiveView> {
+	set(value: ActiveView) {
 		if (value !== undefined) {
-			if (!projectStore) {
+			if (!projectValue) {
 				throw new TypeError(
 					"Cannot set an active view when no project is open",
 				);
 			} else if (
-				![...projectStore.components, ...projectStore.systems].includes(
+				![...projectValue.components, ...projectValue.systems].includes(
 					value,
 				)
 			) {
@@ -170,18 +195,18 @@ class ActiveView implements Writable<TActiveView> {
 				);
 			}
 		}
-		activeViewStore = value;
+		activeViewValue = value;
 		for (const subscriber of activeViewSubscribers) {
-			subscriber(activeViewStore);
+			subscriber(activeViewValue);
 		}
 		for (const subscriber of memberSubscribers.components) {
-			subscriber(projectStore?.components);
+			subscriber(projectValue?.components);
 		}
 		for (const subscriber of memberSubscribers.systems) {
-			subscriber(projectStore?.systems);
+			subscriber(projectValue?.systems);
 		}
 		for (const subscriber of projectSubscribers) {
-			subscriber(projectStore);
+			subscriber(projectValue);
 		}
 	}
 	/**
@@ -194,15 +219,15 @@ class ActiveView implements Writable<TActiveView> {
 	 */
 	fastUpdate() {
 		for (const subscriber of activeViewSubscribers) {
-			subscriber(activeViewStore);
+			subscriber(activeViewValue);
 		}
 	}
-	update(updater: Updater<TActiveView>) {
-		this.set(updater(activeViewStore));
+	update(updater: Updater<ActiveView>) {
+		this.set(updater(activeViewValue));
 	}
-	subscribe(subscriber: Subscriber<TActiveView>) {
+	subscribe(subscriber: Subscriber<ActiveView>) {
 		activeViewSubscribers.add(subscriber);
-		subscriber(activeViewStore);
+		subscriber(activeViewValue);
 
 		const unsubscribe: Unsubscriber = () => {
 			activeViewSubscribers.delete(subscriber);
@@ -213,18 +238,18 @@ class ActiveView implements Writable<TActiveView> {
 /**
  * This store defines which Component/System is displayed in the SVG view.
  */
-export const activeView = new ActiveView();
+export const activeView = new ActiveViewStore();
 
 components.subscribe(closeActiveViewIfDeleted);
 systems.subscribe(closeActiveViewIfDeleted);
 function closeActiveViewIfDeleted() {
-	if (activeViewStore === undefined) return;
+	if (activeViewValue === undefined) return;
 	if (
-		!projectStore ||
-		![...projectStore.components, ...projectStore.systems].includes(
-			activeViewStore,
+		!projectValue ||
+		![...projectValue.components, ...projectValue.systems].includes(
+			activeViewValue,
 		)
 	) {
-		activeViewStore = undefined;
+		activeViewValue = undefined;
 	}
 }

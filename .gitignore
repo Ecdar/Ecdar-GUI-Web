@@ -10,6 +10,9 @@
 ### NPM ###
 node_modules
 
+### yarn ###
+yarn-error.log
+
 ### SvelteKit ###
 /build
 /.svelte-kit
@@ -17,6 +20,9 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+#### Project examples ###
+/src/lib/projectExamples.ts
+/src/lib/projectExamples
 
 ### macOS ###
 *.DS_Store

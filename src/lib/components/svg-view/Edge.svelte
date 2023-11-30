@@ -1,26 +1,30 @@
 <script lang="ts">
-	import { PropertyType, Status } from "$lib/classes/automaton";
+	import {
+		NailPropertyType,
+		LocationEdgeStatus,
+	} from "$lib/classes/automaton";
 	import type { iPoint } from "$lib/interfaces/iPoint";
 	import type { iNail } from "$lib/interfaces/iNail";
 	import Nail from "./Nail.svelte";
+	import { scale } from "$lib/globalState/scaleStore";
 
 	export let sourcePoint: iPoint;
 	export let targetPoint: iPoint;
-	export let edgeType: Status;
+	export let edgeType: LocationEdgeStatus;
 	export let nails: iNail[];
 	let points: iPoint[] = [];
 
 	function nailSymbol(nail: iNail): string {
 		switch (nail.property.type) {
-			case PropertyType.GUARD:
+			case NailPropertyType.GUARD:
 				return "<";
-			case PropertyType.SYNCHRONIZATION:
-				return edgeType === Status.INPUT ? "?" : "!";
-			case PropertyType.UPDATE:
+			case NailPropertyType.SYNCHRONIZATION:
+				return edgeType === LocationEdgeStatus.INPUT ? "?" : "!";
+			case NailPropertyType.UPDATE:
 				return "=";
-			case PropertyType.SELECTION:
+			case NailPropertyType.SELECTION:
 				return ":";
-			case PropertyType.NONE:
+			case NailPropertyType.NONE:
 			default:
 				return "";
 		}
@@ -47,7 +51,7 @@
 	function calculateX2(line: { from: iPoint; to: iPoint }): number {
 		return (
 			line.to.x -
-			20 *
+			25 *
 				Math.cos(
 					Math.atan2(
 						line.to.y - line.from.y,
@@ -61,7 +65,7 @@
 	function calculateY2(line: { from: iPoint; to: iPoint }): number {
 		return (
 			line.to.y -
-			20 *
+			25 *
 				Math.sin(
 					Math.atan2(
 						line.to.y - line.from.y,
@@ -70,6 +74,11 @@
 				)
 		);
 	}
+
+	$: dashedStroke =
+		edgeType === LocationEdgeStatus.INPUT
+			? `${2 * 8 - $scale},${2 * 8 - $scale}`
+			: "";
 </script>
 
 <!-- Lines -->
@@ -80,7 +89,7 @@
 		x2={index === lines.length - 1 ? calculateX2(line) : line.to.x}
 		y2={index === lines.length - 1 ? calculateY2(line) : line.to.y}
 		marker-end={index === lines.length - 1 ? "url(#arrowhead)" : ""}
-		stroke-dasharray={edgeType === Status.INPUT ? "10,10" : ""}
+		stroke-dasharray={dashedStroke}
 		id="edge-{edgeType}-{index}"
 	/>
 {/each}
@@ -92,7 +101,7 @@
 
 <style>
 	line {
-		stroke: black;
+		stroke: var(--canvas-action-color);
 		stroke-width: 2;
 	}
 </style>

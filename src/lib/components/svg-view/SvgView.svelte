@@ -1,9 +1,4 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { activeModel } from "$lib/globalState/activeModel";
-	import { scale } from "$lib/globalState/scaleStore";
-	import Location from "$lib/components/svg-view/Location.svelte";
-	import Edge from "./Edge.svelte";
 	import Panzoom, {
 		type CurrentValues,
 		type PanzoomChangeEvent,
@@ -69,39 +64,45 @@
 		style:transform
 		style:transition
 	>
-		<!--All edges are drawn with their reference to their source location-->
-		{#each $activeModel.edges as edge}
-			<Edge
-				bind:sourcePoint={$activeModel.locations[edge.sourceLocation]
-					.position}
-				bind:targetPoint={$activeModel.locations[edge.targetLocation]
-					.position}
-				nails={edge.nails}
-				edgeType={edge.status}
-			/>
-		{/each}
+		{#if $activeView instanceof Component}
+			{@const component = $activeView}
+			<!--All edges are drawn with their reference to their source location-->
+			{#each $activeView.edges as edge}
+				<Edge
+					sourcePoint={component.locations.getSure(edge.source)
+						.position}
+					targetPoint={component.locations.getSure(edge.target)
+						.position}
+					nails={edge.nails}
+					edgeType={edge.status}
+				/>
+			{/each}
 
-		<!--All locations are drawn-->
-		{#each Object.values({ ...$activeModel.locations }) as location}
-			<Location
-				locationID={location.id}
-				bind:position={location.position}
-				bind:nickname={location.nickname}
-			/>
-		{/each}
+			<!--All locations are drawn-->
+			{#each $activeView.locations as location}
+				<Location
+					locationId={location.id}
+					bind:position={location.position}
+					bind:nickname={location.nickname}
+				/>
+			{/each}
+		{:else if $activeView instanceof System}
+			<text>TODO: Not implemented yet</text>
+		{/if}
 
 		<!-- Arrowhead used at the end of edges -->
 		<defs>
 			<marker
+				class="arrowhead"
 				id="arrowhead"
-				viewBox="0 0 10 10"
+				viewBox="0 0 15 15"
 				refX="10"
 				refY="5"
 				markerWidth="6"
 				markerHeight="6"
 				orient="auto-start-reverse"
 			>
-				<path d="M 0 0 L 10 5 L 0 10 z" fill="black" />
+				<path d="M 5 0 L 15 5 L 5 10 z" />
 			</marker>
 		</defs>
 	</g>
@@ -120,9 +121,12 @@
 		touch-action: none;
 		cursor: move;
 	}
-	
 	.panzoom-element {
 		user-select: none;
 		touch-action: none;
+	}
+
+	.arrowhead {
+		fill: var(--canvas-action-color);
 	}
 </style>
