@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 import { compileProtobuffers } from "./compileProtobuffers";
 
 export default defineConfig({
-	plugins: [sveltekit(), compileProtobuffers],
+	plugins: [compileProtobuffers, sveltekit()],
 	test: {
 		include: ["src/**/*.{test,spec}.{js,ts}"],
 	},

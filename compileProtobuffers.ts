@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import fs from "fs-extra";
 import { exec } from "node:child_process";
 
@@ -20,7 +21,7 @@ export const compileProtobuffers = {
 					`),
 				),
 		);
-		console.log("\x1b[33m✔\x1b[0m Compiled Protobuffers Done");
+		console.log(`${chalk.green("✔")} Compiled Protobuffers: Done`);
 	},
 };
 

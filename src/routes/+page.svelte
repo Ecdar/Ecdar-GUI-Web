@@ -11,6 +11,7 @@
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
+	import { callEndpoint } from "$lib/classes/communication";
 </script>
 
 <!-- Top navigation Panel -->
