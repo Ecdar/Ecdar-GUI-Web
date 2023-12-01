@@ -2,6 +2,7 @@ import { test, expect, type Page, type Locator } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
+	await page.waitForLoadState();
 	await page.click("#start-new-project");
 
 	await page.getByRole("button", { name: "Options", exact: true }).hover();
