@@ -6,20 +6,31 @@
 	export let id: string;
 	export let size: number = 24;
 	export let color: string = "currentColor";
+	export let justifyContent: "flex-start" | "flex-end" | "center" =
+		"flex-start";
 	export let button: HTMLElement | undefined = undefined;
 	export let popovertarget: string | undefined = undefined;
 </script>
 
-<button bind:this={button} on:click={click} {popovertarget}>
-	<svelte:component
-		this={icon}
-		{id}
-		{size}
-		{color}
-		ariaLabel=""
-		tabindex="-1"
-	/>
-</button>
+<div>
+	<button
+		style="justify-content: {justifyContent}"
+		bind:this={button}
+		on:click={click}
+		{popovertarget}
+	>
+		<svelte:component
+			this={icon}
+			{id}
+			{size}
+			{color}
+			ariaLabel=""
+			tabindex="-1"
+			style="margin: 1%;"
+		/>
+		<slot />
+	</button>
+</div>
 
 <style>
 	button {

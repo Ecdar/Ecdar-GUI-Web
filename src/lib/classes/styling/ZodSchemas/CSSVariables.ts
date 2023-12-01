@@ -20,6 +20,7 @@ export const ColorVariables = z
 		"--console-scrollbar-thumbhover-color": ColorAttribute,
 		"--console-tab-hover-color": ColorAttribute,
 		"--text-color": ColorAttribute,
+		"--text-secondary-color": ColorAttribute,
 		"--background-color": ColorAttribute,
 		"--query-success-color": ColorAttribute,
 		"--query-warning-color": ColorAttribute,
