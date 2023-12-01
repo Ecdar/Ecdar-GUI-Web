@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Dialog } from "@playwright/test";
 
 const testFilesPath = "tests/lib/components/settings/testfiles";
 
@@ -115,7 +115,7 @@ test("can reset font", async ({ page }) => {
 	expect(fontIsLoaded).toBe(true);
 
 	// Accept dialog to accept to reset font
-	page.on("dialog", (dialog) => dialog.accept());
+	page.on("dialog", acceptDialogue);
 
 	await resetButton.click();
 
@@ -140,3 +140,9 @@ test("cannot upload multiple files at once", async ({ page }) => {
 
 	expect(fileChooser.isMultiple()).toBe(false);
 });
+
+function acceptDialogue(dialog: Dialog): void {
+	dialog.accept().catch(() => {
+		throw new Error("Dialog was not accepted");
+	});
+}

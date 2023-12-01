@@ -105,7 +105,7 @@ test("can delete valid color", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	page.on("dialog", acceptDialouge);
+	page.on("dialog", acceptDialogue);
 
 	await page.locator(".bottom .delete").click();
 	await expect(page.locator("body")).toHaveCSS(
@@ -115,7 +115,7 @@ test("can delete valid color", async ({ page }) => {
 });
 
 test("can delete invalid color", async ({ page }) => {
-	page.on("dialog", acceptDialouge);
+	page.on("dialog", acceptDialogue);
 
 	for (const testValue of ["2", "-1", ""]) {
 		await page.locator("#select-property").selectOption("Background Color");
@@ -198,7 +198,7 @@ test("can reset colors", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	page.on("dialog", acceptDialouge);
+	page.on("dialog", acceptDialogue);
 
 	await page.locator("#reset-colors").click();
 
@@ -208,7 +208,7 @@ test("can reset colors", async ({ page }) => {
 	);
 });
 
-function acceptDialouge(dialog: Dialog): void {
+function acceptDialogue(dialog: Dialog): void {
 	dialog.accept().catch(() => {
 		throw new Error("Dialog was not accepted");
 	});
