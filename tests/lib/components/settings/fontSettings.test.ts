@@ -27,11 +27,12 @@ test("can upload and apply real font", async ({ page }) => {
 	await fileChooser.setFiles(`${testFilesPath}/Lobster-Regular.ttf`);
 
 	// Test if the font has been applied
-	await page.evaluate(() => document.fonts.ready);
-	const fontIsLoaded = await page.evaluate(() =>
-		document.fonts.check("12px CustomFont"),
-	);
-	expect(fontIsLoaded).toBe(true);
+	await page.evaluate(() => {
+		document.fonts.onloadingdone = () => {
+			const fontIsLoaded = document.fonts.check("12px CustomFont");
+			expect(fontIsLoaded).toBe(true);
+		};
+	});
 
 	await expect(
 		page.getByRole("button", {
@@ -54,11 +55,12 @@ test("cannot upload broken font", async ({ page }) => {
 	await fileChooser.setFiles(`${testFilesPath}/emptyNonFontFile.ttf`);
 
 	// Test if the font has been applied
-	await page.evaluate(() => document.fonts.ready);
-	const fontIsLoaded = await page.evaluate(() =>
-		document.fonts.check("12px CustomFont"),
-	);
-	expect(fontIsLoaded).toBe(false);
+	await page.evaluate(() => {
+		document.fonts.onloadingdone = () => {
+			const fontIsLoaded = document.fonts.check("12px CustomFont");
+			expect(fontIsLoaded).toBe(false);
+		};
+	});
 
 	await expect(
 		page.getByRole("button", {
@@ -81,11 +83,12 @@ test("cannot upload non-permitted font file type", async ({ page }) => {
 	await fileChooser.setFiles(`${testFilesPath}/hello.txt`);
 
 	// Test if the font has been applied
-	await page.evaluate(() => document.fonts.ready);
-	const fontIsLoaded = await page.evaluate(() =>
-		document.fonts.check("12px CustomFont"),
-	);
-	expect(fontIsLoaded).toBe(false);
+	await page.evaluate(() => {
+		document.fonts.onloadingdone = () => {
+			const fontIsLoaded = document.fonts.check("12px CustomFont");
+			expect(fontIsLoaded).toBe(false);
+		};
+	});
 
 	await expect(
 		page.getByRole("button", {
@@ -113,11 +116,12 @@ test("can reset font", async ({ page }) => {
 	await fileChooser.setFiles(`${testFilesPath}/Lobster-Regular.ttf`);
 
 	// Test if the new font has been applied
-	await page.evaluate(() => document.fonts.ready);
-	const fontIsLoaded = await page.evaluate(() =>
-		document.fonts.check("12px CustomFont"),
-	);
-	expect(fontIsLoaded).toBe(true);
+	await page.evaluate(() => {
+		document.fonts.onloadingdone = () => {
+			const fontIsLoaded = document.fonts.check("12px CustomFont");
+			expect(fontIsLoaded).toBe(true);
+		};
+	});
 
 	// Accept dialog to accept to reset font
 	page.on("dialog", acceptDialogue);
@@ -125,11 +129,12 @@ test("can reset font", async ({ page }) => {
 	await resetButton.click();
 
 	// Test if the font has been reset
-	await page.evaluate(() => document.fonts.ready);
-	const fontIsNotReset = await page.evaluate(() =>
-		document.fonts.check("12px CustomFont"),
-	);
-	expect(fontIsNotReset).toBe(false);
+	await page.evaluate(() => {
+		document.fonts.onloadingdone = () => {
+			const fontIsLoaded = document.fonts.check("12px CustomFont");
+			expect(fontIsLoaded).toBe(false);
+		};
+	});
 });
 
 test("cannot upload multiple files at once", async ({ page }) => {
