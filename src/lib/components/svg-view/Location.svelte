@@ -1,16 +1,17 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import Node from "./Node.svelte";
 	import type { iPoint } from "$lib/interfaces/iPoint";
+	import type { LocationId } from "$lib/classes/automaton/LocationId";
 	import type { iNickname } from "$lib/interfaces/iNickname";
-	import Label from "./Label.svelte";
 	import { contextMenu } from "$lib/components/contextMenu/contextMenu";
 	import LocationMenu from "$lib/components/contextMenu/contentTypes/locationMenu/LocationMenu.svelte";
+	import Label from "./Label.svelte";
+	import Node from "./Node.svelte";
 
 	export let position: iPoint;
-	export let locationID: string;
-	export let nickname: iNickname;
+	export let locationId: LocationId;
+	export let nickname: iNickname | undefined;
 
 	let group: SVGElement;
 	let menuProps = {
@@ -25,10 +26,12 @@
 	bind:this={group}
 	use:contextMenu={{ content: LocationMenu, props: menuProps }}
 >
-	<Label
-		bind:position={nickname.position}
-		bind:parentPosition={position}
-		bind:text={nickname.name}
-	/>
-	<Node text={locationID} radius={20} bind:position />
+	{#if nickname?.name}
+		<Label
+			bind:position={nickname.position}
+			bind:parentPosition={position}
+			bind:text={nickname.name}
+		/>
+	{/if}
+	<Node text={locationId.rawId} radius={20} bind:position />
 </g>

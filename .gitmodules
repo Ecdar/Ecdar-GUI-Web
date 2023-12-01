@@ -1,0 +1,3 @@
+[submodule "Ecdar-Common"]
+	path = Ecdar-Common
+	url = https://github.com/ECDAR-AAU-SW-P5/Ecdar-Common.git

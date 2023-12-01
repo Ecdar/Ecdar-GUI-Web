@@ -3,32 +3,30 @@
 		Folder_special,
 		Request_page,
 	} from "svelte-google-materialdesign-icons";
+	import type { SystemId } from "$lib/classes/automaton/system/SystemId";
+	import type { ComponentId } from "$lib/classes/automaton/component/ComponentId";
 	import ProjectItemDropDownMenu from "./ProjectItemDropDownMenu.svelte";
 
-	export let name: string;
+	export let id: SystemId | ComponentId;
 	export let description: string;
 	export let color: string;
 	export let includeInPeriodicCheck: boolean = false;
-	export let index: number;
 	export let itemType: "system" | "component";
 
-	function handleProjectItemClick() {
-		console.log("Project Item clicked");
-	}
+	export let setAsActive: () => void;
+	export let rename: () => void;
 
-	function handleDoubleClick() {
-		name = prompt("New name:", name) || name;
-	}
+	const UniqeId = id.rawId.split(" ").join("-").toLowerCase();
 </script>
 
-<button on:click={handleProjectItemClick}>
-	<div class="project-item {itemType}" id="{itemType}-{index}">
+<button on:click={setAsActive}>
+	<div class="project-item {itemType}" id={UniqeId}>
 		<div
 			class="left"
-			on:dblclick={handleDoubleClick}
+			on:dblclick={rename}
 			on:keypress={(event) => {
 				if (event.key === "Enter") {
-					handleDoubleClick();
+					rename();
 				}
 			}}
 			role="button"
@@ -43,7 +41,7 @@
 					{/if}
 				</div>
 			</div>
-			<p>{name}</p>
+			<p>{id.rawId}</p>
 		</div>
 		<div>
 			{#if itemType === "component"}
@@ -51,14 +49,14 @@
 					bind:description
 					bind:color
 					bind:includeInPeriodicCheck
-					{index}
+					{id}
 					{itemType}
 				/>
 			{:else}
 				<ProjectItemDropDownMenu
 					bind:description
 					bind:color
-					{index}
+					{id}
 					{itemType}
 				/>
 			{/if}
@@ -90,8 +88,10 @@
 
 	.project-item {
 		background-color: var(--sidebar-element-color);
+		border: none;
 		transition: var(--sidebar-element-transition);
 		cursor: pointer;
+		width: 100%;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;

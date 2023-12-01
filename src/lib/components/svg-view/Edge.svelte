@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { PropertyType, Status } from "$lib/classes/automaton";
+	import {
+		NailPropertyType,
+		LocationEdgeStatus,
+	} from "$lib/classes/automaton";
 	import type { iPoint } from "$lib/interfaces/iPoint";
 	import type { iNail } from "$lib/interfaces/iNail";
 	import Nail from "./Nail.svelte";
@@ -7,21 +10,21 @@
 
 	export let sourcePoint: iPoint;
 	export let targetPoint: iPoint;
-	export let edgeType: Status;
+	export let edgeType: LocationEdgeStatus;
 	export let nails: iNail[];
 	let points: iPoint[] = [];
 
 	function nailSymbol(nail: iNail): string {
 		switch (nail.property.type) {
-			case PropertyType.GUARD:
+			case NailPropertyType.GUARD:
 				return "<";
-			case PropertyType.SYNCHRONIZATION:
-				return edgeType === Status.INPUT ? "?" : "!";
-			case PropertyType.UPDATE:
+			case NailPropertyType.SYNCHRONIZATION:
+				return edgeType === LocationEdgeStatus.INPUT ? "?" : "!";
+			case NailPropertyType.UPDATE:
 				return "=";
-			case PropertyType.SELECTION:
+			case NailPropertyType.SELECTION:
 				return ":";
-			case PropertyType.NONE:
+			case NailPropertyType.NONE:
 			default:
 				return "";
 		}
@@ -73,7 +76,9 @@
 	}
 
 	$: dashedStroke =
-		edgeType === Status.INPUT ? `${2 * 8 - $scale},${2 * 8 - $scale}` : "";
+		edgeType === LocationEdgeStatus.INPUT
+			? `${2 * 8 - $scale},${2 * 8 - $scale}`
+			: "";
 </script>
 
 <!-- Lines -->

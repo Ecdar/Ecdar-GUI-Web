@@ -38,6 +38,7 @@
 		flex-direction: column;
 		margin: 0;
 		background-color: var(--background-color);
+		color: var(--text-color);
 	}
 
 	:global(button:not(:disabled)) {
