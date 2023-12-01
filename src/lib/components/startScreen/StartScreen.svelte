@@ -32,7 +32,7 @@
 					icon={Add}
 					id={`start-new-project`}
 					color="var(--sidebar-text-color)"
-					justifyContend="center"
+					justifyContent="center"
 					><p style="font-size: 1.7em">
 						New Blank Project
 					</p></SvgButton
@@ -46,7 +46,7 @@
 						icon={File_open}
 						id={`open-example-${exampleName.replaceAll(" ", "-")}`}
 						color="var(--text-color)"
-						justifyContend="center"
+						justifyContent="center"
 						click={async () => {
 							await projectHandler.openExampleProject(
 								exampleLoader,
@@ -65,7 +65,7 @@
 					icon={File_open}
 					id={`open-project`}
 					color="var(--sidebar-text-color)"
-					justifyContend="center"
+					justifyContent="center"
 					><p style="font-size: 1.7em">Open A Project</p></SvgButton
 				>
 			</div>
@@ -77,7 +77,7 @@
 						icon={File_open}
 						id={`open-project`}
 						color="var(--sidebar-text-color)"
-						justifyContend="center"
+						justifyContent="center"
 						click={async () => {
 							await projectHandler.openRecentProject(
 								recentProject,

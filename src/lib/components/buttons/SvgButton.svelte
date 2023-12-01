@@ -6,7 +6,7 @@
 	export let id: string;
 	export let size: number = 24;
 	export let color: string = "currentColor";
-	export let justifyContend: "flex-start" | "flex-end" | "center" =
+	export let justifyContent: "flex-start" | "flex-end" | "center" =
 		"flex-start";
 	export let button: HTMLElement | undefined = undefined;
 	export let popovertarget: string | undefined = undefined;
@@ -14,7 +14,7 @@
 
 <div>
 	<button
-		style="justify-content: {justifyContend}"
+		style="justify-content: {justifyContent}"
 		bind:this={button}
 		on:click={click}
 		{popovertarget}
