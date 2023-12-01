@@ -22,7 +22,7 @@
 
 	const dispatch = createEventDispatcher();
 	let projectHandler: typeof ProjectHandler;
-  
+
 	onMount(async () => {
 		projectHandler = (
 			await import("$lib/classes/projectHandler/ProjectHandler")

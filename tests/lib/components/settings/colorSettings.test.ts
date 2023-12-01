@@ -57,7 +57,7 @@ test("can use color picker to update a valid color", async ({ page }) => {
 
 	await colorInputs[1].fill("#ff00ff");
 
-	page.getByRole("button", { name: "Update", exact: true }).click();
+	await page.getByRole("button", { name: "Update", exact: true }).click();
 
 	await expect(page.locator("body")).toHaveCSS(
 		"background-color",
@@ -86,7 +86,7 @@ test("can update valid color", async ({ page }) => {
 	await modifiedColorFields[1].fill("0");
 	await modifiedColorFields[2].fill("1");
 
-	page.getByRole("button", { name: "Update", exact: true }).click();
+	await page.getByRole("button", { name: "Update", exact: true }).click();
 
 	await expect(page.locator("body")).toHaveCSS(
 		"background-color",
@@ -105,7 +105,11 @@ test("can delete valid color", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	page.on("dialog", (dialog) => dialog.accept());
+	page.on("dialog", (dialog) => {
+		async () => {
+			await dialog.accept();
+		};
+	});
 
 	await page.locator(".bottom .delete").click();
 	await expect(page.locator("body")).toHaveCSS(
@@ -115,7 +119,11 @@ test("can delete valid color", async ({ page }) => {
 });
 
 test("can delete invalid color", async ({ page }) => {
-	page.on("dialog", (dialog) => dialog.accept());
+	page.on("dialog", (dialog) => {
+		async () => {
+			await dialog.accept();
+		};
+	});
 
 	for (const testValue of ["2", "-1", ""]) {
 		await page.locator("#select-property").selectOption("Background Color");
@@ -198,7 +206,12 @@ test("can reset colors", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	page.on("dialog", (dialog) => dialog.accept());
+	page.on("dialog", (dialog) => {
+		async () => {
+			await dialog.accept();
+		};
+	});
+
 	await page.locator("#reset-colors").click();
 
 	await expect(page.locator("body")).toHaveCSS(

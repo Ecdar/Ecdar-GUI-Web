@@ -19,7 +19,7 @@ test("can upload and apply real font", async ({ page }) => {
 		name: "Click here to upload a font",
 		exact: true,
 	});
-	uploadButton.click();
+	await uploadButton.click();
 	const fileChooser = await fileChooserPromise;
 
 	// Select one file
@@ -45,7 +45,7 @@ test("cannot upload broken font", async ({ page }) => {
 		name: "Click here to upload a font",
 		exact: true,
 	});
-	uploadButton.click();
+	await uploadButton.click();
 	const fileChooser = await fileChooserPromise;
 
 	// Select one file
@@ -71,7 +71,7 @@ test("cannot upload non-permitted font file type", async ({ page }) => {
 		name: "Click here to upload a font",
 		exact: true,
 	});
-	uploadButton.click();
+	await uploadButton.click();
 	const fileChooser = await fileChooserPromise;
 
 	// Select one file
@@ -115,7 +115,11 @@ test("can reset font", async ({ page }) => {
 	expect(fontIsLoaded).toBe(true);
 
 	// Accept dialog to accept to reset font
-	page.on("dialog", (dialog) => dialog.accept());
+	page.on("dialog", (dialog) => {
+		async () => {
+			await dialog.accept();
+		};
+	});
 
 	await resetButton.click();
 
