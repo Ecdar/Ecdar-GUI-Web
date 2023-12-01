@@ -125,6 +125,7 @@ test("can reset font", async ({ page }) => {
 	await resetButton.click();
 
 	// Test if the font has been reset
+	await page.evaluate(() => document.fonts.ready);
 	const fontIsNotReset = await page.evaluate(() =>
 		document.fonts.check("12px CustomFont"),
 	);
