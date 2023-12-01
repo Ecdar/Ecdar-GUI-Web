@@ -115,11 +115,7 @@ test("can reset font", async ({ page }) => {
 	expect(fontIsLoaded).toBe(true);
 
 	// Accept dialog to accept to reset font
-	page.on("dialog", (dialog) => {
-		async () => {
-			await dialog.accept();
-		};
-	});
+	page.on("dialog", (dialog) => dialog.accept());
 
 	await resetButton.click();
 

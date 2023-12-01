@@ -105,11 +105,7 @@ test("can delete valid color", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	page.on("dialog", (dialog) => {
-		async () => {
-			await dialog.accept();
-		};
-	});
+	page.on("dialog", (dialog) => dialog.accept());
 
 	await page.locator(".bottom .delete").click();
 	await expect(page.locator("body")).toHaveCSS(
@@ -119,11 +115,7 @@ test("can delete valid color", async ({ page }) => {
 });
 
 test("can delete invalid color", async ({ page }) => {
-	page.on("dialog", (dialog) => {
-		async () => {
-			await dialog.accept();
-		};
-	});
+	page.on("dialog", (dialog) => dialog.accept());
 
 	for (const testValue of ["2", "-1", ""]) {
 		await page.locator("#select-property").selectOption("Background Color");
@@ -206,11 +198,7 @@ test("can reset colors", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	page.on("dialog", (dialog) => {
-		async () => {
-			await dialog.accept();
-		};
-	});
+	page.on("dialog", (dialog) => dialog.accept());
 
 	await page.locator("#reset-colors").click();
 
