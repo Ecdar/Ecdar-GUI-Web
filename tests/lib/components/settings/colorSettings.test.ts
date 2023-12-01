@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Dialog } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
@@ -105,7 +105,7 @@ test("can delete valid color", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	page.on("dialog", (dialog) => dialog.accept());
+	page.on("dialog", acceptDialouge);
 
 	await page.locator(".bottom .delete").click();
 	await expect(page.locator("body")).toHaveCSS(
@@ -115,7 +115,7 @@ test("can delete valid color", async ({ page }) => {
 });
 
 test("can delete invalid color", async ({ page }) => {
-	page.on("dialog", (dialog) => dialog.accept());
+	page.on("dialog", acceptDialouge);
 
 	for (const testValue of ["2", "-1", ""]) {
 		await page.locator("#select-property").selectOption("Background Color");
@@ -198,7 +198,7 @@ test("can reset colors", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	page.on("dialog", (dialog) => dialog.accept());
+	page.on("dialog", acceptDialouge);
 
 	await page.locator("#reset-colors").click();
 
@@ -207,3 +207,9 @@ test("can reset colors", async ({ page }) => {
 		"color(display-p3 0.95686 0.95686 0.95686)",
 	);
 });
+
+function acceptDialouge(dialog: Dialog): void {
+	dialog.accept().catch(() => {
+		throw new Error("Dialog was not accepted");
+	});
+}
