@@ -26,6 +26,7 @@ test("can upload and apply real font", async ({ page }) => {
 	await fileChooser.setFiles(`${testFilesPath}/Lobster-Regular.ttf`);
 
 	// Test if the font has been applied
+	await page.evaluate(() => document.fonts.ready);
 	const fontIsLoaded = await page.evaluate(() =>
 		document.fonts.check("12px CustomFont"),
 	);
@@ -52,6 +53,7 @@ test("cannot upload broken font", async ({ page }) => {
 	await fileChooser.setFiles(`${testFilesPath}/emptyNonFontFile.ttf`);
 
 	// Test if the font has been applied
+	await page.evaluate(() => document.fonts.ready);
 	const fontIsLoaded = await page.evaluate(() =>
 		document.fonts.check("12px CustomFont"),
 	);
@@ -78,6 +80,7 @@ test("cannot upload non-permitted font file type", async ({ page }) => {
 	await fileChooser.setFiles(`${testFilesPath}/hello.txt`);
 
 	// Test if the font has been applied
+	await page.evaluate(() => document.fonts.ready);
 	const fontIsLoaded = await page.evaluate(() =>
 		document.fonts.check("12px CustomFont"),
 	);
@@ -109,6 +112,7 @@ test("can reset font", async ({ page }) => {
 	await fileChooser.setFiles(`${testFilesPath}/Lobster-Regular.ttf`);
 
 	// Test if the new font has been applied
+	await page.evaluate(() => document.fonts.ready);
 	const fontIsLoaded = await page.evaluate(() =>
 		document.fonts.check("12px CustomFont"),
 	);
