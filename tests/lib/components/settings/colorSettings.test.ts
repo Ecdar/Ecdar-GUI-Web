@@ -27,6 +27,44 @@ test("can create valid color", async ({ page }) => {
 	);
 });
 
+test("can use color picker to choose a valid color", async ({ page }) => {
+	await page.locator("#select-property").selectOption("Background Color");
+
+	const inputs = await page.locator(`input[type="color"]`).all();
+
+	await inputs[0].fill("#ff00ff");
+
+	await page.locator("#add-color").click();
+
+	await expect(page.locator("body")).toHaveCSS(
+		"background-color",
+		"color(srgb 1 0 1)",
+	);
+});
+
+test("can use color picker to update a valid color", async ({ page }) => {
+	await page.locator("#select-property").selectOption("Background Color");
+
+	const numberInputs = await page.locator(`input[type="number"]`).all();
+
+	await numberInputs[0].fill("0");
+	await numberInputs[1].fill("0");
+	await numberInputs[2].fill("0");
+
+	await page.locator("#add-color").click();
+
+	const colorInputs = await page.locator(`input[type="color"]`).all();
+
+	await colorInputs[1].fill("#ff00ff");
+
+	page.getByRole("button", { name: "Update", exact: true }).click();
+
+	await expect(page.locator("body")).toHaveCSS(
+		"background-color",
+		"color(srgb 1 0 1)",
+	);
+});
+
 test("can update valid color", async ({ page }) => {
 	await page.locator("#select-property").selectOption("Background Color");
 
