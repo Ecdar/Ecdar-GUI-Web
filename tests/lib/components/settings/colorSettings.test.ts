@@ -77,7 +77,6 @@ test("can update valid color", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	await page.waitForTimeout(1000);
 	const modifiedColorFields = await page
 		.locator(".bottom .custom-color")
 		.first()
