@@ -48,6 +48,7 @@
 			"--canvas-text-color": ["display-p3", 0, 0, 0],
 			"--sidebar-text-color": ["display-p3", 0, 0, 0],
 			"--text-color": ["display-p3", 0, 0, 0],
+			"--text-secondary-color": ["display-p3", 0.4, 0.4, 0.4],
 			"--background-color": ["display-p3", 0.95686, 0.95686, 0.95686],
 			"--console-selectedtab-color": [
 				"display-p3",
@@ -154,6 +155,7 @@
 				"--canvas-text-color": ["display-p3", 1, 1, 1],
 				"--sidebar-text-color": ["display-p3", 1, 1, 1],
 				"--text-color": ["display-p3", 1, 1, 1],
+				"--text-secondary-color": ["display-p3", 0.8, 0.8, 0.8],
 				"--background-color": ["display-p3", 0.0902, 0.10196, 0.13333],
 				"--console-selectedtab-color": [
 					"display-p3",
