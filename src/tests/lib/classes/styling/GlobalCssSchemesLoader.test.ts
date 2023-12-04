@@ -4,7 +4,7 @@ import GlobalCssSchemesLoader from "$lib/classes/styling/GlobalCssSchemesLoader"
 describe("CSS loader tests", () => {
 	it("has no access to the Window element", () => {
 		expect(() => {
-			new GlobalCssSchemesLoader();
+			GlobalCssSchemesLoader.init();
 		}).toThrowError(
 			"The CSS loader needs access to the window and DOM elements",
 		);
