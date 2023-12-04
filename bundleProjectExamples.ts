@@ -77,7 +77,7 @@ export const bundleProjectExamples = {
 				}`,
 			);
 		}
-    
+
 		/* eslint-disable-next-line no-console -- It is okay to do this in the build phase to let the dev know what is happening */
 		console.log(`${chalk.green("✔")} bundled project examples`);
 	},

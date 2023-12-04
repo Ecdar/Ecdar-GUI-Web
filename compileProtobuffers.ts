@@ -43,7 +43,9 @@ function runcmd(cmd: string): Promise<void> {
 				const reducedCmd = cmd
 					.replace(/\\.*\n/g, "")
 					.replace(/\s+/g, " ");
-				reject(`Protobuff command failed\ncmd:\n${reducedCmd}\nstdout:\n${stdout}\nstderr:\n${stderr}`);
+				reject(
+					`Protobuff command failed\ncmd:\n${reducedCmd}\nstdout:\n${stdout}\nstderr:\n${stderr}`,
+				);
 			}
 			resolve();
 		});
