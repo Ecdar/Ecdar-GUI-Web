@@ -1,3 +1,5 @@
+import type TransitionAttribute from "./ZodSchemas/AttributeSchemas/TransitionAttribute";
+import type NumberUnitAttribute from "./ZodSchemas/AttributeSchemas/NumberUnitAttribute";
 import type ColorAttribute from "./ZodSchemas/AttributeSchemas/ColorAttribute";
 import { ColorVariablesPartial } from "./ZodSchemas/CSSVariables";
 import { type MediaScheme, CustomScheme } from "./ZodSchemas/MediaScheme";
@@ -6,10 +8,10 @@ import { MediaSchemes, CustomSchemes } from "./ZodSchemas/MediaSchemes";
 import GlobalCssProperties from "../../GlobalCssProperties.json";
 
 import Console from "$lib/classes/console/Console";
+
+import { browser } from "$app/environment";
 import { get, set, update } from "idb-keyval";
 import type { z } from "zod";
-import type TransitionAttribute from "./ZodSchemas/AttributeSchemas/TransitionAttribute";
-import type NumberUnitAttribute from "./ZodSchemas/AttributeSchemas/NumberUnitAttribute";
 
 export type ConvertedValue = {
 	variable: string;
@@ -430,4 +432,15 @@ class GlobalCssSchemesLoader {
 }
 
 const shared: GlobalCssSchemesLoader = new GlobalCssSchemesLoader();
+if (browser) {
+	// Catch errors here and show error popup
+	try {
+		shared.init();
+		//GlobalFontLoader.init();
+	} catch (error) {
+		if (error instanceof TypeError || error instanceof Error)
+			Console.writeLineFrontend(error.message);
+	}
+}
+
 export default shared;

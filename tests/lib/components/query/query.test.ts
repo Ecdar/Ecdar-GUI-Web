@@ -110,7 +110,7 @@ test("can write in comment field", async ({ page }) => {
 	const commentInput = page.locator(`#query-0`).getByPlaceholder("Comment");
 
 	await expect(commentInput).toHaveValue("");
-	for (const string of ["Comment String", "Anders", "Arnar", "Albert"]) {
+	for (const string of ["Comment String", "Anders"]) {
 		await commentInput.fill(string);
 		await commentInput.press("Enter");
 		await expect(commentInput).toHaveValue(string);

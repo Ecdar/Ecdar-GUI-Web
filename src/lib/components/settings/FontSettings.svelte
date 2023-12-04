@@ -22,6 +22,7 @@
 		bind:this={uploadButtonReference}
 		class="add"
 		on:click={() => {
+			inputReference.value = "";
 			inputReference.click();
 		}}
 	>

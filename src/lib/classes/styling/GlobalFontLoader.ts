@@ -1,5 +1,6 @@
 import Console from "$lib/classes/console/Console";
 import { get, set, del } from "idb-keyval";
+import { browser } from "$app/environment";
 
 class GlobalFontLoader {
 	private readonly _idbKey = "customFontBinary";
@@ -124,6 +125,10 @@ class GlobalFontLoader {
 		reader.readAsArrayBuffer(file);
 	}
 
+	/**
+	 * Sets the button style for warning state.
+	 * @param uploadButtonReference - The reference to the upload button element.
+	 */
 	private setButtonStyleWarning(uploadButtonReference: HTMLButtonElement) {
 		// Alert user about the error
 		uploadButtonReference.setAttribute(
@@ -136,4 +141,15 @@ class GlobalFontLoader {
 }
 
 const shared: GlobalFontLoader = new GlobalFontLoader();
+
+if (browser) {
+	// Catch errors here and show error popup
+	try {
+		shared.init();
+	} catch (error) {
+		if (error instanceof TypeError || error instanceof Error)
+			Console.writeLineFrontend(error.message);
+	}
+}
+
 export default shared;

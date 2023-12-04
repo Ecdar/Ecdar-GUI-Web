@@ -38,6 +38,7 @@
 		<!-- Canvas -->
 		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
+			<!-- Replace Settings with a modal or new window instead of replacing the SVG View -->
 			{#if showSettings}
 				<Settings on:toggleSettings={toggleSettings} />
 			{:else}
