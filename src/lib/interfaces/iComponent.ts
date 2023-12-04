@@ -1,9 +1,9 @@
-import type { iPoint } from './iPoint';
-import type { iEdge } from './iEdge';
-import type { iLocation } from './iLocation';
-import type { iDimensions } from './iDimensions';
+import type { iPoint } from "./iPoint";
+import type { iEdge } from "./iEdge";
+import type { iLocation } from "./iLocation";
+import type { iDimensions } from "./iDimensions";
 
-export interface iComponent{
+export interface iComponent {
 	name: string;
 	declarations: string;
 	locations: iLocation[];
