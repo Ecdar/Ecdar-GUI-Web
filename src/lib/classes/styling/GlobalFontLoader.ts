@@ -39,7 +39,8 @@ class GlobalFontLoader {
 	async setCustomFont(newFont?: Blob): Promise<boolean> {
 		const fontBlob: Blob | undefined = newFont ?? (await get(this._idbKey));
 
-		// No custom font has been uploaded by the user to the correct font has been set
+		// Fontblob is undefined if no custom font has been set.
+		// The correct font has therefore been set (The standard one)
 		if (fontBlob === undefined) {
 			return true;
 		}
