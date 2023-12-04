@@ -26,9 +26,12 @@ export const compileProtobuffers = {
 
 		if (response.length === 0) {
 			const err = `Failed to compile protobuffers, ${PROTOBUFF_DIR} is empty`;
+			/* eslint-disable-next-line no-console -- It is okay to do this in the build phase to let the dev know what is happening */
 			console.error(`${chalk.red("❌")}${err}`);
 			throw new Error(err);
 		}
+
+		/* eslint-disable-next-line no-console -- It is okay to do this in the build phase to let the dev know what is happening */
 		console.log(`${chalk.green("✔")} Compiled Protobuffers: Done`);
 	},
 };
@@ -40,10 +43,7 @@ function runcmd(cmd: string): Promise<void> {
 				const reducedCmd = cmd
 					.replace(/\\.*\n/g, "")
 					.replace(/\s+/g, " ");
-				console.error(`Protobuff command failed\ncmd:\n${reducedCmd} `);
-				console.error(`stdout:\n${stdout}`);
-				console.error(`stderr:\n${stderr}`);
-				reject();
+				reject(`Protobuff command failed\ncmd:\n${reducedCmd}\nstdout:\n${stdout}\nstderr:\n${stderr}`);
 			}
 			resolve();
 		});
