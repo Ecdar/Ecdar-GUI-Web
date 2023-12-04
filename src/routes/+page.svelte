@@ -11,11 +11,17 @@
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
+	import Settings from "$lib/components/settings/SettingsView.svelte";
+
+	let showSettings: boolean = false;
+	function toggleSettings() {
+		showSettings = !showSettings;
+	}
 </script>
 
 <!-- Top navigation Panel -->
 <nav id="main-nav">
-	<TopBar />
+	<TopBar on:toggleSettings={toggleSettings} />
 </nav>
 <main>
 	{#if $project === undefined}
@@ -32,7 +38,12 @@
 		<!-- Canvas -->
 		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
-			<SvgView />
+			<!-- Replace Settings with a modal or new window instead of replacing the SVG View -->
+			{#if showSettings}
+				<Settings on:toggleSettings={toggleSettings} />
+			{:else}
+				<SvgView />
+			{/if}
 		</div>
 		<!-- Right side -->
 		<SidePanel panelSide={SidePanelEnum.Right}>
@@ -72,9 +83,9 @@
 	}
 
 	.canvas {
+		color: var(--canvas-text-color);
 		display: flex;
 		flex-direction: column;
-		color: var(--canvas-text-color);
 		flex-grow: 1;
 	}
 </style>
