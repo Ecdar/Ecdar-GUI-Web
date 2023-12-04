@@ -11,7 +11,7 @@ export const compileProtobuffers = {
 	buildStart: async () => {
 		await isClosed();
 		await fs.ensureDir(OUT_DIR);
-		const res = await Promise.all(
+		const response = await Promise.all(
 			(await fs.readdir(PROTOBUFF_DIR))
 				.filter((file) => file.match(/.*\.proto/g))
 				.map((file) =>
@@ -24,7 +24,7 @@ export const compileProtobuffers = {
 				),
 		);
 
-		if (res.length === 0) {
+		if (response.length === 0) {
 			const err = `Failed to compile protobuffers, ${PROTOBUFF_DIR} is empty`;
 			console.error(`${chalk.red("❌")}${err}`);
 			throw new Error(err);
@@ -34,7 +34,7 @@ export const compileProtobuffers = {
 };
 
 function runcmd(cmd: string): Promise<void> {
-	return new Promise((res, rej) => {
+	return new Promise((resolve, reject) => {
 		exec(cmd, (err, stdout, stderr) => {
 			if (err !== null) {
 				const reducedCmd = cmd
@@ -43,23 +43,29 @@ function runcmd(cmd: string): Promise<void> {
 				console.error(`Protobuff command failed\ncmd:\n${reducedCmd} `);
 				console.error(`stdout:\n${stdout}`);
 				console.error(`stderr:\n${stderr}`);
-				rej();
+				reject();
 			}
-			res();
+			resolve();
 		});
 	});
 }
 
-function isClosed(): Promise<void> {
-	return new Promise((res) => {
-		for (;;) {
-			try {
-				execSync("yarn protoc --version");
-				res();
-				break;
-			} catch {
-				[]; // NO EMPTY BLOCK STATEMENTS
-			}
-		}
-	});
+async function isClosed(){
+	  let timeout = 0;
+	  for (;;) {
+		  try {
+			  execSync("yarn protoc --version");
+			  break;
+		  } catch {
+			  await sleep(1000);
+			  if(++timeout > 10)
+				throw new Error("Execute yarn protoc exited timeout");
+		  }
+	  }
+}
+
+function sleep(ms:number) : Promise<void> {
+	return new Promise(resolve => {
+		setTimeout(() => { resolve() }, ms);
+	})
 }
