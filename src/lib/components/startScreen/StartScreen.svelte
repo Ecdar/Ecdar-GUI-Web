@@ -31,7 +31,7 @@
 					click={startNewProject}
 					icon={Add}
 					id={`start-new-project`}
-					color="var(--sidebar-text-color)"
+					color="var(--text-color)"
 					justifyContent="center"
 					><p style="font-size: 1.7em">
 						New Blank Project
@@ -51,7 +51,7 @@
 							await projectHandler.openExampleProject(
 								exampleLoader,
 							);
-						}}>{exampleName}</SvgButton
+						}}><p>{exampleName}</p></SvgButton
 					>
 				{/each}
 			</div>
@@ -64,7 +64,7 @@
 					}}
 					icon={File_open}
 					id={`open-project`}
-					color="var(--sidebar-text-color)"
+					color="var(--text-color)"
 					justifyContent="center"
 					><p style="font-size: 1.7em">Open A Project</p></SvgButton
 				>
@@ -76,7 +76,7 @@
 					<SvgButton
 						icon={File_open}
 						id={`open-project`}
-						color="var(--sidebar-text-color)"
+						color="var(--text-color)"
 						justifyContent="center"
 						click={async () => {
 							await projectHandler.openRecentProject(
@@ -128,5 +128,9 @@
 		flex-direction: column;
 		width: 50%;
 		margin: 5%;
+	}
+
+	p {
+		color: var(--text-color);
 	}
 </style>
