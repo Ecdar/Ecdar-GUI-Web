@@ -436,7 +436,6 @@ if (browser) {
 	// Catch errors here and show error popup
 	try {
 		shared.init();
-		//GlobalFontLoader.init();
 	} catch (error) {
 		if (error instanceof TypeError || error instanceof Error)
 			Console.writeLineFrontend(error.message);
