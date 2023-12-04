@@ -8,8 +8,8 @@
 	import { activeView } from "$lib/globalState/activeProject";
 	import { Component } from "$lib/classes/automaton/component/Component";
 	import Edge from "./Edge.svelte";
-	import Location from "$lib/components/svg-view/Location.svelte";
-	import { System } from "$lib/classes/automaton/system/System";
+	import Location from "$lib/components/svgView/Location.svelte";
+	import { System } from "$lib/classes/automaton";
 
 	/**
 	 * The parent svg element that the entire view is shown with.
