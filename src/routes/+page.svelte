@@ -4,7 +4,7 @@
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
 	import SidePanel from "$lib/components/sidePanel/SidePanel.svelte";
 	import { SidePanelEnum } from "$lib/components/sidePanel/SidePanelEnum";
-	import SvgView from "$lib/components/svg-view/SvgView.svelte";
+	import SvgView from "$lib/components/svgView/SvgView.svelte";
 	import Console from "$lib/components/console/Console.svelte";
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import GlobalDeclaration from "$lib/components/project/globalDeclaration/GlobalDeclaration.svelte";

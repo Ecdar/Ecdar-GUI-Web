@@ -2,6 +2,8 @@
 node_modules
 /Ecdar-Common
 /build
+/Ecdar-ProtoBuf/
+/src/lib/protobuf/
 /.svelte-kit
 /package
 .env
