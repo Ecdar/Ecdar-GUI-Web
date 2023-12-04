@@ -3,6 +3,8 @@
 	import DraggableSvg from "./helpers/DraggableSVG.svelte";
 
 	export let position: iPoint = { x: 10, y: 10 };
+
+	// TODO: these should not be hard coded they should scale with the things inside the component
 	let width = 800;
 	let height = 1000;
 	const cutOff = 100;
