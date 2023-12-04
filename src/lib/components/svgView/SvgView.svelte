@@ -9,7 +9,7 @@
 	import { activeView } from "$lib/globalState/activeProject";
 	import { Component as automatonComponent } from "$lib/classes/automaton/component/Component";
 	import Edge from "./Edge.svelte";
-	import Location from "$lib/components/svg-view/Location.svelte";
+	import Location from "$lib/components/svgView/Location.svelte";
 	import { System } from "$lib/classes/automaton/system/System";
 	import Component from "./Component.svelte";
 
