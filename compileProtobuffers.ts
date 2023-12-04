@@ -50,22 +50,24 @@ function runcmd(cmd: string): Promise<void> {
 	});
 }
 
-async function isClosed(){
-	  let timeout = 0;
-	  for (;;) {
-		  try {
-			  execSync("yarn protoc --version");
-			  break;
-		  } catch {
-			  await sleep(1000);
-			  if(++timeout > 10)
+async function isClosed() {
+	let timeout = 0;
+	for (;;) {
+		try {
+			execSync("yarn protoc --version");
+			break;
+		} catch {
+			await sleep(1000);
+			if (++timeout > 10)
 				throw new Error("Execute yarn protoc exited timeout");
-		  }
-	  }
+		}
+	}
 }
 
-function sleep(ms:number) : Promise<void> {
-	return new Promise(resolve => {
-		setTimeout(() => { resolve() }, ms);
-	})
+function sleep(ms: number): Promise<void> {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve();
+		}, ms);
+	});
 }
