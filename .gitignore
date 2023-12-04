@@ -20,6 +20,9 @@ yarn-error.log
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+### Protobuffers ###
+/src/lib/protobuf/
+
 #### Project examples ###
 /src/lib/projectExamples.ts
 /src/lib/projectExamples
