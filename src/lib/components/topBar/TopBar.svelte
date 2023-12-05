@@ -20,12 +20,8 @@
 		Error,
 	} from "svelte-google-materialdesign-icons";
 
-  const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher();
 	let projectHandler: typeof ProjectHandler;
-  
-	function toggleEngineUI() {
-		dispatch("toggleEngineUI");
-	}
 
 	onMount(async () => {
 		projectHandler = (
@@ -217,7 +213,7 @@
 			icon={Settings_input_composite}
 			name="Engine Options"
 			on:click={() => {
-				toggle();
+				dispatch("toggleEngineUI");
 			}}
 		/>
 		<DropDownButton

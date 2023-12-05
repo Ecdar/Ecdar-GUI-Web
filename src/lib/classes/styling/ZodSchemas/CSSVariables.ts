@@ -44,6 +44,8 @@ export const ColorVariables = z
 		"--engine-ui-button-color": ColorAttribute,
 		"--settings-danger-button-color": ColorAttribute,
 		"--settings-safe-button-color": ColorAttribute,
+		"--dropdown-button-color": ColorAttribute,
+		"--dropdown-text-color": ColorAttribute,
 	})
 	.strict();
 

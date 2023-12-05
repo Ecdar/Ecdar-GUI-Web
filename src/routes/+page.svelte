@@ -14,13 +14,12 @@
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 	import Settings from "$lib/components/settings/SettingsView.svelte";
-  
+
 	let engineUIContainer: EngineUi & IEngineUIComponent;
 
 	function openEngineUI() {
 		engineUIContainer.showEngineUI();
-  }
-
+	}
 
 	let showSettings: boolean = false;
 	function toggleSettings() {
@@ -31,7 +30,10 @@
 <!-- Top navigation Panel -->
 <EngineUi bind:this={engineUIContainer} />
 <nav id="main-nav">
-	<TopBar on:toggleSettings={toggleSettings} on:toggleEngineUI={openEngineUI}/>
+	<TopBar
+		on:toggleSettings={toggleSettings}
+		on:toggleEngineUI={openEngineUI}
+	/>
 </nav>
 <main>
 	{#if $project === undefined}

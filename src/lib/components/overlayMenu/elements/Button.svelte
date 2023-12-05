@@ -7,9 +7,9 @@
 
 	export let text: string;
 
-	export let backgroundColor: string = "white";
+	export let backgroundColor: string = "var(--dropdown-button-color)";
 
-	export let buttonColor: string = "black";
+	export let buttonColor: string = "var(--dropdown-text-color))";
 </script>
 
 <button

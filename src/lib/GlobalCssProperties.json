@@ -134,7 +134,9 @@
 				0.38823529411
 			],
 			"--settings-danger-button-color": ["srgb", 0.498, 0.0902, 0.0549],
-			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667]
+			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667],
+			"--dropdown-button-color": ["srgb", 1, 1, 1],
+			"--dropdown-text-color": ["srgb", 0, 0, 0]
 		},
 		"fontSize": {
 			"--sidebar-fontsize": [1, "rem"],
