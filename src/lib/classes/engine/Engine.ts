@@ -32,11 +32,6 @@ export class Engine {
 		return this.#address;
 	}
 	set address(ipAdress: string) {
-		if (this.useBundle) {
-			this.#address = "127.0.0.1";
-			return;
-		}
-
 		if (validateIP(ipAdress)) this.#address = ipAdress;
 		else throw new Error(ipAdress + " Is an invalid IP address");
 	}
@@ -94,7 +89,14 @@ export class Engine {
 
 	hasBeenChanged: boolean = false;
 
-	useBundle: boolean = false;
+	#useBundle: boolean = false;
+	get useBundle(): boolean {
+		return this.#useBundle;
+	}
+	set useBundle(useBundle: boolean) {
+		this.#useBundle = useBundle;
+		if (useBundle) this.address = "127.0.0.1";
+	}
 
 	constructor(
 		name: string,
@@ -105,13 +107,13 @@ export class Engine {
 		id: number,
 		useBundle: boolean,
 	) {
-		this.useBundle = useBundle;
 		this.name = name;
-		this.address = address;
+		if (!useBundle) this.address = address;
 		this.portRangeStart = portRangeStart;
 		this.portRangeEnd = portRangeEnd;
 		this.type = type;
 		this.id = id;
+		this.#useBundle = useBundle;
 	}
 
 	toJSON() {
