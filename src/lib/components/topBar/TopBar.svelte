@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { createEventDispatcher, onMount } from "svelte";
+	import type { projectHandler as ProjectHandler } from "$lib/classes/projectHandler/ProjectHandler";
 	import TopBarButton from "$lib/components/topBar/TopBarButton.svelte";
 	import DropDownButton from "$lib/components/topBar/DropDownButton.svelte";
 	import DropDownCheckBox from "$lib/components/topBar/DropDownCheckBox.svelte";
@@ -6,23 +8,30 @@
 		Note_add,
 		File_open,
 		Save,
-		Done_all,
 		Image,
 		Arrow_left,
 		Arrow_right,
 		Arrow_drop_down,
 		Arrow_drop_up,
 		Window,
+		Settings,
 		Settings_input_composite,
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
-	import { createEventDispatcher } from "svelte";
-	const dispatch = createEventDispatcher();
 
-	function toggle() {
-		dispatch("toggle");
+  const dispatch = createEventDispatcher();
+	let projectHandler: typeof ProjectHandler;
+  
+	function toggleEngineUI() {
+		dispatch("toggleEngineUI");
 	}
+
+	onMount(async () => {
+		projectHandler = (
+			await import("$lib/classes/projectHandler/ProjectHandler")
+		).projectHandler;
+	});
 </script>
 
 <!--
@@ -41,14 +50,14 @@
 			icon={Note_add}
 			name="New Project"
 			on:click={() => {
-				console.log("New Project");
+				projectHandler.openNewProject();
 			}}
 		/>
 		<DropDownButton
 			icon={File_open}
 			name="Open Project"
-			on:click={() => {
-				console.log("Open Project");
+			on:click={async () => {
+				await projectHandler.openProject();
 			}}
 		/>
 		<DropDownButton
@@ -61,23 +70,29 @@
 		<DropDownButton
 			icon={Save}
 			name="Save Project"
-			on:click={() => {
-				console.log("Save Project");
+			on:click={async () => {
+				await projectHandler.quickSaveProject();
 			}}
 		/>
 		<DropDownButton
 			icon={Save}
 			name="Save Project as"
-			on:click={() => {
-				console.log("Save Project as");
+			on:click={async () => {
+				await projectHandler.saveProject();
 			}}
 		/>
-
 		<DropDownButton
-			icon={Done_all}
-			name="New Test Plan"
-			on:click={() => {
-				console.log("New Test Plan");
+			icon={Save}
+			name="Export as JSON"
+			on:click={async () => {
+				await projectHandler.exportProject();
+			}}
+		/>
+		<DropDownButton
+			icon={File_open}
+			name="Import from JSON"
+			on:click={async () => {
+				await projectHandler.importProject();
 			}}
 		/>
 		<DropDownButton
@@ -189,7 +204,6 @@
 				console.log("unchecked UI cache");
 			}}
 		/>
-
 		<DropDownCheckBox
 			name="Periodic query execution"
 			on:checked={() => {
@@ -206,6 +220,13 @@
 				toggle();
 			}}
 		/>
+		<DropDownButton
+			icon={Settings}
+			name="Settings"
+			on:click={() => {
+				dispatch("toggleSettings");
+			}}
+		/>
 	</TopBarButton>
 </div>
 
@@ -217,13 +238,6 @@
 			name="Modelling Help"
 			on:click={() => {
 				console.log("Modelling Help");
-			}}
-		/>
-		<DropDownButton
-			icon={Help}
-			name="Testing Help"
-			on:click={() => {
-				console.log("Testing Help");
 			}}
 		/>
 		<DropDownButton

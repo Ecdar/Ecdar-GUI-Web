@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
 	ColorVariables,
 	FontSizeVariables,
+	FontFamilyVariables,
 	BorderVariables,
 	TransitionVariables,
 } from "./CSSVariables";
@@ -19,19 +20,29 @@ export const RequiredMediaScheme = z
 		mediaFeature: z.string(),
 		color: ColorVariables.required(),
 		fontSize: FontSizeVariables.required(),
+		fontFamily: FontFamilyVariables.required(),
 		border: BorderVariables.required(),
 		transition: TransitionVariables.required(),
 	})
 	.strict();
 
-const MediaScheme = z
+export const MediaScheme = z
 	.object({
 		mediaFeature: z.string(),
 		color: ColorVariables.partial().optional(),
 		fontSize: FontSizeVariables.partial().optional(),
+		fontFamily: FontFamilyVariables.partial().optional(),
 		border: BorderVariables.partial().optional(),
 		transition: TransitionVariables.partial().optional(),
 	})
 	.strict();
 
-export default MediaScheme;
+export const CustomScheme = z
+	.object({
+		mediaFeature: z.string(),
+		color: ColorVariables.partial().default({}),
+		fontSize: FontSizeVariables.partial().default({}),
+		fontFamily: FontFamilyVariables.partial().default({}),
+		border: BorderVariables.partial().default({}),
+	})
+	.strict();
