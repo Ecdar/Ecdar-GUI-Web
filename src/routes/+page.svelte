@@ -4,19 +4,32 @@
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
 	import SidePanel from "$lib/components/sidePanel/SidePanel.svelte";
 	import { SidePanelEnum } from "$lib/components/sidePanel/SidePanelEnum";
+<<<<<<< HEAD
+=======
+	import SvgView from "$lib/components/svgView/SvgView.svelte";
+>>>>>>> main
 	import Console from "$lib/components/console/Console.svelte";
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import GlobalDeclaration from "$lib/components/project/globalDeclaration/GlobalDeclaration.svelte";
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
+<<<<<<< HEAD
 	import Canvas from "$lib/components/canvas/Canvas.svelte";
 	import CanvasNav from "$lib/components/canvas/CanvasNav.svelte";
+=======
+	import Settings from "$lib/components/settings/SettingsView.svelte";
+
+	let showSettings: boolean = false;
+	function toggleSettings() {
+		showSettings = !showSettings;
+	}
+>>>>>>> main
 </script>
 
 <!-- Top navigation Panel -->
 <nav id="main-nav">
-	<TopBar />
+	<TopBar on:toggleSettings={toggleSettings} />
 </nav>
 <main>
 	{#if $project === undefined}
@@ -32,10 +45,20 @@
 		</SidePanel>
 		<!-- Canvas -->
 		<div class="canvas">
+<<<<<<< HEAD
 			<nav class="inner-nav2">
 				<CanvasNav />
 			</nav>
 			<Canvas />
+=======
+			<nav class="inner-nav2">Nav 2</nav>
+			<!-- Replace Settings with a modal or new window instead of replacing the SVG View -->
+			{#if showSettings}
+				<Settings on:toggleSettings={toggleSettings} />
+			{:else}
+				<SvgView />
+			{/if}
+>>>>>>> main
 		</div>
 		<!-- Right side -->
 		<SidePanel panelSide={SidePanelEnum.Right}>
@@ -75,9 +98,9 @@
 	}
 
 	.canvas {
+		color: var(--canvas-text-color);
 		display: flex;
 		flex-direction: column;
-		color: var(--canvas-text-color);
 		flex-grow: 1;
 	}
 </style>

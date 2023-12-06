@@ -1,0 +1,9 @@
+
+[submodule "Ecdar-ProtoBuf"]
+	path = Ecdar-ProtoBuf
+	url = https://github.com/ECDAR-AAU-SW-P5/Ecdar-ProtoBuf
+
+[submodule "Ecdar-Common"]
+	path = Ecdar-Common
+	url = https://github.com/ECDAR-AAU-SW-P5/Ecdar-Common.git
+
