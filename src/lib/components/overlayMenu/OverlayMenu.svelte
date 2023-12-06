@@ -66,7 +66,7 @@
 
 	// TODO: this check is unnecessary when support is universal: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/popover#browser_compatibility
 	const popoverIsSupported =
-		browser && HTMLElement.prototype.hasOwnProperty("popover");
+		browser && Object.hasOwnProperty.call(HTMLElement.prototype, "popover");
 
 	/**
 	 * Opens the context menu (Right-click menu)
