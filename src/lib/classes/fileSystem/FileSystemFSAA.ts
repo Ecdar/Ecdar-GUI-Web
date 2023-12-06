@@ -25,6 +25,8 @@ export class FileSystemFSAA extends FileSystemImplementation<
 		"showSaveFilePicker" in globalThis &&
 		"FileSystemHandle" in globalThis;
 
+	static name = "FSAA";
+
 	async showDirectoryPicker(
 		options: FileSystemPickerOptions<
 			FileSystemHandle,

@@ -235,6 +235,7 @@ export class FileSystemTauri extends FileSystemImplementation<
 	DirectoryHandleTauri
 > {
 	static supported = inTauri;
+	static name = "Tauri";
 
 	async showDirectoryPicker(
 		options: FileSystemPickerOptions<

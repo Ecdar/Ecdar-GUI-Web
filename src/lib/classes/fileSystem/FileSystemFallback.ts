@@ -220,6 +220,7 @@ export class FileSystemFallback extends FileSystemImplementation<
 	DirectoryHandleFallback
 > {
 	static supported = true;
+	static name = "Fallback";
 
 	async showDirectoryPicker() {
 		const fileList = await uploadItem("directory");

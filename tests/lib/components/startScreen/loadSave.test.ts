@@ -1,4 +1,5 @@
-import { test, expect, type FileChooser } from "@playwright/test";
+import { test, type FileChooser } from "@playwright/test";
+import { log } from "console";
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
@@ -6,6 +7,18 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("should be able to open(load) Ecdar University", async ({ page }) => {
+	// wait for all the logic to be loaded
+	await page.waitForSelector("#open-project");
+
+	// set token from localStorage fileSystemName
+	const fileSystemName = await page.evaluate(() => {
+		return localStorage.getItem("fileSystemName");
+	});
+
+	log(fileSystemName);
+
+	if (fileSystemName !== "Fallback") test.skip();
+
 	const files = [
 		"Queries.json",
 		"GlobalDeclaration.json",

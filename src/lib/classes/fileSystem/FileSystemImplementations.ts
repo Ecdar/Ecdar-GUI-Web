@@ -32,7 +32,12 @@ export function getBestFileSystemImplementation(): FileSystemImplementation<
 	IDirectoryHandle<IFileSystemHandle, IFileHandle>
 > {
 	for (const implementation of fileSystemImplementations) {
-		if (implementation.supported) return new implementation();
+		if (!implementation.supported) continue;
+		localStorage.setItem("fileSystemName", implementation.name);
+		return new implementation();
 	}
+
+	// Theoretically the fallback should always be supported, but just in case:
+	localStorage.setItem("fileSystemName", "Fallback-FSLoopError");
 	return new fileSystemFallbackImplementation();
 }

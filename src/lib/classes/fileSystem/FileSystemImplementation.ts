@@ -262,4 +262,6 @@ export abstract class FileSystemImplementation<
 	abstract deserializeProjectAccess(
 		projectAccess: ISerializedProjectAccess,
 	): IProjectAccess<I, F, D>;
+
+	static implementationName: string;
 }
