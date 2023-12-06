@@ -4,6 +4,7 @@
 import { z } from "zod";
 import ColorAttribute from "./AttributeSchemas/ColorAttribute";
 import BorderAttribute from "./AttributeSchemas/BorderAttribute";
+import FontAttribute from "./AttributeSchemas/FontAttribute";
 import TransitionAttribute from "./AttributeSchemas/TransitionAttribute";
 import NumberUnitAttribute from "./AttributeSchemas/NumberUnitAttribute";
 
@@ -19,6 +20,8 @@ export const ColorVariables = z
 		"--console-text-color": ColorAttribute,
 		"--console-scrollbar-thumbhover-color": ColorAttribute,
 		"--console-tab-hover-color": ColorAttribute,
+		"--text-color": ColorAttribute,
+		"--text-secondary-color": ColorAttribute,
 		"--background-color": ColorAttribute,
 		"--query-success-color": ColorAttribute,
 		"--query-warning-color": ColorAttribute,
@@ -31,14 +34,35 @@ export const ColorVariables = z
 		"--sidebar-text-color": ColorAttribute,
 		"--sidebar-element-color": ColorAttribute,
 		"--sidebar-element-hover-color": ColorAttribute,
+		"--engine-ui-underline-color": ColorAttribute,
+		"--engine-ui-error-underline-color": ColorAttribute,
+		"--engine-ui-input-text-placeholder-color": ColorAttribute,
+		"--engine-ui-scrollbar-thumb-background-color": ColorAttribute,
+		"--engine-ui-scrollbar-thumb-color": ColorAttribute,
+		"--engine-ui-text-color": ColorAttribute,
+		"--engine-ui-background-color": ColorAttribute,
+		"--engine-ui-button-color": ColorAttribute,
+		"--settings-danger-button-color": ColorAttribute,
+		"--settings-safe-button-color": ColorAttribute,
+		"--dropdown-button-color": ColorAttribute,
+		"--dropdown-text-color": ColorAttribute,
 	})
 	.strict();
+
+export const ColorVariablesPartial = ColorVariables.partial();
 
 // Supported CSS font size variables
 export const FontSizeVariables = z
 	.object({
 		"--sidebar-fontsize": NumberUnitAttribute,
 		"--sidebar-navigationbar-fontsize": NumberUnitAttribute,
+	})
+	.strict();
+
+// Supported CSS font family variables
+export const FontFamilyVariables = z
+	.object({
+		"--font-family": FontAttribute,
 	})
 	.strict();
 
@@ -55,5 +79,9 @@ export const TransitionVariables = z
 		"--console-tab-hover-transition": TransitionAttribute,
 		"--console-height-transition": TransitionAttribute,
 		"--sidebar-element-transition": TransitionAttribute,
+		"--settings-filter-transition": TransitionAttribute,
+		"--settings-background-color-transition": TransitionAttribute,
+		"--tabs-background-color-transition": TransitionAttribute,
+		"--svgbutton-background-color-transition": TransitionAttribute,
 	})
 	.strict();

@@ -1,4 +1,4 @@
-import { Point } from "$lib/classes/draw";
+import { Point } from "./Point";
 import type { VirtualElement } from "@floating-ui/dom";
 
 /**

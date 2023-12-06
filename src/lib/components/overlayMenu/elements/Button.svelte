@@ -6,9 +6,16 @@
 	export let icon: ComponentType;
 
 	export let text: string;
+
+	export let backgroundColor: string = "var(--dropdown-button-color)";
+
+	export let buttonColor: string = "var(--dropdown-text-color))";
 </script>
 
-<button on:click={click}>
+<button
+	on:click={click}
+	style="background-color: {backgroundColor}; color: {buttonColor}"
+>
 	<svelte:component this={icon} ariaLabel="" class="icon" tabindex="-1" />
 	<p>{text}</p>
 </button>
@@ -16,7 +23,6 @@
 <style>
 	button {
 		border: 0;
-		background-color: #fff;
 		display: flex;
 		align-items: center;
 		height: 2em;
@@ -30,6 +36,6 @@
 	}
 
 	button:hover {
-		background-color: #eee;
+		filter: brightness(0.9);
 	}
 </style>
