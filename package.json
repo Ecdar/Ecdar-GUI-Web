@@ -47,12 +47,9 @@
 		"@protobuf-ts/grpcweb-transport": "^2.9.1",
 		"@protobuf-ts/runtime": "^2.9.1",
 		"@tauri-apps/api": "^1.5.1",
-<<<<<<< HEAD
 		"codejar": "^4.2.0",
 		"highlight.js": "^11.9.0",
-=======
 		"idb-keyval": "^6.2.1",
->>>>>>> main
 		"svelte-google-materialdesign-icons": "^0.8.2",
 		"zod": "^3.22.4"
 	}
