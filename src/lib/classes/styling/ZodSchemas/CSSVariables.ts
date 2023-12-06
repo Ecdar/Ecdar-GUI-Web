@@ -31,6 +31,7 @@ export const ColorVariables = z
 		"--sidebar-text-color": ColorAttribute,
 		"--sidebar-element-color": ColorAttribute,
 		"--sidebar-element-hover-color": ColorAttribute,
+		"--editor-keyword-color": ColorAttribute,
 	})
 	.strict();
 

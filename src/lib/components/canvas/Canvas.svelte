@@ -5,11 +5,8 @@
 	let editor: boolean = true;
 </script>
 
-
 {#if editor}
 	<Editor />
 {:else}
 	<SvgView />
 {/if}
-
-
