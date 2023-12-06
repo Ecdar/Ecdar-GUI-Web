@@ -39,6 +39,11 @@
 				linenr.appendChild(createLineNr(1));
 				return;
 			}
+			// Fixes line numbers in chrome and webkit
+			let substr = text.substring(text.length - 2);
+			if (substr == "\n\n") {
+				text = text.substring(0, text.length - 2) + '\n';
+			}
 			linenr.appendChild(createLineNr(1));
 			let lines = 1;
 			for (let i = 0; i <= text.length; i++)
