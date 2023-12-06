@@ -64,6 +64,10 @@
 		open = Boolean(event.newState === "open");
 	}
 
+	// TODO: this check is unnecessary when support is universal: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/popover#browser_compatibility
+	const popoverIsSupported =
+		browser && HTMLElement.prototype.hasOwnProperty("popover");
+
 	/**
 	 * Opens the context menu (Right-click menu)
 	 */
@@ -71,7 +75,7 @@
 		if (!overlayMenuPopover) return;
 
 		// Show the menu
-		if (!overlayMenuPopover.matches(":popover-open"))
+		if (popoverIsSupported && !overlayMenuPopover.matches(":popover-open"))
 			overlayMenuPopover.showPopover();
 
 		// Set up event listeners for closing the menu
@@ -103,7 +107,10 @@
 	 * Closes the context menu (Right-click menu)
 	 */
 	function closeContextMenu() {
-		if (overlayMenuPopover?.matches(":popover-open")) {
+		if (
+			popoverIsSupported &&
+			overlayMenuPopover?.matches(":popover-open")
+		) {
 			overlayMenuPopover.hidePopover();
 		}
 		closeListenersController?.abort();
