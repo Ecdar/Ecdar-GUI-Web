@@ -290,7 +290,7 @@
 	}
 
 	#IP {
-		width: 60%;
+		width: 55%;
 		padding: 0.4em 0.4em 0.2em 0.4em;
 		border-bottom: 0.05em solid var(--borderColour);
 	}
@@ -367,6 +367,6 @@
 	}
 
 	#local-button {
-		width: 24%;
+		width: 25%;
 	}
 </style>
