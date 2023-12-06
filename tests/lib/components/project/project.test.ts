@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, firefox } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
@@ -28,6 +28,7 @@ test("Add 10 components", async ({ page }) => {
 
 	for (let i = 0; i < 10; i++) {
 		await page.click("#add-component");
+		await page.waitForLoadState();
 	}
 
 	await expect(page.locator(".project-item.component")).toHaveCount(10);

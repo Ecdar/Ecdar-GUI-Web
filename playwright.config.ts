@@ -1,4 +1,5 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
+import { defineConfig, devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
 	webServer: {
@@ -8,6 +9,21 @@ const config: PlaywrightTestConfig = {
 	},
 	testDir: "tests",
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/,
+	globalSetup: "playwright.global.ts",
+	projects: [
+		{
+			name: "chromium",
+			use: { ...devices["Desktop Chrome"] },
+		},
+		{
+			name: "firefox",
+			use: { ...devices["Desktop Firefox"] },
+		},
+		{
+			name: "webkit",
+			use: { ...devices["Desktop Safari"] },
+		},
+	],
 };
 
 export default config;
