@@ -1,11 +1,17 @@
 <script lang="ts">
 	import Editor from "../editor/Editor.svelte";
 	import SvgView from "../svg-view/SvgView.svelte";
+	import { CanvasModes, canvasModes } from "./state";
 
-	let editor: boolean = true;
+	let mode = CanvasModes.Editor;
+
+	canvasModes.subscribe((newMode) => {
+		mode = newMode;
+	});
+
 </script>
 
-{#if editor}
+{#if mode === CanvasModes.Editor}
 	<Editor />
 {:else}
 	<SvgView />
