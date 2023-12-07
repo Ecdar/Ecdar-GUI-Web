@@ -17,7 +17,7 @@
 	<form>
 		<div>
 			<div class="box">
-				<h2>Ecdar v. 0.1</h2>
+				<h1>Ecdar v. 0.1</h1>
 				Made by:
 				<br /><br />
 				5. Semester, Aalborg University 2023
