@@ -93,7 +93,8 @@
 					let tempEngine = EngineStorage.getEngine(engine.id);
 
 					tempEngine.useBundle = engine.useBundle;
-					tempEngine.address = engine.address;
+					if (tempEngine.useBundle)
+						tempEngine.address = engine.address;
 					tempEngine.name = engine.name;
 					tempEngine.portRangeStart = engine.portRangeStart;
 					tempEngine.portRangeEnd = engine.portRangeEnd;
@@ -106,7 +107,8 @@
 			forceCloseDialogContainer();
 		} catch (error) {
 			engineSeperateArray.forEach((engine) => {
-				engine.setUpEngineSeperate();
+				if (engine.hasBeenDeleted == false)
+					engine.setUpEngineSeperate();
 			});
 			incorrectInformationModal.showModal();
 		}

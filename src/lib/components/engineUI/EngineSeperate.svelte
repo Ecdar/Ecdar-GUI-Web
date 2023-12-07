@@ -36,6 +36,8 @@
 	export let currentEngine: EngineDTO;
 	export let tempEngines: Array<EngineDTO>;
 
+	export let hasBeenDeleted: boolean = false;
+
 	export const setUpEngineSeperate = () => {
 		changeNameBorder();
 		changeIpBorder();
@@ -47,6 +49,7 @@
 	 */
 	function deleteEngine() {
 		currentEngine.address = "-1";
+		hasBeenDeleted = true;
 		if (tempEngines.length == 1) {
 			nameContainer.value = "";
 			ipAddressContainer.value = "";
