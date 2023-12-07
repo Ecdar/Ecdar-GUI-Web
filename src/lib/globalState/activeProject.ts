@@ -24,7 +24,11 @@
 
 import type { Writable, Subscriber, Unsubscriber, Updater } from "svelte/store";
 import type { Project } from "$lib/classes/automaton/Project";
-import type { Component, System } from "$lib/classes/automaton";
+import type {
+	Component,
+	GlobalDeclarations,
+	System,
+} from "$lib/classes/automaton";
 
 type ProjectKeys = Pick<
 	Project,
@@ -174,7 +178,7 @@ export const systemDeclarations = new ProjectMemberStore("systemDeclarations");
  */
 export const globalDeclarations = new ProjectMemberStore("globalDeclarations");
 
-export type ActiveView = Component | System | undefined;
+export type ActiveView = Component | System | GlobalDeclarations | undefined;
 let activeViewValue: ActiveView;
 const activeViewSubscribers = new Set<Subscriber<ActiveView>>();
 
@@ -186,9 +190,11 @@ class ActiveViewStore implements Writable<ActiveView> {
 					"Cannot set an active view when no project is open",
 				);
 			} else if (
-				![...projectValue.components, ...projectValue.systems].includes(
-					value,
-				)
+				![
+					...projectValue.components,
+					...projectValue.systems,
+					projectValue.globalDeclarations,
+				].includes(value)
 			) {
 				throw new TypeError(
 					"Cannot set an active view that is not part of the active project",
@@ -246,9 +252,11 @@ function closeActiveViewIfDeleted() {
 	if (activeViewValue === undefined) return;
 	if (
 		!projectValue ||
-		![...projectValue.components, ...projectValue.systems].includes(
-			activeViewValue,
-		)
+		![
+			...projectValue.components,
+			...projectValue.systems,
+			projectValue.globalDeclarations,
+		].includes(activeViewValue)
 	) {
 		activeViewValue = undefined;
 	}

@@ -4,7 +4,6 @@
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
 	import SidePanel from "$lib/components/sidePanel/SidePanel.svelte";
 	import { SidePanelEnum } from "$lib/components/sidePanel/SidePanelEnum";
-	import SvgView from "$lib/components/svgView/SvgView.svelte";
 	import Console from "$lib/components/console/Console.svelte";
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import GlobalDeclaration from "$lib/components/project/globalDeclaration/GlobalDeclaration.svelte";
@@ -13,17 +12,13 @@
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 	import Canvas from "$lib/components/canvas/Canvas.svelte";
 	import CanvasNav from "$lib/components/canvas/CanvasNav.svelte";
+	import { showSettings } from "$lib/components/settings/state";
 	import Settings from "$lib/components/settings/SettingsView.svelte";
-
-	let showSettings: boolean = false;
-	function toggleSettings() {
-		showSettings = !showSettings;
-	}
 </script>
 
 <!-- Top navigation Panel -->
 <nav id="main-nav">
-	<TopBar on:toggleSettings={toggleSettings} />
+	<TopBar />
 </nav>
 <main>
 	{#if $project === undefined}
@@ -42,6 +37,9 @@
 			<nav class="inner-nav2">
 				<CanvasNav />
 			</nav>
+			{#if $showSettings}
+				<Settings />
+			{/if}
 			<Canvas />
 		</div>
 		<!-- Right side -->

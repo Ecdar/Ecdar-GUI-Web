@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { default as hljs } from "highlight.js";
+	import { editor } from "./state";
 
-	let editor: HTMLElement;
+	export let isHidden: boolean;
+	let editorDiv: HTMLElement;
+
 	hljs.registerLanguage("ecdar", () => {
 		return {
 			case_insensitive: false,
-			keywords: "clock",
-			contains: [],
+			keywords: ["clock", "broadcast", "chan"],
+			contains: [hljs.COMMENT("/\\*", "\\*/"), hljs.COMMENT("//", "\\n")],
 		};
 	});
 
@@ -50,21 +53,42 @@
 				if (text[i] == "\n") linenr.appendChild(createLineNr(++lines));
 		}
 
-		updateLines("");
-		CodeJar(node, (n: HTMLElement) => {
-			let code = n.textContent as string;
+		function updateCode(node: HTMLElement, code: string) {
 			updateLines(code);
-			code = hljs.highlight(code, { language: "ecdar" }).value;
-			n.innerHTML = code;
+			let highlight = hljs.highlight(code, { language: "ecdar" }).value;
+			node.innerHTML = highlight;
+		}
+
+		editor.change.subscribe((newCode) => {
+			updateCode(node, newCode);
 		});
 
+		updateLines("");
+		CodeJar(
+			node,
+			(n: HTMLElement) => {
+				let code = n.textContent as string;
+				editor.push.update((push) => (push(code), push));
+				updateCode(n, code);
+			},
+			{ 
+				history: false ,
+				addClosing: false,
+			},
+		);
+
 		node.style.overflowY = "visible";
-		editor.appendChild(linenr);
-		editor.appendChild(node);
+		editorDiv.appendChild(linenr);
+		editorDiv.appendChild(node);
+		editorDiv.style.visibility = isHidden ? "hidden" : "visible";
 	});
 </script>
 
-<div id="editor" bind:this={editor} />
+<div
+	id="editor"
+	bind:this={editorDiv}
+	style={isHidden ? "visibility:hidden; height:0px;" : "visibility:visible;"}
+/>
 
 <style>
 	:global(:root) {
@@ -74,7 +98,7 @@
 
 	#editor {
 		width: 100%;
-		height: 100%;
+		height: 200%;
 		max-width: 80vw;
 		overflow: auto;
 	}
@@ -88,6 +112,12 @@
 
 	:global(.hljs-keyword) {
 		color: var(--editor-keyword-color);
+		font-family: monospace;
+	}
+
+	:global(.hljs-comment) {
+		color: var(--editor-comment-color);
+		font-family: monospace;
 	}
 
 	:global(.editor-linenum) {

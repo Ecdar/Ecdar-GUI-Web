@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
 	import Tabs from "$lib/components/tabs/Tabs.svelte";
 	import type { Tab } from "$lib/components/tabs/Tab";
 	import ColorSettings from "$lib/components/settings/ColorSettings.svelte";
 	import FontSettings from "$lib/components/settings/FontSettings.svelte";
-
-	const dispatch = createEventDispatcher();
+	import { showSettings } from "./state";
 
 	const settingTabs: Tab[] = [
 		{
@@ -25,7 +23,7 @@
 
 <button
 	on:click={() => {
-		dispatch("toggleSettings");
+		$showSettings = false;
 	}}
 >
 	<p>Close Settings</p>

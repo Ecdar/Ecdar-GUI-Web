@@ -35,6 +35,7 @@ export const ColorVariables = z
 		"--sidebar-element-color": ColorAttribute,
 		"--sidebar-element-hover-color": ColorAttribute,
 		"--editor-keyword-color": ColorAttribute,
+		"--editor-comment-color": ColorAttribute,
 		"--settings-danger-button-color": ColorAttribute,
 		"--settings-safe-button-color": ColorAttribute,
 	})
