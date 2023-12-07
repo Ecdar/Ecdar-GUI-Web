@@ -1,5 +1,5 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
-import { defineConfig, devices } from "@playwright/test";
+import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
 	webServer: {
@@ -9,7 +9,6 @@ const config: PlaywrightTestConfig = {
 	},
 	testDir: "tests",
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/,
-	globalSetup: "playwright.global.ts",
 	projects: [
 		{
 			name: "chromium",
