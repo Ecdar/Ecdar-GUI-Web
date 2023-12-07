@@ -3,7 +3,7 @@
 	import type { EngineDTO } from "./EngineDTO";
 
 	export let tempEngines: Array<EngineDTO>;
-	export let engineSeperateArray: Array<EngineSeperate>;
+	export let engineSeperateArray: Array<EngineSeperate | undefined>;
 </script>
 
 <h2>Engines</h2>

@@ -12,8 +12,9 @@
 	let unsavedChangesModal: Modal & IModalComponent;
 	let incorrectInformationModal: Modal & IModalComponent;
 
-	let engineSeperateArray: Array<EngineSeperate & IEngineSeperateComponent> =
-		[];
+	let engineSeperateArray: Array<
+		(EngineSeperate & IEngineSeperateComponent) | undefined
+	> = [];
 
 	/**
 	 * Reset the engineUI view and show the engineUI
@@ -107,8 +108,7 @@
 			forceCloseDialogContainer();
 		} catch (error) {
 			engineSeperateArray.forEach((engine) => {
-				if (engine.hasBeenDeleted == false)
-					engine.setUpEngineSeperate();
+				if (engine != undefined) engine.setUpEngineSeperate();
 			});
 			incorrectInformationModal.showModal();
 		}
