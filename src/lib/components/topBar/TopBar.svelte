@@ -40,7 +40,7 @@
 -->
 
 <!--File top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="File">
 		<DropDownButton
 			icon={Note_add}
@@ -109,7 +109,7 @@
 </div>
 
 <!--Edit top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="Edit">
 		<DropDownButton
 			icon={Arrow_left}
@@ -143,7 +143,7 @@
 </div>
 
 <!--View top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="View">
 		<DropDownCheckBox
 			name="Project Panel"
@@ -189,7 +189,7 @@
 </div>
 
 <!--Options top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="Options">
 		<DropDownCheckBox
 			name="UI cache"
@@ -213,7 +213,7 @@
 			icon={Settings_input_composite}
 			name="Engine Options"
 			on:click={() => {
-				console.log("Engine Options");
+				dispatch("toggleEngineUI");
 			}}
 		/>
 		<DropDownButton
@@ -227,7 +227,7 @@
 </div>
 
 <!--Help top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="Help">
 		<DropDownButton
 			icon={Help}
@@ -240,14 +240,14 @@
 			icon={Error}
 			name="About"
 			on:click={() => {
-				console.log("About");
+				dispatch("toggleAboutBox");
 			}}
 		/>
 	</TopBarButton>
 </div>
 
 <style>
-	div {
+	.container {
 		height: 100%;
 		display: block;
 		float: left;
