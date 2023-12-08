@@ -45,7 +45,7 @@
 		max-width: 100vw;
 		display: block;
 		position: fixed;
-		background-color: var(--console-unselectedtab-color);
+		background-color: var(--modal-background-color);
 		z-index: 100;
 		transform: translate(-50%, -50%);
 		top: 50%;

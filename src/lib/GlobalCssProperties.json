@@ -136,7 +136,13 @@
 			"--settings-danger-button-color": ["srgb", 0.498, 0.0902, 0.0549],
 			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667],
 			"--dropdown-button-color": ["srgb", 1, 1, 1],
-			"--dropdown-text-color": ["srgb", 0, 0, 0]
+			"--dropdown-text-color": ["srgb", 0, 0, 0],
+			"--modal-background-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
+			]
 		},
 		"fontSize": {
 			"--sidebar-fontsize": [1, "rem"],
@@ -279,7 +285,13 @@
 					0.09666666666,
 					0.12019607843
 				],
-				"--engine-ui-text-color": ["display-p3", 1, 1, 1]
+				"--engine-ui-text-color": ["display-p3", 1, 1, 1],
+				"--modal-background-color": [
+					"display-p3",
+					0.0156862745,
+					0.02352941176,
+					0.03529411764
+				]
 			}
 		},
 		{

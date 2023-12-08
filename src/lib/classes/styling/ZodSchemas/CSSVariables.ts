@@ -46,6 +46,7 @@ export const ColorVariables = z
 		"--settings-safe-button-color": ColorAttribute,
 		"--dropdown-button-color": ColorAttribute,
 		"--dropdown-text-color": ColorAttribute,
+		"--modal-background-color": ColorAttribute,
 	})
 	.strict();
 
