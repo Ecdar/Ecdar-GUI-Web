@@ -202,3 +202,18 @@ test("Unsaved end port will not save", async ({ page }) => {
 		),
 	).toBeVisible();
 });
+
+test('Can add and delete 10 engines', async ({ page }) => {
+  for (let i = 0; i < 10; i++) {
+    await page.locator("#add-button").click();
+  }
+
+  await expect(page.locator("form")).toHaveCount(12);
+
+  for (let i = 0; i < 10; i++) {
+    await page.locator(".delete-button").first().click();
+    await page.getByRole('button', { name: 'done' }).click();
+  }
+
+  await expect(page.locator("form")).toHaveCount(2);
+});
