@@ -18,7 +18,7 @@
 	/**
 	 * Reset the engineUI view and show the engineUI
 	 */
-	export function showEngineUI() {
+	export function showModal() {
 		tempEngines = [];
 		EngineStorage.getEngineArray().forEach((engine) => {
 			let tempEngine: EngineDTO = {
@@ -41,6 +41,19 @@
 
 		tempEngines = tempEngines;
 		dialogContainer.showModal();
+	}
+
+	/**
+	 * Close the modal, but check if there are any unsaved changes
+	 */
+	export function closeModal() {
+		if (!checkIfChanged()) {
+			unsavedChangesModal.showModal();
+			return;
+		}
+		tempEngines = [];
+		tempEngines = tempEngines;
+		dialogContainer.closeModal();
 	}
 
 	/**
@@ -121,19 +134,6 @@
 			engine.type,
 			engine.useBundle,
 		);
-	}
-
-	/**
-	 * Close the modal, but check if there are any unsaved changes
-	 */
-	function closeModal() {
-		if (!checkIfChanged()) {
-			unsavedChangesModal.showModal();
-			return;
-		}
-		tempEngines = [];
-		tempEngines = tempEngines;
-		dialogContainer.closeModal();
 	}
 
 	/**

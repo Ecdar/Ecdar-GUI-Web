@@ -8,38 +8,17 @@
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import GlobalDeclaration from "$lib/components/project/globalDeclaration/GlobalDeclaration.svelte";
 	import Queries from "$lib/components/query/Queries.svelte";
-	import type IEngineUIComponent from "$lib/interfaces/IEngineUIComponent";
-	import type IAboutUI from "$lib/interfaces/IAboutUI";
-	import EngineUi from "$lib/components/engineUI/EngineUI.svelte";
-	import AboutUi from "$lib/components/topBar/aboutUI/AboutUI.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 	import Canvas from "$lib/components/canvas/Canvas.svelte";
 	import CanvasNav from "$lib/components/canvas/CanvasNav.svelte";
-	import { showSettings } from "$lib/components/settings/state";
-	import Settings from "$lib/components/settings/SettingsView.svelte";
-
-	let engineUIContainer: EngineUi & IEngineUIComponent;
-
-	function openEngineUI() {
-		engineUIContainer.showEngineUI();
-	}
-
-	let aboutUIContainer: AboutUi & IAboutUI;
-	function openAboutUI() {
-		aboutUIContainer.showAboutUI();
-	}
+	import ModalContainer from "$lib/components/dialogPopoverContainer/ModalContainer.svelte";
 </script>
 
 <!-- Top navigation Panel -->
-<EngineUi bind:this={engineUIContainer} />
-<AboutUi bind:this={aboutUIContainer} />
+<ModalContainer />
 <nav id="main-nav">
 	<TopBar />
-	<TopBar
-		on:toggleEngineUI={openEngineUI}
-		on:toggleAboutBox={openAboutUI}
-	/>
 </nav>
 <main>
 	{#if $project === undefined}
@@ -58,9 +37,6 @@
 			<nav class="inner-nav2">
 				<CanvasNav />
 			</nav>
-			{#if $showSettings}
-				<Settings />
-			{/if}
 			<Canvas />
 		</div>
 		<!-- Right side -->

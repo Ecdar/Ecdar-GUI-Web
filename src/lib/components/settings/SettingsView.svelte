@@ -3,7 +3,18 @@
 	import type { Tab } from "$lib/components/tabs/Tab";
 	import ColorSettings from "$lib/components/settings/ColorSettings.svelte";
 	import FontSettings from "$lib/components/settings/FontSettings.svelte";
-	import { showSettings } from "./state";
+	import Modal from "../dialogPopover/Modal.svelte";
+	import type IModalComponent from "$lib/interfaces/IModalComponent";
+
+	let dialogContainer: Modal & IModalComponent;
+
+	export function showModal() {
+		dialogContainer.showModal();
+	}
+
+	export function closeModal() {
+		dialogContainer.closeModal();
+	}
 
 	const settingTabs: Tab[] = [
 		{
@@ -17,17 +28,19 @@
 	];
 </script>
 
-<div id="setting-tabs-container">
-	<Tabs tabs={settingTabs} />
-</div>
+<Modal bind:this={dialogContainer}>
+	<div id="setting-tabs-container">
+		<Tabs tabs={settingTabs} />
+	</div>
 
-<button
-	on:click={() => {
-		$showSettings = false;
-	}}
->
-	<p>Close Settings</p>
-</button>
+	<button
+		on:click={() => {
+			dialogContainer.closeModal();
+		}}
+	>
+		<p>Close Settings</p>
+	</button>
+</Modal>
 
 <style>
 	button {

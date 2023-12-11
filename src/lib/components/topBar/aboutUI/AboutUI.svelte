@@ -2,13 +2,13 @@
 	import Modal from "$lib/components/dialogPopover/Modal.svelte";
 	import type IModalComponent from "$lib/interfaces/IModalComponent";
 
-	let dialogContainer!: Modal & IModalComponent;
+	let dialogContainer: Modal & IModalComponent;
 
-	export function showAboutUI() {
+	export function showModal() {
 		dialogContainer.showModal();
 	}
 
-	function closeModal() {
+	export function closeModal() {
 		dialogContainer.closeModal();
 	}
 </script>

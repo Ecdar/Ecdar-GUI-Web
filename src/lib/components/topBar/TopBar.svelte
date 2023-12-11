@@ -3,7 +3,6 @@
 	import TopBarButton from "$lib/components/topBar/TopBarButton.svelte";
 	import DropDownButton from "$lib/components/topBar/DropDownButton.svelte";
 	import DropDownCheckBox from "$lib/components/topBar/DropDownCheckBox.svelte";
-	import { showSettings } from "$lib/components/settings/state";
 	import {
 		Note_add,
 		File_open,
@@ -20,6 +19,7 @@
 		Error,
 	} from "svelte-google-materialdesign-icons";
 	import { onMount } from "svelte";
+	import { Popup, popup } from "../dialogPopoverContainer/state";
 
 	let projectHandler: typeof ProjectHandler;
 
@@ -213,14 +213,14 @@
 			icon={Settings_input_composite}
 			name="Engine Options"
 			on:click={() => {
-				dispatch("toggleEngineUI");
+				popup.set(Popup.Engine);
 			}}
 		/>
 		<DropDownButton
 			icon={Settings}
 			name="Settings"
 			on:click={() => {
-				$showSettings = true;
+				popup.set(Popup.Settings);
 			}}
 		/>
 	</TopBarButton>
@@ -240,7 +240,7 @@
 			icon={Error}
 			name="About"
 			on:click={() => {
-				dispatch("toggleAboutBox");
+				popup.set(Popup.About);
 			}}
 		/>
 	</TopBarButton>

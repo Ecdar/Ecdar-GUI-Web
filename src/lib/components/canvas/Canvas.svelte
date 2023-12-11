@@ -4,5 +4,11 @@
 	import { CanvasModes, canvasModes } from "./state";
 </script>
 
-<Editor isHidden={$canvasModes !== CanvasModes.Editor} />
-<SvgView isHidden={$canvasModes !== CanvasModes.Draw} />
+<Editor
+	isHidden={$canvasModes !== CanvasModes.Editor &&
+		$canvasModes !== CanvasModes.None}
+/>
+<SvgView
+	isHidden={$canvasModes !== CanvasModes.Draw &&
+		$canvasModes !== CanvasModes.None}
+/>

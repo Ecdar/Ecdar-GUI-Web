@@ -6,29 +6,39 @@ import { editor } from "$lib/components/editor/state";
 export enum CanvasModes {
 	Draw,
 	Editor,
+	None,
 }
 
 export enum CanvasSupports {
 	OnlyDraw,
 	OnlyEditor,
 	Both,
+	None,
 }
 
-export const canvasSupports = writable(CanvasSupports.OnlyEditor);
-export const canvasModes = writable(CanvasModes.Editor);
+export const canvasSupports = writable(CanvasSupports.None);
+export const canvasModes = writable(CanvasModes.None);
 
 canvasSupports.subscribe((newSupports) => {
 	canvasModes.update((currentMode) => {
 		if (
-			newSupports == CanvasSupports.OnlyEditor &&
-			currentMode == CanvasModes.Draw
+			newSupports === CanvasSupports.OnlyEditor &&
+			(currentMode === CanvasModes.Draw ||
+				currentMode === CanvasModes.None)
 		)
 			return CanvasModes.Editor;
 		else if (
-			newSupports == CanvasSupports.OnlyDraw &&
-			currentMode == CanvasModes.Editor
+			newSupports === CanvasSupports.OnlyDraw &&
+			(currentMode === CanvasModes.Editor ||
+				currentMode === CanvasModes.None)
 		)
 			return CanvasModes.Draw;
+		else if (
+			newSupports === CanvasSupports.Both &&
+			currentMode === CanvasModes.None
+		)
+			return CanvasModes.Draw;
+		else if (newSupports === CanvasSupports.None) return CanvasModes.None;
 		else return currentMode;
 	});
 });
