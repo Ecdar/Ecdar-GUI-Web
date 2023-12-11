@@ -20,10 +20,10 @@
 				<h1>Ecdar v. 0.1</h1>
 				Made by:
 				<br /><br />
-				5. Semester, Aalborg University 2023
+				&nbsp; 5. Semester, Aalborg University 2023
 				<br /><br />
-				For more information go to
-				<a href="https://www.ecdar.net/" target="_blank"> Ecdar.net</a>
+				For more information, go to
+				<a href="https://www.ecdar.net/" target="_blank"> www.Ecdar.net</a>
 			</div>
 			<button on:click={closeModal}>Close</button>
 		</div>
@@ -33,15 +33,16 @@
 <style>
 	form {
 		height: 15em;
-		width: 25em;
-		background-color: white;
+		width: 35em;
+		background-color: var(--console-topbar-background-color);
 	}
 
 	.box {
 		padding: 1em;
+		color:var(--text-color);
 	}
 
 	button {
-		margin-left: 80%;
+		margin-left: 85%;
 	}
 </style>
