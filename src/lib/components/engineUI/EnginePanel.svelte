@@ -13,6 +13,7 @@
 			currentEngine={engine}
 			{tempEngines}
 			bind:this={engineSeperateArray[index]}
+			currentComponent={engineSeperateArray[index]}
 		/>
 		<hr />
 	{/each}

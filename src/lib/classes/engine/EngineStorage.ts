@@ -1,6 +1,5 @@
 import type IEngineStorageObject from "$lib/interfaces/IEngineStorageObject";
 import { Engine } from "./Engine";
-import type { EngineType } from "./EngineType";
 /**
  * Engine storage definition.
  * Stores an array of Engine instances, and can create, delete or search the array
@@ -34,8 +33,8 @@ class EngineStorage {
 	set defaultEngine(engine: Engine | undefined) {
 		let index = -1;
 
-		index = this.engineArray.findIndex((engine: Engine) => {
-			return engine.id === engine.id;
+		index = this.engineArray.findIndex((arrayEngine: Engine) => {
+			return arrayEngine.id === engine?.id;
 		});
 		if (engine === undefined || index > -1) this.#defaultEngine = engine;
 		else throw new Error("Failed to set default engine");
@@ -55,7 +54,6 @@ class EngineStorage {
 		address: string,
 		portRangeStart: number,
 		portRangeEnd: number,
-		type: EngineType,
 		useBundle: boolean,
 	) {
 		const newEngine = new Engine(
@@ -63,7 +61,6 @@ class EngineStorage {
 			address,
 			portRangeStart,
 			portRangeEnd,
-			type,
 			this.engineId,
 			useBundle,
 		);
@@ -153,7 +150,6 @@ class EngineStorage {
 					engine.address,
 					engine.portRangeStart,
 					engine.portRangeEnd,
-					engine.type,
 					engine.id,
 					engine.useBundle,
 				),

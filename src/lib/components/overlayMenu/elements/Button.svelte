@@ -9,12 +9,12 @@
 
 	export let backgroundColor: string = "var(--dropdown-button-color)";
 
-	export let buttonColor: string = "var(--dropdown-text-color))";
+	export let checkBoxColor: string = "var(--dropdown-text-color))";
 </script>
 
 <button
 	on:click={click}
-	style="background-color: {backgroundColor}; color: {buttonColor}"
+	style="background-color: {backgroundColor}; color: {checkBoxColor}"
 >
 	<svelte:component this={icon} ariaLabel="" class="icon" tabindex="-1" />
 	<p>{text}</p>

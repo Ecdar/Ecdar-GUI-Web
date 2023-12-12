@@ -2,7 +2,12 @@
 	"default": {
 		"mediaFeature": "default",
 		"color": {
-			"--navigationbar-text-color": ["display-p3", 1, 1, 1],
+			"--navigationbar-text-color": [
+				"display-p3",
+				1,
+				1,
+				1
+			],
 			"--console-scrollbar-thumb-color": [
 				"display-p3",
 				0.22745098039,
@@ -45,11 +50,36 @@
 				0.34901960784,
 				0.38823529411
 			],
-			"--canvas-text-color": ["display-p3", 0, 0, 0],
-			"--sidebar-text-color": ["display-p3", 0, 0, 0],
-			"--text-color": ["display-p3", 0, 0, 0],
-			"--text-secondary-color": ["display-p3", 0.4, 0.4, 0.4],
-			"--background-color": ["display-p3", 0.95686, 0.95686, 0.95686],
+			"--canvas-text-color": [
+				"display-p3",
+				0,
+				0,
+				0
+			],
+			"--sidebar-text-color": [
+				"display-p3",
+				0,
+				0,
+				0
+			],
+			"--text-color": [
+				"display-p3",
+				0,
+				0,
+				0
+			],
+			"--text-secondary-color": [
+				"display-p3",
+				0.4,
+				0.4,
+				0.4
+			],
+			"--background-color": [
+				"display-p3",
+				0.95686,
+				0.95686,
+				0.95686
+			],
 			"--console-selectedtab-color": [
 				"display-p3",
 				0.2862745098,
@@ -68,7 +98,12 @@
 				0.27450980392,
 				0.30588235294
 			],
-			"--console-text-color": ["display-p3", 0, 0, 0],
+			"--console-text-color": [
+				"display-p3",
+				0,
+				0,
+				0
+			],
 			"--sidebar-element-color": [
 				"display-p3",
 				0.93333333333,
@@ -81,8 +116,18 @@
 				0.84705882352,
 				0.86274509803
 			],
-			"--queries-input-background-color": ["display-p3", 1, 1, 1],
-			"--canvas-action-color": ["display-p3", 0, 0, 0],
+			"--queries-input-background-color": [
+				"display-p3",
+				1,
+				1,
+				1
+			],
+			"--canvas-action-color": [
+				"display-p3",
+				0,
+				0,
+				0
+			],
 			"--console-tab-hover-color": [
 				"display-p3",
 				0.3362745098,
@@ -95,7 +140,12 @@
 				0.39901960784,
 				0.43823529411
 			],
-			"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
+			"--engine-ui-underline-color": [
+				"display-p3",
+				1,
+				1,
+				1
+			],
 			"--engine-ui-error-underline-color": [
 				"display-p3",
 				0.82745098039,
@@ -120,23 +170,48 @@
 				0.6941,
 				0.6706
 			],
-			"--engine-ui-text-color": ["display-p3", 1, 1, 1],
+			"--engine-ui-text-color": [
+				"display-p3",
+				1,
+				1,
+				1
+			],
 			"--engine-ui-background-color": [
 				"display-p3",
 				0.2862745098,
 				0.34901960784,
 				0.38823529411
 			],
-			"--engine-ui-button-color": [
+			"--engine-ui-checkbox-color": [
 				"display-p3",
 				0.2862745098,
 				0.34901960784,
 				0.38823529411
 			],
-			"--settings-danger-button-color": ["srgb", 0.498, 0.0902, 0.0549],
-			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667],
-			"--dropdown-button-color": ["srgb", 1, 1, 1],
-			"--dropdown-text-color": ["srgb", 0, 0, 0],
+			"--settings-danger-button-color": [
+				"srgb",
+				0.498,
+				0.0902,
+				0.0549
+			],
+			"--settings-safe-button-color": [
+				"srgb",
+				0.3255,
+				0.498,
+				0.2667
+			],
+			"--dropdown-button-color": [
+				"srgb",
+				1,
+				1,
+				1
+			],
+			"--dropdown-text-color": [
+				"srgb",
+				0,
+				0,
+				0
+			],
 			"--modal-background-color": [
 				"display-p3",
 				0.22745098039,
@@ -145,40 +220,97 @@
 			]
 		},
 		"fontSize": {
-			"--sidebar-fontsize": [1, "rem"],
-			"--sidebar-navigationbar-fontsize": [1, "rem"]
+			"--sidebar-fontsize": [
+				1,
+				"rem"
+			],
+			"--sidebar-navigationbar-fontsize": [
+				1,
+				"rem"
+			]
 		},
 		"fontFamily": {
-			"--font-family": ["CustomFont, sans-serif"]
+			"--font-family": [
+				"CustomFont, sans-serif"
+			]
 		},
 		"border": {
 			"--main-navigationbar-border": [
 				"solid",
-				[0.1, "em"],
-				["display-p3", 0.18823529411, 0.22745098039, 0.25098039215]
+				[
+					0.1,
+					"em"
+				],
+				[
+					"display-p3",
+					0.18823529411,
+					0.22745098039,
+					0.25098039215
+				]
 			],
 			"--main-innernavigationbar-border": [
 				"none solid solid solid",
-				[0.1, "em"],
-				["display-p3", 0.18823529411, 0.22745098039, 0.25098039215]
+				[
+					0.1,
+					"em"
+				],
+				[
+					"display-p3",
+					0.18823529411,
+					0.22745098039,
+					0.25098039215
+				]
 			]
 		},
 		"transition": {
-			"--console-tab-hover-transition": ["background-color", [200, "ms"]],
-			"--console-height-transition": ["height", [200, "ms"]],
-			"--sidebar-element-transition": ["background-color", [200, "ms"]],
-			"--settings-filter-transition": ["filter", [200, "ms"]],
+			"--console-tab-hover-transition": [
+				"background-color",
+				[
+					200,
+					"ms"
+				]
+			],
+			"--console-height-transition": [
+				"height",
+				[
+					200,
+					"ms"
+				]
+			],
+			"--sidebar-element-transition": [
+				"background-color",
+				[
+					200,
+					"ms"
+				]
+			],
+			"--settings-filter-transition": [
+				"filter",
+				[
+					200,
+					"ms"
+				]
+			],
 			"--settings-background-color-transition": [
 				"background-color",
-				[200, "ms"]
+				[
+					200,
+					"ms"
+				]
 			],
 			"--tabs-background-color-transition": [
 				"background-color",
-				[200, "ms"]
+				[
+					200,
+					"ms"
+				]
 			],
 			"--svgbutton-background-color-transition": [
 				"background-color",
-				[200, "ms"]
+				[
+					200,
+					"ms"
+				]
 			]
 		}
 	},
@@ -198,11 +330,36 @@
 					0.06666666666,
 					0.09019607843
 				],
-				"--canvas-text-color": ["display-p3", 1, 1, 1],
-				"--sidebar-text-color": ["display-p3", 1, 1, 1],
-				"--text-color": ["display-p3", 1, 1, 1],
-				"--text-secondary-color": ["display-p3", 0.8, 0.8, 0.8],
-				"--background-color": ["display-p3", 0.0902, 0.10196, 0.13333],
+				"--canvas-text-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
+				"--sidebar-text-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
+				"--text-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
+				"--text-secondary-color": [
+					"display-p3",
+					0.8,
+					0.8,
+					0.8
+				],
+				"--background-color": [
+					"display-p3",
+					0.0902,
+					0.10196,
+					0.13333
+				],
 				"--console-selectedtab-color": [
 					"display-p3",
 					0.08490196078,
@@ -221,7 +378,12 @@
 					0.02352941176,
 					0.03529411764
 				],
-				"--console-text-color": ["display-p3", 1, 1, 1],
+				"--console-text-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
 				"--sidebar-element-color": [
 					"display-p3",
 					0.19215686274,
@@ -240,7 +402,12 @@
 					0.06666666666,
 					0.09019607843
 				],
-				"--canvas-action-color": ["display-p3", 1, 1, 1],
+				"--canvas-action-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
 				"--console-tab-hover-color": [
 					"display-p3",
 					0.13490196078,
@@ -253,7 +420,12 @@
 					0.14666666666,
 					0.17019607843
 				],
-				"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
+				"--engine-ui-underline-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
 				"--engine-ui-error-underline-color": [
 					"display-p3",
 					0.82745098039,
@@ -272,20 +444,30 @@
 					0.95,
 					0.95
 				],
-				"--engine-ui-scrollbar-thumb-color": ["display-p3", 0, 0, 0],
+				"--engine-ui-scrollbar-thumb-color": [
+					"display-p3",
+					0,
+					0,
+					0
+				],
 				"--engine-ui-background-color": [
 					"display-p3",
 					0.08490196078,
 					0.09666666666,
 					0.12019607843
 				],
-				"--engine-ui-button-color": [
+				"--engine-ui-checkbox-color": [
 					"display-p3",
 					0.08490196078,
 					0.09666666666,
 					0.12019607843
 				],
-				"--engine-ui-text-color": ["display-p3", 1, 1, 1],
+				"--engine-ui-text-color": [
+					"display-p3",
+					1,
+					1,
+					1
+				],
 				"--modal-background-color": [
 					"display-p3",
 					0.0156862745,
@@ -297,13 +479,27 @@
 		{
 			"mediaFeature": "prefers-reduced-motion",
 			"transition": {
-				"--console-tab-hover-transition": ["none"],
-				"--console-height-transition": ["none"],
-				"--sidebar-element-transition": ["none"],
-				"--settings-filter-transition": ["none"],
-				"--settings-background-color-transition": ["none"],
-				"--tabs-background-color-transition": ["none"],
-				"--svgbutton-background-color-transition": ["none"]
+				"--console-tab-hover-transition": [
+					"none"
+				],
+				"--console-height-transition": [
+					"none"
+				],
+				"--sidebar-element-transition": [
+					"none"
+				],
+				"--settings-filter-transition": [
+					"none"
+				],
+				"--settings-background-color-transition": [
+					"none"
+				],
+				"--tabs-background-color-transition": [
+					"none"
+				],
+				"--svgbutton-background-color-transition": [
+					"none"
+				]
 			}
 		}
 	]

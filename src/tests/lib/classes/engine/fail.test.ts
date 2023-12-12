@@ -48,17 +48,6 @@ describe("fail engine test", () => {
 		}).toThrow();
 	});
 
-	it("fails on missing type", () => {
-		const obj = {
-			engineArray: [missingType],
-			engineId: 2,
-			defaultEngine: undefined,
-		};
-		expect(() => {
-			EngineStorage.deSerialize(JSON.stringify(obj));
-		}).toThrow();
-	});
-
 	it("fails on missing id", () => {
 		const obj = {
 			engineArray: [missingId],
@@ -138,17 +127,6 @@ describe("fail engine test", () => {
 		}).toThrow();
 	});
 
-	it("fails on invalid type", () => {
-		const obj = {
-			engineArray: [wrongType],
-			engineId: 2,
-			defaultEngine: undefined,
-		};
-		expect(() => {
-			EngineStorage.deSerialize(JSON.stringify(obj));
-		}).toThrow();
-	});
-
 	it("fails on invalid id", () => {
 		const obj = {
 			engineArray: [wrongId],
@@ -164,22 +142,34 @@ describe("fail engine test", () => {
 
 	it("fails on wrong function input", () => {
 		expect(() => {
-			EngineStorage.createEngine("", "123.123.123.213", 2, 4, 2);
+			EngineStorage.createEngine("", "123.123.123.213", 2, 4, false);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "1234.123.123.213", 2, 4, 2);
+			EngineStorage.createEngine("a", "1234.123.123.213", 2, 4, false);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "123.123.123.213", -1, 4, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", -1, 4, false);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "123.123.123.213", 5555555, 4, 2);
+			EngineStorage.createEngine(
+				"a",
+				"123.123.123.213",
+				5555555,
+				4,
+				false,
+			);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "123.123.123.213", 2, 1, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", 2, 1, false);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "123.123.123.213", 2, 555555, 2);
+			EngineStorage.createEngine(
+				"a",
+				"123.123.123.213",
+				2,
+				555555,
+				false,
+			);
 		}).toThrow();
 	});
 
@@ -191,22 +181,34 @@ describe("fail engine test", () => {
 
 	it("fails on wrong function input", () => {
 		expect(() => {
-			EngineStorage.createEngine("", "123.123.123.213", 2, 4, 2);
+			EngineStorage.createEngine("", "123.123.123.213", 2, 4, false);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "1234.123.123.213", 2, 4, 2);
+			EngineStorage.createEngine("a", "1234.123.123.213", 2, 4, false);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "123.123.123.213", -1, 4, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", -1, 4, false);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "123.123.123.213", 5555555, 4, 2);
+			EngineStorage.createEngine(
+				"a",
+				"123.123.123.213",
+				5555555,
+				4,
+				false,
+			);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "123.123.123.213", 2, 1, 2);
+			EngineStorage.createEngine("a", "123.123.123.213", 2, 1, false);
 		}).toThrow();
 		expect(() => {
-			EngineStorage.createEngine("a", "123.123.123.213", 2, 555555, 2);
+			EngineStorage.createEngine(
+				"a",
+				"123.123.123.213",
+				2,
+				555555,
+				false,
+			);
 		}).toThrow();
 	});
 
@@ -217,8 +219,8 @@ describe("fail engine test", () => {
 				address: "123.123.123.123",
 				portRangeStart: 5,
 				portRangeEnd: 5,
-				type: 2,
 				id: 1,
+				useBundle: false,
 			} as Engine;
 		}).toThrow();
 	});
@@ -242,8 +244,8 @@ const missingName = {
 	address: "123.123.123.123",
 	portRangeStart: 5,
 	portRangeEnd: 5,
-	type: 2,
 	id: 1,
+	useBundle: false,
 };
 
 const missingAddress = {
@@ -251,8 +253,8 @@ const missingAddress = {
 	//address: "123.123.123.123",
 	portRangeStart: 5,
 	portRangeEnd: 5,
-	type: 2,
 	id: 1,
+	useBundle: false,
 };
 
 const missingPortStart = {
@@ -260,8 +262,8 @@ const missingPortStart = {
 	address: "123.123.123.123",
 	//portRangeStart: 5,
 	portRangeEnd: 5,
-	type: 2,
 	id: 1,
+	useBundle: false,
 };
 
 const missingPortEnd = {
@@ -269,17 +271,8 @@ const missingPortEnd = {
 	address: "123.123.123.123",
 	portRangeStart: 5,
 	//portRangeEnd: 5,
-	type: 2,
 	id: 1,
-};
-
-const missingType = {
-	name: "test",
-	address: "123.123.123.123",
-	portRangeStart: 5,
-	portRangeEnd: 5,
-	//type: 2,
-	id: 1,
+	useBundle: false,
 };
 
 const missingId = {
@@ -287,8 +280,8 @@ const missingId = {
 	address: "123.123.123.123",
 	portRangeStart: 5,
 	portRangeEnd: 5,
-	type: 2,
 	//id: 1,
+	useBundle: false,
 };
 
 const wrongName = {
@@ -296,8 +289,8 @@ const wrongName = {
 	address: "123.123.123.123",
 	portRangeStart: 5,
 	portRangeEnd: 5,
-	type: 2,
 	id: 1,
+	useBundle: false,
 };
 
 const wrongAddress = {
@@ -305,8 +298,8 @@ const wrongAddress = {
 	address: "123.123.1235.123",
 	portRangeStart: 5,
 	portRangeEnd: 5,
-	type: 2,
 	id: 1,
+	useBundle: false,
 };
 
 const wrongPortStart1 = {
@@ -314,41 +307,32 @@ const wrongPortStart1 = {
 	address: "123.123.123.123",
 	portRangeStart: -1,
 	portRangeEnd: 5,
-	type: 2,
 	id: 1,
+	useBundle: false,
 };
 const wrongPortStart2 = {
 	name: "test",
 	address: "123.123.123.123",
 	portRangeStart: 65355,
 	portRangeEnd: 5,
-	type: 2,
 	id: 1,
+	useBundle: false,
 };
 const wrongPortEnd1 = {
 	name: "test",
 	address: "123.123.123.123",
 	portRangeStart: 1,
 	portRangeEnd: 65555,
-	type: 2,
 	id: 1,
+	useBundle: false,
 };
 const wrongPortEnd2 = {
 	name: "test",
 	address: "123.123.123.123",
 	portRangeStart: 10,
 	portRangeEnd: 5,
-	type: 2,
 	id: 1,
-};
-
-const wrongType = {
-	name: "test",
-	address: "123.123.123.123",
-	portRangeStart: -1,
-	portRangeEnd: 5,
-	type: 10,
-	id: 1,
+	useBundle: false,
 };
 
 const wrongId = {
@@ -356,6 +340,6 @@ const wrongId = {
 	address: "123.123.123.123",
 	portRangeStart: 1,
 	portRangeEnd: 5,
-	type: 2,
 	id: -5,
+	useBundle: false,
 };

@@ -12,15 +12,15 @@ describe("succeed Engine test", () => {
 	it("Create and push engine", () => {
 		expect(EngineStorage.engineArray.length).toBe(0);
 
-		EngineStorage.createEngine("test", "123.213.123.123", 1, 2, 1);
+		EngineStorage.createEngine("test", "8.8.8.8", 1, 2, false);
 		expect(EngineStorage.engineArray.length).toBe(1);
 	});
 
 	it("Set default", () => {
 		//testEngine mirror
-		EngineStorage.createEngine("test2", "123.213.123.123", 1, 2, 1);
-		EngineStorage.defaultEngine = testEngine;
-		expect(EngineStorage.defaultEngine).toBe(testEngine);
+		EngineStorage.createEngine("test2", "123.213.123.123", 1, 2, false);
+		EngineStorage.defaultEngine = testEngineWithId;
+		expect(EngineStorage.defaultEngine).toBe(testEngineWithId);
 	});
 
 	it("Get engine", () => {
@@ -45,19 +45,11 @@ describe("succeed Engine test", () => {
  *           DATA              * 
 \*******************************/
 
-const testEngine: Engine = {
-	name: "test2",
-	address: "123.213.123.123",
-	portRangeStart: 1,
-	portRangeEnd: 2,
-	type: 1,
-} as Engine;
-
 const testEngineWithId: Engine = {
 	name: "test2",
 	address: "123.213.123.123",
 	portRangeStart: 1,
 	portRangeEnd: 2,
-	type: 1,
 	id: 5,
+	useBundle: false,
 } as Engine;

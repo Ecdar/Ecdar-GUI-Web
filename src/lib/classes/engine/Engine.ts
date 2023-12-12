@@ -1,4 +1,3 @@
-import { EngineType } from "./EngineType";
 import {
 	comparePortRange,
 	validateEndPort,
@@ -19,9 +18,8 @@ export class Engine {
 	get name(): string {
 		return this.#name;
 	}
-	set name(setName: string | undefined) {
-		if (validateName(setName) && setName !== undefined)
-			this.#name = setName;
+	set name(setName: string) {
+		if (validateName(setName)) this.#name = setName;
 		else throw new Error("Engine must have a name");
 	}
 	/**
@@ -64,18 +62,6 @@ export class Engine {
 	}
 
 	/**
-	 * type of engine
-	 * */
-	#type: EngineType = 0;
-	get type(): EngineType {
-		return this.#type;
-	}
-	set type(engineType: EngineType) {
-		if (engineType in EngineType) this.#type = engineType;
-		else throw new Error("Invalid engine #type");
-	}
-
-	/**
 	 * Unique identifier
 	 * */
 	#id: number = 0;
@@ -103,7 +89,6 @@ export class Engine {
 		address: string,
 		portRangeStart: number,
 		portRangeEnd: number,
-		type: EngineType,
 		id: number,
 		useBundle: boolean,
 	) {
@@ -111,7 +96,6 @@ export class Engine {
 		if (!useBundle) this.address = address;
 		this.portRangeStart = portRangeStart;
 		this.portRangeEnd = portRangeEnd;
-		this.type = type;
 		this.id = id;
 		this.#useBundle = useBundle;
 	}
@@ -122,8 +106,8 @@ export class Engine {
 			address: this.#address,
 			portRangeStart: this.#portRangeStart,
 			portRangeEnd: this.#portRangeEnd,
-			type: this.#type,
 			id: this.#id,
+			useBundle: this.#useBundle,
 		};
 	}
 }

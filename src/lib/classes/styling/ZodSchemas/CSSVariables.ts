@@ -41,7 +41,7 @@ export const ColorVariables = z
 		"--engine-ui-scrollbar-thumb-color": ColorAttribute,
 		"--engine-ui-text-color": ColorAttribute,
 		"--engine-ui-background-color": ColorAttribute,
-		"--engine-ui-button-color": ColorAttribute,
+		"--engine-ui-checkbox-color": ColorAttribute,
 		"--settings-danger-button-color": ColorAttribute,
 		"--settings-safe-button-color": ColorAttribute,
 		"--dropdown-button-color": ColorAttribute,

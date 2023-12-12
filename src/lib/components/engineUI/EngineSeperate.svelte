@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Modal from "../dialogPopover/Modal.svelte";
+	import Modal from "../modal/Modal.svelte";
 	import type { EngineDTO } from "./EngineDTO";
 	import {
 		Delete,
@@ -17,8 +17,10 @@
 		validateName,
 		validateStartPort,
 	} from "$lib/classes/engine/Validation";
+	import type EngineSeperate from "./EngineSeperate.svelte";
 
-	let formElement: HTMLFormElement;
+	export let currentComponent: EngineSeperate | undefined;
+
 	let modalContainer: Modal & iModalComponent;
 	let nameContainer: HTMLInputElement;
 	let ipAddressContainer: HTMLInputElement;
@@ -56,7 +58,7 @@
 			closeModal();
 			return;
 		}
-		formElement.parentNode?.removeChild(formElement);
+		currentComponent?.$destroy();
 		closeModal();
 	}
 
@@ -166,8 +168,8 @@
 	</div>
 </Modal>
 
-<form bind:this={formElement}>
-	<div id="name-box" class="box">
+<div id="engine-seperate-outer">
+	<div id="name-box" class="box" tabindex="-1">
 		Name:
 		<input
 			type="text"
@@ -185,46 +187,45 @@
 			on:click={showModal}><Delete size="18" /></button
 		>
 	</div>
-	<div class="box">
+	<div class="box" tabindex="-1">
 		IP Address:
 		<input
-			type="text"
+			type="url"
 			placeholder="192.168.1.1"
-			id="IP"
+			id="ip"
 			value={currentEngine.address != "-1" ? currentEngine.address : ""}
 			on:change={onIPChange}
 			bind:this={ipAddressContainer}
 			style="--borderColour: {ipBorderColour}; color: {currentEngine.useBundle
 				? 'grey'
 				: 'var(--engine-ui-text-color)'}"
-			readonly={currentEngine.useBundle}
+			disabled={currentEngine.useBundle}
 		/>
-		<div id="local-button" class="unselectable">
+		<div id="local-button" class="unselectable" tabindex="-1">
 			{#if currentEngine.useBundle}
 				<Button
 					icon={Check_box}
 					text="Use Bundle"
 					click={toggleUseBundle}
-					backgroundColor={"var(--engine-ui-button-color)"}
-					buttonColor={"var(--engine-ui-text-color)"}
+					backgroundColor={"var(--engine-ui-checkbox-color)"}
+					checkBoxColor={"var(--engine-ui-text-color)"}
 				/>
 			{:else}
 				<Button
 					icon={Check_box_outline_blank}
 					text="Use Bundle"
 					click={toggleUseBundle}
-					backgroundColor={"var(--engine-ui-button-color)"}
-					buttonColor={"var(--engine-ui-text-color)"}
+					backgroundColor={"var(--engine-ui-checkbox-color)"}
+					checkBoxColor={"var(--engine-ui-text-color)"}
 				/>
 			{/if}
 		</div>
 	</div>
-	<div id="port-range-box" class="box">
+	<div id="port-range-box" class="box" tabindex="-1">
 		Port range:
 		<input
 			type="number"
 			placeholder="7000"
-			id="STARTPORT"
 			class="port-input"
 			min="0"
 			max="65535"
@@ -239,7 +240,6 @@
 		<input
 			type="number"
 			placeholder="7000"
-			id="ENDPORT"
 			class="port-input"
 			min="0"
 			max="65535"
@@ -251,7 +251,7 @@
 			style="--borderColour: {portColour}"
 		/>
 	</div>
-</form>
+</div>
 
 <style>
 	.unselectable {
@@ -260,7 +260,7 @@
 		user-select: none;
 	}
 
-	form {
+	#engine-seperate-outer {
 		background-color: var(--engine-ui-background-color);
 		padding: 0.2em;
 		color: var(--engine-ui-text-color);
@@ -289,7 +289,7 @@
 		border-bottom: 0.05em solid var(--borderColour);
 	}
 
-	#IP {
+	#ip {
 		width: 55%;
 		padding: 0.4em 0.4em 0.2em 0.4em;
 		border-bottom: 0.05em solid var(--borderColour);
@@ -322,6 +322,7 @@
 		margin: 0;
 	}
 
+	input[type="url"],
 	input[type="text"] {
 		border: none;
 		background-color: var(--engine-ui-background-color);
@@ -329,6 +330,7 @@
 		margin: 0.2em;
 	}
 
+	input[type="url"]::placeholder,
 	input[type="text"]::placeholder {
 		color: var(--engine-ui-input-text-placeholder-color);
 		text-align: center;
