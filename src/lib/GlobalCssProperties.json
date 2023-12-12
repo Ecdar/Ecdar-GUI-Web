@@ -95,9 +95,9 @@
 			],
 			"--toolbar-icon-color": [
 				"display-p3",
-				1,
-				1,
-				1
+				0,
+				0,
+				0
 			],
 			"--toolbar-selected-color": [
 				"display-p3",
@@ -205,21 +205,21 @@
 				],
 				"--toolbar-icon-color": [
 					"display-p3",
-					0,
-					0,
-					0
+					1,
+					1,
+					1
 				],
 				"--toolbar-selected-color": [
+					"display-p3",
+					0.42215686274,
+					0.45176470588,
+					0.45529411764
+				],
+				"--toolbar-icon-background-color": [
 					"display-p3",
 					0.19215686274,
 					0.21176470588,
 					0.23529411764
-				],
-				"--toolbar-icon-background-color": [
-					"display-p3",
-					0.0156862745,
-					0.02352941176,
-					0.03529411764
 				]
 			}
 		},

@@ -4,8 +4,10 @@
 		Content_cut,
 		Arrow_downward,
 		Arrow_upward,
+		Arrow_right,
 	} from "svelte-google-materialdesign-icons";
 	import SidePanel from "$lib/components/sidePanel/SidePanel.svelte";
+	import SvgButton from "../buttons/SvgButton.svelte";
 	
 	export let collapsed: boolean = false;
 	const initalSize: string = "fits-content";
@@ -26,30 +28,38 @@
 			collapsed = true;
 		}
 	}
-
 </script>
+
 <nav>
 	<div id="tools-nav">
 		<div>
 			<h1>Tools</h1>
 		</div>
-		<button
-			type="button"
-			class="collapsible unselectable"
-			on:click={collapseOrExpand}
-		>
+		<button class="collapsible unselectable">
 			{#if collapsed}
-				<Arrow_upward size="18" color="white"/>
+				<SvgButton
+				icon={Arrow_downward}
+				click={collapseOrExpand}
+				id="toolbar-collapse-expand"
+				color="white"
+				/>
 			{:else}
-				<Arrow_downward size="18"  color="white"/>
+				<SvgButton
+				icon={Arrow_right}
+				click={collapseOrExpand}
+				id="toolbar-collapse-expand"
+				color="white"
+				/>
 			{/if}
+			
 		</button>
 	</div>
-	
 </nav>
+
 <div 
 	class=tool-bar-style 
 	style= "height: {toolbarSize}"
+	data-testid="toolbar"
 >
 	<!-- Add ToolBarItems here, containing name, icon, onClick and description -->
 	<ToolBarItem 
@@ -57,7 +67,7 @@
 		icon={Content_cut}	
 		onClick={() => {
 			// Your custom logic here
-			console.log('Button pressed!');
+			console.log('Cut pressed!');
 		}}	
 		description="This is a testfunction for cut"
 		
@@ -67,7 +77,7 @@
 		icon={Content_cut}	
 		onClick={() => {
 			// Your custom logic here
-			console.log('Button pressed!');
+			console.log('Cut 2 pressed!');
 		}}		
 		description="This is a testfunction for cut 2"
 	/>
@@ -76,7 +86,7 @@
 		icon={Content_cut}	
 		onClick={() => {
 			// Your custom logic here
-			console.log('Button pressed!');
+			console.log('Cut 3 pressed!');
 		}}
 		description="This is a testfunction for cut 3"
 	/>
@@ -85,7 +95,7 @@
 		icon={Content_cut}	
 		onClick={() => {
 			// Your custom logic here
-			console.log('Button pressed!');
+			console.log('Cut 4 pressed!');
 		}}
 		description="This is a testfunction for cut 4"
 	/>
@@ -94,7 +104,7 @@
 		icon={Content_cut}	
 		onClick={() => {
 			// Your custom logic here
-			console.log('Button pressed!');
+			console.log('Cut 5 pressed!');
 		}}
 		description="This is a testfunction for cut 5"
 	/>
@@ -103,7 +113,7 @@
 		icon={Content_cut}	
 		onClick={() => {
 			// Your custom logic here
-			console.log('Button pressed!');
+			console.log('Cut 6 pressed!');
 		}}
 		description="This is a testfunction for cut 6"
 	/>
@@ -112,7 +122,7 @@
 		icon={Content_cut}	
 		onClick={() => {
 			// Your custom logic here
-			console.log('Button pressed!');
+			console.log('Cut 7 pressed!');
 		}}
 		description="This is a testfunction for cut 7"
 	/>
@@ -121,7 +131,7 @@
 		icon={Content_cut}	
 		onClick={() => {
 			// Your custom logic here
-			console.log('Button pressed!');
+			console.log('Cut 8 pressed!');
 		}}
 		description="This is a testfunction for cut 8"
 	/>
@@ -130,12 +140,11 @@
 		icon={Content_cut}	
 		onClick={() => {
 			// Your custom logic here
-			console.log('Button pressed!');
+			console.log('Cut 9 pressed!');
 		}}
 		description="This is a testfunction for cut 9"
 	/>
 </div>
-
 
 <style>
 	.tool-bar-style{
@@ -160,16 +169,10 @@
 	.collapsible {
 		background-color: var(--console-topbar-background-color);
 		float: right;
-		position: relative;
-		box-shadow: 0 3px 11px rgba(28, 28, 28, 0.55);
-		padding-left: 0.5em;
-		padding-right: 0.5em;
-		padding-bottom: 0.4em;
-		padding-top: 0.4em;
+		background: none;
+		border: none;
+		display: flex;
 	}
 
-	.collapsible:hover {
-		background-color: var(--console-selectedtab-color);
-	}
 	
 </style>

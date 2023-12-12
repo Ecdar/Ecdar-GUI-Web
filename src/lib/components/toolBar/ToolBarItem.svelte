@@ -2,13 +2,15 @@
     import { getContext, setContext, type ComponentType} from "svelte";
     import { tooltip } from 'svooltip';
 	import 'svooltip/styles.css'; // Include default styling
+    import { toolbarState, addToolbarItemState} from "$lib/globalState/toolbarState";
 
     export let icon: ComponentType;
     export let name: string;
     export let onClick: () => void;
     export let description: string;
 
-    let isSelected: boolean = getContext("selectedItem") === name;
+
+    let isSelected: boolean = getContext("selectedItem") === name; 
     
     /**
      * Calls the on:Click function on the button
@@ -27,17 +29,11 @@
             isSelected = false;
             setContext("selectedItem", undefined);
         }
-        else if (getContext("selectedItem") === undefined){
-            isSelected = true;
-            setContext("selectedItem", name);
-        }
         else{
             isSelected = true;
             setContext("selectedItem", name);
         }
     }
-
-
 
     const iconCtx = {
         strokeWidth: "1.5",
@@ -58,10 +54,10 @@
         id={slugify(name)}
         value={name}
         on:change={handleRadioChange}
-        on:click={onClick}
+        on:click={handleClick}
         style="display: none;"
     />
-    <svelte:component this={icon} style="var(--toolbar-icon-color)"></svelte:component>
+    <svelte:component this={icon} style={ "color: var(--toolbar-icon-color)"}></svelte:component>
 </label>
 
 <style>

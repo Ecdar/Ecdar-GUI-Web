@@ -1,12 +1,10 @@
-import type ToolBarItem from "$lib/components/toolBar/ToolBarItemOld.svelte";
 import { writable, type Writable} from "svelte/store";
 
-export let toolbarState: ToolBarItem;
-//export const toolbarState: {
-//    [NAME: string]: Writable<boolean>;
-//} = {};
+export const toolbarState: {
+    [NAME: string]: Writable<string>;
+} = {};
 
-export function changeToolBarItemState(name: string, defaultValue: boolean){
+export function addToolbarItemState(name: string, defaultValue: string){
     if (typeof toolbarState[name] === typeof undefined) {
 		toolbarState[name] = writable(defaultValue);
 	}
