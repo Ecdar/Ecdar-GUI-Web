@@ -3,15 +3,11 @@
 	import {
 		Content_cut,
 		Arrow_downward,
-		Arrow_upward,
 		Arrow_right,
 	} from "svelte-google-materialdesign-icons";
-	import SidePanel from "$lib/components/sidePanel/SidePanel.svelte";
 	import SvgButton from "../buttons/SvgButton.svelte";
 	
 	export let collapsed: boolean = false;
-	const initalSize: string = "fits-content";
-	let extendedSize: string = initalSize;
 	let collapsedSize: string = "0em";
 	let toolbarSize = collapsedSize;
 

@@ -1,11 +1,5 @@
-import { writable, type Writable} from "svelte/store";
+import { writable } from 'svelte/store';
 
-export const toolbarState: {
-    [NAME: string]: Writable<string>;
-} = {};
+const selectedItem = writable("");
 
-export function addToolbarItemState(name: string, defaultValue: string){
-    if (typeof toolbarState[name] === typeof undefined) {
-		toolbarState[name] = writable(defaultValue);
-	}
-}
+export default selectedItem;

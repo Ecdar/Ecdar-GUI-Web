@@ -2,7 +2,7 @@
     import { getContext, setContext, type ComponentType} from "svelte";
     import { tooltip } from 'svooltip';
 	import 'svooltip/styles.css'; // Include default styling
-    import { toolbarState, addToolbarItemState} from "$lib/globalState/toolbarState";
+    import selectedItem from "$lib/globalState/toolbarState";
 
     export let icon: ComponentType;
     export let name: string;
@@ -19,21 +19,9 @@
         if (onClick) {
             onClick(); 
         }
+        $selectedItem = name;
     }
-    
-    /**
-     * Handles the function if the radio button is selected
-     */
-    function handleRadioChange() {
-        if(getContext("selectedItem") === name){
-            isSelected = false;
-            setContext("selectedItem", undefined);
-        }
-        else{
-            isSelected = true;
-            setContext("selectedItem", name);
-        }
-    }
+
 
     const iconCtx = {
         strokeWidth: "1.5",
@@ -53,7 +41,7 @@
         name="tools"
         id={slugify(name)}
         value={name}
-        on:change={handleRadioChange}
+        on:change={() => {isSelected = $selectedItem !== name}}
         on:click={handleClick}
         style="display: none;"
     />
