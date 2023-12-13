@@ -14,12 +14,9 @@
 		{#if engine.address != "-1"}
 			<EngineSeperate
 				currentEngine={engine}
-
 				bind:this={engineSeperateArray[index]}
-				
 			/>
 		{/if}
-		
 	{/each}
 </div>
 

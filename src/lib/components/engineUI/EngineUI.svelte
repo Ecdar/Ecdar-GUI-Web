@@ -35,10 +35,7 @@
 				useBundle: engine.useBundle,
 			};
 
-			tempEngines.update((items) => [
-			...items,
-			tempEngine,
-		]);
+			tempEngines.update((items) => [...items, tempEngine]);
 		});
 
 		if (get(tempEngines).length == 0) {
@@ -62,12 +59,8 @@
 			useBundle: false,
 		};
 
-		tempEngines.update((items) => [
-			...items,
-			newEngine,
-		]);
+		tempEngines.update((items) => [...items, newEngine]);
 		// .push(newEngine);
-		
 	}
 
 	/**
