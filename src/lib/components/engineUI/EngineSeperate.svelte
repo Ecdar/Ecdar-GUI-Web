@@ -9,7 +9,6 @@
 		Check_box_outline_blank,
 	} from "svelte-google-materialdesign-icons";
 	import type iModalComponent from "$lib/interfaces/IModalComponent";
-	import Button from "../overlayMenu/elements/Button.svelte";
 	import {
 		comparePortRange,
 		validateEndPort,
@@ -151,20 +150,20 @@
 					Are you sure you wish to delete this engine?
 				{/if}
 			</h4>
-			<button
-				on:click={deleteEngine}
-				type="button"
-				class="delete-selection"
-			>
-				<Done size="18" />
-			</button>
-			<button
-				on:click={closeModal}
-				type="button"
-				class="delete-selection"
-			>
-				<Close size="18" />
-			</button>
+			<div class="delete-buttons">
+				<SvgButton
+					icon={Done}
+					click={deleteEngine}
+					size={24}
+					id="delete-selection"
+				/>
+				<SvgButton
+					icon={Close}
+					click={closeModal}
+					size={24}
+					id="close-delete-selection"
+				/>
+			</div>
 		</div>
 	</div>
 </Modal>
@@ -183,12 +182,7 @@
 		/>
 	</div>
 	<div class="delete-button">
-		<SvgButton
-			icon={Delete}
-			id="show-modal"
-			size={18}
-			click={showModal}
-		/>
+		<SvgButton icon={Delete} id="show-modal" size={18} click={showModal} />
 	</div>
 	<p id="ip">IP Address:</p>
 	<div id="ip-input">
@@ -207,9 +201,7 @@
 	</div>
 	<div id="local-button" class="unselectable" tabindex="-1">
 		<SvgButton
-			icon={currentEngine.useBundle
-				? Check_box
-				: Check_box_outline_blank}
+			icon={currentEngine.useBundle ? Check_box : Check_box_outline_blank}
 			click={toggleUseBundle}
 			size={18}
 			id="checkbox-button"
@@ -366,20 +358,15 @@
 		text-align: center;
 	}
 
-	.delete-selection {
-		border: 0;
-		border-bottom: 0.05em solid var(--engine-ui-underline-color);
-		padding: 0.2em 0.2em 0 0.2em;
-		background-color: transparent;
-		cursor: pointer;
-		margin-left: 0.5em;
-		margin-right: 0.5em;
-		color: var(--engine-ui-text-color);
-	}
-
 	#delete-text {
 		margin: 0.2em;
 		color: var(--engine-ui-text-color);
+	}
+
+	.delete-buttons {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
 	}
 
 	#local-button {
@@ -388,7 +375,6 @@
 		flex-direction: row-reverse;
 		justify-content: center;
 		align-items: center;
-
 	}
 
 	#local-button > p {

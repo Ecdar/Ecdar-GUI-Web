@@ -145,6 +145,10 @@
 	function closeUnsavedChangesModal() {
 		unsavedChangesModal.closeModal();
 	}
+
+	function closeIncorrectModal() {
+		incorrectInformationModal.closeModal();
+	}
 </script>
 
 <Modal bind:this={dialogContainer}>
@@ -185,15 +189,20 @@
 				You have unsaved changes. Are you sure you wish to close the
 				Engine tab? Your changes may not be saved.
 			</h4>
-			<button
-				on:click={forceCloseDialogContainer}
-				class="modal-selection"
-			>
-				<Done size="18" />
-			</button>
-			<button on:click={closeUnsavedChangesModal} class="modal-selection">
-				<Close size="18" />
-			</button>
+			<div class="close-buttons">
+				<SvgButton
+					icon={Done}
+					id="close-unsaved-changes-modal"
+					click={forceCloseDialogContainer}
+					size={24}
+				/>
+				<SvgButton
+					icon={Close}
+					id="close-unsaved-changes-modal"
+					click={closeUnsavedChangesModal}
+					size={24}
+				/>
+			</div>
 		</div>
 	</div>
 </Modal>
@@ -205,12 +214,14 @@
 				The information could not be processed. Check the input and try
 				again.
 			</h4>
-			<button
-				on:click={incorrectInformationModal.closeModal}
-				class="modal-selection"
-			>
-				<Done size="18" />
-			</button>
+			<div class="incorrect-information-button">
+				<SvgButton
+					icon={Done}
+					click={closeIncorrectModal}
+					id="close-incorrect-information-modal"
+					size={24}
+				/>
+			</div>
 		</div>
 	</div>
 </Modal>
@@ -237,17 +248,6 @@
 		padding-bottom: 0.2rem;
 	}
 
-	.modal-selection {
-		border: 0;
-		border-bottom: 0.05em solid var(--engine-ui-underline-color);
-		padding: 0.2em 0.2em 0 0.2em;
-		background-color: transparent;
-		cursor: pointer;
-		margin-left: 0.5em;
-		margin-right: 0.5em;
-		color: var(--engine-ui-text-color);
-	}
-
 	#modal-text {
 		margin: 0.2em;
 		color: var(--engine-ui-text-color);
@@ -260,5 +260,16 @@
 	.inner-modal-dialog {
 		padding: 0.2em;
 		background-color: var(--engine-ui-background-color);
+	}
+
+	.close-buttons {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+	}
+
+	.incorrect-information-button {
+		display: flex;
+		justify-content: center;
 	}
 </style>
