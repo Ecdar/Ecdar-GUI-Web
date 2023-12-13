@@ -21,7 +21,7 @@
 	import { tempEngines } from "$lib/globalState/tempEngines";
 	import { get } from "svelte/store";
 
-	export let currentComponent: EngineSeperate | undefined;
+	// export let currentComponent: EngineSeperate | undefined;
 
 	let modalContainer: Modal & iModalComponent;
 	let nameContainer: HTMLInputElement;
@@ -36,6 +36,8 @@
 	let engineUIErrorUnderlineColour: string =
 		"var(--engine-ui-error-underline-color)";
 	let engineUIUnderlineColour: string = "var(--engine-ui-underline-color)";
+
+	
 
 	export let currentEngine: EngineDTO;
 	// export let tempEngines: Array<EngineDTO>;
@@ -60,7 +62,14 @@
 		})
 
 		
-
+		$tempEngines.forEach( (engine) => {
+			if(engine == currentEngine){
+				engine.address = "-1";
+				if(engine.id == -1) //if deleted engine is new, dont mark it as change
+					engine.hasBeenChanged = false;
+			}
+		})
+		
 		if (validEngines.length <= 1) {
 			nameContainer.value = "";
 			ipAddressContainer.value = "";
@@ -72,13 +81,7 @@
 			return;
 		}
 
-		$tempEngines.forEach( (engine) => {
-			if(engine == currentEngine){
-				engine.address = "-1";
-				if(engine.id != -1) //check if change affects stored engines
-					engine.hasBeenChanged = true;
-			}
-		})
+		
 		
 		$tempEngines = $tempEngines;
 		// $tempEngines.find((engine) => {return engine != currentEngine})) 
@@ -231,13 +234,21 @@
 		/>
 	</div>
 	<div id="local-button" class="unselectable" tabindex="-1">
-		<SvgButton
+		<!-- <SvgButton
 			icon={currentEngine.useBundle ? Check_box : Check_box_outline_blank}
 			click={toggleUseBundle}
 			size={18}
-			id="checkbox-button"
-		/>
-		<p>Use Bundle</p>
+			button={new HTMLElement().id = }
+			id={"checkbox-button"}
+		/> -->
+		<label> <!--for attribute automatically works on nested element-->
+			Use Bundle 
+			<SvgButton
+			icon={currentEngine.useBundle ? Check_box : Check_box_outline_blank}
+			click={toggleUseBundle}
+			size={18}
+			id={"checkbox-button"}
+		/></label>
 	</div>
 	<p id="port">Port range:</p>
 	<div id="port-input">
@@ -273,6 +284,15 @@
 </div>
 
 <style>
+	:global(.engine-panel #checkbox-button){
+		pointer-events: none;
+	}
+	label {
+		display: flex;
+		cursor: pointer;
+	}
+
+
 	.unselectable {
 		-webkit-user-select: none;
 		-ms-user-select: none;

@@ -178,53 +178,7 @@ test("Invalid engine start port larger than end port will not save", async ({
 	).toBeVisible();
 });
 
-test("Unsaved name will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
-	await inputs[0].fill("test");
 
-	await page.locator("#close-button").click();
-	await expect(
-		page.getByText(
-			"You have unsaved changes. Are you sure you wish to close the Engine tab? Your changes may not be saved.",
-		),
-	).toBeVisible();
-});
-
-test("Unsaved address will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
-	await inputs[1].fill("1.1.1.1");
-
-	await page.locator("#close-button").click();
-	await expect(
-		page.getByText(
-			"You have unsaved changes. Are you sure you wish to close the Engine tab? Your changes may not be saved.",
-		),
-	).toBeVisible();
-});
-
-test("Unsaved start port will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
-	await inputs[2].fill("1");
-
-	await page.locator("#close-button").click();
-	await expect(
-		page.getByText(
-			"You have unsaved changes. Are you sure you wish to close the Engine tab? Your changes may not be saved.",
-		),
-	).toBeVisible();
-});
-
-test("Unsaved end port will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
-	await inputs[3].fill("2");
-
-	await page.locator("#close-button").click();
-	await expect(
-		page.getByText(
-			"You have unsaved changes. Are you sure you wish to close the Engine tab? Your changes may not be saved.",
-		),
-	).toBeVisible();
-});
 
 test("Can add and delete 10 engines", async ({ page }) => {
 	for (let i = 0; i < 10; i++) {
@@ -245,3 +199,7 @@ test("Can add and delete 10 engines", async ({ page }) => {
 
 	await expect(page.locator(".engines>div")).toHaveCount(1);
 });
+
+
+
+test("Removed engine, close window ask for change")

@@ -16,7 +16,7 @@
 				currentEngine={engine}
 
 				bind:this={engineSeperateArray[index]}
-				currentComponent={engineSeperateArray[index]}
+				
 			/>
 		{/if}
 		
