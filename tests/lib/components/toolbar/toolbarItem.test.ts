@@ -2,13 +2,15 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
+	await page.waitForLoadState();
 	await page.click("#start-new-project");
 });
 
+
 test('selected button lights up correctly', async ({ page }) => {
   await page.locator('#tools-nav').getByRole('button').nth(1).click();
-  const firsttool =  page.locator('.tool-bar-item').first();
-  const unSelectedcolor = await firsttool.evaluate((el) => {
+  const firstTool =  page.locator('.tool-bar-item').first();
+  const unSelectedcolor = await firstTool.evaluate((el) => {
     return window.getComputedStyle(el).getPropertyValue('background-color');
 
   })
@@ -19,7 +21,7 @@ test('selected button lights up correctly', async ({ page }) => {
             .click();
 
 
-  const Selectedcolor = await firsttool.evaluate((el) => {
+  const Selectedcolor = await firstTool.evaluate((el) => {
     return window.getComputedStyle(el).getPropertyValue('background-color');
 
   })
