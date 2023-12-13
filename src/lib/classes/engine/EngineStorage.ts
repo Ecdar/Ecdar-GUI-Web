@@ -8,7 +8,7 @@ class EngineStorage {
 	/**
 	 * Array of engines defined
 	 * */
-	engineArray: Array<Engine> = [];
+	engineArray: Array<Engine | undefined> = [];
 
 	/**
 	 * variable used to give unique id to engines
@@ -33,9 +33,11 @@ class EngineStorage {
 	set defaultEngine(engine: Engine | undefined) {
 		let index = -1;
 
-		index = this.engineArray.findIndex((arrayEngine: Engine) => {
-			return arrayEngine.id === engine?.id;
-		});
+		index = this.engineArray.findIndex(
+			(arrayEngine: Engine | undefined) => {
+				return arrayEngine?.id === engine?.id;
+			},
+		);
 		if (engine === undefined || index > -1) this.#defaultEngine = engine;
 		else throw new Error("Failed to set default engine");
 	}
@@ -64,25 +66,19 @@ class EngineStorage {
 			this.engineId,
 			useBundle,
 		);
-		this.engineArray.push(newEngine);
+		this.engineArray[this.engineId - 1] = newEngine;
 	}
 
 	/**
 	 * Deletes the engine with the given id
 	 */
 	deleteEngine(id: number) {
-		const engineIndex: number = this.engineArray.findIndex(
-			(engine: Engine) => {
-				return engine.id === id;
-			},
-		);
 		//check for results
-		if (engineIndex > -1) {
+		if (this.engineArray[id]) {
 			//Check if the default engine is being removed
-			if (this.defaultEngine === this.engineArray[engineIndex])
-				this.defaultEngine = undefined;
+			if (this.defaultEngine?.id === id) this.defaultEngine = undefined;
 
-			this.engineArray.splice(engineIndex, 1);
+			this.engineArray[id] = undefined;
 		} else {
 			throw new Error("Engine Id does not exist");
 		}
@@ -95,15 +91,15 @@ class EngineStorage {
 
 		//Find engine based on id
 		if (typeof identifier === "number") {
-			returnEngine = this.engineArray.find((engine: Engine) => {
-				return engine.id === identifier;
-			});
+			returnEngine = this.engineArray[identifier];
 		}
 		//Find engine based on name
 		else {
-			returnEngine = this.engineArray.find((engine: Engine) => {
-				return engine.name === identifier;
-			});
+			returnEngine = this.engineArray.find(
+				(engine: Engine | undefined) => {
+					return engine?.name === identifier;
+				},
+			);
 		}
 		if (returnEngine !== undefined) return returnEngine;
 		else throw new Error("Could not find engine");
@@ -112,7 +108,7 @@ class EngineStorage {
 	/**
 	 * Returns all engines in the store in the form of an array
 	 */
-	getEngineArray(): Engine[] {
+	getEngineArray(): Array<Engine | undefined> {
 		return this.engineArray;
 	}
 

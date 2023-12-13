@@ -13,7 +13,7 @@ describe("succeed Engine test", () => {
 		expect(EngineStorage.engineArray.length).toBe(0);
 
 		EngineStorage.createEngine("test", "8.8.8.8", 1, 2, false);
-		expect(EngineStorage.engineArray.length).toBe(1);
+		expect(EngineStorage.engineArray.length).toBe(5);
 	});
 
 	it("Set default", () => {
@@ -28,7 +28,7 @@ describe("succeed Engine test", () => {
 			//convert to JSON to remove private fields
 			JSON.stringify(EngineStorage.getEngine("test2")),
 		).toBe(JSON.stringify(testEngineWithId));
-		expect(JSON.stringify(EngineStorage.getEngine(5))).toBe(
+		expect(JSON.stringify(EngineStorage.getEngine(6))).toBe(
 			JSON.stringify(testEngineWithId),
 		);
 	});
@@ -50,6 +50,6 @@ const testEngineWithId: Engine = {
 	address: "123.213.123.123",
 	portRangeStart: 1,
 	portRangeEnd: 2,
-	id: 5,
+	id: 6,
 	useBundle: false,
 } as Engine;
