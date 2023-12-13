@@ -6,7 +6,8 @@
 		Arrow_right,
 	} from "svelte-google-materialdesign-icons";
 	import SvgButton from "../buttons/SvgButton.svelte";
-	
+	import EcdarConsole from "$lib/classes/console/Console";
+
 	export let collapsed: boolean = false;
 	let collapsedSize: string = "0em";
 	let toolbarSize = collapsedSize;
@@ -14,13 +15,12 @@
 	/**
 	 * Collapses or expands the toolbar
 	 */
-	function collapseOrExpand(){
-		if(collapsed){
+	function collapseOrExpand() {
+		if (collapsed) {
 			toolbarSize = "0";
 			collapsed = false;
-		}
-		else {
-			toolbarSize = "fit-content"
+		} else {
+			toolbarSize = "fit-content";
 			collapsed = true;
 		}
 	}
@@ -33,108 +33,110 @@
 		</div>
 		<button class="collapsible unselectable">
 			<SvgButton
+<<<<<<< Updated upstream
 			icon={collapsed ? Arrow_downward : Arrow_right}
 			click={collapseOrExpand}
 			id="toolbar-collapse-expand"
 			color="white"
+=======
+				icon={collapsed ? Arrow_downward : Arrow_right}
+				click={collapseOrExpand}
+				id="toolbar-collapse-expand"
+				color="white"
+>>>>>>> Stashed changes
 			/>
 		</button>
 	</div>
 </nav>
 
-<div 
-	class=tool-bar-style 
-	style= "height: {toolbarSize}"
-	data-testid="toolbar"
->
+<div class="tool-bar-style" style="height: {toolbarSize}" data-testid="toolbar">
 	<!-- Add ToolBarItems here, containing name, icon, onClick and description -->
-	<ToolbarItem 
+	<ToolbarItem
 		name="Cut"
-		icon={Content_cut}	
+		icon={Content_cut}
 		onClick={() => {
 			// Your custom logic here
-			console.log('Cut pressed!');
-		}}	
+			EcdarConsole.writeLineFrontend("Cut pressed!");
+		}}
 		description="This is a testfunction for cut"
-		
 	/>
-	<ToolbarItem 
+	<ToolbarItem
 		name="Cut2"
-		icon={Content_cut}	
+		icon={Content_cut}
 		onClick={() => {
 			// Your custom logic here
-			console.log('Cut 2 pressed!');
-		}}		
+			EcdarConsole.writeLineFrontend("Cut 2 pressed!");
+		}}
 		description="This is a testfunction for cut 2"
 	/>
-	<ToolbarItem 
+	<ToolbarItem
 		name="Cut3"
-		icon={Content_cut}	
+		icon={Content_cut}
 		onClick={() => {
 			// Your custom logic here
-			console.log('Cut 3 pressed!');
+			EcdarConsole.writeLineFrontend("Cut 3 pressed!");
 		}}
 		description="This is a testfunction for cut 3"
 	/>
-	<ToolbarItem 
+	<ToolbarItem
 		name="Cut4"
-		icon={Content_cut}	
+		icon={Content_cut}
 		onClick={() => {
 			// Your custom logic here
-			console.log('Cut 4 pressed!');
+			EcdarConsole.writeLineFrontend("Cut 4 pressed!");
 		}}
 		description="This is a testfunction for cut 4"
 	/>
-	<ToolbarItem 
+	<ToolbarItem
 		name="Cut5"
-		icon={Content_cut}	
+		icon={Content_cut}
 		onClick={() => {
 			// Your custom logic here
-			console.log('Cut 5 pressed!');
+			EcdarConsole.writeLineFrontend("Cut 5 pressed!");
 		}}
 		description="This is a testfunction for cut 5"
 	/>
-	<ToolbarItem 
+	<ToolbarItem
 		name="Cut6"
-		icon={Content_cut}	
+		icon={Content_cut}
 		onClick={() => {
 			// Your custom logic here
-			console.log('Cut 6 pressed!');
+			EcdarConsole.writeLineFrontend("Cut 6 pressed!");
 		}}
 		description="This is a testfunction for cut 6"
 	/>
-	<ToolbarItem 
+	<ToolbarItem
 		name="Cut7"
-		icon={Content_cut}	
+		icon={Content_cut}
 		onClick={() => {
 			// Your custom logic here
-			console.log('Cut 7 pressed!');
+			EcdarConsole.writeLineFrontend("Cut 7 pressed!");
 		}}
 		description="This is a testfunction for cut 7"
 	/>
-	<ToolbarItem 
+	<ToolbarItem
 		name="Cut8"
-		icon={Content_cut}	
+		icon={Content_cut}
 		onClick={() => {
 			// Your custom logic here
-			console.log('Cut 8 pressed!');
+			EcdarConsole.writeLineFrontend("Cut 8 pressed!");
 		}}
 		description="This is a testfunction for cut 8"
 	/>
-	<ToolbarItem 
+	<ToolbarItem
 		name="Cut9"
-		icon={Content_cut}	
+		icon={Content_cut}
 		onClick={() => {
 			// Your custom logic here
-			console.log('Cut 9 pressed!');
+			EcdarConsole.writeLineFrontend("Cut 9 pressed!");
 		}}
 		description="This is a testfunction for cut 9"
 	/>
 </div>
 
 <style>
-	.tool-bar-style{
-		font-size: 0; /* This removes the space between buttons*/ 
+	.tool-bar-style {
+		font-size: 0; /* This removes the space between buttons*/
 		margin-right: -2px;
 		margin-bottom: 0px;
 	}
@@ -159,6 +161,9 @@
 		border: none;
 		display: flex;
 	}
+<<<<<<< Updated upstream
 
 	
+=======
+>>>>>>> Stashed changes
 </style>
