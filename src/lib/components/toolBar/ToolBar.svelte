@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ToolbarItem from "./ToolbarItem.svelte";
+	import ToolbarItem from "./ToolBarItem.svelte";
 	import {
 		Content_cut,
 		Arrow_downward,
@@ -33,17 +33,10 @@
 		</div>
 		<button class="collapsible unselectable">
 			<SvgButton
-<<<<<<< Updated upstream
-			icon={collapsed ? Arrow_downward : Arrow_right}
-			click={collapseOrExpand}
-			id="toolbar-collapse-expand"
-			color="white"
-=======
 				icon={collapsed ? Arrow_downward : Arrow_right}
 				click={collapseOrExpand}
 				id="toolbar-collapse-expand"
 				color="white"
->>>>>>> Stashed changes
 			/>
 		</button>
 	</div>
@@ -161,9 +154,4 @@
 		border: none;
 		display: flex;
 	}
-<<<<<<< Updated upstream
-
-	
-=======
->>>>>>> Stashed changes
 </style>
