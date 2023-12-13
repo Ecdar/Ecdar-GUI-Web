@@ -108,8 +108,9 @@ class EngineStorage {
 	/**
 	 * Returns all engines in the store in the form of an array
 	 */
-	getEngineArray(): Array<Engine | undefined> {
-		return this.engineArray;
+	getEngineArray(): Array<Engine> {
+		const filtered: Engine[] = this.engineArray.filter(element => element !== undefined) as Engine[]
+		return filtered;
 	}
 
 	/**

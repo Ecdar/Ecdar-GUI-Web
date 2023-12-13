@@ -34,10 +34,10 @@ describe("succeed Engine test", () => {
 	});
 
 	it("Get all engines", () => {
-		expect(EngineStorage.engineArray.length).toBe(
-			EngineStorage.getEngineArray().length,
+		expect(EngineStorage.getEngineArray().length).toBe(
+			2
 		);
-		expect(EngineStorage.engineArray).toBe(EngineStorage.getEngineArray());
+		
 	});
 });
 
