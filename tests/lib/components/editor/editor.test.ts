@@ -38,7 +38,7 @@ test("Write in editor", async ({ page }) => {
 	await expect(page.getByText("clock x;")).toBeVisible();
 });
 
-test("Correct line numers in editor", async ({ page }) => {
+test("Correct line numbers in editor", async ({ page }) => {
 	await page
 		.locator("#coffee-machine-1")
 		.getByRole("button", { name: "folder special Coffee Machine 1" })
