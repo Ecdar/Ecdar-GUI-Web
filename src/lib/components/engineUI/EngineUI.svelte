@@ -91,7 +91,7 @@
 					let tempEngine = EngineStorage.getEngine(engine.id);
 
 					tempEngine.useBundle = engine.useBundle;
-					if (tempEngine.useBundle)
+					if (!tempEngine.useBundle)
 						tempEngine.address = engine.address;
 					tempEngine.name = engine.name;
 					tempEngine.portRangeStart = engine.portRangeStart;

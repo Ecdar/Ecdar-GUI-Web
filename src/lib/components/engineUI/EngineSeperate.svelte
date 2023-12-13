@@ -155,13 +155,13 @@
 					icon={Done}
 					click={deleteEngine}
 					size={24}
-					id="delete-selection"
+					id="delete-button"
 				/>
 				<SvgButton
 					icon={Close}
 					click={closeModal}
 					size={24}
-					id="close-delete-selection"
+					id="delete-button"
 				/>
 			</div>
 		</div>

@@ -19,24 +19,47 @@ test("Can add a new engine", async ({ page }) => {
 });
 
 test("Can remove an engine", async ({ page }) => {
-	await page.locator("#add-button").click();
-	await page.locator(".delete-button").first().click();
-	await page.locator(".inner-delete-dialog>button").first().click();
+	await page.locator("#button-box").getByRole("button").nth(1).click();
+	await page
+		.locator("#engine-ui-outer div")
+		.filter({ hasText: "Engines Are you sure you wish" })
+		.getByRole("button")
+		.nth(2)
+		.click();
+	await page
+		.locator("#engine-ui-outer")
+		.getByRole("dialog")
+		.getByRole("button")
+		.first()
+		.click();
 	await expect(page.locator(".engines>div")).toHaveCount(1);
 });
 
 test("Can cancel deletion of an engine", async ({ page }) => {
-	await page.locator("#add-button").click();
-	await page.locator(".delete-button").first().click();
-	const buttons = await page.locator(".inner-delete-dialog>button").all();
-
-	await buttons[1].click();
+	await page.locator("#button-box").getByRole("button").nth(1).click();
+	await page
+		.locator("#engine-ui-outer div")
+		.filter({ hasText: "Engines Are you sure you wish" })
+		.getByRole("button")
+		.nth(2)
+		.click();
+	await page
+		.locator("#engine-ui-outer")
+		.getByRole("dialog")
+		.getByRole("button")
+		.nth(1)
+		.click();
 	await expect(page.locator(".engines>div")).toHaveCount(2);
 });
 
 test("Can not remove the last engine", async ({ page }) => {
 	await page.locator(".delete-button").first().click();
-	await page.locator(".inner-delete-dialog>button").first().click();
+	await page
+		.locator("#engine-ui-outer")
+		.getByRole("dialog")
+		.getByRole("button")
+		.nth(1)
+		.click();
 	await expect(page.locator(".engines>div")).toHaveCount(1);
 });
 
@@ -62,7 +85,7 @@ test("Can save engine changes", async ({ page }) => {
 test("Can save engine with useBundle changes", async ({ page }) => {
 	const inputs = await page.locator("input").all();
 	await inputs[0].fill("test");
-	await page.locator("#local-button").click();
+	await page.locator("#local-button").getByRole("button").click();
 	await inputs[2].fill("1");
 	await inputs[3].fill("2");
 
@@ -212,7 +235,12 @@ test("Can add and delete 10 engines", async ({ page }) => {
 
 	for (let i = 0; i < 10; i++) {
 		await page.locator(".delete-button").first().click();
-		await page.getByRole("button", { name: "done" }).click();
+		await page
+			.locator("#engine-ui-outer")
+			.getByRole("dialog")
+			.getByRole("button")
+			.first()
+			.click();
 	}
 
 	await expect(page.locator(".engines>div")).toHaveCount(1);
