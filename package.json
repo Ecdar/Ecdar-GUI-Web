@@ -21,7 +21,6 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.39.0",
-		"@svelte-plugins/tooltips": "^0.1.9",
 		"@protobuf-ts/plugin": "^2.9.1",
 		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.26.0",
