@@ -8,10 +8,9 @@
 	import type EngineSeperate from "./EngineSeperate.svelte";
 	import type IEngineSeperateComponent from "$lib/interfaces/IEngineSeperateComponent";
 	import SvgButton from "../buttons/SvgButton.svelte";
-	import { get, writable, type Writable } from "svelte/store";
+	import { get } from "svelte/store";
 	import { tempEngines } from "$lib/globalState/tempEngines";
 	let dialogContainer!: Modal & IModalComponent;
-	// let tempEngines: Writable<Array<EngineDTO>> = writable([]);
 	let unsavedChangesModal: Modal & IModalComponent;
 	let incorrectInformationModal: Modal & IModalComponent;
 
@@ -60,7 +59,6 @@
 		};
 
 		tempEngines.update((items) => [...items, newEngine]);
-		// .push(newEngine);
 	}
 
 	/**
@@ -71,7 +69,6 @@
 		return $tempEngines.find((engine) => {
 			return engine.hasBeenChanged;
 		});
-		// return false;
 	}
 
 	/**
@@ -79,7 +76,6 @@
 	 */
 	function onSubmit() {
 		try {
-			// EngineStorage.engineArray = [];
 			$tempEngines.forEach((engine) => {
 				if (engine.id == -1) {
 					if (engine.address == "-1") return;
@@ -100,7 +96,6 @@
 					storedEngine.hasBeenChanged = false;
 				}
 			});
-			// tempEngines = [];
 			forceCloseDialogContainer();
 		} catch (error) {
 			engineSeperateArray.forEach((engine) => {
@@ -128,7 +123,6 @@
 			unsavedChangesModal.showModal();
 			return;
 		}
-		// tempEngines = [];
 		dialogContainer.closeModal();
 	}
 
@@ -155,7 +149,7 @@
 <Modal bind:this={dialogContainer}>
 	<div id="engine-ui-outer">
 		<div class="engine-panel" tabindex="-1">
-			<EnginePanel {tempEngines} {engineSeperateArray} />
+			<EnginePanel {engineSeperateArray} />
 		</div>
 		<div id="button-box" tabindex="-1">
 			<SvgButton

@@ -16,12 +16,8 @@
 		validateName,
 		validateStartPort,
 	} from "$lib/classes/engine/Validation";
-	import type EngineSeperate from "./EngineSeperate.svelte";
 	import SvgButton from "../buttons/SvgButton.svelte";
 	import { tempEngines } from "$lib/globalState/tempEngines";
-	import { get } from "svelte/store";
-
-	// export let currentComponent: EngineSeperate | undefined;
 
 	let modalContainer: Modal & iModalComponent;
 	let nameContainer: HTMLInputElement;
@@ -38,7 +34,6 @@
 	let engineUIUnderlineColour: string = "var(--engine-ui-underline-color)";
 
 	export let currentEngine: EngineDTO;
-	// export let tempEngines: Array<EngineDTO>;
 
 	export const setUpEngineSeperate = () => {
 		changeNameBorder();
@@ -51,8 +46,6 @@
 	 * Deletion should not be permanent if the change is not saved in EngineUI
 	 */
 	function deleteEngine() {
-		// currentEngine.address = "-1";
-
 		const validEngines = $tempEngines.filter((engine) => {
 			return engine.address != "-1";
 		});
@@ -78,9 +71,7 @@
 		}
 
 		$tempEngines = $tempEngines;
-		// $tempEngines.find((engine) => {return engine != currentEngine}))
 
-		// currentComponent?.$destroy();
 		closeModal();
 	}
 
@@ -226,13 +217,6 @@
 		/>
 	</div>
 	<div id="local-button" class="unselectable" tabindex="-1">
-		<!-- <SvgButton
-			icon={currentEngine.useBundle ? Check_box : Check_box_outline_blank}
-			click={toggleUseBundle}
-			size={18}
-			button={new HTMLElement().id = }
-			id={"checkbox-button"}
-		/> -->
 		<label>
 			<!--for attribute automatically works on nested element-->
 			Use Bundle

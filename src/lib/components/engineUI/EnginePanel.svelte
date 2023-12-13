@@ -1,10 +1,7 @@
 <script lang="ts">
 	import EngineSeperate from "./EngineSeperate.svelte";
-	import type { EngineDTO } from "./EngineDTO";
-	import { get, writable, type Writable } from "svelte/store";
-	import { Id } from "$lib/classes/automaton/Id";
+	import { tempEngines } from "$lib/globalState/tempEngines";
 
-	export let tempEngines: Writable<Array<EngineDTO>> = writable([]);
 	export let engineSeperateArray: Array<EngineSeperate | undefined>;
 </script>
 
