@@ -32,12 +32,12 @@
 			<h1>Tools</h1>
 		</div>
 		<button class="collapsible unselectable">
-				<SvgButton
-				icon={collapsed ? Arrow_downward : Arrow_right}
-				click={collapseOrExpand}
-				id="toolbar-collapse-expand"
-				color="white"
-				/>
+			<SvgButton
+			icon={collapsed ? Arrow_downward : Arrow_right}
+			click={collapseOrExpand}
+			id="toolbar-collapse-expand"
+			color="white"
+			/>
 		</button>
 	</div>
 </nav>
