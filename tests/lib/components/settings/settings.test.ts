@@ -82,13 +82,10 @@ test("change to color tab", async ({ page }) => {
 	await expect(buttons[1]).not.toHaveClass(/active/);
 });
 
-test("settings hidden when closing 'Esc' press'", async ({
-	page,
-}) => {
+test("settings hidden when closing 'Esc' press'", async ({ page }) => {
 	await expect(page.locator("#setting-tabs-container")).toBeVisible();
 	await page.keyboard.press("Escape");
 	await expect(page.locator("#setting-tabs-container")).toBeHidden();
-
 });
 
 test("settings hidden when closing through button", async ({ page }) => {
@@ -117,7 +114,5 @@ test("can reopen settings after closing", async ({ page }) => {
 		.getByRole("button", { name: "settings Settings", exact: true })
 		.click();
 
-
 	await expect(page.locator("#setting-tabs-container")).toBeVisible();
-
 });
