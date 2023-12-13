@@ -67,6 +67,9 @@
 	/>
 {/if}
 <div class="side-panel" style="flex-basis: {panelWidth}px">
+	{#if panelSide === SidePanelEnum.Left}
+		<slot name="toolbar" />
+	{/if}
 	<nav class="inner-nav">
 		<slot name="nav" />
 	</nav>
