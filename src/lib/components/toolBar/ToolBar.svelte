@@ -32,22 +32,12 @@
 			<h1>Tools</h1>
 		</div>
 		<button class="collapsible unselectable">
-			{#if collapsed}
 				<SvgButton
-				icon={Arrow_downward}
+				icon={collapsed ? Arrow_downward : Arrow_right}
 				click={collapseOrExpand}
 				id="toolbar-collapse-expand"
 				color="white"
 				/>
-			{:else}
-				<SvgButton
-				icon={Arrow_right}
-				click={collapseOrExpand}
-				id="toolbar-collapse-expand"
-				color="white"
-				/>
-			{/if}
-			
 		</button>
 	</div>
 </nav>
