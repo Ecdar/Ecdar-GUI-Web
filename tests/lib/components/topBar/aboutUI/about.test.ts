@@ -17,5 +17,4 @@ test("Navigating to Help, then About", async ({ page }) => {
 		.innerHTML();
 
 	expect(aboutBox).toBe("Ecdar v. 0.1");
-
 });

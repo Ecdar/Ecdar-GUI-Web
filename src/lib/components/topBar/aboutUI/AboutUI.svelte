@@ -31,8 +31,6 @@
 </Modal>
 
 <style>
-	
-
 	.box {
 		padding-left: 1em;
 		color: var(--text-color);
