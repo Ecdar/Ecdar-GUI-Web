@@ -115,6 +115,8 @@
 			return;
 		}
 		if (
+			!Number.isInteger(Number(startPortContainer.value)) ||
+			!Number.isInteger(Number(endPortContainer.value)) ||
 			!validateStartPort(Number(startPortContainer.value)) ||
 			!validateEndPort(Number(endPortContainer.value)) ||
 			!comparePortRange(
@@ -215,6 +217,7 @@
 			placeholder="7000"
 			class="port-input"
 			min="0"
+			step="1"
 			max="65535"
 			value={currentEngine.portRangeStart != -1
 				? currentEngine.portRangeStart
