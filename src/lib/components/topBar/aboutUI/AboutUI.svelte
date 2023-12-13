@@ -18,12 +18,10 @@
 		<div>
 			<div class="box">
 				<h1>Ecdar v. 0.1</h1>
-				Made by:
-				<br /><br />
-				&nbsp; 5. Semester, Aalborg University 2023
-				<br /><br />
-				For more information, go to
-				<a href="https://www.ecdar.net/" target="_blank"> www.Ecdar.net</a>
+				<p>Made by:</p>
+				<p>&nbsp; 5. Semester, Aalborg University 2023</p>
+				<p>For more information, go to
+				<a href="https://www.ecdar.net/" target="_blank"> www.Ecdar.net</a></p>
 			</div>
 			<button on:click={closeModal}>Close</button>
 		</div>
@@ -38,11 +36,12 @@
 	}
 
 	.box {
-		padding: 1em;
+		padding-left: 1em;
 		color:var(--text-color);
 	}
 
 	button {
-		margin-left: 85%;
+		margin-top: 2em;
+		margin-left: 35em;
 	}
 </style>
