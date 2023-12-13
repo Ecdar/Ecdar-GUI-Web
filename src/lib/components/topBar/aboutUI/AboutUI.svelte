@@ -20,8 +20,12 @@
 				<h1>Ecdar v. 0.1</h1>
 				<p>Made by:</p>
 				<p>&nbsp; 5. Semester, Aalborg University 2023</p>
-				<p>For more information, go to
-				<a href="https://www.ecdar.net/" target="_blank"> www.Ecdar.net</a></p>
+				<p>
+					For more information, go to
+					<a href="https://www.ecdar.net/" target="_blank">
+						www.Ecdar.net</a
+					>
+				</p>
 			</div>
 			<button on:click={closeModal}>Close</button>
 		</div>
@@ -37,7 +41,7 @@
 
 	.box {
 		padding-left: 1em;
-		color:var(--text-color);
+		color: var(--text-color);
 	}
 
 	button {
