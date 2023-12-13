@@ -221,11 +221,11 @@
 	}
 
 	#button-box {
-		padding-top: 0.5rem;
 		display: flex;
 		width: 100%;
 		height: 3em;
-		justify-content: space-around;
+		justify-content: space-evenly;
+		padding-right: 1rem;
 	}
 
 	:global(#button-box button) {

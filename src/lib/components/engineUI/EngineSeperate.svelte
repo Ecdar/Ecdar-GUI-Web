@@ -18,6 +18,7 @@
 		validateStartPort,
 	} from "$lib/classes/engine/Validation";
 	import type EngineSeperate from "./EngineSeperate.svelte";
+	import SvgButton from "../buttons/SvgButton.svelte";
 
 	export let currentComponent: EngineSeperate | undefined;
 
@@ -169,30 +170,32 @@
 </Modal>
 
 <div id="engine-seperate-outer">
-	<div id="name-box" class="box" tabindex="-1">
-		<p>Name:</p>
+	<p id="name">Name:</p>
+	<div id="name-input">
 		<input
 			type="text"
 			placeholder="Name"
-			id="name"
+			id="name-input-text"
 			value={currentEngine.name}
 			on:change={onNameChange}
 			bind:this={nameContainer}
 			style="--border-color: {nameBorderColour}"
 		/>
-		<button
-			type="button"
-			id="show-modal"
-			class="delete-button"
-			on:click={showModal}><Delete size="18" /></button
-		>
 	</div>
-	<div class="box" tabindex="-1">
-		<p>IP Address:</p>
+	<div class="delete-button">
+		<SvgButton
+			icon={Delete}
+			id="show-modal"
+			size={18}
+			click={showModal}
+		/>
+	</div>
+	<p id="ip">IP Address:</p>
+	<div id="ip-input">
 		<input
 			type="url"
 			placeholder="192.168.1.1"
-			id="ip"
+			id="ip-input-text"
 			value={currentEngine.address != "-1" ? currentEngine.address : ""}
 			on:change={onIPChange}
 			bind:this={ipAddressContainer}
@@ -201,28 +204,20 @@
 				: 'var(--engine-ui-text-color)'}"
 			disabled={currentEngine.useBundle}
 		/>
-		<div id="local-button" class="unselectable" tabindex="-1">
-			{#if currentEngine.useBundle}
-				<Button
-					icon={Check_box}
-					text="Use Bundle"
-					click={toggleUseBundle}
-					backgroundColor={"var(--engine-ui-checkbox-color)"}
-					checkBoxColor={"var(--engine-ui-text-color)"}
-				/>
-			{:else}
-				<Button
-					icon={Check_box_outline_blank}
-					text="Use Bundle"
-					click={toggleUseBundle}
-					backgroundColor={"var(--engine-ui-checkbox-color)"}
-					checkBoxColor={"var(--engine-ui-text-color)"}
-				/>
-			{/if}
-		</div>
 	</div>
-	<div id="port-range-box" class="box" tabindex="-1">
-		<p>Port range:</p>
+	<div id="local-button" class="unselectable" tabindex="-1">
+		<SvgButton
+			icon={currentEngine.useBundle
+				? Check_box
+				: Check_box_outline_blank}
+			click={toggleUseBundle}
+			size={18}
+			id="checkbox-button"
+		/>
+		<p>Use Bundle</p>
+	</div>
+	<p id="port">Port range:</p>
+	<div id="port-input">
 		<input
 			type="number"
 			placeholder="7000"
@@ -264,6 +259,9 @@
 		background-color: var(--engine-ui-background-color);
 		padding: 0.2em;
 		color: var(--engine-ui-text-color);
+		display: grid;
+		grid-template-areas: "name name-input delete" "ip ip-input local" "port port-input .";
+		grid-template-columns: 1fr 3fr 1fr;
 	}
 
 	.delete-button {
@@ -272,6 +270,7 @@
 		cursor: pointer;
 		color: var(--engine-ui-text-color);
 		margin-left: auto;
+		grid-area: delete;
 	}
 
 	.delete-dialog {
@@ -284,25 +283,56 @@
 	}
 
 	#name {
-		width: 29em;
+		grid-area: name;
+	}
+
+	#name-input {
+		grid-area: name-input;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	#name-input-text {
 		padding: 0.4em 0.4em 0.2em 0.4em;
 		border-bottom: 0.05em solid var(--border-color);
 	}
 
 	#ip {
-		width: 20em;
-		padding: 0.4em 0.4em 0.2em 0.4em;
+		grid-area: ip;
+	}
+
+	#ip-input {
+		grid-area: ip-input;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	#ip-input-text {
 		border-bottom: 0.05em solid var(--border-color);
 	}
 
 	.port-input {
-		width: 12.77em;
+		width: 10em;
 		border: none;
 		border-bottom: 0.05em solid var(--border-color);
 		background-color: var(--engine-ui-background-color);
 		color: var(--engine-ui-text-color);
 		text-align: center;
 		padding: 0.4em 0.4em 0.2em 0.4em;
+	}
+
+	#port {
+		grid-area: port;
+	}
+
+	#port-input {
+		grid-area: port-input;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	.port-input::placeholder {
@@ -352,25 +382,24 @@
 		color: var(--engine-ui-text-color);
 	}
 
-	.box {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		width: 32em;
-		padding: 0.1rem 0.4rem 0.1rem 0.4rem;
-	}
-
-	#port-range-box {
-		padding-bottom: 0.5rem;
-	}
-
 	#local-button {
-		width: 7.5em;
-		margin-left: auto;
+		grid-area: local;
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: center;
+		align-items: center;
+
+	}
+
+	#local-button > p {
+		padding: 0;
+		margin: 0;
+		font-size: small;
 	}
 
 	#port-separator {
 		justify-content: center;
+		align-items: center;
 		margin: 0 0.3em 0 0.3em;
 	}
 </style>
