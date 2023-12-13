@@ -96,8 +96,7 @@
 				0.43823529411
 			],
 			"--settings-danger-button-color": ["srgb", 0.498, 0.0902, 0.0549],
-			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667]
-			],
+			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667],
 			"--toolbar-icon-color": [
 				"display-p3",
 				0,
