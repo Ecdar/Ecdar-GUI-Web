@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
+	await page.waitForLoadState();
 	await page.click("#start-new-project");
 });
 
@@ -58,9 +59,9 @@ test("Delete a component", async ({ page }) => {
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 	await page.click("#add-component");
 	await expect(page.locator(".project-item.component")).toHaveCount(1);
-	await page.click("#component-button-0");
+	await page.click("#component-1-button");
 	await page
-		.locator("#component-menu-0")
+		.locator("#component-1-menu")
 		.getByRole("button", { name: "Delete" })
 		.click();
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
@@ -70,9 +71,9 @@ test("Delete a system", async ({ page }) => {
 	await expect(page.locator(".project-item.system")).toHaveCount(0);
 	await page.click("#add-system");
 	await expect(page.locator(".project-item.system")).toHaveCount(1);
-	await page.click("#system-button-0");
+	await page.click("#system-1-button");
 	await page
-		.locator("#system-menu-0")
+		.locator("#system-1-menu")
 		.getByRole("button", { name: "Delete" })
 		.click();
 	await expect(page.locator(".project-item.system")).toHaveCount(0);
@@ -88,9 +89,9 @@ test("Delete 10 systems", async ({ page }) => {
 	await expect(page.locator(".project-item.system")).toHaveCount(10);
 
 	for (let i = 0; i < 10; i++) {
-		await page.click("#system-button-0");
+		await page.click("#system-1-button");
 		await page
-			.locator("#system-menu-0")
+			.locator("#system-1-menu")
 			.getByRole("button", { name: "Delete" })
 			.click();
 	}
@@ -108,9 +109,9 @@ test("Delete 10 components", async ({ page }) => {
 	await expect(page.locator(".project-item.component")).toHaveCount(10);
 
 	for (let i = 0; i < 10; i++) {
-		await page.click("#component-button-0");
+		await page.click("#component-1-button");
 		await page
-			.locator("#component-menu-0")
+			.locator("#component-1-menu")
 			.getByRole("button", { name: "Delete" })
 			.click();
 	}
@@ -118,21 +119,21 @@ test("Delete 10 components", async ({ page }) => {
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 });
 
-test("Delete the grey component", async ({ page }) => {
-	for (let i = 0; i < 3; i++) {
+test("Delete the 2.nd with a given color component", async ({ page }) => {
+	for (let i = 1; i <= 3; i++) {
 		await page.click("#add-component");
 
-		await page.click(`#component-button-${i}`);
+		await page.click(`#component-${i}-button`);
 		await page
-			.locator(`#component-menu-${i}`)
-			.locator(`.colors > button:nth-child(${i + 1})`)
+			.locator(`#component-${i}-menu`)
+			.locator(`.colors > button:nth-child(${i})`)
 			.first()
 			.click();
 	}
 
-	await page.click("#component-button-0");
+	await page.click("#component-2-button");
 	await page
-		.locator("#component-menu-0")
+		.locator("#component-2-menu")
 		.getByRole("button", { name: "Delete" })
 		.click();
 
@@ -141,7 +142,7 @@ test("Delete the grey component", async ({ page }) => {
 	await expect(components).toHaveCount(2);
 	await expect(components.nth(0).locator(".circle")).toHaveCSS(
 		"background-color",
-		"rgb(199, 0, 57)",
+		"rgb(139, 0, 0)",
 	);
 	await expect(components.nth(1).locator(".circle")).toHaveCSS(
 		"background-color",
@@ -153,16 +154,16 @@ test("Can toggle includeInPeriodicCheck", async ({ page }) => {
 	await page.click("#add-component");
 
 	const svgPath = page
-		.locator("#component-menu-0")
+		.locator("#component-1-menu")
 		.locator("svg")
 		.first()
 		.locator("path");
 
 	const firstPath = await svgPath.getAttribute("d");
 
-	await page.click("#component-button-0");
+	await page.click("#component-1-button");
 	await page
-		.locator("#component-menu-0")
+		.locator("#component-1-menu")
 		.getByRole("button", { name: "Include in periodic check" })
 		.click();
 
@@ -170,9 +171,9 @@ test("Can toggle includeInPeriodicCheck", async ({ page }) => {
 
 	expect(firstPath).not.toBe(secondPath);
 
-	await page.click("#component-button-0");
+	await page.click("#component-1-button");
 	await page
-		.locator("#component-menu-0")
+		.locator("#component-1-menu")
 		.getByRole("button", { name: "Include in periodic check" })
 		.click();
 
@@ -184,15 +185,15 @@ test("Can toggle includeInPeriodicCheck", async ({ page }) => {
 test("Description should stay the same after edited", async ({ page }) => {
 	await page.click("#add-component");
 
-	await page.click("#component-button-0");
+	await page.click("#component-1-button");
 	await page
-		.locator("#component-menu-0")
+		.locator("#component-1-menu")
 		.getByRole("textbox")
 		.fill("This is a new description.");
 	await page.keyboard.press("Escape");
 
-	await page.click("#component-button-0");
+	await page.click("#component-1-button");
 	await expect(
-		page.locator("#component-menu-0").getByRole("textbox"),
+		page.locator("#component-1-menu").getByRole("textbox"),
 	).toHaveValue("This is a new description.");
 });
