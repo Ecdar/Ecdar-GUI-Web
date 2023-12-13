@@ -382,6 +382,7 @@
 		background-color: var(--engine-ui-background-color);
 		color: var(--engine-ui-text-color);
 		margin: 0.2em;
+		text-align: center;
 	}
 
 	input[type="url"]::placeholder,
