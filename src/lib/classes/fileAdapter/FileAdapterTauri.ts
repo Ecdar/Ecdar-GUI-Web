@@ -175,7 +175,7 @@ export class FileAdapterTauri implements IFileAdapterImplementation {
 						? undefined
 						: async () => {
 								await fs.removeFile(file.path);
-						  },
+							},
 				),
 			);
 		}

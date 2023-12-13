@@ -93,12 +93,7 @@
 				0.39901960784,
 				0.43823529411
 			],
-			"--toolbar-icon-color": [
-				"display-p3",
-				0,
-				0,
-				0
-			],
+			"--toolbar-icon-color": ["display-p3", 0, 0, 0],
 			"--toolbar-selected-color": [
 				"display-p3",
 				0.3362745098,
@@ -203,12 +198,7 @@
 					0.14666666666,
 					0.17019607843
 				],
-				"--toolbar-icon-color": [
-					"display-p3",
-					1,
-					1,
-					1
-				],
+				"--toolbar-icon-color": ["display-p3", 1, 1, 1],
 				"--toolbar-selected-color": [
 					"display-p3",
 					0.42215686274,
