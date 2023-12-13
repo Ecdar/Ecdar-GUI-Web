@@ -14,30 +14,24 @@
 </script>
 
 <Modal bind:this={dialogContainer}>
-	<form>
-		<div>
-			<div class="box">
-				<h1>Ecdar v. 0.1</h1>
-				<p>Made by:</p>
-				<p>&nbsp; 5. Semester, Aalborg University 2023</p>
-				<p>
-					For more information, go to
-					<a href="https://www.ecdar.net/" target="_blank">
-						www.Ecdar.net</a
-					>
-				</p>
-			</div>
-			<button on:click={closeModal}>Close</button>
+	<div>
+		<div class="box">
+			<h1>Ecdar v. 0.1</h1>
+			<p>Made by:</p>
+			<p>&nbsp; 5. Semester, Aalborg University 2023</p>
+			<p>
+				For more information, go to
+				<a href="https://www.ecdar.net/" target="_blank">
+					www.Ecdar.net</a
+				>
+			</p>
 		</div>
-	</form>
+		<button on:click={closeModal}>Close</button>
+	</div>
 </Modal>
 
 <style>
-	form {
-		height: 15em;
-		width: 35em;
-		background-color: var(--console-topbar-background-color);
-	}
+	
 
 	.box {
 		padding-left: 1em;

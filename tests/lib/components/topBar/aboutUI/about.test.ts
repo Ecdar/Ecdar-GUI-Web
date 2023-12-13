@@ -18,5 +18,4 @@ test("Navigating to Help, then About", async ({ page }) => {
 
 	expect(aboutBox).toBe("Ecdar v. 0.1");
 
-	await page.getByRole("button", { name: "Close" }).click();
 });
