@@ -15,17 +15,10 @@
 			bind:this={engineSeperateArray[index]}
 			currentComponent={engineSeperateArray[index]}
 		/>
-		<hr />
 	{/each}
 </div>
 
 <style>
-	hr {
-		display: none;
-		padding: 0;
-		color: 0 0 0 0;
-	}
-
 	h2 {
 		margin-bottom: 0.3em;
 		padding: 0.15em;

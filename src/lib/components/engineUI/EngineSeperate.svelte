@@ -170,7 +170,7 @@
 
 <div id="engine-seperate-outer">
 	<div id="name-box" class="box" tabindex="-1">
-		Name:
+		<p>Name:</p>
 		<input
 			type="text"
 			placeholder="Name"
@@ -178,7 +178,7 @@
 			value={currentEngine.name}
 			on:change={onNameChange}
 			bind:this={nameContainer}
-			style="--borderColour: {nameBorderColour}"
+			style="--border-color: {nameBorderColour}"
 		/>
 		<button
 			type="button"
@@ -188,7 +188,7 @@
 		>
 	</div>
 	<div class="box" tabindex="-1">
-		IP Address:
+		<p>IP Address:</p>
 		<input
 			type="url"
 			placeholder="192.168.1.1"
@@ -196,7 +196,7 @@
 			value={currentEngine.address != "-1" ? currentEngine.address : ""}
 			on:change={onIPChange}
 			bind:this={ipAddressContainer}
-			style="--borderColour: {ipBorderColour}; color: {currentEngine.useBundle
+			style="--border-color: {ipBorderColour}; color: {currentEngine.useBundle
 				? 'grey'
 				: 'var(--engine-ui-text-color)'}"
 			disabled={currentEngine.useBundle}
@@ -222,7 +222,7 @@
 		</div>
 	</div>
 	<div id="port-range-box" class="box" tabindex="-1">
-		Port range:
+		<p>Port range:</p>
 		<input
 			type="number"
 			placeholder="7000"
@@ -234,9 +234,9 @@
 				: ""}
 			on:change={onStartPortChange}
 			bind:this={startPortContainer}
-			style="--borderColour: {portColour}"
+			style="--border-color: {portColour}"
 		/>
-		-
+		<p id="port-separator">-</p>
 		<input
 			type="number"
 			placeholder="7000"
@@ -248,7 +248,7 @@
 				: ""}
 			on:change={onEndPortChange}
 			bind:this={endPortContainer}
-			style="--borderColour: {portColour}"
+			style="--border-color: {portColour}"
 		/>
 	</div>
 </div>
@@ -268,10 +268,10 @@
 
 	.delete-button {
 		border: 0;
-		padding: 0 0.1em 0 2em;
 		background-color: transparent;
 		cursor: pointer;
 		color: var(--engine-ui-text-color);
+		margin-left: auto;
 	}
 
 	.delete-dialog {
@@ -284,21 +284,21 @@
 	}
 
 	#name {
-		width: 90%;
+		width: 29em;
 		padding: 0.4em 0.4em 0.2em 0.4em;
-		border-bottom: 0.05em solid var(--borderColour);
+		border-bottom: 0.05em solid var(--border-color);
 	}
 
 	#ip {
-		width: 55%;
+		width: 20em;
 		padding: 0.4em 0.4em 0.2em 0.4em;
-		border-bottom: 0.05em solid var(--borderColour);
+		border-bottom: 0.05em solid var(--border-color);
 	}
 
 	.port-input {
-		width: 37%;
+		width: 12.77em;
 		border: none;
-		border-bottom: 0.05em solid var(--borderColour);
+		border-bottom: 0.05em solid var(--border-color);
 		background-color: var(--engine-ui-background-color);
 		color: var(--engine-ui-text-color);
 		text-align: center;
@@ -361,14 +361,16 @@
 	}
 
 	#port-range-box {
-		padding-bottom: 1rem;
-	}
-
-	#name-box {
-		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
 	}
 
 	#local-button {
-		width: 25%;
+		width: 7.5em;
+		margin-left: auto;
+	}
+
+	#port-separator {
+		justify-content: center;
+		margin: 0 0.3em 0 0.3em;
 	}
 </style>
