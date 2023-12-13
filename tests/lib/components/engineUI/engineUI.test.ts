@@ -10,19 +10,19 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("Starts with one seperate engine", async ({ page }) => {
-	await expect(page.locator("form")).toHaveCount(2);
+	await expect(page.locator(".engines>div")).toHaveCount(1);
 });
 
 test("Can add a new engine", async ({ page }) => {
 	await page.locator("#add-button").click();
-	await expect(page.locator("form")).toHaveCount(3);
+	await expect(page.locator(".engines>div")).toHaveCount(2);
 });
 
 test("Can remove an engine", async ({ page }) => {
 	await page.locator("#add-button").click();
 	await page.locator(".delete-button").first().click();
 	await page.locator(".inner-delete-dialog>button").first().click();
-	await expect(page.locator("form")).toHaveCount(2);
+	await expect(page.locator(".engines>div")).toHaveCount(1);
 });
 
 test("Can cancel deletion of an engine", async ({ page }) => {
@@ -31,13 +31,13 @@ test("Can cancel deletion of an engine", async ({ page }) => {
 	const buttons = await page.locator(".inner-delete-dialog>button").all();
 
 	await buttons[1].click();
-	await expect(page.locator("form")).toHaveCount(3);
+	await expect(page.locator(".engines>div")).toHaveCount(2);
 });
 
 test("Can not remove the last engine", async ({ page }) => {
 	await page.locator(".delete-button").first().click();
 	await page.locator(".inner-delete-dialog>button").first().click();
-	await expect(page.locator("form")).toHaveCount(2);
+	await expect(page.locator(".engines>div")).toHaveCount(1);
 });
 
 test("Can save engine changes", async ({ page }) => {
@@ -208,12 +208,12 @@ test("Can add and delete 10 engines", async ({ page }) => {
 		await page.locator("#add-button").click();
 	}
 
-	await expect(page.locator("form")).toHaveCount(12);
+	await expect(page.locator(".engines>div")).toHaveCount(11);
 
 	for (let i = 0; i < 10; i++) {
 		await page.locator(".delete-button").first().click();
 		await page.getByRole("button", { name: "done" }).click();
 	}
 
-	await expect(page.locator("form")).toHaveCount(2);
+	await expect(page.locator(".engines>div")).toHaveCount(1);
 });
