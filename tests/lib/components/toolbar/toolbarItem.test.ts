@@ -7,30 +7,32 @@ test.beforeEach(async ({ page }) => {
 
 test('selected button lights up correctly', async ({ page }) => {
   await page.locator('#tools-nav').getByRole('button').nth(1).click();
-  const firstButtonColor = await page.locator('.tool-bar-item > svg')
-                                     .first()
-                                     .innerHTML;
+  const firsttool =  page.locator('.tool-bar-item').first();
+  const unSelectedcolor = await firsttool.evaluate((el) => {
+    return window.getComputedStyle(el).getPropertyValue('background-color');
+
+  })
+
 
   await page.locator('.tool-bar-item > svg')
             .first()
             .click();
 
-  const firstButtonSelectedColor = await page.getByTestId("toolbar")
-                                             .nth(1)
-                                             .getAttribute('background-color');
 
+  const Selectedcolor = await firsttool.evaluate((el) => {
+    return window.getComputedStyle(el).getPropertyValue('background-color');
+
+  })
   await page.locator('label:nth-child(2) > svg').click();
 
-  const firstButtonUnselectedColor = await page.getByTestId('toolbar')
-                                               .nth(1)
-                                               .getAttribute('background-color');
+  expect(Selectedcolor).not.toBe(unSelectedcolor);
 
-  const secondButtonSelectedColor = await page.getByTestId('toolbar')
-                                              .nth(2)
-                                              .getAttribute("background-color");
-  
-  await expect(firstButtonColor).toBe("black");
-  await expect(firstButtonColor).toEqual(firstButtonUnselectedColor);
-  await expect(firstButtonUnselectedColor).not.toBe(firstButtonSelectedColor);
-  await expect(firstButtonSelectedColor).toBe(secondButtonSelectedColor);
+  const secondTool =  page.locator('.tool-bar-item').nth(1);
+
+  const secondToolSelectedcolor = await secondTool.evaluate((el) => {
+    return window.getComputedStyle(el).getPropertyValue('background-color');
+
+  })
+
+  expect(Selectedcolor).toBe(secondToolSelectedcolor);
 });
