@@ -18,6 +18,8 @@
 	} from "$lib/classes/engine/Validation";
 	import type EngineSeperate from "./EngineSeperate.svelte";
 	import SvgButton from "../buttons/SvgButton.svelte";
+	import { tempEngines } from "$lib/globalState/tempEngines";
+	import { get } from "svelte/store";
 
 	export let currentComponent: EngineSeperate | undefined;
 
@@ -36,7 +38,7 @@
 	let engineUIUnderlineColour: string = "var(--engine-ui-underline-color)";
 
 	export let currentEngine: EngineDTO;
-	export let tempEngines: Array<EngineDTO>;
+	// export let tempEngines: Array<EngineDTO>;
 
 	export const setUpEngineSeperate = () => {
 		changeNameBorder();
@@ -46,19 +48,43 @@
 
 	/**
 	 * Delete an engine by setting the adress of the engine to -1 and removing it from the view
+	 * Deletion should not be permanent if the change is not saved in EngineUI
 	 */
 	function deleteEngine() {
-		currentEngine.address = "-1";
-		if (tempEngines.length == 1) {
+		// currentEngine.address = "-1";
+		
+		
+
+		const validEngines = $tempEngines.filter((engine) => {
+			return engine.address != "-1"
+		})
+
+		
+
+		if (validEngines.length <= 1) {
 			nameContainer.value = "";
 			ipAddressContainer.value = "";
 			startPortContainer.value = "";
 			endPortContainer.value = "";
 			currentEngine.name = "";
+
 			closeModal();
 			return;
 		}
-		currentComponent?.$destroy();
+
+		$tempEngines.forEach( (engine) => {
+			if(engine == currentEngine){
+				engine.address = "-1";
+				if(engine.id != -1) //check if change affects stored engines
+					engine.hasBeenChanged = true;
+			}
+		})
+		
+		$tempEngines = $tempEngines;
+		// $tempEngines.find((engine) => {return engine != currentEngine})) 
+		
+
+		// currentComponent?.$destroy();
 		closeModal();
 	}
 
@@ -137,6 +163,9 @@
 	function toggleUseBundle(event: MouseEvent) {
 		event.stopPropagation();
 		currentEngine.useBundle = !currentEngine.useBundle;
+		if(!currentEngine.useBundle)
+			validateIP(currentEngine.address);
+		currentEngine.hasBeenChanged = true;
 		changeIpBorder();
 	}
 </script>

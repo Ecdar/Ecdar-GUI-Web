@@ -8,8 +8,10 @@
 	import type EngineSeperate from "./EngineSeperate.svelte";
 	import type IEngineSeperateComponent from "$lib/interfaces/IEngineSeperateComponent";
 	import SvgButton from "../buttons/SvgButton.svelte";
+	import { get, writable, type Writable } from "svelte/store";
+	import { tempEngines } from "$lib/globalState/tempEngines";
 	let dialogContainer!: Modal & IModalComponent;
-	let tempEngines: EngineDTO[] = [];
+	// let tempEngines: Writable<Array<EngineDTO>> = writable([]);
 	let unsavedChangesModal: Modal & IModalComponent;
 	let incorrectInformationModal: Modal & IModalComponent;
 
@@ -21,7 +23,7 @@
 	 * Reset the engineUI view and show the engineUI
 	 */
 	export function showEngineUI() {
-		tempEngines = [];
+		$tempEngines = [];
 		EngineStorage.getEngineArray().forEach((engine) => {
 			let tempEngine: EngineDTO = {
 				address: engine.address,
@@ -33,13 +35,16 @@
 				useBundle: engine.useBundle,
 			};
 
-			tempEngines.push(tempEngine);
+			tempEngines.update((items) => [
+			...items,
+			tempEngine,
+		]);
 		});
 
-		if (tempEngines.length == 0) {
+		if (get(tempEngines).length == 0) {
 			addNewEngine();
+			$tempEngines[0].hasBeenChanged = false; //dont mark empty engine as change
 		}
-
 		dialogContainer.showModal();
 	}
 
@@ -53,12 +58,16 @@
 			portRangeEnd: -1,
 			portRangeStart: -1,
 			id: -1,
-			hasBeenChanged: false,
+			hasBeenChanged: true,
 			useBundle: false,
 		};
 
-		tempEngines.push(newEngine);
-		tempEngines = tempEngines;
+		tempEngines.update((items) => [
+			...items,
+			newEngine,
+		]);
+		// .push(newEngine);
+		
 	}
 
 	/**
@@ -66,12 +75,10 @@
 	 * @returns true if any of the engines have been changed
 	 */
 	function checkIfChanged() {
-		tempEngines.forEach((engine) => {
-			if (engine.hasBeenChanged) {
-				return true;
-			}
+		return $tempEngines.find((engine) => {
+			return engine.hasBeenChanged;
 		});
-		return false;
+		// return false;
 	}
 
 	/**
@@ -79,7 +86,8 @@
 	 */
 	function onSubmit() {
 		try {
-			tempEngines.forEach((engine) => {
+			// EngineStorage.engineArray = [];
+			$tempEngines.forEach((engine) => {
 				if (engine.id == -1) {
 					if (engine.address == "-1") return;
 					handleCreateNewEngine(engine);
@@ -88,18 +96,18 @@
 						EngineStorage.deleteEngine(engine.id);
 						return;
 					}
-					let tempEngine = EngineStorage.getEngine(engine.id);
+					let storedEngine = EngineStorage.getEngine(engine.id);
 
-					tempEngine.useBundle = engine.useBundle;
-					if (!tempEngine.useBundle)
-						tempEngine.address = engine.address;
-					tempEngine.name = engine.name;
-					tempEngine.portRangeStart = engine.portRangeStart;
-					tempEngine.portRangeEnd = engine.portRangeEnd;
-					tempEngine.hasBeenChanged = false;
+					storedEngine.useBundle = engine.useBundle;
+					if (!storedEngine.useBundle)
+						storedEngine.address = engine.address;
+					storedEngine.name = engine.name;
+					storedEngine.portRangeStart = engine.portRangeStart;
+					storedEngine.portRangeEnd = engine.portRangeEnd;
+					storedEngine.hasBeenChanged = false;
 				}
 			});
-			tempEngines = [];
+			// tempEngines = [];
 			forceCloseDialogContainer();
 		} catch (error) {
 			engineSeperateArray.forEach((engine) => {
@@ -123,11 +131,11 @@
 	 * Close the modal, but check if there are any unsaved changes
 	 */
 	function closeModal() {
-		if (!checkIfChanged()) {
+		if (checkIfChanged()) {
 			unsavedChangesModal.showModal();
 			return;
 		}
-		tempEngines = [];
+		// tempEngines = [];
 		dialogContainer.closeModal();
 	}
 

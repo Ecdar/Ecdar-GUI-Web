@@ -1,20 +1,25 @@
 <script lang="ts">
 	import EngineSeperate from "./EngineSeperate.svelte";
 	import type { EngineDTO } from "./EngineDTO";
+	import { get, writable, type Writable } from "svelte/store";
+	import { Id } from "$lib/classes/automaton/Id";
 
-	export let tempEngines: Array<EngineDTO>;
+	export let tempEngines: Writable<Array<EngineDTO>> = writable([]);
 	export let engineSeperateArray: Array<EngineSeperate | undefined>;
 </script>
 
 <h2>Engines</h2>
 <div class="engines">
-	{#each tempEngines as engine, index}
-		<EngineSeperate
-			currentEngine={engine}
-			{tempEngines}
-			bind:this={engineSeperateArray[index]}
-			currentComponent={engineSeperateArray[index]}
-		/>
+	{#each $tempEngines as engine, index}
+		{#if engine.address != "-1"}
+			<EngineSeperate
+				currentEngine={engine}
+
+				bind:this={engineSeperateArray[index]}
+				currentComponent={engineSeperateArray[index]}
+			/>
+		{/if}
+		
 	{/each}
 </div>
 
