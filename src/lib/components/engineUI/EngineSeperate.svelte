@@ -37,8 +37,6 @@
 		"var(--engine-ui-error-underline-color)";
 	let engineUIUnderlineColour: string = "var(--engine-ui-underline-color)";
 
-	
-
 	export let currentEngine: EngineDTO;
 	// export let tempEngines: Array<EngineDTO>;
 
@@ -54,22 +52,20 @@
 	 */
 	function deleteEngine() {
 		// currentEngine.address = "-1";
-		
-		
 
 		const validEngines = $tempEngines.filter((engine) => {
-			return engine.address != "-1"
-		})
+			return engine.address != "-1";
+		});
 
-		
-		$tempEngines.forEach( (engine) => {
-			if(engine == currentEngine){
+		$tempEngines.forEach((engine) => {
+			if (engine == currentEngine) {
 				engine.address = "-1";
-				if(engine.id == -1) //if deleted engine is new, dont mark it as change
+				if (engine.id == -1)
+					//if deleted engine is new, dont mark it as change
 					engine.hasBeenChanged = false;
 			}
-		})
-		
+		});
+
 		if (validEngines.length <= 1) {
 			nameContainer.value = "";
 			ipAddressContainer.value = "";
@@ -81,11 +77,8 @@
 			return;
 		}
 
-		
-		
 		$tempEngines = $tempEngines;
-		// $tempEngines.find((engine) => {return engine != currentEngine})) 
-		
+		// $tempEngines.find((engine) => {return engine != currentEngine}))
 
 		// currentComponent?.$destroy();
 		closeModal();
@@ -165,10 +158,9 @@
 
 	function toggleUseBundle(event: MouseEvent) {
 		event.stopPropagation();
-		currentEngine.useBundle = !currentEngine.useBundle;
-		if(!currentEngine.useBundle)
-			validateIP(currentEngine.address);
 		currentEngine.hasBeenChanged = true;
+		currentEngine.useBundle = !currentEngine.useBundle;
+		if (!currentEngine.useBundle) validateIP(currentEngine.address);
 		changeIpBorder();
 	}
 </script>
@@ -241,14 +233,18 @@
 			button={new HTMLElement().id = }
 			id={"checkbox-button"}
 		/> -->
-		<label> <!--for attribute automatically works on nested element-->
-			Use Bundle 
+		<label>
+			<!--for attribute automatically works on nested element-->
+			Use Bundle
 			<SvgButton
-			icon={currentEngine.useBundle ? Check_box : Check_box_outline_blank}
-			click={toggleUseBundle}
-			size={18}
-			id={"checkbox-button"}
-		/></label>
+				icon={currentEngine.useBundle
+					? Check_box
+					: Check_box_outline_blank}
+				click={toggleUseBundle}
+				size={18}
+				id={"checkbox-button"}
+			/></label
+		>
 	</div>
 	<p id="port">Port range:</p>
 	<div id="port-input">
@@ -284,14 +280,16 @@
 </div>
 
 <style>
-	:global(.engine-panel #checkbox-button){
+	:global(.engine-panel #checkbox-button) {
 		pointer-events: none;
 	}
 	label {
 		display: flex;
 		cursor: pointer;
+		padding: 0;
+		margin: 0;
+		font-size: small;
 	}
-
 
 	.unselectable {
 		-webkit-user-select: none;
@@ -428,12 +426,6 @@
 		flex-direction: row-reverse;
 		justify-content: center;
 		align-items: center;
-	}
-
-	#local-button > p {
-		padding: 0;
-		margin: 0;
-		font-size: small;
 	}
 
 	#port-separator {

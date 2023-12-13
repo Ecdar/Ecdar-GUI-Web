@@ -139,12 +139,12 @@ export class Location extends AutomatonClass<RawLocation> {
 			typeof raw.nickname === "string"
 				? Nickname.fromRaw(raw as { nickname: string }, {
 						positionReference: position,
-				  })
+					})
 				: undefined,
 			typeof raw.invariant === "string"
 				? Invariant.fromRaw(raw as { invariant: string }, {
 						positionReference: position,
-				  })
+					})
 				: undefined,
 		);
 	};

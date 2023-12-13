@@ -178,8 +178,6 @@ test("Invalid engine start port larger than end port will not save", async ({
 	).toBeVisible();
 });
 
-
-
 test("Can add and delete 10 engines", async ({ page }) => {
 	for (let i = 0; i < 10; i++) {
 		await page.locator("#add-button").click();
@@ -199,7 +197,3 @@ test("Can add and delete 10 engines", async ({ page }) => {
 
 	await expect(page.locator(".engines>div")).toHaveCount(1);
 });
-
-
-
-test("Removed engine, close window ask for change")

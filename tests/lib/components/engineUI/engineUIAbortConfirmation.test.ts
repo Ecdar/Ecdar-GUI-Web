@@ -10,7 +10,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("No changes, does not say there has been changes", async ({ page }) => {
-
 	await page.locator("#close-button").click();
 	await expect(
 		page.getByText(
@@ -19,9 +18,18 @@ test("No changes, does not say there has been changes", async ({ page }) => {
 	).not.toBeVisible();
 });
 
-test("Creating and deleting engine does not count as change", async ({ page }) => {
+test("Creating and deleting engine does not count as change", async ({
+	page,
+}) => {
 	await page.locator("#add-button").click();
 	await page.locator(".delete-button").last().click();
+	await page
+		.locator("#engine-ui-outer")
+		.getByRole("dialog")
+		.getByRole("button")
+		.first()
+		.click();
+
 	await page.locator("#close-button").click();
 	await expect(
 		page.getByText(
@@ -31,7 +39,6 @@ test("Creating and deleting engine does not count as change", async ({ page }) =
 });
 
 test("Empty placeholder does not count as change", async ({ page }) => {
-
 	await page.locator("#close-button").click();
 	await expect(
 		page.getByText(
@@ -90,9 +97,8 @@ test("Unsaved, end port will not save", async ({ page }) => {
 	).toBeVisible();
 });
 
-test("Unsaved, marked use bundle",  async ({ page }) => {
-	const inputs = await page.locator("input").all();
-	await inputs[3].fill("2");
+test("Unsaved, marked use bundle", async ({ page }) => {
+	await page.locator("#local-button").getByRole("button").click();
 
 	await page.locator("#close-button").click();
 	await expect(
@@ -102,10 +108,21 @@ test("Unsaved, marked use bundle",  async ({ page }) => {
 	).toBeVisible();
 });
 
-test("Unsaved, unmarked use bundle, and added ip",  async ({ page }) => {
+test("Unsaved, unmarked use bundle, and added ip", async ({ page }) => {
 	const inputs = await page.locator("input").all();
+	await inputs[0].fill("test");
+	await page.locator("#local-button").getByRole("button").click();
+	await inputs[2].fill("1");
 	await inputs[3].fill("2");
 
+	await page.locator("#save-button").click();
+	await page.getByRole("button", { name: "Options", exact: true }).hover();
+	await page
+		.getByRole("button", { name: "settings input composite" })
+		.click();
+
+	await page.locator("#local-button").getByRole("button").click();
+	await inputs[1].fill("1.1.1.1");
 	await page.locator("#close-button").click();
 	await expect(
 		page.getByText(
