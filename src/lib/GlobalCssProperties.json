@@ -47,6 +47,8 @@
 			],
 			"--canvas-text-color": ["display-p3", 0, 0, 0],
 			"--sidebar-text-color": ["display-p3", 0, 0, 0],
+			"--text-color": ["display-p3", 0, 0, 0],
+			"--text-secondary-color": ["display-p3", 0.4, 0.4, 0.4],
 			"--background-color": ["display-p3", 0.95686, 0.95686, 0.95686],
 			"--console-selectedtab-color": [
 				"display-p3",
@@ -93,6 +95,9 @@
 				0.39901960784,
 				0.43823529411
 			],
+			"--settings-danger-button-color": ["srgb", 0.498, 0.0902, 0.0549],
+			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667]
+			],
 			"--toolbar-icon-color": [
 				"display-p3",
 				0,
@@ -116,6 +121,9 @@
 			"--sidebar-fontsize": [1, "rem"],
 			"--sidebar-navigationbar-fontsize": [1, "rem"]
 		},
+		"fontFamily": {
+			"--font-family": ["CustomFont, sans-serif"]
+		},
 		"border": {
 			"--main-navigationbar-border": [
 				"solid",
@@ -131,7 +139,20 @@
 		"transition": {
 			"--console-tab-hover-transition": ["background-color", [200, "ms"]],
 			"--console-height-transition": ["height", [200, "ms"]],
-			"--sidebar-element-transition": ["background-color", [200, "ms"]]
+			"--sidebar-element-transition": ["background-color", [200, "ms"]],
+			"--settings-filter-transition": ["filter", [200, "ms"]],
+			"--settings-background-color-transition": [
+				"background-color",
+				[200, "ms"]
+			],
+			"--tabs-background-color-transition": [
+				"background-color",
+				[200, "ms"]
+			],
+			"--svgbutton-background-color-transition": [
+				"background-color",
+				[200, "ms"]
+			]
 		}
 	},
 	"schemes": [
@@ -152,6 +173,8 @@
 				],
 				"--canvas-text-color": ["display-p3", 1, 1, 1],
 				"--sidebar-text-color": ["display-p3", 1, 1, 1],
+				"--text-color": ["display-p3", 1, 1, 1],
+				"--text-secondary-color": ["display-p3", 0.8, 0.8, 0.8],
 				"--background-color": ["display-p3", 0.0902, 0.10196, 0.13333],
 				"--console-selectedtab-color": [
 					"display-p3",
@@ -228,7 +251,11 @@
 			"transition": {
 				"--console-tab-hover-transition": ["none"],
 				"--console-height-transition": ["none"],
-				"--sidebar-element-transition": ["none"]
+				"--sidebar-element-transition": ["none"],
+				"--settings-filter-transition": ["none"],
+				"--settings-background-color-transition": ["none"],
+				"--tabs-background-color-transition": ["none"],
+				"--svgbutton-background-color-transition": ["none"]
 			}
 		}
 	]

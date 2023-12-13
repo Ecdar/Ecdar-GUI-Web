@@ -1,6 +1,6 @@
 import { Tabs } from "$lib/classes/Tabs";
 import { describe, it, expect } from "vitest";
-import Console from "../../../../lib/classes/console/Console";
+import Console from "$lib/classes/console/Console";
 
 describe("Console class", () => {
 	describe("stores are correct when", () => {
@@ -45,8 +45,12 @@ describe("Console class", () => {
 			const backendArray = arrays[0];
 			const frontendArray = arrays[1];
 
-			expect(backendArray[backendArray.length - 1]).toBe(string);
-			expect(frontendArray[frontendArray.length - 1]).toBe(string2);
+			expect(backendArray[backendArray.length - 1].split(" - ")[1]).toBe(
+				string,
+			);
+			expect(
+				frontendArray[frontendArray.length - 1].split(" - ")[1],
+			).toBe(string2);
 		});
 	});
 });
