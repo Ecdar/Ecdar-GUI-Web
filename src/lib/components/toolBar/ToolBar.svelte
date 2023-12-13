@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ToolBarItem from "./ToolbarItem.svelte";
+	import ToolbarItem from "./ToolbarItem.svelte";
 	import {
 		Content_cut,
 		Arrow_downward,
@@ -58,7 +58,7 @@
 	data-testid="toolbar"
 >
 	<!-- Add ToolBarItems here, containing name, icon, onClick and description -->
-	<ToolBarItem 
+	<ToolbarItem 
 		name="Cut"
 		icon={Content_cut}	
 		onClick={() => {
@@ -68,7 +68,7 @@
 		description="This is a testfunction for cut"
 		
 	/>
-	<ToolBarItem 
+	<ToolbarItem 
 		name="Cut2"
 		icon={Content_cut}	
 		onClick={() => {
@@ -77,7 +77,7 @@
 		}}		
 		description="This is a testfunction for cut 2"
 	/>
-	<ToolBarItem 
+	<ToolbarItem 
 		name="Cut3"
 		icon={Content_cut}	
 		onClick={() => {
@@ -86,7 +86,7 @@
 		}}
 		description="This is a testfunction for cut 3"
 	/>
-	<ToolBarItem 
+	<ToolbarItem 
 		name="Cut4"
 		icon={Content_cut}	
 		onClick={() => {
@@ -95,7 +95,7 @@
 		}}
 		description="This is a testfunction for cut 4"
 	/>
-	<ToolBarItem 
+	<ToolbarItem 
 		name="Cut5"
 		icon={Content_cut}	
 		onClick={() => {
@@ -104,7 +104,7 @@
 		}}
 		description="This is a testfunction for cut 5"
 	/>
-	<ToolBarItem 
+	<ToolbarItem 
 		name="Cut6"
 		icon={Content_cut}	
 		onClick={() => {
@@ -113,7 +113,7 @@
 		}}
 		description="This is a testfunction for cut 6"
 	/>
-	<ToolBarItem 
+	<ToolbarItem 
 		name="Cut7"
 		icon={Content_cut}	
 		onClick={() => {
@@ -122,7 +122,7 @@
 		}}
 		description="This is a testfunction for cut 7"
 	/>
-	<ToolBarItem 
+	<ToolbarItem 
 		name="Cut8"
 		icon={Content_cut}	
 		onClick={() => {
@@ -131,7 +131,7 @@
 		}}
 		description="This is a testfunction for cut 8"
 	/>
-	<ToolBarItem 
+	<ToolbarItem 
 		name="Cut9"
 		icon={Content_cut}	
 		onClick={() => {
