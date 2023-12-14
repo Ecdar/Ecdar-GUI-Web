@@ -50,7 +50,7 @@ test("Empty placeholder does not count as change", async ({ page }) => {
 //--------- Test input changes -----------------
 
 test("Unsaved, name will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("test");
 
 	await page.locator("#close-button").click();
@@ -62,7 +62,7 @@ test("Unsaved, name will not save", async ({ page }) => {
 });
 
 test("Unsaved, address will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[1].fill("1.1.1.1");
 
 	await page.locator("#close-button").click();
@@ -74,7 +74,7 @@ test("Unsaved, address will not save", async ({ page }) => {
 });
 
 test("Unsaved, start port will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[2].fill("1");
 
 	await page.locator("#close-button").click();
@@ -86,7 +86,7 @@ test("Unsaved, start port will not save", async ({ page }) => {
 });
 
 test("Unsaved, end port will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[3].fill("2");
 
 	await page.locator("#close-button").click();
@@ -109,7 +109,7 @@ test("Unsaved, marked use bundle", async ({ page }) => {
 });
 
 test("Unsaved, unmarked use bundle, and added ip", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("test");
 	await page.locator("#local-button").getByRole("button").click();
 	await inputs[2].fill("1");

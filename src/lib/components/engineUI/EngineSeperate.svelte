@@ -57,7 +57,7 @@
 
 		$tempEngines = $tempEngines;
 
-		showDeleteDialog = false;	
+		showDeleteDialog = false;
 	}
 
 	function onNameChange() {
@@ -156,7 +156,9 @@
 				/>
 				<SvgButton
 					icon={Close}
-					click={() => {showDeleteDialog = false}}
+					click={() => {
+						showDeleteDialog = false;
+					}}
 					size={24}
 					id="delete-button"
 				/>
@@ -179,7 +181,14 @@
 		/>
 	</div>
 	<div class="delete-button">
-	  <SvgButton icon={Delete} id="show-modal" size={18} click={() => {showDeleteDialog = true}} />
+		<SvgButton
+			icon={Delete}
+			id="show-modal"
+			size={18}
+			click={() => {
+				showDeleteDialog = true;
+			}}
+		/>
 	</div>
 	<p id="ip">IP Address:</p>
 	<div id="ip-input">

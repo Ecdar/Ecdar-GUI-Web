@@ -12,7 +12,7 @@
 	import { engineStore } from "$lib/globalState/engines";
 
 	let showUnsavedChanges = false;
-	$: if (!$showEngineUI && checkIfChanged() ){
+	$: if (!$showEngineUI && checkIfChanged()) {
 		showUnsavedChanges = false;
 	}
 
@@ -28,7 +28,6 @@
 	let engineSeperateArray: Array<
 		(EngineSeperate & IEngineSeperateComponent) | undefined
 	> = [];
-
 
 	//Always have at least one component!
 	$: if (
@@ -66,7 +65,7 @@
 		});
 	}
 
-	function forceCloseDialogContainer(){
+	function forceCloseDialogContainer() {
 		showUnsavedChanges = false;
 		showIncorrectInformation = false;
 		$showEngineUI = false;
@@ -95,6 +94,15 @@
 			engineSeperateArray.forEach((engine) => {
 				if (engine != undefined) engine.setUpEngineSeperate();
 			});
+			showIncorrectInformation = true;
+		}
+	}
+
+	function onDiscard() {
+		if (checkIfChanged()) {
+			showUnsavedChanges = true;
+		} else {
+			$showEngineUI = false;
 		}
 	}
 	/**
@@ -112,7 +120,6 @@
 	}
 
 	console.log($showEngineUI);
-
 </script>
 
 <Modal show={$showEngineUI}>
@@ -139,7 +146,7 @@
 				id={"close-button"}
 				icon={Close}
 				size={24}
-				click={() => {$showEngineUI = false}}
+				click={onDiscard}
 				color={"var(--engine-ui-text-color)"}
 			/>
 		</div>
@@ -163,7 +170,9 @@
 				<SvgButton
 					icon={Close}
 					id="close-unsaved-changes-modal"
-					click={() => { showUnsavedChanges = false }}
+					click={() => {
+						showUnsavedChanges = false;
+					}}
 					size={24}
 				/>
 			</div>
@@ -181,7 +190,9 @@
 			<div class="incorrect-information-button">
 				<SvgButton
 					icon={Done}
-					click={() => { showIncorrectInformation = false }}
+					click={() => {
+						showIncorrectInformation = false;
+					}}
 					id="close-incorrect-information-modal"
 					size={24}
 				/>

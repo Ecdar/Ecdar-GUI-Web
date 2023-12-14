@@ -64,7 +64,7 @@ test("Can not remove the last engine", async ({ page }) => {
 });
 
 test("Can save engine changes", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("test");
 	await inputs[1].fill("1.1.1.1");
 	await inputs[2].fill("1");
@@ -83,7 +83,7 @@ test("Can save engine changes", async ({ page }) => {
 });
 
 test("Can save engine with useBundle changes", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("test");
 	await page.locator("#local-button").getByRole("button").click();
 	await inputs[2].fill("1");
@@ -102,7 +102,7 @@ test("Can save engine with useBundle changes", async ({ page }) => {
 });
 
 test("Invalid engine name will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("");
 	await inputs[1].fill("1.1.1.1");
 	await inputs[2].fill("1");
@@ -117,7 +117,7 @@ test("Invalid engine name will not save", async ({ page }) => {
 });
 
 test("Invalid engine address will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("test");
 	await inputs[1].fill("invalid");
 	await inputs[2].fill("1");
@@ -132,7 +132,7 @@ test("Invalid engine address will not save", async ({ page }) => {
 });
 
 test("Invalid engine start port will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("test");
 	await inputs[1].fill("1.1.1.1");
 	await inputs[2].fill("-1");
@@ -147,7 +147,7 @@ test("Invalid engine start port will not save", async ({ page }) => {
 });
 
 test("Invalid engine end port will not save", async ({ page }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("test");
 	await inputs[1].fill("1.1.1.1");
 	await inputs[2].fill("1");
@@ -164,7 +164,7 @@ test("Invalid engine end port will not save", async ({ page }) => {
 test("Invalid engine start port larger than end port will not save", async ({
 	page,
 }) => {
-	const inputs = await page.locator("input").all();
+	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("test");
 	await inputs[1].fill("1.1.1.1");
 	await inputs[2].fill("2");
