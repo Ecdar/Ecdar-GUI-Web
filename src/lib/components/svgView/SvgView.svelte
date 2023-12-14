@@ -11,6 +11,8 @@
 	import Location from "$lib/components/svgView/Location.svelte";
 	import { System } from "$lib/classes/automaton";
 
+	export let isHidden: boolean;
+
 	/**
 	 * The parent svg element that the entire view is shown with.
 	 */
@@ -62,6 +64,7 @@
 	on:pointerdown={(event) => panzoom?.handleDown(event)}
 	on:wheel={(event) => panzoom?.zoomWithWheel(event)}
 	class="panzoom-parent"
+	style={isHidden ? "visibility:hidden; height:0px;" : "visibility:visible;"}
 >
 	<g
 		bind:this={scaler}

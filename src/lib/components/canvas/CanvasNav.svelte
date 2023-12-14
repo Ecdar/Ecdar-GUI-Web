@@ -1,0 +1,65 @@
+<script lang="ts">
+	import { Draw, Code } from "svelte-google-materialdesign-icons";
+	import SvgButton from "../buttons/SvgButton.svelte";
+
+	import {
+		CanvasModes,
+		CanvasSupports,
+		canvasModes,
+		canvasSupports,
+	} from "./state";
+
+	let supports = CanvasSupports.OnlyEditor;
+	let mode = CanvasModes.Editor;
+
+	canvasModes.subscribe((newMode) => {
+		mode = newMode;
+	});
+
+	canvasSupports.subscribe((newSupports) => {
+		supports = newSupports;
+	});
+</script>
+
+<nav id="canvas-nav">
+	<div class="buttons">
+		{#if supports === CanvasSupports.Both && mode !== CanvasModes.Draw}
+			<SvgButton
+				icon={Draw}
+				id="toggle-draw"
+				size={30}
+				click={() => {
+					canvasModes.set(CanvasModes.Draw);
+				}}
+			/>
+		{/if}
+		{#if supports === CanvasSupports.Both && mode !== CanvasModes.Editor}
+			<SvgButton
+				icon={Code}
+				id="toggle-editor"
+				size={30}
+				click={() => {
+					canvasModes.set(CanvasModes.Editor);
+				}}
+			/>
+		{/if}
+	</div>
+</nav>
+
+<style>
+	#canvas-nav {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		min-height: 5em;
+		padding: 0 1em;
+		background-color: var(--canvas-topbar-color);
+	}
+
+	.buttons {
+		color: var(--navigationbar-text-color);
+		background: none;
+		border: none;
+		display: flex;
+	}
+</style>

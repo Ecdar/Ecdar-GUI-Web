@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { Description } from "svelte-google-materialdesign-icons";
+	import {
+		activeView,
+		globalDeclarations,
+	} from "$lib/globalState/activeProject";
 
 	function handleGlobalDeclarationsClick() {
-		console.log("Global Declarations clicked");
+		$activeView = $globalDeclarations;
 	}
 </script>
 

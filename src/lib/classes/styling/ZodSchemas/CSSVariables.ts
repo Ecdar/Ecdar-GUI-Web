@@ -34,6 +34,8 @@ export const ColorVariables = z
 		"--sidebar-text-color": ColorAttribute,
 		"--sidebar-element-color": ColorAttribute,
 		"--sidebar-element-hover-color": ColorAttribute,
+		"--editor-keyword-color": ColorAttribute,
+		"--editor-comment-color": ColorAttribute,
 		"--engine-ui-underline-color": ColorAttribute,
 		"--engine-ui-error-underline-color": ColorAttribute,
 		"--engine-ui-input-text-placeholder-color": ColorAttribute,

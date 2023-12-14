@@ -95,6 +95,18 @@
 				0.39901960784,
 				0.43823529411
 			],
+			"--editor-keyword-color": [
+				"display-p3",
+				0.52549019608,
+				0.58823529411,
+				0.98823529412
+			],
+			"--editor-comment-color": [
+				"display-p3",
+				0.52549019608,
+				0.52549019608,
+				0.52549019608
+			],
 			"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
 			"--engine-ui-error-underline-color": [
 				"display-p3",
@@ -246,6 +258,12 @@
 					0.13490196078,
 					0.14666666666,
 					0.17019607843
+				],
+				"--editor-keyword-color": [
+					"display-p3",
+					0.52549019608,
+					0.58823529411,
+					0.98823529412
 				],
 				"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
 				"--engine-ui-error-underline-color": [
