@@ -1,14 +1,10 @@
-const regexTest: RegExp = new RegExp(
-	"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", // Will test for any valid IP address
-);
-
 export function validateName(name: string | undefined): boolean {
 	if (name != "" && name !== undefined) return true;
 	return false;
 }
 
 export function validateIP(ipAdress: string): boolean {
-	return regexTest.test(ipAdress);
+	return URL.canParse(ipAdress);
 }
 
 export function validateStartPort(port: number): boolean {
