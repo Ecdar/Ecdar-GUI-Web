@@ -1,6 +1,12 @@
 import { test, expect } from "@playwright/test";
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, browserName }) => {
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
+
 	await page.goto("/");
 	await page.click("#start-new-project");
 });

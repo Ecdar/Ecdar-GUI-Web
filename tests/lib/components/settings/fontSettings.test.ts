@@ -2,7 +2,13 @@ import { test, expect, type Dialog } from "@playwright/test";
 
 const testFilesPath = "tests/lib/components/settings/testfiles";
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, browserName }) => {
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
+
 	await page.goto("/");
 	await page.waitForLoadState();
 	await page.waitForLoadState("load");
@@ -11,10 +17,8 @@ test.beforeEach(async ({ page }) => {
 	await page.waitForLoadState("load");
 	await page.waitForLoadState("domcontentloaded");
 
-	await page.getByRole("button", { name: "Options", exact: true }).hover();
-	await page
-		.getByRole("button", { name: "settings Settings", exact: true })
-		.click();
+	await page.getByRole("button", { name: "Options", exact: true }).click();
+	await page.getByRole("button", { name: "Settings", exact: true }).click();
 	await page.getByRole("button", { name: "Font", exact: true }).click();
 });
 
