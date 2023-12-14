@@ -8,7 +8,6 @@
 		Check_box,
 		Check_box_outline_blank,
 	} from "svelte-google-materialdesign-icons";
-	import type iModalComponent from "$lib/interfaces/IModalComponent";
 	import {
 		comparePortRange,
 		validateEndPort,
@@ -18,9 +17,7 @@
 	} from "$lib/classes/engine/Validation";
 	import SvgButton from "../buttons/SvgButton.svelte";
 	import type { Writable } from "svelte/store";
-	// import { tempEngines } from "$lib/globalState/tempEngines";
 
-	let modalContainer: Modal & iModalComponent;
 	let nameContainer: HTMLInputElement;
 	let ipAddressContainer: HTMLInputElement;
 	let startPortContainer: HTMLInputElement;
@@ -60,12 +57,9 @@
 
 		$tempEngines = $tempEngines;
 
-		closeModal();
+		showDeleteDialog = false;	
 	}
 
-	function showModal() {
-		modalContainer.showModal();
-	}
 	function onNameChange() {
 		currentEngine.name = nameContainer.value;
 		currentEngine.hasBeenChanged = true;
@@ -131,10 +125,6 @@
 		}
 	}
 
-	function closeModal() {
-		modalContainer.closeModal();
-	}
-
 	function toggleUseBundle(event: MouseEvent) {
 		event.stopPropagation();
 		currentEngine.hasBeenChanged = true;
@@ -142,9 +132,11 @@
 		if (!currentEngine.useBundle) validateIP(currentEngine.address);
 		changeIpBorder();
 	}
+
+	let showDeleteDialog = false;
 </script>
 
-<Modal bind:this={modalContainer}>
+<Modal show={showDeleteDialog}>
 	<div class="delete-dialog">
 		<div class="inner-delete-dialog">
 			<h4 id="delete-text">
@@ -164,7 +156,7 @@
 				/>
 				<SvgButton
 					icon={Close}
-					click={closeModal}
+					click={() => {showDeleteDialog = false}}
 					size={24}
 					id="delete-button"
 				/>
@@ -187,7 +179,7 @@
 		/>
 	</div>
 	<div class="delete-button">
-		<SvgButton icon={Delete} id="show-modal" size={18} click={showModal} />
+	  <SvgButton icon={Delete} id="show-modal" size={18} click={() => {showDeleteDialog = true}} />
 	</div>
 	<p id="ip">IP Address:</p>
 	<div id="ip-input">

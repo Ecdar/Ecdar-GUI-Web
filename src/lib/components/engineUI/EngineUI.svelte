@@ -4,16 +4,22 @@
 	import Modal from "../modal/Modal.svelte";
 	import EnginePanel from "./EnginePanel.svelte";
 	import { Save, Add, Close, Done } from "svelte-google-materialdesign-icons";
-	import type IModalComponent from "$lib/interfaces/IModalComponent";
 	import type IEngineSeperateComponent from "$lib/interfaces/IEngineSeperateComponent";
 	import SvgButton from "../buttons/SvgButton.svelte";
-	import { get, writable, type Writable } from "svelte/store";
+	import { writable, type Writable } from "svelte/store";
 	import type EngineSeperate from "./EngineSeperate.svelte";
-
+	import { showEngineUI } from "./showEngineUI";
 	import { engineStore } from "$lib/globalState/engines";
-	let dialogContainer!: Modal & IModalComponent;
-	let unsavedChangesModal: Modal & IModalComponent;
-	let incorrectInformationModal: Modal & IModalComponent;
+
+	let showUnsavedChanges = false;
+	$: if (!$showEngineUI && checkIfChanged() ){
+		showUnsavedChanges = false;
+	}
+
+	/**
+	 * Close the unsaved changes modal
+	 */
+	let showIncorrectInformation = false;
 
 	let tempEngines: Writable<Array<EngineDTO>> = writable<Array<EngineDTO>>(
 		[],
@@ -23,31 +29,6 @@
 		(EngineSeperate & IEngineSeperateComponent) | undefined
 	> = [];
 
-	/**
-	 * Reset the engineUI view and show the engineUI
-	 */
-	export function showEngineUI() {
-		tempEngines.set([]);
-
-		get(engineStore).forEach((engine) => {
-			let tempEngine: EngineDTO = {
-				address: engine.address,
-				name: engine.name,
-				portRangeEnd: engine.portRangeEnd,
-				portRangeStart: engine.portRangeStart,
-				id: engine.id,
-				hasBeenChanged: false,
-				useBundle: engine.useBundle,
-			};
-			tempEngines.update((items) => [...items, tempEngine]);
-		});
-
-		// if (get(tempEngines).length == 0) {
-		// 	addNewEngine();
-		// 	$tempEngines[0].hasBeenChanged = false; //dont mark empty engine as change
-		// }
-		dialogContainer.showModal();
-	}
 
 	//Always have at least one component!
 	$: if (
@@ -85,6 +66,11 @@
 		});
 	}
 
+	function forceCloseDialogContainer(){
+		showUnsavedChanges = false;
+		showIncorrectInformation = false;
+		$showEngineUI = false;
+	}
 	/**
 	 * onSubmit place all the temporary engines into EngineStorage, and delete the engines which have been deleted
 	 */
@@ -109,7 +95,6 @@
 			engineSeperateArray.forEach((engine) => {
 				if (engine != undefined) engine.setUpEngineSeperate();
 			});
-			incorrectInformationModal.showModal();
 		}
 	}
 	/**
@@ -126,38 +111,11 @@
 		);
 	}
 
-	/**
-	 * Close the modal, but check if there are any unsaved changes
-	 */
-	function closeModal() {
-		if (checkIfChanged()) {
-			unsavedChangesModal.showModal();
-			return;
-		}
-		dialogContainer.closeModal();
-	}
+	console.log($showEngineUI);
 
-	/**
-	 * Forcefully close the modal
-	 */
-	function forceCloseDialogContainer() {
-		closeUnsavedChangesModal();
-		dialogContainer.closeModal();
-	}
-
-	/**
-	 * Close the unsaved changes modal
-	 */
-	function closeUnsavedChangesModal() {
-		unsavedChangesModal.closeModal();
-	}
-
-	function closeIncorrectModal() {
-		incorrectInformationModal.closeModal();
-	}
 </script>
 
-<Modal bind:this={dialogContainer}>
+<Modal show={$showEngineUI}>
 	<div id="engine-ui-outer">
 		<div class="engine-panel" tabindex="-1">
 			<EnginePanel {tempEngines} {engineSeperateArray} />
@@ -181,14 +139,14 @@
 				id={"close-button"}
 				icon={Close}
 				size={24}
-				click={closeModal}
+				click={() => {$showEngineUI = false}}
 				color={"var(--engine-ui-text-color)"}
 			/>
 		</div>
 	</div>
 </Modal>
 
-<Modal bind:this={unsavedChangesModal}>
+<Modal show={showUnsavedChanges}>
 	<div class="modal-dialog">
 		<div class="inner-modal-dialog">
 			<h4 id="modal-text">
@@ -205,7 +163,7 @@
 				<SvgButton
 					icon={Close}
 					id="close-unsaved-changes-modal"
-					click={closeUnsavedChangesModal}
+					click={() => { showUnsavedChanges = false }}
 					size={24}
 				/>
 			</div>
@@ -213,7 +171,7 @@
 	</div>
 </Modal>
 
-<Modal bind:this={incorrectInformationModal}>
+<Modal show={showIncorrectInformation}>
 	<div class="modal-dialog" tabindex="-1">
 		<div class="inner-modal-dialog" tabindex="-1">
 			<h4 id="modal-text">
@@ -223,7 +181,7 @@
 			<div class="incorrect-information-button">
 				<SvgButton
 					icon={Done}
-					click={closeIncorrectModal}
+					click={() => { showIncorrectInformation = false }}
 					id="close-incorrect-information-modal"
 					size={24}
 				/>

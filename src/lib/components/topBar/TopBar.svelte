@@ -21,6 +21,8 @@
 	} from "svelte-google-materialdesign-icons";
 	import SettingsView from "$lib/components/settings/SettingsView.svelte";
 	import { showSettings } from "$lib/components/settings/showSettings";
+	import { showEngineUI } from "$lib/components/engineUI/showEngineUI";
+	import EngineUi from "../engineUI/EngineUI.svelte";
 
 	let projectHandler: typeof ProjectHandler;
 
@@ -214,7 +216,7 @@
 			icon={Settings_input_composite}
 			name="Engine Options"
 			on:click={() => {
-				dispatch("toggleEngineUI");
+				$showEngineUI = true;
 			}}
 		/>
 		<DropDownButton
@@ -248,6 +250,7 @@
 </div>
 
 <SettingsView />
+<EngineUi />
 
 <style>
 	div {
