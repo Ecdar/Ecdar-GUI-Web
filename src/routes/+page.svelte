@@ -9,19 +9,12 @@
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import GlobalDeclaration from "$lib/components/project/globalDeclaration/GlobalDeclaration.svelte";
 	import Queries from "$lib/components/query/Queries.svelte";
-	import type IEngineUIComponent from "$lib/interfaces/IEngineUIComponent";
 	import type IAboutUI from "$lib/interfaces/IAboutUI";
-	import EngineUi from "$lib/components/engineUI/EngineUI.svelte";
 	import AboutUi from "$lib/components/topBar/aboutUI/AboutUI.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 	import Settings from "$lib/components/settings/SettingsView.svelte";
 
-	let engineUIContainer: EngineUi & IEngineUIComponent;
-
-	function openEngineUI() {
-		engineUIContainer.showEngineUI();
-	}
 
 	let showSettings: boolean = false;
 	function toggleSettings() {
@@ -35,12 +28,10 @@
 </script>
 
 <!-- Top navigation Panel -->
-<EngineUi bind:this={engineUIContainer} />
 <AboutUi bind:this={aboutUIContainer} />
 <nav id="main-nav">
 	<TopBar
 		on:toggleSettings={toggleSettings}
-		on:toggleEngineUI={openEngineUI}
 		on:toggleAboutBox={openAboutUI}
 	/>
 </nav>
