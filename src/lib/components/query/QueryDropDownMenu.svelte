@@ -40,7 +40,7 @@
 		<Button
 			icon={isPeriodic ? Check_box : Check_box_outline_blank}
 			text="Run Periodically"
-			click={togglePeriodicCheck}
+			on:click={togglePeriodicCheck}
 		/>
 	</Panel>
 	<Panel>
@@ -50,7 +50,7 @@
 		<Button
 			icon={Delete}
 			text="Delete"
-			click={() => {
+			on:click={() => {
 				$queries?.splice(index, 1);
 				$queries = $queries;
 			}}

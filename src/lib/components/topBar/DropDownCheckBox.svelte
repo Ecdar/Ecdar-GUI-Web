@@ -1,56 +1,59 @@
 <script lang="ts">
-	import { createEventDispatcher, type ComponentType } from "svelte";
-	import DropDownButton from "./DropDownButton.svelte";
-	import { Done } from "svelte-google-materialdesign-icons";
+	import { createEventDispatcher } from "svelte";
+	import Button from "$lib/components/overlayMenu/elements/Button.svelte";
 	import {
+		Check_box,
+		Check_box_outline_blank,
+	} from "svelte-google-materialdesign-icons";
+	/*import {
 		checkboxStates,
 		addCheckbox,
-	} from "$lib/globalState/topbarCheckBoxes";
+	} from "$lib/globalState/topbarCheckBoxes";*/
 
-	//Set dafult values
-	export let name: string = "Default";
-	let icon: ComponentType = Done;
+	//Set default values
+	export let text: string = "Default";
 	export let defaultVal: boolean = false;
 	let checked: boolean = defaultVal;
+	$: icon = checked ? Check_box : Check_box_outline_blank;
 	let unique = {};
 
-	addCheckbox(name, defaultVal);
-	checkboxStates[name].subscribe((value) => {
+	/*addCheckbox(text, defaultVal);
+	checkboxStates[text].subscribe((value) => {
 		checked = value;
-	});
+	});*/
 
 	const dispatch = createEventDispatcher();
 
 	function onCheck() {
+		checked = true;
+		//checkboxStates[text].set(true);
 		dispatch("checked");
 	}
 
 	function onUnCheck() {
+		checked = false;
+		//checkboxStates[text].set(false);
 		dispatch("unchecked");
 	}
 
-	function whatToCall(c: boolean) {
-		c ? onCheck() : onUnCheck();
+	function toggle() {
+		if (checked) {
+			onUnCheck();
+		} else {
+			onCheck();
+		}
 	}
 
-	whatToCall(checked);
+	toggle();
 </script>
 
 <!--Make each dropdown item, into button-->
 {#key unique}
-	<DropDownButton
-		{name}
+	<Button
+		{text}
 		{icon}
-		color={checked ? "black" : "transparent"}
 		on:click={() => {
-			checkboxStates[name].update(() => {
-				if (checked) {
-					onUnCheck();
-				} else {
-					onCheck();
-				}
-				return !checked;
-			});
+			toggle();
 			unique = {};
 		}}
 	/>

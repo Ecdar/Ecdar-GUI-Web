@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { ComponentType } from "svelte";
 
-	export let click: (event: MouseEvent) => void = () => {};
 	export let icon: ComponentType;
 	export let id: string;
 	export let size: number = 24;
@@ -17,7 +16,7 @@
 		style="justify-content: {justifyContent}"
 		{id}
 		bind:this={button}
-		on:click={click}
+		on:click
 		{popovertarget}
 	>
 		<svelte:component

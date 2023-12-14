@@ -55,6 +55,7 @@
 	}
 
 	#main-nav {
+		display: flex;
 		background-color: var(--main-navigationbar-color);
 		height: 2em;
 		border-bottom: 0.2em solid black;

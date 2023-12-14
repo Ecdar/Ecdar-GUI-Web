@@ -17,6 +17,7 @@
 			</p>
 		</div>
 		<button
+			id="close-about-ui"
 			on:click={() => {
 				$showAboutUI = false;
 			}}>Close</button
@@ -32,7 +33,7 @@
 		color: var(--text-color);
 	}
 
-	button {
+	button#close-about-ui {
 		margin-left: 30em;
 		margin-bottom: 1em;
 	}
