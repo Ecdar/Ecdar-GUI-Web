@@ -119,7 +119,7 @@ test("Invalid engine name will not save", async ({ page }) => {
 test("Invalid engine address will not save", async ({ page }) => {
 	const inputs = await page.locator("#engine-ui-outer input").all();
 	await inputs[0].fill("test");
-	await inputs[1].fill("invalid");
+	await inputs[1].fill("5.5.5.5.5");
 	await inputs[2].fill("1");
 	await inputs[3].fill("2");
 

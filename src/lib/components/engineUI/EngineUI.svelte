@@ -6,10 +6,13 @@
 	import { Save, Add, Close, Done } from "svelte-google-materialdesign-icons";
 	import type IEngineSeperateComponent from "$lib/interfaces/IEngineSeperateComponent";
 	import SvgButton from "../buttons/SvgButton.svelte";
-	import { writable, type Writable } from "svelte/store";
+	import { get, writable, type Writable } from "svelte/store";
 	import type EngineSeperate from "./EngineSeperate.svelte";
 	import { showEngineUI } from "./showEngineUI";
 	import { engineStore } from "$lib/globalState/engines";
+	import { onDestroy } from "svelte";
+
+	let closeListenersController: AbortController | undefined;
 
 	let showUnsavedChanges = false;
 
@@ -61,6 +64,51 @@
 			return engine.hasBeenChanged;
 		});
 	}
+
+	$: if ($showEngineUI) {
+		tempEngines.set([]);
+
+		//load Engine store
+		get(engineStore).forEach((engine) => {
+			let tempEngine: EngineDTO = {
+				address: engine.address,
+				name: engine.name,
+				hasBeenChanged: false,
+				useBundle: engine.useBundle,
+				portRangeStart: engine.portRangeStart,
+				portRangeEnd: engine.portRangeEnd,
+				id: engine.id,
+			};
+			tempEngines.update((items) => [...items, tempEngine]);
+		});
+		if (get(tempEngines).length == 0) {
+			addNewEngine();
+			$tempEngines[0].hasBeenChanged = false; //dont mark empty engine as change
+		}
+
+		closeListenersController?.abort();
+		closeListenersController = new AbortController();
+		window.addEventListener(
+			"keydown",
+			(event) => {
+				if (event.key === "Escape") {
+					$showEngineUI = false;
+				}
+			},
+			{
+				passive: true,
+				signal: closeListenersController.signal,
+			},
+		);
+		// openContextMenu();
+	} else {
+		closeListenersController?.abort();
+		// closeContextMenu();
+	}
+
+	onDestroy(() => {
+		closeListenersController?.abort();
+	});
 
 	function forceCloseDialogContainer() {
 		showUnsavedChanges = false;

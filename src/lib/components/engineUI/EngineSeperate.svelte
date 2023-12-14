@@ -263,6 +263,7 @@
 		padding: 0;
 		margin: 0;
 		font-size: small;
+		align-items: center;
 	}
 
 	.unselectable {
@@ -278,6 +279,9 @@
 		display: grid;
 		grid-template-areas: "name name-input delete" "ip ip-input local" "port port-input .";
 		grid-template-columns: 1fr 3fr 1fr;
+
+		border-bottom: 0.3em solid var(--engine-ui-text-color);
+		border-top: 0.3em solid var(--engine-ui-text-color);
 	}
 
 	.delete-button {

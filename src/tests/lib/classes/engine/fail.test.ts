@@ -250,7 +250,7 @@ const missingName = {
 
 const missingAddress = {
 	name: "test",
-	//address: "123.123.123.123",
+	address: "",
 	portRangeStart: 5,
 	portRangeEnd: 5,
 	id: 1,

@@ -16,7 +16,8 @@ class EngineStorage {
 	#engineId: number = 0;
 
 	get engineId(): number {
-		return (this.engineId = ++this.#engineId); //auto inc
+		this.engineId = ++this.#engineId; //auto inc
+		return this.#engineId;
 	}
 	set engineId(id: number) {
 		if (id >= 0) this.#engineId = id;

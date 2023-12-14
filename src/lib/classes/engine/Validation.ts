@@ -3,12 +3,12 @@ export function validateName(name: string | undefined): boolean {
 	return false;
 }
 
-const regexTest: RegExp = new RegExp(
-	"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", // Will test for any valid IP address
-);
+// const regexTest: RegExp = new RegExp(
+// 	"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", // Will test for any valid IP address
+// );
 
-export function validateIP(ipAdress: string): boolean {
-	return URL.canParse(ipAdress) || regexTest.test(ipAdress);
+export function validateIP(ipAddress: string): boolean {
+	return URL.canParse("https://" + ipAddress) || URL.canParse(ipAddress); //regexTest.test(ipAdress);
 }
 
 export function validateStartPort(port: number): boolean {
