@@ -70,7 +70,7 @@
 		<div class="group">
 			<SvgButton
 				icon={Arrow_right}
-				click={runQuery}
+				on:click={runQuery}
 				id="run-query"
 				color="var(--sidebar-text-color)"
 			/>

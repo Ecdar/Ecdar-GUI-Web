@@ -49,13 +49,13 @@
 	<div class="buttons">
 		<SvgButton
 			icon={Create_new_folder}
-			click={addComponent}
+			on:click={addComponent}
 			size={30}
 			id="add-component"
 		/>
 		<SvgButton
 			icon={Note_add}
-			click={addSystem}
+			on:click={addSystem}
 			size={30}
 			id="add-system"
 		/>

@@ -1,7 +1,11 @@
 <script lang="ts">
-	import TopBarDropDown from "./TopBarDropDown.svelte";
+	import OverlayMenu from "$lib/components/overlayMenu/OverlayMenu.svelte";
 
 	export let name: string = "Default";
+
+	$: dropdownId = `topbar-dropdown-menu-${name}`;
+
+	let button: HTMLButtonElement;
 
 	//Set visibility of dropdown to no visible
 	let visible: boolean = false;
@@ -9,32 +13,14 @@
 
 <!--Show dropdown menu of given topbar item on hover-->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div
-	class="unselectable"
-	on:mouseenter={() => {
-		visible = true;
-	}}
-	on:mouseleave={() => {
-		visible = false;
-	}}
->
-	<button>
-		{name}
-	</button>
-	<div class="container">
-		{#if visible}
-			<TopBarDropDown>
-				<slot />
-			</TopBarDropDown>
-		{/if}
-	</div>
-</div>
+<button bind:this={button} popovertarget={dropdownId}>
+	{name}
+</button>
+<OverlayMenu id={dropdownId} anchor={button}>
+	<slot />
+</OverlayMenu>
 
 <style>
-	div {
-		height: 100%;
-	}
-
 	button {
 		height: 100%;
 		background-color: var(--main-navigationbar-color);

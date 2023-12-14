@@ -69,7 +69,7 @@
 					? Check_box
 					: Check_box_outline_blank}
 				text="Include in periodic check"
-				click={togglePeriodicCheck}
+				on:click={togglePeriodicCheck}
 			/>
 		</Panel>
 	{/if}
@@ -94,7 +94,7 @@
 		<Button
 			icon={Delete}
 			text="Delete"
-			click={() => {
+			on:click={() => {
 				if (id instanceof SystemId) {
 					$systems?.delete(id);
 					$systems = $systems;

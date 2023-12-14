@@ -12,9 +12,9 @@
 <button bind:this={button} popovertarget={menuId}>Files</button>
 <OverlayMenu anchor={button} id={menuId}>
 	<Panel>
-		<Button icon={Download} text="Load" click={() => {}} />
+		<Button icon={Download} text="Load" on:click={() => {}} />
 	</Panel>
 	<Panel>
-		<Button icon={Save} text="Save" click={() => {}} />
+		<Button icon={Save} text="Save" on:click={() => {}} />
 	</Panel>
 </OverlayMenu>

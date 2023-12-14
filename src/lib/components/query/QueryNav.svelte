@@ -28,13 +28,13 @@
 		<SvgButton icon={Add} click={addQuery} size={30} id="add-query" />
 		<SvgButton
 			icon={Arrow_right}
-			click={runAllQueries}
+			on:click={runAllQueries}
 			size={30}
 			id="run-all-queries"
 		/>
 		<SvgButton
 			icon={Menu}
-			click={resetAllStatus}
+			on:click={resetAllStatus}
 			size={30}
 			id="reset-all-status"
 		/>

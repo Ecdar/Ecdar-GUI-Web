@@ -28,7 +28,7 @@
 		<div class="flex-column">
 			<div class="bottom-border">
 				<SvgButton
-					click={startNewProject}
+					on:click={startNewProject}
 					icon={Add}
 					id={`start-new-project`}
 					color="var(--text-color)"
@@ -47,7 +47,7 @@
 						id={`open-example-${exampleName.replaceAll(" ", "-")}`}
 						color="var(--text-color)"
 						justifyContent="center"
-						click={async () => {
+						on:click={async () => {
 							await projectHandler.openExampleProject(
 								exampleLoader,
 							);
@@ -59,7 +59,7 @@
 		<div class="flex-column">
 			<div class="bottom-border">
 				<SvgButton
-					click={async () => {
+					on:click={async () => {
 						await projectHandler.openProject();
 					}}
 					icon={File_open}
@@ -78,7 +78,7 @@
 						id={`open-project`}
 						color="var(--text-color)"
 						justifyContent="center"
-						click={async () => {
+						on:click={async () => {
 							await projectHandler.openRecentProject(
 								recentProject,
 							);
