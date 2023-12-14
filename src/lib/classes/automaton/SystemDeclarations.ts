@@ -28,7 +28,7 @@ export class SystemDeclarations extends Declarations<
 			: {
 					name: this.type,
 					declarations: this.declarations,
-				};
+			  };
 	}
 
 	/**

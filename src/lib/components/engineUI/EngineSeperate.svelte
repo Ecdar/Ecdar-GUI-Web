@@ -17,7 +17,8 @@
 		validateStartPort,
 	} from "$lib/classes/engine/Validation";
 	import SvgButton from "../buttons/SvgButton.svelte";
-	import { tempEngines } from "$lib/globalState/tempEngines";
+	import type { Writable } from "svelte/store";
+	// import { tempEngines } from "$lib/globalState/tempEngines";
 
 	let modalContainer: Modal & iModalComponent;
 	let nameContainer: HTMLInputElement;
@@ -34,6 +35,7 @@
 	let engineUIUnderlineColour: string = "var(--engine-ui-underline-color)";
 
 	export let currentEngine: EngineDTO;
+	export let tempEngines: Writable<Array<EngineDTO>>;
 
 	export const setUpEngineSeperate = () => {
 		changeNameBorder();
@@ -56,8 +58,10 @@
 				if (engine.id == -1)
 					//if deleted engine is new, dont mark it as change
 					engine.hasBeenChanged = false;
+				else engine.hasBeenChanged = true;
 			}
 		});
+		// $tempEngine.address = "-1"
 
 		if (validEngines.length <= 1) {
 			nameContainer.value = "";
@@ -66,8 +70,8 @@
 			endPortContainer.value = "";
 			currentEngine.name = "";
 
-			closeModal();
-			return;
+			// 	// closeModal();
+			// 	// return;
 		}
 
 		$tempEngines = $tempEngines;
@@ -391,6 +395,10 @@
 	input[type="text"]::placeholder {
 		color: var(--engine-ui-input-text-placeholder-color);
 		text-align: center;
+	}
+
+	input[type="number"] {
+		-moz-appearance: textfield;
 	}
 
 	#delete-text {
