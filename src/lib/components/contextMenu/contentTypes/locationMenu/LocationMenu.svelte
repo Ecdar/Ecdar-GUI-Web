@@ -23,11 +23,23 @@
 		icon={Delete}
 		text="Delete"
 		click={() => {
-			location.remove();
+			// TODO: implement
 		}}
 	/>
-	<Button icon={Warning} text="Deattach" click={() => {}} />
-	<Button icon={Star} text="Star" click={() => {}} />
+	<Button
+		icon={Warning}
+		text="Deattach"
+		click={() => {
+			// TODO: implement
+		}}
+	/>
+	<Button
+		icon={Star}
+		text="Star"
+		click={() => {
+			// TODO: implement
+		}}
+	/>
 </Panel>
 <Panel>
 	<p>Color</p>

@@ -250,6 +250,6 @@ function closeActiveViewIfDeleted() {
 			activeViewValue,
 		)
 	) {
-		activeViewValue = undefined;
+		activeView.set(undefined);
 	}
 }
