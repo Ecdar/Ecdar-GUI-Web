@@ -7,11 +7,8 @@
 	 * Ensures that the real DOM element is opened or closed when the svelte value changes.
 	 */
 	$: if (dialogContainer && show) {
-		console.log("open");
-		//throw new Error("wut");
 		dialogContainer.showModal();
 	} else {
-		console.log("close");
 		dialogContainer?.close();
 	}
 
