@@ -13,26 +13,12 @@
 	import AboutUi from "$lib/components/topBar/aboutUI/AboutUI.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
-	import Settings from "$lib/components/settings/SettingsView.svelte";
-
-	let showSettings: boolean = false;
-	function toggleSettings() {
-		showSettings = !showSettings;
-	}
-
-	let aboutUIContainer: AboutUi & IAboutUI;
-	function openAboutUI() {
-		aboutUIContainer.showAboutUI();
-	}
 </script>
 
 <!-- Top navigation Panel -->
 <AboutUi bind:this={aboutUIContainer} />
 <nav id="main-nav">
-	<TopBar
-		on:toggleSettings={toggleSettings}
-		on:toggleAboutBox={openAboutUI}
-	/>
+	<TopBar />
 </nav>
 <main>
 	{#if $project === undefined}
@@ -50,11 +36,7 @@
 		<div class="canvas">
 			<nav class="inner-nav2">Nav 2</nav>
 			<!-- Replace Settings with a modal or new window instead of replacing the SVG View -->
-			{#if showSettings}
-				<Settings on:toggleSettings={toggleSettings} />
-			{:else}
-				<SvgView />
-			{/if}
+			<SvgView />
 		</div>
 		<!-- Right side -->
 		<SidePanel panelSide={SidePanelEnum.Right}>
