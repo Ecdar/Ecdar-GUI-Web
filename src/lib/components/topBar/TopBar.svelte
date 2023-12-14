@@ -21,6 +21,8 @@
 	} from "svelte-google-materialdesign-icons";
 	import SettingsView from "$lib/components/settings/SettingsView.svelte";
 	import { showSettings } from "$lib/components/settings/showSettings";
+	import AboutUi from "./aboutUI/AboutUI.svelte";
+	import { showAboutUI } from "$lib/components/topBar/aboutUI/showAboutUI";
 
 	let projectHandler: typeof ProjectHandler;
 
@@ -41,7 +43,7 @@
 -->
 
 <!--File top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="File">
 		<DropDownButton
 			icon={Note_add}
@@ -110,7 +112,7 @@
 </div>
 
 <!--Edit top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="Edit">
 		<DropDownButton
 			icon={Arrow_left}
@@ -144,7 +146,7 @@
 </div>
 
 <!--View top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="View">
 		<DropDownCheckBox
 			name="Project Panel"
@@ -190,7 +192,7 @@
 </div>
 
 <!--Options top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="Options">
 		<DropDownCheckBox
 			name="UI cache"
@@ -214,7 +216,7 @@
 			icon={Settings_input_composite}
 			name="Engine Options"
 			on:click={() => {
-				console.log("Engine Options");
+				console.log("Engine options");
 			}}
 		/>
 		<DropDownButton
@@ -228,7 +230,7 @@
 </div>
 
 <!--Help top bar button-->
-<div>
+<div class="container">
 	<TopBarButton name="Help">
 		<DropDownButton
 			icon={Help}
@@ -241,16 +243,18 @@
 			icon={Error}
 			name="About"
 			on:click={() => {
-				console.log("About");
+				$showAboutUI = true;
 			}}
 		/>
 	</TopBarButton>
 </div>
 
+<!-- Add modal component here -->
 <SettingsView />
+<AboutUi />
 
 <style>
-	div {
+	.container {
 		height: 100%;
 		display: block;
 		float: left;
