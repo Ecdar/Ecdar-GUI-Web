@@ -106,7 +106,7 @@
 				0.52549019608,
 				0.52549019608,
 				0.52549019608
-
+			],
 			"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
 			"--engine-ui-error-underline-color": [
 				"display-p3",
@@ -264,7 +264,7 @@
 					0.52549019608,
 					0.58823529411,
 					0.98823529412
-				]
+				],
 				"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
 				"--engine-ui-error-underline-color": [
 					"display-p3",
