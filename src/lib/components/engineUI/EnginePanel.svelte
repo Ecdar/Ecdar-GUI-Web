@@ -1,16 +1,21 @@
 <script lang="ts">
+	import type { Writable } from "svelte/store";
 	import EngineSeperate from "./EngineSeperate.svelte";
-	import { tempEngines } from "$lib/globalState/tempEngines";
+	import type { EngineDTO } from "./EngineDTO";
+	// import { tempEngines } from "$lib/globalState/tempEngines";
 
 	export let engineSeperateArray: Array<EngineSeperate | undefined>;
+	export let tempEngines: Writable<Array<EngineDTO>>;
 </script>
 
+<!-- bind:this={engineSeperateArray[index]} -->
 <h2>Engines</h2>
 <div class="engines">
 	{#each $tempEngines as engine, index}
 		{#if engine.address != "-1"}
 			<EngineSeperate
 				currentEngine={engine}
+				{tempEngines}
 				bind:this={engineSeperateArray[index]}
 			/>
 		{/if}

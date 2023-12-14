@@ -67,6 +67,8 @@ class EngineStorage {
 			useBundle,
 		);
 		this.engineArray[this.engineId - 1] = newEngine;
+
+		return newEngine;
 	}
 
 	/**
