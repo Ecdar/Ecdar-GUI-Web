@@ -25,7 +25,7 @@
 		<h1>Queries</h1>
 	</div>
 	<div class="buttons">
-		<SvgButton icon={Add} click={addQuery} size={30} id="add-query" />
+		<SvgButton icon={Add} on:click={addQuery} size={30} id="add-query" />
 		<SvgButton
 			icon={Arrow_right}
 			on:click={runAllQueries}
