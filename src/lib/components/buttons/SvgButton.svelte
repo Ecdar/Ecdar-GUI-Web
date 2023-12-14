@@ -15,13 +15,13 @@
 <div>
 	<button
 		style="justify-content: {justifyContent}"
+		{id}
 		bind:this={button}
 		on:click={click}
 		{popovertarget}
 	>
 		<svelte:component
 			this={icon}
-			{id}
 			{size}
 			{color}
 			ariaLabel=""
