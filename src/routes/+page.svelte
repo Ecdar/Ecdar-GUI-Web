@@ -15,7 +15,6 @@
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 	import Settings from "$lib/components/settings/SettingsView.svelte";
 
-
 	let showSettings: boolean = false;
 	function toggleSettings() {
 		showSettings = !showSettings;
