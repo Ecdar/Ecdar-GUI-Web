@@ -2,7 +2,7 @@
 	let dialog: HTMLDialogElement | undefined;
 
 	/**
-	 * Will allows the user to close the modal by clicking outside it.
+	 * Allows the user to close the modal by clicking outside it.
 	 */
 	export let closeOnBackdrop: boolean = false;
 
@@ -22,7 +22,7 @@
 
 	/**
 	 * Closes the modal if the user clicks outside it
-	 * Only works if ModalCloseOnBackdrop is true
+	 * Only works if closeOnBackdrop is true
 	 */
 	function closeOnBackdropClick(event: MouseEvent) {
 		if (!closeOnBackdrop) return;
