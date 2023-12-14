@@ -71,8 +71,8 @@
 				editor.push.update((push) => (push(code), push));
 				updateCode(n, code);
 			},
-			{ 
-				history: false ,
+			{
+				history: false,
 				addClosing: false,
 			},
 		);
