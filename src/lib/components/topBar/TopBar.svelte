@@ -244,11 +244,3 @@
 <!-- Add modal component here -->
 <SettingsView />
 <AboutUi />
-
-<style>
-	.container {
-		height: 100%;
-		display: block;
-		float: left;
-	}
-</style>

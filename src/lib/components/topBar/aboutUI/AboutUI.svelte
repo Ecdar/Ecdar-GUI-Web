@@ -17,7 +17,7 @@
 			</p>
 		</div>
 		<button
-			id="close-aboout-ui"
+			id="close-about-ui"
 			on:click={() => {
 				$showAboutUI = false;
 			}}>Close</button

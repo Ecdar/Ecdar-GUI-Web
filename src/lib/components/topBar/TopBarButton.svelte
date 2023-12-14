@@ -6,13 +6,9 @@
 	$: dropdownId = `topbar-dropdown-menu-${name}`;
 
 	let button: HTMLButtonElement;
-
-	//Set visibility of dropdown to no visible
-	let visible: boolean = false;
 </script>
 
 <!--Show dropdown menu of given topbar item on hover-->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
 <button bind:this={button} popovertarget={dropdownId}>
 	{name}
 </button>
@@ -31,17 +27,5 @@
 
 	button:hover {
 		background-color: var(--navigationbar-button-hover-color);
-	}
-
-	.unselectable {
-		-webkit-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
-
-	.container {
-		position: absolute;
-		height: 0px;
-		z-index: 100;
 	}
 </style>

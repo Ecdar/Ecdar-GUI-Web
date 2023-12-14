@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher, type ComponentType } from "svelte";
+	import { createEventDispatcher } from "svelte";
 	import Button from "$lib/components/overlayMenu/elements/Button.svelte";
 	import {
 		Check_box,
@@ -36,7 +36,7 @@
 		dispatch("unchecked");
 	}
 
-	function toggle(c: boolean) {
+	function toggle() {
 		if (checked) {
 			onUnCheck();
 		} else {
