@@ -57,6 +57,7 @@
 
 <style>
 	dialog {
+		color: var(--text-color);
 		background-color: var(--background-color);
 	}
 	dialog::backdrop {
