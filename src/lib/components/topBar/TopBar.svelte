@@ -249,6 +249,7 @@
 	</TopBarButton>
 </div>
 
+<!-- Add modal component here -->
 <SettingsView />
 <AboutUi />
 
