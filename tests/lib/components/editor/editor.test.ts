@@ -39,22 +39,33 @@ test("Write in editor", async ({ page }) => {
 });
 
 test("Correct line numbers in editor", async ({ page }) => {
+	function randomLineNumber(min: number, max: number) {
+		return Math.floor(Math.random() * (max - min + 1) + min);
+	}
+
 	await page
 		.locator("#coffee-machine-1")
 		.getByRole("button", { name: "folder special Coffee Machine 1" })
 		.click();
 	await page.locator("#editor").locator(".editor-text").click();
-	for (let i = 0; i < 4; i++) {
+
+	const createLines = randomLineNumber(5, 30);
+
+	for (let i = 0; i < createLines; i++) {
 		await page.keyboard.press("Enter");
 	}
 
-	await expect(page.locator(".editor-linenum")).toHaveCount(5);
+	await expect(page.locator(".editor-linenum")).toHaveCount(createLines + 1);
 
-	for (let i = 0; i < 2; i++) {
+	const deleteLines = randomLineNumber(5, createLines);
+
+	for (let i = 0; i < deleteLines; i++) {
 		await page.keyboard.press("Backspace");
 	}
 
-	await expect(page.locator(".editor-linenum")).toHaveCount(3);
+	await expect(page.locator(".editor-linenum")).toHaveCount(
+		createLines + 1 - deleteLines,
+	);
 });
 
 test("Change between editor- and svg-view", async ({ page }) => {
