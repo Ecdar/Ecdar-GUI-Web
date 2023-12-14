@@ -15,7 +15,7 @@
 </script>
 
 <!-- Top navigation Panel -->
-<ModalContainer/>
+<ModalContainer />
 <nav id="main-nav">
 	<TopBar />
 </nav>

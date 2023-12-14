@@ -7,7 +7,9 @@
 	export let show: Writable<boolean>;
 
 	onMount(() => {
-		show.subscribe( val => { val ? dialogContainer.showModal() : dialogContainer.close() });
+		show.subscribe((val) => {
+			val ? dialogContainer.showModal() : dialogContainer.close();
+		});
 	});
 
 	/**
