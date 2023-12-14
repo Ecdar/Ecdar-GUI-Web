@@ -42,13 +42,22 @@
 			tempEngines.update((items) => [...items, tempEngine]);
 		});
 
-		if (get(tempEngines).length == 0) {
-			addNewEngine();
-			$tempEngines[0].hasBeenChanged = false; //dont mark empty engine as change
-		}
+		// if (get(tempEngines).length == 0) {
+		// 	addNewEngine();
+		// 	$tempEngines[0].hasBeenChanged = false; //dont mark empty engine as change
+		// }
 		dialogContainer.showModal();
 	}
 
+	//Always have at least one component!
+	$: if (
+		$tempEngines.filter((engine) => {
+			return engine.address != "-1";
+		}).length == 0
+	) {
+		addNewEngine();
+		$tempEngines[0].hasBeenChanged = false; //dont mark empty engine as change
+	}
 	/**
 	 * Add a new engine to the view
 	 */
