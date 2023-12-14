@@ -4,7 +4,7 @@
 	import ColorSettings from "$lib/components/settings/ColorSettings.svelte";
 	import FontSettings from "$lib/components/settings/FontSettings.svelte";
 	import Modal from "../modal/Modal.svelte";
-	import { showSettings } from "../modalContainer/state";
+	import { showSettings } from "../settings/showSettings";
 
 	const settingTabs: Tab[] = [
 		{

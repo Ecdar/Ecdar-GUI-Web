@@ -19,7 +19,7 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
-	import { showSettings } from "../modalContainer/state";
+	import { showSettings } from "../settings/showSettings";
 
 	let projectHandler: typeof ProjectHandler;
 
