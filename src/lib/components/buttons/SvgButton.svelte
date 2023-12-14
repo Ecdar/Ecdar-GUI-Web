@@ -4,7 +4,6 @@
 	export let click: (event: MouseEvent) => void = () => {};
 	export let icon: ComponentType;
 	export let id: string;
-	export let buttonId: string = "";
 	export let size: number = 24;
 	export let color: string = "currentColor";
 	export let justifyContent: "flex-start" | "flex-end" | "center" =
@@ -15,15 +14,14 @@
 
 <div>
 	<button
-		id={buttonId}
 		style="justify-content: {justifyContent}"
+		{id}
 		bind:this={button}
 		on:click={click}
 		{popovertarget}
 	>
 		<svelte:component
 			this={icon}
-			{id}
 			{size}
 			{color}
 			ariaLabel=""

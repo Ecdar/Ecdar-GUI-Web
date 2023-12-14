@@ -12,7 +12,6 @@
 		strokeWidth: "1.5",
 		size: "15",
 		variation: "filled",
-		color: color,
 	};
 	setContext("iconContext", iconContext);
 </script>
@@ -20,7 +19,7 @@
 <!--Make each dropdown item, into button-->
 
 <button class="dropdown-item" on:click>
-	<svelte:component this={icon}></svelte:component>
+	<svelte:component this={icon} {color}></svelte:component>
 	<div class="align-text">{name}</div>
 </button>
 

@@ -210,13 +210,12 @@
 			<!--for attribute automatically works on nested element-->
 			Use Bundle
 			<SvgButton
-				buttonId="checkbox-button-for-label"
+				id="checkbox-button-for-label"
 				icon={currentEngine.useBundle
 					? Check_box
 					: Check_box_outline_blank}
 				click={toggleUseBundle}
 				size={18}
-				id={"checkbox-button"}
 			/></label
 		>
 	</div>
@@ -254,7 +253,7 @@
 </div>
 
 <style>
-	:global(.engine-panel #checkbox-button) {
+	:global(.engine-panel #checkbox-button-for-label svg) {
 		pointer-events: none;
 	}
 	label {

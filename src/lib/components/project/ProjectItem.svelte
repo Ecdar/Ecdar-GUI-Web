@@ -16,22 +16,23 @@
 	export let setAsActive: () => void;
 	export let rename: () => void;
 
-	const UniqeId = id.rawId.split(" ").join("-").toLowerCase();
+	const UniqueId = id.rawId.split(" ").join("-").toLowerCase();
 </script>
 
-<button on:click={setAsActive}>
-	<div class="project-item {itemType}" id={UniqeId}>
-		<div
-			class="left"
-			on:dblclick={rename}
-			on:keypress={(event) => {
-				if (event.key === "Enter") {
-					rename();
-				}
-			}}
-			role="button"
-			tabindex="0"
-		>
+<div class="project-item {itemType}" id={UniqueId}>
+	<div
+		class="left"
+		on:click={setAsActive}
+		on:dblclick={rename}
+		on:keypress={(event) => {
+			if (event.key === "Enter") {
+				rename();
+			}
+		}}
+		role="button"
+		tabindex="0"
+	>
+		<div style="display: flex;">
 			<div class="circle" style="background-color: {color}">
 				<div class="icon">
 					{#if itemType === "component"}
@@ -43,47 +44,49 @@
 			</div>
 			<p>{id.rawId}</p>
 		</div>
-		<div>
-			{#if itemType === "component"}
-				<ProjectItemDropDownMenu
-					bind:description
-					bind:color
-					bind:includeInPeriodicCheck
-					{id}
-					{itemType}
-				/>
-			{:else}
-				<ProjectItemDropDownMenu
-					bind:description
-					bind:color
-					{id}
-					{itemType}
-				/>
-			{/if}
-		</div>
 	</div>
-</button>
+	<div class="right">
+		{#if itemType === "component"}
+			<ProjectItemDropDownMenu
+				bind:description
+				bind:color
+				bind:includeInPeriodicCheck
+				{id}
+				{itemType}
+			/>
+		{:else}
+			<ProjectItemDropDownMenu
+				bind:description
+				bind:color
+				{id}
+				{itemType}
+			/>
+		{/if}
+	</div>
+</div>
 
 <style>
-	button {
-		display: block;
-		color: inherit;
-		font: inherit;
-		border: none;
-		border-bottom: 1px solid black;
-		padding: 0;
-		width: 100%;
-	}
-
-	button:focus-visible {
-		outline: 1px solid white;
-		outline-offset: -1px;
-	}
-
 	.left {
-		display: flex;
-		align-items: center;
+		padding: 10px;
 		width: 100%;
+		overflow: hidden;
+		border-right: 1px solid rgba(28, 28, 28, 0.55);
+		border-image: linear-gradient(
+			rgba(0, 0, 0, 0) 20%,
+			rgba(0, 0, 0, 1) 20%,
+			rgba(0, 0, 0, 1) 80%,
+			rgba(0, 0, 0, 0) 80%
+		);
+		border-image-slice: 1;
+	}
+
+	.right {
+		margin: 0 5px;
+	}
+
+	p {
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.project-item {
@@ -95,7 +98,6 @@
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-		padding: 10px;
 		border-bottom: 1px solid black;
 	}
 

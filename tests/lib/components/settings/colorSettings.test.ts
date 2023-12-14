@@ -3,7 +3,11 @@ import { test, expect, type Dialog } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
 	await page.waitForLoadState();
+	await page.waitForLoadState("load");
+	await page.waitForLoadState("domcontentloaded");
 	await page.click("#start-new-project");
+	await page.waitForLoadState("load");
+	await page.waitForLoadState("domcontentloaded");
 
 	await page.getByRole("button", { name: "Options", exact: true }).hover();
 	await page
@@ -60,9 +64,9 @@ test("can use color picker to update a valid color", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
-	const colorInputs = await page
-		.locator(`#setting-tabs-container input[type="color"]`)
-		.all();
+	await page.waitForSelector(".bottom .custom-color");
+
+	const colorInputs = await page.locator(`input[type="color"]`).all();
 
 	await colorInputs[1].fill("#ff00ff");
 
@@ -86,6 +90,8 @@ test("can update valid color", async ({ page }) => {
 	await inputs[2].fill("0");
 
 	await page.locator("#add-color").click();
+
+	await page.waitForSelector('.bottom .custom-color input[type="number"]');
 
 	const modifiedColorFields = await page
 		.locator(".bottom .custom-color")
@@ -143,6 +149,10 @@ test("can delete invalid color", async ({ page }) => {
 
 		await page.locator("#add-color").click();
 
+		await page.waitForSelector(
+			'.bottom .custom-color input[type="number"]',
+		);
+
 		const modifiedColorFields = await page
 			.locator(".bottom .custom-color")
 			.first()
@@ -190,6 +200,8 @@ test("cannot update invalid color", async ({ page }) => {
 	await inputs[2].fill("1");
 
 	await page.locator("#add-color").click();
+
+	await page.waitForSelector('.bottom .custom-color input[type="number"]');
 
 	const modifiedColorFields = await page
 		.locator(".bottom .custom-color")
