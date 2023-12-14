@@ -28,7 +28,7 @@ export class GlobalDeclarations extends Declarations<
 			: {
 					name: this.type,
 					declarations: this.declarations,
-				};
+			  };
 	}
 
 	/**
