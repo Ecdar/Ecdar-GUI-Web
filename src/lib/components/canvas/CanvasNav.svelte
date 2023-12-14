@@ -21,7 +21,7 @@
 	});
 </script>
 
-<div id="canvas-nav">
+<nav id="canvas-nav">
 	<div class="buttons">
 		{#if supports === CanvasSupports.Both && mode !== CanvasModes.Draw}
 			<SvgButton
@@ -44,14 +44,14 @@
 			/>
 		{/if}
 	</div>
-</div>
+</nav>
 
 <style>
 	#canvas-nav {
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
-		height: 100%;
+		min-height: 5em;
 		padding: 0 1em;
 		background-color: var(--canvas-topbar-color);
 	}
