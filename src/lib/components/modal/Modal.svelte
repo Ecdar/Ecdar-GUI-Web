@@ -1,28 +1,22 @@
 <script lang="ts">
+	import { onMount } from "svelte";
+	import type { Writable } from "svelte/store";
+
 	let dialogContainer: HTMLDialogElement;
-	export let ModalCloseOnBackdrop: boolean = false;
+	export let modalCloseOnBackdrop: boolean = false;
+	export let show: Writable<boolean>;
 
-	/**
-	 * Function for showing the current modal
-	 */
-	export function showModal() {
-		dialogContainer.showModal();
-	}
-
-	/**
-	 * Function for closing the current modal
-	 */
-	export function closeModal() {
-		dialogContainer.close();
-	}
+	onMount(() => {
+		show.subscribe( val => { val ? dialogContainer.showModal() : dialogContainer.close() });
+	});
 
 	/**
 	 * Function for closing the current modal when the backdrop is clicked if
 	 * ModalCloseOnBackdrop is true
 	 */
 	function closeModalOnBackdropClick() {
-		if (ModalCloseOnBackdrop) {
-			dialogContainer.close();
+		if (modalCloseOnBackdrop) {
+			$show = false;
 		}
 	}
 </script>

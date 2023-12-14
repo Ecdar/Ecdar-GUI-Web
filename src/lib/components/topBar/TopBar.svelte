@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher, onMount } from "svelte";
+	import { onMount } from "svelte";
 	import type { projectHandler as ProjectHandler } from "$lib/classes/projectHandler/ProjectHandler";
 	import TopBarButton from "$lib/components/topBar/TopBarButton.svelte";
 	import DropDownButton from "$lib/components/topBar/DropDownButton.svelte";
@@ -19,8 +19,8 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
+	import { showSettings } from "../modalContainer/state";
 
-	const dispatch = createEventDispatcher();
 	let projectHandler: typeof ProjectHandler;
 
 	onMount(async () => {
@@ -220,7 +220,7 @@
 			icon={Settings}
 			name="Settings"
 			on:click={() => {
-				dispatch("toggleSettings");
+				$showSettings = true;
 			}}
 		/>
 	</TopBarButton>
