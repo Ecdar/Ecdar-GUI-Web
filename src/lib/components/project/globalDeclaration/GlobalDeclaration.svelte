@@ -22,7 +22,6 @@
 		color: inherit;
 		font: inherit;
 		border: none;
-		border-bottom: 1px solid black;
 		padding: 0;
 		width: 100%;
 	}
@@ -30,6 +29,11 @@
 	button:focus-visible {
 		outline: 1px solid white;
 		outline-offset: -1px;
+	}
+
+	p {
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	#global-dec {

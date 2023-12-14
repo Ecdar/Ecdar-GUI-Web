@@ -57,8 +57,11 @@ test("Add 5 systems and 5 components", async ({ page }) => {
 });
 
 test("Delete a component", async ({ page, browserName }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 	await page.click("#add-component");
@@ -72,8 +75,11 @@ test("Delete a component", async ({ page, browserName }) => {
 });
 
 test("Delete a system", async ({ page, browserName }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	await expect(page.locator(".project-item.system")).toHaveCount(0);
 	await page.click("#add-system");
@@ -87,13 +93,16 @@ test("Delete a system", async ({ page, browserName }) => {
 });
 
 test("Delete 10 systems", async ({ page, browserName }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	await expect(page.locator(".project-item.system")).toHaveCount(0);
 
 	for (let i = 0; i < 10; i++) {
-		await page.click("#add-system");
+		await page.locator("#add-system").click();
 	}
 
 	await expect(page.locator(".project-item.system")).toHaveCount(10);
@@ -110,8 +119,11 @@ test("Delete 10 systems", async ({ page, browserName }) => {
 });
 
 test("Delete 10 components", async ({ page, browserName }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 
@@ -132,12 +144,12 @@ test("Delete 10 components", async ({ page, browserName }) => {
 	await expect(page.locator(".project-item.component")).toHaveCount(0);
 });
 
-test("Delete the 2.nd with a given color component", async ({
-	page,
-	browserName,
-}) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+test("Delete the 2nd component", async ({ page, browserName }) => {
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	for (let i = 1; i <= 3; i++) {
 		await page.click("#add-component");
@@ -170,8 +182,11 @@ test("Delete the 2.nd with a given color component", async ({
 });
 
 test("Can toggle includeInPeriodicCheck", async ({ page, browserName }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	await page.click("#add-component");
 
@@ -208,19 +223,22 @@ test("Description should stay the same after edited", async ({
 	page,
 	browserName,
 }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
-	await page.click("#add-component");
+	await page.locator("#add-component").click();
 
-	await page.click("#component-1-button");
+	await page.locator("#component-1-button").click();
 	await page
 		.locator("#component-1-menu")
 		.getByRole("textbox")
 		.fill("This is a new description.");
 	await page.keyboard.press("Escape");
 
-	await page.click("#component-1-button");
+	await page.locator("#component-1-button").click();
 	await expect(
 		page.locator("#component-1-menu").getByRole("textbox"),
 	).toHaveValue("This is a new description.");

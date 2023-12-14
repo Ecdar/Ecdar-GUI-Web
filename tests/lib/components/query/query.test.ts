@@ -27,8 +27,11 @@ test("add 10 queries", async ({ page }) => {
 });
 
 test("delete any query", async ({ page, browserName }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	await expect(page.locator(".query")).toHaveCount(0);
 	await page.click("#add-query");
@@ -39,8 +42,11 @@ test("delete any query", async ({ page, browserName }) => {
 });
 
 test("delete all 10 queries", async ({ page, browserName }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	await expect(page.locator(".query")).toHaveCount(0);
 
@@ -62,8 +68,11 @@ test("delete all 10 queries", async ({ page, browserName }) => {
 });
 
 test("delete a specific query", async ({ page, browserName }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	await expect(page.locator(".query")).toHaveCount(0);
 
@@ -163,8 +172,11 @@ test("can change backend to all options", async ({ page }) => {
 });
 
 test("can change isPeriodic", async ({ page, browserName }) => {
-	// TODO: remove this check when Firefox supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
-	test.skip(browserName === "firefox", "Popover not supported yet");
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
 
 	await page.click("#add-query");
 
