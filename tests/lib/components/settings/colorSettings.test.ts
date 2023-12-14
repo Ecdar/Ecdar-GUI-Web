@@ -77,6 +77,8 @@ test("can update valid color", async ({ page }) => {
 
 	await page.locator("#add-color").click();
 
+	await page.waitForSelector('.bottom .custom-color input[type="number"]');
+
 	const modifiedColorFields = await page
 		.locator(".bottom .custom-color")
 		.first()
@@ -129,6 +131,10 @@ test("can delete invalid color", async ({ page }) => {
 
 		await page.locator("#add-color").click();
 
+		await page.waitForSelector(
+			'.bottom .custom-color input[type="number"]',
+		);
+
 		const modifiedColorFields = await page
 			.locator(".bottom .custom-color")
 			.first()
@@ -172,6 +178,8 @@ test("cannot update invalid color", async ({ page }) => {
 	await inputs[2].fill("1");
 
 	await page.locator("#add-color").click();
+
+	await page.waitForSelector('.bottom .custom-color input[type="number"]');
 
 	const modifiedColorFields = await page
 		.locator(".bottom .custom-color")
