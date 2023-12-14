@@ -2,8 +2,8 @@
 
 <script lang="ts">
 	import type { iPoint } from "$lib/interfaces/iPoint";
+	import type { Nickname } from "$lib/classes/automaton";
 	import type { LocationId } from "$lib/classes/automaton/LocationId";
-	import type { iNickname } from "$lib/interfaces/iNickname";
 	import { contextMenu } from "$lib/components/contextMenu/contextMenu";
 	import LocationMenu from "$lib/components/contextMenu/contentTypes/locationMenu/LocationMenu.svelte";
 	import Label from "./Label.svelte";
@@ -11,7 +11,7 @@
 
 	export let position: iPoint;
 	export let locationId: LocationId;
-	export let nickname: iNickname | undefined;
+	export let nickname: Nickname | undefined;
 
 	let group: SVGElement;
 	let menuProps = {

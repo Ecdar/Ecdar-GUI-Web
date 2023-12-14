@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DraggableSvg from "./DraggableSVG.svelte";
+	import DraggableSvg from "./helpers/DraggableSVG.svelte";
 	import type { iPoint } from "$lib/interfaces/iPoint";
 
 	export let parentPosition: iPoint;

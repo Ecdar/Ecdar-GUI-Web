@@ -8,6 +8,7 @@
 	export let text: string;
 
 	let radius: number;
+	// having this reactive fixes some bugs where some nails were small
 	$: radius = text == "" ? 5 : 10;
 </script>
 
