@@ -2,6 +2,7 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
+	workers: 1,
 	webServer: {
 		command: "yarn build && yarn preview",
 		port: 4173,
