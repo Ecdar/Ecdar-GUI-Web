@@ -12,9 +12,6 @@
 	import { engineStore } from "$lib/globalState/engines";
 
 	let showUnsavedChanges = false;
-	$: if (!$showEngineUI && checkIfChanged()) {
-		showUnsavedChanges = false;
-	}
 
 	/**
 	 * Close the unsaved changes modal
@@ -118,8 +115,6 @@
 			engine.useBundle,
 		);
 	}
-
-	console.log($showEngineUI);
 </script>
 
 <Modal show={$showEngineUI}>
