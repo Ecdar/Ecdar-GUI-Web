@@ -3,7 +3,11 @@ import { test, expect } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
 	await page.waitForLoadState();
+	await page.waitForLoadState("load");
+	await page.waitForLoadState("domcontentloaded");
 	await page.click("#start-new-project");
+	await page.waitForLoadState("load");
+	await page.waitForLoadState("domcontentloaded");
 });
 
 test("Starts only with Global Declaration", async ({ page }) => {

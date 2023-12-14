@@ -3,7 +3,11 @@ import { test, expect } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
 	await page.waitForLoadState();
+	await page.waitForLoadState("load");
+	await page.waitForLoadState("domcontentloaded");
 	await page.click("#start-new-project");
+	await page.waitForLoadState("load");
+	await page.waitForLoadState("domcontentloaded");
 });
 
 test("starts with no queries", async ({ page }) => {
