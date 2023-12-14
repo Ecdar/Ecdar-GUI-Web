@@ -1,16 +1,19 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import type { Writable } from "svelte/store";
-
-	let dialogContainer: HTMLDialogElement;
+	let dialogContainer: HTMLDialogElement | undefined;
 	export let modalCloseOnBackdrop: boolean = false;
-	export let show: Writable<boolean>;
+	export let show: boolean = false;
 
-	onMount(() => {
-		show.subscribe((val) => {
-			val ? dialogContainer.showModal() : dialogContainer.close();
-		});
-	});
+	/**
+	 * Ensures that the real DOM element is opened or closed when the svelte value changes.
+	 */
+	$: if (dialogContainer && show) {
+		console.log("open");
+		//throw new Error("wut");
+		dialogContainer.showModal();
+	} else {
+		console.log("close");
+		dialogContainer?.close();
+	}
 
 	/**
 	 * Function for closing the current modal when the backdrop is clicked if
@@ -18,7 +21,7 @@
 	 */
 	function closeModalOnBackdropClick() {
 		if (modalCloseOnBackdrop) {
-			$show = false;
+			show = false;
 		}
 	}
 </script>

@@ -11,11 +11,9 @@
 	import Queries from "$lib/components/query/Queries.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
-	import ModalContainer from "$lib/components/modalContainer/ModalContainer.svelte";
 </script>
 
 <!-- Top navigation Panel -->
-<ModalContainer />
 <nav id="main-nav">
 	<TopBar />
 </nav>

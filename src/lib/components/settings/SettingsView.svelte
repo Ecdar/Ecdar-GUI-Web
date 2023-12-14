@@ -4,7 +4,7 @@
 	import ColorSettings from "$lib/components/settings/ColorSettings.svelte";
 	import FontSettings from "$lib/components/settings/FontSettings.svelte";
 	import Modal from "../modal/Modal.svelte";
-	import { showSettings } from "../settings/showSettings";
+	import { showSettings } from "./showSettings";
 
 	const settingTabs: Tab[] = [
 		{
@@ -18,7 +18,7 @@
 	];
 </script>
 
-<Modal show={showSettings}>
+<Modal show={$showSettings}>
 	<div id="setting-tabs-container">
 		<Tabs tabs={settingTabs} />
 	</div>

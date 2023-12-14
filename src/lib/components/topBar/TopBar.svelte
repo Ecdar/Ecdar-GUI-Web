@@ -19,7 +19,8 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
-	import { showSettings } from "../settings/showSettings";
+	import SettingsView from "$lib/components/settings/SettingsView.svelte";
+	import { showSettings } from "$lib/components/settings/showSettings";
 
 	let projectHandler: typeof ProjectHandler;
 
@@ -245,6 +246,8 @@
 		/>
 	</TopBarButton>
 </div>
+
+<SettingsView />
 
 <style>
 	div {
