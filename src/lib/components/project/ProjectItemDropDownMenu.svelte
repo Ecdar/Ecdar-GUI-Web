@@ -19,7 +19,7 @@
 	export let id: SystemId | ComponentId;
 	export let itemType: "system" | "component";
 
-	const UniqeId = id.rawId.split(" ").join("-").toLowerCase();
+	const UniqueId = id.rawId.split(" ").join("-").toLowerCase();
 
 	const colorOptions = [
 		"#8B0000", // Dark Red
@@ -40,7 +40,7 @@
 		"#900C3F", // Deep Red
 	];
 
-	const menuId = `${UniqeId}-menu`;
+	const menuId = `${UniqueId}-menu`;
 	let button: HTMLElement;
 
 	/**
@@ -57,7 +57,7 @@
 	bind:button
 	icon={More_vert}
 	popovertarget={menuId}
-	id={`${UniqeId}-button`}
+	id={`${UniqueId}-button`}
 	color="var(--sidebar-text-color)"
 />
 <OverlayMenu anchor={button} id={menuId}>

@@ -3,7 +3,11 @@ import { test, expect } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
 	await page.goto("/");
 	await page.waitForLoadState();
+	await page.waitForLoadState("load");
+	await page.waitForLoadState("domcontentloaded");
 	await page.click("#start-new-project");
+	await page.waitForLoadState("load");
+	await page.waitForLoadState("domcontentloaded");
 });
 
 test("starts with no queries", async ({ page }) => {
@@ -26,7 +30,13 @@ test("add 10 queries", async ({ page }) => {
 	await expect(page.locator(".query")).toHaveCount(10);
 });
 
-test("delete any query", async ({ page }) => {
+test("delete any query", async ({ page, browserName }) => {
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
+
 	await expect(page.locator(".query")).toHaveCount(0);
 	await page.click("#add-query");
 	await expect(page.locator(".query")).toHaveCount(1);
@@ -35,7 +45,13 @@ test("delete any query", async ({ page }) => {
 	await expect(page.locator(".query")).toHaveCount(0);
 });
 
-test("delete all 10 queries", async ({ page }) => {
+test("delete all 10 queries", async ({ page, browserName }) => {
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
+
 	await expect(page.locator(".query")).toHaveCount(0);
 
 	for (let i = 0; i < 10; i++) {
@@ -55,7 +71,13 @@ test("delete all 10 queries", async ({ page }) => {
 	await expect(page.locator(".query")).toHaveCount(0);
 });
 
-test("delete a specific query", async ({ page }) => {
+test("delete a specific query", async ({ page, browserName }) => {
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
+
 	await expect(page.locator(".query")).toHaveCount(0);
 
 	for (let i = 0; i < 3; i++) {
@@ -153,7 +175,13 @@ test("can change backend to all options", async ({ page }) => {
 	}
 });
 
-test("can change isPeriodic", async ({ page }) => {
+test("can change isPeriodic", async ({ page, browserName }) => {
+	// TODO: remove this check when Firefox and WebKit supports popover: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover#browser_compatibility
+	test.skip(
+		browserName === "firefox" || browserName === "webkit",
+		"Popover not supported yet",
+	);
+
 	await page.click("#add-query");
 
 	const svgPath = page

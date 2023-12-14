@@ -171,7 +171,7 @@ export abstract class IdMap<
 			const storedMember = this.get(id);
 			if (storedMember && storedMember.id !== id) {
 				throw new TypeError(
-					`This map uses a different Id (${storedMember.id.rawId}) that is uniqely comparable to ${id.rawId}. You cannot use both in the same map.`,
+					`This map uses a different Id (${storedMember.id.rawId}) that is uniquely comparable to ${id.rawId}. You cannot use both in the same map.`,
 				);
 			}
 		}
