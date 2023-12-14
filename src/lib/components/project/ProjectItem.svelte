@@ -66,21 +66,6 @@
 </div>
 
 <style>
-	/* button {
-		display: block;
-		color: inherit;
-		font: inherit;
-		border: none;
-		border-bottom: 1px solid black;
-		padding: 0;
-		width: 100%;
-	}
-
-	button:focus-visible {
-		outline: 1px solid white;
-		outline-offset: -1px;
-	} */
-
 	.left {
 		padding: 10px;
 		width: 100%;
