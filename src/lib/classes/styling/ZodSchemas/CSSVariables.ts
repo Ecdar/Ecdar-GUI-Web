@@ -34,8 +34,18 @@ export const ColorVariables = z
 		"--sidebar-text-color": ColorAttribute,
 		"--sidebar-element-color": ColorAttribute,
 		"--sidebar-element-hover-color": ColorAttribute,
+		"--engine-ui-underline-color": ColorAttribute,
+		"--engine-ui-error-underline-color": ColorAttribute,
+		"--engine-ui-input-text-placeholder-color": ColorAttribute,
+		"--engine-ui-scrollbar-thumb-background-color": ColorAttribute,
+		"--engine-ui-scrollbar-thumb-color": ColorAttribute,
+		"--engine-ui-text-color": ColorAttribute,
+		"--engine-ui-background-color": ColorAttribute,
+		"--engine-ui-button-color": ColorAttribute,
 		"--settings-danger-button-color": ColorAttribute,
 		"--settings-safe-button-color": ColorAttribute,
+		"--dropdown-button-color": ColorAttribute,
+		"--dropdown-text-color": ColorAttribute,
 	})
 	.strict();
 

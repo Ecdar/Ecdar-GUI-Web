@@ -95,8 +95,48 @@
 				0.39901960784,
 				0.43823529411
 			],
+			"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
+			"--engine-ui-error-underline-color": [
+				"display-p3",
+				0.82745098039,
+				0.18431372549,
+				0.18431372549
+			],
+			"--engine-ui-input-text-placeholder-color": [
+				"display-p3",
+				0.8,
+				0.8,
+				0.8
+			],
+			"--engine-ui-scrollbar-thumb-background-color": [
+				"display-p3",
+				0.5608,
+				0.498,
+				0.4353
+			],
+			"--engine-ui-scrollbar-thumb-color": [
+				"display-p3",
+				0.7137,
+				0.6941,
+				0.6706
+			],
+			"--engine-ui-text-color": ["display-p3", 1, 1, 1],
+			"--engine-ui-background-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			],
+			"--engine-ui-button-color": [
+				"display-p3",
+				0.2862745098,
+				0.34901960784,
+				0.38823529411
+			],
 			"--settings-danger-button-color": ["srgb", 0.498, 0.0902, 0.0549],
-			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667]
+			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667],
+			"--dropdown-button-color": ["srgb", 1, 1, 1],
+			"--dropdown-text-color": ["srgb", 0, 0, 0]
 		},
 		"fontSize": {
 			"--sidebar-fontsize": [1, "rem"],
@@ -206,7 +246,40 @@
 					0.13490196078,
 					0.14666666666,
 					0.17019607843
-				]
+				],
+				"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
+				"--engine-ui-error-underline-color": [
+					"display-p3",
+					0.82745098039,
+					0.18431372549,
+					0.18431372549
+				],
+				"--engine-ui-input-text-placeholder-color": [
+					"display-p3",
+					0.7333,
+					0.7333,
+					0.7333
+				],
+				"--engine-ui-scrollbar-thumb-background-color": [
+					"display-p3",
+					0.95,
+					0.95,
+					0.95
+				],
+				"--engine-ui-scrollbar-thumb-color": ["display-p3", 0, 0, 0],
+				"--engine-ui-background-color": [
+					"display-p3",
+					0.08490196078,
+					0.09666666666,
+					0.12019607843
+				],
+				"--engine-ui-button-color": [
+					"display-p3",
+					0.08490196078,
+					0.09666666666,
+					0.12019607843
+				],
+				"--engine-ui-text-color": ["display-p3", 1, 1, 1]
 			}
 		},
 		{
