@@ -9,14 +9,11 @@
 	import ProjectNav from "$lib/components/project/ProjectNav.svelte";
 	import GlobalDeclaration from "$lib/components/project/globalDeclaration/GlobalDeclaration.svelte";
 	import Queries from "$lib/components/query/Queries.svelte";
-	import type IAboutUI from "$lib/interfaces/IAboutUI";
-	import AboutUi from "$lib/components/topBar/aboutUI/AboutUI.svelte";
 	import QueryNav from "$lib/components/query/QueryNav.svelte";
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 </script>
 
 <!-- Top navigation Panel -->
-<AboutUi bind:this={aboutUIContainer} />
 <nav id="main-nav">
 	<TopBar />
 </nav>

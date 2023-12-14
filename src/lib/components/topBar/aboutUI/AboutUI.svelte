@@ -1,19 +1,9 @@
 <script lang="ts">
-	import Modal from "$lib/components/dialogPopover/Modal.svelte";
-	import type IModalComponent from "$lib/interfaces/IModalComponent";
-
-	let dialogContainer!: Modal & IModalComponent;
-
-	export function showAboutUI() {
-		dialogContainer.showModal();
-	}
-
-	function closeModal() {
-		dialogContainer.closeModal();
-	}
+	import Modal from "$lib/components/modal/Modal.svelte";
+	import { showAboutUI } from "./showAboutUI";
 </script>
 
-<Modal bind:this={dialogContainer}>
+<Modal show={$showAboutUI}>
 	<div>
 		<div class="box">
 			<h1>Ecdar v. 0.1</h1>
@@ -26,7 +16,11 @@
 				>
 			</p>
 		</div>
-		<button on:click={closeModal}>Close</button>
+		<button
+			on:click={() => {
+				$showAboutUI = false;
+			}}>Close</button
+		>
 	</div>
 </Modal>
 

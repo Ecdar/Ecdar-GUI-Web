@@ -21,6 +21,8 @@
 	} from "svelte-google-materialdesign-icons";
 	import SettingsView from "$lib/components/settings/SettingsView.svelte";
 	import { showSettings } from "$lib/components/settings/showSettings";
+	import AboutUi from "./aboutUI/AboutUI.svelte";
+	import { showAboutUI } from "$lib/components/topBar/aboutUI/showAboutUI";
 
 	let projectHandler: typeof ProjectHandler;
 
@@ -214,7 +216,7 @@
 			icon={Settings_input_composite}
 			name="Engine Options"
 			on:click={() => {
-				dispatch("toggleEngineUI");
+				console.log("Engine options");
 			}}
 		/>
 		<DropDownButton
@@ -241,13 +243,14 @@
 			icon={Error}
 			name="About"
 			on:click={() => {
-				dispatch("toggleAboutBox");
+				$showAboutUI = true;
 			}}
 		/>
 	</TopBarButton>
 </div>
 
 <SettingsView />
+<AboutUi />
 
 <style>
 	.container {
