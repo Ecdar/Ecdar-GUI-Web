@@ -47,36 +47,6 @@
 <!--TODO: Remove this when supported by Svelte-->
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog
-<<<<<<< HEAD
-	bind:this={dialogContainer}
-	on:click|self={() => {
-		closeModalOnBackdropClick();
-	}}
->
-	<div class="box">
-		<slot />
-	</div>
-</dialog>
-
-<style>
-	.box {
-		max-width: 100vw;
-		display: block;
-		position: fixed;
-		background-color: var(--modal-background-color);
-		z-index: 100;
-		transform: translate(-50%, -50%);
-		top: 50%;
-		left: 50%;
-	}
-
-	dialog {
-		max-width: 100vw;
-		width: 100vw;
-		max-height: 100vh;
-		height: 100vh;
-		background-color: rgba(0, 0, 0, 0.2);
-=======
 	bind:this={dialog}
 	on:click|self={(event) => {
 		closeOnBackdropClick(event);
@@ -92,6 +62,5 @@
 	}
 	dialog::backdrop {
 		background-color: var(--modal-background-color);
->>>>>>> main
 	}
 </style>
