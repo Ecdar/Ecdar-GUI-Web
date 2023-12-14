@@ -32,12 +32,14 @@
 
 <style>
 	.box {
+		height: 10em;
+		width: 30em;
 		padding-left: 1em;
 		color: var(--text-color);
 	}
 
 	button {
-		margin-top: 2em;
-		margin-left: 35em;
+		margin-left: 30em;
+		margin-bottom: 1em;
 	}
 </style>
