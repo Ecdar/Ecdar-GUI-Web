@@ -61,7 +61,6 @@
 				else engine.hasBeenChanged = true;
 			}
 		});
-		// $tempEngine.address = "-1"
 
 		if (validEngines.length <= 1) {
 			nameContainer.value = "";
@@ -69,9 +68,6 @@
 			startPortContainer.value = "";
 			endPortContainer.value = "";
 			currentEngine.name = "";
-
-			// 	// closeModal();
-			// 	// return;
 		}
 
 		$tempEngines = $tempEngines;

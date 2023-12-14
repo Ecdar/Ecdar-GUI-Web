@@ -2,13 +2,11 @@
 	import type { Writable } from "svelte/store";
 	import EngineSeperate from "./EngineSeperate.svelte";
 	import type { EngineDTO } from "./EngineDTO";
-	// import { tempEngines } from "$lib/globalState/tempEngines";
 
 	export let engineSeperateArray: Array<EngineSeperate | undefined>;
 	export let tempEngines: Writable<Array<EngineDTO>>;
 </script>
 
-<!-- bind:this={engineSeperateArray[index]} -->
 <h2>Engines</h2>
 <div class="engines">
 	{#each $tempEngines as engine, index}

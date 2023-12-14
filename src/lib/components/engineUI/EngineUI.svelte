@@ -5,12 +5,9 @@
 	import EnginePanel from "./EnginePanel.svelte";
 	import { Save, Add, Close, Done } from "svelte-google-materialdesign-icons";
 	import type IModalComponent from "$lib/interfaces/IModalComponent";
-	// import type EngineSeperate from "./EngineSeperate.svelte";
 	import type IEngineSeperateComponent from "$lib/interfaces/IEngineSeperateComponent";
 	import SvgButton from "../buttons/SvgButton.svelte";
 	import { get, writable, type Writable } from "svelte/store";
-	//import { tempEngines } from "$lib/globalState/tempEngines";
-	//import { tempEngines } from "$lib/globalState/tempEngines";
 	import type EngineSeperate from "./EngineSeperate.svelte";
 
 	import { engineStore } from "$lib/globalState/engines";
@@ -44,20 +41,6 @@
 			};
 			tempEngines.update((items) => [...items, tempEngine]);
 		});
-
-		// EngineStorage.getEngineArray().forEach((engine) => {
-		// 	let tempEngine: EngineDTO = {
-		// 		address: engine.address,
-		// 		name: engine.name,
-		// 		portRangeEnd: engine.portRangeEnd,
-		// 		portRangeStart: engine.portRangeStart,
-		// 		id: engine.id,
-		// 		hasBeenChanged: false,
-		// 		useBundle: engine.useBundle,
-		// 	};
-
-		// 	tempEngines.update((items) => [...items, tempEngine]);
-		// });
 
 		if (get(tempEngines).length == 0) {
 			addNewEngine();
@@ -98,41 +81,19 @@
 	 */
 	function onSubmit() {
 		try {
-			//assign id's to new engines
-			// let tmpengine:Array<EngineDTO> = [];
+			//assign id's to new engines, and set change to false
 			$tempEngines.forEach((engine) => {
 				if (engine.id == -1 && engine.address != "-1")
 					handleCreateNewEngine(engine);
 
 				engine.hasBeenChanged = false;
-				// tmpengine.push(engine);
 			});
 
 			//Remove engines marked for deletion
 			$tempEngines = $tempEngines.filter((engine) => {
 				return engine.address != "-1";
 			});
-			$tempEngines = $tempEngines;
-			// $tempEngines.forEach((engine) => {
-			// 	if (engine.id == -1) {
-			// 		if (engine.address == "-1") return;
-			// 		handleCreateNewEngine(engine);
-			// 	} else {
-			// 		if (engine.address == "-1") {
-			// 			EngineStorage.deleteEngine(engine.id);
-			// 			return;
-			// 		}
-			// 		let storedEngine = EngineStorage.getEngine(engine.id);
 
-			// 		storedEngine.useBundle = engine.useBundle;
-			// 		if (!storedEngine.useBundle)
-			// 			storedEngine.address = engine.address;
-			// 		storedEngine.name = engine.name;
-			// 		storedEngine.portRangeStart = engine.portRangeStart;
-			// 		storedEngine.portRangeEnd = engine.portRangeEnd;
-			// 		storedEngine.hasBeenChanged = false;
-			// 	}
-			// });
 			engineStore.set($tempEngines);
 			forceCloseDialogContainer();
 		} catch (error) {
