@@ -2,6 +2,7 @@
 	import { project } from "$lib/globalState/activeProject";
 	import StartScreen from "$lib/components/startScreen/StartScreen.svelte";
 	import TopBar from "$lib/components/topBar/TopBar.svelte";
+	import ToolBar from "$lib/components/toolBar/ToolBar.svelte";
 	import SidePanel from "$lib/components/sidePanel/SidePanel.svelte";
 	import { SidePanelEnum } from "$lib/components/sidePanel/SidePanelEnum";
 	import SvgView from "$lib/components/svgView/SvgView.svelte";
@@ -29,6 +30,7 @@
 	{:else}
 		<!-- Left side -->
 		<SidePanel panelSide={SidePanelEnum.Left}>
+			<ToolBar slot="toolbar" />
 			<ProjectNav slot="nav" />
 			<div slot="content">
 				<GlobalDeclaration />

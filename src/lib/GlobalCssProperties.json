@@ -96,7 +96,20 @@
 				0.43823529411
 			],
 			"--settings-danger-button-color": ["srgb", 0.498, 0.0902, 0.0549],
-			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667]
+			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667],
+			"--toolbar-icon-color": ["display-p3", 0, 0, 0],
+			"--toolbar-selected-color": [
+				"display-p3",
+				0.3362745098,
+				0.39901960784,
+				0.43823529411
+			],
+			"--toolbar-icon-background-color": [
+				"display-p3",
+				0.93333333333,
+				0.93333333333,
+				0.93333333333
+			]
 		},
 		"fontSize": {
 			"--sidebar-fontsize": [1, "rem"],
@@ -206,6 +219,19 @@
 					0.13490196078,
 					0.14666666666,
 					0.17019607843
+				],
+				"--toolbar-icon-color": ["display-p3", 1, 1, 1],
+				"--toolbar-selected-color": [
+					"display-p3",
+					0.42215686274,
+					0.45176470588,
+					0.45529411764
+				],
+				"--toolbar-icon-background-color": [
+					"display-p3",
+					0.19215686274,
+					0.21176470588,
+					0.23529411764
 				]
 			}
 		},

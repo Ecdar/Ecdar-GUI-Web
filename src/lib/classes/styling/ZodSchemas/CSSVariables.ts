@@ -36,6 +36,9 @@ export const ColorVariables = z
 		"--sidebar-element-hover-color": ColorAttribute,
 		"--settings-danger-button-color": ColorAttribute,
 		"--settings-safe-button-color": ColorAttribute,
+		"--toolbar-icon-color": ColorAttribute,
+		"--toolbar-selected-color": ColorAttribute,
+		"--toolbar-icon-background-color": ColorAttribute,
 	})
 	.strict();
 
