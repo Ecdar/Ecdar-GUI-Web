@@ -48,10 +48,6 @@
 	 * Deletion should not be permanent if the change is not saved in EngineUI
 	 */
 	function deleteEngine() {
-		const validEngines = $tempEngines.filter((engine) => {
-			return engine.address != "-1";
-		});
-
 		$tempEngines.forEach((engine) => {
 			if (engine == currentEngine) {
 				engine.address = "-1";
@@ -61,14 +57,6 @@
 				else engine.hasBeenChanged = true;
 			}
 		});
-
-		if (validEngines.length <= 1) {
-			nameContainer.value = "";
-			ipAddressContainer.value = "";
-			startPortContainer.value = "";
-			endPortContainer.value = "";
-			currentEngine.name = "";
-		}
 
 		$tempEngines = $tempEngines;
 

@@ -52,7 +52,7 @@
 	//Always have at least one component!
 	$: if (
 		$tempEngines.filter((engine) => {
-			return engine.address != "-1";
+			return engine.address != "-1"; //not marked for deletion
 		}).length == 0
 	) {
 		addNewEngine();
@@ -112,7 +112,10 @@
 			incorrectInformationModal.showModal();
 		}
 	}
-
+	/**
+	 * Calls Engine constructer, which validates all input.
+	 * Throws errors on validation fails
+	 */
 	function handleCreateNewEngine(engine: EngineDTO) {
 		return EngineStorage.createEngine(
 			engine.name,
