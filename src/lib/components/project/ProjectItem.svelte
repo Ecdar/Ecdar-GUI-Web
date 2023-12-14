@@ -16,11 +16,11 @@
 	export let setAsActive: () => void;
 	export let rename: () => void;
 
-	const UniqeId = id.rawId.split(" ").join("-").toLowerCase();
+	const UniqueId = id.rawId.split(" ").join("-").toLowerCase();
 </script>
 
 <button on:click={setAsActive}>
-	<div class="project-item {itemType}" id={UniqeId}>
+	<div class="project-item {itemType}" id={UniqueId}>
 		<div
 			class="left"
 			on:dblclick={rename}
