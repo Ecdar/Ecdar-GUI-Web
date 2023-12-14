@@ -217,10 +217,11 @@
 		/>
 	</div>
 	<div id="local-button" class="unselectable" tabindex="-1">
-		<label>
+		<label for="checkbox-button-for-label" >
 			<!--for attribute automatically works on nested element-->
 			Use Bundle
 			<SvgButton
+				buttonId="checkbox-button-for-label"
 				icon={currentEngine.useBundle
 					? Check_box
 					: Check_box_outline_blank}
