@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import type { projectHandler as ProjectHandler } from "$lib/classes/projectHandler/ProjectHandler";
 	import TopBarButton from "$lib/components/topBar/TopBarButton.svelte";
 	import DropDownButton from "$lib/components/topBar/DropDownButton.svelte";
 	import DropDownCheckBox from "$lib/components/topBar/DropDownCheckBox.svelte";
-	import { showSettings } from "$lib/components/settings/state";
 	import {
 		Note_add,
 		File_open,
@@ -19,7 +19,8 @@
 		Help,
 		Error,
 	} from "svelte-google-materialdesign-icons";
-	import { onMount } from "svelte";
+	import SettingsView from "$lib/components/settings/SettingsView.svelte";
+	import { showSettings } from "$lib/components/settings/showSettings";
 
 	let projectHandler: typeof ProjectHandler;
 
@@ -245,6 +246,8 @@
 		/>
 	</TopBarButton>
 </div>
+
+<SettingsView />
 
 <style>
 	div {

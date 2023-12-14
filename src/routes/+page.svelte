@@ -12,8 +12,6 @@
 	import ProjectItems from "$lib/components/project/ProjectItems.svelte";
 	import Canvas from "$lib/components/canvas/Canvas.svelte";
 	import CanvasNav from "$lib/components/canvas/CanvasNav.svelte";
-	import { showSettings } from "$lib/components/settings/state";
-	import Settings from "$lib/components/settings/SettingsView.svelte";
 </script>
 
 <!-- Top navigation Panel -->
@@ -34,12 +32,7 @@
 		</SidePanel>
 		<!-- Canvas -->
 		<div class="canvas">
-			<nav class="inner-nav2">
-				<CanvasNav />
-			</nav>
-			{#if $showSettings}
-				<Settings />
-			{/if}
+			<CanvasNav />
 			<Canvas />
 		</div>
 		<!-- Right side -->
@@ -71,12 +64,6 @@
 		display: flex;
 		flex: 1;
 		overflow: hidden;
-	}
-
-	.inner-nav2 {
-		background-color: var(--canvas-topbar-color);
-		color: var(--navigationbar-text-color);
-		border: none;
 	}
 
 	.canvas {

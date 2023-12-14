@@ -258,6 +258,6 @@ function closeActiveViewIfDeleted() {
 			projectValue.globalDeclarations,
 		].includes(activeViewValue)
 	) {
-		activeViewValue = undefined;
+		activeView.set(undefined);
 	}
 }

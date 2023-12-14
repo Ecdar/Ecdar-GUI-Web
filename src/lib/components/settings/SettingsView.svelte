@@ -3,7 +3,8 @@
 	import type { Tab } from "$lib/components/tabs/Tab";
 	import ColorSettings from "$lib/components/settings/ColorSettings.svelte";
 	import FontSettings from "$lib/components/settings/FontSettings.svelte";
-	import { showSettings } from "./state";
+	import Modal from "../modal/Modal.svelte";
+	import { showSettings } from "./showSettings";
 
 	const settingTabs: Tab[] = [
 		{
@@ -17,17 +18,19 @@
 	];
 </script>
 
-<div id="setting-tabs-container">
-	<Tabs tabs={settingTabs} />
-</div>
+<Modal show={$showSettings}>
+	<div id="setting-tabs-container">
+		<Tabs tabs={settingTabs} />
+	</div>
 
-<button
-	on:click={() => {
-		$showSettings = false;
-	}}
->
-	<p>Close Settings</p>
-</button>
+	<button
+		on:click={() => {
+			$showSettings = false;
+		}}
+	>
+		<p>Close Settings</p>
+	</button>
+</Modal>
 
 <style>
 	button {
