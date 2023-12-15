@@ -21,6 +21,8 @@
 	} from "svelte-google-materialdesign-icons";
 	import SettingsView from "$lib/components/settings/SettingsView.svelte";
 	import { showSettings } from "$lib/components/settings/showSettings";
+	import { showEngineUI } from "$lib/components/engineUI/showEngineUI";
+	import EngineUi from "../engineUI/EngineUI.svelte";
 	import AboutUi from "./aboutUI/AboutUI.svelte";
 	import { showAboutUI } from "$lib/components/topBar/aboutUI/showAboutUI";
 
@@ -216,7 +218,7 @@
 			icon={Settings_input_composite}
 			name="Engine Options"
 			on:click={() => {
-				console.log("Engine options");
+				$showEngineUI = true;
 			}}
 		/>
 		<DropDownButton
@@ -251,6 +253,7 @@
 
 <!-- Add modal component here -->
 <SettingsView />
+<EngineUi />
 <AboutUi />
 
 <style>

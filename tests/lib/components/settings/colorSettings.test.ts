@@ -18,7 +18,9 @@ test.beforeEach(async ({ page }) => {
 test("can create valid color", async ({ page }) => {
 	await page.locator("#select-property").selectOption("Background Color");
 
-	const inputs = await page.locator(`input[type="number"]`).all();
+	const inputs = await page
+		.locator(`#setting-tabs-container input[type="number"]`)
+		.all();
 
 	await inputs[0].fill("1");
 	await inputs[1].fill("0");
@@ -35,7 +37,9 @@ test("can create valid color", async ({ page }) => {
 test("can use color picker to choose a valid color", async ({ page }) => {
 	await page.locator("#select-property").selectOption("Background Color");
 
-	const inputs = await page.locator(`input[type="color"]`).all();
+	const inputs = await page
+		.locator(`#setting-tabs-container input[type="color"]`)
+		.all();
 
 	await inputs[0].fill("#ff00ff");
 
@@ -50,7 +54,9 @@ test("can use color picker to choose a valid color", async ({ page }) => {
 test("can use color picker to update a valid color", async ({ page }) => {
 	await page.locator("#select-property").selectOption("Background Color");
 
-	const numberInputs = await page.locator(`input[type="number"]`).all();
+	const numberInputs = await page
+		.locator(`#setting-tabs-container input[type="number"]`)
+		.all();
 
 	await numberInputs[0].fill("0");
 	await numberInputs[1].fill("0");
@@ -75,7 +81,9 @@ test("can use color picker to update a valid color", async ({ page }) => {
 test("can update valid color", async ({ page }) => {
 	await page.locator("#select-property").selectOption("Background Color");
 
-	const inputs = await page.locator(`input[type="number"]`).all();
+	const inputs = await page
+		.locator(`#setting-tabs-container input[type="number"]`)
+		.all();
 
 	await inputs[0].fill("0");
 	await inputs[1].fill("0");
@@ -106,7 +114,9 @@ test("can update valid color", async ({ page }) => {
 test("can delete valid color", async ({ page }) => {
 	await page.locator("#select-property").selectOption("Background Color");
 
-	const inputs = await page.locator(`input[type="number"]`).all();
+	const inputs = await page
+		.locator(`#setting-tabs-container input[type="number"]`)
+		.all();
 
 	await inputs[0].fill("1");
 	await inputs[1].fill("0");
@@ -129,7 +139,9 @@ test("can delete invalid color", async ({ page }) => {
 	for (const testValue of ["2", "-1", ""]) {
 		await page.locator("#select-property").selectOption("Background Color");
 
-		const inputs = await page.locator(`input[type="number"]`).all();
+		const inputs = await page
+			.locator(`#setting-tabs-container input[type="number"]`)
+			.all();
 
 		await inputs[0].fill("1");
 		await inputs[1].fill("0");
@@ -163,7 +175,9 @@ test("can delete invalid color", async ({ page }) => {
 test("cannot create invalid color", async ({ page }) => {
 	await page.locator("#select-property").selectOption("Background Color");
 
-	const inputs = await page.locator(`input[type="number"]`).all();
+	const inputs = await page
+		.locator(`#setting-tabs-container input[type="number"]`)
+		.all();
 
 	await inputs[0].fill("1");
 	await inputs[1].fill("0");
@@ -177,7 +191,9 @@ test("cannot create invalid color", async ({ page }) => {
 test("cannot update invalid color", async ({ page }) => {
 	await page.locator("#select-property").selectOption("Background Color");
 
-	const inputs = await page.locator(`input[type="number"]`).all();
+	const inputs = await page
+		.locator(`#setting-tabs-container input[type="number"]`)
+		.all();
 
 	await inputs[0].fill("1");
 	await inputs[1].fill("0");
@@ -205,7 +221,9 @@ test("cannot update invalid color", async ({ page }) => {
 test("can reset colors", async ({ page }) => {
 	await page.locator("#select-property").selectOption("Background Color");
 
-	const inputs = await page.locator(`input[type="number"]`).all();
+	const inputs = await page
+		.locator(`#setting-tabs-container input[type="number"]`)
+		.all();
 
 	await inputs[0].fill("1");
 	await inputs[1].fill("0");
