@@ -40,6 +40,8 @@
 		validatePort();
 	};
 
+	export let id: number;
+
 	/**
 	 * Delete an engine by setting the adress of the engine to -1 and removing it from the view
 	 * Deletion should not be permanent if the change is not saved in EngineUI
@@ -153,6 +155,7 @@
 					click={deleteEngine}
 					size={24}
 					id="delete-button"
+					color={"var(--engine-ui-text-color)"}
 				/>
 				<SvgButton
 					icon={Close}
@@ -161,6 +164,7 @@
 					}}
 					size={24}
 					id="delete-button"
+					color={"var(--engine-ui-text-color)"}
 				/>
 			</div>
 		</div>
@@ -188,6 +192,7 @@
 			click={() => {
 				showDeleteDialog = true;
 			}}
+			color={"var(--engine-ui-text-color)"}
 		/>
 	</div>
 	<p id="ip">IP Address:</p>
@@ -206,16 +211,17 @@
 		/>
 	</div>
 	<div id="local-button" class="unselectable" tabindex="-1">
-		<label for="checkbox-button-for-label">
+		<label for={"checkbox-button-for-label-" + id}>
 			<!--for attribute automatically works on nested element-->
 			Use Bundle
 			<SvgButton
-				id="checkbox-button-for-label"
+				id={"checkbox-button-for-label-" + id}
 				icon={currentEngine.useBundle
 					? Check_box
 					: Check_box_outline_blank}
 				click={toggleUseBundle}
 				size={18}
+				color={"var(--engine-ui-text-color)"}
 			/></label
 		>
 	</div>

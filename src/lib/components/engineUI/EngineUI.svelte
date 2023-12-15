@@ -209,6 +209,7 @@
 					id="close-unsaved-changes-modal"
 					click={forceCloseDialogContainer}
 					size={24}
+					color={"var(--engine-ui-text-color)"}
 				/>
 				<SvgButton
 					icon={Close}
@@ -217,6 +218,7 @@
 						showUnsavedChanges = false;
 					}}
 					size={24}
+					color={"var(--engine-ui-text-color)"}
 				/>
 			</div>
 		</div>
@@ -238,6 +240,7 @@
 					}}
 					id="close-incorrect-information-modal"
 					size={24}
+					color={"var(--engine-ui-text-color)"}
 				/>
 			</div>
 		</div>

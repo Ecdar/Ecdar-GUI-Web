@@ -12,6 +12,7 @@
 	{#each $tempEngines as engine, index}
 		{#if engine.address != "-1"}
 			<EngineSeperate
+				id={index}
 				currentEngine={engine}
 				{tempEngines}
 				bind:this={engineSeperateArray[index]}
@@ -24,7 +25,7 @@
 	h2 {
 		margin-bottom: 0.3em;
 		padding: 0.15em;
-		background-color: var(--console-selectedtab-color);
+		background-color: var(--engine-ui-background-color);
 		width: fit-content;
 		text-shadow: 0.05em 0.05em 0.05em grey;
 		color: var(--engine-ui-text-color);
@@ -43,19 +44,19 @@
 	}
 
 	.engines::-webkit-scrollbar-track {
-		box-shadow: inset 0 0 1em var(--console-unselectedtab-color);
-		background: var(--console-unselectedtab-color);
+		box-shadow: inset 0 0 1em var(--engine-ui-background-color);
+		background: var(--engine-ui-background-color);
 	}
 
 	.engines::-webkit-scrollbar-thumb {
 		background: var(--engine-ui-scrollbar-thumb-background-color);
 		border-radius: 4em;
-		border: 0.3em solid var(--engine-ui-scrollbar-thumb-color);
+		border: 0.3em solid var(--engine-ui-background-color);
 		border-top: 0;
 		border-bottom: 0;
 	}
 
 	.engines::-webkit-scrollbar-thumb:hover {
-		background: var(--engine-ui-scrollbar-thumb-color);
+		background: var(--engine-ui-scrollbar-thumb-hover-background-color);
 	}
 </style>

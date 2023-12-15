@@ -59,6 +59,7 @@
 	dialog {
 		color: var(--text-color);
 		background-color: var(--background-color);
+		overflow-y: hidden;
 	}
 	dialog::backdrop {
 		background-color: var(--modal-background-color);
