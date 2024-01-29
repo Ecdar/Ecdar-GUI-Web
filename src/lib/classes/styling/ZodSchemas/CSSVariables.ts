@@ -40,14 +40,16 @@ export const ColorVariables = z
 		"--engine-ui-error-underline-color": ColorAttribute,
 		"--engine-ui-input-text-placeholder-color": ColorAttribute,
 		"--engine-ui-scrollbar-thumb-background-color": ColorAttribute,
+		"--engine-ui-scrollbar-thumb-hover-background-color": ColorAttribute,
 		"--engine-ui-scrollbar-thumb-color": ColorAttribute,
 		"--engine-ui-text-color": ColorAttribute,
 		"--engine-ui-background-color": ColorAttribute,
-		"--engine-ui-button-color": ColorAttribute,
+		"--engine-ui-checkbox-color": ColorAttribute,
 		"--settings-danger-button-color": ColorAttribute,
 		"--settings-safe-button-color": ColorAttribute,
 		"--dropdown-button-color": ColorAttribute,
 		"--dropdown-text-color": ColorAttribute,
+		"--modal-background-color": ColorAttribute,
 	})
 	.strict();
 

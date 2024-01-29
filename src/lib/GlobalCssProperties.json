@@ -107,7 +107,7 @@
 				0.52549019608,
 				0.52549019608
 			],
-			"--engine-ui-underline-color": ["display-p3", 1, 1, 1],
+			"--engine-ui-underline-color": ["display-p3", 0, 0, 0],
 			"--engine-ui-error-underline-color": [
 				"display-p3",
 				0.82745098039,
@@ -116,15 +116,21 @@
 			],
 			"--engine-ui-input-text-placeholder-color": [
 				"display-p3",
-				0.8,
-				0.8,
-				0.8
+				0.5,
+				0.5,
+				0.5
 			],
 			"--engine-ui-scrollbar-thumb-background-color": [
 				"display-p3",
-				0.5608,
-				0.498,
-				0.4353
+				0.3,
+				0.3,
+				0.3
+			],
+			"--engine-ui-scrollbar-thumb-hover-background-color": [
+				"display-p3",
+				0.1,
+				0.1,
+				0.1
 			],
 			"--engine-ui-scrollbar-thumb-color": [
 				"display-p3",
@@ -132,14 +138,9 @@
 				0.6941,
 				0.6706
 			],
-			"--engine-ui-text-color": ["display-p3", 1, 1, 1],
-			"--engine-ui-background-color": [
-				"display-p3",
-				0.2862745098,
-				0.34901960784,
-				0.38823529411
-			],
-			"--engine-ui-button-color": [
+			"--engine-ui-text-color": ["display-p3", 0, 0, 0],
+			"--engine-ui-background-color": ["display-p3", 0.95, 0.95, 0.95],
+			"--engine-ui-checkbox-color": [
 				"display-p3",
 				0.2862745098,
 				0.34901960784,
@@ -148,7 +149,13 @@
 			"--settings-danger-button-color": ["srgb", 0.498, 0.0902, 0.0549],
 			"--settings-safe-button-color": ["srgb", 0.3255, 0.498, 0.2667],
 			"--dropdown-button-color": ["srgb", 1, 1, 1],
-			"--dropdown-text-color": ["srgb", 0, 0, 0]
+			"--dropdown-text-color": ["srgb", 0, 0, 0],
+			"--modal-background-color": [
+				"display-p3",
+				0.22745098039,
+				0.27450980392,
+				0.30588235294
+			]
 		},
 		"fontSize": {
 			"--sidebar-fontsize": [1, "rem"],
@@ -274,15 +281,21 @@
 				],
 				"--engine-ui-input-text-placeholder-color": [
 					"display-p3",
-					0.7333,
-					0.7333,
-					0.7333
+					0.5,
+					0.5,
+					0.5
 				],
 				"--engine-ui-scrollbar-thumb-background-color": [
 					"display-p3",
 					0.95,
 					0.95,
 					0.95
+				],
+				"--engine-ui-scrollbar-thumb-hover-background-color": [
+					"display-p3",
+					0.6,
+					0.6,
+					0.6
 				],
 				"--engine-ui-scrollbar-thumb-color": ["display-p3", 0, 0, 0],
 				"--engine-ui-background-color": [
@@ -291,13 +304,19 @@
 					0.09666666666,
 					0.12019607843
 				],
-				"--engine-ui-button-color": [
+				"--engine-ui-checkbox-color": [
 					"display-p3",
 					0.08490196078,
 					0.09666666666,
 					0.12019607843
 				],
-				"--engine-ui-text-color": ["display-p3", 1, 1, 1]
+				"--engine-ui-text-color": ["display-p3", 1, 1, 1],
+				"--modal-background-color": [
+					"display-p3",
+					0.0156862745,
+					0.02352941176,
+					0.03529411764
+				]
 			}
 		},
 		{
